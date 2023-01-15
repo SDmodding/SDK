@@ -1,2 +1,27 @@
 # SDK
- Re-written SDK from debug symbols & some wrapped functions to access them easily
+Re-written SDK from debug symbols & some wrapped functions to access them easily
+
+# Info
+This is just cloned repo from latest SDK-Dev but meant for public, main point of this repo is so people can have access to basic SDK and build their own stuff around game and have some basic information of how this thing works...
+
+If you just build this without modifying anything, you get basic debug menu with some testing features like: 
+- hud stuff (action, dialog, hint, mission health, mission progress, map blip)
+- script camera (this can be used to fly around)
+- day manager (time, rain, wind)
+- player teleport (offset, waypoint)
+- player animation (you need exact animation name)
+- vehicle spawning
+
+# Callbacks
+**OnDialogBox** - This callback is called when you initialized any game dialog box and user clicked on button
+
+**OnGameUpdate** - This callback is called before game updates all stuff, so you can modify animations, positions, etc... (Call here all stuff around game because this is synced with game thread!)
+
+**OnRender** - This callback is called on DX Present update, we just use it for ImGui render, but you can use it to render other stuff...
+
+# Before use:
+The SDK is working on first initial release of definitive edition from steam.
+
+If you have latest game version installed from steam just download this executable and replace it in your game folder.
+
+[Download: sdhdship.exe](https://mega.nz/file/fK5SWARD#1fAWkxAHaKCIMDaJ5XAQKvjs6gK4RCQo5ZlvvtHWtVw)
