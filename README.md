@@ -22,7 +22,7 @@ If you just build this without modifying anything, you get basic debug menu with
 
 **OnRender** - This callback is called on DX Present update, we just use it for ImGui render, but you can use it to render other stuff...
 
-# Before use:
+# Before use
 The SDK is working on first initial release of definitive edition from steam.
 
 If you have latest game version installed from steam just download this executable and replace it in your game folder.
