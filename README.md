@@ -1,6 +1,9 @@
 # SDK
 Re-written SDK from debug symbols & some wrapped functions to access them easily
 
+# Contributing 
+You can create issues & pull requests if you reversed something yourself and it can be added later on, but most basic stuff that already exist in debug symbols will be ignored.
+
 # Info
 This is just cloned repo from latest SDK-Dev but meant for public, main point of this repo is so people can have access to basic SDK and build their own stuff around game and have some basic information of how this thing works...
 
