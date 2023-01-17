@@ -109,5 +109,10 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, eTargetType, pSimObject);
 		}
+
+		void ClearTarget(eTargetTypeEnum eTargetType)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, eTargetType);
+		}
 	};
 }

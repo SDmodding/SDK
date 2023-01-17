@@ -18,6 +18,14 @@ namespace UFG
 		T* p;
 	};
 
+	template<typename T>
+	struct qNode
+	{
+		qNode<T>* mPrev;
+		qNode<T>* mNext;
+
+		T* GetBase() { return reinterpret_cast<T*>(this); }
+	};
 
 	template<typename T>
 	struct HomerCubic

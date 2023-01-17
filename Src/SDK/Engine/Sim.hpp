@@ -71,6 +71,16 @@ namespace UFG
 			return (m_BaseAnimation && m_BaseAnimation->mCreature && m_BaseAnimation->mCreature->mIsAttached);
 		}
 
+		void Restore()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1911F0))(this);
+		}
+
+		void Suspend()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1916D0))(this);
+		}
+
 		void Destroy()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1905C0))(this);

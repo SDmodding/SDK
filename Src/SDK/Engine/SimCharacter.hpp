@@ -127,6 +127,16 @@ namespace UFG
 		CActionController mActionController;
 	};
 
+	class CAIScriptInterfaceComponent
+	{
+	public:
+
+		void SetDesiredTarget(eTargetTypeEnum target_type, CSimObject* target_object)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x386060))(this, target_type, target_object);
+		}
+	};
+
 	class CAIActionTreeComponent
 	{
 	public:
@@ -152,10 +162,25 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x53F000))(this, object);
 		}
 
-
 		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, const bool bModifyCollisionAccordingToLock)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
+		}
+
+		void AttackTarget(CSimObject* m_Target)
+		{
+			static eTargetTypeEnum m_AttackTypes[] =
+			{
+				eTARGET_TYPE_ATTACKER, eTARGET_TYPE_CLOSEST_PED, eTARGET_TYPE_FACING,
+				eTARGET_TYPE_FOCUS, eTARGET_TYPE_AI_OBJECTIVE, eTARGET_TYPE_PLAYER,
+				eTARGET_TYPE_STIMULUS_PRODUCER, eTARGET_TYPE_CONDITION_STIMULUS_PRODUCER, eTARGET_TYPE_LAST_THREAT, eTARGET_TYPE_ATTACKING
+			};
+
+			for (UFG::eTargetTypeEnum m_AttackType : m_AttackTypes)
+			{
+				SetTarget(m_AttackType, m_Target);
+				SetTargetLock(m_AttackType, true, false);
+			}
 		}
 	};
 
@@ -165,6 +190,24 @@ namespace UFG
 		CIntention m_Intention;
 	};
 
+	class CActiveAIEntityComponent
+	{
+	public:
+		void AddSupplementaryAttackTarget(CSimObject* attack_target)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x340E10))(this, attack_target);
+		}
+
+		void AddThreatTarget(CSimObject* pTarget, float radius)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, float)>(UFG_RVA(0x341190))(this, pTarget, radius);
+		}
+
+		void SetCurrentObjective(eAIObjective objective)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eAIObjective, void*)>(UFG_RVA(0x3852B0))(this, objective, nullptr);
+		}
+	};
 
 	class CCharacterPhysicsComponent : public CSimComponent
 	{
@@ -197,6 +240,26 @@ namespace UFG
 		unsigned __int32 mEnableBullShitCurbHack : 1;
 		unsigned __int32 mIsPlayer : 1;
 		unsigned __int32 mBullShitCurbHack : 1;
+	};
+
+	class CRagdollComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x30);
+
+		void* mRagdoll;
+		void* mPose;
+		float mRagDollWeight;
+		float mVelocityFromProxyScale;
+		RagdollComponent::PoseState mPoseState;
+		RagdollComponent::PoseState mDesiredPoseState;
+		unsigned int mLevelOfDetail;
+		unsigned int mDesiredLevelOfDetail;
+
+		bool IsActive()
+		{
+			return (mPoseState == UFG::RagdollComponent::STATE_POWERED_TRACKING);
+		}
 	};
 
 	class CCharacterOccupantComponent : public CSimComponent
@@ -399,6 +462,36 @@ namespace UFG
 			return reinterpret_cast<CCharacterPropertiesComponent*>(m_Component);
 		}
 
+		CAIScriptInterfaceComponent* GetAIScriptInterface()
+		{
+			CSimComponent* m_Component = m_Components.p[5].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterAIScriptInterfaceComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterAIScriptInterfaceComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CAIScriptInterfaceComponent*>(m_Component);
+		}
+
+		CHealthComponent* GetHealth()
+		{
+			CSimComponent* m_Component = m_Components.p[6].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterHealthComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterHealthComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CHealthComponent*>(m_Component);
+		}
+
 		CActionTreeComponent* GetActionTree()
 		{
 			CSimComponent* m_Component = m_Components.p[7].m_pComponent;
@@ -485,6 +578,22 @@ namespace UFG
 			return reinterpret_cast<CAICharacterControllerBaseComponent*>(m_Component);
 		}
 
+		CActiveAIEntityComponent* GetActiveAIEntity()
+		{
+			CSimComponent* m_Component = m_Components.p[22].m_pComponent;
+
+			// AICharacterControllerBaseComponent::_TypeUID
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterActiveAIEntityComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterActiveAIEntityComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CActiveAIEntityComponent*>(m_Component);
+		}
+
 		CCharacterPhysicsComponent* GetCharacterPhysics()
 		{
 			CSimComponent* m_Component = nullptr;
@@ -538,6 +647,21 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CInventoryComponent*>(m_Component);
+		}
+
+		CRagdollComponent* GetRagdoll()
+		{
+			CSimComponent* m_Component = m_Components.p[42].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterRagdollComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterRagdollComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CRagdollComponent*>(m_Component);
 		}
 
 		CCharacterOccupantComponent* GetCharacterOccupant()
