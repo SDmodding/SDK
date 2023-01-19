@@ -2,6 +2,15 @@
 
 namespace UFG
 {
+	class CController
+	{
+	public:
+		UFG_PAD(0x728);
+
+		bool m_IsKeyboardController;
+		bool m_ControllerInUse;
+	};
+
 	class CDxInputSystem
 	{
 	public:
@@ -11,6 +20,27 @@ namespace UFG
 	CDxInputSystem* DxInputSystem = reinterpret_cast<CDxInputSystem*>(UFG_RVA(0x249CDE8));
 
 	class CInputSystem
+	{
+	public:
+		void* vfptr;
+		CController* mControllers[5];
+		bool mIsAssigned[5];
+		bool mbSentDisconnectMsg;
+		bool mbCheckForControllerDisconnect;
+		int mKeyboardIndex;
+
+		CController* AcquireController(int index)
+		{
+			return reinterpret_cast<CController*(__fastcall*)(void*, int)>(UFG_RVA(0x1B6EB0))(this, index);
+		}
+	};
+
+	/* 
+	* This is custom class, it doesn't exist in the main game
+	* But those variables are under namespace in original code and in compiled binary they're under themself
+	* so it was better to write custom class for this
+	*/
+	class CInputSystem001
 	{
 	public:
 		bool ApplicationHasFocus;
@@ -37,9 +67,8 @@ namespace UFG
 			ShouldRestrictCursorKeyboard[0] = m_bValue;
 			ShouldRestrictCursorKeyboard[1] = m_bValue;
 		}
-
 	};
-	CInputSystem* InputSystem = reinterpret_cast<CInputSystem*>(UFG_RVA(0x235FB80));
+	CInputSystem001* InputSystem001 = reinterpret_cast<CInputSystem001*>(UFG_RVA(0x235FB80));
 
 	class CInputActionData
 	{
@@ -59,6 +88,10 @@ namespace UFG
 		float mOffSeconds;
 		unsigned int mServicedFlag;
 		bool mActionTrue;
+
+		float GetAxisVelX() { return mAxisRawX[0] - mAxisRawX[1]; }
+
+		float GetAxisVelY() { return mAxisRawY[0] - mAxisRawY[1]; }
 	};
 
 	class CInputActionDef
@@ -69,6 +102,11 @@ namespace UFG
 
 	namespace Input
 	{
+		CInputSystem* Get()
+		{
+			return *reinterpret_cast<CInputSystem**>(UFG_RVA(0x235F860));
+		}
+
 		void EnableGameInput(bool m_bValue)
 		{
 			static bool m_bLastValue = true;
@@ -77,21 +115,53 @@ namespace UFG
 			m_bLastValue = m_bValue;
 			{
 				DxInputSystem->FreezeInputs = !m_bValue;
-				InputSystem->ShouldHideCursor = m_bValue;
+				InputSystem001->ShouldHideCursor = m_bValue;
 
-				InputSystem->SetRestrictCursor(m_bValue);
+				InputSystem001->SetRestrictCursor(m_bValue);
 			}
 		}
 
-		unsigned int GetActiveControllerNum()
+		int GetActiveControllerNum()
 		{
-			return *reinterpret_cast<unsigned int*>(UFG_RVA(0x235FB78));
+			return *reinterpret_cast<int*>(UFG_RVA(0x235FB78));
+		}
+
+		CInputActionData* Get_Move() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4988))->mDataPerController[GetActiveControllerNum()]; }
+
+		CInputActionData* Get_Mouse() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x235FD50))->mDataPerController[GetActiveControllerNum()]; }
+
+		namespace Gamepad
+		{
+			bool IsActive()
+			{
+				CController* m_Controller = Get()->AcquireController(GetActiveControllerNum());
+				if (m_Controller && m_Controller->m_IsKeyboardController)
+					return false;
+
+				return true;
+			}
+
+			CInputActionData* Get_CamMove() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E43C8))->mDataPerController[GetActiveControllerNum()]; }
 		}
 
 		namespace Button
 		{
 			// Keyboard - Q
 			CInputActionData* Get_VehicleActionHijack() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4F78))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_L1() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B5D8))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_L1_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B600))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_R1() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B740))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_R1_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B768))->mDataPerController[GetActiveControllerNum()]; }
+
+			// Keyboard - CTRL
+			CInputActionData* Get_L2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B650))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_L2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B678))->mDataPerController[GetActiveControllerNum()]; }
+
+			// Keyboard SHIFT
+			CInputActionData* Get_R2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7B8))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_R2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7E0))->mDataPerController[GetActiveControllerNum()]; }
 
 			// Keyboard - M (Cycle objectives)
 			CInputActionData* Get_L3() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B6C8))->mDataPerController[GetActiveControllerNum()]; }

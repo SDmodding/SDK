@@ -130,6 +130,46 @@ namespace UFG
 			return m_Delta.Length();
 		}
 
+		void ConvertToRad()
+		{
+			x *= UFG_Deg2Rad_Mul;
+			y *= UFG_Deg2Rad_Mul;
+			z *= UFG_Deg2Rad_Mul;
+		}
+
+		void AngleVectors(qVector3* forward, qVector3* right, qVector3* up)
+		{
+			float sp = sinf(x);
+			float cp = cosf(x);
+
+			float sy = sinf(y);
+			float cy = cosf(y);
+
+			float sr = sinf(z);
+			float cr = cosf(z);
+
+			if (forward)
+			{
+				forward->x = cp * cy;
+				forward->y = cp * sy;
+				forward->z = -sp;
+			}
+
+			if (right)
+			{
+				right->x = (-1 * sr * sp * cy + -1 * cr * -sy);
+				right->y = (-1 * sr * sp * sy + -1 * cr * cy);
+				right->z = -1 * sr * cp;
+			}
+
+			if (up)
+			{
+				up->x = (cr * sp * cy + -sr * -sy);
+				up->y = (cr * sp * sy + -sr * cy);
+				up->z = cr * cp;
+			}
+		}
+		
 		void Angles2Vector()
 		{
 			float m_PitchSin = sinf(x); 
@@ -145,9 +185,7 @@ namespace UFG
 
 		void DegAngles2Vector()
 		{
-			x *= UFG_Deg2Rad_Mul;
-			y *= UFG_Deg2Rad_Mul;
-			z *= UFG_Deg2Rad_Mul;
+			ConvertToRad();
 
 			Angles2Vector();
 		}
