@@ -154,26 +154,10 @@ namespace Callback
 			if (ImGui::CollapsingHeader("Script Camera", ImGuiTreeNodeFlags_DefaultOpen))
 			{
 				if (ImGui::Button("Toggle"))
-					m_ToggleScriptCamera = true;
+					Feature::ScriptCamera.m_Toggle = true;
 
-				if (m_ScriptCamera->mbScriptCameraOn)
-				{
-					float m_X = 0.f; float m_Y = 0.f; float m_Z = 0.f;
-					ImGui::SliderFloat("X##ScriptCamera", &m_X, -5.f, 5.f);
-					ImGui::SliderFloat("Y##ScriptCamera", &m_Y, -5.f, 5.f);
-					ImGui::SliderFloat("Z##ScriptCamera", &m_Z, -5.f, 5.f);
-
-					m_ScriptCameraEye.x += m_X;
-					m_ScriptCameraEye.y += m_Y;
-					m_ScriptCameraEye.z += m_Z;
-
-					float m_Pitch = 0.f; float m_Yaw = 0.f;
-					ImGui::SliderFloat("Pitch##ScriptCamera", &m_Pitch, -5.f, 5.f);
-					ImGui::SliderFloat("Yaw##ScriptCamera", &m_Yaw, -5.f, 5.f);
-
-					m_ScriptCameraLook.x += m_Pitch;
-					m_ScriptCameraLook.y += m_Yaw;
-				}
+				ImGui::SliderFloat("Move Speed##ScriptCamera", &Feature::ScriptCamera.m_MoveSpeed, 0.1f, 3.f, "%.1f", 0.1f);
+				ImGui::SliderFloat("Look Speed##ScriptCamera", &Feature::ScriptCamera.m_LookSpeed, 0.1f, 3.f, "%.1f", 0.1f);
 			}
 
 			if (ImGui::CollapsingHeader("Day Manager", ImGuiTreeNodeFlags_DefaultOpen))
@@ -183,12 +167,13 @@ namespace Callback
 				ImGui::SliderFloat("Rain Target", &UFG::TimeOfDayManager->m_WeatherTarget, 0.f, 2.f);
 				ImGui::SliderFloat("Next Rain Target", &UFG::TimeOfDayManager->m_NextWeatherTarget, 0.f, 2.f);
 				ImGui::SliderFloat("Wind Speed", &UFG::TimeOfDayManager->mWindSpeed, 0.f, 10.f);
-
 			}
-
+			
 			UFG::CSimCharacter* m_LocalPlayer = UFG::LocalPlayer::Get();
 			if (ImGui::CollapsingHeader("Local Player", ImGuiTreeNodeFlags_DefaultOpen) && m_LocalPlayer)
 			{
+				ImGui::Checkbox("God Mode", &m_GodMode);
+
 				UFG::qVector4& m_LocalPlayerPos = m_LocalPlayer->m_pTransformNodeComponent->mWorldTransform.v3;
 				
 				for (char i = 0; 3 > i; ++i)

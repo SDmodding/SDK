@@ -1,35 +1,29 @@
 #pragma once
+#include "Features/ScriptCamera.hpp"
 
 namespace Callback
 {
-	UFG::qSymbol m_VehicleHash = -1;
+	bool m_GodMode = false;
 	UFG::qVector3* m_pTeleport;
 	char* m_Animation = nullptr;
 
-	bool m_ToggleScriptCamera = false;
-	UFG::qVector3 m_ScriptCameraEye(0.f, 0.f, 0.f);
-	UFG::qVector3 m_ScriptCameraLook(0.f, 0.f, 0.f);
+	UFG::qSymbol m_VehicleHash = -1;
 
 	void OnGameUpdate()
 	{
 		UFG::CSimCharacter* m_LocalPlayer = UFG::LocalPlayer::Get();
 
-		if (m_VehicleHash != -1)
+		static bool m_GodModeWasOn = false;
+		if (m_GodMode || m_GodModeWasOn)
 		{
-			UFG::CSimObject* m_Vehicle = UFG::Sim::SpawnUniqueObject(UFG::Sim::GenerateActorName("dbg_car"), m_VehicleHash);
-			if (m_Vehicle)
+			m_GodModeWasOn = m_GodMode;
+
+			UFG::CHealthComponent* m_LocalPlayerHealth = m_LocalPlayer->GetHealth();
+			if (m_LocalPlayerHealth)
 			{
-				UFG::TSVehicle* m_VehicleActor = reinterpret_cast<UFG::TSVehicle*>(m_Vehicle->GetActor());
-				if (m_VehicleActor)
-					m_VehicleActor->UnlockDoors(true);
-
-				UFG::qVector4 m_VehiclePosition = m_LocalPlayer->m_pTransformNodeComponent->mWorldTransform.v3;
-				m_VehiclePosition.x += 5.f;
-
-				UFG::SimObjectUtility::SetPosition(m_Vehicle, m_VehiclePosition);
+				m_LocalPlayerHealth->m_bIsTakingDamage = !m_GodMode;
+				m_LocalPlayerHealth->SetHealth(static_cast<int>(m_LocalPlayerHealth->m_fMaxHealth));
 			}
-
-			m_VehicleHash = -1;
 		}
 
 		if (m_pTeleport)
@@ -61,37 +55,24 @@ namespace Callback
 
 		UFG::CScriptCameraComponent* m_ScriptCamera = m_Camera->GetScriptCamera();
 		if (m_ScriptCamera)
+			Feature::ScriptCamera.Update(m_LocalPlayer, m_ScriptCamera);
+
+		if (m_VehicleHash != -1)
 		{
-			if (m_ScriptCamera->mbScriptCameraOn)
+			UFG::CSimObject* m_Vehicle = UFG::Sim::SpawnUniqueObject(UFG::Sim::GenerateActorName("dbg_car"), m_VehicleHash);
+			if (m_Vehicle)
 			{
-				if (m_ToggleScriptCamera)
-				{
-					m_ToggleScriptCamera = false;
-					m_ScriptCamera->ReleaseCamera(false);
+				UFG::TSVehicle* m_VehicleActor = reinterpret_cast<UFG::TSVehicle*>(m_Vehicle->GetActor());
+				if (m_VehicleActor)
+					m_VehicleActor->UnlockDoors(true);
 
-					UFG::SimObjectUtility::SetPosition(m_LocalPlayer, m_ScriptCameraEye);
-				}
-				else
-				{
-					UFG::qVector3 m_LookPos = m_ScriptCameraLook;
-					m_LookPos.DegAngles2Vector();
+				UFG::qVector4 m_VehiclePosition = m_LocalPlayer->m_pTransformNodeComponent->mWorldTransform.v3;
+				m_VehiclePosition.x += 5.f;
 
-					m_LookPos.x += m_ScriptCameraEye.x;
-					m_LookPos.y += m_ScriptCameraEye.y;
-					m_LookPos.z += m_ScriptCameraEye.z;
-
-					m_ScriptCamera->SetDesiredEyeLook(&m_ScriptCameraEye, &m_LookPos);
-
-					UFG::SimObjectUtility::SetPosition(m_LocalPlayer, m_ScriptCameraEye.x, m_ScriptCameraEye.y, m_ScriptCameraEye.z - 5.f);
-				}
+				UFG::SimObjectUtility::SetPosition(m_Vehicle, m_VehiclePosition);
 			}
-			else if (m_ToggleScriptCamera)
-			{
-				m_ToggleScriptCamera = false;
-				m_ScriptCamera->SwitchToScriptCam(false);
 
-				m_ScriptCameraEye = m_LocalPlayer->m_pTransformNodeComponent->mWorldTransform.v3.ToVector3();
-			}
+			m_VehicleHash = -1;
 		}
 	}
 }
