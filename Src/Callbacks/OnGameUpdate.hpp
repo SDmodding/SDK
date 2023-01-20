@@ -1,9 +1,12 @@
 #pragma once
+#include "Features/CopSystem.hpp"
 #include "Features/ScriptCamera.hpp"
 
 namespace Callback
 {
-	bool m_GodMode = false;
+	float m_FreezeTimeValue = -1.f;
+
+	bool m_GodMode = true;
 	UFG::qVector3* m_pTeleport;
 	char* m_Animation = nullptr;
 
@@ -12,6 +15,11 @@ namespace Callback
 	void OnGameUpdate()
 	{
 		UFG::CSimCharacter* m_LocalPlayer = UFG::LocalPlayer::Get();
+
+		if (m_FreezeTimeValue > 0.f)
+			UFG::TimeOfDayManager->m_SecondsSinceMidnight = m_FreezeTimeValue;
+
+		Feature::CopSystem_.Update();
 
 		static bool m_GodModeWasOn = false;
 		if (m_GodMode || m_GodModeWasOn)

@@ -24,7 +24,7 @@ namespace Hook
 			m_iStyle.Colors[ImGuiCol_TextDisabled] = ImVec4(0.500f, 0.500f, 0.500f, 1.000f);
 			m_iStyle.Colors[ImGuiCol_WindowBg] = ImVec4(0.180f, 0.180f, 0.180f, 1.000f);
 			m_iStyle.Colors[ImGuiCol_ChildBg] = ImVec4(0.280f, 0.280f, 0.280f, 0.000f);
-			m_iStyle.Colors[ImGuiCol_PopupBg] = ImVec4(0.313f, 0.313f, 0.313f, 1.000f);
+			m_iStyle.Colors[ImGuiCol_PopupBg] = ImVec4(0.160f, 0.160f, 0.160f, 1.000f);
 			m_iStyle.Colors[ImGuiCol_Border] = ImVec4(0.266f, 0.266f, 0.266f, 1.000f);
 			m_iStyle.Colors[ImGuiCol_BorderShadow] = ImVec4(0.000f, 0.000f, 0.000f, 0.000f);
 			m_iStyle.Colors[ImGuiCol_FrameBg] = ImVec4(0.160f, 0.160f, 0.160f, 1.000f);
@@ -110,12 +110,26 @@ namespace Hook
 
 			InitColors();
 
-			ImGuiIO& m_iIO = ImGui::GetIO();
+			ImGuiIO& m_IO = ImGui::GetIO();
 			{
-				m_iIO.IniFilename = 0;
-				m_iIO.LogFilename = 0;
+				m_IO.IniFilename = 0;
+				m_IO.LogFilename = 0;
 
-				m_iIO.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
+				m_IO.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
+			}
+
+			if (m_IO.DisplaySize.y > 1080.f)
+			{
+				Callback::m_UseBiggerWindow = true;
+
+				ImFontConfig m_FontConfig = ImFontConfig();
+				m_FontConfig.OversampleH = m_FontConfig.OversampleV = 1;
+				m_FontConfig.PixelSnapH = true;
+				m_FontConfig.SizePixels = 26.f;
+
+				m_IO.FontDefault = m_IO.Fonts->AddFontDefault(&m_FontConfig);
+				m_IO.Fonts->Build();
+				ImGui_ImplDX11_InvalidateDeviceObjects();
 			}
 		}
 	}

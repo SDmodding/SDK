@@ -3,12 +3,13 @@
 namespace Callback
 {
 	bool m_bOnRenderDebug = true;
+	bool m_UseBiggerWindow = false;
 
 	void OnRender()
 	{
 		if (!m_bOnRenderDebug) return;
 
-		ImGui::SetNextWindowSize(ImVec2(540.f, 360.f));
+		ImGui::SetNextWindowSize(m_UseBiggerWindow ? ImVec2(1080.f, 720.f) : ImVec2(540.f, 360.f));
 		if (ImGui::Begin("SD Debug", nullptr, ImGuiWindowFlags_NoResize))
 		{
 			if (ImGui::CollapsingHeader("UI / HUD", ImGuiTreeNodeFlags_DefaultOpen))
@@ -162,7 +163,13 @@ namespace Callback
 
 			if (ImGui::CollapsingHeader("Day Manager", ImGuiTreeNodeFlags_DefaultOpen))
 			{
-				ImGui::SliderFloat("Time", &UFG::TimeOfDayManager->m_SecondsSinceMidnight, 0.f, 86400.f);
+				static bool m_FreezeTime = false;
+				if (ImGui::Checkbox("Freeze Time", &m_FreezeTime))
+					m_FreezeTimeValue = (!m_FreezeTime ? -1.f : UFG::TimeOfDayManager->m_SecondsSinceMidnight);
+
+				if (ImGui::SliderFloat("Time", &UFG::TimeOfDayManager->m_SecondsSinceMidnight, 0.f, 86400.f) && m_FreezeTime)
+					m_FreezeTimeValue = UFG::TimeOfDayManager->m_SecondsSinceMidnight;
+
 				ImGui::SliderFloat("Rain State", &UFG::TimeOfDayManager->m_WeatherState, 0.f, 2.f);
 				ImGui::SliderFloat("Rain Target", &UFG::TimeOfDayManager->m_WeatherTarget, 0.f, 2.f);
 				ImGui::SliderFloat("Next Rain Target", &UFG::TimeOfDayManager->m_NextWeatherTarget, 0.f, 2.f);
@@ -170,6 +177,7 @@ namespace Callback
 			}
 			
 			UFG::CSimCharacter* m_LocalPlayer = UFG::LocalPlayer::Get();
+
 			if (ImGui::CollapsingHeader("Local Player", ImGuiTreeNodeFlags_DefaultOpen) && m_LocalPlayer)
 			{
 				ImGui::Checkbox("God Mode", &m_GodMode);
@@ -236,6 +244,11 @@ namespace Callback
 
 					ImGui::TreePop();
 				}
+			}
+
+			if (ImGui::CollapsingHeader("Cop System", ImGuiTreeNodeFlags_DefaultOpen) && m_LocalPlayer)
+			{
+				ImGui::Checkbox("Disable Heat", &Feature::CopSystem_.m_DisableHeat);
 			}
 
 			if (ImGui::CollapsingHeader("Vehicle", ImGuiTreeNodeFlags_DefaultOpen))
