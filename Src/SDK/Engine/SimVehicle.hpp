@@ -163,6 +163,48 @@ namespace UFG
 		float mNotMovingTime;
 		float mPropellerAngle;
 		int mGroundFixupRequired;
+		int mAxleBoneId[4];
+		int mWheelBoneId[4];
+		int mMotorBoneId[2];
+		int mPropellerBoneId[2];
+		int mNumWheels;
+		int mLockAtHighLODMode;
+		float mLockAtHighLODTime;
+		float mVehicleCollisionMinImpulseRequiredToTakeDamage;
+		float mVehicleCollisionDamageDealtAtMinImpulse;
+		float mVehicleCollisionDamageDealtAtMaxImpulse;
+		float mVehicleCollisionDamageDealtAtMinRamImpulse;
+		float mVehicleCollisionDamageDealtAtMaxRamImpulse;
+		float mVehicleCollisionExtraDamageMultiplier;
+		float mVehicleCollisionMinImpulseRequiredToDealDamage;
+		float mVehicleCollisionMaxImpulseForDealingDamage;
+		float mVehicleCollisionMinRamImpulseRequiredToDealDamage;
+		float mVehicleCollisionMaxRamImpulseForDealingDamage;
+		float mSecondsSinceAppliedSpeedBoostRewardFromVehicleTakedown;
+		float mSecondsEngineHasBeenDeteriorating;
+		qVector3 mRamVelocity;
+		unsigned __int32 mLockedAtLowLOD : 1;
+		unsigned __int32 mSuspended : 1;
+		unsigned __int32 mNotMoving : 1;
+		unsigned __int32 mNisMode : 1;
+		unsigned __int32 mCannotExplode : 1;
+		__int8 mVehicleCollisionForceDamageDealer : 1;
+		__int8 mIsRoofSliding : 1;
+		__int8 mLastEngineDamageCouldBeATakedown : 1;
+		__int8 mRamming : 1;
+		__int8 mCollisionShouldTriggerExplosion : 1;
+		__int8 mbWasEngineDeteriorating : 1;
+		float mDistanceToHighLod;
+		float mDistanceToMedLod;
+		bool mDoorsLocked;
+		bool mUntargetable;
+		bool mCreatedWithTemporaryRig;
+		eVehicleTrunkTypeEnum mTrunkType;
+
+		void SetLOD(PhysicsVehicle::Lod lod)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, PhysicsVehicle::Lod)>(UFG_RVA(0x68A9B0))(this, lod);
+		}
 	};
 
 	// Components
@@ -466,4 +508,19 @@ namespace UFG
 
 		void UnlockDoors(bool enable) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x65EDB0))(this, enable); }
 	};
+
+	namespace PhysicsMoverInterface
+	{
+		// This can be used to itter through all in - game vehicles, just make sure to break out the loop when nullptr is hit to prevent infite - loop.
+		CPhysicsMoverInterface* Itter(CPhysicsMoverInterface* m_This = nullptr)
+		{
+			static const uintptr_t m_List = UFG_RVA(0x2091350);
+
+			uintptr_t m_Next = *reinterpret_cast<uintptr_t*>((m_This ? reinterpret_cast<uintptr_t>(m_This) : m_List) + 0x50) - 0x48;
+			if (m_Next == m_List)
+				return nullptr;
+
+			return reinterpret_cast<CPhysicsMoverInterface*>(m_Next);
+		}
+	}
 }

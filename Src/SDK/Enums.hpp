@@ -88,6 +88,19 @@ namespace UFG
 		};
 	}
 
+	namespace PhysicsVehicle
+	{
+		enum Lod
+		{
+			LOD_UNINITIALIZED = 0x0,
+			LOD_LOW = 0x1,
+			LOD_MEDIUM = 0x2,
+			LOD_HIGH = 0x3,
+			LOD_NIS = 0x4,
+			LOD_RESOURCES_UNLOADED = 0x5,
+		};
+	}
+
 	namespace RagdollComponent
 	{
 		enum PoseState
@@ -677,5 +690,19 @@ namespace UFG
 		FX_WHEELEDVEHICLEJUMP = 0x25,
 		FX_WHEELEDVEHICLEIMPACT = 0x26,
 		EFFECT_TABLE_SIZE = 0x27,
+	};
+
+	enum eVehicleTrunkTypeEnum
+	{
+		eVEHICLE_TRUNK_TYPE_NONE = 0x0,
+		eVEHICLE_TRUNK_TYPE_CAR_NARROW = 0x1,
+		eVEHICLE_TRUNK_TYPE_CAR_STANDARD = 0x2,
+		eVEHICLE_TRUNK_TYPE_CAR_WIDE = 0x3,
+		eVEHICLE_TRUNK_TYPE_CAR_WIDER = 0x4,
+		eVEHICLE_TRUNK_TYPE_VAN_STANDARD = 0x5,
+		eVEHICLE_TRUNK_TYPE_VAN_WIDE = 0x6,
+		eVEHICLE_TRUNK_TYPE_VAN_WIDER = 0x7,
+		eVEHICLE_TRUNK_TYPE_VAN_NARROW = 0x8,
+		NUM_VEHICLE_TRUNK_TYPES = 0x9,
 	};
 }

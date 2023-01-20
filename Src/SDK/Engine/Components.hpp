@@ -73,12 +73,26 @@ namespace UFG
 		CCreature* mCreature;
 	};
 
-	class CRigidBodyComponent
+	class CRigidBodyComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0xA8);
+		UFG_PAD(0x68);
 
 		void* mBody;
+
+		UFG_PAD(0x58);
+		/*UFG::WaterFloatingTrackerBaseComponent* mWaterFloatingTrackerComponent;
+		UFG::RebindingComponentHandle<UFG::TransformNodeComponent, 0> mRootTransformComponent;
+		UFG::WindAction* mWindAction;
+		BitArray256* mFractureState;
+		UFG::qArray<UFG::qSafePointer<UFG::Constraint, UFG::Constraint>, 0> mConstraints;*/
+
+		unsigned int mFlags;
+
+		void SetMotionType(unsigned int mode)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0xB1500))(this, mode);
+		}
 
 		void SetVelocity(UFG::qVector3* vel)
 		{
@@ -88,6 +102,11 @@ namespace UFG
 		void GetVelocity(UFG::qVector3* result)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*)>(UFG_RVA(0xAB970))(this, result);
+		}
+
+		void EnablePhysics(bool m_Enable)
+		{
+			SetMotionType(m_Enable ? 128 : 256);
 		}
 	};
 

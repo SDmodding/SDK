@@ -260,6 +260,11 @@ namespace UFG
 		{
 			return (mPoseState == UFG::RagdollComponent::STATE_POWERED_TRACKING);
 		}
+
+		void ApplyAngularImpulse(int bone, qVector3* impulse, float connectionTransfer)
+		{
+			reinterpret_cast<bool(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, bone, impulse, connectionTransfer);
+		}
 	};
 
 	class CCharacterOccupantComponent : public CSimComponent
