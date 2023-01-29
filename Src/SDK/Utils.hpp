@@ -4,6 +4,16 @@ namespace SDK
 {
 	namespace Utils
 	{
+        long long m_SkookumBinarySize = 0;
+        void* m_SkookumScriptBinary = nullptr;
+        void* GetSkookumScriptBinary()
+        {
+            if (!m_SkookumScriptBinary)
+                m_SkookumScriptBinary = UFG::StreamFileWrapper::ReadEntireFile("Data\\Scripts\\Classes.skoo-bin", &m_SkookumBinarySize);
+
+            return m_SkookumScriptBinary;
+        }
+
         long long m_GlobalPropertiesSize = 0;
         void* m_GlobalProperties = nullptr;
         void* GetGlobalProperties()

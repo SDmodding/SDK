@@ -146,6 +146,25 @@ namespace UFG
 
 		namespace Button
 		{
+			CInputActionData* Get_Left() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0B0))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_Left_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0D8))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_Right() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B128))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_Right_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B150))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_Up() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1A0))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_Up_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1C8))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_Down() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B218))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_Down_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B240))->mDataPerController[GetActiveControllerNum()]; }
+
+			// Keyboard - Up Arrow
+			CInputActionData* Get_EquipUp() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4E10))->mDataPerController[GetActiveControllerNum()]; }
+
+			// Keyboard - H
+			CInputActionData* Get_VehicleHorn_Start() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47D0))->mDataPerController[GetActiveControllerNum()]; }
+			CInputActionData* Get_VehicleHorn_Stop() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47F8))->mDataPerController[GetActiveControllerNum()]; }
+
 			// Keyboard - Q
 			CInputActionData* Get_VehicleActionHijack() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4F78))->mDataPerController[GetActiveControllerNum()]; }
 
@@ -168,6 +187,11 @@ namespace UFG
 
 			// Keyboard - E (Interact / Enter vehicle)
 			CInputActionData* Get_Action() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4C30))->mDataPerController[GetActiveControllerNum()]; }
+
+
+			CInputActionData* Get_UIAccept() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B290))->mDataPerController[GetActiveControllerNum()]; }
+
+			CInputActionData* Get_UIBack() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B308))->mDataPerController[GetActiveControllerNum()]; }
 		}
 	}
 }

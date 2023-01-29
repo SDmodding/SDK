@@ -2,6 +2,8 @@
 
 namespace UFG
 {
+	class CRoadNetworkLane;
+
 	// ...
 	class CSteering
 	{
@@ -59,6 +61,11 @@ namespace UFG
 		CRigidBodyComponent* mRigidBody;
 
 		UFG_PAD(0x1F8);
+
+		void FlipVehicle(float torqueFactor, qVector3* collisionPoint)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x4654C0))(this, torqueFactor, collisionPoint);
+		}
 	};
 
 	class CPhysicsWheeledVehicle : public CPhysicsVehicle
@@ -205,6 +212,26 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, PhysicsVehicle::Lod)>(UFG_RVA(0x68A9B0))(this, lod);
 		}
+
+		void RepairDamage()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x6899D0))(this);
+		}
+
+		float GetEngineDamage()
+		{
+			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0x67A630))(this);
+		}
+
+		void SetEngineDamage(float damage)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x68A5C0))(this, damage);
+		}
+
+		void SetCannotExplode(bool cannotExplode)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x68A470))(this, cannotExplode);
+		}
 	};
 
 	// Components
@@ -256,24 +283,91 @@ namespace UFG
 	class CVehicleEffectsComponent : public CSimComponent
 	{
 	public:
+		UFG_PAD(0x10);
+
+		unsigned int mDamageTransferUID;
+
+		UFG_PAD(0x52C);
+		/*UFG::qSafeArray<UFG::WheelModelsBinding, 4> mWheelModelBindings;
+		UFG::EffectStatus mEffectStatusTable[39];
+		UFG::RebindingComponentHandle<UFG::WaterFloatingTrackerComponent, 0> mWaterFloatingTrackerComponent;
+		UFG::RebindingComponentHandle<UFG::CompositeDrawableComponent, 0> mDrawableComponent;
+		UFG::RebindingComponentHandle<Render::FXSimComponent, 0> mFXComponent;
+		UFG::RebindingComponentHandle<UFG::PhysicsMoverInterface, 0> mMoverComponent;
+		UFG::RebindingComponentHandle<UFG::RoadSpaceComponent, 0> mRoadSpaceComponent;
+		UFG::RebindingComponentHandle<UFG::VehicleDriverInterface, 0> mVehicleDriverComponent;*/
+
+		unsigned long mSkidEmitters[4];
+		CTransformNodeComponent* mTransformNodes[16];
+		unsigned long mWheelBoneId[4];
+		unsigned long mBumperBoneId[4];
+		unsigned long mSkidEffect[4];
+		unsigned long mRimSparksEffect[4];
+		unsigned long mBumperSparksEffect[4];
+		unsigned long mWetSurfaceEffect[4];
+		void* mLastPhysicsSurfacProperty[4];
+
+		UFG_PAD(0x50);
+		//UFG::HullSprayEffects mSprayEffects[2];
+
+		qVector3 mSprayVector;
+		qSymbol mEffectGroup;
+		unsigned int mLevelOfDetail;
+		unsigned int mNumWheels;
+		unsigned int mNumQueuedHeadlightChanges;
+
+		UFG_PAD(0x4);
+		CRoadNetworkLane* mPreTurnLane;
+
+		float mSpeedLevelThreshold[4];
+		unsigned int mSpeedLevel;
+		unsigned int mRigUID;
+		unsigned int mVandalizedDamage;
+		CDamageRig* mDamageRig;
+		float mInitialGrimePercentage;
+		float mInitialGrimeFactor;
+		float mExtinguishFireCountdown;
+		float mAirTime;
+		float mSignalTimer;
+		float mHeadlightFlashesLength;
+		float mHeadlightFlashesTimer;
+		float mHeadlightFlareOnTime;
+		float mHeadlightFlareOffTime;
+		bool mIsOffGround;
+		unsigned int mFramesOffGround;
+		unsigned __int32 mOnFire : 1;
+		unsigned __int32 mBlownOutWindows : 1;
+		unsigned __int32 mInWater : 1;
+		unsigned __int32 mUsesHeadlightsInRain : 1;
+		unsigned __int32 mScriptLightsEnabled : 1;
+		unsigned __int32 mHeadlightsAlwaysOn : 1;
+		unsigned __int32 mHeadlightsAlwaysOff : 1;
+		unsigned __int32 mAreEffectMarkersResolved : 1;
+
 		void TurnOnCopLights()
 		{
-			return reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x68E020))(this);
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x68E020))(this);
 		}
 
 		void TurnOffCopLights()
 		{
-			return reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x68D7F0))(this);
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x68D7F0))(this);
 		}
 
 		void TurnOnLightEffects(UFG::VehicleEffectId id)
 		{
-			return reinterpret_cast<void(__fastcall*)(void*, UFG::VehicleEffectId)>(UFG_RVA(0x68E850))(this, id);
+			reinterpret_cast<void(__fastcall*)(void*, UFG::VehicleEffectId)>(UFG_RVA(0x68E850))(this, id);
 		}
 
 		void TurnOffLightEffects(UFG::VehicleEffectId id)
 		{
-			return reinterpret_cast<void(__fastcall*)(void*, UFG::VehicleEffectId)>(UFG_RVA(0x68DD20))(this, id);
+			reinterpret_cast<void(__fastcall*)(void*, UFG::VehicleEffectId)>(UFG_RVA(0x68DD20))(this, id);
+		}
+
+		void SetAllDamageMarkers(float damage, bool triggers_only, bool suppress_soundeffects)
+		{
+			if (mDamageRig)
+				reinterpret_cast<void(__fastcall*)(void*, void*, float, bool, bool)>(UFG_RVA(0x3AEDD0))(mDamageRig, this, damage, triggers_only, suppress_soundeffects);
 		}
 	};
 

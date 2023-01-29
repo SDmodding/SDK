@@ -11,3 +11,5 @@
 #define CharacterRagdollComponent_TypeUID					0x82000001
 
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
+
+#define WeaponGunComponent_TypeUID							0x9C000001

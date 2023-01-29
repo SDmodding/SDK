@@ -217,6 +217,56 @@ namespace UFG
 		qVector4 v2;
 		qVector4 v3;
 
+		// This rotate funcs are wrong...
+		void RotateRight(qVector3 vRot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
+		{
+			if (!m_SinCosIncluded)
+			{
+				m_Sin = sinf(m_Theta);
+				m_Cos = cosf(m_Theta);
+			}
+
+			v0.x = m_Cos + (1.f - m_Cos) * vRot.x * vRot.x;
+			v0.y = (1.f - m_Cos) * vRot.x * vRot.y - m_Sin * vRot.z;
+			v0.z = (1.f - m_Cos) * vRot.x * vRot.z + m_Sin * vRot.y;
+		}
+
+		void RotateForward(qVector3 m_Rot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
+		{
+			if (!m_SinCosIncluded)
+			{
+				m_Sin = sinf(m_Theta);
+				m_Cos = cosf(m_Theta);
+			}
+
+			v1.x = (1.f - m_Cos) * m_Rot.y * m_Rot.x + m_Sin * m_Rot.z;
+			v1.y = m_Cos + (1.f - m_Cos) * m_Rot.y * m_Rot.y;
+			v1.z = (1.f - m_Cos) * m_Rot.y * m_Rot.z - m_Sin * m_Rot.x;
+		}
+
+		void RotateUp(qVector3 m_Rot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
+		{
+			if (!m_SinCosIncluded)
+			{
+				m_Sin = sinf(m_Theta);
+				m_Cos = cosf(m_Theta);
+			}
+
+			v2.x = (1.f - m_Cos) * m_Rot.z * m_Rot.x - m_Sin * m_Rot.y;
+			v2.y = (1.f - m_Cos) * m_Rot.z * m_Rot.y + m_Sin * m_Rot.x;
+			v2.z = m_Cos + (1.f - m_Cos) * m_Rot.z * m_Rot.z;
+		}
+
+		void Rotate(qVector3 m_Rot, float m_Theta)
+		{
+			const float m_Sin = sinf(m_Theta);
+			const float m_Cos = cosf(m_Theta);
+
+			RotateRight(m_Rot, 0.f, m_Sin, m_Cos, true);
+			RotateForward(m_Rot, 0.f, m_Sin, m_Cos, true);
+			RotateUp(m_Rot, 0.f, m_Sin, m_Cos, true);
+		}
+
 		qVector3 ToVector3()
 		{
 			float sy = sqrtf(v0.x * v0.x + v1.x * v1.y);
