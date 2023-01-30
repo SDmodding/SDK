@@ -134,7 +134,11 @@ namespace UFG
 		{
 			bool IsActive()
 			{
-				CController* m_Controller = Get()->AcquireController(GetActiveControllerNum());
+				CInputSystem* m_InputSystem = Get();
+				if (!m_InputSystem)
+					return false;
+
+				CController* m_Controller = m_InputSystem->AcquireController(GetActiveControllerNum());
 				if (m_Controller && m_Controller->m_IsKeyboardController)
 					return false;
 

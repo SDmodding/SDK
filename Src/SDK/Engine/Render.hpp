@@ -15,12 +15,13 @@ namespace Render
 		float mFarBlurRadius;
 		bool mNearBlurRendered;
 
+		bool* DontRender() { return reinterpret_cast<bool*>(UFG_RVA(0x2136120)); }
+
 		void Enable(bool enable)
 		{
-			bool* m_DontRender = reinterpret_cast<bool*>(UFG_RVA(0x2136120));
-			if (*m_DontRender != enable) return;
+			if (*DontRender() != enable) return;
 
-			*m_DontRender = !enable;
+			*DontRender() = !enable;
 
 			mFocalDistance	= 0.f;
 			mInFocusRange	= 0.f;
