@@ -322,5 +322,54 @@ namespace SDK
                 fclose(m_File);
             }
         }
+
+        void DumpWardrobeItems()
+        {
+            std::map<int, std::map<uint32_t, std::string>> m_Data;
+
+            UFG::StoreFrontTracker->LoadStoreData(0);
+            UFG::StoreFrontTracker->mProperties.Bind();
+
+            UFG::qPropertyList* m_List = UFG::PropertySet::GetList(UFG::StoreFrontTracker->mProperties.mpPropSet, 0x23C60283);
+            for (int i = 0; m_List->mNumElements > i; ++i)
+            {
+                uintptr_t* m_Item = reinterpret_cast<uintptr_t*>(m_List->GetValuePtr(0x1A, i));
+                if (!m_Item || !*m_Item)
+                    continue;
+
+                UFG::qPropertySet* m_ItemSet = reinterpret_cast<UFG::qPropertySet*>(reinterpret_cast<uintptr_t>(m_Item) + *m_Item);
+
+                UFG::qSymbol* m_ItemCategory    = m_ItemSet->GetSymbol(0x543E920D);
+                const char* m_ItemName          = m_ItemSet->GetString(0xBEBEBF75);
+
+                const char* m_ItemTranslated    = UFG::UI::GetTranslator()->Translate(&m_ItemName[1]);
+
+                int m_ItemCategoryID    = reinterpret_cast<int(__fastcall*)(UFG::qSymbol*)>(UFG_RVA(0x4B0C00))(m_ItemCategory);
+
+                m_Data[m_ItemCategoryID][m_ItemSet->m_Hash] = (m_ItemTranslated ? m_ItemTranslated : "");
+            }
+
+            m_Data = m_Data;
+
+            FILE* m_File = nullptr;
+            fopen_s(&m_File, "dbg\\items.h", "w");
+            if (m_File)
+            {
+                char m_FileOutput[128];
+
+                for (auto& m_Category : m_Data)
+                {
+                    fwrite(m_FileOutput, 1, sprintf_s(m_FileOutput, sizeof(m_FileOutput), "{ %d, {\n", m_Category.first), m_File);
+
+                    for (auto& m_Clothes : m_Category.second)
+                    {
+                        fwrite(m_FileOutput, 1, sprintf_s(m_FileOutput, sizeof(m_FileOutput), "\t{ 0x%X, \"%s\" },\n", m_Clothes.first, m_Clothes.second.c_str()), m_File);
+                    }
+
+                    fwrite(m_FileOutput, 1, sprintf_s(m_FileOutput, sizeof(m_FileOutput), "}},\n"), m_File);
+                }
+                fclose(m_File);
+            }
+        }
 	}
 }

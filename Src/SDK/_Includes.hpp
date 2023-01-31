@@ -62,6 +62,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Game/Screen.hpp"
 #include "Game/ScreenHud.hpp"
 #include "Game/ScreenOverlay.hpp"
+#include "Game/Store.hpp"
 #include "Game/Tasks.hpp"
 #include "Game/TimeOfDayManager.hpp"
 #include "Game/UI.hpp"
