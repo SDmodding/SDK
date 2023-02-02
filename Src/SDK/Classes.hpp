@@ -217,6 +217,10 @@ namespace UFG
 		qVector4 v2;
 		qVector4 v3;
 
+		qVector3 GetForward()	{ return { -v2.x, -v2.y, -v2.z }; }
+		qVector3 GetUp()		{ return { v1.x, v1.y, v1.z }; }
+		qVector3 GetRight()		{ return { v0.x, v0.y, v0.z }; }
+
 		// This rotate funcs are wrong...
 		void RotateRight(qVector3 vRot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
 		{
@@ -239,9 +243,9 @@ namespace UFG
 				m_Cos = cosf(m_Theta);
 			}
 
-			v1.x = (1.f - m_Cos) * m_Rot.y * m_Rot.x + m_Sin * m_Rot.z;
-			v1.y = m_Cos + (1.f - m_Cos) * m_Rot.y * m_Rot.y;
-			v1.z = (1.f - m_Cos) * m_Rot.y * m_Rot.z - m_Sin * m_Rot.x;
+			v2.x = (1.f - m_Cos) * m_Rot.y * m_Rot.x + m_Sin * m_Rot.z;
+			v2.y = m_Cos + (1.f - m_Cos) * m_Rot.y * m_Rot.y;
+			v2.z = (1.f - m_Cos) * m_Rot.y * m_Rot.z - m_Sin * m_Rot.x;
 		}
 
 		void RotateUp(qVector3 m_Rot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
@@ -252,9 +256,9 @@ namespace UFG
 				m_Cos = cosf(m_Theta);
 			}
 
-			v2.x = (1.f - m_Cos) * m_Rot.z * m_Rot.x - m_Sin * m_Rot.y;
-			v2.y = (1.f - m_Cos) * m_Rot.z * m_Rot.y + m_Sin * m_Rot.x;
-			v2.z = m_Cos + (1.f - m_Cos) * m_Rot.z * m_Rot.z;
+			v1.x = (1.f - m_Cos) * m_Rot.z * m_Rot.x - m_Sin * m_Rot.y;
+			v1.y = (1.f - m_Cos) * m_Rot.z * m_Rot.y + m_Sin * m_Rot.x;
+			v1.z = m_Cos + (1.f - m_Cos) * m_Rot.z * m_Rot.z;
 		}
 
 		void Rotate(qVector3 m_Rot, float m_Theta)

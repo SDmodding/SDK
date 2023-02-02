@@ -78,7 +78,7 @@ namespace UFG
 	public:
 		UFG_PAD(0x68);
 
-		void* mBody;
+		hkpRigidBody* mBody;
 
 		UFG_PAD(0x58);
 		/*UFG::WaterFloatingTrackerBaseComponent* mWaterFloatingTrackerComponent;
@@ -107,6 +107,17 @@ namespace UFG
 		void EnablePhysics(bool m_Enable)
 		{
 			SetMotionType(m_Enable ? 128 : 256);
+		}
+
+		float GetMass()
+		{
+			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xAA990))(this);
+		}
+
+		void SetMass(float m)
+		{
+			if (mBody)
+				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xD62710))(mBody, m);
 		}
 	};
 

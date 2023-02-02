@@ -1,6 +1,12 @@
 #pragma once
 
-class hkpEntity
+class hkpWorldObject
+{
+public:
+	UFG_PAD(0x80);
+};
+
+class hkpEntity : public hkpWorldObject
 {
 public:
 };

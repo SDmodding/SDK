@@ -66,6 +66,14 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x4654C0))(this, torqueFactor, collisionPoint);
 		}
+
+		void SetMass(float m) { mRigidBody->SetMass(m); }
+		float GetMass() { return mRigidBody->GetMass(); }
+
+		void SetMassScaleForCollisions(float scaleMass, float scaleRotMass)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, float)>(UFG_RVA(0x475170))(this, scaleMass, scaleRotMass);
+		}
 	};
 
 	class CPhysicsWheeledVehicle : public CPhysicsVehicle

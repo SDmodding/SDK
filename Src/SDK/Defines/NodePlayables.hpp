@@ -51,6 +51,11 @@
 #define NodePlayable_Character_Sneeze_Female				10877
 #define NodePlayable_Character_Sneeze_Male					10878
 
+#define NodePlayable_Character_Parkour_JumpSmall			16162
+#define NodePlayable_Character_Parkour_JumpHigh				16163
+
+#define NodePlayable_Character_Falling						16269
+
 #define NodePlayable_Character_PickingNose					10901
 
 #define NodePlayable_Character_Arrest_PassiveCrouch			19447
