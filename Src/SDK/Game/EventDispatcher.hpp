@@ -73,11 +73,17 @@ namespace UFG
 		void* m_Class = nullptr;
 		void* m_Function = nullptr;
 
-		CEventHandler(void* c, void* p) 
-		{
-			m_Class = c;
-			m_Function = p;
-		}
+		CEventHandler(void* p) { m_Function = p; }
+		CEventHandler(void* c, void* p) { m_Class = c; m_Function = p; }
+
+		/*
+		* void __fastcall EventFunction(void* m_Class, UFG::CEvent* m_Event)
+		* {
+		*
+		* }
+		* 
+		* static CEventHandler m_EventHandler(EventFunction);
+		*/
 	};
 
 	class CEventDispatcher

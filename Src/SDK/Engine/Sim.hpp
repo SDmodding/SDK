@@ -26,6 +26,22 @@ namespace UFG
 		qArray<CSimComponentHolder> m_Components;
 		void* m_UnboundComponentHandles[2];
 
+		int GetType()
+		{
+			uintptr_t m_VFTable = *reinterpret_cast<uintptr_t*>(this);
+
+			if (m_VFTable == UFG_RVA(0x17C3178)) // Character
+				return 1;
+
+			if (m_VFTable == UFG_RVA(0x17C3198))  // Vehicle
+				return 2;
+
+			if (m_VFTable == UFG_RVA(0x1797E38)) // Prop/Weapon/Door
+				return 3;
+
+			return 0;
+		}
+
 		CSimComponent* GetComponentOfType(unsigned int type_uid)
 		{
 			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x190AD0))(this, type_uid);
@@ -53,6 +69,23 @@ namespace UFG
 				m_Component = m_Components.p[4].m_pComponent;
 
 			return reinterpret_cast<CSimComponent*(__fastcall*)(void*)>(UFG_RVA(0x4E0C50))(m_Component);
+		}
+
+		CSimObjectPropertiesComponent* GetProperties()
+		{
+			CSimComponent* m_Component = m_Components.p[3].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1)
+					m_Component = m_Components.p[4].m_pComponent;
+				else if ((m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(SimObjectProperties_TypeUID);
+				else
+					m_Component = GetComponentOfType(SimObjectProperties_TypeUID);
+			}
+
+			return reinterpret_cast<CSimObjectPropertiesComponent*>(m_Component);
 		}
 
 		bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)

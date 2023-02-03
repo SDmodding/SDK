@@ -89,6 +89,21 @@ namespace UFG
 
 		unsigned int mFlags;
 
+		void ApplyForce(qVector3* force, qVector3* point)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*, qVector3*)>(UFG_RVA(0xA0EA0))(this, 0.f, force, point);
+		}
+
+		void ApplyLinearImpulse(qVector3* impulse, qVector3* point)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector3*)>(UFG_RVA(0xA1000))(this, impulse, point);
+		}
+
+		void ApplyAngularImpulse(qVector3* vel)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xA0BC0))(this, vel);
+		}
+
 		void SetMotionType(unsigned int mode)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0xB1500))(this, mode);

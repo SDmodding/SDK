@@ -74,6 +74,11 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float, float)>(UFG_RVA(0x475170))(this, scaleMass, scaleRotMass);
 		}
+
+		void ClearMassScaleForCollisions()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x45A630))(this);
+		}
 	};
 
 	class CPhysicsWheeledVehicle : public CPhysicsVehicle

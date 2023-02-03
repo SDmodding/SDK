@@ -4,6 +4,8 @@
 #define ChaseCameraComponent_TypeUID						0x1E000045
 #define ScriptCameraComponent_TypeUID						0x1E000085
 
+#define SimObjectProperties_TypeUID							0xB2000001
+
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterHealthComponent_TypeUID					0xAA000001
 #define CharacterAnimationComponent_TypeUID					0xC6000003
