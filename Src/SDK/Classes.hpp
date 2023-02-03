@@ -97,6 +97,11 @@ namespace UFG
 			x = f0; y = f1;
 		}
 
+		// Funcs
+		float Length()
+		{
+			return sqrtf(x * x + y * y);
+		}
 	};
 
 	class qVector3
@@ -118,10 +123,28 @@ namespace UFG
 		__forceinline bool operator==(qVector3& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z); }
 		__forceinline bool operator!=(qVector3& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z); }
 
+		__forceinline qVector3 operator+(qVector3 m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z }; }
+		__forceinline void operator+=(qVector3 m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; }
+
+		__forceinline qVector3 operator-(qVector3 m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z }; }
+		__forceinline void operator-=(qVector3 m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; }
+
+		__forceinline qVector3 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value }; }
+		__forceinline void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; }
+
+		__forceinline qVector3 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value }; }
+		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; }
+
 		// Funcs
 		float Length()
 		{
 			return sqrtf(x * x + y * y + z * z);
+		}
+
+		void Normalize()
+		{
+			float m_Length = Length();
+			operator/=(m_Length);
 		}
 
 		float DistTo(qVector3* m_Other)

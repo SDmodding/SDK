@@ -5,6 +5,7 @@
 #define ScriptCameraComponent_TypeUID						0x1E000085
 
 #define SimObjectProperties_TypeUID							0xB2000001
+#define SimObjectCompositeDrawable_TypeUID					0x04000001
 
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterHealthComponent_TypeUID					0xAA000001

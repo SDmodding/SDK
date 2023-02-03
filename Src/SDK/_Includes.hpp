@@ -23,10 +23,12 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Defines/BoneUID.hpp"
 #include "Defines/TypeUID.hpp"
 
+#include "Engine/Illusion.hpp"
 #include "Engine/Render.hpp"
 
 #include "Engine/PropertySet.hpp"
 #include "Engine/ResourceInventory.hpp"
+#include "Engine/ResourceWarehouse.hpp"
 
 #include "Engine/Metrics.hpp"
 

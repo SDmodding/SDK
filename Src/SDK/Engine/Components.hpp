@@ -32,6 +32,15 @@ namespace UFG
 		char m_BoundComponentHandles[0x10];
 	};
 
+	class CCompositeDrawableComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x28);
+
+		void* mCompositeLook;
+		Illusion::CMaterialModifierParams mMaterialModifier;
+	};
+
 	class CSimObjectPropertiesComponent : public CSimComponent
 	{
 	public:

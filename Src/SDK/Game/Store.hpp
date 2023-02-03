@@ -27,6 +27,14 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(qPropertySet*, bool, bool, bool, bool, bool)>(UFG_RVA(0x49E860))(pItem, bSaveToStats, bRefreshPlayer, bRemoveAnyPredefinedOutfit, bUpdateLastEquipItem, bPreviewing);
 		}
+
+		void EquipItem(qSymbol m_Item, bool bSaveToStats, bool bRefreshPlayer, bool bRemoveAnyPredefinedOutfit, bool bUpdateLastEquipItem, bool bPreviewing)
+		{
+			StoreFrontTracker->LoadStoreData(0);
+			qPropertySet* m_ItemPropertySet = UFG::StoreFrontTracker->FindItemSlow(&m_Item);
+			if (m_ItemPropertySet)
+				UFG::StoreFront::EquipItem(m_ItemPropertySet, bSaveToStats, bRefreshPlayer, bRemoveAnyPredefinedOutfit, bUpdateLastEquipItem, bPreviewing);
+		}
 	}
 
 	namespace StoreMeshHelper

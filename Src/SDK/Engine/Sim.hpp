@@ -88,6 +88,27 @@ namespace UFG
 			return reinterpret_cast<CSimObjectPropertiesComponent*>(m_Component);
 		}
 
+		CCompositeDrawableComponent* GetCompositeDrawable()
+		{
+			CSimComponent* m_Component = nullptr;
+
+			if ((m_Flags >> 14) & 1)
+				m_Component = m_Components.p[14].m_pComponent;
+			else if ((m_Flags & 0x8000u) == 0)
+			{
+				if ((m_Flags >> 13) & 1)
+					m_Component = m_Components.p[9].m_pComponent;
+				else if ((m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(SimObjectCompositeDrawable_TypeUID);
+				else
+					m_Component = GetComponentOfType(SimObjectCompositeDrawable_TypeUID);
+			}
+			else
+				m_Component = m_Components.p[14].m_pComponent;
+
+			return reinterpret_cast<CCompositeDrawableComponent*>(m_Component);
+		}
+
 		bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, CSimObject**, qSymbol*, qSymbol*, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, targetType, pOverrideTarget, ppOutSimObjectTarget, &attachJoint, &targetAttachJoint, blendInTime, attachRelative, attachRelativeMaxDistance, attachToTarget, addToInventory, assignTarget, assignmentTargetType, lockTarget, positionOnly, positionXYOnly, managePowerLevel);
