@@ -31,11 +31,10 @@ namespace UFG
 			return reinterpret_cast<qResourceInventory*>(UFG_RVA(0x23693F0));
 		}
 
-		std::vector<qPropertySetResource*> GetContents()
+		std::vector<qPropertySetResource*> GetContents(qResourceInventory* m_ResourceInventory)
 		{
 			std::vector<qPropertySetResource*> m_Return;
 
-			qResourceInventory* m_ResourceInventory = Get();
 			{
 				qBaseNodeRB* v2 = m_ResourceInventory->mResourceDatas.mRoot.mChild[0];
 				uintptr_t m_ResourceTree = reinterpret_cast<uintptr_t>(&m_ResourceInventory->mResourceDatas);

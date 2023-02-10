@@ -2,6 +2,7 @@
 
 namespace UFG
 {
+	class CRaceTrail;
 	class CRoadNetworkLane;
 
 	// ...
@@ -384,6 +385,61 @@ namespace UFG
 		}
 	};
 
+	class CAiDriverComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x518);
+
+		float m_StopDist;
+		float m_fDelayedStopDecel;
+		bool m_ResetStopDistOnStop;
+		float m_fChaseSpeedLimit;
+		float m_fRaceSpeedLimit;
+		bool m_RaceWanderAtEnd;
+		bool m_bDeniesHijack;
+		bool m_bCreepingTowardEscortEnemy;
+		bool m_CappingSpeedForStopPoint;
+		bool m_CappingSpeedForNextGuide;
+
+		void SetDrivingMode(uint32_t mode)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x658B90))(this, mode);
+		}
+
+		void SetDrivingRole(uint32_t role)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x658C90))(this, role);
+		}
+
+		void StartRacing(float m_SpeedLimit, bool m_WanderAtEnd)
+		{
+			SetDrivingMode(6);
+			SetDrivingRole(1);
+
+			m_fRaceSpeedLimit = m_SpeedLimit;
+			m_RaceWanderAtEnd = m_WanderAtEnd;
+		}
+	};
+	
+	class CRoadSpaceComponent : public CSimComponent
+	{
+	public:
+		void SetRaceTrail(CRaceTrail* race_trail)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x659740))(this, race_trail);
+		}
+
+		void SetRaceTrailSteer(CRaceTrail* race_trail)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x6597F0))(this, race_trail);
+		}
+
+		void FlushRaceTrails()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x64D630))(this);
+		}
+	};
+
 	class CVehicleOccupantComponent : public CSimComponent
 	{
 	public:
@@ -518,7 +574,37 @@ namespace UFG
 
 			return reinterpret_cast<CTargetingSystemVehicleComponent*>(m_Component);
 		}
+
+		CAiDriverComponent* GetAiDriver()
+		{
+			CSimComponent* m_Component = m_Components.p[23].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(VehicleAiDriverComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(VehicleAiDriverComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CAiDriverComponent*>(m_Component);
+		}
 		
+		CRoadSpaceComponent* GetRoadSpace()
+		{
+			CSimComponent* m_Component = m_Components.p[24].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(VehicleRoadSpaceComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(VehicleRoadSpaceComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CRoadSpaceComponent*>(m_Component);
+		}
+
 		CVehicleOccupantComponent* GetOccupant()
 		{
 			CSimComponent* m_Component = nullptr;
@@ -532,9 +618,9 @@ namespace UFG
 					return nullptr;
 
 				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xDE000001);
+					m_Component = GetComponentOfTypeHK(VehicleOccupantComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xDE000001);
+					m_Component = GetComponentOfType(VehicleOccupantComponent_TypeUID);
 			}
 			else
 				m_Component = m_Components.p[30].m_pComponent;
@@ -555,9 +641,9 @@ namespace UFG
 					return nullptr;
 
 				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xE2000001);
+					m_Component = GetComponentOfTypeHK(VehicleEffectsComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xE2000001);
+					m_Component = GetComponentOfType(VehicleEffectsComponent_TypeUID);
 			}
 			else
 				m_Component = m_Components.p[32].m_pComponent;

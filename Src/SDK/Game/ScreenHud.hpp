@@ -60,6 +60,48 @@ namespace UFG
 		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C630))(this, visible); }
 	};
 
+	class CRaceTimer
+	{
+	public:
+		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C650))(this, visible); }
+
+		void SetTime(unsigned int minutes, unsigned int seconds, unsigned int thousandths) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int, unsigned int)>(UFG_RVA(0x60A0C0))(this, minutes, seconds, thousandths);
+		}
+
+		void StartCountdown() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x4F2480))(); }
+	};
+
+	class CRacePath
+	{
+	public:
+		UFG_PAD(0x28);
+
+		uint32_t m_MarkerPositionsSize;
+		uint32_t m_MarkerPositionsCapacity;
+		qVector3* m_MarkerPositionsPointer;
+
+		void SetVisible(bool m_Enable) { *reinterpret_cast<bool*>(UFG_RVA(0x2173F01)) = m_Enable; }
+
+		void GenerateSpline(qVector3* m_Array, uint32_t m_Size)
+		{
+			m_MarkerPositionsPointer	= m_Array;
+			m_MarkerPositionsSize		= m_Size;
+
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xC0910))(this);
+
+			m_MarkerPositionsPointer	= nullptr;
+			m_MarkerPositionsSize		= 0;
+		}
+
+		void Clear() 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xBE980))(this); 
+			SetVisible(false);
+		}
+	};
+
 	class CHintText
 	{
 	public:
@@ -79,21 +121,21 @@ namespace UFG
 		CInfoPopup* InfoPopup; // Basically HintText + special SFX
 		CMissionHealth* MissionHealth;
 		void* TurnHint;
-		void* RaceTimer;
+		CRaceTimer* RaceTimer;
 		void* RacePosition;
 
-		char m_Pad0[0x8];
+		UFG_PAD(0x8);
 
 		void* RacePercentage;
 		void* MissionRewards;
 		void* RegionIndicator; // Top animated movie with region change (North Point, Central, ...)
 
-		char m_Pad1[0x8];
+		UFG_PAD(0x8);
 
-		void* RacePath;
+		CRacePath* RacePath;
 		void* ShortcutButton;
 
-		char m_Pad2[0x8];
+		UFG_PAD(0x8);
 
 		CHintText* HintText;
 		void* GameplayHelp;

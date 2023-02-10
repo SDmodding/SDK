@@ -5,6 +5,8 @@
 // Character
 #define BoneUID_Grip_R_Hand												0xFB287B16
 #define BoneUID_Bip01_Head												0x22C14F2A
+#define BoneUID_Bip01_L_Hand											0xBCA17C2D
+#define BoneUID_Bip01_R_Hand											0x8950F2CA
 #define BoneUID_Bip01_R_Prop											0x154116EA
 
 // Vehicle

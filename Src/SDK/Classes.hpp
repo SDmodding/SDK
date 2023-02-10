@@ -135,11 +135,15 @@ namespace UFG
 		__forceinline qVector3 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value }; }
 		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; }
 
+		__forceinline qVector3 operator-() { return { -x, -y, -z }; }
+
 		// Funcs
 		float Length()
 		{
 			return sqrtf(x * x + y * y + z * z);
 		}
+
+		float DotProduct(qVector3& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
 
 		void Normalize()
 		{
@@ -229,16 +233,38 @@ namespace UFG
 			x = f0; y = f1; z = f2; w = f3;
 		}
 
+		// Operators
+		__forceinline bool operator==(qVector4& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z && w == m_Other.w); }
+		__forceinline bool operator!=(qVector4& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z || w != m_Other.w); }
+
+		__forceinline qVector4 operator+(qVector4 m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z, w + m_Other.w }; }
+		__forceinline void operator+=(qVector4 m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; w += m_Other.w; }
+
+		__forceinline qVector4 operator-(qVector4 m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z, w - m_Other.w }; }
+		__forceinline void operator-=(qVector4 m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; w -= m_Other.w; }
+
+		__forceinline qVector4 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value, w * m_Value }; }
+		__forceinline void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; w *= m_Value; }
+
+		__forceinline qVector4 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value, w / m_Value }; }
+		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; ; w /= m_Value; }
+
+		__forceinline qVector4 operator-() { return { -x, -y, -z, -w }; }
+
+		// Funcs
+		operator qVector3() { return qVector3(x, y, z); }
 		qVector3 ToVector3() { return qVector3(x, y, z); }
+
+		float DotProduct(qVector4& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
 	};
 
 	class qMatrix44
 	{
 	public:
-		qVector4 v0;
-		qVector4 v1;
-		qVector4 v2;
-		qVector4 v3;
+		qVector4 v0; // Right
+		qVector4 v1; // Up
+		qVector4 v2; // Forward
+		qVector4 v3; // Position
 
 		qVector3 GetForward()	{ return { -v2.x, -v2.y, -v2.z }; }
 		qVector3 GetUp()		{ return { v1.x, v1.y, v1.z }; }

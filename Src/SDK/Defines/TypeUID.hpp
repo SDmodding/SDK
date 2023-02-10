@@ -7,6 +7,8 @@
 #define SimObjectProperties_TypeUID							0xB2000001
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
 
+#define SimObjectFXComponent_TypeUID						0x32000001
+
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterHealthComponent_TypeUID					0xAA000001
 #define CharacterAnimationComponent_TypeUID					0xC6000003
@@ -14,5 +16,9 @@
 #define CharacterRagdollComponent_TypeUID					0x82000001
 
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
+#define VehicleAiDriverComponent_TypeUID					0xD8000003
+#define VehicleRoadSpaceComponent_TypeUID					0xDA000001
+#define VehicleOccupantComponent_TypeUID					0xDE000001
+#define VehicleEffectsComponent_TypeUID						0xE2000001
 
 #define WeaponGunComponent_TypeUID							0x9C000001

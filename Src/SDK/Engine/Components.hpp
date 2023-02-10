@@ -39,6 +39,22 @@ namespace UFG
 
 		void* mCompositeLook;
 		Illusion::CMaterialModifierParams mMaterialModifier;
+
+		bool IsCharacter()
+		{
+			if (mCompositeLook && *reinterpret_cast<uintptr_t*>(mCompositeLook) == UFG_RVA(0x17C3748))
+				return true;
+
+			return false;
+		}
+
+		bool IsVehicle()
+		{
+			if (mCompositeLook && *reinterpret_cast<uintptr_t*>(mCompositeLook) == UFG_RVA(0x17C3668))
+				return true;
+
+			return false;
+		}
 	};
 
 	class CSimObjectPropertiesComponent : public CSimComponent
@@ -142,6 +158,20 @@ namespace UFG
 		{
 			if (mBody)
 				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xD62710))(mBody, m);
+		}
+	};
+
+	class CFXSimComponent : CSimComponent
+	{
+	public:
+		qSymbol AttachEffect(qSymbol effectId, int jointID, qMatrix44* offset = nullptr, void* overrideObject = nullptr)
+		{
+			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, int, qMatrix44*, void*)>(UFG_RVA(0x1C78F0))(this, effectId, jointID, offset, overrideObject);
+		}
+
+		void DetachEffect(qSymbol fxId, uint32_t killOption = 0x0)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol, uint32_t)>(UFG_RVA(0x1CB150))(this, fxId, killOption);
 		}
 	};
 

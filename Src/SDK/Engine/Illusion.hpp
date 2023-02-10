@@ -9,6 +9,19 @@ namespace Illusion
 		UFG_PAD(0x18);
 
 		uint32_t m_UID;
+
+		UFG_PAD(0x18);
+
+		char m_DebugName[0x24];
+
+		UFG_PAD(0x10);
+
+		uint32_t mParentUID;
+		uint32_t mDataByteSize;
+		uint32_t mNumValues;
+		uint32_t mNameUID;
+
+		uintptr_t GetDataPointer() { return (reinterpret_cast<uintptr_t>(this) + 0x80); }
 	};
 
 	class CStateBlockItter
@@ -45,6 +58,16 @@ namespace Illusion
 			return m_Itter;
 		}
 
+		void Add(CStateBlock* m_StateBlock)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CStateBlock*)>(UFG_RVA(0x8DE00))(this, m_StateBlock);
+		}
+
+		void Remove(CStateBlock* m_StateBlock)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CStateBlock*)>(UFG_RVA(0x94950))(this, m_StateBlock);
+		}
+
 		CStateBlock* GetStateBlock(unsigned int name_uid, int return_default_data = 1)
 		{
 			return reinterpret_cast<CStateBlock*(__fastcall*)(void*, unsigned int, int)>(UFG_RVA(0x92690))(this, name_uid, return_default_data);
@@ -54,7 +77,29 @@ namespace Illusion
 	class CParamOverride
 	{
 	public:
-		UFG_PAD(0x68);
+		UFG_PAD(0x8);
+
+		void* mOverrideResource;
+		UFG_PAD(0x10);
+		uint32_t mOverrideNameUID;
+
+		UFG_PAD(0xC);
+
+		void* mOriginalResource;
+		UFG_PAD(0x10);
+		uint32_t mOriginalNameUID;
+
+		UFG_PAD(0x18);
+
+		void* GetOverride()
+		{
+			return *reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(mOverrideResource) + 0x10);
+		}
+
+		void* GetOriginal()
+		{
+			return *reinterpret_cast<void**>(reinterpret_cast<uintptr_t>(mOriginalResource) + 0x10);
+		}
 
 		void SetOverride(unsigned int param_uid, unsigned int resource_type_name_uid, unsigned int override_name_uid, int condition, unsigned int original_name_uid)
 		{

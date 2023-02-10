@@ -6,10 +6,11 @@ namespace UFG
 	struct qPropertySetResource
 	{
 		qBaseNodeRB m_Node;
-		UFG_PAD(0x14);
+		UFG_PAD(0x10);
+		uint32_t mTypeUID;
 		char m_Name[0x24];
-		unsigned int mFlags;
-		unsigned int mSourceCRC;
+		uint32_t mFlags;
+		uint32_t mSourceCRC;
 
 		qPropertySet* GetProperty()
 		{
