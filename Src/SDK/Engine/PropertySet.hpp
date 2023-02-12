@@ -2,26 +2,18 @@
 
 namespace UFG
 {
-	struct qPropertySet;
-	struct qPropertySetResource
-	{
-		qBaseNodeRB m_Node;
-		UFG_PAD(0x10);
-		uint32_t mTypeUID;
-		char m_Name[0x24];
-		uint32_t mFlags;
-		uint32_t mSourceCRC;
-
-		qPropertySet* GetProperty()
-		{
-			return reinterpret_cast<qPropertySet*>(reinterpret_cast<uintptr_t>(this) + 0x68);
-		}
-	};
-
+	struct qPropertySetResource;
 	struct qPropertySet
 	{
 		UFG_PAD(0x40);
-		qSymbol m_Hash;
+		qSymbol mName;
+		uint16_t mRefCount;
+		uint16_t mNumParents;
+		uint32_t mParentMask;
+		qSymbol mSchemaName;
+		uint32_t mPropertyMask;
+		uint16_t mNumDataBytes;
+		uint16_t mNumProperties;
 
 		const char* GetString(qSymbol propName, uint32_t depth = 0x1)
 		{
@@ -37,6 +29,16 @@ namespace UFG
 		{
 			return reinterpret_cast<qPropertySetResource*>(reinterpret_cast<uintptr_t>(this) - 0x68);
 		}
+	};
+
+	struct qPropertySetResource : qResourceData
+	{
+		uint32_t mFlags;
+		uint32_t mSourceCRC;
+		const char* mNameString;
+		qPropertySet mData;
+
+		qPropertySet* GetPropertySet() { return &mData; }
 	};
 
 	struct qPropertyList

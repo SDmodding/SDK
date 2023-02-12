@@ -60,4 +60,18 @@ namespace UFG
 				(UFG_RVA(0x61F820))(nullptr, "", bodyText, option1Text, UFG_DIALOGBOX_OPTION_HASH, option2Text, UFG_DIALOGBOX_OPTION_HASH + 1, option3Text, UFG_DIALOGBOX_OPTION_HASH + 2, 0, flashFile);
 		}
 	}
+
+	namespace ScreenMissionComplete
+	{
+		void Actiate(qSymbol gamesliceType, qSymbol gamesliceSubType, const char* caption, bool show_xp_tutorial) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(qSymbol*, qSymbol*, const char*, bool)>(UFG_RVA(0x5D10C0))(&gamesliceType, &gamesliceSubType, caption, show_xp_tutorial);
+		}
+
+		void ClearRacers() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5860))(); }
+
+		void ClearRewards() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5900))(); }
+
+		void FillRacerInfo(qArray<qString>* racerNames) { reinterpret_cast<void(__fastcall*)(qArray<qString>*)>(UFG_RVA(0x5D8360))(racerNames); }
+	}
 }

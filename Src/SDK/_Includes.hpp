@@ -26,6 +26,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Illusion.hpp"
 #include "Engine/Render.hpp"
 
+#include "Engine/Resources.hpp"
 #include "Engine/PropertySet.hpp"
 #include "Engine/ResourceInventory.hpp"
 #include "Engine/ResourceWarehouse.hpp"

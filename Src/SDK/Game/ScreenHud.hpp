@@ -60,7 +60,7 @@ namespace UFG
 		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C630))(this, visible); }
 	};
 
-	class CRaceTimer
+	class CRaceTimerWidget
 	{
 	public:
 		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C650))(this, visible); }
@@ -70,10 +70,26 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int, unsigned int)>(UFG_RVA(0x60A0C0))(this, minutes, seconds, thousandths);
 		}
 
+		void SetTime(float m_FloatTime)
+		{
+			uint32_t m_Time = static_cast<uint32_t>(m_FloatTime * 1000.f);
+			SetTime((m_Time / 1000 / 60), (m_Time / 1000 % 60), (m_Time % 1000));
+		}
+
 		void StartCountdown() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x4F2480))(); }
 	};
 
-	class CRacePath
+	class CRacePositionWidget
+	{
+	public:
+		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C640))(this, visible); }
+
+		void SetNumRacers(unsigned int numRacers) { reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x606620))(this, numRacers); }
+
+		void SetPlayerRank(unsigned int rank) { reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x606F00))(this, rank); }
+	};
+
+	class CRacePathWidget
 	{
 	public:
 		UFG_PAD(0x28);
@@ -121,8 +137,8 @@ namespace UFG
 		CInfoPopup* InfoPopup; // Basically HintText + special SFX
 		CMissionHealth* MissionHealth;
 		void* TurnHint;
-		CRaceTimer* RaceTimer;
-		void* RacePosition;
+		CRaceTimerWidget* RaceTimer;
+		CRacePositionWidget* RacePosition;
 
 		UFG_PAD(0x8);
 
@@ -132,7 +148,7 @@ namespace UFG
 
 		UFG_PAD(0x8);
 
-		CRacePath* RacePath;
+		CRacePathWidget* RacePath;
 		void* ShortcutButton;
 
 		UFG_PAD(0x8);

@@ -57,7 +57,7 @@ namespace UFG
 	class qString
 	{
 	public:
-		void* m_Pad0x0[0x2];
+		UFG_PAD(0x10);
 
 		unsigned int mMagic;
 		int mLength;
@@ -144,6 +144,7 @@ namespace UFG
 		}
 
 		float DotProduct(qVector3& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
+		qVector3 Cross(qVector3 m_Other) { return { y * m_Other.z - z * m_Other.y, z * m_Other.x - x * m_Other.z, x * m_Other.y - y * m_Other.x }; }
 
 		void Normalize()
 		{

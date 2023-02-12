@@ -2,6 +2,7 @@
 
 namespace UFG
 {
+	class CRacePosition;
 	class CRaceTrail;
 	class CRoadNetworkLane;
 
@@ -246,6 +247,11 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x68A470))(this, cannotExplode);
 		}
+
+		bool AreAllWheelsOnGround()
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x670840))(this);
+		}
 	};
 
 	// Components
@@ -424,6 +430,13 @@ namespace UFG
 	class CRoadSpaceComponent : public CSimComponent
 	{
 	public:
+		UFG_PAD(0x630);
+
+		qVector3 mDestinationPosition;
+		qVector3 mDestinationDirection;
+		CRacePosition* m_pRacePosition;
+		CRacePosition* m_pRacePositionSteer;
+
 		void SetRaceTrail(CRaceTrail* race_trail)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x659740))(this, race_trail);
@@ -437,6 +450,11 @@ namespace UFG
 		void FlushRaceTrails()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x64D630))(this);
+		}
+
+		float GetFractionRaceComplete()
+		{
+			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0x64E760))(this);
 		}
 	};
 
