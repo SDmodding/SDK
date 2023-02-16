@@ -61,7 +61,7 @@ namespace UFG
 	public:
 		UFG_PAD(0x10);
 
-		UFG::RebindingComponentHandle<CActionTreeComponent> m_pActionTreeComponent;
+		RebindingComponentHandle<CActionTreeComponent> m_pActionTreeComponent;
 	};
 
 	// Components
@@ -176,7 +176,7 @@ namespace UFG
 				eTARGET_TYPE_STIMULUS_PRODUCER, eTARGET_TYPE_CONDITION_STIMULUS_PRODUCER, eTARGET_TYPE_LAST_THREAT, eTARGET_TYPE_ATTACKING
 			};
 
-			for (UFG::eTargetTypeEnum m_AttackType : m_AttackTypes)
+			for (eTargetTypeEnum m_AttackType : m_AttackTypes)
 			{
 				SetTarget(m_AttackType, m_Target);
 				SetTargetLock(m_AttackType, true, false);
@@ -258,7 +258,7 @@ namespace UFG
 
 		bool IsActive()
 		{
-			return (mPoseState == UFG::RagdollComponent::STATE_POWERED_TRACKING);
+			return (mPoseState == RagdollComponent::STATE_POWERED_TRACKING);
 		}
 
 		void ApplyAngularImpulse(int bone, qVector3* impulse, float connectionTransfer)
@@ -282,40 +282,85 @@ namespace UFG
 		CSimVehicle* GetCurrentVehicle()
 		{
 			if (mCurrentVOC)
-				return reinterpret_cast<UFG::CSimVehicle*>(mCurrentVOC->m_pSimObject);
+				return reinterpret_cast<CSimVehicle*>(mCurrentVOC->m_pSimObject);
 
 			return nullptr;
 		}
 	};
 
-	class CCharacterSubjectComponent
+	class __declspec(align(16)) CCharacterSubjectComponent
 	{
 	public:
-		UFG_PAD(0x38C);
+		UFG_PAD(0x130);
 
+		qMatrix44 mHeadTransformation;
+		qMatrix44 mCamboneTransformation;
+		qMatrix44 mPelvisTransformation;
+		qMatrix44 mSyncTransformation;
+		qMatrix44 mTargetWorld;
+		bool bElevationLock;
+		float rLockedElevationDef;
+		float rLockedElevationCam;
+		float rLockedElevationHip;
+		float rLockedElevationHed;
+		float rLockedElevationFocusCreatureCambone;
+		float rLockedElevationFocusCreaturePelvis;
+		float rLockedElevationFocusCreatureHead;
+		int mIsHostage;
+		int mJogging;
+		bool mSprinting;
+		bool mFallingAttack;
+		int mActionHijacking;
+		int mWalking;
+		qSymbol mContextOverrideScriptGlobal[8];
+		qSymbol mContextOverrideFreemanNPC[8];
+		qSymbol mContextOverrideFreemanPlayer[8];
+		qSymbol mContextOverrideScriptLocal[8];
+		int mTypeOverrideFreeman;
+		bool bGotoRise;
+		float rGotoRise;
+		float rGotoRiseRate;
+		float rGotoRisePatience;
+		bool bGotoRadius;
+		float rGotoRadius;
+		float rGotoRadiusRate;
+		float rGotoRadiusPatience;
+		bool bGotoAngle;
+		float rGotoAngle;
+		float rGotoAngleRate;
+		float rGotoAnglePatience;
+		bool bGotoAngleWorldSpace;
+		bool bGotoAngleUseSecond;
+		float rGotoAngleSecond;
+		bool bGotoAngleFarthestAngle;
+		bool bGotoAngleAdditive;
+		void* mParkourHandle;
+		qVector3 mFilteredPosition;
 		float mPositionFilterSpeed;
-		UFG::qVector3 mFilteredVelocity;
+		qVector3 mFilteredVelocity;
 		float mFilteredSpeed;
 		float mVelocityFilterSpeed;
 		int mBoneHead;
 		int mBoneCamera;
 		int mBonePelvis;
 		int mBoneSync;
-		UFG::qVector3 mHeadPosition;
-		UFG::qVector3 mCambonePosition;
-		UFG::qVector3 mPelvisPosition;
-		UFG::qVector3 mSyncPosition;
+		qVector3 mHeadPosition;
+		qVector3 mCambonePosition;
+		qVector3 mPelvisPosition;
+		qVector3 mSyncPosition;
 		bool mHeadDirty;
 		bool mCamboneDirty;
 		bool mPelvisDirty;
 		bool mSyncDirty;
-		UFG::qVector3 mAntiJitterPosition;
-		UFG::qVector3 mGrapplePosition;
-		UFG::qVector3 mLastAliveHeadPosition;
-
-		UFG_PAD(0x64);
-
-		CBaseAnimationComponent* pCharacterAnimationComponent;
+		qVector3 mAntiJitterPosition;
+		qVector3 mGrapplePosition;
+		qVector3 mLastAliveHeadPosition;
+		qBox mBox;
+		float mRadius;
+		RebindingComponentHandle<CCharacterPhysicsComponent> pCharacterPhysicsComponent;
+		RebindingComponentHandle<CBaseAnimationComponent> pCharacterAnimationComponent;
+		RebindingComponentHandle<CTargetingSystemBaseComponent> pTargetingSystemBaseComponent;
+		RebindingComponentHandle<CCharacterSubjectComponent> pSocialTargetOverrideComponent;
 
 		bool IsWalking()
 		{

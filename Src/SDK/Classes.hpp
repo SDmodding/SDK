@@ -394,4 +394,12 @@ namespace UFG
 			m->v2.w = 0.f;
 		}
 	};
+
+	class qBox
+	{
+	public:
+		qVector3 mMin;
+		qVector3 mMax;
+	};
+
 }

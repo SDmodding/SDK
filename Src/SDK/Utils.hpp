@@ -130,7 +130,7 @@ namespace SDK
             UFG::StoreFrontTracker->mProperties.Bind();
 
             UFG::qPropertyList* m_List = UFG::PropertySet::GetList(UFG::StoreFrontTracker->mProperties.mpPropSet, 0x23C60283);
-            for (int i = 0; m_List->mNumElements > i; ++i)
+            for (uint32_t i = 0; m_List->mNumElements > i; ++i)
             {
                 uintptr_t* m_Item = reinterpret_cast<uintptr_t*>(m_List->GetValuePtr(0x1A, i));
                 if (!m_Item || !*m_Item)

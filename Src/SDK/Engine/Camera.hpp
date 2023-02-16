@@ -60,10 +60,10 @@ namespace UFG
 		{
 			switch (m_TypeUID)
 			{
-			case FollowCameraComponent_TypeUID:
-				reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3C8890))(this); break;
-			case ChaseCameraComponent_TypeUID:
-				reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3C8730))(this); break;
+				case FollowCameraComponent_TypeUID:
+					reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3C8890))(this); break;
+				case ChaseCameraComponent_TypeUID:
+					reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3C8730))(this); break;
 			}
 		}
 
@@ -90,6 +90,25 @@ namespace UFG
 	{
 	public:
 		UFG_PAD(0x1F0);
+	};
+
+	class CFollowCameraComponent : public CGameCameraComponent
+	{
+	public:
+		UFG_PAD(0xD4);
+
+		float mDofFarFocalDist;
+
+		RebindingComponentHandle<CCharacterSubjectComponent> mTarget;
+		RebindingComponentHandle<void> mEnemyTarget;
+		uint32_t mType;
+		uint32_t mContext;
+		uint32_t mPreviousType;
+		uint32_t mPreviousContext;
+
+		UFG_PAD(0x1438);
+
+		qMatrix44 mTargetWorld;
 	};
 
 	class CScriptCameraComponent : public CGameCameraComponent
