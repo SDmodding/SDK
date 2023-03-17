@@ -24,6 +24,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Defines/TypeUID.hpp"
 
 #include "Engine/Illusion.hpp"
+#include "Engine/MemoryPool.hpp"
 #include "Engine/Render.hpp"
 
 #include "Engine/Resources.hpp"
@@ -34,6 +35,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Metrics.hpp"
 
 #include "Engine/Action.hpp"
+#include "Engine/AudioEntity.hpp"
 #include "Engine/Entity.hpp"
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"

@@ -4,11 +4,48 @@ namespace UFG
 {
 	struct qPropertySetResource;
 	struct qPropertyList;
+	struct qPropertySet;
+
+	struct qProperty
+	{
+		uint32_t mTypeUIDOffsetChanged;
+		uint32_t mNameUID;
+
+		ePropertyTypeEnum GetTypeUID()
+		{
+			return reinterpret_cast<ePropertyTypeEnum(__fastcall*)(void*)>(UFG_RVA(0x1F84E0))(this);
+		}
+
+		uintptr_t GetDataOffset()
+		{
+			return reinterpret_cast<uintptr_t(__fastcall*)(void*)>(UFG_RVA(0x1F6D10))(this);
+		}
+	};
+
+	struct qPropertySetHandle
+	{
+		UFG_PAD(0x10);
+
+		void* mData;
+		uint32_t mNameUID;
+		uint32_t mTailPad;
+
+		qPropertySet* Get()
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(void*)>(UFG_RVA(0x1F6680))(this);
+		}
+	};
+
 	struct qPropertySet
 	{
 		uint32_t mFlags;
 
-		UFG_PAD(0x3C);
+		UFG_PAD(0x1C);
+
+		uintptr_t* mParents;
+		uintptr_t* mValues;
+		uintptr_t* mDefaultBits;
+		uintptr_t* mProperties;
 
 		qSymbol mName;
 		uint16_t mRefCount;
@@ -18,6 +55,43 @@ namespace UFG
 		uint32_t mPropertyMask;
 		uint16_t mNumDataBytes;
 		uint16_t mNumProperties;
+
+		const char* GetNameDebug()
+		{
+			return reinterpret_cast<const char*(__fastcall*)(void*)>(UFG_RVA(0x1F6F60))(this);
+		}
+
+		qProperty* GetPropertyByIndex(uint32_t m_Index)
+		{
+			uintptr_t m_Offset = reinterpret_cast<uintptr_t>(mProperties);
+			qProperty* m_Properties = reinterpret_cast<qProperty*>(reinterpret_cast<uintptr_t>(&mProperties) + m_Offset);
+
+			return &m_Properties[m_Index];
+		}
+
+		uintptr_t* GetValuePtrByIndex(uint32_t m_Index)
+		{
+			qProperty* m_Property = GetPropertyByIndex(m_Index);
+			uintptr_t m_PropertyData = m_Property->GetDataOffset();
+			uintptr_t m_ValueOffset = reinterpret_cast<uintptr_t>(mValues);
+
+			if (m_ValueOffset)
+			{
+				uintptr_t m_ValueData = (reinterpret_cast<uintptr_t>(&mValues) + m_ValueOffset);
+				return reinterpret_cast<uintptr_t*>(m_PropertyData + m_ValueData);
+			}
+
+			return reinterpret_cast<uintptr_t*>(m_PropertyData);
+		}
+
+		qPropertySet* GetParentByIndex(uint32_t m_Index)
+		{
+			uintptr_t m_Offset = reinterpret_cast<uintptr_t>(mParents);
+			qPropertySetHandle* m_Parents = reinterpret_cast<qPropertySetHandle*>(reinterpret_cast<uintptr_t>(&mParents) + m_Offset);
+			qPropertySetHandle* m_Parent = &m_Parents[m_Index];
+
+			return m_Parent->Get();
+		}
 
 		bool* GetBool(qSymbol propName, uint32_t depth = 0x1)
 		{
@@ -102,7 +176,7 @@ namespace UFG
 			if (!m_Item || !*m_Item)
 				return nullptr;
 
-			return reinterpret_cast<UFG::qPropertySet*>(reinterpret_cast<uintptr_t>(m_Item) + *m_Item);
+			return reinterpret_cast<qPropertySet*>(reinterpret_cast<uintptr_t>(m_Item) + *m_Item);
 		}
 
 		qPropertySet* Find(qSymbol symbol)
