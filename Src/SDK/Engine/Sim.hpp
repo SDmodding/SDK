@@ -197,7 +197,7 @@ namespace UFG
 			return reinterpret_cast<CSimObject*(__fastcall*)(void*, qSymbol)>(UFG_RVA(0x190C40))(Get(), objName);
 		}
 
-		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, int priority = 5, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
+		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
 		{
 			qPropertySet* m_PropertySet = PropertySet::Get(objHash);
 			if (m_PropertySet)
@@ -205,7 +205,7 @@ namespace UFG
 			return nullptr;
 		}
 
-		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, int priority = 5, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
+		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
 		{
 			CSimObject* m_Object = GetSimObject(objName);
 			if (m_Object)
@@ -214,7 +214,7 @@ namespace UFG
 			return SpawnObject(objName, objHash, priority, pOwnerLayer, pSpawnerSceneObj, pOwner);
 		}
 
-		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 5, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
+		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
 		{
 			qPropertySet* m_PropertySet = PropertySet::Get(objHash);
 			if (m_PropertySet)
@@ -222,13 +222,23 @@ namespace UFG
 			return nullptr;
 		}
 
-		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 5, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
+		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
 		{
 			CSimObject* m_Object = GetSimObject(objName);
 			if (m_Object)
 				m_Object->Destroy();
 
 			return SpawnObject(objName, objHash, xform, priority, pOwnerLayer, pSpawnerSceneObj);
+		}
+
+		bool DestroyObject(qSymbol objName)
+		{
+			CSimObject* m_Object = GetSimObject(objName);
+			if (!m_Object)
+				return false;
+
+			m_Object->Destroy();
+			return true;
 		}
 	}
 }

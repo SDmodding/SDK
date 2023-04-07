@@ -93,6 +93,11 @@ namespace UFG
 			return m_Parent->Get();
 		}
 
+		uintptr_t GetMemImagePtr()
+		{
+			return reinterpret_cast<uintptr_t(__fastcall*)(void*)>(UFG_RVA(0x1F6F00))(this);
+		}
+
 		bool* GetBool(qSymbol propName, uint32_t depth = 0x1)
 		{
 			return reinterpret_cast<bool*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1EA610))(this, &propName, depth);
@@ -121,6 +126,11 @@ namespace UFG
 		qSymbol* GetSymbol(qSymbol propName, uint32_t depth = 0x1)
 		{
 			return reinterpret_cast<qSymbol*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9FF0))(this, &propName, depth);
+		}
+
+		qPropertySet* GetSet(qSymbol name, uint32_t depth = 0x1)
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertySet*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9EF0))(this, &name, depth);
 		}
 
 		qPropertyList* GetList(qSymbol name, uint32_t depth = 0x1)

@@ -109,6 +109,11 @@ namespace UFG
 		UFG_PAD(0x1438);
 
 		qMatrix44 mTargetWorld;
+
+		void SetTarget(CSimObject* m_Target)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x3CD570))(this, m_Target);
+		}
 	};
 
 	class CScriptCameraComponent : public CGameCameraComponent

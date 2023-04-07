@@ -457,4 +457,24 @@ namespace UFG
 		qVector3 mMax;
 	};
 
+	class __declspec(align(16)) CHavokNavPosition
+	{
+	public:
+		void* vfptr;
+		qVector3 m_vPosition;
+
+		UFG_PAD(0x4);
+
+		bool m_bValid = false;
+		qVector4 m_hkvMeshPosition;
+		uint32_t m_packedKey = -1;
+		uint32_t m_aiMeshUid = -1;
+
+		CHavokNavPosition() { }
+		CHavokNavPosition(qVector3 m_Position) 
+		{ 
+			m_vPosition = m_Position;
+			m_hkvMeshPosition = { m_Position.x, m_Position.y, m_Position.z, 1.f };
+		}
+	};
 }

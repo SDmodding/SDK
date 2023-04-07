@@ -60,7 +60,7 @@ namespace UFG
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
 					m_Component = GetComponentOfTypeHK(WeaponGunComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(CharacterActiveAIEntityComponent_TypeUID);
+					m_Component = GetComponentOfType(WeaponGunComponent_TypeUID);
 			}
 			else
 				m_Component = GetComponentOfTypeHK(WeaponGunComponent_TypeUID);

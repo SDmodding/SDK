@@ -2,6 +2,14 @@
 
 namespace UFG
 {
+	enum AiPathGoalMode
+	{
+		AiGoal_Replace = 0x0,
+		AiGoal_Replace_Direct = 0x1,
+		AiGoal_Append = 0x2,
+	};
+
+
 	namespace AimingPlayerComponent
 	{
 		enum eAimBlendMode
@@ -484,6 +492,15 @@ namespace UFG
 		NUM_AI_OBJECTIVES = 0x24,
 	};
 
+	enum eAttackPhaseEnum
+	{
+		eATTACK_PHASE_INVALID = 0x0,
+		eATTACK_PHASE_EXECUTION = 0x1,
+		eATTACK_PHASE_COLLISION = 0x2,
+		eATTACK_PHASE_RECOVERY = 0x3,
+		NUM_ATTACK_PHASES = 0x4,
+	};
+
 	enum eCharacterActionRequestEnum
 	{
 		eCHARACTER_ACTION_REQUEST_ATTACK = 0xF,
@@ -558,6 +575,15 @@ namespace UFG
 		CP_COVER = 0xC,
 		CP_FREERUN = 0xD,
 		CP_NUM_SHAPES = 0xE,
+	};
+
+	enum eCoverPopoutSideEnum
+	{
+		ePOPOUT_SIDE_NONE = 0x0,
+		ePOPOUT_SIDE_LEFT = 0x1,
+		ePOPOUT_SIDE_RIGHT = 0x2,
+		ePOPOUT_SIDE_TOP = 0x3,
+		NUM_COVER_POPOUT_SIDE_TYPES = 0x4,
 	};
 
 	enum eFactionClassEnum

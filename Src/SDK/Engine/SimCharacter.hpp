@@ -127,6 +127,59 @@ namespace UFG
 		CActionController mActionController;
 	};
 
+	class CHitReactionComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x18);
+
+		float mAttackTimer;
+		eAttackPhaseEnum mAttackPhaseEnum;
+		bool mHitRecordProcessing;
+		unsigned int mReceiverDamageMultiplierPct;
+		qSharedString mHitTreeFileName;
+		CActionPath mHitReactionOpeningBranchFullPath;
+		CActionNode* mHitTree;
+
+		struct IncomingAttackInfo_t
+		{
+			eAttackPhaseEnum mAttackPhaseEnum;
+			int mAttackTypeID;
+			qSafePointer<CSimObject> mAttacker;
+			int mAttackLocationLateralID;
+			int mAttackLocationHorizontalID;
+			int mTimeSinceUpdated;
+		};
+		IncomingAttackInfo_t mIncomingAttackInfo;
+
+		struct HitRecord_t
+		{
+			bool mHitRecordProcessed;
+			bool mIsDeadly;
+			bool mDamageHandled;
+			bool mEffectTriggered;
+			int mAttackTypeID;
+			int mDamage;
+			qSafePointer<CSimObject> mAttacker;
+			float mTimeSinceHit;
+			int mFramesSinceHit;
+			/*UFG::MeleeInfo mMeleeInfo;
+			UFG::ProjectileInfo mProjectileInfo;
+			UFG::CollisionInfo mCollisionInfo;
+			int mEffectBone;
+			UFG::qVector3 mEffectOffset;
+			float mDistanceFromExplosionSquared;
+			UFG::ExplosionTypeInfo* mExplosionInfo;
+			unsigned int mAttackerNetworkID;
+			HitRecord_t* mNext;*/
+		};
+		HitRecord_t mHitRecord;
+
+		/*int mNumHits;
+		UFG::RebindingComponentHandle<UFG::ActionTreeComponent, 0> mActionTreeComponent;
+		bool mWasProxy;*/
+	};
+	UFG_PAD(sizeof(CHitReactionComponent));
+
 	class CAIScriptInterfaceComponent
 	{
 	public:
@@ -152,6 +205,25 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x379620))(this);
 		}
+	};
+
+	class CAICoverComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x10);
+
+		void* m_pQuery;
+		void* m_pCoverObject;
+		void* m_pTargetedCoverPosition;
+		void* m_pProbeCoverObject;
+		void* m_pCurrentCoverPosition;
+		void* m_pSyncCoverPosition;
+		eCoverPopoutSideEnum m_ePopoutSide;
+		qSafePointer<CSimObject> m_pSimTargetSync;
+		qSafePointer<CSimObject> m_pSimTargetPopout;
+		int m_iHoldCoverPositionRefs;
+		int m_iAllowHoldCoverPositionUpdateRefs;
+		int m_iSyncBoneID;
 	};
 
 	class CTargetingSystemPedBaseComponent : public CTargetingSystemBaseComponent
@@ -373,6 +445,15 @@ namespace UFG
 		}
 	};
 
+	class CCharacterNavComponent : public CSimComponent
+	{
+	public:
+		void AddGoalPoint(CHavokNavPosition* npDestination, AiPathGoalMode goalMode, float speed, float fDestinationTolerance)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CHavokNavPosition*, AiPathGoalMode, float, float)>(UFG_RVA(0x263430))(this, npDestination, goalMode, speed, fDestinationTolerance);
+		}
+	};
+
 	class CInventoryComponent : public CSimComponent
 	{
 	public:
@@ -527,6 +608,18 @@ namespace UFG
 			return reinterpret_cast<CAIScriptInterfaceComponent*>(m_Component);
 		}
 
+		CAICoverComponent* GetAICover()
+		{
+			CSimComponent* m_Component = nullptr;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0 && !((m_Flags >> 13) & 1) && !((m_Flags >> 12) & 1))
+				m_Component = GetComponentOfType(CharacterAICoverComponent_TypeUID);
+			else
+				m_Component = GetComponentOfTypeHK(CharacterAICoverComponent_TypeUID);
+
+			return reinterpret_cast<CAICoverComponent*>(m_Component);
+		}
+
 		CHealthComponent* GetHealth()
 		{
 			CSimComponent* m_Component = m_Components.p[6].m_pComponent;
@@ -564,11 +657,10 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[9].m_pComponent;
 
-			// ActionTreeComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[8].m_pComponent;
+					m_Component = m_Components.p[9].m_pComponent;
 				else if ((m_Flags >> 12) & 1)
 					m_Component = GetComponentOfTypeHK(CharacterAnimationComponent_TypeUID);
 				else
@@ -576,6 +668,23 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+		}
+
+		CHitReactionComponent* GetHitReaction()
+		{
+			CSimComponent* m_Component = m_Components.p[15].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1)
+					m_Component = m_Components.p[15].m_pComponent;
+				else if ((m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterHitReactionComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterHitReactionComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CHitReactionComponent*>(m_Component);
 		}
 
 		CAIActionTreeComponent* GetAIActionTree()
@@ -665,6 +774,21 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CCharacterPhysicsComponent*>(m_Component);
+		}
+
+		CCharacterNavComponent* GetNav()
+		{
+			CSimComponent* m_Component = m_Components.p[36].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterNavComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterNavComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CCharacterNavComponent*>(m_Component);
 		}
 
 		CCharacterSubjectComponent* GetCharacterSubject()

@@ -7,6 +7,8 @@ namespace UFG
 	class CActionPath
 	{
 	public:
+		int mCount;
+		qSymbol* mData;
 	};
 
 	class CActionNode

@@ -40,6 +40,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"
 #include "Engine/DamageRig.hpp"
+#include "Engine/DebugDrawManager.hpp"
 #include "Engine/Components.hpp"
 #include "Engine/FXManager.hpp"
 #include "Engine/Sim.hpp"
@@ -52,6 +53,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Director.hpp"
 #include "Engine/StreamFileWrapper.hpp"
 #include "Engine/PhysicsSystem.hpp"
+#include "Engine/TrueCrowdDatabase.hpp"
 
 // ..
 #include "Game/CopSystem.hpp"
@@ -63,6 +65,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Game/LocalPlayer.hpp"
 #include "Game/Vehicle.hpp"
 #include "Game/Map.hpp"
+#include "Game/PedSpawnManager.hpp"
 #include "Game/ProgressionTracker.hpp"
 #include "Game/RaceManager.hpp"
 #include "Game/RoadNetwork.hpp"
@@ -75,6 +78,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Game/TimeOfDayManager.hpp"
 #include "Game/UI.hpp"
 #include "Game/Weapon.hpp"
+#include "Game/WheeledVehicleManager.hpp"
 
 #include "Utils.hpp"
 
