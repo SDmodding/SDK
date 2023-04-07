@@ -1,7 +1,5 @@
 #pragma once
 
-// hello from mp-client
-
 namespace UFG
 {
 	class qBaseNodeRB

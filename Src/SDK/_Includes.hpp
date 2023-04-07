@@ -36,6 +36,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 
 #include "Engine/Action.hpp"
 #include "Engine/AudioEntity.hpp"
+#include "Engine/BSP.hpp"
 #include "Engine/Entity.hpp"
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"
@@ -49,6 +50,8 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/SimCharacter.hpp"
 #include "Engine/SimObjectUtility.hpp"
 #include "Engine/RenderWorld.hpp"
+#include "Engine/SectionChooser.hpp"
+#include "Engine/SectionLayout.hpp"
 #include "Engine/Camera.hpp"
 #include "Engine/Director.hpp"
 #include "Engine/StreamFileWrapper.hpp"

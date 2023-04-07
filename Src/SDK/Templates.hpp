@@ -70,4 +70,22 @@ namespace UFG
 
 		UFG_PAD(0x4);
 	};
+
+
+	template <typename T>
+	struct qOffset64
+	{
+		int64_t mOffset;
+
+		T* Get(uint32_t m_Index, uintptr_t m_Size)
+		{
+			uintptr_t m_Address = reinterpret_cast<uintptr_t>(this) + mOffset;
+			return reinterpret_cast<T*>(m_Address + static_cast<uintptr_t>(m_Index) * m_Size);
+		}
+
+		T* Get(uint32_t m_Index)
+		{
+			return Get(m_Index, sizeof(T));
+		}
+	};
 }
