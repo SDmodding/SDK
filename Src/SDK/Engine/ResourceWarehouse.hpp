@@ -1,6 +1,7 @@
 #pragma once
-#define StateBlockInventory_UID		0x4D04C7F2
 #define FXEffectsInventory_UID		0xED341A8D
+#define ModelDataInventory_UID		0xA2ADCD77
+#define StateBlockInventory_UID		0x4D04C7F2
 
 namespace UFG
 {
@@ -13,6 +14,8 @@ namespace UFG
 		}
 
 		qResourceInventory* GetFXEffectsInventory() { return GetInventory(FXEffectsInventory_UID); }
+
+		qResourceInventory* GetModelDataInventory() { return GetInventory(ModelDataInventory_UID); }
 
 		Illusion::CStateBlockInventory* GetStateBlockInventory() { return reinterpret_cast<Illusion::CStateBlockInventory*>(GetInventory(StateBlockInventory_UID)); }
 	};

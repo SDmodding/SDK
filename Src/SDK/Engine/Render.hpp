@@ -88,6 +88,25 @@ namespace Render
 		m_ViewportScale.y = static_cast<float>(m_BackBufferTarget[1]);
 		return &m_ViewportScale;
 	}
+
+	class CView
+	{
+	public:
+		CViewSettings* mSettings;
+		void* mSubmitContext;
+		UFG::qVector4 mFrustumPlanes[6];
+		CViewMetrics mViewMetrics;
+		unsigned int mLastBeginFrameCounter;
+		UFG::qMatrix44 mWorldViewProjection;
+		UFG::qMatrix44 mViewWorld;
+		float mExtractedNearPlane;
+		float mExtractedFarPlane;
+
+		void SubmitRenderModel(Illusion::CModel* model, UFG::qMatrix44* local_world)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, Illusion::CModel*, UFG::qMatrix44*)>(UFG_RVA(0x7D20))(this, model, local_world);
+		}
+	};
 }
 
 namespace UFG

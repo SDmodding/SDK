@@ -50,6 +50,4 @@ namespace UFG
 
 		char mName[32];
 	};
-
-	UFG_PAD(sizeof(CBSP));
 }

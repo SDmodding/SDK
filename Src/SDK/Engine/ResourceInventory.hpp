@@ -22,22 +22,14 @@ namespace UFG
 		float mLoadTime;
 		float mUnloadTime;
 		float mInitHandleTime;
-	};
 
-	namespace ResourceInventory
-	{
-		qResourceInventory* Get()
-		{
-			return reinterpret_cast<qResourceInventory*>(UFG_RVA(0x23693F0));
-		}
-
-		std::vector<qPropertySetResource*> GetContents(qResourceInventory* m_ResourceInventory)
+		std::vector<qPropertySetResource*> GetContents()
 		{
 			std::vector<qPropertySetResource*> m_Return;
 
 			{
-				qBaseNodeRB* v2 = m_ResourceInventory->mResourceDatas.mRoot.mChild[0];
-				uintptr_t m_ResourceTree = reinterpret_cast<uintptr_t>(&m_ResourceInventory->mResourceDatas);
+				qBaseNodeRB* v2 = mResourceDatas.mRoot.mChild[0];
+				uintptr_t m_ResourceTree = reinterpret_cast<uintptr_t>(&mResourceDatas);
 				qBaseNodeRB* v4 = v2->mChild[0];
 				uintptr_t v5;
 				for (v5 = m_ResourceTree + 0x20; v4 != reinterpret_cast<qBaseNodeRB*>(v5); v4 = v4->mChild[0])
@@ -80,6 +72,19 @@ namespace UFG
 			}
 
 			return m_Return;
+		}
+	};
+
+	namespace ResourceInventory
+	{
+		qResourceInventory* Get()
+		{
+			return reinterpret_cast<qResourceInventory*>(UFG_RVA(0x23693F0));
+		}
+
+		std::vector<qPropertySetResource*> GetContents(qResourceInventory* m_ResourceInventory)
+		{
+			return m_ResourceInventory->GetContents();
 		}
 	}
 }
