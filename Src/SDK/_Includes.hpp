@@ -56,6 +56,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Camera.hpp"
 #include "Engine/Director.hpp"
 #include "Engine/StreamFileWrapper.hpp"
+#include "Engine/StreamResourceLoader.hpp"
 #include "Engine/PhysicsSystem.hpp"
 #include "Engine/TrueCrowdDatabase.hpp"
 
@@ -91,6 +92,9 @@ namespace UFG
 	namespace Global
 	{
 		uintptr_t WndProc = UFG_RVA(0x6A2770);
+		uintptr_t D3D11Device = UFG_RVA(0x2439AE0);
+		uintptr_t D3D11DeviceContext = UFG_RVA(0x2439AE8);
+		uintptr_t DXGIDevice = UFG_RVA(0x2439B08);
 		uintptr_t DXGISwapChain = UFG_RVA(0x2439B10);
 		HWND* m_hWindow = reinterpret_cast<HWND*>(UFG_RVA(0x249CDF0));
 	}

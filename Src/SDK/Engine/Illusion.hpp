@@ -140,4 +140,35 @@ namespace Illusion
 
 		UFG_PAD(0x4);
 	};
+
+	class CTargetPlat
+	{
+	public:
+		char mResolveDepthSurface;
+		char mHasDepthSurface;
+		char mNumSurfaces;
+		char mInvertedDepth;
+		unsigned __int16 mNumMips;
+		D3D11_VIEWPORT mViewport;
+		ID3D11RenderTargetView* mRenderTargetView[32][4];
+		ID3D11DepthStencilView* mDepthStencilView;
+		ID3D11DepthStencilView* mDepthStencilViewRO;
+		void* mMSAATargetTexture[4];
+		void* mMSAADepthTexture;
+	};
+
+	class CTarget
+	{
+	public:
+		int mWidth;
+		int mHeight;
+		CTargetPlat* mTargetPlat;
+		unsigned int mNumTargetTextures;
+		void* mTargetTexture[4];
+		char mOwnsTargetTexture[4];
+		void* mDepthTexture;
+		void* mDepthTextureCopy;
+		char mOwnsDepthTexture;
+		char mDescription[32];
+	};
 }

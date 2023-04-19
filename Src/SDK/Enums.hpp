@@ -40,6 +40,21 @@ namespace UFG
 		NUM_COP_SYSTEM_FINISH_REASONS = 0x5,
 	};
 
+	namespace DataStreamer
+	{
+		enum STREAM_STATE
+		{
+			STATE_ERROR = 0x0,
+			STATE_EMPTY = 0x1,
+			STATE_LOAD_QUEUED = 0x2,
+			STATE_LOADING = 0x3,
+			STATE_FIXUP_DELAY = 0x4,
+			STATE_RESOURCE_FIXUP = 0x5,
+			STATE_ACTIVE = 0x6,
+			STATE_DEACTIVATING = 0x7,
+			STATE_COUNT = 0x8,
+		};
+	}
 
 	namespace GameStat
 	{
