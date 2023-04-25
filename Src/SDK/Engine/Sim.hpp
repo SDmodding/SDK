@@ -12,6 +12,18 @@ namespace UFG
 		unsigned int m_TypeUID;
 	};
 
+	class CSceneObjectProperties
+	{
+	public:
+		UFG_PAD(0x8C);
+
+		uint32_t mLastTeleportFrame;
+		qPropertySet* mpWritableProperties;
+		qPropertySet* mpConstProperties;
+		uint32_t mPrevNameHash;
+		uint32_t mChildIndex;
+	};
+
 	class CSimObject
 	{
 	public:
@@ -21,7 +33,7 @@ namespace UFG
 		unsigned short m_Flags;
 		char m_ReservedComponentSlots;
 		char m_ResolveRefCount;
-		void* m_pSceneObj;
+		CSceneObjectProperties* m_pSceneObj;
 		CTransformNodeComponent* m_pTransformNodeComponent;
 		qArray<CSimComponentHolder> m_Components;
 		void* m_UnboundComponentHandles[2];
@@ -188,6 +200,14 @@ namespace UFG
 		{
 			qSymbol m_Symbol;
 			reinterpret_cast<void(__fastcall*)(qSymbol*, const char*)>(UFG_RVA(0x180880))(&m_Symbol, name);
+
+			return m_Symbol;
+		}
+
+		qSymbol GenerateUniqueName(const char* m_Root)
+		{
+			qSymbol m_Symbol;
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, const char*)>(UFG_RVA(0x190A50))(Get(), &m_Symbol, m_Root);
 
 			return m_Symbol;
 		}

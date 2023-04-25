@@ -178,7 +178,6 @@ namespace UFG
 		UFG::RebindingComponentHandle<UFG::ActionTreeComponent, 0> mActionTreeComponent;
 		bool mWasProxy;*/
 	};
-	UFG_PAD(sizeof(CHitReactionComponent));
 
 	class CAIScriptInterfaceComponent
 	{
@@ -335,7 +334,22 @@ namespace UFG
 
 		void ApplyAngularImpulse(int bone, qVector3* impulse, float connectionTransfer)
 		{
-			reinterpret_cast<bool(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, bone, impulse, connectionTransfer);
+			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, bone, impulse, connectionTransfer);
+		}
+		
+		void SetMotorMaxForce(float m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475360))(this, m_Value);
+		}
+
+		void SetLimitStiffness(float m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475160))(this, m_Value);
+		}
+
+		void SetPositionTrackingStiffness(float m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475540))(this, m_Value);
 		}
 	};
 
@@ -581,13 +595,12 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[3].m_pComponent;
 
-			// CharacterPropertiesComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xB2000005);
+					m_Component = GetComponentOfTypeHK(CharacterPropertiesComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xB2000005);
+					m_Component = GetComponentOfType(CharacterPropertiesComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CCharacterPropertiesComponent*>(m_Component);
@@ -741,7 +754,6 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[22].m_pComponent;
 
-			// AICharacterControllerBaseComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)

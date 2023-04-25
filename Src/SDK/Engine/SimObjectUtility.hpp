@@ -37,6 +37,15 @@ namespace UFG
 			Teleport(m_pSimObject, &m_Matrix);
 		}
 
+		void SetRotation(CSimObject* m_SimObject, qVector3& m_Rot)
+		{
+			qMatrix44 m_Matrix = m_SimObject->m_pTransformNodeComponent->mWorldTransform;
+			m_Matrix.SetRotation(m_Rot);
+
+			Teleport(m_SimObject, &m_Matrix);
+		}
+
+		// Don't use please
 		void SetYaw(CSimObject* m_pSimObject, float m_fYaw)
 		{
 			qMatrix44 m_Matrix = m_pSimObject->m_pTransformNodeComponent->mWorldTransform;

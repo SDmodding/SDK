@@ -315,14 +315,35 @@ namespace UFG
 	class qMatrix44
 	{
 	public:
-		qVector4 v0; // Right
-		qVector4 v1; // Up
-		qVector4 v2; // Forward
+		qVector4 v0; // Forward
+		qVector4 v1; // Right
+		qVector4 v2; // Up
 		qVector4 v3; // Position
 
-		qVector3 GetForward()	{ return { -v2.x, -v2.y, -v2.z }; }
-		qVector3 GetUp()		{ return { v1.x, v1.y, v1.z }; }
-		qVector3 GetRight()		{ return { v0.x, v0.y, v0.z }; }
+		__forceinline qVector3 GetForward()	{ return v0; }
+		__forceinline qVector3 GetRight()	{ return v1; }
+		__forceinline qVector3 GetUp()		{ return v2; }
+
+		void SetRotation(qVector3 m_Rotation)
+		{
+			m_Rotation *= UFG_Deg2Rad_Mul;
+
+			float m_Pitch[2] = { cosf(m_Rotation.x), sinf(m_Rotation.x) };
+			float m_Yaw[2] = { cosf(m_Rotation.y), sinf(m_Rotation.y) };
+			float m_Roll[2] = { cosf(m_Rotation.z), sinf(m_Rotation.z) };
+
+			v0 = { m_Yaw[0] * m_Pitch[0], m_Yaw[1] * m_Pitch[0], m_Pitch[1], 0.f };
+			v1 = { m_Yaw[0] * m_Pitch[1] * m_Roll[1] - m_Yaw[1] * m_Roll[0], m_Yaw[1] * m_Pitch[1] * m_Roll[1] + m_Yaw[0] * m_Roll[0], -m_Pitch[0] * m_Roll[1], 0.f };
+			v2 = { m_Yaw[0] * m_Pitch[1] * m_Roll[0] + m_Yaw[1] * m_Roll[1], m_Yaw[1] * m_Pitch[1] * m_Roll[0] - m_Yaw[0] * m_Roll[1], m_Pitch[0] * m_Roll[0], 0.f };
+		}
+
+		qVector3 GetRotation()
+		{
+			UFG::qVector3 m_MatrixRot(acosf(v0.DotProduct(v2)), atan2f(v0.y, v0.x), atan2f(v1.z, v1.y));
+			m_MatrixRot *= UFG_Rad2Deg_Mul;
+
+			return m_MatrixRot;
+		}
 
 		// This rotate funcs are wrong...
 		void RotateRight(qVector3 vRot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
