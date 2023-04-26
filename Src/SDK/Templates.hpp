@@ -25,6 +25,18 @@ namespace UFG
 		qNode<T>* mNext;
 
 		T* GetBase() { return reinterpret_cast<T*>(this); }
+
+		void GetVector(std::vector<T*>& m_Vector)
+		{
+			for (qNode<T>* i = mNext; i != this; i = i->mNext)
+				m_Vector.emplace_back(reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(i) + sizeof(qNode<T>)));
+		}
+	};
+
+	template <typename T>
+	struct qList
+	{
+		qNode<T> mNode;
 	};
 
 	template<typename T>

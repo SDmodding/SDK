@@ -55,49 +55,63 @@ namespace UFG
 			return reinterpret_cast<qBaseTreeRB*(__fastcall*)(qBaseTreeRB*, qBaseNodeRB*)>(UFG_RVA(0x171440))(this, m_Node);
 		}
 
-		void GetContent(std::vector<unsigned int>& m_List)
+		template <typename T>
+		std::vector<T*> GetNodes()
 		{
-			qBaseNodeRB* v2 = mRoot.mChild[0];
-			uintptr_t m_Tree = reinterpret_cast<uintptr_t>(this);
-			qBaseNodeRB* v4 = v2->mChild[0];
-			uintptr_t v5;
-			for (v5 = m_Tree + 0x20; v4 != reinterpret_cast<qBaseNodeRB*>(v5); v4 = v4->mChild[0])
-				v2 = v4;
+			std::vector<T*> m_Nodes;
 
-			qBaseNodeRB* m_Current = nullptr;
-			if (v2 != reinterpret_cast<qBaseNodeRB*>(m_Tree))
-				m_Current = v2;
-
-			while (m_Current)
 			{
-				m_List.emplace_back(m_Current->mUID);
+				qBaseNodeRB* v2 = mRoot.mChild[0];
+				uintptr_t m_Tree = reinterpret_cast<uintptr_t>(this);
+				qBaseNodeRB* v4 = v2->mChild[0];
+				uintptr_t v5;
+				for (v5 = m_Tree + 0x20; v4 != reinterpret_cast<qBaseNodeRB*>(v5); v4 = v4->mChild[0])
+					v2 = v4;
 
-				qBaseNodeRB* v7 = m_Current->mChild[1];
-				if (reinterpret_cast<qBaseNodeRB*>(v5) == v7)
+				qBaseNodeRB* m_Current = nullptr;
+				if (v2 != reinterpret_cast<qBaseNodeRB*>(m_Tree))
+					m_Current = v2;
+
+				while (m_Current)
 				{
-					qBaseNodeRB* m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Current->mParent) & 0xFFFFFFFFFFFFFFFEui64);
-					if (m_Current == m_Parent->mChild[1])
+					m_Nodes.emplace_back(reinterpret_cast<T*>(m_Current));
+
+					qBaseNodeRB* v7 = m_Current->mChild[1];
+					if (reinterpret_cast<qBaseNodeRB*>(v5) == v7)
 					{
-						qBaseNodeRB* m_Children = m_Parent->mChild[1];
-						while (m_Children == m_Parent->mChild[1])
+						qBaseNodeRB* m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Current->mParent) & 0xFFFFFFFFFFFFFFFEui64);
+						if (m_Current == m_Parent->mChild[1])
 						{
-							m_Children = m_Parent;
-							m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Parent->mParent) & 0xFFFFFFFFFFFFFFFEui64);
+							qBaseNodeRB* m_Children = m_Parent->mChild[1];
+							while (m_Children == m_Parent->mChild[1])
+							{
+								m_Children = m_Parent;
+								m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Parent->mParent) & 0xFFFFFFFFFFFFFFFEui64);
+							}
 						}
+
+						if (m_Parent == reinterpret_cast<qBaseNodeRB*>(m_Tree))
+							break;
+
+						m_Current = m_Parent;
 					}
-
-					if (m_Parent == reinterpret_cast<qBaseNodeRB*>(m_Tree))
-						break;
-
-					m_Current = m_Parent;
-				}
-				else
-				{
-					for (qBaseNodeRB* j = v7->mChild[0]; j != reinterpret_cast<qBaseNodeRB*>(v5); j = j->mChild[0])
-						v7 = j;
-					m_Current = v7;
+					else
+					{
+						for (qBaseNodeRB* j = v7->mChild[0]; j != reinterpret_cast<qBaseNodeRB*>(v5); j = j->mChild[0])
+							v7 = j;
+						m_Current = v7;
+					}
 				}
 			}
+
+			return m_Nodes;
+		}
+
+		void GetContent(std::vector<unsigned int>& m_List)
+		{
+			std::vector<qBaseNodeRB*> m_Nodes = GetNodes<qBaseNodeRB>();
+			for (qBaseNodeRB* Node : m_Nodes)
+				m_List.emplace_back(Node->mUID);
 		}
 	};
 
