@@ -115,7 +115,14 @@ namespace AKSoundEngine
 			MapStruct<A, B> Assoc;
 		};
 
-		Item_t m_table[N];
+		Item_t* m_table[N];
+		unsigned int m_uiSize;
+	};
+
+	template <typename T, size_t N>
+	struct HashListBare
+	{
+		T m_table[N];
 		unsigned int m_uiSize;
 	};
 
@@ -123,6 +130,44 @@ namespace AKSoundEngine
 	{
 		unsigned int bankID;
 		const void* pInMemoryPtr;
+	};
+
+	struct Indexable_t
+	{
+		void* vfptr;
+		Indexable_t* pNextItem;
+		unsigned int key;
+		int m_lRef;
+	};
+
+	struct Action_t : Indexable_t
+	{
+		Action_t* m_pNext;
+		void* m_props;
+		void* m_ranges;
+		unsigned int m_ulElementID;
+		unsigned __int16 m_eActionType;
+		__int8 m_eFadeCurve : 5;
+		__int8 m_bWasLoadedFromBank : 1;
+		__int8 m_bIsBusElement : 1;
+	};
+
+	struct Event_t : Indexable_t
+	{
+		Action_t* m_pFirstAction;
+		unsigned int m_iPreparationCount;
+	};
+
+	template <typename T>
+	struct IndexItem
+	{
+		CAkLock m_IndexLock;
+		HashListBare<T, 193> m_mapIDToPtr;
+
+		T GetPtrAndAddRef(uint32_t m_ID)
+		{
+			return reinterpret_cast<T(__fastcall*)(void*, uint32_t)>(UFG_RVA(0xA5D770))(this, m_ID);
+		}
 	};
 
 	struct UsageSlot_t
@@ -139,7 +184,7 @@ namespace AKSoundEngine
 		void* m_paLoadedMedia;
 		void* m_pfnBankCallback;
 		void* m_pCookie;
-		Array<void*> m_listLoadedItem;
+		Array<Indexable_t*> m_listLoadedItem;
 		int m_iRefCount;
 		int m_iPrepareRefCount;
 		__int8 m_bWasLoadedAsABank : 1;
@@ -163,6 +208,21 @@ namespace AKSoundEngine
 		unsigned int m_sourceID;
 	};
 
+	class CAudioLibIndex
+	{
+	public:
+		IndexItem<void*> m_idxAudioNode;
+		IndexItem<void*> m_idxBusses;
+		IndexItem<void*> m_idxCustomStates;
+		IndexItem<Event_t*> m_idxEvents;
+		IndexItem<Action_t*> m_idxActions;
+		IndexItem<void*> m_idxLayers;
+		IndexItem<void*> m_idxAttenuations;
+		IndexItem<void*> m_idxDynamicSequences;
+		IndexItem<void*> m_idxDialogueEvents;
+		IndexItem<void*> m_idxFxShareSets;
+		IndexItem<void*> m_idxFxCustom;
+	};
 
 	class CBankReader
 	{
@@ -208,20 +268,12 @@ namespace AKSoundEngine
 
 	};
 
-	namespace BankMgr
-	{
-		CBankMgr* Get()
-		{
-			return *reinterpret_cast<CBankMgr**>(UFG_RVA(0x249E950));
-		}
-	}
-
 	// Rewritten from scratch from (.text:0000000140A41FD0)
-	int GetIDFromString(const char* m_String)
+	uint32_t GetIDFromString(const char* m_String)
 	{
 		size_t m_Size = strlen(m_String);
 
-		int m_ID = 0x811C9DC5;
+		uint32_t m_ID = 0x811C9DC5;
 		for (size_t i = 0; m_Size > i; ++i)
 		{
 			char m_Char = m_String[i];
@@ -229,7 +281,7 @@ namespace AKSoundEngine
 			if (m_Char >= 'A' && m_Char <= 'Z')
 				m_Char += 0x20;
 
-			m_ID = static_cast<int>(m_Char ^ (0x1000193 * m_ID));
+			m_ID = static_cast<uint32_t>(m_Char ^ (0x1000193 * m_ID));
 		}
 
 		return m_ID;
@@ -239,4 +291,9 @@ namespace AKSoundEngine
 	{
 		return reinterpret_cast<AKRESULT(__fastcall*)(uint32_t, void*, void*, int)>(UFG_RVA(0xA424A0))(m_ID, m_Callback, m_Cookie, m_MemoryPoolID);
 	}
+
+	// Instances
+	CAudioLibIndex* GetAudioLibIndex() { return *reinterpret_cast<CAudioLibIndex**>(UFG_RVA(0x249E9D8)); }
+
+	CBankMgr* GetBankMgr() { return *reinterpret_cast<CBankMgr**>(UFG_RVA(0x249E950)); }
 }

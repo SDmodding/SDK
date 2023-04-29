@@ -15,12 +15,6 @@ namespace UFG
 			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t, void*, uint32_t, void*)>(UFG_RVA(0x1440B0))(this, eventId, pInitParams, fadeInDurationMs, externalSourceInfo);
 		}
 
-		bool CreateAndPlayEvent(const char* m_String)
-		{
-			uint32_t m_EventID = reinterpret_cast<uint32_t(__fastcall*)(const char*)>(UFG_RVA(0x143890))(m_String);
-			return CreateAndPlayEvent(m_EventID);
-		}
-
 		void StopAndForgetEvent(uint32_t m_EventID, float m_MS = 0.f)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t, float)>(UFG_RVA(0x14CCC0))(this, m_EventID, m_MS);

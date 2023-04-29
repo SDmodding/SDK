@@ -56,6 +56,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/SectionLayout.hpp"
 #include "Engine/Camera.hpp"
 #include "Engine/Director.hpp"
+#include "Engine/SoundBankManager.hpp"
 #include "Engine/StreamFileWrapper.hpp"
 #include "Engine/StreamResourceLoader.hpp"
 #include "Engine/PhysicsSystem.hpp"

@@ -27,7 +27,7 @@ namespace UFG
 	class CSimObject
 	{
 	public:
-		UFG_PAD(0x48);
+		UFG_PAD(0x40);
 
 		qSymbol m_Name;
 		unsigned short m_Flags;
@@ -38,6 +38,13 @@ namespace UFG
 		qArray<CSimComponentHolder> m_Components;
 		void* m_UnboundComponentHandles[2];
 
+		virtual ~CSimObject() { }
+
+		virtual void Attach(CSimComponent* component, unsigned int index) { }
+
+		virtual void Detach(CSimComponent* component) { }
+
+		// Please check SceneObject Properties to get type...
 		int GetType()
 		{
 			uintptr_t m_VFTable = *reinterpret_cast<uintptr_t*>(this);

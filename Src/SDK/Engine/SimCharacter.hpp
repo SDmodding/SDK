@@ -99,6 +99,59 @@ namespace UFG
 		}
 	};
 
+	// Original Name: ActorAudioComponent
+	class CCharacterAudioComponent
+	{
+	public:
+		UFG_PAD(0x190);
+
+		void* m_AudioEvent;
+		UFG::CAudioEntity* m_SFXEntity;
+		void* m_voiceProfile;
+		unsigned int m_curPlayingPriority;
+		float m_interiorCheckTimer;
+		float m_distance2ToListener;
+		unsigned int m_activeAmbientConversationId;
+		unsigned int m_subtitleId;
+		int m_isSpeakingCnt;
+		void* m_leftFootstep;
+		void* m_rightFootstep;
+
+		UFG_PAD(0x58);
+		/*UFG::AmbientContextManager m_ambientContexts;
+		UFG::qSafePointer<UFG::SimComponent, UFG::HealthComponent> m_healthComponent;
+		UFG::qSafePointer<UFG::SimComponent, UFG::TransformNodeComponent> m_transformNodeComponent;
+		UFG::qSafePointer<UFG::SimComponent, UFG::SimObjectCharacterPropertiesComponent> m_simObjectCharacterPropertiesComponent;*/
+
+		__int8 m_isSpeakingInConversation : 1;
+		__int8 m_isListeningInAConversation : 1;
+		__int8 m_isNearby : 1;
+		__int8 m_enableTaggedDialogue : 1;
+		__int8 m_enableInCarReactions : 1;
+		__int8 m_charcterIsAmbient : 1;
+		__int8 m_forceInitialize : 1;
+		__int8 m_forceDisable : 1;
+		__int8 m_failedSpeechCondition : 1;
+		__int8 m_debugActor : 1;
+		__int8 m_inCar : 1;
+		__int8 m_isPlayer : 1;
+		__int8 m_inConversationButTooFarToPlay : 1;
+		__int8 m_inConversationWithActionRequests : 1;
+		__int8 m_isMale : 1;
+		__int8 m_highHeel : 1;
+		__int8 m_isPossessed : 1;
+
+		bool PlaySpeech(uint32_t m_EventID, uint32_t m_FileID, void* m_Callback = nullptr, uint32_t m_Priority = 5, bool m_Subtitle = false)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t, uint32_t, void*, uint32_t, bool)>(UFG_RVA(0x5A8E20))(this, m_EventID, m_FileID, m_Callback, m_Priority, m_Subtitle);
+		}
+
+		void StopCurrentlyPlaying(bool m_Force = true)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x5AC9F0))(this, m_Force);
+		}
+	};
+
 	class CCharacterPropertiesComponent : public CSimObjectPropertiesComponent
 	{
 	public:
@@ -591,6 +644,11 @@ namespace UFG
 	class CSimCharacter : public CSimObject
 	{
 	public:
+		CCharacterAudioComponent* GetAudio()
+		{
+			return reinterpret_cast<CCharacterAudioComponent*>(GetComponentOfType(CharacterAudioComponent_TypeUID));
+		}
+
 		CCharacterPropertiesComponent* GetCharacterProperties()
 		{
 			CSimComponent* m_Component = m_Components.p[3].m_pComponent;

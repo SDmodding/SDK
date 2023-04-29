@@ -15,6 +15,7 @@
 
 #define SimObjectFXComponent_TypeUID						0x32000001
 
+#define CharacterAudioComponent_TypeUID						0xD2000003
 #define CharacterPropertiesComponent_TypeUID				0xB2000005
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterAICoverComponent_TypeUID					0x64000001
