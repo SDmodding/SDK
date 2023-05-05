@@ -6,7 +6,22 @@ namespace UFG
 	class CMemoryPool
 	{
 	public:
-		UFG_PAD(0x2460);
+		qNode<CMemoryPool> mNode;
+		unsigned int mInitializedUID;
+		void* mAutoAllocatedBuffer;
+		void* mData;
+		char mDataBuffer[9216];
+		unsigned int mFlags;
+		bool mUsePageBasedStompFinder;
+		char* mStart;
+		char* mEnd;
+		CMemoryPool* mOverflowPool;
+		int mOverflowOccurred;
+		int mPrintWarningOnOverflow;
+		int mAmountOfSpilledMemory;
+		int mMaxAmountOfSpilledMemory;
+		int mNumActiveSpilledAllocs;
+		int mTotalSpilledAllocs;
 
 		CMemoryPool() {}
 		CMemoryPool(const char* name, int64_t memory_byte_size, int small_block_byte_size, int can_small_block_overflow_into_large_block = 0, unsigned int InStatList = 1, void* overflow_pool = nullptr, int printWarningOnOverflow = 1, bool bInitializeAllocator = true)
@@ -29,4 +44,5 @@ namespace UFG
 			return reinterpret_cast<const char*(__fastcall*)(void*)>(UFG_RVA(0x1713C0))(this);
 		}
 	};
+	CMemoryPool* gMainMemoryPool = reinterpret_cast<CMemoryPool*>(UFG_RVA(0x22581A0));
 }

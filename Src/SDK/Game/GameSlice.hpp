@@ -133,6 +133,25 @@ namespace UFG
 		qSymbol mSprinkleCharacter1Override;
 		qSymbol mSprinkleCharacter2Override;
 		qSymbol mSubsetModeType;
-	};
 
+		void ForceLock(bool isReset)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x4A1050))(this, isReset);
+		}
+
+		void SetState(GameSlice::State newState)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, GameSlice::State)>(UFG_RVA(0x4BD6F0))(this, newState);
+		}
+
+		void Start()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x4BEF50))(this);
+		}
+
+		void StartScript()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x4BF760))(this);
+		}
+	};
 }

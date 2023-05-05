@@ -99,6 +99,38 @@ namespace UFG
 		}
 	};
 
+	class CAttackRightsComponent
+	{
+	public:
+		static bool HasComponent(CSceneObjectProperties* m_ObjectProperties)
+		{
+			return reinterpret_cast<bool(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x364DA0))(m_ObjectProperties);
+		}
+
+		void OnAttach(CSimObject* m_Character)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x378900))(this, m_Character);
+		}
+
+		void OnDetach()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x37A110))(this);
+		}
+
+		void InitFromProperties(qPropertySet* m_PropertySet)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qPropertySet*)>(UFG_RVA(0x366D40))(this, m_PropertySet);
+		}
+
+		void InitDefaultProperties()
+		{
+			// default-component-AttackRights
+			qPropertySet* m_PropertySet = PropertySet::Get(0xE29C0011);
+
+			InitFromProperties(m_PropertySet);
+		}
+	};
+
 	// Original Name: ActorAudioComponent
 	class CCharacterAudioComponent
 	{
@@ -330,6 +362,11 @@ namespace UFG
 		void SetCurrentObjective(eAIObjective objective)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eAIObjective, void*)>(UFG_RVA(0x3852B0))(this, objective, nullptr);
+		}
+
+		void SetBehaviourTree(const char* behaviour_tree_name)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x385000))(this, behaviour_tree_name);
 		}
 	};
 
@@ -780,13 +817,12 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[20].m_pComponent;
 
-			// TargetingSystemPedBaseComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xA0000003);
+					m_Component = GetComponentOfTypeHK(CharacterTargetingPedComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xA0000003);
+					m_Component = GetComponentOfType(CharacterTargetingPedComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CTargetingSystemPedBaseComponent*>(m_Component);
@@ -929,6 +965,21 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CCharacterOccupantComponent*>(m_Component);
+		}
+
+		CAttackRightsComponent* GetAttackRights()
+		{
+			CSimComponent* m_Component = m_Components.p[46].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterAttackRightsComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(CharacterAttackRightsComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CAttackRightsComponent*>(m_Component);
 		}
 
 		CAimingPlayerComponent* GetAimingPlayer()

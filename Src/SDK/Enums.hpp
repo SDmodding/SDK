@@ -961,6 +961,54 @@ namespace UFG
 		NUM_SIM_OBJECT_TYPES = 0x6,
 	};
 
+	// This is custom!
+	enum eSimObjectTypeEnum2
+	{
+		eSIM_OBJ_TYPE2_Invalid = 0, 
+		eSIM_OBJ_TYPE2_AIPathMarker,
+		eSIM_OBJ_TYPE2_AIJumpPoint,
+		eSIM_OBJ_TYPE2_AIOutlineRegion,
+		eSIM_OBJ_TYPE2_AISeedPoint,
+		eSIM_OBJ_TYPE2_AudioEmitterMarker,
+		eSIM_OBJ_TYPE2_AudioTriggerRegion,
+		eSIM_OBJ_TYPE2_BoostRegion,
+		eSIM_OBJ_TYPE2_Camera,
+		eSIM_OBJ_TYPE2_CameraMarker,
+		eSIM_OBJ_TYPE2_Character,
+		eSIM_OBJ_TYPE2_Collectible,
+		eSIM_OBJ_TYPE2_CombatRegion,
+		eSIM_OBJ_TYPE2_CopRoadBlock,
+		eSIM_OBJ_TYPE2_Director,
+		eSIM_OBJ_TYPE2_Door,
+		eSIM_OBJ_TYPE2_DynamicLight,
+		eSIM_OBJ_TYPE2_FleeToPoint,
+		eSIM_OBJ_TYPE2_FXSimComponent,
+		eSIM_OBJ_TYPE2_HidingSpot,
+		eSIM_OBJ_TYPE2_HijackReturn,
+		eSIM_OBJ_TYPE2_InterestPoint,
+		eSIM_OBJ_TYPE2_IrradianceVolume,
+		eSIM_OBJ_TYPE2_Marker,
+		eSIM_OBJ_TYPE2_MarkerProgressionTrigger,
+		eSIM_OBJ_TYPE2_MarkerRaceStartingGrid,
+		eSIM_OBJ_TYPE2_MeleeScriptSystem,
+		eSIM_OBJ_TYPE2_ModelAsset,
+		eSIM_OBJ_TYPE2_NISScriptSystem,
+		eSIM_OBJ_TYPE2_ParkingSpot,
+		eSIM_OBJ_TYPE2_Prefab,
+		eSIM_OBJ_TYPE2_Prop,
+		eSIM_OBJ_TYPE2_ReinforcementPoint,
+		eSIM_OBJ_TYPE2_TrafficRegion,
+		eSIM_OBJ_TYPE2_TriggerRegion,
+		eSIM_OBJ_TYPE2_Turf,
+		eSIM_OBJ_TYPE2_Vehicle,
+		eSIM_OBJ_TYPE2_Weapon,
+		eSIM_OBJ_TYPE2_WeaponSpawner,
+		eSIM_OBJ_TYPE2_StartRegion,
+		eSIM_OBJ_TYPE2_SpawnPoint,
+		eSIM_OBJ_TYPE2_SpawnPointProgressionTrigger,
+		eSIM_OBJ_TYPE2_SpawnRegion
+	};
+
 	enum eSimObjectVehicleTypeEnum
 	{
 		eSIM_OBJ_VEHICLE_TYPE_INVALID = 0x0,

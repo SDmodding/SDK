@@ -143,6 +143,11 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qSymbol*)>(UFG_RVA(0x1EB070))(this, &m_Name, &m_Value);
 		}
 
+		void SetProperty(qSymbol m_Name, qPropertySet* m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qPropertySet*)>(UFG_RVA(0x1EB030))(this, &m_Name, m_Value);
+		}
+
 		bool HasResource() { return (mFlags & 1); }
 
 		qPropertySetResource* GetResource()

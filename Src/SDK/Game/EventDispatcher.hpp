@@ -47,6 +47,14 @@ namespace UFG
 	};
 
 	// Event Classes
+	class CEntityDiedEvent : public CEvent
+	{
+	public:
+		qSafePointer<CSimObject> pSimObject;
+	};
+
+	UFG_PAD(sizeof(CEntityDiedEvent));
+
 	class CCollisionEvent : public CEvent
 	{
 	public:
@@ -58,7 +66,7 @@ namespace UFG
 
 		UFG_PAD(0x4);
 
-		qSafePointer<UFG::CSimObject> mSimObject[2];
+		qSafePointer<CSimObject> mSimObject[2];
 		qVector3 preCollisionPosition[2];
 		qVector3 velocity[2];
 		unsigned __int64 objectPropertyHandleUID[2];
@@ -73,6 +81,7 @@ namespace UFG
 		void* m_Class = nullptr;
 		void* m_Function = nullptr;
 
+		CEventHandler() { }
 		CEventHandler(void* p) { m_Function = p; }
 		CEventHandler(void* c, void* p) { m_Class = c; m_Function = p; }
 

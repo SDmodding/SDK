@@ -682,9 +682,9 @@ namespace UFG
 					return nullptr;
 
 				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xE4000001);
+					m_Component = GetComponentOfTypeHK(VehiclePhysicsMoverInterface_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xE4000001);
+					m_Component = GetComponentOfType(VehiclePhysicsMoverInterface_TypeUID);
 			}
 			else
 				m_Component = m_Components.p[34].m_pComponent;
