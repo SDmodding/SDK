@@ -7,24 +7,25 @@ namespace UFG
 	{
 	public:
 		qNode<CMemoryPool> mNode;
-		unsigned int mInitializedUID;
-		void* mAutoAllocatedBuffer;
-		void* mData;
-		char mDataBuffer[9216];
-		unsigned int mFlags;
-		bool mUsePageBasedStompFinder;
-		char* mStart;
-		char* mEnd;
-		CMemoryPool* mOverflowPool;
-		int mOverflowOccurred;
-		int mPrintWarningOnOverflow;
-		int mAmountOfSpilledMemory;
-		int mMaxAmountOfSpilledMemory;
-		int mNumActiveSpilledAllocs;
-		int mTotalSpilledAllocs;
+		unsigned int mInitializedUID = 0;
+		void* mAutoAllocatedBuffer = nullptr;
+		void* mData = nullptr;
+		char mDataBuffer[9216] = { 0 };
+		unsigned int mFlags = 0;
+		bool mUsePageBasedStompFinder = false;
+		char* mStart = nullptr;
+		char* mEnd = nullptr;
+		CMemoryPool* mOverflowPool = nullptr;
+		int mOverflowOccurred = 0;
+		int mPrintWarningOnOverflow = 0;
+		int mAmountOfSpilledMemory = 0;
+		int mMaxAmountOfSpilledMemory = 0;
+		int mNumActiveSpilledAllocs = 0;
+		int mTotalSpilledAllocs = 0;
 
-		CMemoryPool() {}
-		CMemoryPool(const char* name, int64_t memory_byte_size, int small_block_byte_size, int can_small_block_overflow_into_large_block = 0, unsigned int InStatList = 1, void* overflow_pool = nullptr, int printWarningOnOverflow = 1, bool bInitializeAllocator = true)
+		CMemoryPool() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x161710))(this); }
+
+		void Init(const char* name, int64_t memory_byte_size, int small_block_byte_size, int can_small_block_overflow_into_large_block = 0, unsigned int InStatList = 1, CMemoryPool* overflow_pool = nullptr, int printWarningOnOverflow = 1, bool bInitializeAllocator = true)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*, int64_t, int, int, unsigned int, void*, int, bool)>(UFG_RVA(0x173370))(this, name, memory_byte_size, small_block_byte_size, can_small_block_overflow_into_large_block, InStatList, overflow_pool, printWarningOnOverflow, bInitializeAllocator);
 		}
@@ -45,4 +46,20 @@ namespace UFG
 		}
 	};
 	CMemoryPool* gMainMemoryPool = reinterpret_cast<CMemoryPool*>(UFG_RVA(0x22581A0));
+	qList<CMemoryPool>* gMemoryPoolList = reinterpret_cast<qList<CMemoryPool>*>(UFG_RVA(0x235B2D8));
+
+	namespace MemoryPool
+	{
+		CMemoryPool* FindByName(const char* m_Name)
+		{
+			for (qNode<CMemoryPool>* i = gMemoryPoolList->mNode.mNext; i != &gMemoryPoolList->mNode; i = i->mNext)
+			{
+				CMemoryPool* m_MemoryPool = i->GetPointer();
+				if (strcmp(m_MemoryPool->GetName(), m_Name) == 0)
+					return m_MemoryPool;
+			}
+
+			return nullptr;
+		}
+	}
 }

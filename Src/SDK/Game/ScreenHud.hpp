@@ -2,6 +2,174 @@
 
 namespace UFG
 {
+	class CTiledMapWidget
+	{
+	public:
+		UFG_PAD(0x170);
+	};
+
+	struct PDAInputLocker_t
+	{
+		qString mOwner;
+		bool mAcquired;
+	};
+
+	class CPDAPhoneContactsWidget
+	{
+	public:
+		void* vfptr;
+		int mState;
+		unsigned int mNumContacts;
+		unsigned int mSelectedIndex;
+		unsigned int mSelectedSubOptionIndex;
+		qString mSelectedName;
+		qString mSelectedSubOption;
+		qArray<qString> mMissionList;
+
+		struct TxtMsgInfo_t
+		{
+			qString message;
+			qSymbol symbol;
+		};
+		qArray<TxtMsgInfo_t> mMessages;
+
+		qPropertySet* mData;
+		qPropertySet* mContactData;
+		qString mTraceName;
+		qSymbol mTraceSymbol;
+		qString mPerkGiverName;
+		qSymbol mPerkGiverSymbol;
+		bool mShowingPerkIcon;
+		bool mDisablePerk;
+		bool mUpdateContactMethod;
+		qSymbol mSelectedSymbol;
+		qArray<qSymbol> mSymbolList;
+		qArray<qString> mNameList;
+		qArray<qString> mPortraitList;
+
+		void AddContact(void* m_Screen, qSymbol m_Sym, const char* m_Name, const char* m_Portrait)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, void*, qSymbol*, const char*, const char*)>(UFG_RVA(0x5D1AA0))(this, m_Screen, &m_Sym, m_Name, m_Portrait);
+		}
+
+		void Exit(void* m_Screen, bool m_PlaySound)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, void*, bool)>(UFG_RVA(0x5D7D50))(this, m_Screen, m_PlaySound);
+		}
+	};
+
+	class CPDARootMenuWidget
+	{
+	public:
+		int mState;
+		float mIdleTime;
+		float mRefreshTimer;
+		bool mLastScrolledPrev;
+		unsigned int mIntroIndex;
+		unsigned int mSelectedIndex;
+		qString mSelectedItem;
+		PDAInputLocker_t mInputLocker;
+	};
+
+
+	class CPDAIncomingCallWidget
+	{
+	public:
+		int mState;
+		float mTimer;
+		int mOldSeconds;
+		bool mUpdateTimer;
+		qString mCallerName;
+		qString mCallerPortrait;
+		bool mVoiceMail;
+		PDAInputLocker_t mInputLocker;
+
+		void SetCallerName(const char* m_CallerName, const char* m_Portrait, bool m_VoiceMail)
+		{
+			mCallerName.Set(m_CallerName);
+			mCallerPortrait.Set(m_Portrait);
+			mVoiceMail = m_VoiceMail;
+		}
+	};
+
+	class CPDAIncomingTextWidget
+	{
+	public:
+		int mState;
+		bool mMessageRead;
+		bool mHelpbarShown;
+		bool mIgnoreButtonOnce;
+		int mDismissCause;
+		float mDisplayTime;
+		PDAInputLocker_t mInputLocker;
+	};
+
+	class CPDAWidget
+	{
+	public:
+		void* vfptr;
+		CPDAPhoneContactsWidget PhoneContacts;
+		int mState;
+		int mPrevState;
+		void* mMovie;
+
+		CPDARootMenuWidget RootMenu;
+		int mTextInboxState;
+		CPDAIncomingCallWidget IncomingCall;
+		CPDAIncomingTextWidget IncomingText;
+		int mClockTime;
+		qPropertySet* mContactData;
+		bool m_objectiveScrollingInProgress;
+		float m_objectiveScrollingTimer;
+		float m_R1_timer;
+		float m_R3_timer;
+		float mLeftStickTimer;
+		float mRightStickTimer;
+		bool mLeftStickActive;
+		bool mRightStickActive;
+		bool mGPSActivatedFlag;
+		unsigned int mPDAOpenDelay;
+		bool mTextMsgRead;
+		bool mShouldHighlight;
+		bool mPreLocked;
+		unsigned int mRootIntro;
+		qString mPhoneContact;
+		bool mOutgoingCall;
+		bool mAutoAnsCall;
+		bool mVoiceMail;
+		float mTime;
+
+		void DeactivateAll()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D6080))(this);
+		}
+
+		// This crap is for some reason defined in global ptr...
+		// And its used only in "PDAPhoneContactsWidget::LaunchCallMission", but it will call function from this class anyway, so it could be defined under class.
+		__inline qString* GetContactImage() { return reinterpret_cast<qString*>(UFG_RVA(0x2431410)); }
+
+		void AnswerPhoneCall(const char* m_ContactName, const char* m_Portrait, bool m_VoiceMail)
+		{
+			// Information needed because the function below will call (PDAIncomingCallWidget::SetCallerName)
+			mPhoneContact.Set(m_ContactName);
+			GetContactImage()->Set(m_Portrait);
+			mVoiceMail = m_VoiceMail;
+
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D3B10))(this);
+		}
+
+		void QueueIncomingPhoneCall(const char* m_ContactName, bool m_Outgoing, bool m_AutoAnswer, bool m_VoiceMail)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*, bool, bool, bool)>(UFG_RVA(0x5FE9C0))(this, m_ContactName, m_Outgoing, m_AutoAnswer, m_VoiceMail);
+		}
+
+		bool EndPhoneCall(bool m_PlaySound)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, bool)>(UFG_RVA(0x5D7150))(this, m_PlaySound);
+		}
+	};
+
+
 	class CActionButton
 	{
 	public:
@@ -126,42 +294,58 @@ namespace UFG
 		void Hide() { reinterpret_cast<void(__fastcall*)(void*)> (UFG_RVA(0x62FBF0))(this); }
 	};
 
-	class CScreenHud
+	class CScreenHud : public CScreen
 	{
 	public:
-		void* MapLines;
-		CActionButton* ActionButton;
-		void* CombatMeter;
-		void* ObjectiveDistance;
-		CMissionProgress* MissionProgress;
-		CInfoPopup* InfoPopup; // Basically HintText + special SFX
-		CMissionHealth* MissionHealth;
-		void* TurnHint;
-		CRaceTimerWidget* RaceTimer;
-		CRacePositionWidget* RacePosition;
+		CTiledMapWidget Minimap;
+		CPDAWidget* PDA;
 
-		UFG_PAD(0x8);
+		/*UFG::UIHKHealthMeterWidget HealthMeter;
+		UFG::UIHKWeaponAmmoWidget WeaponAmmo;
+		UFG::UIHKRadioStationWidget RadioStationWidget;
+		UFG::UIHKActionHijackWidget ActionHijack;
+		UFG::UIHKMoneyPopupWidget MoneyPopup;
+		UFG::UIHKBuffWidget Buffs;
+		UFG::UIHKSocialActionManager SocialActionManager;
+		UFG::UIHKSecondaryObjectivesWidget SecondaryObjectives;
+		UFG::UIHKObjectiveFlasherWidget ObjectiveFlasher;
+		UFG::UIHKScreenHud::eState mState;
+		float mMinimapAlpha;
+		float mMinimapFadeTimeout;
+		bool mMinimapVisibleChanged;
+		UFG::UIHKReticleWidget Reticle;
+		UFG::UIHKDirectionalDamageWidget DirectionalDamage;
+		UFG::UIHKHeatLevelWidget HeatLevel;
+		UFG::UIHKTimeOfDayWidget TimeOfDay;
+		UFG::UIHKSniperWidget SniperWidget;
+		float mStatInfoTimer;
+		bool mStatSocialAwardActive;
+		bool mStatGameInfoActive;
+		bool mUpdateStatGamePosition;
+		bool mHudEnable;*/
+	};
 
-		void* RacePercentage;
-		void* MissionRewards;
-		void* RegionIndicator; // Top animated movie with region change (North Point, Central, ...)
+	namespace ScreenHud
+	{
+		CScreenHud* Get() { return *reinterpret_cast<CScreenHud**>(UFG_RVA(0x2430CC8)); }
 
-		UFG_PAD(0x8);
+		CActionButton* GetActionButton() { return *reinterpret_cast<CActionButton**>(UFG_RVA(0x2430BB8)); }
 
-		CRacePathWidget* RacePath;
-		void* ShortcutButton;
+		CMissionProgress* GetMissionProgress() { return *reinterpret_cast<CMissionProgress**>(UFG_RVA(0x2430BD0)); }
 
-		UFG_PAD(0x8);
+		CInfoPopup* GetInfoPopup() { return *reinterpret_cast<CInfoPopup**>(UFG_RVA(0x2430BD8)); }
 
-		CHintText* HintText;
-		void* GameplayHelp;
-		void* XPFlasher;
-		void* SecondaryTutorial;
+		CRaceTimerWidget* GetRaceTimerWidget() { return *reinterpret_cast<CRaceTimerWidget**>(UFG_RVA(0x2430BF0)); }
+
+		CRacePositionWidget* GetRacePositionWidget() { return *reinterpret_cast<CRacePositionWidget**>(UFG_RVA(0x2430BF8)); }
+
+		CRacePathWidget* GetRacePathWidget() { return *reinterpret_cast<CRacePathWidget**>(UFG_RVA(0x2430C28)); }
+
+		CHintText* GetHintText() { return *reinterpret_cast<CHintText**>(UFG_RVA(0x2430C40)); }
 
 		void SetVisible(bool value)
 		{
 			reinterpret_cast<void(__fastcall*)(bool)>(UFG_RVA(0x60C670))(value);
 		}
-	};
-	CScreenHud* ScreenHud = reinterpret_cast<CScreenHud*>(UFG_RVA(0x2430BB0));
+	}
 }

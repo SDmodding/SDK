@@ -8,6 +8,18 @@ namespace UFG
 		qBaseNodeRB* mParent;
 		qBaseNodeRB* mChild[2];
 		unsigned int mUID;
+
+		template <typename T, uintptr_t N>
+		T* GetPointer()
+		{
+			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) - N);
+		}
+	};
+
+	class qNodeRB
+	{
+	public:
+		qBaseNodeRB mNode;
 	};
 
 	class qBaseTreeRB
@@ -45,14 +57,64 @@ namespace UFG
 			return result;
 		}
 
-		qBaseNodeRB* GetTail()
+		qBaseNodeRB* GetHead()
 		{
-			return reinterpret_cast<qBaseNodeRB*(__fastcall*)(qBaseTreeRB*)>(UFG_RVA(0x1725F0))(this);
+			qBaseNodeRB* m_Head = mRoot.mChild[0];
+			for (qBaseNodeRB* i = m_Head->mChild[0]; i != &mNULL; i = i->mChild[0])
+				m_Head = i;
+
+			if (m_Head == &mNULL)
+				return nullptr;
+
+			return m_Head;
 		}
 
-		qBaseTreeRB* GetNext(qBaseNodeRB* m_Node)
+		qBaseNodeRB* GetTail()
 		{
-			return reinterpret_cast<qBaseTreeRB*(__fastcall*)(qBaseTreeRB*, qBaseNodeRB*)>(UFG_RVA(0x171440))(this, m_Node);
+			qBaseNodeRB* m_Tail = mRoot.mChild[0];
+			for (qBaseNodeRB* i = m_Tail->mChild[1]; i != &mNULL; i = i->mChild[1])
+				m_Tail = i;
+
+			if (m_Tail == &mNULL)
+				return nullptr;
+
+			return m_Tail;
+		}
+
+		qBaseNodeRB* GetNext(qBaseNodeRB* m_Node)
+		{
+			qBaseNodeRB* m_NextNode = m_Node->mChild[1];
+			if (m_NextNode == &mNULL) // If there is no right child, go up the tree until a parent is found whose left child this node is.
+			{
+				// Find the first parent whose left child is the node's ancestor.
+				qBaseNodeRB* m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Node->mParent) & 0xFFFFFFFFFFFFFFFEui64);
+				if (m_Node == m_Parent->mChild[1])
+				{
+					// Go up the tree until a parent is found whose left child is this node's ancestor.
+					qBaseNodeRB* m_Children = m_Parent->mChild[1];
+					while (m_Children == m_Parent->mChild[1])
+					{
+						m_Children = m_Parent;
+						m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Parent->mParent) & 0xFFFFFFFFFFFFFFFEui64);
+					}
+				}
+
+				// If we reach the root node and its left child is not the input node, return nullptr.
+				if (m_Parent == &mNULL)
+					return nullptr;
+
+				// Set the current node to the parent node.
+				m_Node = m_Parent;
+			}
+			else // If there is a right child, find the leftmost child of the right child.
+			{
+				for (qBaseNodeRB* i = m_NextNode->mChild[0]; i != &mNULL; i = i->mChild[0])
+					m_NextNode = i;
+
+				m_Node = m_NextNode;
+			}
+
+			return m_Node;
 		}
 
 		template <typename T>
@@ -60,58 +122,16 @@ namespace UFG
 		{
 			std::vector<T*> m_Nodes;
 
-			{
-				qBaseNodeRB* v2 = mRoot.mChild[0];
-				uintptr_t m_Tree = reinterpret_cast<uintptr_t>(this);
-				qBaseNodeRB* v4 = v2->mChild[0];
-				uintptr_t v5;
-				for (v5 = m_Tree + 0x20; v4 != reinterpret_cast<qBaseNodeRB*>(v5); v4 = v4->mChild[0])
-					v2 = v4;
-
-				qBaseNodeRB* m_Current = nullptr;
-				if (v2 != reinterpret_cast<qBaseNodeRB*>(m_Tree))
-					m_Current = v2;
-
-				while (m_Current)
-				{
-					m_Nodes.emplace_back(reinterpret_cast<T*>(m_Current));
-
-					qBaseNodeRB* v7 = m_Current->mChild[1];
-					if (reinterpret_cast<qBaseNodeRB*>(v5) == v7)
-					{
-						qBaseNodeRB* m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Current->mParent) & 0xFFFFFFFFFFFFFFFEui64);
-						if (m_Current == m_Parent->mChild[1])
-						{
-							qBaseNodeRB* m_Children = m_Parent->mChild[1];
-							while (m_Children == m_Parent->mChild[1])
-							{
-								m_Children = m_Parent;
-								m_Parent = reinterpret_cast<qBaseNodeRB*>(reinterpret_cast<uintptr_t>(m_Parent->mParent) & 0xFFFFFFFFFFFFFFFEui64);
-							}
-						}
-
-						if (m_Parent == reinterpret_cast<qBaseNodeRB*>(m_Tree))
-							break;
-
-						m_Current = m_Parent;
-					}
-					else
-					{
-						for (qBaseNodeRB* j = v7->mChild[0]; j != reinterpret_cast<qBaseNodeRB*>(v5); j = j->mChild[0])
-							v7 = j;
-						m_Current = v7;
-					}
-				}
-			}
+			for (qBaseNodeRB* i = GetHead(); i; i = GetNext(i))
+				m_Nodes.emplace_back(reinterpret_cast<T*>(i));
 
 			return m_Nodes;
 		}
 
 		void GetContent(std::vector<unsigned int>& m_List)
 		{
-			std::vector<qBaseNodeRB*> m_Nodes = GetNodes<qBaseNodeRB>();
-			for (qBaseNodeRB* Node : m_Nodes)
-				m_List.emplace_back(Node->mUID);
+			for (qBaseNodeRB* i = GetHead(); i; i = GetNext(i))
+				m_List.emplace_back(i->mUID);
 		}
 	};
 
@@ -131,6 +151,11 @@ namespace UFG
 		char* mData;
 		unsigned int mStringHash32;
 		unsigned int mStringHashUpper32;
+
+		void Set(const char* m_Text)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x17C9B0))(this, m_Text);
+		}
 	};
 
 	class qColour

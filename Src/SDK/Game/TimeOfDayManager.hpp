@@ -61,6 +61,16 @@ namespace UFG
 		unsigned int m_SunFx;
 		qVector3 mCameraPosition;
 		NightFogZone* mNightFogZones;
+
+		bool IsAboutToRain()
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x6B420))(this);
+		}
+
+		void LockWeather(bool m_Lock)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x6BA30))(this, m_Lock);
+		}
 	};
 	CTimeOfDayManager* TimeOfDayManager = reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
 }

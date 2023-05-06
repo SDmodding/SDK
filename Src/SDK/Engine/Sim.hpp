@@ -87,8 +87,9 @@ namespace UFG
 	class CSimObject
 	{
 	public:
-		UFG_PAD(0x40);
+		UFG_PAD(0x20);
 
+		qBaseNodeRB mNode;
 		qSymbol m_Name;
 		unsigned short m_Flags;
 		char m_ReservedComponentSlots;
@@ -256,11 +257,21 @@ namespace UFG
 		}
 	};
 
+	class CSimulation
+	{
+	public:
+		qTreeRB mSimObjects;
+		qTreeRB mSimObjectsToBeDeleted;
+		qTreeRB mSimObjectsToBeDeletedRecursively;
+		qSafePointer<CSimObject> mpLocalPlayer;
+		qArray<CSimObject> m_aCurrentDestructingObjects;
+	};
+
 	namespace Sim
 	{
-		void* Get()
+		CSimulation* Get()
 		{
-			return reinterpret_cast<void*>(UFG_RVA(0x235C3A0));
+			return reinterpret_cast<CSimulation*>(UFG_RVA(0x235C3A0));
 		}
 
 		qSymbol GenerateActorName(const char* name)

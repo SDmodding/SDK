@@ -116,7 +116,11 @@ namespace UFG
 	class CUIScreenManager
 	{
 	public:
-		UFG_PAD(0xB8);
+		void* vfptr;
+		qList<CScreen> m_screenStack;
+		qList<CScreen> m_overlayStack;
+
+		UFG_PAD(0x90);
 
 		void* mMainThreadId;
 		bool m_renderUI;
@@ -145,6 +149,11 @@ namespace UFG
 		bool mIsMidSwitch;
 		char mLastScreenPopped[64];
 		UFG::qString mDebugStackPrint;*/
+
+		CScreen* GetTopScreen()
+		{
+			return reinterpret_cast<CScreen*(__fastcall*)(void*)>(UFG_RVA(0xA2BEF0))(this);
+		}
 	};
 
 	namespace UI

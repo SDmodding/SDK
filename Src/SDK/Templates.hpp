@@ -1,15 +1,15 @@
 #pragma once
 
-template<typename T>
-struct qSetBase
-{
-	unsigned int mCount;
-	unsigned int mBufferSize;
-	T** mppArray;
-};
-
 namespace UFG
 {
+	template<typename T>
+	struct qSetBase
+	{
+		unsigned int mCount;
+		unsigned int mBufferSize;
+		T** mppArray;
+	};
+
 	template<typename T>
 	struct qArray
 	{
@@ -26,10 +26,13 @@ namespace UFG
 
 		T* GetBase() { return reinterpret_cast<T*>(this); }
 
+		template <uintptr_t N = 0>
+		T* GetPointer() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + N); }
+
 		void GetVector(std::vector<T*>& m_Vector)
 		{
 			for (qNode<T>* i = mNext; i != this; i = i->mNext)
-				m_Vector.emplace_back(reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(i) + sizeof(qNode<T>)));
+				m_Vector.emplace_back(i->GetPointer());
 		}
 	};
 
@@ -66,6 +69,33 @@ namespace UFG
 	template<typename T>
 	struct qSafePointer : qSafePointerBase<T>
 	{ };
+
+	template<typename T>
+	struct qSafePointerNode
+	{
+		qSafePointerNode<T>* vfptr;
+		qList<qSafePointerBase<T>> m_SafePointerList;
+	};
+
+
+	template<typename T>
+	struct qSafePointerWithCallbacksBase
+	{
+		qNode<qSafePointerWithCallbacksBase<T>> m_Node;
+		T* m_pPointer;
+		unsigned int m_Changed;
+		T* m_BindClass;
+		T* m_BindCallback;
+		T* m_UnbindClass;
+		T* m_UnbindCallback;
+	};
+
+
+	template<typename T>
+	struct qSafePointerNodeWithCallbacks : qSafePointerNode<T>
+	{
+		qList<qSafePointerWithCallbacksBase<T>> m_SafePointerWithCallbackList;
+	};
 
 	template<typename T>
 	struct RebindingComponentHandle

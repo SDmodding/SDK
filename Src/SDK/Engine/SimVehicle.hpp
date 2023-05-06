@@ -2,6 +2,7 @@
 
 namespace UFG
 {
+	class CCharacterOccupantComponent;
 	class CRacePosition;
 	class CRaceTrail;
 	class CRoadNetworkLane;
@@ -461,13 +462,12 @@ namespace UFG
 	class CVehicleOccupantComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x28);
-
-		CSimCharacter* mpDriver;
-
-		UFG_PAD(0x100);
-
-		unsigned int mSeatCount;
+		qNode<CVehicleOccupantComponent> mNode;
+		void* mpParkingSpot;
+		qSafePointer<CSimCharacter> mpDriver;
+		qList<CCharacterOccupantComponent> mPassengers;
+		qSafePointer<CSimObject> mpReservations[10];
+		uint32_t mSeatCount;
 
 		CSimCharacter* GetPassenger(int iIndex, bool excludeEnteringAndExiting)
 		{
@@ -495,7 +495,7 @@ namespace UFG
 
 		bool IsOccupant(CSimCharacter* m_Character)
 		{
-			if (mpDriver == m_Character) 
+			if (mpDriver.m_pPointer == m_Character) 
 				return true;
 
 			for (unsigned int i = 0; mSeatCount > i; ++i)
