@@ -29,6 +29,9 @@ namespace UFG
 		template <uintptr_t N = 0>
 		T* GetPointer() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + N); }
 
+		template <uintptr_t N = 0>
+		T* GetPointerSub() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) - N); }
+
 		void GetVector(std::vector<T*>& m_Vector)
 		{
 			for (qNode<T>* i = mNext; i != this; i = i->mNext)
@@ -117,7 +120,9 @@ namespace UFG
 	template <typename T>
 	struct qOffset64
 	{
-		int64_t mOffset;
+		__int64 mOffset;
+
+		__inline bool IsValid() { return mOffset; }
 
 		T* Get(uint32_t m_Index, uintptr_t m_Size)
 		{
@@ -128,6 +133,14 @@ namespace UFG
 		T* Get(uint32_t m_Index)
 		{
 			return Get(m_Index, sizeof(T));
+		}
+
+		T* GetPointer()
+		{
+			if (!IsValid())
+				return nullptr;
+
+			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + mOffset);
 		}
 	};
 }

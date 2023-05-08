@@ -9,11 +9,14 @@ namespace UFG
 		qBaseNodeRB* mChild[2];
 		unsigned int mUID;
 
+		template <typename T>
+		T* GetPointer() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this)); }
+
 		template <typename T, uintptr_t N>
-		T* GetPointer()
-		{
-			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) - N);
-		}
+		T* GetPointer() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) - N); }
+
+		template <typename T, uintptr_t N>
+		T* ReadPointerOffset() { return *reinterpret_cast<T**>(reinterpret_cast<uintptr_t>(this) + N); }
 	};
 
 	class qNodeRB

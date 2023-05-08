@@ -14,22 +14,59 @@ namespace UFG
 	class CActionNode
 	{
 	public:
-		UFG_PAD(0x10);
-
-		CActionNode* mParent;
-
-		UFG_PAD(0x8);
-
+		void* vfptr;
+		void* mResourceOwner;
+		qOffset64<CActionNode> mParent;
+		void* mFirstCallback;
 		unsigned int mMostUsedIndex;
 		unsigned int mUniqueID;
 		qSymbol mID;
+		char mBreakPoint;
+		char mDisable;
+		char mPad0;
+		char mPad1;
+		char mPad2;
 
-		UFG_PAD(0xC);
+		void GetResourcePath(char* m_Path, int m_PathSize)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, char*, int)>(UFG_RVA(0x26EBD0))(this, m_Path, m_PathSize);
+		}
 	};
 
-	class CActionNodePlayable : public CActionNode
+	class CActionNodeImplementation : public CActionNode
+	{
+		qOffset64<void*> mConditions;
+		qOffset64<void*> mTracks;
+
+		UFG_PAD(0x10);
+		//BinPtrArray<ActionNode, 0, 0> mChildren;
+	};
+
+
+	class CActionNodePlayable : public CActionNodeImplementation
 	{
 	public:
+	};
+
+	class CActionNodeBank : public CActionNodeImplementation
+	{
+	public:
+		qNode<CActionNodeBank> mBankNode;
+		unsigned __int16 m_Level;
+		char m_NeedsBalancing;
+		unsigned __int64 mSignalMask;
+	};
+
+	class CActionNodeRoot : public CActionNodeBank
+	{
+	public:
+		qNode<CActionNodeRoot> mRootNode;
+		__int64 mToolVersion;
+		qList<void*> m_ConditionInitList;
+		qList<CActionNodeRoot> m_SubRoots;
+		qList<CActionNodeBank> m_BanksToBalance;
+		int m_NumNeededActionTreeComponentBaseValueUIDs[11];
+		uint8_t mActionTreeType;
 	};
 
 	class CActionContext
@@ -71,6 +108,22 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x272E40))(this, timeDelta);
 		}
 	};
+
+	class CActionTreeResource : public qResourceData
+	{
+	public:
+		qOffset64<void*> mRootNode;
+		qOffset64<void*> mTypeTable;
+
+		CActionNodeRoot* GetRoot()
+		{
+			if (!mRootNode.mOffset)
+				return nullptr;
+
+			return reinterpret_cast<CActionNodeRoot*>(reinterpret_cast<uintptr_t>(this) + mRootNode.mOffset + sizeof(qResourceData));
+		}
+	};
+
 
 	namespace ActionNode
 	{

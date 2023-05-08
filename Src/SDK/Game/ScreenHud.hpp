@@ -173,9 +173,20 @@ namespace UFG
 	class CActionButton
 	{
 	public:
-		void Hide() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5EC990))(this); }
+		void Hide() 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5EC990))(this); 
+		}
 
-		void Show(const char* actionText, unsigned int button, const char* actionType) { reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int, const char*)>(UFG_RVA(0x60CA80))(this, actionText, button, actionType); }
+		void Show(const char* actionText, unsigned int button, const char* actionType) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int, const char*)>(UFG_RVA(0x60CA80))(this, actionText, button, actionType); 
+		}
+
+		void ShowOneFrame(const char* actionText, unsigned int button, const char* actionType)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int, const char*)>(UFG_RVA(0x610C90))(this, actionText, button, actionType);
+		}
 	};
 
 	enum MissionProgressState : unsigned int
@@ -191,6 +202,9 @@ namespace UFG
 	class CMissionProgress
 	{
 	public:
+		bool mVisible;
+		bool mChanged;
+
 		void Clear() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D50D0))(this); }
 
 		void SetState(unsigned int state, unsigned int slot) { reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int)>(UFG_RVA(0x609040))(this, state, slot); }
@@ -201,7 +215,15 @@ namespace UFG
 	class CInfoPopup
 	{
 	public:
-		void Show(const char* caption, qSymbol* type, float duration, int position = 0) { reinterpret_cast<void(__fastcall*)(void*, const char*, qSymbol*, float, int)>(UFG_RVA(0x60D100))(this, caption, type, duration, position); }
+		void Show(const char* caption, qSymbol type, float duration, int position = 0)
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, const char*, qSymbol*, float, int)>(UFG_RVA(0x60D100))(this, caption, &type, duration, position); 
+		}
+
+		void Hide()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECBD0))(this);
+		}
 	};
 
 	class CMissionHealth
@@ -226,6 +248,20 @@ namespace UFG
 		void SetSuccess(bool success) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x609F80))(this, success); }
 
 		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C630))(this, visible); }
+	};
+
+	class CTurnHintWidget
+	{
+	public:
+		void Show(qSymbol m_Icon)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x60D260))(this, &m_Icon);
+		}
+
+		void Hide()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECC40))(this);
+		}
 	};
 
 	class CRaceTimerWidget
@@ -291,7 +327,27 @@ namespace UFG
 	public:
 		void Show(const char* text, float displayTime, bool repeat = false, float repeatTime = 0.f) { reinterpret_cast<void(__fastcall*)(void*, const char*, float, bool, float)>(UFG_RVA(0x63AFD0))(this, text, displayTime, repeat, repeatTime); }
 
-		void Hide() { reinterpret_cast<void(__fastcall*)(void*)> (UFG_RVA(0x62FBF0))(this); }
+		void Hide() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x62FBF0))(this); }
+	};
+
+	class CMissionComplete
+	{
+	public:
+
+	};
+
+	class CSecondaryTutorialWidget
+	{
+	public:
+		void Show(const char* m_Text)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x60D240))(this, m_Text);
+		}
+
+		void Hide() 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECC30))(this);
+		}
 	};
 
 	class CScreenHud : public CScreen
@@ -335,6 +391,10 @@ namespace UFG
 
 		CInfoPopup* GetInfoPopup() { return *reinterpret_cast<CInfoPopup**>(UFG_RVA(0x2430BD8)); }
 
+		CMissionHealth* GetMissionHealth() { return *reinterpret_cast<CMissionHealth**>(UFG_RVA(0x2430BE0)); }
+
+		CTurnHintWidget* GetTurnHintWidget() { return *reinterpret_cast<CTurnHintWidget**>(UFG_RVA(0x2430BE8)); }
+
 		CRaceTimerWidget* GetRaceTimerWidget() { return *reinterpret_cast<CRaceTimerWidget**>(UFG_RVA(0x2430BF0)); }
 
 		CRacePositionWidget* GetRacePositionWidget() { return *reinterpret_cast<CRacePositionWidget**>(UFG_RVA(0x2430BF8)); }
@@ -343,9 +403,49 @@ namespace UFG
 
 		CHintText* GetHintText() { return *reinterpret_cast<CHintText**>(UFG_RVA(0x2430C40)); }
 
+		CSecondaryTutorialWidget* GetSecondaryTutorialWidget() { return *reinterpret_cast<CSecondaryTutorialWidget**>(UFG_RVA(0x2430C58)); }
+
 		void SetVisible(bool value)
 		{
 			reinterpret_cast<void(__fastcall*)(bool)>(UFG_RVA(0x60C670))(value);
+		}
+
+		bool GetVisible()
+		{
+			return *reinterpret_cast<bool*>(UFG_RVA(0x208E330));
+		}
+
+		namespace MissionComplete
+		{
+			int* TotalScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C04)); }
+			int* PoliceScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C20)); }
+			int* TriadScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C24)); }
+			int* UncappedTotalScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C38)); }
+
+
+			float* PoliceScorePercentage() { return reinterpret_cast<float*>(UFG_RVA(0x243121C)); }
+			float* TriadScorePercentage() { return reinterpret_cast<float*>(UFG_RVA(0x2431CEC)); }
+
+			void Activate(qSymbol m_GameSliceType, qSymbol m_GameSliceSubType, const char* m_Caption, bool m_ShowXPTutorial)
+			{
+				reinterpret_cast<void(__fastcall*)(qSymbol*, qSymbol*, const char*, bool)>(UFG_RVA(0x5D10C0))(&m_GameSliceType, &m_GameSliceSubType, m_Caption, m_ShowXPTutorial);
+			}
+
+			void AddReward(const char* m_Caption, qSymbol m_Icon)
+			{
+				static qSymbol m_UIScreenType = 0xD1FAADB0;
+				reinterpret_cast<void(__fastcall*)(const char*, qSymbol, qSymbol*)>(UFG_RVA(0x5D2A70))(m_Caption, m_Icon, &m_UIScreenType);
+			}
+
+			void ClearRacers()
+			{
+				reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5860))();
+			}
+
+			void ClearRewards()
+			{
+				reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5900))();
+			}
 		}
 	}
 }

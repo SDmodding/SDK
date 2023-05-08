@@ -37,6 +37,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 
 #include "Engine/Action.hpp"
 #include "Engine/AKSoundEngine.hpp"
+#include "Engine/Animation.hpp"
 #include "Engine/AudioEntity.hpp"
 #include "Engine/BSP.hpp"
 #include "Engine/Entity.hpp"
