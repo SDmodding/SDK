@@ -3,6 +3,7 @@
 namespace UFG
 {
 	class CSimObject;
+	class CActionController;
 
 	class CActionPath
 	{
@@ -72,9 +73,12 @@ namespace UFG
 	class CActionContext
 	{
 	public:
-		UFG_PAD(0x10);
-
-		CSimObject* mSimObject;
+		qSafePointer<CSimObject> mSimObject; 
+		CActionNode* m_OpeningBranch;
+		CActionController* mActionController;
+		CActionContext* mParentContext;
+		bool mDebugBreak;
+		unsigned __int64 mSignals;
 	};
 
 	class CActionController
@@ -93,9 +97,14 @@ namespace UFG
 		CActionNodePlayable* m_previousNode;
 		CActionNodePlayable* m_SequenceNode;
 
-		void Play(CActionNodePlayable* node)
+		void Play(CActionNode* m_Node, bool m_ForcePlay)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, node);
+			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, m_Node, m_ForcePlay);
+		}
+
+		void Play(CActionNodePlayable* m_Node)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, m_Node);
 		}
 
 		void Stop()
@@ -148,63 +157,7 @@ namespace UFG
 
 		std::vector<CActionNodePlayable*> GetContents()
 		{
-			std::vector<CActionNodePlayable*> m_Return;
-
-			CActionNodePlayableDatabase* ActionNodePlayableDatabase = Get();
-			{
-				auto v2 = ActionNodePlayableDatabase->mPlayables.mTree.mRoot.mChild[0];
-				auto v3 = v2->mChild[0];
-				signed __int64 i;
-				for (i = (signed __int64)&ActionNodePlayableDatabase->mPlayables.mTree.mNULL;
-					v3 != (UFG::qBaseNodeRB*)i;
-					v3 = v3->mChild[0])
-				{
-					v2 = v3;
-				}
-				CActionNodePlayableDatabase* v5 = 0i64;
-				if (v2 != (UFG::qBaseNodeRB*)i)
-					v5 = (CActionNodePlayableDatabase*)v2;
-
-				while (v5)
-				{
-					auto v6 = v5->mPlayables.mTree.mRoot.mUID;
-					auto v7 = (CActionNodePlayable*)v5->mPlayables.mTree.mNULL.mParent;
-					if (v7)
-					{
-						m_Return.emplace_back(v7);
-					}
-
-					auto v11 = (CActionNodePlayableDatabase*)v5->mPlayables.mTree.mRoot.mChild[1];
-					if ((CActionNodePlayableDatabase*)i == v11)
-					{
-						auto v13 = (CActionNodePlayableDatabase*)((uintptr_t)v5->mPlayables.mTree.mRoot.mParent & 0xFFFFFFFFFFFFFFFEui64);
-						if (v5 == (CActionNodePlayableDatabase*)v13->mPlayables.mTree.mRoot.mChild[1])
-						{
-							auto v14 = v13;
-							do
-							{
-								v14 = v13;
-								v13 = (CActionNodePlayableDatabase*)((uintptr_t)v13->mPlayables.mTree.mRoot.mParent & 0xFFFFFFFFFFFFFFFEui64);
-							} while (v14 == (CActionNodePlayableDatabase*)v13->mPlayables.mTree.mRoot.mChild[1]);
-						}
-						v5 = v13;
-						if (v13 == ActionNodePlayableDatabase)
-							v5 = 0i64;
-					}
-					else
-					{
-						for (auto j = (CActionNodePlayableDatabase*)v11->mPlayables.mTree.mRoot.mChild[0];
-							j != (CActionNodePlayableDatabase*)i;
-							j = (CActionNodePlayableDatabase*)j->mPlayables.mTree.mRoot.mChild[0])
-						{
-							v11 = j;
-						}
-						v5 = v11;
-					}
-				}
-			}
-
-			return m_Return;
+			return Get()->mPlayables.mTree.GetNodes<CActionNodePlayable>();
 		};
 	}
 }

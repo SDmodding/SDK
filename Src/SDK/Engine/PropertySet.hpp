@@ -108,6 +108,11 @@ namespace UFG
 			return reinterpret_cast<const char*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x236A50))(this, &propName, depth);
 		}
 
+		void SetString(qSymbol m_Name, const char* m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, const char*)>(UFG_RVA(0x1EAE90))(this, &m_Name, m_Value);
+		}
+
 		int* GetInt(qSymbol propName, uint32_t depth = 0x1)
 		{
 			return reinterpret_cast<int*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1E98E0))(this, &propName, depth);
@@ -128,6 +133,11 @@ namespace UFG
 			return reinterpret_cast<qSymbol*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9FF0))(this, &propName, depth);
 		}
 
+		void SetSymbol(qSymbol m_Name, qSymbol m_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qSymbol*)>(UFG_RVA(0x1EB070))(this, &m_Name, &m_Value);
+		}
+
 		qPropertySet* GetSet(qSymbol name, uint32_t depth = 0x1)
 		{
 			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertySet*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9EF0))(this, &name, depth);
@@ -136,11 +146,6 @@ namespace UFG
 		qPropertyList* GetList(qSymbol name, uint32_t depth = 0x1)
 		{
 			return reinterpret_cast<qPropertyList*(__fastcall*)(qPropertySet*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9E60))(this, &name, depth);
-		}
-
-		void SetSymbol(qSymbol m_Name, qSymbol m_Value)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qSymbol*)>(UFG_RVA(0x1EB070))(this, &m_Name, &m_Value);
 		}
 
 		void SetProperty(qSymbol m_Name, qPropertySet* m_Value)

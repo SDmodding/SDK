@@ -4,6 +4,7 @@ namespace UFG
 {
 	class CTransformNodeComponent;
 	class CSimComponent;
+	class CSimObject;
 
 	class CSimComponentHolder
 	{
@@ -15,7 +16,15 @@ namespace UFG
 	class CSceneObjectProperties
 	{
 	public:
-		UFG_PAD(0x8C);
+		UFG_PAD(0x18);
+
+		uint32_t m_TypeUID;
+		uint32_t m_NameUID;
+		uint16_t m_Flags;
+		int16_t m_SimObjIndex;
+		CSimObject* m_pSimObject;
+
+		UFG_PAD(0x58);
 
 		uint32_t mLastTeleportFrame;
 		qPropertySet* mpWritableProperties;
@@ -23,16 +32,28 @@ namespace UFG
 		uint32_t mPrevNameHash;
 		uint32_t mChildIndex;
 
+		qPropertySet* GetPropertySet()
+		{
+			if (mpWritableProperties)
+				return mpWritableProperties;
+
+			return mpConstProperties;
+		}
+
+		/* 
+		* If 'mpWritableProperties' is nullptr, using this will create New PropertySetand append 'mpConstProperties'.
+		* This is useful if we wanna modify some data.
+		*/
+		qPropertySet* GetWritableProperties()
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(void*)>(UFG_RVA(0x23E2F0))(this);
+		}
+
 		eSimObjectTypeEnum2 GetType()
 		{
-			qPropertySet* m_PropertySet = mpWritableProperties;
+			qPropertySet* m_PropertySet = GetPropertySet();
 			if (!m_PropertySet)
-			{
-				if (!mpConstProperties)
-					return eSIM_OBJ_TYPE2_Invalid;
-
-				m_PropertySet = mpConstProperties;
-			}
+				return eSIM_OBJ_TYPE2_Invalid;
 
 			qSymbol* m_TypeHash = m_PropertySet->GetSymbol(0x510C404C); // ObjectType
 			switch (m_TypeHash ? *m_TypeHash : 0x0)
@@ -290,48 +311,68 @@ namespace UFG
 			return m_Symbol;
 		}
 
-		CSimObject* GetSimObject(qSymbol objName)
+		CSimObject* GetSimObject(qSymbol m_ObjectName)
 		{
-			return reinterpret_cast<CSimObject*(__fastcall*)(void*, qSymbol)>(UFG_RVA(0x190C40))(Get(), objName);
+			return reinterpret_cast<CSimObject*(__fastcall*)(void*, qSymbol)>(UFG_RVA(0x190C40))(Get(), m_ObjectName);
 		}
 
-		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
+		// Passing nullptr propertyset will crash game!
+		CSimObject* SpawnObject(qSymbol m_ObjectName, qPropertySet* m_PropertySet, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
 		{
-			qPropertySet* m_PropertySet = PropertySet::Get(objHash);
+			if (!UFG::ObjectResourceManager::IsLoaded(m_PropertySet))
+				return nullptr;
+
+			return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, int, void*, void*, CSimObject*)>(UFG_RVA(0x5B7410))(&m_ObjectName, m_PropertySet, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
+		}
+
+		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
+		{
+			qPropertySet* m_PropertySet = PropertySet::Get(m_ObjectHash);
 			if (m_PropertySet)
-				return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, int, void*, void*, CSimObject*)>(UFG_RVA(0x5B7410))(&objName, m_PropertySet, priority, pOwnerLayer, pSpawnerSceneObj, pOwner);
+				return SpawnObject(m_ObjectName, m_PropertySet, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
+
 			return nullptr;
 		}
 
-		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr, CSimObject* pOwner = nullptr)
+		CSimObject* SpawnUniqueObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
 		{
-			CSimObject* m_Object = GetSimObject(objName);
+			CSimObject* m_Object = GetSimObject(m_ObjectName);
 			if (m_Object)
 				m_Object->Destroy();
 
-			return SpawnObject(objName, objHash, priority, pOwnerLayer, pSpawnerSceneObj, pOwner);
+			return SpawnObject(m_ObjectName, m_ObjectHash, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
 		}
 
-		CSimObject* SpawnObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
+		// Passing nullptr propertyset will crash game!
+		CSimObject* SpawnObject(qSymbol m_ObjectName, qPropertySet* m_PropertySet, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)
 		{
-			qPropertySet* m_PropertySet = PropertySet::Get(objHash);
+			if (!UFG::ObjectResourceManager::IsLoaded(m_PropertySet))
+				return nullptr;
+
+			return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, qMatrix44&, int, void*, void*)>(UFG_RVA(0x5B7350))(&m_ObjectName, m_PropertySet, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
+		}
+
+		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)
+		{
+			qPropertySet* m_PropertySet = PropertySet::Get(m_ObjectHash);
 			if (m_PropertySet)
-				return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, qMatrix44&, int, void*, void*)>(UFG_RVA(0x5B7350))(&objName, m_PropertySet, xform, priority, pOwnerLayer, pSpawnerSceneObj);
+				return SpawnObject(m_ObjectName, m_PropertySet, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
+
 			return nullptr;
 		}
 
-		CSimObject* SpawnUniqueObject(qSymbol objName, qSymbol objHash, qMatrix44& xform, int priority = 0, void* pOwnerLayer = nullptr, void* pSpawnerSceneObj = nullptr)
+		CSimObject* SpawnUniqueObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)
 		{
-			CSimObject* m_Object = GetSimObject(objName);
+			CSimObject* m_Object = GetSimObject(m_ObjectName);
 			if (m_Object)
 				m_Object->Destroy();
 
-			return SpawnObject(objName, objHash, xform, priority, pOwnerLayer, pSpawnerSceneObj);
+			return SpawnObject(m_ObjectName, m_ObjectHash, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
 		}
 
-		bool DestroyObject(qSymbol objName)
+		bool DestroyObject(qSymbol m_ObjectName)
 		{
-			CSimObject* m_Object = GetSimObject(objName);
+			CSimObject* m_Object = GetSimObject(m_ObjectName);
 			if (!m_Object)
 				return false;
 

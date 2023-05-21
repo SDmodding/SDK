@@ -18,6 +18,13 @@ namespace UFG
 		T* p;
 	};
 
+	template<typename T, size_t N>
+	struct qFixedArray
+	{
+		unsigned int size;
+		T p[N];
+	};
+
 	template<typename T>
 	struct qNode
 	{

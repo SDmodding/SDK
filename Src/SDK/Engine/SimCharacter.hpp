@@ -446,19 +446,15 @@ namespace UFG
 	class CCharacterOccupantComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x10);
-
-		unsigned int mTargetType;
-		unsigned int mSeatIndex;
-
-		UFG_PAD(0x18);
-
-		CVehicleOccupantComponent* mCurrentVOC;
+		qNode<CCharacterOccupantComponent> mNode;
+		UFG::eTargetTypeEnum mTargetType;
+		uint32_t mSeatIndex;
+		RebindingComponentHandle<CVehicleOccupantComponent> mCurrentVOC;
 
 		CSimVehicle* GetCurrentVehicle()
 		{
-			if (mCurrentVOC)
-				return reinterpret_cast<CSimVehicle*>(mCurrentVOC->m_pSimObject);
+			if (mCurrentVOC.m_pSimComponent)
+				return reinterpret_cast<CSimVehicle*>(mCurrentVOC.m_pSimComponent->m_pSimObject);
 
 			return nullptr;
 		}
@@ -561,8 +557,8 @@ namespace UFG
 	class CInventoryComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x1C);
-
+		qNode<CInventoryComponent> m_Node;
+		qFixedArray<bool, 6> m_EquipSlots;
 		int m_InventoryItems[209];
 		eInventoryItemEnum m_SellableItem;
 		qSymbol m_SellableItemProp;
@@ -570,14 +566,42 @@ namespace UFG
 		bool m_bCheatUnlimitedAmmo;
 		bool m_bDebugDrawInventory;
 
-		void Equip(CSimObject* pObjectToEquip, bool useEquipSlot = false, int inventoryEquipSlot = 0)
+		static UFG::eTargetTypeEnum GetSlotTarget(int m_Slot)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, bool, int)>(UFG_RVA(0x526F90))(this, pObjectToEquip, useEquipSlot, inventoryEquipSlot);
+			switch (m_Slot)
+			{
+				default: return UFG::eTARGET_TYPE_EQUIPPED;
+				case 1: return UFG::eTARGET_TYPE_EQUIPPED_LEFT_HAND;
+				case 2: return UFG::eTARGET_TYPE_EQUIPPED_HAT;
+				case 3: return UFG::eTARGET_TYPE_EQUIPPED_GLASSES;
+				case 4: return UFG::eTARGET_TYPE_STOWED_WEAPON;
+				case 5: return UFG::eTARGET_TYPE_STOWED_2H_WEAPON;
+			}
 		}
 
-		void UnEquip(int slot = 0, bool bDeleteFromWorld = false)
+		void SetCanDrop(int m_Slot, bool m_CanDrop)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, bool, int)>(UFG_RVA(0x557A40))(this, slot, bDeleteFromWorld);
+			m_EquipSlots.p[m_Slot] = m_CanDrop;
+		}
+
+		bool Equip(CSimObject* m_ObjectToEquip, bool m_UseEquipSlot = false, int m_Slot = 0)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, bool, int)>(UFG_RVA(0x526F90))(this, m_ObjectToEquip, m_UseEquipSlot, m_Slot);
+		}
+
+		void UnEquip(int m_Slot = 0, bool m_DeleteFromWorld = false)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool, int)>(UFG_RVA(0x557A40))(this, m_Slot, m_DeleteFromWorld);
+		}
+		
+		void RemoveObjectFromInventory(CSimObject* m_Object)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x549120))(this, m_Object);
+		}
+
+		void Stow(int m_Slot, int m_DestinationSlot)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, int)>(UFG_RVA(0x552A40))(this, m_Slot, m_DestinationSlot);
 		}
 	};
 
@@ -747,15 +771,14 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[7].m_pComponent;
 
-			// ActionTreeComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1)
 					m_Component = m_Components.p[6].m_pComponent;
 				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xC8000001);
+					m_Component = GetComponentOfTypeHK(CharacterActionTreeComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xC8000001);
+					m_Component = GetComponentOfType(CharacterActionTreeComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CActionTreeComponent*>(m_Component);
@@ -861,22 +884,14 @@ namespace UFG
 
 		CCharacterPhysicsComponent* GetCharacterPhysics()
 		{
-			CSimComponent* m_Component = nullptr;
+			CSimComponent* m_Component = m_Components.p[27].m_pComponent;
 
-			if ((m_Flags >> 14) & 1)
-				m_Component = m_Components.p[27].m_pComponent;
-			else
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
-				// CharacterPhysicsComponent::_TypeUID
-				if ((m_Flags & 0x8000) == 0)
-				{
-					if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-						m_Component = GetComponentOfTypeHK(0x7A000001);
-					else
-						m_Component = GetComponentOfType(0x7A000001);
-				}
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterPhysicsComponent_TypeUID);
 				else
-					m_Component = GetComponentOfTypeHK(0x7A000001);
+					m_Component = GetComponentOfType(CharacterPhysicsComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CCharacterPhysicsComponent*>(m_Component);
@@ -917,13 +932,12 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[39].m_pComponent;
 
-			// CharacterPropertiesComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xAC000001);
+					m_Component = GetComponentOfTypeHK(CharacterInventoryComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xAC000001);
+					m_Component = GetComponentOfType(CharacterInventoryComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CInventoryComponent*>(m_Component);
@@ -946,22 +960,14 @@ namespace UFG
 
 		CCharacterOccupantComponent* GetCharacterOccupant()
 		{
-			CSimComponent* m_Component = nullptr;
+			CSimComponent* m_Component = m_Components.p[44].m_pComponent;
 
-			if ((m_Flags >> 14) & 1)
-				m_Component = m_Components.p[44].m_pComponent;
-			else
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
-				// CharacterOccupantComponent::_TypeUID
-				if ((m_Flags & 0x8000) == 0)
-				{
-					if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-						m_Component = GetComponentOfTypeHK(0x96000001);
-					else
-						m_Component = GetComponentOfType(0x96000001);
-				}
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(CharacterOccupantComponent_TypeUID);
 				else
-					m_Component = GetComponentOfTypeHK(0x96000001);
+					m_Component = GetComponentOfType(CharacterOccupantComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CCharacterOccupantComponent*>(m_Component);

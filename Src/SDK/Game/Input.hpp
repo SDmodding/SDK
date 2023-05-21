@@ -5,8 +5,55 @@ namespace UFG
 	class CController
 	{
 	public:
-		UFG_PAD(0x728);
+		void* vfptr;
+		bool mIsInitialized;
+		bool mIsRemote;
+		uint32_t mControllerIndex;
 
+		UFG_PAD(0x20);
+
+		struct InputState_t
+		{
+			uint64_t mLastMouseXYTime;
+			short mMouseX;
+			short mMouseY;
+			short mMouseWheel;
+			short mPrevMouseX;
+			short mPrevMouseY;
+			short mPrevMouseWheel;
+			char mKeyState[256];
+
+			void ClearKeyStates()
+			{
+				memset(mKeyState, 0, sizeof(mKeyState));
+			}
+
+			void Clear()
+			{
+				mLastMouseXYTime = 0;
+				mMouseX = -1;
+				mMouseY = -1;
+				mMouseWheel = 0;
+				mPrevMouseX = -1;
+				mPrevMouseY = -1;
+				mPrevMouseWheel = 0;
+				ClearKeyStates();
+			}
+		};
+		InputState_t mInputState;
+		InputState_t mPreviousInputState;
+
+		UFG_PAD(0x268);
+
+		uint32_t mRightThumbServiceTick;
+		void* mInputActionMaps[32];
+		void* mMultiInputMaps[32];
+		bool mInputActionMapEnable[32];
+		bool mMultiInputMapEnable[32];
+		float m_fTimeSinceLastInput;
+		const uint32_t* m_pRemapArray;
+		uint32_t m_ActiveMapSet;
+		uint32_t m_SubModes;
 		bool m_IsKeyboardController;
 		bool m_ControllerInUse;
 	};
@@ -107,11 +154,16 @@ namespace UFG
 			return *reinterpret_cast<CInputSystem**>(UFG_RVA(0x235F860));
 		}
 
+		int GetActiveControllerNum()
+		{
+			return *reinterpret_cast<int*>(UFG_RVA(0x235FB78));
+		}
+
 		void EnableGameInput(bool m_bValue)
 		{
 			static bool m_bLastValue = true;
 			if (m_bValue && m_bLastValue) return;
-			
+
 			m_bLastValue = m_bValue;
 			{
 				DxInputSystem->FreezeInputs = !m_bValue;
@@ -119,11 +171,6 @@ namespace UFG
 
 				InputSystem001->SetRestrictCursor(m_bValue);
 			}
-		}
-
-		int GetActiveControllerNum()
-		{
-			return *reinterpret_cast<int*>(UFG_RVA(0x235FB78));
 		}
 
 		CInputActionData* Get_Move() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4988))->mDataPerController[GetActiveControllerNum()]; }

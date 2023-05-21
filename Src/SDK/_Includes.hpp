@@ -4,7 +4,8 @@
 //
 
 uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
-#define UFG_RVA(x) (BaseAddress + x)
+#define UFG_RVA(x)		(BaseAddress + x)
+#define UFG_RVA_GET(x)	(reinterpret_cast<uintptr_t>(x) - BaseAddress)
 
 #define UFG_PAD_INSERT(x, y) x ## y
 #define UFG_PAD_DEFINE(x, y) UFG_PAD_INSERT(x, y)
@@ -47,6 +48,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/DebugDrawManager.hpp"
 #include "Engine/Components.hpp"
 #include "Engine/FXManager.hpp"
+#include "Engine/ObjectResourceManager.hpp"
 #include "Engine/Sim.hpp"
 #include "Engine/SimVehicle.hpp"
 #include "Engine/SimWeapon.hpp"
@@ -63,6 +65,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/StreamResourceLoader.hpp"
 #include "Engine/PhysicsSystem.hpp"
 #include "Engine/TrueCrowdDatabase.hpp"
+#include "Engine/Wwise.hpp"
 
 // ..
 #include "Game/CopSystem.hpp"
@@ -96,10 +99,10 @@ namespace UFG
 	namespace Global
 	{
 		uintptr_t WndProc = UFG_RVA(0x6A2770);
-		uintptr_t D3D11Device = UFG_RVA(0x2439AE0);
-		uintptr_t D3D11DeviceContext = UFG_RVA(0x2439AE8);
-		uintptr_t DXGIDevice = UFG_RVA(0x2439B08);
-		uintptr_t DXGISwapChain = UFG_RVA(0x2439B10);
+		void** D3D11Device = reinterpret_cast<void**>(UFG_RVA(0x2439AE0));
+		void** D3D11DeviceContext = reinterpret_cast<void**>(UFG_RVA(0x2439AE8));
+		void** DXGIDevice = reinterpret_cast<void**>(UFG_RVA(0x2439B08));
+		void** DXGISwapChain = reinterpret_cast<void**>(UFG_RVA(0x2439B10));
 		HWND* m_hWindow = reinterpret_cast<HWND*>(UFG_RVA(0x249CDF0));
 	}
 }

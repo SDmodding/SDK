@@ -10,11 +10,11 @@ namespace UFG
 	class CTargetingSimObject
 	{
 	public:
-		UFG_PAD(0x28);
-
-		CSimObject* mTarget;
-
-		UFG_PAD(0x8);
+		qNode<CTargetingSimObject> mNode;
+		void* m_pTSBC; // TargetingSystemBaseComponent
+		qSafePointer<CSimObject> m_pTarget;
+		uint8_t m_eTargetType;
+		bool m_bLock;
 	};
 
 	// Components
@@ -54,6 +54,11 @@ namespace UFG
 				return true;
 
 			return false;
+		}
+
+		void SetHidden(bool m_Hidden)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x4000))(this, m_Hidden);
 		}
 	};
 
@@ -180,23 +185,28 @@ namespace UFG
 	public:
 		UFG_PAD(0x18);
 
-		CTargetingSimObject* GetTarget(eTargetTypeEnum eTargetType)
-		{
-			uintptr_t m_pTargets		= *reinterpret_cast<uintptr_t*>(reinterpret_cast<uintptr_t>(this) + 0x58);
-			uintptr_t m_pTargetingMap	= *reinterpret_cast<uintptr_t*>(reinterpret_cast<uintptr_t>(this) + 0x60);
+		CTargetingSimObject* m_pTargets;
 
-			uint8_t m_TargetID			= *reinterpret_cast<uint8_t*>(m_pTargetingMap + 0x8 + eTargetType);
-			return *reinterpret_cast<CTargetingSimObject**>(m_pTargets + (m_TargetID * sizeof(CTargetingSimObject)));
+		struct TargetingMap_t
+		{
+			uint32_t m_uNumValidTargetTypes;
+			qFixedArray<uint8_t, 91> m_Map;
+		};
+		TargetingMap_t* m_pTargetingMap;
+
+		CTargetingSimObject* GetTarget(eTargetTypeEnum m_TargetType)
+		{
+			return &m_pTargets[m_pTargetingMap->m_Map.p[m_TargetType]];
 		}
 
-		void SetTarget(eTargetTypeEnum eTargetType, CSimObject* pSimObject)
+		void SetTarget(eTargetTypeEnum m_TargetType, CSimObject* m_SimObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, eTargetType, pSimObject);
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, m_TargetType, m_SimObject);
 		}
 
-		void ClearTarget(eTargetTypeEnum eTargetType)
+		void ClearTarget(eTargetTypeEnum m_TargetType)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, eTargetType);
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, m_TargetType);
 		}
 	};
 }

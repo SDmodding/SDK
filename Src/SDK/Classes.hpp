@@ -312,6 +312,16 @@ namespace UFG
 
 			Angles2Vector();
 		}
+
+		void Vector2Angles()
+		{
+			float m_Pitch = asinf(y);
+			float m_Yaw = atan2f(z, x);
+
+			x = m_Pitch;
+			y = m_Yaw;
+			z = 0.f;
+		}
 	};
 
 	class qVector4

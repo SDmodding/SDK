@@ -32,32 +32,27 @@ namespace UFG
 	{
 		void InfoStart(const char* bodyText, bool fullscreen = true, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, bool, const char*)>
-				(UFG_RVA(0x61FB90))(nullptr, "", bodyText, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, bool, const char*)>(UFG_RVA(0x61FB90))(nullptr, "", bodyText, fullscreen, flashFile);
 		}
 		
 		void InfoEnd()
 		{
-			reinterpret_cast<void(__fastcall*)(void*, DWORD)>
-				(UFG_RVA(0xA31600))(*(uintptr_t**)UFG_RVA(0x249C1C0), UFG_DIALOGBOX_TOP_LAYER);
+			reinterpret_cast<void(__fastcall*)(void*, DWORD)>(UFG_RVA(0xA31600))(*(uintptr_t**)UFG_RVA(0x249C1C0), UFG_DIALOGBOX_TOP_LAYER);
 		}
 
-		void OneButton(const char* bodyText, const char* optionText, bool fullscreen = true, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		void OneButton(const char* bodyText, const char* optionText, bool fullscreen = true, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, unsigned int, bool, const char*)>
-				(UFG_RVA(0x61F500))(nullptr, "", bodyText, optionText, UFG_DIALOGBOX_OPTION_HASH, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, bool, const char*)>(UFG_RVA(0x61F500))(nullptr, "", bodyText, optionText, m_OptionHash, fullscreen, flashFile);
 		}
 
-		void TwoButton(const char* bodyText, const char* option1Text, const char* option2Text, bool fullscreen = true, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		void TwoButton(const char* bodyText, const char* option1Text, const char* option2Text, bool fullscreen = true, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, unsigned int, const char*, unsigned int, unsigned int, bool, const char*)>
-				(UFG_RVA(0x61F970))(nullptr, "", bodyText, option1Text, UFG_DIALOGBOX_OPTION_HASH, option2Text, UFG_DIALOGBOX_OPTION_HASH + 1, 0, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, uint32_t, bool, const char*)>(UFG_RVA(0x61F970))(nullptr, "", bodyText, option1Text, m_OptionHash, option2Text, m_OptionHash + 1, 0, fullscreen, flashFile);
 		}
 
-		void ThreeButton(const char* bodyText, const char* option1Text, const char* option2Text, const char* option3Text, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		void ThreeButton(const char* bodyText, const char* option1Text, const char* option2Text, const char* option3Text, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, unsigned int, const char*, unsigned int, const char*, unsigned int, unsigned int, const char*)>
-				(UFG_RVA(0x61F820))(nullptr, "", bodyText, option1Text, UFG_DIALOGBOX_OPTION_HASH, option2Text, UFG_DIALOGBOX_OPTION_HASH + 1, option3Text, UFG_DIALOGBOX_OPTION_HASH + 2, 0, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, const char*, uint32_t, uint32_t, const char*)>(UFG_RVA(0x61F820))(nullptr, "", bodyText, option1Text, m_OptionHash, option2Text, m_OptionHash + 1, option3Text, m_OptionHash + 2, 0, flashFile);
 		}
 	}
 

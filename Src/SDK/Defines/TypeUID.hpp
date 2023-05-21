@@ -21,12 +21,16 @@
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterAICoverComponent_TypeUID					0x64000001
 #define CharacterHealthComponent_TypeUID					0xAA000001
+#define CharacterActionTreeComponent_TypeUID				0xC8000001
 #define CharacterAnimationComponent_TypeUID					0xC6000003
 #define CharacterHitReactionComponent_TypeUID				0xA8000001
 #define CharacterTargetingPedComponent_TypeUID				0xA0000003
 #define CharacterActiveAIEntityComponent_TypeUID			0x46000003
+#define CharacterPhysicsComponent_TypeUID					0x7A000001
 #define CharacterNavComponent_TypeUID						0x40000001
+#define CharacterInventoryComponent_TypeUID					0xAC000001
 #define CharacterRagdollComponent_TypeUID					0x82000001
+#define CharacterOccupantComponent_TypeUID					0x96000001
 
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
 #define VehicleAiDriverComponent_TypeUID					0xD8000003
