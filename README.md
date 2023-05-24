@@ -15,6 +15,9 @@ If you just build this without modifying anything, you get basic debug menu with
 - player animation (you need exact animation name)
 - vehicle spawning
 
+__Update 24. May 2023:__
+- There has been huge updates that might break the solution itself and I don't willing to trying to fix that, so if you even bother using this I recommend making new project and including SDK as external include and just include the main header file inside SDK called `_Includes.hpp`. You can still copy some needed stuff to begin with or fix the solution by yourself.
+
 # Callbacks
 **OnDialogBox** - This callback is called when you initialized any game dialog box and user clicked on button
 
