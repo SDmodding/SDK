@@ -28,6 +28,12 @@ namespace UFG
 			if (HasStreamedResource(m_PropertySet))
 				reinterpret_cast<void(__fastcall*)(void*, qPropertySet*)>(UFG_RVA(0x43FBE0))(this, m_PropertySet);
 		}
+
+		void ReleaseCriticalResource(qPropertySet* m_PropertySet)
+		{
+			if (HasStreamedResource(m_PropertySet))
+				reinterpret_cast<void(__fastcall*)(void*, qPropertySet*)>(UFG_RVA(0x441910))(this, m_PropertySet);
+		}
 	};
 
 	namespace ObjectResourceManager

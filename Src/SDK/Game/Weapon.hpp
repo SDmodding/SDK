@@ -144,6 +144,7 @@ namespace UFG
 		{ Weapon_firearm_smg_45cal_gold, "SMG 45Cal (Gold)" },
 		{ Weapon_firearm_smg_45cal_taclight, "SMG 45Cal (Taclight)" },
 		{ Weapon_firearm_smg_machine_pistol, "Machine Pistol" },
+		{ Weapon_melee_Basketball001, "Basketball" },
 		{ Weapon_melee_beerbottle, "Beer Bottle" },
 		{ Weapon_melee_kitchenknife, "Kitchen Knife" },
 		{ Weapon_melee_baton, "Baton" },

@@ -221,7 +221,8 @@ namespace UFG
 
 	namespace VehicleUtility
 	{
-		unsigned int GetDoorUID(int m_ID)
+		// If you really wanna use this, re-write it from scratch was used for MP development and will be unused...
+		/*unsigned int GetDoorUID(int m_ID)
 		{
 			switch (m_ID)
 			{
@@ -277,7 +278,7 @@ namespace UFG
 			}
 
 			return m_BestID;
-		}
+		}*/
 
 		void PlaceCharacterInVehicle(UFG::CSimCharacter* character, UFG::CSimVehicle* vehicle, UFG::eTargetTypeEnum eRole, bool addAI, bool destroyEquipped, bool ignoreRoleGetInFirstEmptyPassengerSeat)
 		{

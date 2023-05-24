@@ -18,5 +18,10 @@ namespace UFG
 		{
 			return 0x90ECB5FF;
 		}
+
+		__forceinline qSymbol GetPropertySetUID()
+		{
+			return 0xBD387BEE; // object-physical-character-player
+		}
 	}
 }

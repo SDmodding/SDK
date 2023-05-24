@@ -143,14 +143,26 @@ namespace UFG
 			return 0;
 		}
 
-		CSimComponent* GetComponentOfType(unsigned int type_uid)
+		CSimComponent* GetComponentOfType(uint32_t m_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x190AD0))(this, type_uid);
+			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, m_TypeUID);
 		}
 
-		CSimComponent* GetComponentOfTypeHK(unsigned int type_uid)
+		template <typename T>
+		T* GetComponentOfType(uint32_t m_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x52BBC0))(this, type_uid);
+			return reinterpret_cast<T*>(GetComponentOfType(m_TypeUID));
+		}
+
+		CSimComponent* GetComponentOfTypeHK(uint32_t m_TypeUID)
+		{
+			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, m_TypeUID);
+		}
+
+		template <typename T>
+		T* GetComponentOfTypeHK(uint32_t m_TypeUID)
+		{
+			return reinterpret_cast<T*>(GetComponentOfTypeHK(m_TypeUID));
 		}
 
 		CSimComponent* GetActor()
@@ -227,6 +239,23 @@ namespace UFG
 			return reinterpret_cast<CFXSimComponent*>(m_Component);
 		}
 
+		CBaseAnimationComponent* GetBaseAnimation()
+		{
+			CSimComponent* m_Component = nullptr;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000u) == 0)
+			{
+				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(SimObjectBaseAnimation_TypeUID);
+				else
+					m_Component = GetComponentOfType(SimObjectBaseAnimation_TypeUID);
+			}
+			else
+				m_Component = GetComponentOfTypeHK(SimObjectBaseAnimation_TypeUID);
+
+			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+		}
+
 		bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, CSimObject**, qSymbol*, qSymbol*, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, targetType, pOverrideTarget, ppOutSimObjectTarget, &attachJoint, &targetAttachJoint, blendInTime, attachRelative, attachRelativeMaxDistance, attachToTarget, addToInventory, assignTarget, assignmentTargetType, lockTarget, positionOnly, positionXYOnly, managePowerLevel);
@@ -239,7 +268,7 @@ namespace UFG
 
 		bool IsAttached()
 		{
-			CBaseAnimationComponent* m_BaseAnimation = reinterpret_cast<CBaseAnimationComponent*>(GetComponentOfType(CharacterAnimationComponent_TypeUID));
+			CBaseAnimationComponent* m_BaseAnimation = GetBaseAnimation();
 			return (m_BaseAnimation && m_BaseAnimation->mCreature && m_BaseAnimation->mCreature->mIsAttached);
 		}
 
@@ -319,10 +348,17 @@ namespace UFG
 		// Passing nullptr propertyset will crash game!
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qPropertySet* m_PropertySet, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
 		{
-			if (!UFG::ObjectResourceManager::IsLoaded(m_PropertySet))
+			UFG::CObjectResourceManager* m_ObjectResourceManager = UFG::ObjectResourceManager::Get();
+			if (!m_ObjectResourceManager)
 				return nullptr;
 
-			return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, int, void*, void*, CSimObject*)>(UFG_RVA(0x5B7410))(&m_ObjectName, m_PropertySet, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
+			if (!m_ObjectResourceManager->IsLoaded(m_PropertySet))
+				m_ObjectResourceManager->PreLoadCriticalResource(m_PropertySet);
+
+			UFG::CSimObject* m_NewObject = reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, int, void*, void*, CSimObject*)>(UFG_RVA(0x5B7410))(&m_ObjectName, m_PropertySet, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
+			m_ObjectResourceManager->ReleaseCriticalResource(m_PropertySet);
+
+			return m_NewObject;
 		}
 
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
@@ -346,10 +382,17 @@ namespace UFG
 		// Passing nullptr propertyset will crash game!
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qPropertySet* m_PropertySet, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)
 		{
-			if (!UFG::ObjectResourceManager::IsLoaded(m_PropertySet))
+			UFG::CObjectResourceManager* m_ObjectResourceManager = UFG::ObjectResourceManager::Get();
+			if (!m_ObjectResourceManager)
 				return nullptr;
 
-			return reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, qMatrix44&, int, void*, void*)>(UFG_RVA(0x5B7350))(&m_ObjectName, m_PropertySet, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
+			if (!m_ObjectResourceManager->IsLoaded(m_PropertySet))
+				m_ObjectResourceManager->PreLoadCriticalResource(m_PropertySet);
+
+			UFG::CSimObject* m_NewObject = reinterpret_cast<CSimObject*(__fastcall*)(qSymbol*, qPropertySet*, qMatrix44&, int, void*, void*)>(UFG_RVA(0x5B7350))(&m_ObjectName, m_PropertySet, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
+			m_ObjectResourceManager->ReleaseCriticalResource(m_PropertySet);
+
+			return m_NewObject;
 		}
 
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)

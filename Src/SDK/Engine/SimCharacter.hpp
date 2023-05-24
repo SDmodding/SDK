@@ -210,6 +210,11 @@ namespace UFG
 		const char* mActionTreeFileName;
 		CActionContext* mpActionContext;
 		CActionController mActionController;
+
+		void Reset()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
+		}
 	};
 
 	class CHitReactionComponent : public CSimComponent

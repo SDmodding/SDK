@@ -18,6 +18,11 @@ namespace UFG
 		{
 			return reinterpret_cast<qPropertySet*(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4A0690))(this, itemName);
 		}
+
+		void ResetEquipment()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x4B6A50))(this);
+		}
 	};
 	CStoreFrontTracker* StoreFrontTracker = reinterpret_cast<CStoreFrontTracker*>(UFG_RVA(0x2408280));
 

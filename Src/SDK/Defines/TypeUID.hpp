@@ -12,6 +12,8 @@
 
 #define SimObjectProperties_TypeUID							0xB2000001
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
+#define SimObjectBaseAnimation_TypeUID						0xC6000001
+#define SimObjectStreamedResource_TypeUID					0x72000001
 
 #define SimObjectFXComponent_TypeUID						0x32000001
 

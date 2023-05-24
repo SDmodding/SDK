@@ -150,4 +150,14 @@ namespace UFG
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + mOffset);
 		}
 	};
+
+	// Havok Stuff
+	template <typename T>
+	struct HavokArray
+	{
+		T* m_data;
+		int m_size;
+		int m_capacityAndFlags;
+	};
+
 }
