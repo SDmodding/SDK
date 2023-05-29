@@ -19,7 +19,15 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Typedefs.hpp"
 #include "Functions.hpp"
 
-// ..
+// Engine Havok
+#include "Engine/Havok/Classes.hpp"
+#include "Engine/Havok/hkpCollidable.hpp"
+#include "Engine/Havok/hkpRayCast.hpp"
+#include "Engine/Havok/hkpShape.hpp"
+#include "Engine/Havok/hkpConvexShape.hpp"
+#include "Engine/Havok/hkpBoxShape.hpp"
+
+// Engine
 #include "Defines/NodePlayables.hpp"
 #include "Defines/BoneUID.hpp"
 #include "Defines/TypeUID.hpp"
@@ -60,6 +68,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/SectionLayout.hpp"
 #include "Engine/Camera.hpp"
 #include "Engine/Director.hpp"
+#include "Engine/ShapeCasterCollector.hpp"
 #include "Engine/SoundBankManager.hpp"
 #include "Engine/SimpleXML.hpp"
 #include "Engine/StreamFileWrapper.hpp"
@@ -68,7 +77,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/TrueCrowdDatabase.hpp"
 #include "Engine/Wwise.hpp"
 
-// ..
+// Game
 #include "Game/CopSystem.hpp"
 #include "Game/EventDispatcher.hpp"
 #include "Game/GameCamera.hpp"

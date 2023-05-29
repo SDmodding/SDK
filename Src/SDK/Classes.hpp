@@ -215,6 +215,8 @@ namespace UFG
 		}
 
 		// Operators
+		float& operator[](int m_Index) { return (&x)[m_Index]; }
+
 		__forceinline bool operator==(qVector3& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z); }
 		__forceinline bool operator!=(qVector3& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z); }
 

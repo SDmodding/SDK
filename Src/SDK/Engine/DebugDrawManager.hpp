@@ -28,9 +28,60 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector3*, qColour*, qMatrix44*, void*, bool)>(UFG_RVA(0x18640))(this, &m_Start, &m_End, &m_Color, m_Matrix, m_Callback, m_IsScreenCoords);
 		}
 
+		void DrawAABB(qVector3 m_Min, qVector3 m_Max, qColour m_Color, qMatrix44* m_Matrix = GetMatrix(), void* m_Callback = nullptr)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector3*, qColour*, qMatrix44*, void*)>(UFG_RVA(0x17C10))(this, &m_Min, &m_Max, &m_Color, m_Matrix, m_Callback);
+		}
+
+		void DrawAABB(qVector3 m_Origin, qVector3 m_Min, qVector3 m_Max, qColour m_Color, qMatrix44* m_Matrix = GetMatrix(), void* m_Callback = nullptr)
+		{
+			UFG::qVector3 m_Points[8] =
+			{
+				{ m_Origin.x + m_Min.x, m_Origin.y + m_Min.y, m_Origin.z + m_Min.z },
+				{ m_Origin.x + m_Min.x, m_Origin.y + m_Max.y, m_Origin.z + m_Min.z},
+				{ m_Origin.x + m_Max.x, m_Origin.y + m_Max.y, m_Origin.z + m_Min.z },
+				{ m_Origin.x + m_Max.x, m_Origin.y + m_Min.y, m_Origin.z + m_Min.z },
+				{ m_Origin.x + m_Min.x, m_Origin.y + m_Min.y, m_Origin.z + m_Max.z },
+				{ m_Origin.x + m_Min.x, m_Origin.y + m_Max.y, m_Origin.z + m_Max.z },
+				{ m_Origin.x + m_Max.x, m_Origin.y + m_Max.y, m_Origin.z + m_Max.z },
+				{ m_Origin.x + m_Max.x, m_Origin.y + m_Min.y, m_Origin.z + m_Max.z }
+			};
+
+			DrawLine(m_Points[0], m_Points[1], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[1], m_Points[2], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[2], m_Points[3], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[3], m_Points[0], m_Color, m_Matrix, m_Callback);
+
+			DrawLine(m_Points[4], m_Points[5], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[5], m_Points[6], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[6], m_Points[7], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[7], m_Points[4], m_Color, m_Matrix, m_Callback);
+
+
+			DrawLine(m_Points[0], m_Points[4], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[1], m_Points[5], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[2], m_Points[6], m_Color, m_Matrix, m_Callback);
+			DrawLine(m_Points[3], m_Points[7], m_Color, m_Matrix, m_Callback);
+		}
+
+		void DrawCircle(qVector3 m_Center, float m_Radius, qColour m_Color, qMatrix44* m_Matrix = GetMatrix(), void* m_Callback = nullptr)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, float, qColour*, qMatrix44*, void*)>(UFG_RVA(0x182F0))(this, &m_Center, m_Radius, &m_Color, m_Matrix, m_Callback);
+		}
+
 		void DrawTextA(qVector3 m_Pos, qColour m_Color, const char* m_String)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qColour*, const char*)>(UFG_RVA(0x18E60))(this, &m_Pos, &m_Color, m_String);
+		}
+
+		void DrawTextA(int m_X, int m_Y, qColour m_Color, const char* m_String)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, int, qColour*, const char*)>(UFG_RVA(0x18EB0))(this, m_X, m_Y, &m_Color, m_String);
+		}
+
+		void DrawSphere(qVector3 m_Center, float m_Radius, qColour m_Color, qMatrix44* m_Matrix = GetMatrix(), void* m_Callback = nullptr)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, float, qColour*, qMatrix44*, void*)>(UFG_RVA(0x18D00))(this, &m_Center, m_Radius, &m_Color, m_Matrix, m_Callback);
 		}
 	};
 

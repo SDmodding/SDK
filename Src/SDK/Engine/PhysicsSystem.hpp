@@ -35,6 +35,11 @@ namespace UFG
 			return reinterpret_cast<bool(__fastcall*)(void*, RayCastData*)>(UFG_RVA(0xA1950))(this, data);
 		}
 
+		bool CastShape(CShapeCasterCollector* m_ShapeCasterCollector, qVector3 m_Start, qVector3 m_End)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, CShapeCasterCollector*, qVector3*, qVector3*)>(UFG_RVA(0xA1DD0))(this, m_ShapeCasterCollector, &m_Start, &m_End);
+		}
+
 		void DisableCollisionsBetween(CSimObject* simObjectA, CSimObject* simObjectB)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x461A40))(this, simObjectA, simObjectB);

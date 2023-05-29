@@ -54,7 +54,7 @@ namespace UFG
 					m_Lane->GetPos(&m_Return, 1.f);
 			}
 
-		return m_Return;
+			return m_Return;
 		}
 	};
 

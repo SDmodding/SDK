@@ -354,6 +354,27 @@ namespace UFG
 	class CActiveAIEntityComponent
 	{
 	public:
+		UFG_PAD(0x1030);
+
+		float m_MaxEngagementDistanceXY;
+		float m_MaxEngagementDistanceZ;
+		bool m_EngagementOverrideEnabled;
+		eAIEmotion m_CurrentEmotion;
+		eAIEmotion m_FacialEmotion;
+		eAIObjective m_CurrentObjective;
+		bool m_PrevObjectiveWasHostile;
+		eTargetTypeEnum m_TargetToStayNear;
+		float m_MaxDistanceFromTargetToStayNear;
+		float m_MaxDistanceFromTargetToStayNearHysteresis;
+		float m_ChanceOfCleanVault;
+		eParkourType m_ScriptedParkourTypeNearGoal;
+		eParkourType m_ScriptedParkourTypeFarGoal;
+		bool m_ScriptOverrideFreerunning;
+		bool m_CleanNextVault;
+		bool m_IsSpawning;
+		bool m_InPOIDynamicBranch;
+		bool m_InPropInteractBranch;
+
 		void AddSupplementaryAttackTarget(CSimObject* attack_target)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x340E10))(this, attack_target);

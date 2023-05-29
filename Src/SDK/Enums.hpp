@@ -466,6 +466,24 @@ namespace UFG
 
 	}
 
+	enum eAIEmotion
+	{
+		eAI_EMOTION_NONE = 0x0,
+		eAI_EMOTION_SCARED = 0x1,
+		eAI_EMOTION_AWARE = 0x2,
+		eAI_EMOTION_INTERESTED = 0x3,
+		eAI_EMOTION_PANIC = 0x4,
+		eAI_EMOTION_SURPRISED = 0x5,
+		eAI_EMOTION_NEUTRAL = 0x6,
+		eAI_EMOTION_AGGRESSIVE = 0x7,
+		eAI_EMOTION_HAPPY = 0x8,
+		eAI_EMOTION_SAD = 0x9,
+		eAI_EMOTION_ANGRY = 0xA,
+		eAI_EMOTION_COCKY = 0xB,
+		eAI_EMOTION_STERN = 0xC,
+		NUM_AI_EMOTIONS = 0xD,
+	};
+
 	enum eAIObjective
 	{
 		eAI_OBJECTIVE_NONE = 0x0,
@@ -1140,6 +1158,14 @@ namespace UFG
 		eTARGET_TYPE_PROBE_HIGH_C = 0x59,
 		eTARGET_TYPE_PROBE_HIGH_R = 0x5A,
 		NUM_TARGET_TYPES = 0x5B,
+	};
+
+	enum eParkourType
+	{
+		eParkourType_None = 0x0,
+		eParkourType_Reluctant = 0x1,
+		eParkourType_Normal = 0x2,
+		NUM_PARKOUR_TYPES = 0x3,
 	};
 
 	enum VehicleEffectId
