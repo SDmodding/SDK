@@ -67,6 +67,14 @@ namespace UFG
 		T v1;
 	};
 
+	template <typename T>
+	struct LinearGraph
+	{
+		int nData;
+		const float* fDomain;
+		const T* tRange;
+	};
+
 	template<typename T>
 	struct qSafePointerBase
 	{

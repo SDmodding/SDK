@@ -427,6 +427,21 @@ namespace UFG
 		unsigned __int32 mEnableBullShitCurbHack : 1;
 		unsigned __int32 mIsPlayer : 1;
 		unsigned __int32 mBullShitCurbHack : 1;
+
+		void Update(float m_DeltaTime)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x476DC0))(this, m_DeltaTime);
+		}
+
+		void GetVelocity(qVector3* m_Result)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x468150))(this, m_Result);
+		}
+
+		void SetVelocity(qVector3* m_Velocity)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x4757C0))(this, m_Velocity);
+		}
 	};
 
 	class CRagdollComponent : public CSimComponent

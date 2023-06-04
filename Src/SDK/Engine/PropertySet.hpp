@@ -164,6 +164,12 @@ namespace UFG
 		}
 	};
 
+	struct PropertySetHandle
+	{
+		qSymbol mName;
+		qPropertySet* mpPropSet;
+	};
+
 	struct qPropertySetResource : qResourceData
 	{
 		uint32_t mFlags;

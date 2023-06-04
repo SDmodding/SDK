@@ -1,7 +1,8 @@
 #pragma once
-#define FXEffectsInventory_UID		0xED341A8D
-#define ModelDataInventory_UID		0xA2ADCD77
-#define StateBlockInventory_UID		0x4D04C7F2
+#define ActionTreeResourceInventory_UID			0x8DB8241B
+#define FXEffectsInventory_UID					0xED341A8D
+#define ModelDataInventory_UID					0xA2ADCD77
+#define StateBlockInventory_UID					0x4D04C7F2
 
 namespace UFG
 {
@@ -12,6 +13,8 @@ namespace UFG
 		{
 			return reinterpret_cast<qResourceInventory*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x170B80))(this, type_uid);
 		}
+
+		qResourceInventory* GetActionTreeResourceInventory() { return GetInventory(ActionTreeResourceInventory_UID); }
 
 		qResourceInventory* GetFXEffectsInventory() { return GetInventory(FXEffectsInventory_UID); }
 

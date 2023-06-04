@@ -30,13 +30,6 @@ namespace UFG
 		};
 	}
 
-	struct PropertySetHandle
-	{
-		qSymbol mName;
-		void* mpPropSet;
-	};
-
-
 	class CGameSlice : public qBaseNodeRB
 	{
 	public:

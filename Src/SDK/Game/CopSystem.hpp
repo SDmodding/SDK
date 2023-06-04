@@ -18,11 +18,9 @@ namespace UFG
 		eHeatEventEnum mHeatEventIndex;
 	};
 
-	class CCopSystem
+	class CCopSystem : public CEncounterBase
 	{
 	public:
-		UFG_PAD(0xC90); // UFG::EncounterBase
-
 		bool mReloadTuningFiles;
 		int mDebugDrawLevel;
 		bool mShowCops;
@@ -57,9 +55,19 @@ namespace UFG
 		bool mIsSafehouseInstantCooldownActive;
 		unsigned __int64 mHeatLevelTimestamp;
 
-		void SetHeatLevel(eHeatLevelEnum heatLevel, eHeatEventEnum heatEvent, float heatValue)
+		float GetHeatThresholdByLevel(eHeatLevelEnum m_HeatLevel)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, heatLevel, heatEvent, heatValue);
+			return reinterpret_cast<float(__fastcall*)(void*, eHeatLevelEnum)>(UFG_RVA(0x3EDA60))(this, m_HeatLevel);
+		}
+
+		void ReportInfractionTarget(CSimObject* m_Witness, CSimObject* m_Suspect)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, m_Witness, m_Suspect);
+		}
+
+		void SetHeatLevel(eHeatLevelEnum m_HeatLevel, eHeatEventEnum m_HeatEvent, float m_HeatValue)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, m_HeatLevel, m_HeatEvent, m_HeatValue);
 		}
 	};
 	CCopSystem* CopSystem = reinterpret_cast<CCopSystem*>(UFG_RVA(0x23D9AA0));

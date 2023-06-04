@@ -30,6 +30,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 // Engine
 #include "Defines/NodePlayables.hpp"
 #include "Defines/BoneUID.hpp"
+#include "Defines/StringDictionary.hpp"
 #include "Defines/TypeUID.hpp"
 
 
@@ -78,6 +79,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Wwise.hpp"
 
 // Game
+#include "Game/EncounterBase.hpp"
 #include "Game/CopSystem.hpp"
 #include "Game/EventDispatcher.hpp"
 #include "Game/GameCamera.hpp"

@@ -2,7 +2,122 @@
 
 namespace UFG
 {
+	class CInventoryComponent;
+
 	// Components
+	class CSimWeaponPropertiesComponent : public CSimObjectPropertiesComponent
+	{
+	public:
+		qNode<CSimWeaponPropertiesComponent> mNode;
+		uint32_t mLastOwner;
+		uint32_t mFireMode;
+
+		struct WeaponTypeInfo_t
+		{
+			qSymbol mPropertySetSymbol;
+			uint32_t mNumFireModes;
+
+			struct FireModeInfo_t
+			{
+				unsigned int mSimObjectWeaponType;
+				eInventoryItemEnum mAmmoInventoryItem;
+				int mAmmoClipCapacity;
+				int mAmmoTotalCapacity;
+				float mRateOfFire;
+				float mHardLockReticleSizeMin;
+				float mHardLockReticleSizeMax;
+				float mReticleSizeMin;
+				float mReticleSizeMax;
+				float mReticleSizeBlindfire;
+				float mRangedDistance;
+				float mAngularInaccuracyRadMin;
+				float mAngularInaccuracyRadMax;
+				float mProjectileSpeed;
+				float mProjectileSpeedAI;
+				float mProjectileGravity;
+				float mArmingDistance;
+				float mSlowModeRateOfFireMultiplier;
+				float mSlowModeRateOfFireMultiplierAI;
+				float mSlowModeProjectileSpeedMultiplier;
+				float mSlowModeProjectileSpeedMultiplierAI;
+				float mSlowModeProjectileDamageMultiplier;
+				float mSlowModeProjectileDamageMultiplierAI;
+				float mProjectilePhysicsImpulse;
+				float mThrownSpeed;
+				qSymbol mProjectileSpawnBoneName;
+				unsigned int mProjectileSpawnBoneID;
+				qSymbol mExplosionType;
+				float mBulletLifeSpan;
+				bool mIsTwoHandedWeapon;
+				bool mIsAutomatic;
+				bool mStowable;
+				bool mHasSniperScope;
+				unsigned int mBulletTypeID;
+				unsigned int mBulletEffectID;
+				unsigned int mBulletPerShot;
+				float mHardLockDamageMultiplier;
+				float mDamageMultiplier;
+				float mDamage;
+				float mPropDamage;
+				float mVehicleDamage;
+				int mProjectileReaction;
+				float mFlickTargetingAngularLimitRad;
+				float mAccuracyOnTargetChanged;
+				float mAccuracyPenaltyPerShot;
+				float m_fAccuracyRateMultiplier;
+				qVector3 mMinAngularVelocityWhenThrown;
+				qVector3 mMaxAngularVelocityWhenThrown;
+				unsigned int mStartingMaxAmmoCount;
+				unsigned int mStartingMinAmmoCount;
+				unsigned int mAIOnDeathDropMaxAmmoCount;
+				unsigned int mAIOnDeathDropMinAmmoCount;
+				void* mTracerBeamSettingsHandle;
+				void* mTracerBeamAISettingsHandle;
+				void* mTracerBeamTrailSettingsHandle;
+				void* mTracerBeamTrailAISettingsHandle;
+				qSymbol mAudioWeaponType;
+				bool mAudioWeaponIsLooping;
+				qArray<qSymbol> mSoundbankIds;
+				float mAimYawPerSRad;
+				float mAimPitchPerSRad;
+				float mAimMaxInputSpeedPerS;
+				qFixedArray<float, 10> mAimInputMappingInput;
+				qFixedArray<float, 10> mAimInputMappingOutput;
+				LinearGraph<float> mAimInputMapping;
+				float mAimFlickTransitionRadPerS;
+				float mAimSubtargetTransitionRadPerS;
+				float mAimFreeAimTransitionRadPerS;
+				float mAimFovOffset;
+				float mRecoilKickupMin;
+				float mRecoilKickupMax;
+				float mRecoilKickupOffset;
+				float mRecoilKickupRateAttack;
+				float mRecoilKickupRateDecay;
+				float mRecoilKickback;
+				float mRecoilKickbackSpeed;
+				float mRecoilKickbackDur;
+				float mMinDesiredDistance;
+				float mMaxDisiredDistance;
+				float mDesiredDistance;
+				qVector3 mAimOriginOffset;
+				qVector3 mThrownWeaponSpinAxis;
+			};
+			FireModeInfo_t* mFireModes[2];
+		};
+		WeaponTypeInfo_t* mWeaponTypeInfo;
+
+		float mUnloadTimeOut;
+		uint32_t mSoundBankLoadedId;
+		float mLastBulletImpactStimulusTimer;
+		bool mAccessoriesPreloaded;
+		qSymbol mMagazineType;
+		bool mIsRealWeapon;
+		bool mIsPhoneCamera;
+		bool mIsBladed;
+		uint32_t mHudReticule;
+		CActionPath mNetWorkedFireStateNode;
+	};
+
 	class CGunComponent : public CSimComponent
 	{
 	public:
@@ -12,9 +127,10 @@ namespace UFG
 		qVector3 mNetBulletPosition;
 		qVector3 mNetBulletVelocity;
 
-		UFG_PAD(0x64);
-		/*UFG::RebindingComponentHandle<UFG::SimObjectWeaponPropertiesComponent, 0> mSimObjectWeaponPropertiesComponent;
-		UFG::RebindingComponentHandle<UFG::InventoryItemComponent, 0> mInventoryItemComponent;*/
+		UFG_PAD(0x4);
+
+		RebindingComponentHandle<CSimWeaponPropertiesComponent> mSimObjectWeaponPropertiesComponent;
+		RebindingComponentHandle<CInventoryComponent> mInventoryItemComponent;
 
 		eTargetTypeEnum mMustHitTarget;
 		int mClipAmmo[2];
