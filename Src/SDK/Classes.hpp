@@ -530,6 +530,13 @@ namespace UFG
 		qVector3 mMax;
 	};
 
+	// ...
+
+	struct BitFlags128 
+	{
+		uint64_t mFlags[2];
+	};
+
 	class __declspec(align(16)) CHavokNavPosition
 	{
 	public:

@@ -138,8 +138,8 @@ namespace UFG
 		UFG_PAD(0x190);
 
 		void* m_AudioEvent;
-		UFG::CAudioEntity* m_SFXEntity;
-		void* m_voiceProfile;
+		CAudioEntity* m_SFXEntity;
+		CVoiceProfile* m_voiceProfile;
 		unsigned int m_curPlayingPriority;
 		float m_interiorCheckTimer;
 		float m_distance2ToListener;
@@ -501,10 +501,10 @@ namespace UFG
 		}
 	};
 
-	class __declspec(align(16)) CCharacterSubjectComponent
+	class CCharacterSubjectComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x130);
+		UFG_PAD(0xF0);
 
 		qMatrix44 mHeadTransformation;
 		qMatrix44 mCamboneTransformation;

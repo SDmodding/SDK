@@ -164,6 +164,11 @@ namespace UFG
 
 		CCreature* mCreature;
 
+		void Reset()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B220))(this);
+		}
+
 		void UnbindRequiredAnimationBanks()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58D300))(this);

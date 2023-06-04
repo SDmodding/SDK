@@ -63,7 +63,7 @@ namespace UFG
 		// HashUpper32
 		int GetBoneID(uint32_t m_BoneUID)
 		{
-			if (!mPose.mRigHandleData)
+			if (!mPose.mRigHandle.mData)
 				return -1;
 
 			return mPose.mUFGSkeleton->GetBoneID(m_BoneUID);

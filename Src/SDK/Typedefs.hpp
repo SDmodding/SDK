@@ -3,5 +3,6 @@
 namespace UFG
 {
 	typedef char* qSharedString;
-	typedef unsigned int qSymbol;
+	typedef uint32_t qSymbol;
+	typedef uint32_t qWiseSymbol;
 }

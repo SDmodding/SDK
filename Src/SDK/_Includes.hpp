@@ -60,6 +60,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/FXManager.hpp"
 #include "Engine/ObjectResourceManager.hpp"
 #include "Engine/Sim.hpp"
+#include "Engine/VoiceProfile.hpp"
 #include "Engine/SimVehicle.hpp"
 #include "Engine/SimWeapon.hpp"
 #include "Engine/SimCharacter.hpp"
@@ -75,6 +76,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/StreamFileWrapper.hpp"
 #include "Engine/StreamResourceLoader.hpp"
 #include "Engine/PhysicsSystem.hpp"
+#include "Engine/TiDoGame.hpp"
 #include "Engine/TrueCrowdDatabase.hpp"
 #include "Engine/Wwise.hpp"
 

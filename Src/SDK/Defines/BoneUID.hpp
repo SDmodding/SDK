@@ -48,6 +48,7 @@
 #define BoneUID_M_Trunk													0x8DDDC9FD
 
 // Generic
+#define BoneUID_CameraSync01											0x31F17B03
 #define BoneUID_Sync01													0x806F7A7E
 #define BoneUID_Sync02													0xB65F43E4
 #define BoneUID_Sync03													0xACD90E56

@@ -81,9 +81,14 @@ namespace UFG
 
 		UFG_PAD(0x10);
 
-		void* mRigHandleData;
+		struct RigHandle_t
+		{
+			void* mData;
+			uint32_t mNameUID;
 
-		UFG_PAD(0x20);
+			UFG_PAD(0x1C);
+		};
+		RigHandle_t mRigHandle;
 
 		CSkeleton* mUFGSkeleton;
 		void* mHavokPose;
