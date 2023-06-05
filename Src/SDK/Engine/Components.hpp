@@ -155,6 +155,11 @@ namespace UFG
 		qMatrix44 mLocalTransform;
 		qVector3 mWorldVelocity;
 		int mInheritXformType;
+
+		void SetWorldTranslation(qVector3 m_Position)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x191520))(this, &m_Position);
+		}
 	};
 
 	class CBaseAnimationComponent : public CSimComponent
@@ -241,9 +246,10 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*)>(UFG_RVA(0xAB970))(this, result);
 		}
 
+		// NotifyProxyModeChanged
 		void EnablePhysics(bool m_Enable)
 		{
-			SetMotionType(m_Enable ? 128 : 256);
+			reinterpret_cast<void(__fastcall*)(void*, int)>(UFG_RVA(0x46D870))(this, m_Enable ? 0 : 2);
 		}
 
 		float GetMass()
@@ -285,6 +291,7 @@ namespace UFG
 			qFixedArray<uint8_t, 91> m_Map;
 		};
 		TargetingMap_t* m_pTargetingMap;
+		qList<CTargetingSimObject> m_TargetedBy;
 
 		CTargetingSimObject* GetTarget(eTargetTypeEnum m_TargetType)
 		{

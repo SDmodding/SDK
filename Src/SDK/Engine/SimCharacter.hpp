@@ -315,40 +315,15 @@ namespace UFG
 		int m_iSyncBoneID;
 	};
 
-	class CTargetingSystemPedBaseComponent : public CTargetingSystemBaseComponent
-	{
-	public:
-		void OnAttach(CSimObject* object)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x53F000))(this, object);
-		}
-
-		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, const bool bModifyCollisionAccordingToLock)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
-		}
-
-		void AttackTarget(CSimObject* m_Target)
-		{
-			static eTargetTypeEnum m_AttackTypes[] =
-			{
-				eTARGET_TYPE_ATTACKER, eTARGET_TYPE_CLOSEST_PED, eTARGET_TYPE_FACING,
-				eTARGET_TYPE_FOCUS, eTARGET_TYPE_AI_OBJECTIVE, eTARGET_TYPE_PLAYER,
-				eTARGET_TYPE_STIMULUS_PRODUCER, eTARGET_TYPE_CONDITION_STIMULUS_PRODUCER, eTARGET_TYPE_LAST_THREAT, eTARGET_TYPE_ATTACKING
-			};
-
-			for (eTargetTypeEnum m_AttackType : m_AttackTypes)
-			{
-				SetTarget(m_AttackType, m_Target);
-				SetTargetLock(m_AttackType, true, false);
-			}
-		}
-	};
-
 	class CAICharacterControllerBaseComponent : public CCharacterControllerInterface
 	{
 	public:
 		CIntention m_Intention;
+	};
+
+	class CAICharacterControllerComponent : public CAICharacterControllerBaseComponent
+	{
+	public:
 	};
 
 	class CActiveAIEntityComponent
@@ -463,11 +438,22 @@ namespace UFG
 			return (mPoseState == RagdollComponent::STATE_POWERED_TRACKING);
 		}
 
-		void ApplyAngularImpulse(int bone, qVector3* impulse, float connectionTransfer)
+		void ApplyAngularImpulse(int m_Bone, qVector3 m_Impulse, float m_ConnectionTransfer)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, bone, impulse, connectionTransfer);
+			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, m_Bone, &m_Impulse, m_ConnectionTransfer);
 		}
-		
+
+		void ApplyImpulse(int m_Bone, qVector3 m_Location, qVector3 m_Impulse)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, qVector3*)>(UFG_RVA(0x4585F0))(this, m_Bone, &m_Location, &m_Impulse);
+		}
+
+		void SetVelocity(qVector3 m_Velocity)
+		{
+			if (mRagdoll)
+				reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xB2780))(this, &m_Velocity);
+		}
+
 		void SetMotorMaxForce(float m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475360))(this, m_Value);
@@ -700,10 +686,10 @@ namespace UFG
 		qVector3 m_vFreeAimBaseOffset;
 		qVector3 m_vFreeAimIntention;
 		qVector3 m_vFreeAimTargetPosition;
+		qSafePointer<CSimObject> m_FreeAimSimObject;
 
-		UFG_PAD(0x44);
-		/*UFG::qSafePointer<UFG::SimObject, UFG::SimObject> m_FreeAimSimObject;
-		UFG::qReflectHandle<UFG::PhysicsObjectProperties> m_FreeAimPhysicsObjectProperties;*/
+		UFG_PAD(0x28);
+		//UFG::qReflectHandle<UFG::PhysicsObjectProperties> m_FreeAimPhysicsObjectProperties;
 
 		int m_iFreeAimOriginBoneID;
 		int m_iFreeAimSyncBoneID;
@@ -732,15 +718,139 @@ namespace UFG
 		float m_fUnobscuredAimCheckDistance;
 		float m_fUnobscuredAimTargetPositionPadDistance;
 		float m_fUnobscuredAimNewPositionPadDistance;
-
-		UFG_PAD(0x30);
-		/*UFG::qSafePointer<UFG::SimObject, UFG::SimObject> m_pAimTargetPositionSimObject;
-		UFG::qSafePointer<UFG::SimComponent, UFG::TransformNodeComponent> m_pAimTargetPositionTNC;*/
+		qSafePointer<CSimObject> m_pAimTargetPositionSimObject;
+		qSafePointer<CTransformNodeComponent> m_pAimTargetPositionTNC;
 
 		AimingPlayerComponent::eAimBlendMode m_eAimBlendMode;
 	};
 
-	UFG_PAD(sizeof(CAimingPlayerComponent));
+	class CCharacterAnimationComponent : public CBaseAnimationComponent
+	{
+	public:
+	};
+
+	class CTargetingSystemPedBaseComponent : public CTargetingSystemBaseComponent
+	{
+	public:
+		qNode<CTargetingSystemPedBaseComponent> m_Node;
+		RebindingComponentHandle<CTransformNodeComponent> m_pTransformNodeComponent;
+		RebindingComponentHandle<CAimingBaseComponent> m_pAimingBaseComponent;
+		RebindingComponentHandle<CActionTreeComponent> m_pActionTreeComponent;
+		RebindingComponentHandle<CActiveAIEntityComponent> m_pActiveAIEntityComponent;
+		RebindingComponentHandle<CCharacterPropertiesComponent> m_pSimObjectCharacterPropertiesComponent;
+		RebindingComponentHandle<CAICharacterControllerComponent> m_pAICharacterControllerComponent;
+		RebindingComponentHandle<CAICharacterControllerBaseComponent> m_pAICharacterControllerBaseComponent;
+		RebindingComponentHandle<void*> m_pInterestPointUserComponent;
+		qSafePointer<CSimWeaponPropertiesComponent> m_pEquippedSOWPC;
+		qList<void*> m_TargetSteerToTaskList;
+		bool m_bHasRangedWeapon;
+		bool m_bIsValidSocialTarget;
+		unsigned int m_uUpdateBucket;
+		unsigned int* m_pBucketList; 
+		bool m_bForceUpdate;
+		qFixedArray<qSafePointer<CSimObject>, 80> m_CachedPedsList;
+
+		struct ClosePhysicalTarget_t
+		{
+			float m_fDistance2;
+			CRigidBodyComponent* m_pRigidBodyComponent;
+		};
+		qFixedArray<ClosePhysicalTarget_t, 10> m_ClosePhysicalTargetsList;
+
+		void* m_pActiveTargetingProfile;
+		qVector3 m_vTargetingPosition;
+		qVector3 m_vTargetingForward;
+		qVector3 m_vTargetingLeft;
+		qVector3 m_vTargetingIntention;
+		void* m_pFocusTargetSubTargetingLocation;
+		void* m_pLastFocusTargetSubTargetingLocation;
+		void* m_pFocusTargetSubTargetingLocationOverride;
+		CSimObject* m_pLastFocusTarget;
+		float m_fMinimumTargetDistanceSquared;
+
+		void OnAttach(CSimObject* object)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x53F000))(this, object);
+		}
+
+		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, const bool bModifyCollisionAccordingToLock)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
+		}
+	};
+
+	class CTargetingSystemPedPlayerComponent : public CTargetingSystemPedBaseComponent
+	{
+	public:
+		qNode<CTargetingSystemPedPlayerComponent> m_Node;
+		RebindingComponentHandle<CCharacterAnimationComponent> m_pCharacterAnimationComponent;
+		RebindingComponentHandle<CAimingPlayerComponent> m_pAimingPlayerComponent;
+		RebindingComponentHandle<CAttackRightsComponent> m_pAttackRightsComponent;
+		qSafePointer<CRagdollComponent> m_RagdollTarget;
+		qSafePointer<CRagdollComponent> m_FocusTargetsGrappleTarget;
+		qSafePointer<CSimObject> m_pVehicleFocusTarget;
+		qSafePointer<CSimObject> m_pFocusModeOverrideSimObject;
+		qSafePointer<CSimObject> m_pOccupantOfVehicle;
+		qSafePointer<CSimObject> m_pVehicleClosestPointSimObject;
+		qSafePointer<CTransformNodeComponent> m_pVehicleClosestPointTNC;
+
+		struct RimLighting_t
+		{
+			bool m_bEnabled;
+			eTargetTypeEnum m_TargetType;
+			qSafePointer<CSimObject> m_Target;
+		};
+		RimLighting_t m_RimLighting;
+
+		qSafePointer<CRagdollComponent> m_VehicleCharacterRagdolls[10];
+		bool m_bIsAimingActive;
+		bool m_bIsTransitionalAttackActive;
+		bool m_bFocusModeJustRequested;
+		bool m_bHasFreeAimInput;
+		bool m_bHasAimInput;
+		bool m_bHasNoAimInputTransition;
+		bool m_bHasFullAimInput;
+		bool m_bHasFullAimInputTransition;
+		bool m_bFocusTargetIsHostile;
+		bool m_bTargetAutoAcquisition;
+		bool m_bTargetAutoAcquisitionJustRequested;
+		bool m_bTargetingFreeShootingDesired;
+		bool m_bTargetingFreeAimAssistance;
+		float m_fAimInputLength;
+		bool m_bAimInputRaw;
+		qVector2 m_vAimInput;
+		qVector2 m_vAimInputDir;
+		qVector2 m_vLockedFreeAimInput;
+		eFocusModeEnum m_eOverrideDesiredFocusMode;
+		eFocusModeEnum m_eDesiredFocusMode;
+		eFocusModeEnum m_eFocusMode;
+		float m_fLastLocationTargetingAngle;
+		float m_fTargetingIntentionIdleTime;
+		qVector3 m_vDirectionalTargetingIntention;
+		qVector3 m_vAimTargetingIntention;
+		bool m_bHasPriorityTarget;
+		bool m_bIsInAnyCombat;
+		bool m_TransitTargetingDisabledByMiniGame;
+		bool m_TransitTargetingDisabledByScript;
+		int m_iVisibilityFromBoneID;
+		CSceneObjectProperties* m_pDriverSceneObjectProperties;
+		void* m_pDriverFaceActionComponent;
+		int m_eDriverFaceActionType;
+		eInventoryItemEnum m_eDriverSellableItemType;
+		eInventoryItemEnum m_eDriverOriginalSellableItemType;
+		qVector3* m_ConeToIntentionMap[6];
+		float m_fTimeSinceStartedInput;
+		bool m_bTargetCycleDirectionLeft;
+		bool m_bTargetCycleDesired;
+
+		struct CloseTarget_t
+		{
+			float m_fDistance2;
+			CSimObjectPropertiesComponent* m_pSimObjectPropertiesComponent;
+			qMatrix44 m_Xform;
+		};
+		qFixedArray<CloseTarget_t, 100> m_CloseTargetsList;
+	};
 
 	// Main
 	class CSimCharacter : public CSimObject
@@ -825,7 +935,7 @@ namespace UFG
 			return reinterpret_cast<CActionTreeComponent*>(m_Component);
 		}
 
-		CBaseAnimationComponent* GetAnimation()
+		CCharacterAnimationComponent* GetAnimation()
 		{
 			CSimComponent* m_Component = m_Components.p[9].m_pComponent;
 
@@ -839,7 +949,7 @@ namespace UFG
 					m_Component = GetComponentOfType(CharacterAnimationComponent_TypeUID);
 			}
 
-			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+			return reinterpret_cast<CCharacterAnimationComponent*>(m_Component);
 		}
 
 		CHitReactionComponent* GetHitReaction()
@@ -890,6 +1000,11 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CTargetingSystemPedBaseComponent*>(m_Component);
+		}
+
+		CTargetingSystemPedPlayerComponent* GetTargetingSystemPlayer()
+		{
+			return GetComponentOfType<CTargetingSystemPedPlayerComponent>(CharacterTargetingPedPlayerComponent_TypeUID);
 		}
 
 		CAICharacterControllerBaseComponent* GetAICharacterController()

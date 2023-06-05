@@ -126,6 +126,35 @@ namespace UFG
 
 		virtual void Detach(CSimComponent* component) { }
 
+		// Highlight
+		bool IsHighlighted()
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x6E680))(this);
+		}
+
+		void Highlight(qColour m_Colour, float m_OutlineStrength = 1.5f, float m_XrayStrength = 0.f, bool m_IsDepthEnabled = true)
+		{
+			struct HighlightParams_t
+			{
+				UFG::qColour mColour;
+				float mOutlineStrength;
+				float mXrayStrength;
+				bool mIsDepthEnabled = 1;
+			};
+			HighlightParams_t m_HighlightParams;
+			m_HighlightParams.mColour = m_Colour;
+			m_HighlightParams.mOutlineStrength = m_OutlineStrength;
+			m_HighlightParams.mXrayStrength = m_XrayStrength;
+			m_HighlightParams.mIsDepthEnabled = m_IsDepthEnabled;
+
+			reinterpret_cast<void(__fastcall*)(void*, HighlightParams_t*)>(UFG_RVA(0x6E560))(this, &m_HighlightParams);
+		}
+
+		void UnHighlight()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x6EE30))(this);
+		}
+
 		// Please check SceneObject Properties to get type...
 		int GetType()
 		{
@@ -254,6 +283,11 @@ namespace UFG
 				m_Component = GetComponentOfTypeHK(SimObjectBaseAnimation_TypeUID);
 
 			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+		}
+
+		CRigidBodyComponent* GetRigidBody()
+		{
+			return GetComponentOfType<UFG::CRigidBodyComponent>(SimObjectRigidbody_TypeUID);
 		}
 
 		bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)

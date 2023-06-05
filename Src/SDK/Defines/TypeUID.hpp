@@ -13,6 +13,7 @@
 #define SimObjectProperties_TypeUID							0xB2000001
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
 #define SimObjectBaseAnimation_TypeUID						0xC6000001
+#define SimObjectRigidbody_TypeUID							0x16000003
 #define SimObjectStreamedResource_TypeUID					0x72000001
 
 #define SimObjectFXComponent_TypeUID						0x32000001
@@ -27,6 +28,7 @@
 #define CharacterAnimationComponent_TypeUID					0xC6000003
 #define CharacterHitReactionComponent_TypeUID				0xA8000001
 #define CharacterTargetingPedComponent_TypeUID				0xA0000003
+#define CharacterTargetingPedPlayerComponent_TypeUID		0xA0000023
 #define CharacterActiveAIEntityComponent_TypeUID			0x46000003
 #define CharacterPhysicsComponent_TypeUID					0x7A000001
 #define CharacterNavComponent_TypeUID						0x40000001

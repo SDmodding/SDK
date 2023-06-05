@@ -831,6 +831,16 @@ namespace UFG
 		NUM_FIGHTING_CLASSES = 0xA,
 	};
 
+	enum eFocusModeEnum
+	{
+		eFOCUS_MODE_NONE = 0x0,
+		eFOCUS_MODE_LOCKED = 0x1,
+		eFOCUS_MODE_LOCKED_SOFT = 0x2,
+		eFOCUS_MODE_FREE_AIMING = 0x3,
+		eFOCUS_MODE_FREE_AIMING_LOCKED = 0x4,
+		NUM_FOCUS_MODES = 0x5,
+	};
+
 	enum eGenderEnum
 	{
 		eGENDER_INVALID = 0x0,

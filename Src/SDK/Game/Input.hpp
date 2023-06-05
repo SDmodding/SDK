@@ -212,6 +212,8 @@ namespace UFG
 			// Keyboard - Up Arrow
 			CInputActionData* Get_EquipUp() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4E10))->mDataPerController[GetActiveControllerNum()]; }
 
+			CInputActionData* Get_Fire() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4D20))->mDataPerController[GetActiveControllerNum()]; }
+
 			// Keyboard - H
 			CInputActionData* Get_VehicleHorn_Start() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47D0))->mDataPerController[GetActiveControllerNum()]; }
 			CInputActionData* Get_VehicleHorn_Stop() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47F8))->mDataPerController[GetActiveControllerNum()]; }
