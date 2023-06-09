@@ -155,6 +155,22 @@ namespace UFG
 			return *reinterpret_cast<CActionNodePlayableDatabase**>(UFG_RVA(0x23B1310));
 		}
 
+		CActionNodePlayable* Find(uint32_t m_ID)
+		{
+			qBaseTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables.mTree;
+			for (qBaseNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
+			{
+				if (i->mUID == -1)
+					continue;
+
+				UFG::CActionNodePlayable* m_ActioNodePlayable = i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>();
+				if (m_ActioNodePlayable->mUniqueID == m_ID)
+					return m_ActioNodePlayable;
+			}
+
+			return nullptr;
+		}
+
 		std::vector<CActionNodePlayable*> GetContents()
 		{
 			std::vector<CActionNodePlayable*> m_ActionPlayables;
