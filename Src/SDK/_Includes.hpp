@@ -1,5 +1,10 @@
 #pragma once
 
+/*
+// Use this define before including SDK if you don't wanna use strings inside projects and etc...
+// #define SDK_SD_MINIMAL_BUILD
+*/
+
 #include <unordered_map>
 //
 

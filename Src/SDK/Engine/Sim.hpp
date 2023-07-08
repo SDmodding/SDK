@@ -41,7 +41,7 @@ namespace UFG
 		}
 
 		/* 
-		* If 'mpWritableProperties' is nullptr, using this will create New PropertySetand append 'mpConstProperties'.
+		* If 'mpWritableProperties' is nullptr, using this will create New PropertySet and append 'mpConstProperties'.
 		* This is useful if we wanna modify some data.
 		*/
 		qPropertySet* GetWritableProperties()

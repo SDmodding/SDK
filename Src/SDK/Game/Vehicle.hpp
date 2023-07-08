@@ -4,7 +4,8 @@ namespace UFG
 {
 	namespace Vehicle
 	{
-		std::unordered_map	<qSymbol, const char*> m_List =
+		#ifndef SDK_SD_MINIMAL_BUILD
+		std::unordered_map<qSymbol, const char*> m_List =
 		{ 
 			{ 0x4AF5557A,		"270 DX (Red)" },
 			{ 0x47B673A3,		"270 DX (Green)" },
@@ -217,6 +218,7 @@ namespace UFG
 			{ 0x3ADD6152,		"Wangan GSX (Black)" },
 			{ 0xEF5D6AC3,		"Wangan GSX (Dog Eyes)" },
 		};
+		#endif
 	}
 
 	namespace VehicleUtility

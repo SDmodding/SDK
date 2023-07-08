@@ -226,8 +226,14 @@ namespace UFG
 		__forceinline qVector3 operator-(qVector3 m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z }; }
 		__forceinline void operator-=(qVector3 m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; }
 
+		__forceinline qVector3 operator*(qVector3 m_Other) { return { x * m_Other.x, y * m_Other.y, z * m_Other.z }; }
+		__forceinline void operator*=(qVector3 m_Other) { x *= m_Other.x; y *= m_Other.y; z *= m_Other.z; }
+
 		__forceinline qVector3 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value }; }
 		__forceinline void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; }
+
+		__forceinline qVector3 operator/(qVector3 m_Other) { return { x / m_Other.x, y / m_Other.y, z / m_Other.z }; }
+		__forceinline void operator/=(qVector3 m_Other) { x /= m_Other.x; y /= m_Other.y; z /= m_Other.z; }
 
 		__forceinline qVector3 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value }; }
 		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; }
