@@ -86,6 +86,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Engine/Wwise.hpp"
 
 // Game
+#include "Game/BulletManager.hpp"
 #include "Game/EncounterBase.hpp"
 #include "Game/CopSystem.hpp"
 #include "Game/EventDispatcher.hpp"
