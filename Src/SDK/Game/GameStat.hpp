@@ -5,13 +5,7 @@ namespace UFG
 	class CGameStatTracker
 	{
 	public:
-		class CFactionInterface
-		{
-		public:
-			eFactionStandingEnum mStandings[39][39];
-		};
 		CFactionInterface mFactionInterface;
-
 		qPropertySet* mpDefaultData;
 		qPropertySet* mpRuntimeData;
 		qPropertySet* mpFaceLevelPropertySet;

@@ -126,6 +126,12 @@ namespace UFG
 
 		virtual void Detach(CSimComponent* component) { }
 
+		// SkookumScript
+		bool IsReferencedByScripts()
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x4E22D0))(this);
+		}
+
 		// Highlight
 		bool IsHighlighted()
 		{

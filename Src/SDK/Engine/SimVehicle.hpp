@@ -395,7 +395,44 @@ namespace UFG
 	class CAiDriverComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x518);
+		UFG_PAD(0x568);
+
+		bool m_bAvoidPeds;
+		bool m_bAllowedToPass;
+		bool m_bStayOffSidewalk;
+		bool m_bRespectSpeedLimit;
+		bool m_ObeyTrafficLights;
+		bool m_bCanTurnAround;
+		bool m_bSavedAvoidPeds;
+		bool m_bTemporaryAllowedToPass;
+		bool m_RoadRuleFlagsLocked;
+		bool m_AiAttackEnabled;
+		bool m_AiScriptControlled;
+		uint32_t m_TempPassLaneChangeDirectionCode;
+		bool m_bIgnoreArrivalDirection;
+		bool m_bIsParked;
+		bool m_IsAmbient;
+		uint32_t m_AmbientDriverType;
+		float m_fSearchTimer;
+		float mTargetWaitTimer;
+		float m_RoadSpeedLimitScale;
+		float m_DesiredSpeedLimit;
+		bool m_AvoidObjectsEnabled;
+		bool m_AvoidGeoEnabled;
+		bool m_GoToSlowDownForDestination;
+		bool m_GoToStopAtEnabled;
+		qSafePointer<CSimObject> m_PathingTarget;
+		float m_FacingTargetAngle;
+		float m_StopAtDist;
+		bool m_StopAtUseDestinationDirection;
+
+		struct StopInfo_t
+		{
+			uint32_t eStopStyle;
+			float fSteeringOverride;
+			bool bHasSteeringOverride;
+		};
+		StopInfo_t m_StopInfo;
 
 		float m_StopDist;
 		float m_fDelayedStopDecel;
@@ -408,26 +445,36 @@ namespace UFG
 		bool m_CappingSpeedForStopPoint;
 		bool m_CappingSpeedForNextGuide;
 
-		void SetDrivingMode(uint32_t mode)
+		void SetChaseTarget(CSimVehicle* m_Target)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x658B90))(this, mode);
+			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6587A0))(this, m_Target);
 		}
 
-		void SetDrivingRole(uint32_t role)
+		void SetDrivingMode(AiDriverComponent::eDriverMode p_Mode)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x658C90))(this, role);
+			reinterpret_cast<void(__fastcall*)(void*, AiDriverComponent::eDriverMode)>(UFG_RVA(0x658B90))(this, p_Mode);
+		}
+
+		void SetDrivingRole(AiDriverComponent::eDriverRole p_Role)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, AiDriverComponent::eDriverRole)>(UFG_RVA(0x658C90))(this, p_Role);
+		}
+
+		void SetFollowDistance(float p_Distance)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x6591E0))(this, p_Distance);
 		}
 
 		void StartRacing(float m_SpeedLimit, bool m_WanderAtEnd)
 		{
-			SetDrivingMode(6);
-			SetDrivingRole(1);
+			SetDrivingMode(AiDriverComponent::eDRIVER_MODE_RACE);
+			SetDrivingRole(AiDriverComponent::eDRIVER_ROLE_RACER);
 
 			m_fRaceSpeedLimit = m_SpeedLimit;
 			m_RaceWanderAtEnd = m_WanderAtEnd;
 		}
 	};
-	
+
 	class CRoadSpaceComponent : public CSimComponent
 	{
 	public:
@@ -437,6 +484,12 @@ namespace UFG
 		qVector3 mDestinationDirection;
 		CRacePosition* m_pRacePosition;
 		CRacePosition* m_pRacePositionSteer;
+
+		// To reset use nullptr for m_Target
+		void SetChaseTarget(CSimVehicle* m_Target)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6588B0))(this, m_Target);
+		}
 
 		void SetRaceTrail(CRaceTrail* race_trail)
 		{

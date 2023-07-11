@@ -282,6 +282,16 @@ namespace UFG
 			return m_BestID;
 		}*/
 
+		void ClearDriver(UFG::CSimVehicle* p_Vehicle)
+		{
+			reinterpret_cast<void(__fastcall*)(UFG::CSimVehicle*)>(UFG_RVA(0x674480))(p_Vehicle);
+		}
+
+		CAiDriverComponent* SetAIDriver(UFG::CSimVehicle* p_Vehicle, bool p_Ambient)
+		{
+			return reinterpret_cast<CAiDriverComponent*(__fastcall*)(UFG::CSimCharacter*, UFG::CSimVehicle*, bool)>(UFG_RVA(0x68A270))(nullptr, p_Vehicle, p_Ambient);
+		}
+
 		void PlaceCharacterInVehicle(UFG::CSimCharacter* character, UFG::CSimVehicle* vehicle, UFG::eTargetTypeEnum eRole, bool addAI, bool destroyEquipped, bool ignoreRoleGetInFirstEmptyPassengerSeat)
 		{
 			reinterpret_cast<void(__fastcall*)(UFG::CSimCharacter*, UFG::CSimVehicle*, UFG::eTargetTypeEnum, bool, bool, bool)>(UFG_RVA(0x6864B0))(character, vehicle, eRole, addAI, destroyEquipped, ignoreRoleGetInFirstEmptyPassengerSeat);

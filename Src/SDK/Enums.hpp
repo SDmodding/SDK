@@ -9,6 +9,34 @@ namespace UFG
 		AiGoal_Append = 0x2,
 	};
 
+	namespace AiDriverComponent
+	{
+		enum eDriverMode
+		{
+			eDRIVER_MODE_STOP = 0,
+			eDRIVER_MODE_WANDER,
+			eDRIVER_MODE_GOTO,
+			eDRIVER_MODE_CHASE,
+			eDRIVER_MODE_FOLLOW,
+			eDRIVER_MODE_STOP_AT,
+			eDRIVER_MODE_RACE,
+			eDRIVER_MODE_ESCORT,
+		};
+
+		enum eDriverRole
+		{
+			eDRIVER_ROLE_TRAFFIC = 0,
+			eDRIVER_ROLE_RACER,
+			eDRIVER_ROLE_ENEMY,
+			eDRIVER_ROLE_ALLY,
+			eDRIVER_ROLE_TAXI,
+			eDRIVER_ROLE_COP,
+			eDRIVER_ROLE_BUS,
+			eDRIVER_ROLE_TRAM,
+			eDRIVER_ROLE_FERRY,
+			eDRIVER_ROLE_BOAT,
+		};
+	}
 
 	namespace AimingPlayerComponent
 	{

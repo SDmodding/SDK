@@ -102,6 +102,12 @@ namespace UFG
 	class CAttackRightsComponent
 	{
 	public:
+		// Constructor, call with caution!
+		static CAttackRightsComponent* PropertiesOnActivate(CSceneObjectProperties* m_ObjectProperties)
+		{
+			return reinterpret_cast<CAttackRightsComponent * (__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x37E560))(m_ObjectProperties);
+		}
+
 		static bool HasComponent(CSceneObjectProperties* m_ObjectProperties)
 		{
 			return reinterpret_cast<bool(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x364DA0))(m_ObjectProperties);

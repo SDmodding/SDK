@@ -90,6 +90,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Game/CopSystem.hpp"
 #include "Game/EventDispatcher.hpp"
 #include "Game/ExplosionManager.hpp"
+#include "Game/FactionInterface.hpp"
 #include "Game/GameCamera.hpp"
 #include "Game/GameSlice.hpp"
 #include "Game/GameStat.hpp"
