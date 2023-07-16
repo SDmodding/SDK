@@ -1,7 +1,85 @@
 #pragma once
 
+// CFXSettingsMember TypeUIDs
+#define FX_AUDIO_TYPEUID							0xD77CCEB2
+#define FX_BEAM_TYPEUID								0xA0AAE10F
+#define FX_CORONA_FLARE_TYPEUID						0xB76CCFB8
+#define FX_DECAL_TYPEUID							0xAE323146
+#define FX_DYNAMIC_LIGHT_TYPEUID					0xD6CD7114
+#define FX_EFFECT_EMITTER_TYPEUID					0xFF1F2832
+#define FX_FLARE_TYPEUID							0xA6535FBB
+#define FX_FORCE_TYPEUID							0x433ED8DF
+#define FX_GEO_TYPEUID								0xF1734D8E
+#define FX_LIGHTNING_TYPEUID						0x21AE1C64
+#define FX_PARTICLE_EMITTER_TYPEUID					0x3BEE21DC
+#define FX_TRACK_STRIP_TYPEUID						0x69CE5438
+#define FX_SCREEN_PARTICLE_EMITTER_TYPEUID			0x354C3CDC
+#define FX_VOLUMETRIC_EFFECT_TYPEUID				0xE4B8F46A
+
 namespace UFG
 {
+	// Components
+	class CFXComponentInstance
+	{
+	public:
+		void* vfptr;
+		qNode<CFXComponentInstance> mNode;
+		class CFXOverride* mContainer;
+		float mStartTime;
+		float mEndTime;
+		uint32_t mComponentIndex;
+		bool mIsActive;
+		bool mIsSuspended;
+		int mForceSuspendState;
+		uint32_t mSettingsId;
+	};
+
+	class CDynamicLightInstance : public CFXComponentInstance
+	{
+	public:
+		UFG_PAD(0x28);
+
+		qMatrix44 mTransform;
+		qVector3 mColor;
+		float mDecayRadius;
+		float mFovHalfInner;
+		float mFovHalfOuter;
+		float mShadowNear;
+		uint32_t mTextureUID;
+		float mOnTime;
+		float mOffTime;
+		char mType;
+		char mShadowFlags;
+		char mSpecular;
+		char mClipPlaneCount;
+		uint32_t mLayerUid;
+		float mDecayPower;
+		char mClipPlanes[6];
+		char mDisableAnimation;
+		char mBiasLightCard;
+		uint32_t mLightID;
+		float mAreaLightWidth;
+		float mAreaLightHeight;
+		float mAreaLightNearOffset;
+		float mAreaLightFarOffset;
+		float mAreaLightIntensityScale;
+		uint32_t mTexDistAttenUID;
+		float mTexDistAttenV;
+		uint32_t mPad0;
+
+		UFG_PAD(0x20);
+		// Render::DynamicLightSettingsHandle mSettingsHandle;
+
+		bool mIsFlickeringLightOn;
+		float mFlickerLastChangeTime;
+		float mFlickerChangeTime;
+		qVector3 mFlickerOnColor;
+		qVector3 mFlickerOffColor;
+		float mRadius;
+		float mTimeOfFirstUpdate;
+	};
+
+	// Classes
 	class CFXOverrideSettings
 	{
 	public:
@@ -26,16 +104,60 @@ namespace UFG
 		float mTotalMeshSurfaceArea;
 	};
 
-	class  __declspec(align(16)) CFXInstance
+	class CFXSettingsMember
 	{
 	public:
-		UFG_PAD(0x70);
+		uint32_t typeId;
+		uint32_t nameId;
+		uint32_t guid;
+		qVector3 offset;
+		char offsetWorld;
+		char lodMask;
+		char pad0;
+		char pad1;
+		float start;
+		float end;
+		int rotateType;
+		qVector3 rotateMin;
+		qVector3 rotateMax;
+		qVector3 rotateSpeed;
+		qMatrix44 rotateOffset;
+		float startTime;
+		float endTime;
+	};
 
+	class CFXSettings : public qResourceData
+	{
+	public:
+		qVector3 mAABBMin;
+		qVector3 mAABBMax;
+		float mLength;
+		float mTransformNodeExtraTime;
+		uint64_t mAudioId;
+		uint32_t mSlowMoFxId;
+		float mAttachToCameraZDist;
+		char mLoop;
+		char mComponentCount;
+		char mAttachToCamera;
+		char mPad[13];
+		CFXSettingsMember m_Members[0xFF];
+	};
+
+	class CFXInstance
+	{
+	public:
+		UFG_PAD(0x50);
+
+		CFXSettings* mSettings;
+
+		UFG_PAD(0x8);
+
+		qNode<CFXComponentInstance> mComponents;
 		float mStartTime;
 		float mEndTime;
 		uint32_t mId;
 		float mTransformNodeExtraTime;
-		unsigned __int64 mAudioId;
+		uint64_t mAudioId;
 		uint32_t mSplitScreenViewMask;
 		char mLoop;
 		char mBasisRelativeToParent;
@@ -43,10 +165,30 @@ namespace UFG
 		void* mCullInfo;
 		void* mCullResults;
 		void* mOcclusionQuery;
-		qSafePointer<UFG::CTransformNodeComponent> mParentNode;
+		qSafePointer<CTransformNodeComponent> mParentNode;
 		qMatrix44 mBasis;
 		qMatrix44 mRelativeBasis;
 		CFXOverride* mStateBlockOverride; // SharedPtr
+
+		UFG_PAD(0x8);
+
+		template <typename T>
+		T* GetComponentByIndex(uint32_t m_Index)
+		{
+			for (qNode<CFXComponentInstance>* i = mComponents.mNext; i != &mComponents; i = i->mNext)
+			{
+				CFXComponentInstance* m_FxComponent = i->GetPointerSub<offsetof(CFXComponentInstance, mNode)>();
+				if (m_FxComponent->mComponentIndex == m_Index)
+					return reinterpret_cast<T*>(m_FxComponent);
+			}
+
+			return nullptr;
+		}
+
+		void Update(qVector3 p_CameraPosition, int p_CullIndex, float p_SimTime)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, int, float)>(UFG_RVA(0x1D8FA0))(this, &p_CameraPosition, p_CullIndex, p_SimTime);
+		}
 
 		void SetFxOverride(CFXOverride* p_FxOverride)
 		{
