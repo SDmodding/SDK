@@ -102,6 +102,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #include "Game/PedSpawnManager.hpp"
 #include "Game/ProgressionTracker.hpp"
 #include "Game/RaceManager.hpp"
+#include "Game/RadarSystem.hpp"
 #include "Game/RoadNetwork.hpp"
 #include "Game/SaveLoad.hpp"
 #include "Game/Screen.hpp"
