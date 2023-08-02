@@ -53,6 +53,11 @@ namespace UFG
 
 	namespace MemoryPool
 	{
+		CMemoryPool* GetSimulationPool()
+		{
+			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x235C278));
+		}
+
 		CMemoryPool* FindByName(const char* m_Name)
 		{
 			for (qNode<CMemoryPool>* i = gMemoryPoolList->mNode.mNext; i != &gMemoryPoolList->mNode; i = i->mNext)

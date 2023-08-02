@@ -162,9 +162,43 @@ namespace UFG
 		qVector3 mWorldVelocity;
 		int mInheritXformType;
 
-		void SetWorldTranslation(qVector3 m_Position)
+		static const char* GetName()
 		{
-			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x191520))(this, &m_Position);
+			return reinterpret_cast<const char*>(UFG_RVA(0x16B0BD0));
+		}
+
+		static CTransformNodeComponent* Create(uint32_t p_UID = 0, CTransformNodeComponent* p_Parent = nullptr, bool p_StartSuspended = false)
+		{
+			CTransformNodeComponent* m_NewTransformComponent = reinterpret_cast<CTransformNodeComponent*>(MemoryPool::GetSimulationPool()->Allocate(sizeof(CTransformNodeComponent), GetName(), 0, 1));
+			if (m_NewTransformComponent)
+				m_NewTransformComponent->Constructor(p_UID, p_Parent, p_StartSuspended);
+
+			return m_NewTransformComponent;
+		}
+
+		void Constructor(uint32_t p_UID, CTransformNodeComponent* p_Parent, bool p_StartSuspended)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t, CTransformNodeComponent*, bool)>(UFG_RVA(0x18F1E0))(this, p_UID, p_Parent, p_StartSuspended);
+		}
+
+		void Destructor()
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x18FF10))(this, true);
+		}
+
+		void SetWorldTranslation(qVector3 p_Position)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x191520))(this, &p_Position);
+		}
+
+		void SetLocalTransform(qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qMatrix44*)>(UFG_RVA(0x191250))(this, p_Matrix);
+		}
+
+		void UpdateWorldTransform()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x191D60))(this);
 		}
 	};
 

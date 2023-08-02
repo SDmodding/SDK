@@ -221,9 +221,9 @@ namespace UFG
 			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, CTransformNodeComponent*, uint32_t, void*)>(UFG_RVA(0x1CA510))(this, p_FxID, p_Parent, p_SplitScreenViewMask, p_OverrideObject);
 		}
 
-		qSymbol CreateEffect(qSymbol p_FxID, UFG::qMatrix44 p_Matrix, CTransformNodeComponent* p_Parent, float p_Time = 0.f, uint32_t p_SplitScreenViewMask = -1, void* overrideObject = nullptr)
+		qSymbol CreateEffect(qSymbol p_FxID, qMatrix44* p_Matrix, CTransformNodeComponent* p_Parent, float p_Time = 0.f, uint32_t p_SplitScreenViewMask = -1, void* overrideObject = nullptr)
 		{
-			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, qMatrix44*, CTransformNodeComponent*, float, uint32_t, void*)>(UFG_RVA(0x1C9D30))(this, p_FxID, &p_Matrix, p_Parent, p_Time, p_SplitScreenViewMask, overrideObject);
+			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, qMatrix44*, CTransformNodeComponent*, float, uint32_t, void*)>(UFG_RVA(0x1C9D30))(this, p_FxID, p_Matrix, p_Parent, p_Time, p_SplitScreenViewMask, overrideObject);
 		}
 
 		void KillEffect(qSymbol p_FxID, uint32_t p_KillOption = 0x0)
