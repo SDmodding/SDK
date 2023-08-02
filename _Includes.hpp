@@ -45,6 +45,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 // Defines
 #include "Defines/NodePlayables.hpp"
 #include "Defines/BoneUID.hpp"
+#include "Defines/QSymbolsDictionary.hpp"
 #include "Defines/StringDictionary.hpp"
 #include "Defines/TypeUID.hpp"
 
