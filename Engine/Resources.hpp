@@ -11,4 +11,12 @@ namespace UFG
 		uint32_t mTypeUID;
 		char mDebugName[0x24];
 	};
+
+	struct qResourceHandle
+	{
+		qNode<qResourceHandle> mNode;
+		qResourceData* mData;
+		uint32_t mNameUID;
+		uint32_t mTailPad;
+	};
 }

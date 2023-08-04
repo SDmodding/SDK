@@ -5,8 +5,7 @@ namespace UFG
 	class CMetrics
 	{
 	public:
-		UFG_PAD(0x10);
-
+		qNode<CMetrics> mNode;
 		unsigned __int64 mSimTimeMSec;
 		unsigned int mSimTimeTicks;
 		long double mSimTime;
@@ -25,6 +24,5 @@ namespace UFG
 		float mSimTimeScaleTurbo;
 		float mSimTimeScaleMax;
 	};
-
 	CMetrics* Metrics = reinterpret_cast<CMetrics*>(UFG_RVA(0x203C920));
 }

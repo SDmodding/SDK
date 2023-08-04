@@ -50,21 +50,29 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Defines/TypeUID.hpp"
 
 // Engine Important
+#include "Engine/Metrics.hpp"
 #include "Engine/Resources.hpp"
 #include "Engine/Illusion.hpp"
 #include "Engine/MemoryPool.hpp"
-#include "Engine/Render.hpp"
+#include "Engine/LinearAllocator.hpp"
 
 #include "Engine/PropertySet.hpp"
 #include "Engine/ResourceInventory.hpp"
 #include "Engine/ResourceWarehouse.hpp"
 
 // Engine Illusion
+#include "Engine/Illusion/Classes.hpp"
+#include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
 
-// Engine
-#include "Engine/Metrics.hpp"
+// Engine Render
+#include "Engine/Render/BeamManager.hpp"
+#include "Engine/Render/VDynamic.hpp"
+#include "Engine/Render/Poly.hpp"
+#include "Engine/Render/View.hpp"
+#include "Engine/Render.hpp"
 
+// Engine
 #include "Engine/Action.hpp"
 #include "Engine/AKSoundEngine.hpp"
 #include "Engine/Animation.hpp"
