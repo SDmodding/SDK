@@ -147,4 +147,9 @@ namespace UFG
 			return *reinterpret_cast<CPedSpawningInfo**>(UFG_RVA(0x23DE338));
 		}
 	}
+
+	/* DebugInfo
+	*
+	* PedSpawnManager Render (Green: Ambient | Red: Scripted): https://i.imgur.com/MBrjEPL.png
+	*/
 }
