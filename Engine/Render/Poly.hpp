@@ -7,10 +7,10 @@ namespace Render
 	public:
 		CVDynamic* mVertices;
 
-		void Init(float x, float y, float h, float z)
+		void Init(float x, float y, float w, float h, float z)
 		{
 			mVertices = nullptr;
-			reinterpret_cast<void(__fastcall*)(void*, float, float, float, float)>(UFG_RVA(0x15C30))(this, x, y, h, z);
+			reinterpret_cast<void(__fastcall*)(void*, float, float, float, float, float)>(UFG_RVA(0x15C30))(this, x, y, w, h, z);
 		}
 
 		void SetColors(UFG::qColour* p_Colour0, UFG::qColour* p_Colour1, UFG::qColour* p_Colour2, UFG::qColour* p_Colour3)

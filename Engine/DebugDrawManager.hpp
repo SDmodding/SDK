@@ -69,11 +69,13 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, float, qColour*, qMatrix44*, void*)>(UFG_RVA(0x182F0))(this, &m_Center, m_Radius, &m_Color, m_Matrix, m_Callback);
 		}
 
+		// World Position
 		void DrawTextA(qVector3 m_Pos, qColour m_Color, const char* m_String)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qColour*, const char*)>(UFG_RVA(0x18E60))(this, &m_Pos, &m_Color, m_String);
 		}
 
+		// Screen Position
 		void DrawTextA(int m_X, int m_Y, qColour m_Color, const char* m_String)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, int, int, qColour*, const char*)>(UFG_RVA(0x18EB0))(this, m_X, m_Y, &m_Color, m_String);

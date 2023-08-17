@@ -23,14 +23,7 @@ namespace Render
 		{
 			UFG::qVector3 p0;
 			UFG::qVector3 p1;
-
-			struct BeamSettings_t
-			{
-				float Colour[4];
-				float AnimUVScaleOffset[4];
-			};
-			BeamSettings_t* settings;
-
+			Illusion::CB_BeamSettings* settings;
 			float width;
 			uint32_t texID;
 			uint32_t textureAnimStart;

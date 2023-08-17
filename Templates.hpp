@@ -108,6 +108,10 @@ namespace UFG
 		T* m_UnbindCallback;
 	};
 
+	template<typename T>
+	struct qSafePointerWithCallbacks : qSafePointerWithCallbacksBase<T>
+	{
+	};
 
 	template<typename T>
 	struct qSafePointerNodeWithCallbacks : qSafePointerNode<T>

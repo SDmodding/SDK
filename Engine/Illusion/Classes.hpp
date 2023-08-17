@@ -2,6 +2,28 @@
 
 namespace Illusion
 {
+	// StateValue Params
+	struct CB_BeamSettings
+	{
+		float Colour[4];
+		float AnimUVScaleOffset[4];
+	};
+
+	struct CB_FXOverrideSettings
+	{
+		float ColorTint[4];
+		float Params1[4];
+	};
+
+	struct CB_SceneryInstance
+	{
+		float ColourTint[4];
+		float SIColourTint[4];
+		float Mask[4];
+		float Value0[4];
+	};
+
+	// Generic
 	class CStateValues
 	{
 	public:

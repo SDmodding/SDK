@@ -80,18 +80,11 @@ namespace UFG
 	};
 
 	// Classes
-	class CFXOverrideSettings
-	{
-	public:
-		float ColorTint[4];
-		float Params1[4];
-	};
-
 	class CFXOverride
 	{
 	public:
 		int mReferenceCount;
-		__declspec(align(16)) CFXOverrideSettings stateBlock;
+		__declspec(align(16)) Illusion::CB_FXOverrideSettings stateBlock;
 		uint32_t modelToEmitFromUID;
 		float mAABBMin[3];
 		float mAABBMax[3];

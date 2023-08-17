@@ -2,6 +2,17 @@
 
 namespace UFG
 {
+	enum eActiveZoneClass
+	{
+		Always_Active = 0x0,
+		PreferActive_ExtraLow_Ok = 0x1,
+		PreferExtraLow_Proxy_Bad = 0x2,
+		PreferExtraLow_Proxy_Ok = 0x3,
+		PreferProxy_Inactive_Ok = 0x4,
+		Always_Inactive = 0x5,
+		Zone_Classes_Count = 0x6,
+	};
+
 	enum AiPathGoalMode
 	{
 		AiGoal_Replace = 0x0,
@@ -618,7 +629,41 @@ namespace UFG
 			CurrentVehicleKills = 0xA2,
 			Num_Int32_Stats = 0xA3,
 		};
+	}
 
+	enum eHowSpawned
+	{
+		FromScript = 0x0,
+		FromRegion = 0x1,
+		FromPoint = 0x2,
+		FromNetwork = 0x3,
+	};
+
+	enum ePedType
+	{
+		AmbientPed = 0x1,
+		ScriptedPed = 0x2,
+	};
+
+	namespace PedSpawningInfo
+	{
+		enum eActiveStatus
+		{
+			Inactive = 0x0,
+			Active = 0x1,
+			ExtraLowPower = 0x2,
+			NormalSuspend = 0x3,
+			NetFull = 0x4,
+			NetProxy = 0x5,
+			eActiveStatus_Count = 0x6,
+		};
+
+		enum eDrawList
+		{
+			DrawList_None = 0x0,
+			DrawList_Draw = 0x1,
+			DrawList_NoDraw = 0x2,
+		};
 	}
 
 	namespace PhysicsVehicle

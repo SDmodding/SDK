@@ -17,6 +17,7 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #define UFG_PAD_INSERT(x, y) x ## y
 #define UFG_PAD_DEFINE(x, y) UFG_PAD_INSERT(x, y)
 #define UFG_PAD(size) char UFG_PAD_DEFINE(padding_, __LINE__)[size]
+#define UFG_PAD_ALIGN(size) private: UFG_PAD(size); public:
 
 template <uint32_t Index, typename ReturnType, typename... Args>
 __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
@@ -61,6 +62,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/ResourceWarehouse.hpp"
 
 // Engine Illusion
+#include "Engine/Illusion/Enums.hpp"
 #include "Engine/Illusion/Classes.hpp"
 #include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
