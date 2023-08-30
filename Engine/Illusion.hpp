@@ -180,4 +180,10 @@ namespace Illusion
 		char mOwnsDepthTexture;
 		char mDescription[32];
 	};
+
+	class CTexture
+	{
+	public:
+
+	};
 }

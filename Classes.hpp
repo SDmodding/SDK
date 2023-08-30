@@ -430,6 +430,17 @@ namespace UFG
 			return m_MatrixRot;
 		}
 
+		// Use only if you know what you're doing!
+		void SetCharacterYaw(float p_Degrees)
+		{
+			float m_Radians = UFG_Deg2Rad(p_Degrees);
+			v0.x = cosf(m_Radians);
+			v0.y = sinf(m_Radians);
+
+			v1.x = -v0.y;
+			v1.y = v0.x;
+		}
+
 		// This rotate funcs are wrong...
 		void RotateRight(qVector3 vRot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
 		{

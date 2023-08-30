@@ -85,6 +85,16 @@ namespace UFG
 		ePedType mPedType;
 		uint32_t mStatusChangedFrame;
 
+		float GetSpawnDelta()
+		{
+			return (Metrics->mSimTimeFloat - mSpawnTime);
+		}
+
+		bool CanDraw()
+		{
+			return (mCulledTime == 0.f && (mPrevCulledTime <= 0.f || mLocationClassification));
+		}
+
 		void Reset(bool m_PreserveProxies = false)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x415820))(this, m_PreserveProxies);

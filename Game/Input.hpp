@@ -231,7 +231,7 @@ namespace UFG
 			CInputActionData* Get_L2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B650))->mDataPerController[GetActiveControllerNum()]; }
 			CInputActionData* Get_L2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B678))->mDataPerController[GetActiveControllerNum()]; }
 
-			// Keyboard SHIFT
+			// Keyboard - SHIFT
 			CInputActionData* Get_R2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7B8))->mDataPerController[GetActiveControllerNum()]; }
 			CInputActionData* Get_R2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7E0))->mDataPerController[GetActiveControllerNum()]; }
 

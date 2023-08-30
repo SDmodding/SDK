@@ -24,6 +24,21 @@ namespace Illusion
 	};
 
 	// Generic
+	class  __declspec(align(16)) CViewportScissorState
+	{
+	public:
+		float mViewPortX;
+		float mViewPortY;
+		float mViewPortWidth;
+		float mViewPortHeight;
+		float mViewPortMinDepth;
+		float mViewPortMaxDepth;
+		int mScissorX;
+		int mScissorY;
+		int mScissorWidth;
+		int mScissorHeight;
+	};
+
 	class CStateValues
 	{
 	public:

@@ -53,8 +53,6 @@ namespace UFG
 		qSafePointer<CSimObject> pSimObject;
 	};
 
-	UFG_PAD(sizeof(CEntityDiedEvent));
-
 	class CCollisionEvent : public CEvent
 	{
 	public:
