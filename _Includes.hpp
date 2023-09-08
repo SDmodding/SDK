@@ -35,12 +35,18 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Functions.hpp"
 
 // Engine Havok
+#include "Engine/Havok/Enums.hpp"
 #include "Engine/Havok/Classes.hpp"
+#include "Engine/Havok/hkReferencedObject.hpp"
 #include "Engine/Havok/hkpCollidable.hpp"
 #include "Engine/Havok/hkpRayCast.hpp"
 #include "Engine/Havok/hkpShape.hpp"
 #include "Engine/Havok/hkpConvexShape.hpp"
 #include "Engine/Havok/hkpBoxShape.hpp"
+#include "Engine/Havok/hkpWorldObject.hpp"
+#include "Engine/Havok/hkpMotion.hpp"
+#include "Engine/Havok/hkpEntity.hpp"
+#include "Engine/Havok/hkpRigidBody.hpp"
 
 
 // Defines
@@ -81,7 +87,6 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Attachment.hpp"
 #include "Engine/AudioEntity.hpp"
 #include "Engine/BSP.hpp"
-#include "Engine/Entity.hpp"
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"
 #include "Engine/DataStreamer.hpp"

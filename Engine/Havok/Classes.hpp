@@ -25,3 +25,13 @@ struct hkVector4f
 		m_quad = _mm_set_ps(w, z, y, x);
 	}
 };
+
+struct hkQuaternionf
+{
+	hkVector4f m_vec;
+
+	void SetAxisAngle(hkVector4f* p_Axis, float p_Angle)
+	{
+		reinterpret_cast<void(__fastcall*)(void*, hkVector4f*, float)>(UFG_RVA(0xC57910))(this, p_Axis, p_Angle);
+	}
+};

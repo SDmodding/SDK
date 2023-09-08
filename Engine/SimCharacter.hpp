@@ -54,6 +54,15 @@ namespace UFG
 	class CCharacterRigidBody
 	{
 	public:
+		UFG_PAD(0x20);
+
+		hkpRigidBody* m_character;
+
+		UFG_PAD(0x8);
+
+		hkVector4f mTopVertex;
+		hkVector4f mBottomVertex;
+		hkVector4f m_up;
 	};
 
 	class CCharacterControllerInterface : public CSimComponent
@@ -380,7 +389,11 @@ namespace UFG
 	class CCharacterPhysicsComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x160);
+		UFG_PAD(0x38);
+
+		RebindingComponentHandle<class CRagdollComponent> mRagdollComponent;
+
+		UFG_PAD(0xF8);
 
 		qVector3 mAdditiveVelocity;
 

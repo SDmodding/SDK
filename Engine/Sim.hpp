@@ -122,9 +122,9 @@ namespace UFG
 
 		virtual ~CSimObject() { }
 
-		virtual void Attach(CSimComponent* component, unsigned int index) { }
+		virtual void Attach(CSimComponent* p_Component, uint32_t p_Index) { }
 
-		virtual void Detach(CSimComponent* component) { }
+		virtual void Detach(CSimComponent* p_Component) { }
 
 		// SkookumScript
 		bool IsReferencedByScripts()
