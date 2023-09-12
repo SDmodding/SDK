@@ -18,6 +18,9 @@
 
 #define SimObjectFXComponent_TypeUID						0x32000001
 
+#define CharacterAIAwarenessComponent_TypeUID				0x66000001
+#define CharacterAIActionTreeComponent_TypeUID				0x52000001
+#define CharacterAimingPlayerComponent_TypeUID				0xA2000003
 #define CharacterAttackRightsComponent_TypeUID				0x4A000001
 #define CharacterAudioComponent_TypeUID						0xD2000003
 #define CharacterPropertiesComponent_TypeUID				0xB2000005

@@ -35,8 +35,10 @@ namespace UFG
 
 		~CSimComponent() { UFG_VCall<0, void>(this); }
 		const char* GetDebugTypeName() { return UFG_VCall<4, const char*>(this); }
+		void OnAttach(UFG::CSimObject* p_SimObject) { UFG_VCall<6, void, UFG::CSimObject*>(this, p_SimObject); }
 		void Suspend() { UFG_VCall<8, void>(this); }
 		void Restore() { UFG_VCall<9, void>(this); }
+		void OnDetach() { UFG_VCall<10, void>(this); }
 	};
 
 	class CCompositeDrawableComponent : public CSimComponent

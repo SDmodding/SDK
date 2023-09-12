@@ -82,6 +82,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 
 // Engine
 #include "Engine/Action.hpp"
+#include "Engine/AIAwareness.hpp"
 #include "Engine/AKSoundEngine.hpp"
 #include "Engine/Animation.hpp"
 #include "Engine/Attachment.hpp"

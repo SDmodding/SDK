@@ -19,12 +19,18 @@ namespace UFG
 		qVector3 mDesiredLookAtPoint;
 		bool mDesireToLookAtPointEye;
 		qVector3 mDesiredLookAtPointEye;
-
-		UFG_PAD(0x4C);
-
-		unsigned __int64 mSignals;
-		unsigned __int64 mActionRequests[9];
+		AIAwareness::CSubProfileAnimation mAwarenessIntention;
+		float mCurrentRotationInput;
+		float mCurrentRotationSpeed;
+		float mCurrentRotationSignal;
+		float mCurrentRotationAccel;
+		float mCurrentRotationAngularVel;
+		uint32_t mNodeRequestHash;
+		uint64_t mSignals;
+		uint64_t mActionRequests[9];
 		char mActionRequestChargeTimes[548];
+		uint64_t mFacialRequests;
+		char mFacialRequestChargeTimes[32];
 
 		void SetSpeed(float m_Value)
 		{
@@ -74,6 +80,17 @@ namespace UFG
 	};
 
 	// Components
+	class CAIAwarenessComponent : public UFG::CSimComponent
+	{
+	public:
+		qNode<CAIAwarenessComponent> mNode;
+		AIAwareness::CProfile* mpCurrentProfile;
+		AIAwareness::CEffector* mpHeadEffector;
+		AIAwareness::CEffector* mpEyeEffector;
+		AIAwareness::CKnowledgeSpace* mpKnowledgeSpace;
+		bool mEnabled;
+	};
+
 	class CHealthComponent : public CSimComponent
 	{
 	public:
@@ -108,7 +125,7 @@ namespace UFG
 		}
 	};
 
-	class CAttackRightsComponent
+	class CAttackRightsComponent : public CSimComponent
 	{
 	public:
 		// Constructor, call with caution!
@@ -120,16 +137,6 @@ namespace UFG
 		static bool HasComponent(CSceneObjectProperties* m_ObjectProperties)
 		{
 			return reinterpret_cast<bool(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x364DA0))(m_ObjectProperties);
-		}
-
-		void OnAttach(CSimObject* m_Character)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x378900))(this, m_Character);
-		}
-
-		void OnDetach()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x37A110))(this);
 		}
 
 		void InitFromProperties(qPropertySet* m_PropertySet)
@@ -294,21 +301,11 @@ namespace UFG
 		}
 	};
 
-	class CAIActionTreeComponent
+	class CAIActionTreeComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0xD8);
+		UFG_PAD(0x98);
 		CActionController mActionController;
-
-		void OnAttach(CSimObject* object)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x377E00))(this, object);
-		}
-
-		void OnDetach()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x379620))(this);
-		}
 	};
 
 	class CAICoverComponent : public CSimComponent
@@ -341,10 +338,39 @@ namespace UFG
 	public:
 	};
 
-	class CActiveAIEntityComponent
+	class CAIEntityComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x1030);
+		UFG_PAD(0x4F8);
+		/*UFG::RebindingComponentHandle<UFG::TransformNodeComponent, 0> m_pTransformNodeComponent;
+		UFG::RebindingComponentHandle<UFG::ActionTreeComponent, 0> m_pActionTreeComponent;
+		UFG::RebindingComponentHandle<UFG::RigidBodyComponent, 0> m_pRigidBodyComponent;
+		UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent, 0> m_pCharacterAnimationComponent;
+		UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent, 0> m_pSimObjectCharacterPropertiesComponent;
+		UFG::RebindingComponentHandle<UFG::AttackRightsComponent, 0> m_pAttackRightsComponent;
+		UFG::RebindingComponentHandle<UFG::SceneObjectProperties, 0> m_pSceneObjectProperties;
+		UFG::RebindingComponentHandle<UFG::HealthComponent, 0> m_pHealthComponent;
+		UFG::RebindingComponentHandle<UFG::TargetingSystemPedBaseComponent, 0> m_pTargetingSystemBaseComponent;
+		UFG::RebindingComponentHandle<UFG::CharacterOccupantComponent, 0> m_pCharacterOccupantComponent;
+		UFG::SidewalkWanderData m_WanderData;
+		UFG::HeadTrackTarget m_HeadTrackingTarget;
+		bool m_AIPositionValid;
+		bool m_HostilityEnabled;
+		UFG::NearbyCharacter* m_pNearbyCharacter;
+		UFG::qSafePointer<UFG::GroupComponent, UFG::GroupComponent> m_pGroupComponent;
+		UFG::qSafePointer<UFG::CombatRegion, UFG::CombatRegion> m_pCombatRegion;
+		UFG::qFixedArray<UFG::ThreatTarget, 10> m_ThreatTargets;
+		UFG::qVector3 m_vCombatRegionMoveToVec;
+		bool m_bActive;
+		bool m_bCanWander;
+		bool m_bRefreshWander;
+		bool m_bCanUseCrosswalks;*/
+	};
+
+	class CActiveAIEntityComponent : public CAIEntityComponent
+	{
+	public:
+		UFG_PAD(0xAF8);
 
 		float m_MaxEngagementDistanceXY;
 		float m_MaxEngagementDistanceZ;
@@ -787,11 +813,6 @@ namespace UFG
 		CSimObject* m_pLastFocusTarget;
 		float m_fMinimumTargetDistanceSquared;
 
-		void OnAttach(CSimObject* object)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x53F000))(this, object);
-		}
-
 		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, const bool bModifyCollisionAccordingToLock)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
@@ -992,15 +1013,14 @@ namespace UFG
 		{
 			CSimComponent* m_Component = m_Components.p[19].m_pComponent;
 
-			// AIActionTreeComponent::_TypeUID
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1)
 					m_Component = m_Components.p[6].m_pComponent;
 				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0x52000001);
+					m_Component = GetComponentOfTypeHK(CharacterAIActionTreeComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0x52000001);
+					m_Component = GetComponentOfType(CharacterAIActionTreeComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CAIActionTreeComponent*>(m_Component);
@@ -1170,9 +1190,9 @@ namespace UFG
 			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
 			{
 				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xA2000003);
+					m_Component = GetComponentOfTypeHK(CharacterAimingPlayerComponent_TypeUID);
 				else
-					m_Component = GetComponentOfType(0xA2000003);
+					m_Component = GetComponentOfType(CharacterAimingPlayerComponent_TypeUID);
 			}
 
 			return reinterpret_cast<CAimingPlayerComponent*>(m_Component);
