@@ -1,6 +1,8 @@
 #pragma once
 #include <xmmintrin.h>
 
+typedef uint16_t hkHalf;
+
 struct hkVector4f
 {
 	__m128 m_quad;

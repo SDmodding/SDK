@@ -17,4 +17,9 @@ public:
 	{
 		reinterpret_cast<void(_fastcall*)(void*, hkQuaternionf*)>(UFG_RVA(0xD62800))(this, p_Rotation);
 	}
+
+	void SetPositionAndRotation(hkVector4f* p_Position, hkQuaternionf* p_Rotation)
+	{
+		reinterpret_cast<void(_fastcall*)(void*, hkVector4f*, hkQuaternionf*)>(UFG_RVA(0xD62830))(this, p_Position, p_Rotation);
+	}
 };

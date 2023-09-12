@@ -97,6 +97,11 @@ namespace UFG
 		CActionNodePlayable* m_previousNode;
 		CActionNodePlayable* m_SequenceNode;
 
+		bool IsPlaying(uint32_t p_ID, uint32_t p_MostUsedInex = -1, bool p_RecurseOnSpawns = false)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, uint32_t, bool)>(UFG_RVA(0x26F170))(this, &p_ID, p_MostUsedInex, p_RecurseOnSpawns);
+		}
+
 		void Play(CActionNode* m_Node, bool m_ForcePlay)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, m_Node, m_ForcePlay);

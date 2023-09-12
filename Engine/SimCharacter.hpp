@@ -69,6 +69,24 @@ namespace UFG
 		hkVector4f mTopVertex;
 		hkVector4f mBottomVertex;
 		hkVector4f m_up;
+		float m_maxSlopeCosine;
+		int m_userPlanes;
+		float m_penetrationRecoverySpeed;
+		float m_maxSpeedForSimplexSolver;
+		float m_supportDistance;
+		float mSupportRadius;
+		float m_heightAboveGround;
+		bool m_isPlayer;
+		bool m_fixCurbContacts;
+		bool m_supportedOffCentre;
+		bool m_isInWater;
+		bool m_superMassive;
+
+		UFG_PAD(0x18);
+		//hkArray<CharacterRigidBody::VertPointInfo, hkContainerHeapAllocator> m_verticalContactPoints;
+
+		hkVector4f m_acceleration;
+		float m_maxForce;
 	};
 
 	class CCharacterControllerInterface : public CSimComponent
@@ -331,6 +349,11 @@ namespace UFG
 	{
 	public:
 		CIntention m_Intention;
+
+		void DoParkour(UFG::qVector3* p_Direction, uint32_t p_CheckTypes)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*, void*, uint32_t, CIntention*, bool)>(UFG_RVA(0x352DE0))(this, p_Direction, nullptr, p_CheckTypes, &m_Intention, false);
+		}
 	};
 
 	class CAICharacterControllerComponent : public CAICharacterControllerBaseComponent
@@ -419,8 +442,26 @@ namespace UFG
 
 		RebindingComponentHandle<class CRagdollComponent> mRagdollComponent;
 
-		UFG_PAD(0xF8);
+		UFG_PAD(0xB0);
 
+		struct GroundProperties_t
+		{
+			qVector3 groundPosition;
+			qVector3 groundNormal;
+			float heightAboveGround;
+			float maxOffGroundElevation;
+			float timeOffGround;
+			float latchedFallDistance;
+			float latchedFallTime;
+			uint64_t groundObjectHandleUid;
+			uint64_t groundSurfaceHandleUid;
+			uint32_t support;
+			uint32_t isOnGround : 1;
+			uint32_t isOnGroundFiltered : 1;
+			uint32_t prevOnGround : 1;
+			uint32_t partiallySupported : 1;
+		};
+		GroundProperties_t mGroundProperties;
 		qVector3 mAdditiveVelocity;
 
 		UFG_PAD(0x4);
@@ -890,6 +931,74 @@ namespace UFG
 			qMatrix44 m_Xform;
 		};
 		qFixedArray<CloseTarget_t, 100> m_CloseTargetsList;
+	};
+
+	class CSensorComponent : public CSimComponent
+	{
+	public:
+		CParkourHandle* FindClosestParkourHandle(UFG::qVector3* p_Position, UFG::qVector3* p_Orentation, float p_Angle, float p_BufferZone, float p_DistanceMinXY, float p_DistanceMaxXY, float p_DistanceMinZ, float p_DistanceMaxZ, eSimObjectVehicleTypeEnum checkAttachedToVehicleType, Parkour::CheckFlags p_CheckFlags, UFG::qVector3* p_ContactPosition)
+		{
+			return reinterpret_cast<CParkourHandle*(__fastcall*)(void*, UFG::qVector3*, UFG::qVector3*, float, float, float, float, float, float, eSimObjectVehicleTypeEnum, Parkour::CheckFlags, UFG::qVector3*)>(UFG_RVA(0x27B370))(this, p_Position, p_Orentation, p_Angle, p_BufferZone, p_DistanceMinXY, p_DistanceMaxXY, p_DistanceMinZ, p_DistanceMaxZ, checkAttachedToVehicleType, p_CheckFlags, p_ContactPosition);
+		}
+	};
+
+	class CWorldContextComponent : public CSimComponent
+	{
+	public:
+		qNode<CWorldContextComponent> mNode;
+		qMatrix44 mLatchTest;
+		qMatrix44 mLatchContactPoint;
+		qMatrix44 mWorldAnchor;
+		bool mSyncFeet;
+		bool mSyncLatchedHandle;
+		int mSyncBoneIndex;
+		bool mSyncPositionOnly;
+		bool mSyncToClosestEndpoint;
+		bool mSyncPlanar;
+		bool mSyncXForward;
+		bool mSyncLeftEdge;
+		bool mSyncRightEdge;
+		bool mLockSyncPosition;
+		bool mSyncPositionLocked;
+		float mDistanceFromEdge;
+		float mBlendRate;
+		float mBlendWeight;
+		int mFocusLatchCount;
+		qSafePointer<CParkourHandle> mFocusParkourHandle;
+		qSafePointer<CParkourHandle> mParkourHandle;
+
+		UFG_PAD(0x80);
+		/*UFG::CoverCornerHandle mFocusCoverCornerHandle;
+		UFG::CoverCornerHandle mLatchedCoverCornerHandle;*/
+
+		void* mpCoverPosition;
+		bool mbSyncingCoverParkour;
+		bool mbSyncingCoverLCorner;
+		bool mbSyncingCoverRCorner;
+		qList<CAttachment> mAttachments;
+		RebindingComponentHandle<CCharacterPhysicsComponent> mCharacterPhysicsComponent;
+		CActionNode* mToSwimming;
+		RebindingComponentHandle<CActionTreeComponent> mActionTreeComponent;
+
+		void SetFocusParkourHandle(CParkourHandle* p_NewHandle)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CParkourHandle*, void*)>(UFG_RVA(0x54D1B0))(this, p_NewHandle, nullptr);
+		}
+
+		void SetParkourHandle(CParkourHandle* p_NewHandle)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CParkourHandle*)>(UFG_RVA(0x53C8D0))(this, p_NewHandle);
+		}
+
+		bool IsSyncing()
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x53C1C0))(this);
+		}
+
+		void StopSync()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5528C0))(this);
+		}
 	};
 
 	// Main

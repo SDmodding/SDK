@@ -513,6 +513,12 @@ namespace UFG
 			
 			return m_Ret;
 		}
+
+		// Crashes on 'hkQsTransformf::get4x4ColumnMajor' for some odd reason.
+		void BlendSlerp(qMatrix44* p_SourceA, qMatrix44* p_SourceB, float p_Weight)
+		{
+			reinterpret_cast<void(__fastcall*)(qMatrix44*, qMatrix44*, qMatrix44*, float)>(UFG_RVA(0x3A4A20))(this, p_SourceA, p_SourceB, p_Weight);
+		}
 	};
 
 	class qQuaternion

@@ -96,6 +96,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Components.hpp"
 #include "Engine/FXManager.hpp"
 #include "Engine/ObjectResourceManager.hpp"
+#include "Engine/Parkour.hpp"
 #include "Engine/Sim.hpp"
 #include "Engine/VoiceProfile.hpp"
 #include "Engine/SimVehicle.hpp"

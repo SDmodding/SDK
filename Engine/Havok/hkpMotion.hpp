@@ -17,18 +17,19 @@ public:
 	};
 	MotionType m_type;
 
-	UFG_PAD(0x12F);
+	UFG_PAD(0xBF);
 	/*char m_deactivationIntegrateCounter;
 	unsigned __int16 m_deactivationNumInactiveFrames[2];
-	__declspec(align(16)) hkMotionState m_motionState;
+	__declspec(align(16)) hkMotionState m_motionState;*/
+
 	hkVector4f m_inertiaAndMassInv;
 	hkVector4f m_linearVelocity;
 	hkVector4f m_angularVelocity;
 	hkVector4f m_deactivationRefPosition[2];
-	unsigned int m_deactivationRefOrientation[2];
-	hkpMaxSizeMotion* m_savedMotion;
-	unsigned __int16 m_savedQualityTypeIndex;
-	hkHalf m_gravityFactor;*/
+	uint32_t m_deactivationRefOrientation[2];
+	hkpMotion* m_savedMotion;
+	uint16_t m_savedQualityTypeIndex;
+	hkHalf m_gravityFactor;
 
 	void SetRotation(hkQuaternionf* p_Rotation)
 	{

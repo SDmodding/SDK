@@ -38,6 +38,8 @@
 #define CharacterInventoryComponent_TypeUID					0xAC000001
 #define CharacterRagdollComponent_TypeUID					0x82000001
 #define CharacterOccupantComponent_TypeUID					0x96000001
+#define CharacterSensorComponent_TypeUID					0x84000001
+#define CharacterWorldContextComponent_TypeUID				0xA6000001
 
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
 #define VehicleAiDriverComponent_TypeUID					0xD8000003
