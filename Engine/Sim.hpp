@@ -274,6 +274,23 @@ namespace UFG
 			return reinterpret_cast<CFXSimComponent*>(m_Component);
 		}
 
+		CActionTreeComponent* GetActionTree()
+		{
+			CSimComponent* m_Component = m_Components.p[7].m_pComponent;
+
+			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
+			{
+				if ((m_Flags >> 13) & 1)
+					m_Component = m_Components.p[6].m_pComponent;
+				else if ((m_Flags >> 12) & 1)
+					m_Component = GetComponentOfTypeHK(SimObjectActionTreeComponent_TypeUID);
+				else
+					m_Component = GetComponentOfType(SimObjectActionTreeComponent_TypeUID);
+			}
+
+			return reinterpret_cast<CActionTreeComponent*>(m_Component);
+		}
+
 		CBaseAnimationComponent* GetBaseAnimation()
 		{
 			CSimComponent* m_Component = nullptr;

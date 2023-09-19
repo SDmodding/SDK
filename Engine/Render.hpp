@@ -32,6 +32,11 @@ namespace Render
 		}
 	};
 	CDepthOfField* DepthOfField = reinterpret_cast<CDepthOfField*>(UFG_RVA(0x2129328));
+
+	bool IsLoadScreenRendering()
+	{
+		return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x48050))();
+	}
 }
 
 namespace UFG

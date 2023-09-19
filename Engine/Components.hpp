@@ -41,6 +41,22 @@ namespace UFG
 		void OnDetach() { UFG_VCall<10, void>(this); }
 	};
 
+	class CActionTreeComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x68);
+
+		bool mNisUpdated;
+		const char* mActionTreeFileName;
+		CActionContext* mpActionContext;
+		CActionController mActionController;
+
+		void Reset()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
+		}
+	};
+
 	class CCompositeDrawableComponent : public CSimComponent
 	{
 	public:
@@ -71,6 +87,14 @@ namespace UFG
 		}
 	};
 
+	class CPowerManagementComponent : public CSimComponent
+	{
+	public:
+		void PreventSuspendTemporarily(float p_Time)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x588930))(this, p_Time);
+		}
+	};
 
 	class CStreamedResourceComponent : public CSimComponent
 	{

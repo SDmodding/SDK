@@ -60,5 +60,10 @@ namespace UFG
 
 			Teleport(m_pSimObject, &m_Matrix);
 		}
+
+		void ResetState(CSimObject* p_SimObject, bool p_KeepItems, bool p_DeleteItems) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(CSimObject*, bool, bool)>(UFG_RVA(0x54A8D0))(p_SimObject, p_KeepItems, p_DeleteItems);
+		}
 	}
 }

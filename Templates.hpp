@@ -71,8 +71,8 @@ namespace UFG
 	struct LinearGraph
 	{
 		int nData;
-		const float* fDomain;
-		const T* tRange;
+		float* fDomain;
+		T* tRange;
 	};
 
 	template<typename T>

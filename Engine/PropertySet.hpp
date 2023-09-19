@@ -186,6 +186,11 @@ namespace UFG
 
 		uint32_t mNumElements;
 
+		void AddString(const char* p_String)
+		{
+			reinterpret_cast<void(__fastcall*)(qPropertyList*, const char*)>(UFG_RVA(0x1E8CB0))(this, p_String);
+		}
+
 		const char* GetString(uint32_t index)
 		{
 			return reinterpret_cast<const char*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9AB0))(this, index);
@@ -213,6 +218,11 @@ namespace UFG
 		qPropertySet* Find(qSymbol symbol)
 		{
 			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertyList*, qSymbol*)>(UFG_RVA(0x464730))(this, &symbol);
+		}
+
+		void RemoveAll()
+		{
+			reinterpret_cast<void(__fastcall*)(qPropertyList*)>(UFG_RVA(0x1FB810))(this);
 		}
 	};
 

@@ -186,6 +186,23 @@ namespace UFG
 		}
 	};
 
+	struct qStringBuilder
+	{
+		char* mBuffer;
+		int mBufferSize;
+		int mStringLength;
+
+		~qStringBuilder()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x164430))(this);
+		}
+
+		qStringBuilder()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1620F0))(this);
+		}
+	};
+
 	class qColour
 	{
 	public:
@@ -221,6 +238,12 @@ namespace UFG
 		float Length()
 		{
 			return sqrtf(x * x + y * y);
+		}
+
+		float DistTo(qVector2* m_Other)
+		{
+			qVector2 m_Delta(x - m_Other->x, y - m_Other->y);
+			return m_Delta.Length();
 		}
 	};
 
@@ -284,6 +307,16 @@ namespace UFG
 		{
 			qVector3 m_Delta(x - m_Other->x, y - m_Other->y, z - m_Other->z);
 			return m_Delta.Length();
+		}
+
+		__inline float DistTo2D(qVector2* m_Other)
+		{
+			return reinterpret_cast<qVector2*>(this)->DistTo(m_Other);
+		}
+
+		__inline float DistTo2D(qVector3* m_Other)
+		{
+			return DistTo2D(reinterpret_cast<qVector2*>(m_Other));
 		}
 
 		void ConvertToRad()

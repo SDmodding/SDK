@@ -79,6 +79,11 @@ namespace UFG
 			mPose.GetTranslation(m_BoneID, m_Result);
 		}
 
+		void GetPositionhkQ(hkQsTransformf* p_Result)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, hkQsTransformf*)>(UFG_RVA(0x3A9570))(this, p_Result);
+		}
+
 		CAttachment* GetAttachment(UFG::CSimObject* m_AttachedSimObject)
 		{
 			for (qNode<CAttachment>* i = mAttachments.mNode.mNext; i != &mAttachments.mNode; i = i->mNext)

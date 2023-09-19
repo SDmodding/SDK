@@ -37,3 +37,10 @@ struct hkQuaternionf
 		reinterpret_cast<void(__fastcall*)(void*, hkVector4f*, float)>(UFG_RVA(0xC57910))(this, p_Axis, p_Angle);
 	}
 };
+
+struct hkQsTransformf
+{
+	hkVector4f m_translation;
+	hkQuaternionf m_rotation;
+	hkVector4f m_scale;
+};

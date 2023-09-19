@@ -1,0 +1,22 @@
+Some components steps update calls from UpdateSim
+
+AICharacterControllerComponent                  - 421
+DialogueAnimationComponent                      - 422
+ActionTreeComponent                             - 425
+ActionTreeResourcesComponent                    - 426
+UELComponent                                    - 427
+FacialActionTreeComponent                       - 428
+AnimationLODComponent                           - 431
+BaseAnimationComponent                          - 432
+AICoverComponent                                - 433
+WorldContextComponent                           - 434
+VehicleAudioComponent                           - 435
+ActorAudioComponent                             - 436
+AudioEmitterComponent                           - 437
+SimObjectWeaponPropertiesComponent              - 438
+CharacterPhysicsComponent                       - 476
+RagdollComponent                                - 477
+SensorComponent                                 - 478
+PhantomVolumeComponent                          - 479
+RigidBodyComponent                              - 480
+CharacterEffectsComponent                       - 481

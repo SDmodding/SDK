@@ -10,9 +10,11 @@
 #define ScriptCameraComponent_TypeUID						0x1E000085
 #define TurfCameraComponent_TypeUID							0x1E000101
 
+#define SimObjectActionTreeComponent_TypeUID				0xC8000001
 #define SimObjectProperties_TypeUID							0xB2000001
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
 #define SimObjectBaseAnimation_TypeUID						0xC6000001
+#define SimObjectPowerManagementComponent_TypeUID			0xD0000001
 #define SimObjectRigidbody_TypeUID							0x16000003
 #define SimObjectStreamedResource_TypeUID					0x72000001
 
@@ -27,7 +29,6 @@
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterAICoverComponent_TypeUID					0x64000001
 #define CharacterHealthComponent_TypeUID					0xAA000001
-#define CharacterActionTreeComponent_TypeUID				0xC8000001
 #define CharacterAnimationComponent_TypeUID					0xC6000003
 #define CharacterHitReactionComponent_TypeUID				0xA8000001
 #define CharacterTargetingPedComponent_TypeUID				0xA0000003
@@ -36,6 +37,7 @@
 #define CharacterPhysicsComponent_TypeUID					0x7A000001
 #define CharacterNavComponent_TypeUID						0x40000001
 #define CharacterInventoryComponent_TypeUID					0xAC000001
+#define CharacterInterestPointUserComponent_TypeUID			0x62000001
 #define CharacterRagdollComponent_TypeUID					0x82000001
 #define CharacterOccupantComponent_TypeUID					0x96000001
 #define CharacterSensorComponent_TypeUID					0x84000001

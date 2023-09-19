@@ -2,7 +2,6 @@
 
 namespace UFG
 {
-	class CActionTreeComponent;
 	// ...
 
 	class CIntention
@@ -132,6 +131,11 @@ namespace UFG
 		float m_fRegenerativeHealthRate;
 		float m_fRegenerativeHealthRatio;
 
+		void Reset()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5497A0))(this);
+		}
+
 		void SetHealth(int uHealth)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, int, void*)>(UFG_RVA(0x54D3D0))(this, uHealth, nullptr);
@@ -241,22 +245,6 @@ namespace UFG
 		qSymbol m_symFactionClass;
 	};
 
-	class CActionTreeComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x68);
-
-		bool mNisUpdated;
-		const char* mActionTreeFileName;
-		CActionContext* mpActionContext;
-		CActionController mActionController;
-
-		void Reset()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
-		}
-	};
-
 	class CHitReactionComponent : public CSimComponent
 	{
 	public:
@@ -343,16 +331,37 @@ namespace UFG
 		int m_iHoldCoverPositionRefs;
 		int m_iAllowHoldCoverPositionUpdateRefs;
 		int m_iSyncBoneID;
+
+		static CAICoverComponent* PropertiesOnActivate(CSceneObjectProperties* p_SceneObj)
+		{
+			return reinterpret_cast<CAICoverComponent*(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x37E330))(p_SceneObj);
+		}
 	};
 
 	class CAICharacterControllerBaseComponent : public CCharacterControllerInterface
 	{
 	public:
 		CIntention m_Intention;
+		bool m_IntentionUpdated;
+
+		UFG_PAD(0x7);
+		UFG_PAD(0x48);
+		//UFG::qStaticBitField<548> m_ActionRequestMask;
+
+		bool m_HoldMotionIntention;
+		qVector3 m_HoldMotionIntentionDirection;
+		float m_HoldMotionIntentionSpeed;
+		float m_HoldBlend;
+		float m_HoldBlendDelay;
 
 		void DoParkour(UFG::qVector3* p_Direction, uint32_t p_CheckTypes)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*, void*, uint32_t, CIntention*, bool)>(UFG_RVA(0x352DE0))(this, p_Direction, nullptr, p_CheckTypes, &m_Intention, false);
+		}
+
+		void UpdateHoldMotionIntention(float p_TimeDelta)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x396CA0))(this, p_TimeDelta);
 		}
 	};
 
@@ -718,6 +727,15 @@ namespace UFG
 		}
 	};
 
+	class CInterestPointUserComponent : public CSimComponent
+	{
+	public:
+		void StopPOI()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3892D0))(this);
+		}
+	};
+
 	class CAimingBaseComponent : public CSimComponent
 	{
 	public:
@@ -813,6 +831,10 @@ namespace UFG
 	class CCharacterAnimationComponent : public CBaseAnimationComponent
 	{
 	public:
+		void Reset()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B320))(this);
+		}
 	};
 
 	class CTargetingSystemPedBaseComponent : public CTargetingSystemBaseComponent
@@ -858,6 +880,12 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
 		}
+	};
+
+	class CTargetingSystemPedNPCCombatantComponent : public CTargetingSystemPedBaseComponent
+	{
+	public:
+
 	};
 
 	class CTargetingSystemPedPlayerComponent : public CTargetingSystemPedBaseComponent
@@ -990,6 +1018,11 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CParkourHandle*)>(UFG_RVA(0x53C8D0))(this, p_NewHandle);
 		}
 
+		void ClearParkourHandles()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x522DB0))(this);
+		}
+
 		bool IsSyncing()
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x53C1C0))(this);
@@ -1065,23 +1098,6 @@ namespace UFG
 			}
 
 			return reinterpret_cast<CHealthComponent*>(m_Component);
-		}
-
-		CActionTreeComponent* GetActionTree()
-		{
-			CSimComponent* m_Component = m_Components.p[7].m_pComponent;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[6].m_pComponent;
-				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(CharacterActionTreeComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(CharacterActionTreeComponent_TypeUID);
-			}
-
-			return reinterpret_cast<CActionTreeComponent*>(m_Component);
 		}
 
 		CCharacterAnimationComponent* GetAnimation()

@@ -2,9 +2,58 @@
 
 namespace UFG
 {
+	// ...
 	class CSimObject;
 	class CActionController;
 
+	// Track Classes
+	class CTrack
+	{
+	public:
+		void* vfptr;
+		void* mResourceOwner;
+		uint32_t m_TrackClassNameUID;
+		char mBreakPoint;
+		char mDisable;
+		char mMaster;
+
+		UFG_PAD(0x18);
+		//ExpressionParameterFloat mMasterRate;
+
+		float mTimeBegin;
+		float mTimeEnd;
+
+		const char* GetClassname() { return UFG_VCall<4, const char*>(this); }
+		uint32_t GetClassnameUID() { return UFG_VCall<5, uint32_t>(this); }
+	};
+
+	class CTrackGroup
+	{
+	public:
+		UFG_PAD(0x10);
+
+		int mCount;
+
+		UFG_PAD(0x4);
+
+		qOffset64<qOffset64<CTrack>> mData;
+
+		uint32_t GetCount()
+		{
+			return (static_cast<uint32_t>(mCount) & 0x7FFFFFFFu);
+		}
+
+		CTrack* GetTrack(uint32_t p_Index)
+		{
+			qOffset64<CTrack>* m_Offset = mData.GetPointer();
+			if (m_Offset)
+				return m_Offset[p_Index].GetPointer();
+
+			return nullptr;
+		}
+	};
+
+	// Action Classes
 	class CActionPath
 	{
 	public:
@@ -36,11 +85,17 @@ namespace UFG
 
 	class CActionNodeImplementation : public CActionNode
 	{
+	public:
 		qOffset64<void*> mConditions;
-		qOffset64<void*> mTracks;
+		qOffset64<CTrackGroup> mTracks;
 
 		UFG_PAD(0x10);
 		//BinPtrArray<ActionNode, 0, 0> mChildren;
+
+		CTrackGroup* GetTrackGroup()
+		{
+			return reinterpret_cast<CTrackGroup*(__fastcall*)(void*)>(UFG_RVA(0x26EEE0))(this);
+		}
 	};
 
 
@@ -102,6 +157,11 @@ namespace UFG
 			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, uint32_t, bool)>(UFG_RVA(0x26F170))(this, &p_ID, p_MostUsedInex, p_RecurseOnSpawns);
 		}
 
+		bool WasPlaying(uint32_t p_ID, bool p_RecurseOnSpawns = false)
+		{
+			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, bool)>(UFG_RVA(0x273AB0))(this, &p_ID, p_RecurseOnSpawns);
+		}
+
 		void Play(CActionNode* m_Node, bool m_ForcePlay)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, m_Node, m_ForcePlay);
@@ -120,6 +180,11 @@ namespace UFG
 		void Update(float timeDelta)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x272E40))(this, timeDelta);
+		}
+
+		void GetDebugString(qStringBuilder* p_StringBuilder, bool p_ShowAllTracks, CActionController* p_ControllerToHighlight = nullptr, void* p_TrackToHighlight = nullptr)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qStringBuilder*, bool, CActionController*, void*)>(UFG_RVA(0x26E5B0))(this, p_StringBuilder, p_ShowAllTracks, p_ControllerToHighlight, p_TrackToHighlight);
 		}
 	};
 
