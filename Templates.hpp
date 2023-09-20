@@ -95,7 +95,6 @@ namespace UFG
 		qList<qSafePointerBase<T>> m_SafePointerList;
 	};
 
-
 	template<typename T>
 	struct qSafePointerWithCallbacksBase
 	{
@@ -160,6 +159,48 @@ namespace UFG
 				return nullptr;
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + mOffset);
+		}
+	};
+
+	// Bin Stuff
+	struct BinString
+	{
+		int64_t mOffset;
+
+		bool IsSet() { return mOffset; }
+
+		const char* Get()
+		{
+			return reinterpret_cast<const char*>(reinterpret_cast<uintptr_t>(this) + mOffset);
+		}
+	};
+
+	template <typename T>
+	struct BinArray
+	{
+		int mCount;
+		qOffset64<T> mData;
+	};
+
+
+	template <typename T>
+	struct BinPtrArray
+	{
+		int mCount;
+		qOffset64<qOffset64<T>> mData;
+
+		uint32_t GetRealCount()
+		{
+			return (static_cast<uint32_t>(mCount) & 0x7FFFFFFFu);
+		}
+
+		T* GetFromIndex(uint32_t p_Index)
+		{
+			qOffset64<T>* m_OffsetPtr = mData.GetPointer();
+			if (m_OffsetPtr)
+				return m_OffsetPtr[p_Index].GetPointer();
+
+			return nullptr;
 		}
 	};
 

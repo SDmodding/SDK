@@ -73,6 +73,11 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
 
+// Engine UEL
+#include "Engine/UEL/Value.hpp"
+#include "Engine/UEL/Member.hpp"
+#include "Engine/UEL/Expression.hpp"
+
 // Engine Render
 #include "Engine/Render/BeamManager.hpp"
 #include "Engine/Render/VDynamic.hpp"
@@ -81,7 +86,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render.hpp"
 
 // Engine
-#include "Engine/Action.hpp"
+#include "Engine/Actions.hpp"
 #include "Engine/AIAwareness.hpp"
 #include "Engine/AKSoundEngine.hpp"
 #include "Engine/Animation.hpp"
