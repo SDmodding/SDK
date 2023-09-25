@@ -201,14 +201,14 @@ namespace UFG
 			return reinterpret_cast<qSymbol*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9F80))(this, index);
 		}
 
-		qPropertySet* GetValuePtr(uint32_t type_uid, uint32_t index)
+		qPropertySet* GetValuePtr(ePropertyTypeEnum p_Type, uint32_t p_Index)
 		{
-			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertyList*, uint32_t, uint32_t)>(UFG_RVA(0x1F8920))(this, type_uid, index);
+			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertyList*, ePropertyTypeEnum, uint32_t)>(UFG_RVA(0x1F8920))(this, p_Type, p_Index);
 		}
 
-		qPropertySet* GetProperty(uint32_t type_uid, uint32_t index)
+		qPropertySet* GetProperty(ePropertyTypeEnum p_Type, uint32_t p_Index)
 		{
-			uintptr_t* m_Item = reinterpret_cast<uintptr_t*>(GetValuePtr(type_uid, index));
+			uintptr_t* m_Item = reinterpret_cast<uintptr_t*>(GetValuePtr(p_Type, p_Index));
 			if (!m_Item || !*m_Item)
 				return nullptr;
 

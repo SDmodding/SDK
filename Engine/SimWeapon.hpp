@@ -116,6 +116,12 @@ namespace UFG
 		bool mIsBladed;
 		uint32_t mHudReticule;
 		CActionPath mNetWorkedFireStateNode;
+
+		static void StaticInit()
+		{
+			*reinterpret_cast<uint32_t*>(UFG_RVA(0x240E3D8)) = 0;
+			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5500F0))();
+		}
 	};
 
 	class CGunComponent : public CSimComponent

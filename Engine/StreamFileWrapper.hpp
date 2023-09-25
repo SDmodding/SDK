@@ -4,23 +4,23 @@ namespace UFG
 {
 	namespace StreamFileWrapper
 	{
-		bool FileExists(const char* filename)
+		bool FileExists(const char* p_FileName)
 		{
-			return reinterpret_cast<bool(__fastcall*)(const char*)>(UFG_RVA(0x2290D0))(filename);
+			return reinterpret_cast<bool(__fastcall*)(const char*)>(UFG_RVA(0x2290D0))(p_FileName);
 		}
 
-		void* ReadEntireFile(const char* filename, __int64* loaded_size, void* memory_pool = nullptr, unsigned int alloc_flags = 0, const char* dbg_tag = "StreamFileWrapper::ReadEntireFile")
+		void* ReadEntireFile(const char* p_FileName, int64_t* p_LoadedSize, UFG::CMemoryPool* p_MemoryPool = nullptr, uint32_t p_AllocFlags = 0, const char* p_DbgTag = reinterpret_cast<const char*>(UFG_RVA(0x167DBE0)))
 		{
-			return reinterpret_cast<void*(__fastcall*)(const char*, __int64*, void*, unsigned int, const char*)>(UFG_RVA(0x22C7F0))(filename, loaded_size, memory_pool, alloc_flags, dbg_tag);
+			return reinterpret_cast<void*(__fastcall*)(const char*, int64_t*, UFG::CMemoryPool*, uint32_t, const char*)>(UFG_RVA(0x22C7F0))(p_FileName, p_LoadedSize, p_MemoryPool, p_AllocFlags, p_DbgTag);
 		}
 
-		bool ReadAndOutputFile(const char* m_FileName, const char* m_OutputFile)
+		bool ReadAndOutputFile(const char* p_FileName, const char* p_OutputFile)
 		{
-			if (!FileExists(m_FileName))
+			if (!FileExists(p_FileName))
 				return false;
 
 			__int64 m_Size = 0;
-			void* m_Ptr = ReadEntireFile(m_FileName, &m_Size);
+			void* m_Ptr = ReadEntireFile(p_FileName, &m_Size);
 			if (!m_Ptr)
 				return false;
 
@@ -30,7 +30,7 @@ namespace UFG
 				return false;
 			}
 
-			FILE* m_File = fopen(m_OutputFile, "wb");
+			FILE* m_File = fopen(p_OutputFile, "wb");
 			if (m_File)
 			{
 				fwrite(m_Ptr, sizeof(uint8_t), m_Size, m_File);

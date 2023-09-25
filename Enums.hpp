@@ -1253,7 +1253,7 @@ namespace UFG
 		NUM_INVENTORY_ITEMS = 0xD1,
 	};
 
-	enum ePropertyTypeEnum
+	enum ePropertyTypeEnum : uint32_t
 	{
 		ePROPERTY_TYPE_CHAR = 0x0,
 		ePROPERTY_TYPE_SHORT = 0x1,

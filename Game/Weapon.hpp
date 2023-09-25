@@ -161,6 +161,7 @@ namespace UFG
 		{ Weapon_melee_MacheteTong001, "Machete" },
 		{ Weapon_melee_Purse001_Hand, "Purse" },
 		{ Weapon_melee_Purse002_Hand, "Purse" },
+		{ Weapon_firearm_rifle_DLC_MGL, "Tear Gas Launcher" },
 		{ Weapon_melee_tireiron, "Tire Iron" },
 		{ Weapon_melee_umbrella, "Umbrella" },
 		{ Weapon_melee_pursehand, "Purse" },

@@ -831,6 +831,10 @@ namespace UFG
 	class CCharacterAnimationComponent : public CBaseAnimationComponent
 	{
 	public:
+		qNode<CCharacterAnimationComponent> mNode;
+		bool mEnableUpdateTransforms;
+		CCharacterDamageRig* mDamageRig;
+
 		void Reset()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B320))(this);

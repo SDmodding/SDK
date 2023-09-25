@@ -234,6 +234,16 @@ namespace UFG
 		UFG_PAD(0x58);
 
 		CCreature* mCreature;
+		bool mUpdatedWithResources;
+		bool mUpdatedFromNIS;
+		bool mTransformsUpdated;
+
+		UFG_PAD(0x18);
+		//AnimationGroupHandleContainer mRequiredAnimationBanks;
+
+		bool mDestroyAttachedCharacters;
+		bool mTemporaryRig;
+		uint32_t mCurrentRigUID;
 
 		void Reset()
 		{
