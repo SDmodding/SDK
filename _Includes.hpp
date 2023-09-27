@@ -5,6 +5,11 @@
 // #define SDK_SD_MINIMAL_BUILD
 */
 
+/*
+// Use this define before including SDK if you want use some optional includes...
+// #define SDK_SD_OPTIONAL_INCLUDES
+*/
+
 #include <unordered_map>
 #include <map>
 #include <d3d11.h>
@@ -155,6 +160,10 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/UI.hpp"
 #include "Game/Weapon.hpp"
 #include "Game/WheeledVehicleManager.hpp"
+
+#ifdef SDK_SD_OPTIONAL_INCLUDES
+	#include "Optional/StringHash.hpp"
+#endif
 
 #include "Globals.hpp"
 #include "Utils.hpp"

@@ -34,6 +34,11 @@ namespace UFG
 			{
 				reinterpret_cast<void(__fastcall*)(CLoadedFile*)>(UFG_RVA(0x22EB60))(this);
 			}
-		};
+		}; 
+		
+		bool LoadResourceFile(const char* p_FileName, CMemoryPool* p_MemoryPool = nullptr, uint32_t p_AllocFlags = 0, void* p_Filter = nullptr, void* p_Callback = nullptr, void** p_CallbackParam = nullptr)
+		{
+			return reinterpret_cast<bool(__fastcall*)(const char*, CMemoryPool*, uint32_t, void*, void*, void**)>(UFG_RVA(0x22ADA0))(p_FileName, p_MemoryPool, p_AllocFlags, p_Filter, p_Callback, p_CallbackParam);
+		}
 	}
 }
