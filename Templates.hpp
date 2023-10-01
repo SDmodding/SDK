@@ -204,6 +204,15 @@ namespace UFG
 		}
 	};
 
+	// Reflect Stuff
+	template <typename T>
+	struct qReflectArray
+	{
+		T* mItems;
+		unsigned int mNumItems;
+		unsigned int mFlags;
+	};
+
 	// Havok Stuff
 	template <typename T>
 	struct HavokArray
@@ -212,5 +221,4 @@ namespace UFG
 		int m_size;
 		int m_capacityAndFlags;
 	};
-
 }

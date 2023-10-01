@@ -22,7 +22,7 @@ struct hkVector4f
 		m_quad = _mm_set_ps(0.f, m_Vector3.z, m_Vector3.y, m_Vector3.x);
 	}
 
-	void Set(float x, float y, float z, float w)
+	void Set(float x, float y, float z, float w = 0.f)
 	{
 		m_quad = _mm_set_ps(w, z, y, x);
 	}

@@ -23,7 +23,7 @@ namespace UFG
 	public:
 		qBaseNodeRB* mParent;
 		qBaseNodeRB* mChild[2];
-		unsigned int mUID;
+		uint32_t mUID;
 
 		template <typename T>
 		T* GetPointer() { return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this)); }
@@ -159,6 +159,16 @@ namespace UFG
 	public:
 		qBaseTreeRB mTree;
 	};
+
+	class qTree64Base
+	{
+	public:
+		uint64_t mUID;
+		qTree64Base* mParent;
+		qTree64Base* mChildren[2];
+		qTree64Base* mNeighbours[2];
+	};
+	typedef qTree64Base qTreeNode64;
 
 	struct qString
 	{
@@ -453,6 +463,11 @@ namespace UFG
 			v0 = { m_Yaw[0] * m_Pitch[0], m_Yaw[1] * m_Pitch[0], m_Pitch[1], 0.f };
 			v1 = { m_Yaw[0] * m_Pitch[1] * m_Roll[1] - m_Yaw[1] * m_Roll[0], m_Yaw[1] * m_Pitch[1] * m_Roll[1] + m_Yaw[0] * m_Roll[0], -m_Pitch[0] * m_Roll[1], 0.f };
 			v2 = { m_Yaw[0] * m_Pitch[1] * m_Roll[0] + m_Yaw[1] * m_Roll[1], m_Yaw[1] * m_Pitch[1] * m_Roll[0] - m_Yaw[0] * m_Roll[1], m_Pitch[0] * m_Roll[0], 0.f };
+		}
+
+		void RotationEuler(qVector3* p_Angles)
+		{
+			reinterpret_cast<void(__fastcall*)(qMatrix44*, qVector3*)>(UFG_RVA(0x18A6A0))(this, p_Angles);
 		}
 
 		qVector3 GetRotation()

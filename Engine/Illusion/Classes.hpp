@@ -68,4 +68,23 @@ namespace Illusion
 	};
 
 	class CMaterial;
+
+	// Resources
+	class CBuffer : public UFG::qResourceData
+	{
+	public:
+		uint8_t mBufferType;
+		uint8_t mRunTimeCreated;
+		uint16_t mFlags;
+		uint32_t mDataByteSize;
+		UFG::qOffset64<void*> mData;
+		uint32_t mElementByteSize;
+		uint32_t mNumElements;
+		UFG::qOffset64<void*> mBufferUser;
+		uint32_t mLastUsedFrameNum;
+		uint32_t pad0;
+		UFG::CMemoryPool* mMemoryPool;
+		uint32_t pad1;
+		uint32_t pad2;
+	};
 }

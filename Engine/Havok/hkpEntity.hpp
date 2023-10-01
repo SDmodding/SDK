@@ -27,4 +27,9 @@ public:
 	{
 		reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0xD60FE0))(this);
 	}
+
+	bool IsActivate()
+	{
+		return reinterpret_cast<bool(_fastcall*)(void*)>(UFG_RVA(0xD61300))(this);
+	}
 };

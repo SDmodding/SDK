@@ -338,6 +338,17 @@ namespace UFG
 			if (mBody)
 				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xD62710))(mBody, m);
 		}
+
+		// This actually adds the Rigidbody to hkpWorld...
+		void Inflate(bool p_AddToWorld)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x468BD0))(this, p_AddToWorld);
+		}
+
+		void Deflate(bool p_AddToWorld)
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA68C0))(this);
+		}
 	};
 
 	class CFXSimComponent : CSimComponent

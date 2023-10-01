@@ -29,6 +29,16 @@ namespace UFG
 	class CPhysicsSystem
 	{
 	public:
+		CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, CSimObject* p_SimObject)
+		{
+			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CCollisionInstanceData*, CCollisionMeshData*, uint32_t, uint32_t, CSimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);
+		}
+
+		void AddRenderHelper(CSimObject* p_SimObject, CRigidBodyComponent* p_RigidBody, CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
+		}
+
 		// return: true (it hit something)
 		bool CastRay(RayCastData* data) 
 		{

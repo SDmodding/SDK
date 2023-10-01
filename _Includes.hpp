@@ -40,19 +40,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Functions.hpp"
 
 // Engine Havok
-#include "Engine/Havok/Enums.hpp"
-#include "Engine/Havok/Classes.hpp"
-#include "Engine/Havok/hkReferencedObject.hpp"
-#include "Engine/Havok/hkpCollidable.hpp"
-#include "Engine/Havok/hkpRayCast.hpp"
-#include "Engine/Havok/hkpShape.hpp"
-#include "Engine/Havok/hkpConvexShape.hpp"
-#include "Engine/Havok/hkpBoxShape.hpp"
-#include "Engine/Havok/hkpWorldObject.hpp"
-#include "Engine/Havok/hkpMotion.hpp"
-#include "Engine/Havok/hkpEntity.hpp"
-#include "Engine/Havok/hkpRigidBody.hpp"
-
+#include "Engine/Havok/.Includes.hpp"
 
 // Defines
 #include "Defines/NodePlayables.hpp"
@@ -69,6 +57,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/LinearAllocator.hpp"
 
 #include "Engine/PropertySet.hpp"
+#include "Engine/Reflect.hpp"
 #include "Engine/ResourceInventory.hpp"
 #include "Engine/ResourceWarehouse.hpp"
 
@@ -98,6 +87,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Attachment.hpp"
 #include "Engine/AudioEntity.hpp"
 #include "Engine/BSP.hpp"
+#include "Engine/Collision.hpp"
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"
 #include "Engine/DataStreamer.hpp"
@@ -127,6 +117,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/StreamFileWrapper.hpp"
 #include "Engine/StreamResourceLoader.hpp"
 #include "Engine/PhysicsSystem.hpp"
+#include "Engine/PhysicsPropertyManager.hpp"
 #include "Engine/TiDoGame.hpp"
 #include "Engine/TrueCrowdDatabase.hpp"
 #include "Engine/Wwise.hpp"
