@@ -1,6 +1,7 @@
 #pragma once
 #include <xmmintrin.h>
 
+typedef int8_t hkUFloat8;
 typedef uint16_t hkHalf;
 
 struct hkVector4f
@@ -28,6 +29,20 @@ struct hkVector4f
 	}
 };
 
+struct hkMatrix3f
+{
+	hkVector4f m_col0;
+	hkVector4f m_col1;
+	hkVector4f m_col2;
+};
+typedef hkMatrix3f hkRotationf;
+
+struct hkTransformf
+{
+	hkRotationf m_rotation;
+	hkVector4f m_translation;
+};
+
 struct hkQuaternionf
 {
 	hkVector4f m_vec;
@@ -36,6 +51,15 @@ struct hkQuaternionf
 	{
 		reinterpret_cast<void(__fastcall*)(void*, hkVector4f*, float)>(UFG_RVA(0xC57910))(this, p_Axis, p_Angle);
 	}
+};
+
+struct hkSweptTransformf
+{
+	hkVector4f m_centerOfMass0;
+	hkVector4f m_centerOfMass1;
+	hkQuaternionf m_rotation0;
+	hkQuaternionf m_rotation1;
+	hkVector4f m_centerOfMassLocal;
 };
 
 struct hkQsTransformf

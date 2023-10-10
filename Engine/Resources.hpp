@@ -33,5 +33,20 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x167FB0))(this);
 		}
+
+		template <typename T>
+		__inline T* GetData()
+		{
+			return reinterpret_cast<T*>(mData);
+		}
+
+		template <typename T, uintptr_t m_Offset>
+		__inline T* GetData2()
+		{
+			if (!mData)
+				return nullptr;
+
+			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(mData) + m_Offset);
+		}
 	};
 }

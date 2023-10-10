@@ -13,7 +13,7 @@ namespace UFG
 			void* mImpl;
 			uint16_t mFlags;
 			uint16_t mPriority;
-			uint16_t mTargetState;
+			STREAM_STATE mTargetState;
 
 			void Initialize()
 			{
@@ -42,6 +42,43 @@ namespace UFG
 			}
 		};
 
+		struct StreamInfo_t
+		{
+			qNodeRB mNode;
+			qNode<StreamInfo_t> mOrderNode;
+			qNode<StreamInfo_t> mPriorityNode;
+			STREAM_STATE mStateCurrent;
+			STREAM_STATE mStateTarget;
+			StreamingMemory::DATA_TYPE mDataType;
+			float mTimeInState;
+			uint16_t mFilesQueried : 1;
+			uint16_t mDBGResLoaded : 1;
+			uint16_t mbWasCPURAMRestoredFromCache : 1;
+			uint16_t mDBG : 1;
+			uint16_t mHotResource : 1;
+			uint16_t mMainAllocFailed : 1;
+			uint16_t mVRAMAllocFailed : 1;
+			uint16_t mIsTagged : 1;
+			uint16_t mAddedExternalChunks : 1;
+			uint16_t mDeactivationTicks;
+			BIGFileSize mFileSizePerm;
+			uint64_t mhBufferPerm;
+			void* mhFilePerm;
+			BIGFileSize mFileSizeTemp;
+
+			UFG_PAD(0x20);
+			//UFG::qVRAMemoryHandle mhBufferTemp;
+
+			void* mhFileTemp;
+			qString mFileName;
+			uint32_t mTagSymbolUID;
+			qList<Handle_t> mHandles;
+			uint32_t mFlagsAND;
+			uint32_t mFlagsOR;
+			uint32_t mDataLoadedTo;
+			uint64_t mDiskPosSortKey;
+		};
+
 		namespace Handle
 		{
 			Handle_t* New(const char* p_Name)
@@ -57,6 +94,16 @@ namespace UFG
 		bool QueueStream(Handle_t* p_Handle, const char* p_FileName, uint32_t p_DataType, PRIORITY p_Priority, uint32_t p_Flags, void* p_Callback, void* p_CallbackParam)
 		{
 			return reinterpret_cast<bool(__fastcall*)(Handle_t*, const char*, uint32_t, PRIORITY, uint32_t, void*, void*)>(UFG_RVA(0x22C580))(p_Handle, p_FileName, p_DataType, p_Priority, p_Flags, p_Callback, p_CallbackParam);
+		}
+
+		bool UnloadStreamResources(Handle_t* p_Handle)
+		{
+			return reinterpret_cast<bool(__fastcall*)(Handle_t*)>(UFG_RVA(0x22ED00))(p_Handle);
+		}
+
+		bool ReleaseStream(Handle_t* p_Handle)
+		{
+			return reinterpret_cast<bool(__fastcall*)(Handle_t*)>(UFG_RVA(0x22CBE0))(p_Handle);
 		}
 	}
 }

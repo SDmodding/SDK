@@ -87,6 +87,39 @@ namespace UFG
 		}
 	};
 
+	class CDynamicSceneryInstance
+	{
+	public:
+		UFG_PAD(0x18);
+
+		CSimComponent mSimComponent;
+		qNode<CDynamicSceneryInstance> mNode;
+		int16_t mHidden;
+		int16_t mForceTransparencyState;
+
+		UFG_PAD_ALIGN(0x4);
+
+		void* mCullInfo;
+		void* mCullResults;
+		char mTransparencyState[3];
+
+		UFG_PAD_ALIGN(0x5);
+		UFG_PAD(0x28);
+		//Illusion::ModelHandle mModelHandle;
+
+		qMatrix44 mLocalWorld;
+		float mSelfIlluminationOverride;
+		uint32_t mNameUID;
+		uint32_t mTagUID;
+
+		UFG_PAD_ALIGN(0x4);
+
+		void UpdateCullInfo()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x2357E0))(this);
+		}
+	};
+
 	class CPowerManagementComponent : public CSimComponent
 	{
 	public:
@@ -94,6 +127,15 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x588930))(this, p_Time);
 		}
+	};
+
+	class CPhysicsRenderHelper : public CSimComponent
+	{
+	public:
+		qNode<CPhysicsRenderHelper> mNode;
+		uint16_t mNumSceneryInstances;
+		CDynamicSceneryInstance** mSceneryInstances;
+		uint32_t mFlags;
 	};
 
 	class CStreamedResourceComponent : public CSimComponent
@@ -394,5 +436,24 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, m_TargetType);
 		}
+	};
+
+	class CWaterPhantomComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x68);
+		/*
+		* UFG::BasePhysicsObject
+		* UFG::qNode<UFG::WaterPhantomComponent,UFG::WaterPhantomComponent>
+		* UFG::PhysicsResourceHandle mCollisionMeshBundle;
+		*/
+
+		hkpShapePhantom* mPhantom;
+
+		UFG_PAD(0x220);
+		// hkpAllCdBodyPairCollector mCollector;
+
+		float mElevation;
+		uint32_t mIsVolume : 1;
 	};
 }

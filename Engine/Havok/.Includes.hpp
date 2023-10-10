@@ -6,10 +6,13 @@
 #include "Templates.hpp"
 
 // ...
+#include "hkMemoryAllocator.hpp"
 #include "hkReferencedObject.hpp"
 #include "hkpWorldObject.hpp"
 #include "hkpMopp.hpp"
 #include "hkpMoppCode.hpp"
+#include "hkpMotion.hpp"
+#include "hkpPhantom.hpp"
 #include "hkpCollidable.hpp"
 #include "hkpRayCast.hpp"
 
@@ -19,11 +22,11 @@
 #include "Shapes/hkpConvexShape.hpp"
 #include "Shapes/hkpBoxShape.hpp"
 #include "Shapes/hkpExtendedMeshShape.hpp"
+#include "Shapes/hkpShapePhantom.hpp"
 
 // Util
 #include "Util/hkpMoppUtility.hpp"
 
 // ...
-#include "hkpMotion.hpp"
 #include "hkpEntity.hpp"
 #include "hkpRigidBody.hpp"

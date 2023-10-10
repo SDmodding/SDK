@@ -29,6 +29,9 @@ namespace UFG
 	class CPhysicsSystem
 	{
 	public:
+		void* vfptr;
+		qTreeRB mCollisionModels;
+
 		CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, CSimObject* p_SimObject)
 		{
 			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CCollisionInstanceData*, CCollisionMeshData*, uint32_t, uint32_t, CSimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);

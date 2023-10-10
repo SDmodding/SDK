@@ -86,6 +86,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Animation.hpp"
 #include "Engine/Attachment.hpp"
 #include "Engine/AudioEntity.hpp"
+#include "Engine/BigFile.hpp"
 #include "Engine/BSP.hpp"
 #include "Engine/Collision.hpp"
 #include "Engine/Skeleton.hpp"
@@ -149,6 +150,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/Tasks.hpp"
 #include "Game/TimeOfDayManager.hpp"
 #include "Game/UI.hpp"
+#include "Game/Water.hpp"
 #include "Game/Weapon.hpp"
 #include "Game/WheeledVehicleManager.hpp"
 

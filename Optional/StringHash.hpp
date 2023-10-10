@@ -42,4 +42,23 @@ namespace SDK
 
 		return m_Hash;
 	}
+
+	uint32_t StringHashUpper32(const char* p_Str, uint32_t p_PrevHash = 0xFFFFFFFF)
+	{
+		uint32_t m_Hash = p_PrevHash;
+		while (1)
+		{
+			char m_Char = toupper(*p_Str);
+			if (m_Char == '\0')
+				break;
+
+			if (m_Char >= 'a' && m_Char <= 'z')
+				m_Char -= 0x20;
+
+			m_Hash = (m_Hash << 8) ^ g_CRC32Table[((m_Hash >> 24) ^ m_Char) & 0xFF];
+			++p_Str;
+		}
+
+		return m_Hash;
+	}
 }

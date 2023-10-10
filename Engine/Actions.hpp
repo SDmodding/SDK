@@ -208,8 +208,8 @@ namespace UFG
 
 		CActionNodePlayable* Find(uint32_t m_ID)
 		{
-			qBaseTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables.mTree;
-			for (qBaseNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
+			qTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables;
+			for (qNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
 			{
 				if (i->mUID == -1)
 					continue;
@@ -226,8 +226,8 @@ namespace UFG
 		{
 			std::vector<CActionNodePlayable*> m_ActionPlayables;
 
-			qBaseTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables.mTree;
-			for (qBaseNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
+			qTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables;
+			for (qNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
 			{
 				if (i->mUID == -1)
 					continue;

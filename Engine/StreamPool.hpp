@@ -2,6 +2,8 @@
 
 namespace UFG
 {
+	UFG_PAD(sizeof(UFG::qTreeRB));
+
 	class CStreamPool
 	{
 	public:
@@ -18,9 +20,9 @@ namespace UFG
 
 		UFG_PAD(0x5);
 
-		UFG_PAD(0xA0);
-		/*UFG::BlockHeader mBlockHead;
-		UFG::qTreeRB<UFG::BlockHeader, UFG::BlockHeader, 1> mBlockLookup;*/
+		UFG_PAD(0x58);
+		//UFG::BlockHeader mBlockHead;
+		qTreeRB mBlockLookup;
 
 		uint32_t mPoolIndex;
 		uint32_t mPageSize;

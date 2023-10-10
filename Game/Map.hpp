@@ -171,7 +171,7 @@ namespace UFG
 
 		CUIMapBlip* GetBlip(unsigned int uid)
 		{
-			return reinterpret_cast<CUIMapBlip*>(mIconData.mTree.Get(uid));
+			return reinterpret_cast<CUIMapBlip*>(mIconData.Get(uid));
 		}
 
 		CUIMapBlip* CreateIcon(unsigned int uid, const char* iconType, float xPos, float yPos)

@@ -37,6 +37,11 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector3*, qVector2*, bool*)>(UFG_RVA(0xB9B70))(this, result, world_pos, viewport_scale, is_on_screen);
 		}
+
+		void ScreenToWorldRay(qVector3* p_Result, qVector2* p_ScreenPos, qVector2* p_ViewportScale)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector2*, qVector2*)>(UFG_RVA(0xBA0B0))(this, p_Result, p_ScreenPos, p_ViewportScale);
+		}
 	};
 
 	class CScriptCameraComponent;

@@ -16,7 +16,7 @@ namespace UFG
 		uint32_t mNodeBckIdx;
 		uint16_t mSerial;
 		uint16_t mFaceCount;
-		qOffset64<CBSPFace> mFaces;
+		qOffset64<uint32_t> mFaces;
 		qVector3 mPosition;
 		qVector3 mNormal;
 	};
@@ -26,7 +26,7 @@ namespace UFG
 	public:
 		uint32_t mFaceCount;
 		uint32_t mUID;
-		qOffset64<CBSPFace> mFaces;
+		qOffset64<uint32_t> mFaces;
 		uint32_t mIndex;
 		qVector3 mCenter;
 		uint32_t mSectionIndex;
@@ -49,5 +49,20 @@ namespace UFG
 		UFG_PAD(0x8); 
 
 		char mName[32];
+
+		CBSPNode* GetNodeByIndex(uint32_t p_Index)
+		{
+			return mNodes.Get(p_Index, sizeof(CBSPFace));
+		}
+
+		CBSPFace* GetFaceByIndex(uint32_t p_Index)
+		{
+			return mFaces.Get(p_Index, sizeof(CBSPFace));
+		}
+
+		CBSPSpace* GetSpaceByIndex(uint32_t p_Index)
+		{
+			return mSpaces.Get(p_Index, sizeof(CBSPSpace));
+		}
 	};
 }

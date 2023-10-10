@@ -34,12 +34,7 @@ namespace UFG
 		template <typename T, uintptr_t N>
 		T* ReadPointerOffset() { return *reinterpret_cast<T**>(reinterpret_cast<uintptr_t>(this) + N); }
 	};
-
-	class qNodeRB
-	{
-	public:
-		qBaseNodeRB mNode;
-	};
+	typedef qBaseNodeRB qNodeRB;
 
 	class qBaseTreeRB
 	{
@@ -47,6 +42,11 @@ namespace UFG
 		qBaseNodeRB mRoot;
 		qBaseNodeRB mNULL;
 		int mCount;
+
+		void Remove(void* p_Node)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, void*)>(UFG_RVA(0x17A0F0))(this, p_Node);
+		}
 
 		qBaseTreeRB* Get(unsigned int uid)
 		{
@@ -153,12 +153,7 @@ namespace UFG
 				m_List.emplace_back(i->mUID);
 		}
 	};
-
-	class qTreeRB
-	{
-	public:
-		qBaseTreeRB mTree;
-	};
+	typedef qBaseTreeRB qTreeRB;
 
 	class qTree64Base
 	{

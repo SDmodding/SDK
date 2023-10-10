@@ -375,7 +375,7 @@ namespace UFG
 
 		__inline CSimObject* GetSimObjectHead()
 		{
-			qBaseNodeRB* m_Node = mSimObjects.mTree.GetHead();
+			qBaseNodeRB* m_Node = mSimObjects.GetHead();
 			if (!m_Node)
 				return nullptr;
 
@@ -384,7 +384,7 @@ namespace UFG
 
 		__inline CSimObject* GetSimObjectNext(CSimObject* p_SimObject)
 		{
-			qBaseNodeRB* m_NextNode = mSimObjects.mTree.GetNext(&p_SimObject->mNode);
+			qBaseNodeRB* m_NextNode = mSimObjects.GetNext(&p_SimObject->mNode);
 			if (!m_NextNode || m_NextNode == reinterpret_cast<qBaseNodeRB*>(this))
 				return nullptr;
 

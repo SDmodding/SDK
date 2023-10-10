@@ -15,10 +15,11 @@
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
 #define SimObjectBaseAnimation_TypeUID						0xC6000001
 #define SimObjectPowerManagementComponent_TypeUID			0xD0000001
+#define SimObjectPhysicsRenderHelper_TypeUID				0x80000001
 #define SimObjectRigidbody_TypeUID							0x16000003
 #define SimObjectStreamedResource_TypeUID					0x72000001
-
 #define SimObjectFXComponent_TypeUID						0x32000001
+#define SimObjectWaterPhantomComponent_TypeUID				0x78000001
 
 #define CharacterAIAwarenessComponent_TypeUID				0x66000001
 #define CharacterAIActionTreeComponent_TypeUID				0x52000001
