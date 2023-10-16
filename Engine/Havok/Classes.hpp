@@ -29,6 +29,12 @@ struct hkVector4f
 	}
 };
 
+struct hkContactPoint
+{
+	hkVector4f m_position;
+	hkVector4f m_separatingNormal;
+};
+
 struct hkMatrix3f
 {
 	hkVector4f m_col0;

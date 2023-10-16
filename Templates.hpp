@@ -18,6 +18,12 @@ namespace UFG
 		T* p;
 	};
 
+	template <typename T, size_t N>
+	struct qSafeArray
+	{
+		T array[N];
+	};
+
 	template<typename T, size_t N>
 	struct qFixedArray
 	{

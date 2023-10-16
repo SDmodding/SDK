@@ -8,6 +8,26 @@ namespace UFG
 	class CRoadNetworkLane;
 
 	// ...
+	class CBrakes : public hkpVehicleDefaultBrake
+	{
+	public:
+		float mTimeToMaxPedal;
+		float mTimePedalDown;
+	};
+
+	class CEngine : public hkpVehicleDefaultEngine
+	{
+	public:
+		qArray<float> mTorqueTable;
+		float mDamage;
+		float mTorqueBoost;
+		float mGovernorSpeedKPH;
+		float mEngineResistanceMaxSpeed;
+		float mEngineResistanceMinSpeed;
+		float mEngineResistanceMin;
+		float mEngineResistanceMax;
+	};
+
 	class CSteering
 	{
 	public:
@@ -24,6 +44,29 @@ namespace UFG
 		float mPrevInputValue;
 	};
 
+	class CTransmission : public hkpVehicleDefaultTransmission
+	{
+	public:
+		hkArray<float> mUpshiftRPM;
+		hkArray<float> mDownshiftRPM;
+		uint32_t mForceNeutral : 1;
+	};
+
+
+	class CVehicleAerodynamics : public hkpVehicleDefaultAerodynamics
+	{
+	public:
+		float mDragBoost;
+		float mExtraGravityMultiplier;
+	};
+
+	class CVehicleAction : public hkpUnaryAction
+	{
+	public:
+		class CPhysicsWheeledVehicle* mVehicle;
+		float mFlatTireDistance;
+	};
+
 	class CVehicleInput
 	{
 	public:
@@ -31,17 +74,23 @@ namespace UFG
 		float mForwardWeightShift;
 		float mGasBrakes;
 		float mRawGasBrakes;
-		unsigned __int32 mInReverse : 1;
-		unsigned __int32 mForceNeutral : 1;
-		unsigned __int32 mHandBrakeSet : 1;
-		unsigned __int32 mDoWheelie : 1;
-		unsigned __int32 mDoOneEighty : 1;
-		unsigned __int32 mDoBurnout : 1;
-		unsigned __int32 mFreemanStopTask : 1;
-		unsigned __int32 mFreemanSteerTask : 1;
-		unsigned __int32 mFreemanPreventWheelie : 1;
-		unsigned __int32 mHasHumanDriver : 1;
-		unsigned __int32 mHasAiDriver : 1;
+		uint32_t mInReverse : 1;
+		uint32_t mForceNeutral : 1;
+		uint32_t mHandBrakeSet : 1;
+		uint32_t mDoWheelie : 1;
+		uint32_t mDoOneEighty : 1;
+		uint32_t mDoBurnout : 1;
+		uint32_t mFreemanStopTask : 1;
+		uint32_t mFreemanSteerTask : 1;
+		uint32_t mFreemanPreventWheelie : 1;
+		uint32_t mHasHumanDriver : 1;
+		uint32_t mHasAiDriver : 1;
+	};
+
+	class CVehicleInstance : public hkpVehicleInstance
+	{
+	public:
+		hkQuaternionf mAxleFixup;
 	};
 
 	class CVehicleParams
@@ -55,8 +104,7 @@ namespace UFG
 	class CPhysicsVehicle : public CBasePhysicsObject
 	{
 	public:
-		UFG_PAD(0x10);
-
+		void* mWaterFloatingTrackerComponent;
 		CVehicleParams* mParams;
 
 		UFG_PAD(0x28);
@@ -87,30 +135,27 @@ namespace UFG
 	class CPhysicsWheeledVehicle : public CPhysicsVehicle
 	{
 	public:
-		void* mWheelCollider;
-		void* mHavokVehicle;
-		void* mVehicleAction;
-		void* mEngine;
-		void* mTransmission;
-		void* mBrakes;
+		hkpVehicleWheelCollide* mWheelCollider;
+		CVehicleInstance* mHavokVehicle;
+		CVehicleAction* mVehicleAction;
+		CEngine* mEngine;
+		CTransmission* mTransmission;
+		CBrakes* mBrakes;
 		CSteering* mSteering;
-		void* mAerodynamics;
+		CVehicleAerodynamics* mAerodynamics;
 		qVector4 mHardPointChassisSpace[4];
 		qVector4 mSuspensionDirChassisSpace[4];
-
-		UFG_PAD(0xB4);
-		/*UFG::qSafeArray<float, 4> mCurrentSuspensionLength;
-		UFG::qSafeArray<float, 4> mSkidStrength;
-		UFG::qSafeArray<float, 4> mForwardSkidStrength;
-		UFG::qSafeArray<float, 4> mLateralSkidStrength;
-		UFG::qSafeArray<float, 4> mWheelSpinAngle;
-		UFG::qSafeArray<UFG::qVector3, 4> mGroundPoints;
-		UFG::qSafeArray<bool, 4> mGroundHits;
-		UFG::qSafeArray<float, 4> mRestingSuspensionLength;
-		UFG::qSafeArray<float, 4> mSuspensionUpTravelLimit;
-		UFG::qSafeArray<float, 4> mSuspensionDownTravelLimit;
-		UFG::qSafeArray<float, 4> mTireDamage;*/
-
+		qSafeArray<float, 4> mCurrentSuspensionLength;
+		qSafeArray<float, 4> mSkidStrength;
+		qSafeArray<float, 4> mForwardSkidStrength;
+		qSafeArray<float, 4> mLateralSkidStrength;
+		qSafeArray<float, 4> mWheelSpinAngle;
+		qSafeArray<qVector3, 4> mGroundPoints;
+		qSafeArray<bool, 4> mGroundHits;
+		qSafeArray<float, 4> mRestingSuspensionLength;
+		qSafeArray<float, 4> mSuspensionUpTravelLimit;
+		qSafeArray<float, 4> mSuspensionDownTravelLimit;
+		qSafeArray<float, 4> mTireDamage;
 		float mWheelRadius;
 		float mPreviousSpeed;
 		float mBurnoutMinSpeed;
@@ -136,13 +181,11 @@ namespace UFG
 		float mBlownTireFrictionMultiplier;
 		float mLodHeightFixupFront;
 		float mLodHeightFixupRear;
-		unsigned __int32 mGroundFixupRaysRecieved : 3;
-		unsigned __int32 mAllWheelsOffGround : 1;
-		unsigned __int32 mAllWheelsOnGround : 1;
-		unsigned __int32 mUseNewBurnoutMethod : 1;
-		unsigned __int32 mWheelFrictionMultiplierOverriddenByFreeman : 1;
-
-		UFG_PAD(0x10);
+		uint32_t mGroundFixupRaysRecieved : 3;
+		uint32_t mAllWheelsOffGround : 1;
+		uint32_t mAllWheelsOnGround : 1;
+		uint32_t mUseNewBurnoutMethod : 1;
+		uint32_t mWheelFrictionMultiplierOverriddenByFreeman : 1;
 	};
 
 	class CPhysicsCar : public CPhysicsWheeledVehicle

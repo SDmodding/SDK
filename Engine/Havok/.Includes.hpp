@@ -15,6 +15,21 @@
 #include "hkpPhantom.hpp"
 #include "hkpCollidable.hpp"
 #include "hkpRayCast.hpp"
+#include "hkpEntity.hpp"
+#include "hkpRigidBody.hpp"
+#include "hkpAction.hpp"
+
+// Vehicle
+#include "Vehicle/hkpTyremarksInfo.hpp"
+#include "Vehicle/hkpVehicle.hpp"
+#include "Vehicle/hkpVehicleAerodynamics.hpp"
+#include "Vehicle/hkpVehicleBrake.hpp"
+#include "Vehicle/hkpVehicleData.hpp"
+#include "Vehicle/hkpVehicleEngine.hpp"
+#include "Vehicle/hkpVehicleSuspension.hpp"
+#include "Vehicle/hkpVehicleTransmission.hpp"
+#include "Vehicle/hkpVehicleWheelCollide.hpp"
+#include "Vehicle/hkpVehicleInstance.hpp"
 
 // Shapes
 #include "Shapes/hkpShape.hpp"
@@ -26,7 +41,3 @@
 
 // Util
 #include "Util/hkpMoppUtility.hpp"
-
-// ...
-#include "hkpEntity.hpp"
-#include "hkpRigidBody.hpp"
