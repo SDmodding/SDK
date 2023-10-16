@@ -14,3 +14,12 @@ class hkpUnaryAction : public hkpAction
 public:
 	hkpEntity* m_entity;
 };
+
+class hkpReorientAction : public hkpUnaryAction
+{
+public:
+	hkVector4f m_rotationAxis;
+	hkVector4f m_upAxis;
+	float m_strength;
+	float m_damping;
+};

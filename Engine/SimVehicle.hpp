@@ -7,6 +7,216 @@ namespace UFG
 	class CRaceTrail;
 	class CRoadNetworkLane;
 
+	// PhysicsDefs
+	class CBaseVehiclePhysicsDef : public qReflectObject
+	{
+	public:
+		qReflectString chassis_physicsProperties;
+		uint32_t numWheels;
+		float mass;
+		float collision_friction;
+		float collision_restitution;
+		float highSpeedGovernor;
+		float reverseSpeedGovernor;
+		float superStop_Drag;
+		float other_airSteerYawRate;
+		float other_verticalVelocityDampingUp;
+		float other_verticalVelocityDampingDown;
+		float rollStability;
+		float pitchStability;
+		float dollarValue;
+		float steering_SensitivityLo;
+		float steering_SensitivityHi;
+		float steering_SensitivityMinSpeed;
+		float steering_SensitivityMaxSpeed;
+		float steering_SteeringModelExponent;
+
+		UFG_PAD_ALIGN(0x8);
+	};
+
+	class CWheeledVehiclePhysicsDef : public CBaseVehiclePhysicsDef
+	{
+	public:
+		qReflectArray<float> torqueTable;
+		qReflectArray<float> drivetrain_gearRatioTable;
+		qReflectArray<float> drivetrain_upshiftTable;
+		qReflectArray<float> drivetrain_downshiftTable;
+		qVector3 suspension_hardpointOffsetFront;
+		qVector3 suspension_hardpointOffsetRear;
+		float engine_clutchSlipRPM;
+		float drivetrain_downshiftRPM;
+		float drivetrain_upshiftRPM;
+		float drivetrain_clutchDelayTime;
+		float drivetrain_gearRatio1;
+		float drivetrain_gearRatio2;
+		float drivetrain_gearRatio3;
+		float drivetrain_gearRatio4;
+		float drivetrain_gearRatio5;
+		float drivetrain_reverseGearRatio;
+		float drivetrain_finalDriveRatio;
+		float engine_minRPM;
+		float engine_optRPM;
+		float engine_maxRPM;
+		float engine_maxTorque;
+		float engine_torqueFactorAtMinRPM;
+		float engine_torqueFactorAtMaxRPM;
+		float engine_resistanceMin;
+		float engine_resistanceMax;
+		float engine_resistanceMinSpeed;
+		float engine_resistanceMaxSpeed;
+		float suspension_frontSpringLength;
+		float suspension_rearSpringLength;
+		float suspension_frontSpringRate;
+		float suspension_rearSpringRate;
+		float suspension_frontShockDampingCompression;
+		float suspension_rearShockDampingCompression;
+		float suspension_frontShockDampingExtension;
+		float suspension_rearShockDampingExtension;
+		float suspension_frontUpTravelLimit;
+		float suspension_rearUpTravelLimit;
+		float suspension_frontDownTravelLimit;
+		float suspension_rearDownTravelLimit;
+		float suspension_angle_front;
+		float suspension_angle_rear;
+		float brakes_maxTorqueFront;
+		float brakes_maxTorqueRear;
+		float drivetrain_frontWheelTorqueRatio;
+		float drivetrain_rearWheelTorqueRatio;
+		float wheels_radius_front;
+		float wheels_radius_rear;
+		float wheels_frictionFront;
+		float wheels_frictionRear;
+		float steering_maxAngle;
+		float aerodynamics_frontalArea;
+		float aerodynamics_dragCoefficient;
+		float aerodynamics_liftCoefficient;
+		float other_extraGravity;
+		float other_frictionEqualizer;
+		float other_torqueRollFactor;
+		float other_torquePitchFactor;
+		float other_torqueYawFactor;
+		float other_extraTorqueFactor;
+		float other_normalClippingAngle;
+		float other_chassisUnitInertiaYaw;
+		float other_chassisUnitInertiaRoll;
+		float other_chassisUnitInertiaPitch;
+		float brakes_minTimeToBlock;
+		float brakes_timeToMaxPedal;
+		float brakes_frontMinPedalInputToBlock;
+		float brakes_rearMinPedalInputToBlock;
+		float wheels_mass;
+		float wheels_viscosityFriction;
+		float wheels_slipAngle;
+		float wheels_forceFeedbackMultiplier;
+		float aerodynamics_airDensity;
+		float damping_normalSpinDamping;
+		float damping_collisionSpinDamping;
+		float damping_collisionThreshold;
+		float other_cruiseControlPID_p;
+		float other_cruiseControlPID_i;
+		float other_cruiseControlPID_d;
+		float steering_CenteringRate;
+		float steering_DeadZone;
+		float steering_FrontWheelMultiplier;
+		float steering_RearWheelMultiplier;
+		float burnout_MinSpeed;
+		float burnout_MaxSpeed;
+		float burnout_SpinTorqueAtLowSpeed;
+		float burnout_SpinTorqueAtHighSpeed;
+		float burnout_SpinFrontTireFrictionAtLowSpeed;
+		float burnout_SpinFrontTireFrictionAtHighSpeed;
+		float burnout_SpinRearTireFrictionAtLowSpeed;
+		float burnout_SpinRearTireFrictionAtHighSpeed;
+		float burnout_TorqueFactor_LowSpeed;
+		float burnout_FwdThrustFactor_LowSpeed;
+		float burnout_SideThrustFactor_LowSpeed;
+		float burnout_TorqueFactor_HighSpeed;
+		float burnout_FwdThrustFactor_HighSpeed;
+		float burnout_SideThrustFactor_HighSpeed;
+		float jturn_SpinTorque;
+		float jturn_SpinFrontTireFriction;
+		float jturn_SpinRearTireFriction;
+		float blownTire_WobbleMagnitude;
+		float blownTire_WobbleFrequency;
+		float blownTire_Drag;
+		float blownTire_FrictionMultiplier;
+		float lodHeightFixupFront;
+		float lodHeightFixupRear;
+		float suspension_frontSpringRestingLength;
+		float suspension_rearSpringRestingLength;
+		float other_maxVelocityForPositionalFriction;
+		bool burnout_UseNewMethod;
+
+		UFG_PAD_ALIGN(0x7);
+	};
+
+	class CBikePhysicsDef : public CWheeledVehiclePhysicsDef
+	{
+	public:
+		float aerodynamics_tuckDragBoost;
+		float lean_DesiredLo;
+		float lean_DesiredHi;
+		float lean_MinSpeed;
+		float lean_MaxSpeed;
+		float lean_PID_p;
+		float lean_PID_i;
+		float lean_PID_d;
+		float wheelie_SteeringRate;
+		float wheelie_TorqueBoost;
+		float wheelie_TorqueBoostTime;
+		float wheelie_PID_p;
+		float wheelie_PID_i;
+		float wheelie_PID_d;
+		float wheelie_Angle;
+		float wheelie_BrakingAngle;
+		float wheelie_BrakingYaw;
+	};
+
+	class CBoatPhysicsDef : public CBaseVehiclePhysicsDef
+	{
+	public:
+		qVector3 pontoon0;
+		qVector3 pontoon1;
+		qVector3 pontoon2;
+		qVector3 pontoon3;
+		float rudderForceMultiplier;
+		float rudderOffsetX;
+		float rudderOffsetZ;
+		float keelTorque;
+		float maxRudderAngle;
+		float maxEngineThrust;
+		float engineThrustAngle;
+		float viscousDrag;
+		float viscousDrag2;
+		float quadraticDragLateralVelocityLimit;
+		float torqueDamping;
+		float torqueDampingBowScale;
+		float leanFactor;
+		float COMShift;
+		float bowThrusterCutoffSpeed;
+		float bowThrusterPower;
+		float bowThrusterOffsetX;
+		float bowThrusterOffsetZ;
+		float pontoon0Buoyancy;
+		float pontoon1Buoyancy;
+		float pontoon2Buoyancy;
+		float pontoon3Buoyancy;
+		float pontoon0DragZ;
+		float pontoon1DragZ;
+		float pontoon2DragZ;
+		float pontoon3DragZ;
+	};
+
+	class CCarPhysicsDef : public CWheeledVehiclePhysicsDef
+	{
+	public:
+		bool disableDoorL02;
+		bool disableDoorR02;
+		bool disableDoorL03;
+		bool disableDoorR03;
+		bool disableTrunk;
+	};
+
 	// ...
 	class CBrakes : public hkpVehicleDefaultBrake
 	{
@@ -104,14 +314,54 @@ namespace UFG
 	class CPhysicsVehicle : public CBasePhysicsObject
 	{
 	public:
+		UFG_PAD_ALIGN(0x8);
+
 		void* mWaterFloatingTrackerComponent;
 		CVehicleParams* mParams;
 
 		UFG_PAD(0x28);
 
 		CRigidBodyComponent* mRigidBody;
+		hkpRigidBody* mBulletCollider;
+		hkpRigidBody* mVolumeRigidBody;
+		
+		UFG_PAD(0x30);
+		//UFG::PhysicsResourceHandle mCollisionMeshBundle;
 
-		UFG_PAD(0x1F8);
+		CCollisionMeshData* mBodyCollisionMesh;
+		CCollisionMeshData* mBulletCollisionMesh;
+
+		UFG_PAD_ALIGN(0x8);
+
+		qMatrix44 mLastGoodPosition;
+		qMatrix44 mBodyTransform;
+		qMatrix44 mVolumeOffset;
+		qMatrix44 mTargetTransform;
+		qVector4 mLastFixupPosition;
+		float mLastGoodPositionSampleTimer;
+		class CVehicleCollisionListener* mCollisionListener;
+		hkpReorientAction* mReorientActionRoll;
+		hkpReorientAction* mReorientActionPitch;
+		qSafePointer<class CParkourComponent> mParkourComponent;
+		qSafePointer<class CDynamicCoverComponent> mCoverComponent;
+		PhysicsVehicle::Lod mDesiredLod;
+		PhysicsVehicle::Lod mCurrentLod;
+		bool mIsProxy;
+		float mAirSteerYawRate;
+		float mVerticalVelocityDampingDown;
+		float mVerticalVelocityDampingUp;
+		float mHighSpeedGovernor;
+		float mReverseSpeedGovernor;
+		float mSuperStopDrag;
+		float mPitchStability;
+		float mRollStability;
+		float mSpeedKPH;
+		float mDollarValue;
+		float mRotMassScaleForCollisions;
+		int16_t mSystemId;
+		uint32_t mNumWheels : 3;
+		uint32_t mSuperStop : 1;
+		uint32_t mIsAIControlled : 1;
 
 		void FlipVehicle(float torqueFactor, qVector3* collisionPoint)
 		{
