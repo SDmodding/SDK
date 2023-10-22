@@ -126,6 +126,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 // Game
 #include "Game/BulletManager.hpp"
 #include "Game/EncounterBase.hpp"
+#include "Game/ChaseCamera.hpp"
 #include "Game/CopSystem.hpp"
 #include "Game/EventDispatcher.hpp"
 #include "Game/ExplosionManager.hpp"
