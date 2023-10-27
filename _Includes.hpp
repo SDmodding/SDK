@@ -156,6 +156,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/WheeledVehicleManager.hpp"
 
 #ifdef SDK_SD_OPTIONAL_INCLUDES
+	#include "Optional/PermFile/.Includes.hpp"
 	#include "Optional/StringHash.hpp"
 #endif
 
