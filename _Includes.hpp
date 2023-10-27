@@ -10,6 +10,7 @@
 // #define SDK_SD_OPTIONAL_INCLUDES
 */
 
+#include <intrin.h>
 #include <unordered_map>
 #include <map>
 #include <d3d11.h>

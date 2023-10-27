@@ -7,6 +7,7 @@
 
 // UFG
 #include "ResourceData.hpp"
+#include "PropertySet.hpp"
 
 // Illusion
 #include "Illusion/Buffer.hpp"
