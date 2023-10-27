@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	struct ModelData_t : UFG::ResourceData_t
+	struct ModelData_t : UFG::ResourceData_t // TypeUID: 0x6DF963B3
 	{
 		float m_AABBMin[3];
 		uint32_t m_NumPrims;

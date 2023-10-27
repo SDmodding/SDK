@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	struct Buffer_t : UFG::ResourceData_t
+	struct Buffer_t : UFG::ResourceData_t // TypeUID: 0x7A971479
 	{
 		uint32_t m_Type = 0x0;
 		uint32_t m_Size = 0x0;

@@ -26,7 +26,7 @@ namespace UFG
 		uint32_t m_TailPad;
 	};
 
-	struct PropertySet_t : ResourceData_t
+	struct PropertySet_t : ResourceData_t // TypeUID: 0x5B9BF81E
 	{
 		UFG_PAD(0x10);
 
@@ -92,6 +92,22 @@ namespace UFG
 				return nullptr;
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(m_ValuePtr) + *m_ValuePtr);
+		}
+
+		Property_t* GetPropertyByName(uint32_t p_NameUID)
+		{
+			Property_t* m_Properties = GetProperties();
+			if (m_Properties)
+			{
+				for (uint16_t i = 0; m_NumProperties > i; ++i)
+				{
+					Property_t* m_Property = &m_Properties[i];
+					if (m_Property->m_NameUID == p_NameUID)
+						return m_Property;
+				}
+			}
+
+			return nullptr;
 		}
 	};
 

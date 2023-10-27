@@ -8,6 +8,7 @@
 // UFG
 #include "ResourceData.hpp"
 #include "PropertySet.hpp"
+#include "UILocalization.hpp"
 
 // Illusion
 #include "Illusion/Buffer.hpp"
