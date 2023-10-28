@@ -15,6 +15,7 @@
 #include "Illusion/Material.hpp"
 #include "Illusion/Mesh.hpp"
 #include "Illusion/ModelData.hpp"
+#include "Illusion/ModelUser.hpp"
 
 // Helpers
 namespace SDK

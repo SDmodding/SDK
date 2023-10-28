@@ -33,7 +33,7 @@ namespace Illusion
 		uint8_t m_Align[12] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 	};
 
-	struct Material_t : UFG::ResourceData_t // TypeUID: 0xF5F8516F
+	struct Material_t : UFG::ResourceData_t // TypeUID: 0xF5F8516F || ChunkUID: 0xB4C26312
 	{
 		UFG_PAD(0x8);
 
