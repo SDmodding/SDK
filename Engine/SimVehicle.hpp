@@ -546,6 +546,11 @@ namespace UFG
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x670840))(this);
 		}
+
+		void Reload(uint32_t p_Reason)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x6892E0))(this, p_Reason);
+		}
 	};
 
 	// Components

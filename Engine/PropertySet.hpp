@@ -93,9 +93,10 @@ namespace UFG
 			return m_Parent->Get();
 		}
 
-		uintptr_t GetMemImagePtr()
+		template <typename T = uintptr_t>
+		T GetMemImagePtr()
 		{
-			return reinterpret_cast<uintptr_t(__fastcall*)(void*)>(UFG_RVA(0x1F6F00))(this);
+			return reinterpret_cast<T(__fastcall*)(void*)>(UFG_RVA(0x1F6F00))(this);
 		}
 
 		bool* GetBool(qSymbol propName, uint32_t depth = 0x1)
@@ -237,6 +238,45 @@ namespace UFG
 		{
 			return reinterpret_cast<qPropertyList*(__fastcall*)(qPropertySet*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9E60))(set, &name, depth);
 		}
+
+		// Components
+		struct PhysicsMoverComponent_t // 0x14B9F38F
+		{
+			qSymbol physicsPropertySetAI;
+			qSymbol physicsPropertySetHuman;
+			qOffset64<char*> modelName;
+			qSymbol TrunkType;
+			float damageMultiplierWorldCollisions;
+			float damageMultiplierVehicleCollisions;
+			float damageMultiplierBullets;
+			float damageMultiplierTires;
+			qVector3 boundingBoxMin;
+			qVector3 boundingBoxMax;
+			float tireShotImpulse;
+			float tireBlownImpulse;
+			float lowLodThrottleAcceleration;
+			float lowLodBrakesAcceleration;
+			float lowLodCoastAcceleration;
+			float lowLodMaxSpeed;
+			float lowLodMaxLateralAcceleration;
+			float lowLodMinTurningRadius;
+			float autoDeterioratingDamageThreshold;
+			float autoDeterioratingDamageRate;
+			float vehicleDistanceToHighLod;
+			float vehicleDistanceToMedLod;
+			float vehicleCollisionMinImpulseRequiredToTakeDamage;
+			float vehicleCollisionExtraDamageMultiplier;
+			float vehicleCollisionDamageDealtAtMinImpulse;
+			float vehicleCollisionDamageDealtAtMaxImpulse;
+			float vehicleCollisionMinImpulseRequiredToDealDamage;
+			float vehicleCollisionMaxImpulseForDealingDamage;
+			float vehicleCollisionDamageDealtAtMinRamImpulse;
+			float vehicleCollisionDamageDealtAtMaxRamImpulse;
+			float vehicleCollisionMinRamImpulseRequiredToDealDamage;
+			float vehicleCollisionMaxRamImpulseForDealingDamage;
+			bool vehicleCollisionForceDamageDealer;
+			bool lockedAtLowLOD;
+		};
 	}
 
 	class CPropertySetHandle

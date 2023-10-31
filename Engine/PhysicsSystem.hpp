@@ -42,7 +42,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
 		}
 
-		// return: true (it hit something)
+		// return: true (if hit something)
 		bool CastRay(RayCastData* data) 
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, RayCastData*)>(UFG_RVA(0xA1950))(this, data);
@@ -69,6 +69,18 @@ namespace UFG
 		CPhysicsSystem* Get()
 		{
 			return *reinterpret_cast<CPhysicsSystem**>(UFG_RVA(0x216B2C8));
+		}
+
+		// return: true (If 'p_OutPosition' position has been written)
+		bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistance)
+		{
+			return reinterpret_cast<bool(__fastcall*)(qVector3*, qVector3*, float, float)>(UFG_RVA(0x37C400))(p_OutPosition, p_Position, p_HeightAboveGround, p_CastDistance);
+		}
+		
+		// return: true (If 'p_OutPosition' position has been written)
+		bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistanceDown, float p_CastDistanceUp)
+		{
+			return reinterpret_cast<bool(__fastcall*)(qVector3*, qVector3*, float, float, float)>(UFG_RVA(0x37C560))(p_OutPosition, p_Position, p_HeightAboveGround, p_CastDistanceDown, p_CastDistanceUp);
 		}
 	}
 }

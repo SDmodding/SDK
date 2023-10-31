@@ -460,17 +460,21 @@ namespace UFG
 			v2 = { m_Yaw[0] * m_Pitch[1] * m_Roll[0] + m_Yaw[1] * m_Roll[1], m_Yaw[1] * m_Pitch[1] * m_Roll[0] - m_Yaw[0] * m_Roll[1], m_Pitch[0] * m_Roll[0], 0.f };
 		}
 
-		void RotationEuler(qVector3* p_Angles)
+		void GetRotationEuler(qVector3* p_Euler)
 		{
-			reinterpret_cast<void(__fastcall*)(qMatrix44*, qVector3*)>(UFG_RVA(0x18A6A0))(this, p_Angles);
+			reinterpret_cast<void(__fastcall*)(UFG::qVector3*, UFG::qMatrix44*, bool)>(UFG_RVA(0x207700))(p_Euler, this, false);
 		}
 
-		qVector3 GetRotation()
+		void GetRotationEulerRad(qVector3* p_Euler)
 		{
-			UFG::qVector3 m_MatrixRot(acosf(v0.DotProduct(v2)), atan2f(v0.y, v0.x), atan2f(v1.z, v1.y));
-			m_MatrixRot *= UFG_Rad2Deg_Mul;
+			GetRotationEuler(p_Euler);
+			p_Euler->operator*=(UFG_Deg2Rad_Mul);
+		}
 
-			return m_MatrixRot;
+		// Euler in Radians
+		void SetRotationEuler(qVector3* p_Euler)
+		{
+			reinterpret_cast<void(__fastcall*)(qMatrix44*, qVector3*)>(UFG_RVA(0x18A6A0))(this, p_Euler);
 		}
 
 		// Use only if you know what you're doing!
@@ -482,56 +486,6 @@ namespace UFG
 
 			v1.x = -v0.y;
 			v1.y = v0.x;
-		}
-
-		// This rotate funcs are wrong...
-		void RotateRight(qVector3 vRot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
-		{
-			if (!m_SinCosIncluded)
-			{
-				m_Sin = sinf(m_Theta);
-				m_Cos = cosf(m_Theta);
-			}
-
-			v0.x = m_Cos + (1.f - m_Cos) * vRot.x * vRot.x;
-			v0.y = (1.f - m_Cos) * vRot.x * vRot.y - m_Sin * vRot.z;
-			v0.z = (1.f - m_Cos) * vRot.x * vRot.z + m_Sin * vRot.y;
-		}
-
-		void RotateForward(qVector3 m_Rot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
-		{
-			if (!m_SinCosIncluded)
-			{
-				m_Sin = sinf(m_Theta);
-				m_Cos = cosf(m_Theta);
-			}
-
-			v2.x = (1.f - m_Cos) * m_Rot.y * m_Rot.x + m_Sin * m_Rot.z;
-			v2.y = m_Cos + (1.f - m_Cos) * m_Rot.y * m_Rot.y;
-			v2.z = (1.f - m_Cos) * m_Rot.y * m_Rot.z - m_Sin * m_Rot.x;
-		}
-
-		void RotateUp(qVector3 m_Rot, float m_Theta, float m_Sin = 0.f, float m_Cos = 0.f, bool m_SinCosIncluded = false)
-		{
-			if (!m_SinCosIncluded)
-			{
-				m_Sin = sinf(m_Theta);
-				m_Cos = cosf(m_Theta);
-			}
-
-			v1.x = (1.f - m_Cos) * m_Rot.z * m_Rot.x - m_Sin * m_Rot.y;
-			v1.y = (1.f - m_Cos) * m_Rot.z * m_Rot.y + m_Sin * m_Rot.x;
-			v1.z = m_Cos + (1.f - m_Cos) * m_Rot.z * m_Rot.z;
-		}
-
-		void Rotate(qVector3 m_Rot, float m_Theta)
-		{
-			const float m_Sin = sinf(m_Theta);
-			const float m_Cos = cosf(m_Theta);
-
-			RotateRight(m_Rot, 0.f, m_Sin, m_Cos, true);
-			RotateForward(m_Rot, 0.f, m_Sin, m_Cos, true);
-			RotateUp(m_Rot, 0.f, m_Sin, m_Cos, true);
 		}
 
 		qVector3 ToVector3()

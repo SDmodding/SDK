@@ -332,7 +332,7 @@ namespace UFG
 		BitArray256* mFractureState;
 		UFG::qArray<UFG::qSafePointer<UFG::Constraint, UFG::Constraint>, 0> mConstraints;*/
 
-		unsigned int mFlags;
+		uint32_t mFlags;
 
 		void ApplyForce(qVector3* force, qVector3* point)
 		{
@@ -387,7 +387,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x468BD0))(this, p_AddToWorld);
 		}
 
-		void Deflate(bool p_AddToWorld)
+		void Deflate()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA68C0))(this);
 		}
