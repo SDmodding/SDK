@@ -89,7 +89,7 @@ namespace SDK
 				if (m_ResourceEntry->m_TypeUID && m_ResourceEntry->m_EntrySize[0])
 					m_Resources.emplace_back(m_ResourceEntry);
 
-				m_Offset += static_cast<size_t>(m_ResourceEntry->m_EntrySize[0]) + 0x10;
+				m_Offset += m_ResourceEntry->GetEntrySize();
 			}
 		}
 

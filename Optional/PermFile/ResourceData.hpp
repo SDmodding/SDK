@@ -18,7 +18,7 @@ namespace UFG
 
 		uint32_t GetEntrySize()
 		{
-			return (m_EntrySize[0] + 0x10);
+			return (m_EntrySize[0] + sizeof(ResourceEntry_t));
 		}
 
 		void SetEntrySize(uint32_t p_Size)
