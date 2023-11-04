@@ -6,13 +6,13 @@ namespace UFG
 	{
 	public:
 		qNode<CMetrics> mNode;
-		unsigned __int64 mSimTimeMSec;
-		unsigned int mSimTimeTicks;
+		uint64_t mSimTimeMSec;
+		uint32_t mSimTimeTicks;
 		long double mSimTime;
 		float mSimTimeFloat;
 		float mSimTimeDelta;
 		float mSimTimeUnscaledDelta;
-		unsigned int mSimFrameCount;
+		uint32_t mSimFrameCount;
 		float mSimTimeScaleInGame;
 		bool mSimPausedInGame;
 		float mSimTimeScaleDebug;

@@ -11,6 +11,7 @@
 #include "UILocalization.hpp"
 
 // Illusion
+#include "Illusion/BonePalette.hpp"
 #include "Illusion/Buffer.hpp"
 #include "Illusion/Material.hpp"
 #include "Illusion/Mesh.hpp"

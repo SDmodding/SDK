@@ -42,11 +42,16 @@ namespace Illusion
 
 		UFG_PAD(0x4);
 
-		uint64_t m_MaterialUserOffset = 0;
+		int64_t m_MaterialUserOffset = 0;
+
+		__inline MaterialParam_t* GetTable()
+		{
+			return reinterpret_cast<MaterialParam_t*>(reinterpret_cast<uintptr_t>(this) + sizeof(Material_t));
+		}
 
 		MaterialParam_t* GetParam(uint32_t p_NameUID)
 		{
-			MaterialParam_t* m_ParamTable = reinterpret_cast<MaterialParam_t*>(reinterpret_cast<uintptr_t>(this) + sizeof(Material_t));
+			MaterialParam_t* m_ParamTable = GetTable();
 			for (uint32_t i = 0; m_NumParams > i; ++i)
 			{
 				MaterialParam_t* m_Param = &m_ParamTable[i];
@@ -55,6 +60,11 @@ namespace Illusion
 			}
 
 			return nullptr;
+		}
+		
+		__inline MaterialUser_t* GetUser()
+		{
+			return reinterpret_cast<MaterialUser_t*>(reinterpret_cast<uintptr_t>(&m_MaterialUserOffset) + m_MaterialUserOffset);
 		}
 	};
 }

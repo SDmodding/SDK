@@ -93,14 +93,55 @@ namespace UFG
 		CSkeleton* mUFGSkeleton;
 		void* mHavokPose;
 
-		void GetTranslation(int m_BoneID, qVector3* m_Result)
+		// (Translation) Get
+
+		void GetTranslationWS(int p_BoneID, qVector3* p_Translation)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*)>(UFG_RVA(0x1BBE10))(this, m_BoneID, m_Result);
+			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*)>(UFG_RVA(0x1BBE10))(this, p_BoneID, p_Translation);
 		}
 
-		void GetTranslation(int m_BoneID, qMatrix44* m_Result)
+		// (Position) Set
+
+		void SetPositionLS(int p_BoneID, qMatrix44* p_Matrix)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BBB90))(this, m_BoneID, m_Result);
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BC5B0))(this, p_BoneID, p_Matrix);
+		}
+
+		void SetPositionMS(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BC940))(this, p_BoneID, p_Matrix);
+		}
+
+		void SetPositionMS_ReNormalize(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BCCD0))(this, p_BoneID, p_Matrix);
+		}
+
+		void SetPositionWS(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BD0C0))(this, p_BoneID, p_Matrix);
+		}
+
+		// (Position) Get
+
+		void GetPositionLS(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BB790))(this, p_BoneID, p_Matrix);
+		}
+
+		void GetPositionMS(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BBA30))(this, p_BoneID, p_Matrix);
+		}
+
+		void GetPositionMS_ReNormalize(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BBA90))(this, p_BoneID, p_Matrix);
+		}
+
+		void GetPositionWS(int p_BoneID, qMatrix44* p_Matrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, qMatrix44*)>(UFG_RVA(0x1BBB90))(this, p_BoneID, p_Matrix);
 		}
 	};
 }

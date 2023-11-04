@@ -16,6 +16,11 @@ namespace UFG
 			return reinterpret_cast<struct ResourceData_t*>(this);
 		}
 
+		uint32_t GetEntrySize()
+		{
+			return (m_EntrySize[0] + 0x10);
+		}
+
 		void SetEntrySize(uint32_t p_Size)
 		{
 			m_EntrySize[0] = m_EntrySize[1] = (max(sizeof(ResourceEntry_t), p_Size) - sizeof(ResourceEntry_t));
