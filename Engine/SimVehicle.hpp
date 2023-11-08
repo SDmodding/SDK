@@ -690,10 +690,151 @@ namespace UFG
 		}
 	};
 
+	class CRoadSpaceComponent : public CSimComponent
+	{
+	public:
+		UFG_PAD(0x630);
+
+		qVector3 mDestinationPosition;
+		qVector3 mDestinationDirection;
+		CRacePosition* m_pRacePosition;
+		CRacePosition* m_pRacePositionSteer;
+
+		// To reset use nullptr for m_Target
+		void SetChaseTarget(CSimVehicle* m_Target)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6588B0))(this, m_Target);
+		}
+
+		void SetRaceTrail(CRaceTrail* race_trail)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x659740))(this, race_trail);
+		}
+
+		void SetRaceTrailSteer(CRaceTrail* race_trail)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x6597F0))(this, race_trail);
+		}
+
+		void FlushRaceTrails()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x64D630))(this);
+		}
+
+		float GetFractionRaceComplete()
+		{
+			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0x64E760))(this);
+		}
+	};
+
 	class CAiDriverComponent : public CSimComponent
 	{
 	public:
-		UFG_PAD(0x568);
+		UFG_PAD(0x130 - sizeof(CSimComponent));
+		// TODO:
+		// - Parent class is VehicleDriverInterface rather than SimComponent...
+
+		qNode<CAiDriverComponent> mNode;
+		RebindingComponentHandle<CRoadSpaceComponent> m_pRoadSpace;
+		RebindingComponentHandle<void*> m_pVehicleSubject;
+		qSafePointer<void*> m_pChaseVehicleSubject;
+		qSafePointer<void*> m_pEscortEnemyVehicleSubject;
+		qSafePointer<void*> m_pEscortObjectiveVehicleSubject;
+
+		UFG_PAD(0x160);
+		/*
+		UFG::qPidControllerCore m_SteeringPid;
+		UFG::qPidControllerCore m_ThrottlePid;
+		UFG::DrivingTargetOffsetMover m_OffsetMover;
+		UFG::LinearGraph<float> *m_BrakingGraph;
+		UFG::LinearGraph<float> *m_CarGapGraph;
+		AIdPtr<SSInvokedCoroutine> m_DriveToCoroutine;
+		*/
+
+		AiDriverComponent::eDriverMode m_DrivingMode;
+		AiDriverComponent::eDriverRole m_DrivingRole;
+		qPropertySet* m_DriverProfile;
+		qSafePointer<CSimObject> m_CatchupTarget;
+
+		UFG_PAD(0x98);
+		// UFG::qPidControllerCore m_CatchupPid;
+
+		float m_CatchupRangeBehind;
+		float m_CatchupRangeAhead;
+		float m_CatchupMaxSpeedUp;
+		float m_CatchupMaxSlowDown;
+		float m_CatchupOffset;
+		float m_fDesiredSpeed;
+		float m_fCurrentForwardSpeed;
+		float m_fPreviousGasBrakes;
+		float m_RoadSpeedLimit;
+		qVector3 m_vSteerToPosition;
+		float m_fSteeringScale;
+		bool m_FollowDebug;
+		bool m_AvoidanceDebug;
+		CarCombat::Position m_DesiredOffset;
+		CarCombat::Side m_Side;
+		qVector3 m_vFollowOffsetActual;
+		qVector3 m_vFollowOffsetDesired;
+		float m_fFollowOffsetBlend;
+		float m_fFollowOffsetTolerance;
+		float m_fFollowDistance;
+		float m_fTimeNearOffset;
+		float m_fAttackTime;
+		uint64_t m_iLastHighSpeedCollisionTimestamp;
+
+		UFG_PAD(0x20);
+		// UFG::qNoise<float,float> m_SteeringNoise;
+
+		float m_fSteeringNoiseTimer;
+		float m_fSteeringNoiseAmplitude;
+		float m_fSteeringNoiseAmplitudeMin;
+		bool mModeSteeringLockEnabled;
+		float mModeSteeringLock;
+		bool mModeGasBrakeLockEnabled;
+		float mModeGasBrakeLock;
+		bool m_bSteeringLock;
+		float m_fSteeringLock;
+		bool m_bGasBrakeLock;
+		float m_fGasBrakeLock;
+		float m_fReactionTime;
+
+		UFG_PAD(0x20);
+		// UFG::HistoryBuffer<UFG::qVector2> m_SteeringGasBrakeHistory;
+
+		float m_fAvoidSteerLimit;
+		float m_fAvoidStopTimer;
+		float m_fBrakeTimer;
+		float m_fStuckTimer;
+		float m_fReverseTimer;
+		qVector3 m_vStuckPosition;
+		float m_GettingUnstuckTimer;
+		float m_BeenUnstuckTimer;
+		float m_fPassingTimer;
+		float m_fPassingBias;
+		void* m_AvoidableSensor;
+		int m_NumAvoidableOverlaps;
+		qSafePointer<CSimObject> m_CurrentAvoidable;
+		bool m_BlockedByAvoidable;
+		void* m_pCastingSphere;
+		void* m_pCastingPhantom;
+
+		struct VehicleCombatStats_t
+		{
+			float mLastAttack[7];
+			unsigned int mNumAttacks[7];
+		};
+		VehicleCombatStats_t m_CombatStats;
+
+		CarCombat::Attack m_CurrentAttack; 
+		
+		struct EscortInfo_t
+		{
+			CarAI::EEscortMode eEscortMode;
+			float fDistanceSqrEnemyToObjectiveEnterAttackMode;
+			float fDistanceSqrEnemyToObjectiveEnterEscortMode;
+		};
+		EscortInfo_t m_EscortInfo;
 
 		bool m_bAvoidPeds;
 		bool m_bAllowedToPass;
@@ -770,43 +911,6 @@ namespace UFG
 
 			m_fRaceSpeedLimit = m_SpeedLimit;
 			m_RaceWanderAtEnd = m_WanderAtEnd;
-		}
-	};
-
-	class CRoadSpaceComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x630);
-
-		qVector3 mDestinationPosition;
-		qVector3 mDestinationDirection;
-		CRacePosition* m_pRacePosition;
-		CRacePosition* m_pRacePositionSteer;
-
-		// To reset use nullptr for m_Target
-		void SetChaseTarget(CSimVehicle* m_Target)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6588B0))(this, m_Target);
-		}
-
-		void SetRaceTrail(CRaceTrail* race_trail)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x659740))(this, race_trail);
-		}
-
-		void SetRaceTrailSteer(CRaceTrail* race_trail)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CRaceTrail*)>(UFG_RVA(0x6597F0))(this, race_trail);
-		}
-
-		void FlushRaceTrails()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x64D630))(this);
-		}
-
-		float GetFractionRaceComplete()
-		{
-			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0x64E760))(this);
 		}
 	};
 

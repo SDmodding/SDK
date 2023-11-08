@@ -95,6 +95,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/DataStreamer.hpp"
 #include "Engine/DamageRig.hpp"
 #include "Engine/DebugDrawManager.hpp"
+#include "Engine/Rig.hpp"
 #include "Engine/Components.hpp"
 #include "Engine/Door.hpp"
 #include "Engine/FXManager.hpp"

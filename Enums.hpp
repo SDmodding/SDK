@@ -77,6 +77,61 @@ namespace UFG
 		};
 	}
 
+	namespace CarCombat
+	{
+		enum Attack
+		{
+			Ram = 0x0,
+			Sideswipe = 0x1,
+			PitManeuvre = 0x2,
+			Block = 0x3,
+			Melee = 0x4,
+			Projectile = 0x5,
+			AnyAttack = 0x6,
+			NumAttacks = 0x7,
+		};
+
+		enum FormationAttack
+		{
+			Box = 0x0,
+			Box2 = 0x1,
+			RollingRoadBlock = 0x2,
+			AnyFormationAttack = 0x3,
+			NumFormationAttacks = 0x4,
+		};
+
+		enum Position
+		{
+			Follow = 0x0,
+			Behind = 0x1,
+			RearCorner = 0x2,
+			PitPosition = 0x3,
+			Beside = 0x4,
+			FrontCorner = 0x5,
+			Front = 0x6,
+			NumPositions = 0x7,
+		};
+
+		enum Side
+		{
+			Left = 0x0,
+			Right = 0x1,
+			Closest = 0x2,
+			AnySide = 0x3,
+			NumSides = 0x4,
+		};
+	}
+
+	namespace CarAI
+	{
+		enum EEscortMode
+		{
+			AttackEnemy = 0x0,
+			EscortObjective = 0x1,
+			NumEscortModes = 0x2,
+		};
+	}
+
 	enum eCopSystemFinishReason
 	{
 		eCopSystemFinishReason_Unknown = 0x0,

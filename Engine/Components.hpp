@@ -64,6 +64,21 @@ namespace UFG
 
 		void* mCompositeLook;
 		Illusion::CMaterialModifierParams mMaterialModifier;
+		Illusion::CB_SceneryInstance mSceneryInstance;
+		bool mIsHidden;
+		void* mCullLayer;
+		void* mCullResults;
+		void* mCullInfo;
+		__declspec(align(16)) UFG::qMatrix44 mPoseRootMatrix;
+		UFG::CSkeletalPose* mPose;
+		CRigHandle mRigHandle;
+		unsigned int mNumModelTypeLODs;
+		void* mModelType[5];
+		float mLODBiasMult;
+		float mDrawScale;
+		bool mHasSoftBody;
+		bool mUsePersistentSkinningCache;
+		qArray<void*> mActiveMultiMorphTargets;
 
 		bool IsCharacter()
 		{
