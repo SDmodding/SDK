@@ -350,7 +350,7 @@ namespace UFG
 		}
 	};
 
-	class CScreenHud : public CScreen
+	class CScreenHud : public CUIScreen
 	{
 	public:
 		CTiledMapWidget Minimap;

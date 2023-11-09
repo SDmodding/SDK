@@ -43,6 +43,9 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 // Engine Havok
 #include "Engine/Havok/.Includes.hpp"
 
+// Engine Scaleform
+#include "Engine/Scaleform/.Includes.hpp"
+
 // Defines
 #include "Defines/NodePlayables.hpp"
 #include "Defines/BoneUID.hpp"
@@ -79,6 +82,11 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render/Poly.hpp"
 #include "Engine/Render/View.hpp"
 #include "Engine/Render.hpp"
+
+// Engine UI
+#include "Engine/UI/GfxTranslator.hpp"
+#include "Engine/UI/Screen.hpp"
+#include "Engine/UI/ScreenManager.hpp"
 
 // Engine
 #include "Engine/Actions.hpp"
@@ -146,7 +154,6 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/RadarSystem.hpp"
 #include "Game/RoadNetwork.hpp"
 #include "Game/SaveLoad.hpp"
-#include "Game/Screen.hpp"
 #include "Game/ScreenHud.hpp"
 #include "Game/ScreenOverlay.hpp"
 #include "Game/Store.hpp"

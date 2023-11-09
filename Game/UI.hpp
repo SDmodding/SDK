@@ -84,14 +84,6 @@ namespace UFG
 		const char* m_messageResult;
 	};
 
-	class CUITranslator
-	{
-	public:
-		char* Translate(unsigned int hash) { return reinterpret_cast<char*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0xA28340))(this, hash); }
-
-		__inline char* Translate(const char* text) { return Translate(HashUpper32(text)); }
-	};
-
 	class CUIPropertySetMenu
 	{
 	public:
@@ -113,49 +105,6 @@ namespace UFG
 		}
 	};
 
-	class CUIScreenManager
-	{
-	public:
-		void* vfptr;
-		qList<CScreen> m_screenStack;
-		qList<CScreen> m_overlayStack;
-
-		UFG_PAD(0x90);
-
-		void* mMainThreadId;
-		bool m_renderUI;
-		bool m_useWireframe;
-		bool m_eatInputForScreens;
-		bool m_updateUI;
-		int m_maxScreenLimit;
-		unsigned int m_targetWidth;
-		unsigned int m_targetHeight;
-		unsigned int m_flashWidth;
-		unsigned int m_flashHeight;
-		bool mScaleViewportInCode;
-		unsigned int mScreenUIDCounter;
-		int m_defaultControllerMask;
-		int m_inputSuspended;
-
-		UFG_PAD(0x98);
-
-		CUITranslator* m_translator;
-
-		/*void* m_gfxFileOpener;
-		unsigned int m_currentNumDrawText;
-		Scaleform::GFx::DrawText* m_drawText[32];
-		int m_inputEnabled;
-		UFG::UIScreenFactory* m_screenFactory;
-		bool mIsMidSwitch;
-		char mLastScreenPopped[64];
-		UFG::qString mDebugStackPrint;*/
-
-		CScreen* GetTopScreen()
-		{
-			return reinterpret_cast<CScreen*(__fastcall*)(void*)>(UFG_RVA(0xA2BEF0))(this);
-		}
-	};
-
 	namespace UI
 	{
 		CUIScreenManager* GetScreenManager()
@@ -163,7 +112,7 @@ namespace UFG
 			return *reinterpret_cast<CUIScreenManager**>(UFG_RVA(0x249C1C0));
 		}
 
-		CUITranslator* GetTranslator()
+		CUIGfxTranslator* GetTranslator()
 		{
 			return GetScreenManager()->m_translator;
 		}
