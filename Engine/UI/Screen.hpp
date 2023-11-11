@@ -30,7 +30,7 @@ namespace UFG
 		uint32_t m_screenNameHash;
 		CUIScreenRenderable* mRenderable;
 		void* mLoadThread;
-		unsigned int mScreenUID;
+		uint32_t mScreenUID;
 		int mControllerMask;
 		int mInputEnabled;
 		int mPriority;

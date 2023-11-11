@@ -58,6 +58,11 @@ namespace UFG
 			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x235C278));
 		}
 
+		CMemoryPool* GetScaleformPool()
+		{
+			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x23F1B00));
+		}
+
 		CMemoryPool* FindByName(const char* m_Name)
 		{
 			for (qNode<CMemoryPool>* i = gMemoryPoolList->mNode.mNext; i != &gMemoryPoolList->mNode; i = i->mNext)

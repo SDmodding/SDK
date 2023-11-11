@@ -13,14 +13,6 @@ namespace UFG
 	class CDebugDrawContext
 	{
 	public:
-		static bool* DisableDraw() { return reinterpret_cast<bool*>(UFG_RVA(0x2021C37)); }
-
-		static __inline void ToggleDisableDraw()
-		{
-			bool* m_DisableDraw = DisableDraw();
-			*m_DisableDraw = !(*m_DisableDraw);
-		}
-
 		static __inline qMatrix44* GetMatrix() { return reinterpret_cast<qMatrix44*>(UFG_RVA(0x203BD40)); }
 
 		void DrawLine(qVector3 m_Start, qVector3 m_End, qColour m_Color, qMatrix44* m_Matrix = GetMatrix(), void* m_Callback = nullptr, bool m_IsScreenCoords = false)
@@ -122,6 +114,11 @@ namespace UFG
 		CDebugDrawManager* Get()
 		{
 			return *reinterpret_cast<CDebugDrawManager**>(UFG_RVA(0x212B9B8));
+		}
+
+		bool* DisableDraw()
+		{
+			return reinterpret_cast<bool*>(UFG_RVA(0x2021C37));
 		}
 	}
 }

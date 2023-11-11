@@ -84,6 +84,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render.hpp"
 
 // Engine UI
+#include "Engine/UI/GfxFileOpener.hpp"
 #include "Engine/UI/GfxTranslator.hpp"
 #include "Engine/UI/Screen.hpp"
 #include "Engine/UI/ScreenManager.hpp"

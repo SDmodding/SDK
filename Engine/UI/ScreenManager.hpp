@@ -17,22 +17,22 @@ namespace UFG
 		bool m_eatInputForScreens;
 		bool m_updateUI;
 		int m_maxScreenLimit;
-		unsigned int m_targetWidth;
-		unsigned int m_targetHeight;
-		unsigned int m_flashWidth;
-		unsigned int m_flashHeight;
+		uint32_t m_targetWidth;
+		uint32_t m_targetHeight;
+		uint32_t m_flashWidth;
+		uint32_t m_flashHeight;
 		bool mScaleViewportInCode;
-		unsigned int mScreenUIDCounter;
+		uint32_t mScreenUIDCounter;
 		int m_defaultControllerMask;
 		int m_inputSuspended;
 
 		UFG_PAD(0x98);
 
 		CUIGfxTranslator* m_translator;
+		CUIGfxFileOpener* m_gfxFileOpener;
+		uint32_t m_currentNumDrawText;
 
-		/*void* m_gfxFileOpener;
-		unsigned int m_currentNumDrawText;
-		Scaleform::GFx::DrawText* m_drawText[32];
+		/*Scaleform::GFx::DrawText* m_drawText[32];
 		int m_inputEnabled;
 		UFG::UIScreenFactory* m_screenFactory;
 		bool mIsMidSwitch;
@@ -69,6 +69,11 @@ namespace UFG
 		CUIScreen* GetTopScreen()
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*)>(UFG_RVA(0xA2BEF0))(this);
+		}
+
+		void QueuePushOverlay(const char* p_ScreenName, int p_Priority = 0, int p_ControllerMask = -1)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*, int, int)>(UFG_RVA(0xA31720))(this, p_ScreenName, p_Priority, p_ControllerMask);
 		}
 	};
 }

@@ -50,6 +50,41 @@ namespace UFG
 			for (qNode<T>* i = mNext; i != this; i = i->mNext)
 				m_Vector.emplace_back(i->GetPointer());
 		}
+
+		void Swap(qNode<T>* p_Node)
+		{
+			if (this->mPrev == this) // Is Head?
+			{
+				if (this->mNext)
+					this->mNext->mPrev = p_Node;
+
+				this->mNext		= p_Node;
+				p_Node->mPrev	= this;
+				return;
+			}
+
+			// Swap next ptrs
+			qNode<T>* m_CurrentNext = this->mNext;
+			this->mNext		= p_Node->mNext;
+			p_Node->mNext	= m_CurrentNext;
+
+			if (this->mNext)
+				this->mNext->mPrev = this;
+
+			if (p_Node->mNext)
+				p_Node->mNext->mPrev = p_Node;
+
+			// Swap prev ptrs
+			qNode<T>* m_CurrentPrev = this->mPrev;
+			this->mPrev		= p_Node->mPrev;
+			p_Node->mPrev	= m_CurrentPrev;
+
+			if (this->mPrev)
+				this->mPrev->mNext = this;
+			
+			if (p_Node->mPrev)
+				p_Node->mPrev->mNext = p_Node;
+		}
 	};
 
 	template <typename T>

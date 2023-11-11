@@ -9,6 +9,7 @@
 #include "ResourceData.hpp"
 #include "PropertySet.hpp"
 #include "UILocalization.hpp"
+#include "UIScreen.hpp"
 
 // Illusion
 #include "Illusion/BonePalette.hpp"
