@@ -39,6 +39,12 @@ namespace Scaleform
 			{
 				reinterpret_cast<void(__fastcall*)(void*, Value*, const char*)>(UFG_RVA(0x8C3AB0))(this, p_Value, p_String);
 			}
+
+			// True if the method was invoked otherwise false.
+			bool Invoke(const char* p_MethodName, Value* p_Result, Value* p_Args, uint32_t p_NumArgs)
+			{
+				return reinterpret_cast<bool(__fastcall*)(void*, const char*, Value*, Value *, uint32_t)>(UFG_RVA(0x8E6DE0))(this, p_MethodName, p_Result, p_Args, p_NumArgs);
+			}
 		};
 
 		class MovieDef : public Resource, public StateBag

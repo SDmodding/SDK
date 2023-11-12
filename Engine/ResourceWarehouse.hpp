@@ -13,7 +13,7 @@ namespace UFG
 		qBaseTreeRB mInventoryTree;
 		qList<qResourceInventory> mInventoryList;
 		qResourceInventory* mLastInventory;
-		unsigned int mLastTypeUID;
+		uint32_t mLastTypeUID;
 		int mNumInventories;
 		float mAddTime;
 		float mRemoveTime;
@@ -21,9 +21,19 @@ namespace UFG
 		float mLoadTime;
 		float mUnloadTime;
 
-		qResourceInventory* GetInventory(unsigned int type_uid)
+		void Load(void* p_Buffer, size_t p_NumBytes)
 		{
-			return reinterpret_cast<qResourceInventory*(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x170B80))(this, type_uid);
+			reinterpret_cast<void(__fastcall*)(void*, void*, size_t)>(UFG_RVA(0x176B50))(this, p_Buffer, p_NumBytes);
+		}
+
+		void Unload(void* p_Buffer, size_t p_NumBytes)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, void*, size_t)>(UFG_RVA(0x17F180))(this, p_Buffer, p_NumBytes);
+		}
+
+		qResourceInventory* GetInventory(uint32_t p_TypeUID)
+		{
+			return reinterpret_cast<qResourceInventory*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x170B80))(this, p_TypeUID);
 		}
 
 		qResourceInventory* GetActionTreeResourceInventory() { return GetInventory(ActionTreeResourceInventory_UID); }
@@ -36,5 +46,5 @@ namespace UFG
 
 		qResourceInventory* GetTextureInventory() { return GetInventory(TextureInventory_UID); }
 	};
-	CResourceWarehouse* ResourceWarehouse = reinterpret_cast<CResourceWarehouse*>(UFG_RVA(0x235B2F0));
+	CResourceWarehouse* gResourceWarehouse = reinterpret_cast<CResourceWarehouse*>(UFG_RVA(0x235B2F0));
 }

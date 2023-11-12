@@ -48,10 +48,46 @@ namespace Scaleform
 				class MovieImpl* pMovieRoot;
 				List<Value> ExternalObjRefs;
 			};
-			ObjectInterface* pObjectInterface;
-			ValueType Type;
-			ValueUnion mValue;
-			uint64_t DataAux;
+			ObjectInterface* pObjectInterface = nullptr;
+			ValueType Type = VT_Undefined;
+			ValueUnion mValue = { 0 };
+			uint64_t DataAux = 0;
+
+			__inline void SetNull()
+			{
+				Type = VT_Null;
+				mValue.pData = nullptr;
+			}
+
+			__inline void SetBoolean(bool p_Value)
+			{
+				Type = VT_Boolean;
+				mValue.BValue = p_Value;
+			}
+
+			__inline void SetInt(int p_Value)
+			{
+				Type = VT_Int;
+				mValue.IValue = p_Value;
+			}
+
+			__inline void SetUInt(uint32_t p_Value)
+			{
+				Type = VT_UInt;
+				mValue.UIValue = p_Value;
+			}
+
+			__inline void SetNumber(float p_Value)
+			{
+				Type = VT_Number;
+				mValue.NValue = static_cast<long double>(p_Value);
+			}
+
+			__inline void SetNumber(double p_Value)
+			{
+				Type = VT_Number;
+				mValue.NValue = static_cast<long double>(p_Value);
+			}
 
 			void SetString(ASString* p_Str)
 			{
