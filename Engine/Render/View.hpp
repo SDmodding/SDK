@@ -99,6 +99,11 @@ namespace Render
 			reinterpret_cast<void(__fastcall*)(void*, CPoly*, Illusion::CMaterial*, UFG::qMatrix44*)>(UFG_RVA(0xE880))(this, p_Poly, p_Material, p_LocalWorld);
 		}
 
+		uint32_t Draw(UFG::qResourceHandle* p_ModelHandle, UFG::qMatrix44* p_LocalWorld, bool p_DoClip)
+		{
+			return reinterpret_cast<uint32_t(__fastcall*)(void*, UFG::qResourceHandle*, UFG::qMatrix44*, bool)>(UFG_RVA(0xE420))(this, p_ModelHandle, p_LocalWorld, p_DoClip);
+		}
+
 		void SubmitRenderModel(Illusion::CModel* p_Model, UFG::qMatrix44* p_LocalWorld)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CModel*, UFG::qMatrix44*)>(UFG_RVA(0x7D20))(this, p_Model, p_LocalWorld);

@@ -65,6 +65,11 @@ namespace Illusion
 		Illusion::eRenderPass::Enum mRenderPass;
 		Illusion::ShaderSelector* mShaderSelector;
 		Illusion::MaterialModifierData* mMaterialModifier;*/
+
+		void AddRenderCommand(int16_t p_CommandType, int16_t p_Index, void* p_Data)
+		{
+			reinterpret_cast<void(_fastcall*)(void*, int16_t, int16_t, void*)>(UFG_RVA(0x5DDE0))(this, p_CommandType, p_Index, p_Data);
+		}
 	};
 
 	class CMaterial;

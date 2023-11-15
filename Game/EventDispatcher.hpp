@@ -37,13 +37,13 @@ namespace UFG
 
 		UFG_PAD(0x10);
 
-		unsigned int m_EventUID;
+		uint32_t m_EventUID;
 
 		UFG_PAD(0x4);
 
 		const char* m_NamePTR;
-		unsigned __int64 mUserData0;
-		unsigned __int64 mUserData1;
+		uint64_t mUserData0;
+		uint64_t mUserData1;
 	};
 
 	// Event Classes
@@ -56,7 +56,7 @@ namespace UFG
 	class CCollisionEvent : public CEvent
 	{
 	public:
-		unsigned int mType;
+		uint32_t mType;
 		qVector3 position;
 		qVector3 normal;
 		float speed;
@@ -96,15 +96,15 @@ namespace UFG
 	class CEventDispatcher
 	{
 	public:
-		void* Register(CEventHandler* handler, unsigned int channel_id, const char* name = nullptr, unsigned int depID = 0)
+		void* Register(CEventHandler* p_Handler, uint32_t p_ChannelID, const char* p_Name = nullptr, uint32_t p_DepID = 0)
 		{
-			return reinterpret_cast<void*(__fastcall*)(void*, CEventHandler*, unsigned int, const char*, unsigned int)>(UFG_RVA(0x1B65C0))(this, handler, channel_id, name, depID);
+			return reinterpret_cast<void*(__fastcall*)(void*, CEventHandler*, uint32_t, const char*, uint32_t)>(UFG_RVA(0x1B65C0))(this, p_Handler, p_ChannelID, p_Name, p_DepID);
 		}
 
-		void UnRegister(CEventHandler* handler, unsigned int channel_id)
+		void UnRegister(CEventHandler* p_Handler, uint32_t p_ChannelID)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CEventHandler*, unsigned int)>(UFG_RVA(0x1B6890))(this, handler, channel_id);
+			reinterpret_cast<void(__fastcall*)(void*, CEventHandler*, unsigned int)>(UFG_RVA(0x1B6890))(this, p_Handler, p_ChannelID);
 		}
 	};
-	CEventDispatcher* EventDispatcher = reinterpret_cast<CEventDispatcher*>(UFG_RVA(0x235F740));
+	CEventDispatcher* gEventDispatcher = reinterpret_cast<CEventDispatcher*>(UFG_RVA(0x235F740));
 }
