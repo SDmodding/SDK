@@ -19,6 +19,11 @@ namespace UFG
 		uint32_t mNameUID;
 		uint32_t mTailPad;
 
+		~qResourceHandle()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x164090))(this);
+		}
+
 		qResourceHandle()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x161BB0))(this);

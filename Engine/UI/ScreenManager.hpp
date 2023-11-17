@@ -76,4 +76,13 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, const char*, int, int)>(UFG_RVA(0xA31720))(this, p_ScreenName, p_Priority, p_ControllerMask);
 		}
 	};
+	
+	class CUIScreenTextureManager
+	{
+	public:
+		void QueueTexturePackLoad(const char* p_TextureName, DataStreamer::PRIORITY p_Priority = DataStreamer::DEFAULT_PRIORITY, void* p_Callback = nullptr, void* p_CallbackParam = nullptr)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*, DataStreamer::PRIORITY, void*, void*)>(UFG_RVA(0x5C1CA0))(this, p_TextureName, p_Priority, p_Callback, p_CallbackParam);
+		}
+	};
 }

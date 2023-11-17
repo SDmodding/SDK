@@ -69,11 +69,11 @@ namespace UFG
 		void* mCullLayer;
 		void* mCullResults;
 		void* mCullInfo;
-		__declspec(align(16)) UFG::qMatrix44 mPoseRootMatrix;
-		UFG::CSkeletalPose* mPose;
+		__declspec(align(16)) qMatrix44 mPoseRootMatrix;
+		CSkeletalPose* mPose;
 		CRigHandle mRigHandle;
-		unsigned int mNumModelTypeLODs;
-		void* mModelType[5];
+		uint32_t mNumModelTypeLODs;
+		CModelType* mModelType[5];
 		float mLODBiasMult;
 		float mDrawScale;
 		bool mHasSoftBody;

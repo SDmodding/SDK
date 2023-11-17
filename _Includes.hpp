@@ -56,9 +56,9 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 // Engine Important
 #include "Engine/Metrics.hpp"
 #include "Engine/Resources.hpp"
-#include "Engine/Illusion.hpp"
 #include "Engine/MemoryPool.hpp"
 #include "Engine/LinearAllocator.hpp"
+#include "Engine/Illusion.hpp"
 
 #include "Engine/PropertySet.hpp"
 #include "Engine/Reflect.hpp"
@@ -70,6 +70,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Illusion/Classes.hpp"
 #include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
+#include "Engine/Illusion/Resources.hpp"
 
 // Engine UEL
 #include "Engine/UEL/Value.hpp"
@@ -105,6 +106,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/DamageRig.hpp"
 #include "Engine/DebugDrawManager.hpp"
 #include "Engine/Rig.hpp"
+#include "Engine/Model.hpp"
 #include "Engine/Components.hpp"
 #include "Engine/Door.hpp"
 #include "Engine/FXManager.hpp"

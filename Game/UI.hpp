@@ -105,11 +105,33 @@ namespace UFG
 		}
 	};
 
+	class CUIWeaponAmmoData
+	{
+	public:
+		int ReserveAmmo;
+		int ClipAmmo;
+		int ClipCapacity;
+		int Clips;
+		int OldClips;
+		int OldReserveAmmo;
+		bool IsCamera;
+		bool UnlimitedAmmo;
+		eInventoryItemEnum InventoryItem;
+		const char* IconTexture;
+		const char* TexturePack;
+		qSafePointer<CGunComponent> mGunComponent;
+	};
+
 	namespace UI
 	{
 		CUIScreenManager* GetScreenManager()
 		{
 			return *reinterpret_cast<CUIScreenManager**>(UFG_RVA(0x249C1C0));
+		}
+
+		CUIScreenTextureManager* GetScreenTextureManager()
+		{
+			return *reinterpret_cast<CUIScreenTextureManager**>(UFG_RVA(0x242FF98));
 		}
 
 		CUIGfxTranslator* GetTranslator()

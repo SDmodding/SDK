@@ -42,6 +42,11 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
 		}
 
+		void AddDynamicCover(CSimObject* p_SimObject, qResourceHandle* p_DynamicCoverHandle)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, qResourceHandle*)>(UFG_RVA(0x45BE80))(this, p_SimObject, reinterpret_cast<qResourceHandle*>(reinterpret_cast<uintptr_t>(p_DynamicCoverHandle) - 0x50));
+		}
+
 		// return: true (if hit something)
 		bool CastRay(RayCastData* data) 
 		{

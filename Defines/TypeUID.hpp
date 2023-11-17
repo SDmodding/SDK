@@ -19,6 +19,7 @@
 #define SimObjectRigidbody_TypeUID							0x16000003
 #define SimObjectStreamedResource_TypeUID					0x72000001
 #define SimObjectFXComponent_TypeUID						0x32000001
+#define SimObjectInventoryItemComponent_TypeUID				0xAE000001
 #define SimObjectWaterPhantomComponent_TypeUID				0x78000001
 
 #define CharacterAIAwarenessComponent_TypeUID				0x66000001

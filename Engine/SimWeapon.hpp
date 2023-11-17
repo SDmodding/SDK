@@ -124,6 +124,16 @@ namespace UFG
 		}
 	};
 
+	class CInventoryItemComponent : public UFG::CSimComponent
+	{
+	public:
+		qNode<CInventoryItemComponent> mNode;
+		qSafePointer<CInventoryComponent> m_pOwnerInventoryComponent;
+		eInventoryItemEnum m_eInventoryItem;
+		qSymbol m_symInventoryItem;
+		int m_iQuantity;
+	};
+
 	class CGunComponent : public CSimComponent
 	{
 	public:
@@ -136,7 +146,7 @@ namespace UFG
 		UFG_PAD(0x4);
 
 		RebindingComponentHandle<CSimWeaponPropertiesComponent> mSimObjectWeaponPropertiesComponent;
-		RebindingComponentHandle<CInventoryComponent> mInventoryItemComponent;
+		RebindingComponentHandle<CInventoryItemComponent> mInventoryItemComponent;
 
 		eTargetTypeEnum mMustHitTarget;
 		int mClipAmmo[2];

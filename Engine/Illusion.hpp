@@ -3,26 +3,6 @@
 
 namespace Illusion
 {
-	class CModel : public UFG::qResourceData
-	{
-	public:
-		float mAABBMin[3];
-		unsigned int mNumPrims;
-		float mAABBMax[3];
-		unsigned int pad0;
-		/*Illusion::MaterialTableHandle mMaterialTableHandle;
-		Illusion::BonePaletteHandle mBonePaletteHandle;
-		UFG::qOffset64<UFG::qOffset64<Illusion::Mesh*>*> mMeshOffsetTable;
-		unsigned int mNumMeshes;
-		UFG::qOffset64<Illusion::ModelUser*> mModelUser;
-		unsigned int pad1;
-		unsigned int mLastUsedFrameNum;
-		unsigned int pad2;
-		UFG::qMemoryPool* mMemoryPool;
-		Illusion::MorphTargetsHandle mMorphTargetsHandle;
-		Illusion::LocatorsHandle mLocatorsHandle;*/
-	};
-
 	class CStateBlock
 	{
 	public:

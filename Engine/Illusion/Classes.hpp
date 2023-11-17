@@ -72,24 +72,80 @@ namespace Illusion
 		}
 	};
 
-	class CMaterial;
-
-	// Resources
-	class CBuffer : public UFG::qResourceData
+	class CMaterialUser
 	{
 	public:
-		uint8_t mBufferType;
-		uint8_t mRunTimeCreated;
-		uint16_t mFlags;
-		uint32_t mDataByteSize;
-		UFG::qOffset64<void*> mData;
-		uint32_t mElementByteSize;
-		uint32_t mNumElements;
-		UFG::qOffset64<void*> mBufferUser;
-		uint32_t mLastUsedFrameNum;
-		uint32_t pad0;
+		int16_t mVisibilityFlags;
+		int16_t mShadowFlags;
+	};
+
+	class CRMaterial
+	{
+	public:
+		UFG_PAD(0x190);
+		/*UFG::qReflectObjectType<Illusion::rMaterial, UFG::qReflectObject>
+		Illusion::rMaterial::rRenderState mRenderState;
+		Illusion::eRenderPass::StaticPassData* mStaticRenderPass;
+		Illusion::eRenderPass::PassData mRenderPass[4];*/
+	};
+
+	class RMesh
+	{
+	public:
+		UFG::qReflectString mMaterialName;
+		UFG::qReflectHandle<CRMaterial> mMaterial;
+		UFG::qResourceHandle mVertexDeclHandle;
+		UFG::qResourceHandle mIndexBufferHandle;
+		UFG::qResourceHandle mVertexBufferHandles[4];
+		int mPrimType;
+		int mIndexStart;
+		uint32_t mNumPrims;
+		const char* mDescription;
+	};
+
+	class CRModel
+	{
+	public:
+		UFG::qReflectString mModelName;
+		UFG::qReflectArray<RMesh> mMeshes;
+
+		enum eType
+		{
+			LOD_A = 0x0,
+			LOD_B = 0x1,
+			LOD_C = 0x2,
+			LOD_D = 0x3,
+			OccluderAABB = 0x4,
+			OccluderModel = 0x5,
+			OccluderModelDoubleSided = 0x6,
+			Shadow = 0x7,
+			NonDrawable = 0x8,
+			Physics = 0x8,
+		};
+		eType mModelType;
+
+		UFG::qResourceHandle mBonePaletteHandle;
+		UFG::qVector3 mAABBMin;
+		unsigned int mNumPrims;
+		UFG::qVector3 mAABBMax;
+		unsigned int mLastUsedFrameNum;
 		UFG::CMemoryPool* mMemoryPool;
-		uint32_t pad1;
-		uint32_t pad2;
+	};
+
+	class CModelProxy
+	{
+	public:
+		UFG::qResourceHandle mModelHandle;
+		CRModel* mRModel;
+
+		~CModelProxy()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x27F0))(this);
+		}
+
+		void Init(uint32_t p_NameUID)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x3C70))(this, p_NameUID);
+		}
 	};
 }
