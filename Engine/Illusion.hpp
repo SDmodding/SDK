@@ -3,27 +3,6 @@
 
 namespace Illusion
 {
-	class CStateBlock
-	{
-	public:
-		UFG_PAD(0x18);
-
-		uint32_t m_UID;
-
-		UFG_PAD(0x18);
-
-		char m_DebugName[0x24];
-
-		UFG_PAD(0x10);
-
-		uint32_t mParentUID;
-		uint32_t mDataByteSize;
-		uint32_t mNumValues;
-		uint32_t mNameUID;
-
-		uintptr_t GetDataPointer() { return (reinterpret_cast<uintptr_t>(this) + 0x80); }
-	};
-
 	class CStateBlockItter
 	{
 	public:

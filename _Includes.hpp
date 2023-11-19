@@ -32,6 +32,9 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 	return reinterpret_cast<ReturnType(__fastcall*)(void*, Args...)>(m_Function)(p_Instance, p_Args...);
 }
 
+#define UFG_MIN(a,b) (((a) < (b)) ? (a) : (b))
+#define UFG_MAX(a,b) (((a) > (b)) ? (a) : (b))
+
 #include "Defines/Math.hpp"
 
 #include "Templates.hpp"
@@ -58,7 +61,6 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Resources.hpp"
 #include "Engine/MemoryPool.hpp"
 #include "Engine/LinearAllocator.hpp"
-#include "Engine/Illusion.hpp"
 
 #include "Engine/PropertySet.hpp"
 #include "Engine/Reflect.hpp"
@@ -71,6 +73,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
 #include "Engine/Illusion/Resources.hpp"
+#include "Engine/Illusion.hpp"
 
 // Engine UEL
 #include "Engine/UEL/Value.hpp"

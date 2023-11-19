@@ -2,14 +2,11 @@
 
 namespace UFG
 {
-	struct qResourceData
+	struct qResourceData : qNodeRB
 	{
-		qBaseNodeRB m_Node;
-
-		UFG_PAD(0x10);
-
+		qList<struct qResourceHandle> mResourceHandles;
 		uint32_t mTypeUID;
-		char mDebugName[0x24];
+		char mDebugName[36];
 	};
 
 	struct qResourceHandle
@@ -53,5 +50,12 @@ namespace UFG
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(mData) + m_Offset);
 		}
+	}; 
+	
+	class CPhysicsResourceHandle : public qResourceHandle
+	{
+	public:
+		class CBasePhysicsObject* mOwner;
+		bool mUnloading;
 	};
 }

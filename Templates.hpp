@@ -5,16 +5,16 @@ namespace UFG
 	template<typename T>
 	struct qSetBase
 	{
-		unsigned int mCount;
-		unsigned int mBufferSize;
+		uint32_t mCount;
+		uint32_t mBufferSize;
 		T** mppArray;
 	};
 
 	template<typename T>
 	struct qArray
 	{
-		unsigned int size;
-		unsigned int capacity;
+		uint32_t size;
+		uint32_t capacity;
 		T* p;
 	};
 
@@ -27,7 +27,7 @@ namespace UFG
 	template<typename T, size_t N>
 	struct qFixedArray
 	{
-		unsigned int size;
+		uint32_t size;
 		T p[N];
 	};
 
@@ -141,7 +141,7 @@ namespace UFG
 	{
 		qNode<qSafePointerWithCallbacksBase<T>> m_Node;
 		T* m_pPointer;
-		unsigned int m_Changed;
+		uint32_t m_Changed;
 		T* m_BindClass;
 		T* m_BindCallback;
 		T* m_UnbindClass;
@@ -160,26 +160,23 @@ namespace UFG
 	};
 
 	template<typename T>
-	struct RebindingComponentHandle
+	struct RebindingComponentHandle : qNode<RebindingComponentHandle<T>>
 	{
-		UFG_PAD(0x10);
-
-		unsigned int m_TypeUID;
+		uint32_t m_TypeUID;
 
 		UFG_PAD(0x4);
 
 		T* m_pSimComponent;
 		void* m_pSimObject;
-		unsigned int m_Changed;
+		uint32_t m_Changed;
 
 		UFG_PAD(0x4);
 	};
 
-
 	template <typename T>
 	struct qOffset64
 	{
-		__int64 mOffset;
+		int64_t mOffset;
 
 		__inline bool IsValid() { return mOffset; }
 
@@ -250,8 +247,8 @@ namespace UFG
 	struct qReflectArray
 	{
 		T* mItems;
-		unsigned int mNumItems;
-		unsigned int mFlags;
+		uint32_t mNumItems;
+		uint32_t mFlags;
 	};
 
 	// Havok Stuff

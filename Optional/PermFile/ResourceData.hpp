@@ -23,7 +23,7 @@ namespace UFG
 
 		void SetEntrySize(uint32_t p_Size)
 		{
-			m_EntrySize[0] = m_EntrySize[1] = (max(sizeof(ResourceEntry_t), p_Size) - sizeof(ResourceEntry_t));
+			m_EntrySize[0] = m_EntrySize[1] = (UFG_MAX(sizeof(ResourceEntry_t), p_Size) - sizeof(ResourceEntry_t));
 		}
 	};	
 

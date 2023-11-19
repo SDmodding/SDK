@@ -2,11 +2,19 @@
 
 namespace UFG
 {
-	//...
+	// Classes
 	class CSceneObjectProperties;
 	class CSimObject;
 	class CSimCharacter;
 	class CSimVehicle;
+
+	class CBasePhysicsObject
+	{
+	public:
+		void* vfptr;
+		bool mIsBoat;
+		qSafePointer<CSimComponent> mSimComponent;
+	};
 
 	class CTargetingSimObject
 	{
@@ -18,29 +26,29 @@ namespace UFG
 		bool m_bLock;
 	};
 
-	// Components
+	// Main Class
 	class CSimComponent
 	{
 	public:
 		void* vfptr;
 		UFG_PAD(0x10);
 
-		unsigned int m_TypeUID;
-		unsigned int m_NameUID;
-		unsigned short m_Flags;
-		short m_SimObjIndex;
+		uint32_t m_TypeUID;
+		uint32_t m_NameUID;
+		uint16_t m_Flags;
+		int16_t m_SimObjIndex;
 		CSimObject* m_pSimObject;
-
-		char m_BoundComponentHandles[0x10];
+		qList<RebindingComponentHandle<CSimComponent>> m_BoundComponentHandles;
 
 		~CSimComponent() { UFG_VCall<0, void>(this); }
 		const char* GetDebugTypeName() { return UFG_VCall<4, const char*>(this); }
-		void OnAttach(UFG::CSimObject* p_SimObject) { UFG_VCall<6, void, UFG::CSimObject*>(this, p_SimObject); }
+		void OnAttach(CSimObject* p_SimObject) { UFG_VCall<6, void, CSimObject*>(this, p_SimObject); }
 		void Suspend() { UFG_VCall<8, void>(this); }
 		void Restore() { UFG_VCall<9, void>(this); }
 		void OnDetach() { UFG_VCall<10, void>(this); }
 	};
 
+	// Components
 	class CActionTreeComponent : public CSimComponent
 	{
 	public:
@@ -333,21 +341,52 @@ namespace UFG
 		}
 	};
 
-	class CRigidBodyComponent : public CSimComponent
+	class CRigidBody : public CSimComponent, public CBasePhysicsObject
 	{
 	public:
-		UFG_PAD(0x68);
-
+		CPhysicsResourceHandle mCollisionMeshBundle;
+		CCollisionInstanceData* mInstanceData;
+		CCollisionMeshData* mCollisionMeshData;
 		hkpRigidBody* mBody;
+		class CWaterFloatingTrackerBaseComponent* mWaterFloatingTrackerComponent;
+		RebindingComponentHandle<CTransformNodeComponent> mRootTransformComponent;
+		class CWindAction* mWindAction;
+		struct BitArray256* mFractureState;
+		qArray<qSafePointer<class CConstraint>> mConstraints;
 
-		UFG_PAD(0x58);
-		/*UFG::WaterFloatingTrackerBaseComponent* mWaterFloatingTrackerComponent;
-		UFG::RebindingComponentHandle<UFG::TransformNodeComponent, 0> mRootTransformComponent;
-		UFG::WindAction* mWindAction;
-		BitArray256* mFractureState;
-		UFG::qArray<UFG::qSafePointer<UFG::Constraint, UFG::Constraint>, 0> mConstraints;*/
+		enum Flags : uint32_t
+		{
+			ACTIVE_REGION_MGT = 0x1,
+			INFLATED = 0x2,
+			SPAWNED_FROM_STREAMED_GEO = 0x4,
+			RESOURCE_UNLOADED = 0x8,
+			JUST_SPAWNED = 0x10,
+			JUST_FRACTURED = 0x20,
+			MODE_FIXED = 0x40,
+			MODE_SIMULATED = 0x80,
+			MODE_ANIMATED_HARDKEYFRAME = 0x100,
+			MODE_ANIMATED_SOFTKEYFRAME = 0x200,
+			MODEL_ASSET_BODY = 0x400,
+		};
+		Flags mFlags;
+		uint32_t mCollisionLayerOverride;
+		int mCollisionSystem;
+	};
 
-		uint32_t mFlags;
+	class CRigidBodyComponent : public CRigidBody
+	{
+	public:
+		qNode<CRigidBodyComponent> mNode;
+		qSafePointer<class CParkourComponent> mParkourComponent;
+		qSafePointer<class CDynamicCoverComponent> mCoverComponent;
+		qSafePointer<class CPhysicsRenderHelper> mRenderComponent;
+		qSafePointer<class CStateMachineComponent> mStateMachineComponent;
+		RebindingComponentHandle<class CCharacterAnimationComponent> mAnimationComponent;
+		int16_t mFollowBoneIndex;
+		class CStateMachineDefinition *mRuntimeStateMachineDefinition;
+		float mLifeSpan;
+		float mTimeSinceAddedToWorld;
+		uint32_t mStoredCollisionFilter;
 
 		void ApplyForce(qVector3* force, qVector3* point)
 		{
@@ -405,6 +444,12 @@ namespace UFG
 		void Deflate()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA68C0))(this);
+		}
+
+		__inline void DeflateSafe()
+		{
+			if (mFlags & INFLATED)
+				Deflate();
 		}
 	};
 

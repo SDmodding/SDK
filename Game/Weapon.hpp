@@ -122,6 +122,67 @@
 
 namespace UFG
 {
+	class CWeaponManager
+	{
+	public:
+		struct WeaponEntry_t
+		{
+			float mScore;
+			float mSpawnTime;
+			float mTimeAlive;
+			float mDistFromPlayer;
+			bool mEquipped;
+			qSafePointer<CSimWeaponPropertiesComponent> mComponent;
+		};
+		qArray<WeaponEntry_t> mElements;
+
+		void FastDelete(uint32_t p_Index)
+		{
+			reinterpret_cast<void(__fastcall*)(qArray<WeaponEntry_t>*, uint32_t)>(UFG_RVA(0x43CAE0))(&mElements, p_Index);
+		}
+
+		void AddWeapon(CSimWeaponPropertiesComponent* p_WeaponProperties)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CSimWeaponPropertiesComponent*)>(UFG_RVA(0x438920))(this, p_WeaponProperties);
+		}
+
+		bool RemoveWeapon(CSimWeaponPropertiesComponent* p_WeaponProperties)
+		{
+			for (uint32_t i = 0; mElements.size > i; ++i)
+			{
+				if (mElements.p[i].mComponent.m_pPointer == p_WeaponProperties)
+				{
+					FastDelete(i);
+					return true;
+				}
+			}
+
+			return false;
+		}
+		
+		bool RemoveWeapon(CSimObject* p_Weapon)
+		{
+			for (uint32_t i = 0; mElements.size > i; ++i)
+			{
+				if (mElements.p[i].mComponent.m_pPointer && mElements.p[i].mComponent.m_pPointer->m_pSimObject == p_Weapon)
+				{
+					FastDelete(i);
+					return true;
+				}
+			}
+
+			return false;
+		}
+	};
+
+	namespace WeaponManager
+	{
+		CWeaponManager* Get()
+		{
+			return *reinterpret_cast<CWeaponManager**>(UFG_RVA(0x2401618));
+		}
+	}
+
 	#ifndef SDK_SD_MINIMAL_BUILD
 	std::map<qSymbol,std::string> m_WeaponNames =
 	{

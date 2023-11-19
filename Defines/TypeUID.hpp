@@ -20,10 +20,12 @@
 #define SimObjectStreamedResource_TypeUID					0x72000001
 #define SimObjectFXComponent_TypeUID						0x32000001
 #define SimObjectInventoryItemComponent_TypeUID				0xAE000001
+#define SimTSActorComponent_TypeUID							0x8A000001
 #define SimObjectWaterPhantomComponent_TypeUID				0x78000001
 
 #define CharacterAIAwarenessComponent_TypeUID				0x66000001
 #define CharacterAIActionTreeComponent_TypeUID				0x52000001
+#define CharacterAICharacterControllerComponent_TypeUID		0x44000003
 #define CharacterAimingPlayerComponent_TypeUID				0xA2000003
 #define CharacterAttackRightsComponent_TypeUID				0x4A000001
 #define CharacterAudioComponent_TypeUID						0xD2000003
@@ -44,6 +46,7 @@
 #define CharacterOccupantComponent_TypeUID					0x96000001
 #define CharacterSensorComponent_TypeUID					0x84000001
 #define CharacterWorldContextComponent_TypeUID				0xA6000001
+#define CharacterSubjectComponent_TypeUID					0x68000005
 
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
 #define VehicleAiDriverComponent_TypeUID					0xD8000003
@@ -53,3 +56,4 @@
 #define VehiclePhysicsMoverInterface_TypeUID				0xE4000001
 
 #define WeaponGunComponent_TypeUID							0x9C000001
+#define WeaponPropertiesComponent_TypeUID					0xB2000003

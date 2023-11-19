@@ -178,139 +178,61 @@ namespace UFG
 			return 0;
 		}
 
-		CSimComponent* GetComponentOfType(uint32_t m_TypeUID)
+		__inline CSimComponent* GetComponentOfType(uint32_t m_TypeUID)
 		{
 			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, m_TypeUID);
 		}
 
 		template <typename T>
-		T* GetComponentOfType(uint32_t m_TypeUID)
+		__inline T* GetComponentOfType(uint32_t m_TypeUID)
 		{
 			return reinterpret_cast<T*>(GetComponentOfType(m_TypeUID));
 		}
 
-		CSimComponent* GetComponentOfTypeHK(uint32_t m_TypeUID)
+		__inline CSimComponent* GetComponentOfTypeHK(uint32_t m_TypeUID)
 		{
 			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, m_TypeUID);
 		}
 
 		template <typename T>
-		T* GetComponentOfTypeHK(uint32_t m_TypeUID)
+		__inline T* GetComponentOfTypeHK(uint32_t m_TypeUID)
 		{
 			return reinterpret_cast<T*>(GetComponentOfTypeHK(m_TypeUID));
 		}
 
-		CSimComponent* GetActor()
+		__inline CSimComponent* GetActor()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags & 0x8000u) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[3].m_pComponent;
-				else if ((m_Flags >> 12) & 1)
-					m_Component = m_Components.p[2].m_pComponent;
-				else
-					m_Component = GetComponentOfType(0x8A000001); // TSActorComponent::_TypeUID
-			}
-			else
-				m_Component = m_Components.p[4].m_pComponent;
-
-			return reinterpret_cast<CSimComponent*(__fastcall*)(void*)>(UFG_RVA(0x4E0C50))(m_Component);
+			return GetComponentOfType<CSimComponent>(SimTSActorComponent_TypeUID);
 		}
 
-		CSimObjectPropertiesComponent* GetProperties()
+		__inline CSimObjectPropertiesComponent* GetProperties()
 		{
-			CSimComponent* m_Component = m_Components.p[3].m_pComponent;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[4].m_pComponent;
-				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(SimObjectProperties_TypeUID);
-				else
-					m_Component = GetComponentOfType(SimObjectProperties_TypeUID);
-			}
-
-			return reinterpret_cast<CSimObjectPropertiesComponent*>(m_Component);
+			return GetComponentOfType<CSimObjectPropertiesComponent>(SimObjectProperties_TypeUID);
 		}
 
-		CCompositeDrawableComponent* GetCompositeDrawable()
+		__inline CCompositeDrawableComponent* GetCompositeDrawable()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				m_Component = m_Components.p[14].m_pComponent;
-			else if ((m_Flags & 0x8000u) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[9].m_pComponent;
-				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(SimObjectCompositeDrawable_TypeUID);
-				else
-					m_Component = GetComponentOfType(SimObjectCompositeDrawable_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[14].m_pComponent;
-
-			return reinterpret_cast<CCompositeDrawableComponent*>(m_Component);
+			return GetComponentOfType<CCompositeDrawableComponent>(SimObjectCompositeDrawable_TypeUID);
 		}
 
-		CFXSimComponent* GetFX()
+		__inline CFXSimComponent* GetFX()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000u) == 0)
-			{
-				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(SimObjectFXComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(SimObjectFXComponent_TypeUID);
-			}
-			else
-				m_Component = GetComponentOfTypeHK(SimObjectFXComponent_TypeUID);
-
-			return reinterpret_cast<CFXSimComponent*>(m_Component);
+			return GetComponentOfType<CFXSimComponent>(SimObjectFXComponent_TypeUID);
 		}
 
-		CActionTreeComponent* GetActionTree()
+		__inline CActionTreeComponent* GetActionTree()
 		{
-			CSimComponent* m_Component = m_Components.p[7].m_pComponent;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					m_Component = m_Components.p[6].m_pComponent;
-				else if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(SimObjectActionTreeComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(SimObjectActionTreeComponent_TypeUID);
-			}
-
-			return reinterpret_cast<CActionTreeComponent*>(m_Component);
+			return GetComponentOfType<CActionTreeComponent>(SimObjectActionTreeComponent_TypeUID);
 		}
 
-		CBaseAnimationComponent* GetBaseAnimation()
+		__inline CBaseAnimationComponent* GetBaseAnimation()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000u) == 0)
-			{
-				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(SimObjectBaseAnimation_TypeUID);
-				else
-					m_Component = GetComponentOfType(SimObjectBaseAnimation_TypeUID);
-			}
-			else
-				m_Component = GetComponentOfTypeHK(SimObjectBaseAnimation_TypeUID);
-
-			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+			return GetComponentOfType<CBaseAnimationComponent>(SimObjectBaseAnimation_TypeUID);
 		}
 
-		CRigidBodyComponent* GetRigidBody()
+		__inline CRigidBodyComponent* GetRigidBody()
 		{
-			return GetComponentOfType<UFG::CRigidBodyComponent>(SimObjectRigidbody_TypeUID);
+			return GetComponentOfType<CRigidBodyComponent>(SimObjectRigidbody_TypeUID);
 		}
 
 		bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)
@@ -342,25 +264,6 @@ namespace UFG
 		void Destroy()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1905C0))(this);
-		}
-	};
-
-	class CBasePhysicsObject
-	{
-	public:
-		UFG_PAD(0x8);
-
-		uintptr_t mComponentSafe;
-		uintptr_t mComponent;
-
-		UFG_PAD(0x8);
-
-		CSimComponent* GetComponent()
-		{
-			if (mComponentSafe != mComponent)
-				return nullptr;
-
-			return reinterpret_cast<CSimComponent*>(mComponent - 0x8);
 		}
 	};
 

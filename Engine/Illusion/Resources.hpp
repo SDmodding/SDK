@@ -92,4 +92,29 @@ namespace Illusion
 		}
 	};
 	typedef CModel CModelData;
+
+	class CStateBlock : public UFG::qResourceData
+	{
+	public:
+		UFG::qNode<CStateBlock> mNode;
+		uint32_t mParentUID;
+		uint32_t mDataByteSize;
+		uint32_t mNumValues;
+		uint32_t mStateUID;
+
+		uintptr_t GetDataPointer() 
+		{ 
+			return (reinterpret_cast<uintptr_t>(this) + sizeof(CStateBlock) + 0x8); 
+		}
+	};
+
+	class CStateBlockVehicleLook : public CStateBlock
+	{
+	public:
+		UFG_PAD(0x8);
+		UFG::qColour m_Colour0;
+		UFG::qColour m_Colour1;
+		float m_Values0[4];
+		float m_Values1[4];
+	};
 }

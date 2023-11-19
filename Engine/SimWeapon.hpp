@@ -19,7 +19,7 @@ namespace UFG
 
 			struct FireModeInfo_t
 			{
-				unsigned int mSimObjectWeaponType;
+				uint32_t mSimObjectWeaponType;
 				eInventoryItemEnum mAmmoInventoryItem;
 				int mAmmoClipCapacity;
 				int mAmmoTotalCapacity;
@@ -45,16 +45,16 @@ namespace UFG
 				float mProjectilePhysicsImpulse;
 				float mThrownSpeed;
 				qSymbol mProjectileSpawnBoneName;
-				unsigned int mProjectileSpawnBoneID;
+				uint32_t mProjectileSpawnBoneID;
 				qSymbol mExplosionType;
 				float mBulletLifeSpan;
 				bool mIsTwoHandedWeapon;
 				bool mIsAutomatic;
 				bool mStowable;
 				bool mHasSniperScope;
-				unsigned int mBulletTypeID;
-				unsigned int mBulletEffectID;
-				unsigned int mBulletPerShot;
+				uint32_t mBulletTypeID;
+				uint32_t mBulletEffectID;
+				uint32_t mBulletPerShot;
 				float mHardLockDamageMultiplier;
 				float mDamageMultiplier;
 				float mDamage;
@@ -67,10 +67,10 @@ namespace UFG
 				float m_fAccuracyRateMultiplier;
 				qVector3 mMinAngularVelocityWhenThrown;
 				qVector3 mMaxAngularVelocityWhenThrown;
-				unsigned int mStartingMaxAmmoCount;
-				unsigned int mStartingMinAmmoCount;
-				unsigned int mAIOnDeathDropMaxAmmoCount;
-				unsigned int mAIOnDeathDropMinAmmoCount;
+				uint32_t mStartingMaxAmmoCount;
+				uint32_t mStartingMinAmmoCount;
+				uint32_t mAIOnDeathDropMaxAmmoCount;
+				uint32_t mAIOnDeathDropMinAmmoCount;
 				void* mTracerBeamSettingsHandle;
 				void* mTracerBeamAISettingsHandle;
 				void* mTracerBeamTrailSettingsHandle;
@@ -122,6 +122,11 @@ namespace UFG
 			*reinterpret_cast<uint32_t*>(UFG_RVA(0x240E3D8)) = 0;
 			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5500F0))();
 		}
+
+		static WeaponTypeInfo_t* GetWeaponTypeInfos()
+		{
+			return reinterpret_cast<WeaponTypeInfo_t*>(UFG_RVA(0x240EEC0));
+		}
 	};
 
 	class CInventoryItemComponent : public UFG::CSimComponent
@@ -139,7 +144,7 @@ namespace UFG
 	public:
 		UFG_PAD(0x10);
 
-		unsigned int mNetShootSequence;
+		uint32_t mNetShootSequence;
 		qVector3 mNetBulletPosition;
 		qVector3 mNetBulletVelocity;
 
@@ -181,23 +186,14 @@ namespace UFG
 	class CSimWeapon : public CSimObject
 	{
 	public:
-		CGunComponent* GetGun()
+		__inline CGunComponent* GetGun()
 		{
-			CSimComponent* m_Component = nullptr;
+			return GetComponentOfType<CGunComponent>(WeaponGunComponent_TypeUID);
+		}
 
-			if ((m_Flags >> 14) & 1)
-				m_Component = GetComponentOfTypeHK(WeaponGunComponent_TypeUID);
-			else if ((m_Flags & 0x8000u) == 0)
-			{
-				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(WeaponGunComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(WeaponGunComponent_TypeUID);
-			}
-			else
-				m_Component = GetComponentOfTypeHK(WeaponGunComponent_TypeUID);
-
-			return reinterpret_cast<CGunComponent*>(m_Component);
+		__inline CSimWeaponPropertiesComponent* GetWeaponProperties()
+		{
+			return GetComponentOfType<CSimWeaponPropertiesComponent>(WeaponPropertiesComponent_TypeUID);
 		}
 	};
 }
