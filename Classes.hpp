@@ -2,6 +2,20 @@
 
 namespace UFG
 {
+	class ClipRect
+	{
+	public:
+		float x0;
+		float u0 = 0.f;
+		float x1;
+		float u1 = 1.f;
+		float y0;
+		float v0 = 0.f;
+		float y1;
+		float v1 = 1.f;
+		void* tile = nullptr;
+	};
+
 	class qMutex
 	{
 	public:
@@ -574,6 +588,12 @@ namespace UFG
 		qVector3 mMin;
 		qVector3 mMax;
 	};
+
+	struct UIPoint2f
+	{
+		float x, y;
+	};
+	typedef UIPoint2f ScreenPoint2f, WorldPoint2f, WideMinimapPoint2f, MinimapPoint2f, MinimapTilePoint2f;
 
 	// ...
 

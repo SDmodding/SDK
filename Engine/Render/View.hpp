@@ -104,6 +104,16 @@ namespace Render
 			return reinterpret_cast<uint32_t(__fastcall*)(void*, UFG::qResourceHandle*, UFG::qMatrix44*, bool)>(UFG_RVA(0xE420))(this, p_ModelHandle, p_LocalWorld, p_DoClip);
 		}
 
+		void DrawColoredRect_Xform(float p_X, float p_Y, float p_Width, float p_Height, UFG::qColour* p_Colour, uint32_t p_TextureUID, float* p_UVs, uint32_t p_AlphaStateUID, uint32_t p_RasterStateUID, UFG::qMatrix44* p_TransformMatrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, float, float, float, UFG::qColour*, uint32_t, float*, uint32_t, uint32_t, UFG::qMatrix44*)>(UFG_RVA(0xBFF80))(this, p_X, p_Y, p_Width, p_Height, p_Colour, p_TextureUID, p_UVs, p_AlphaStateUID, p_RasterStateUID, p_TransformMatrix);
+		}
+
+		void DrawClippedPolys(UFG::ClipRect* p_Rects, int p_RectCount, UFG::qColour* p_Colour, uint32_t p_TextureUID, uint32_t p_AlphaStateUID, uint32_t p_RasterStateUID, UFG::qMatrix44* p_TransformMatrix)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, UFG::ClipRect*, int, UFG::qColour*, uint32_t, uint32_t, uint32_t, UFG::qMatrix44*)>(UFG_RVA(0xBFAD0))(this, p_Rects, p_RectCount, p_Colour, p_TextureUID, p_AlphaStateUID, p_RasterStateUID, p_TransformMatrix);
+		}
+
 		void SubmitRenderModel(Illusion::CModel* p_Model, UFG::qMatrix44* p_LocalWorld)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CModel*, UFG::qMatrix44*)>(UFG_RVA(0x7D20))(this, p_Model, p_LocalWorld);

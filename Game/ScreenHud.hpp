@@ -2,12 +2,6 @@
 
 namespace UFG
 {
-	class CTiledMapWidget
-	{
-	public:
-		UFG_PAD(0x170);
-	};
-
 	struct PDAInputLocker_t
 	{
 		qString mOwner;
@@ -353,7 +347,7 @@ namespace UFG
 	class CScreenHud : public CUIScreen
 	{
 	public:
-		CTiledMapWidget Minimap;
+		CUITiledMapWidget Minimap;
 		CPDAWidget* PDA;
 
 		/*UFG::UIHKHealthMeterWidget HealthMeter;

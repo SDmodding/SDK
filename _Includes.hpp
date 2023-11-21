@@ -88,10 +88,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render.hpp"
 
 // Engine UI
-#include "Engine/UI/GfxFileOpener.hpp"
-#include "Engine/UI/GfxTranslator.hpp"
-#include "Engine/UI/Screen.hpp"
-#include "Engine/UI/ScreenManager.hpp"
+#include "Engine/UI/.UI.hpp"
 
 // Engine
 #include "Engine/Actions.hpp"
@@ -153,7 +150,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/Input.hpp"
 #include "Game/LocalPlayer.hpp"
 #include "Game/Vehicle.hpp"
-#include "Game/Map.hpp"
+#include "Game/TiledMap.hpp"
 #include "Game/PedSpawnManager.hpp"
 #include "Game/ProgressionTracker.hpp"
 #include "Game/RaceManager.hpp"
