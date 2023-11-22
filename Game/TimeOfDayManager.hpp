@@ -71,6 +71,10 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x6BA30))(this, m_Lock);
 		}
+
+		static CTimeOfDayManager* Instance()
+		{
+			return reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
+		}
 	};
-	CTimeOfDayManager* TimeOfDayManager = reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
 }

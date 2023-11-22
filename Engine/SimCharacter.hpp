@@ -228,6 +228,61 @@ namespace UFG
 		}
 	};
 
+	class CCharacterEffectsComponent : public CSimComponent, public qNode<CCharacterEffectsComponent>
+	{
+	public:
+		enum Foot
+		{
+			Foot_Left = 0x0,
+			Foot_Right = 0x1,
+			Foot_Num = 0x2,
+		};
+
+		enum Node
+		{
+			Node_WaterFootstepLeft = 0x0,
+			Node_WaterFootstepRight = 0x1,
+			Node_Num = 0x2,
+		};
+
+		struct PhysVolumeRef_t
+		{
+			qNodeRB mNode;
+			bool mActive;
+			bool mForceInactive;
+			float mTimeInVolume;
+			float mTimeOutVolume;
+			class CPhysicsVolumeProperties* mPhysVolume;
+			bool mPhysVolume_HitRecordPlayed;
+		};
+
+		bool InvulnerableToFire;
+		bool ShowHealthBar;
+		CTransformNodeComponent* mNodes[2];
+		RebindingComponentHandle<class CCharacterAnimationComponent> mCharacterAnimationComponent;
+		RebindingComponentHandle<class CCCharacterPhysicsComponent> mCharacterPhysicsComponent;
+		RebindingComponentHandle<class CPhantomVolumeComponent> mPhantomVolumeComponent;
+		qSymbol mWalkingThroughWaterEffect;
+		float mWalkingThroughWaterMinSpeedForEffectSqr;
+		float mMaxWaterDepthForWalkingThroughWaterEffect;
+		qTreeRB mPhysVolumeRefs;
+		uint32_t mActiveVolumeUID[5];
+		uint32_t mActiveSurfaceUID;
+		uint32_t mActiveWetSurfaceUID;
+		bool mIsOnFire;
+		uint32_t mFireEffectID[3];
+		bool mIsSmoldering;
+		uint32_t mSmolderEffectID[3];
+		float mFireExtinguishTime;
+		float mSmolderExtinguishTime;
+		float mQueuedHealthDamage;
+		hkpRigidBody* mPhantomRigidBody;
+		bool mIsAttachedToPlayer;
+		uint32_t mFootstepOverride[2];
+		uint32_t mUIElementIndex;
+		bool mIsEliteFighter;
+	};
+
 	class CCharacterPropertiesComponent : public CSimObjectPropertiesComponent
 	{
 	public:

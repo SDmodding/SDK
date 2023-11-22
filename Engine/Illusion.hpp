@@ -125,24 +125,24 @@ namespace Illusion
 		void* mMSAADepthTexture;
 	};
 
+	class CTexture
+	{
+	public:
+
+	};
+
 	class CTarget
 	{
 	public:
 		int mWidth;
 		int mHeight;
 		CTargetPlat* mTargetPlat;
-		unsigned int mNumTargetTextures;
-		void* mTargetTexture[4];
+		uint32_t mNumTargetTextures;
+		CTexture* mTargetTexture[4];
 		char mOwnsTargetTexture[4];
 		void* mDepthTexture;
 		void* mDepthTextureCopy;
 		char mOwnsDepthTexture;
 		char mDescription[32];
-	};
-
-	class CTexture
-	{
-	public:
-
 	};
 }

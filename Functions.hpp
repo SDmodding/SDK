@@ -2,6 +2,11 @@
 
 namespace UFG
 {
+	float qRandom(float p_Range, int* p_Seed = reinterpret_cast<int*>(UFG_RVA(0x203BC24)))
+	{
+		return reinterpret_cast<float(__fastcall*)(float, int*)>(UFG_RVA(0x189620))(p_Range, p_Seed);
+	}
+
 	__int64 DecompressLZ(void* input, __int64 input_length, void* output, __int64 output_length)
 	{
 		return reinterpret_cast<__int64(__fastcall*)(void*, __int64, void*, __int64)>(UFG_RVA(0x183080))(input, input_length, output, output_length);

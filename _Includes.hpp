@@ -84,6 +84,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render/BeamManager.hpp"
 #include "Engine/Render/VDynamic.hpp"
 #include "Engine/Render/Poly.hpp"
+#include "Engine/Render/RainManager.hpp"
 #include "Engine/Render/View.hpp"
 #include "Engine/Render.hpp"
 

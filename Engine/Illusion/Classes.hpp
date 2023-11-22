@@ -9,10 +9,45 @@ namespace Illusion
 		float AnimUVScaleOffset[4];
 	};
 
+	struct CB_EnvironmentSettings
+	{
+		float SunDir[4];
+		float SunDirWorld[4];
+		float SunColor[4];
+		float AmbientColorHorizon[4];
+		float ScaleAndHeight[4];
+		float ScatterZenithColor[4];
+		float ScatterHorizonColor[4];
+		float ScatterGroundColor[4];
+		float ScatterSunColor[4];
+		float CharacterParams[4];
+		float FogStartStopSky[4];
+		float WindDirAndMag[4];
+		float DisplayDebug[4];
+		float LitWindowTimeOn[4];
+		float Lighting[4];
+		float SunScatterParams[4];
+	};
+
 	struct CB_FXOverrideSettings
 	{
 		float ColorTint[4];
 		float Params1[4];
+	};
+
+	struct CB_RainSettings
+	{
+		float WorldViewProj[16];
+		float PreviousWorldViewProj[16];
+		float WorldView[16];
+		float PositionOffset[4];
+		float Velocity[4];
+		float Alpha[4];
+		float ViewPosition[4];
+		float SizeScale[4];
+		float Lighting[4];
+		float Forward[4];
+		float ParticleBoxSize[4];
 	};
 
 	struct CB_SceneryInstance
@@ -21,6 +56,15 @@ namespace Illusion
 		float SIColourTint[4];
 		float Mask[4];
 		float Value0[4];
+	}; 
+	
+	struct CB_SkySettings
+	{
+		float CloudColourTop[4];
+		float CloudColourMid[4];
+		float CloudColourBottom[4];
+		float CloudShadingComponents[4];
+		float CloudColourCeiling[4];
 	};
 
 	// Generic
