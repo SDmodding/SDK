@@ -100,6 +100,11 @@ namespace UFG
 		float mLoadTime;
 		float mUnloadTime;
 
+		static CResourceWarehouse* Instance()
+		{
+			return reinterpret_cast<CResourceWarehouse*>(UFG_RVA(0x235B2F0));
+		}
+
 		void Load(void* p_Buffer, size_t p_NumBytes)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, void*, size_t)>(UFG_RVA(0x176B50))(this, p_Buffer, p_NumBytes);
@@ -115,5 +120,4 @@ namespace UFG
 			return reinterpret_cast<qResourceInventory*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x170B80))(this, p_TypeUID);
 		}
 	};
-	CResourceWarehouse* gResourceWarehouse = reinterpret_cast<CResourceWarehouse*>(UFG_RVA(0x235B2F0));
 }

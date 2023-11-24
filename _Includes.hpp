@@ -43,6 +43,10 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Typedefs.hpp"
 #include "Functions.hpp"
 
+// Globals
+#include "Globals/D3D.hxx"
+#include "Globals/Window.hxx"
+
 // Engine Havok
 #include "Engine/Havok/.Includes.hpp"
 
@@ -173,5 +177,4 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 	#include "Optional/StringHash.hpp"
 #endif
 
-#include "Globals.hpp"
 #include "Utils.hpp"

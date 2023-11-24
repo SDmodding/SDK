@@ -26,7 +26,7 @@ namespace UFG
 
 			if (!m_Size)
 			{
-				gMainMemoryPool->Free(m_Ptr);
+				MemoryPool::GetMainPool()->Free(m_Ptr);
 				return false;
 			}
 
@@ -37,7 +37,7 @@ namespace UFG
 				fclose(m_File);
 			}
 
-			gMainMemoryPool->Free(m_Ptr);
+			MemoryPool::GetMainPool()->Free(m_Ptr);
 			return true;
 		}
 	}

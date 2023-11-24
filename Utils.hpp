@@ -6,6 +6,7 @@ namespace SDK
 	{
         namespace ActionNode
         {
+#ifndef SDK_SD_MINIMAL_BUILD
             const char* GetName(uint32_t m_Hash)
             {
                 static std::unordered_map<uint32_t, const char*> m_Map;
@@ -40,6 +41,7 @@ namespace SDK
 
                 return m_Path;
             }
+#endif
         }
 
         // Integrity check if SDK can be used on game executable.

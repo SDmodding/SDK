@@ -38,7 +38,7 @@ namespace UFG
 
 			void Free()
 			{
-				gMainMemoryPool->Free(this);
+				MemoryPool::GetMainPool()->Free(this);
 			}
 		};
 

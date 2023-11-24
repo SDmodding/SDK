@@ -38,7 +38,7 @@ namespace Render
 
 		bool AddBeam(AddBeamParams_t& p_BeamParams)
 		{
-			if (mNumBeams == 32 || UFG::Metrics->mSimPausedInGame || UFG::Metrics->mSimPausedDebug)
+			if (mNumBeams == 32 || UFG::CMetrics::Instance()->mSimPausedInGame || UFG::CMetrics::Instance()->mSimPausedDebug)
 				return false;
 
 			Beam_t& m_Beam = mBeams[mNumBeams];

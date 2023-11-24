@@ -15,6 +15,11 @@ namespace Render
 		float mFarBlurRadius;
 		bool mNearBlurRendered;
 
+		static CDepthOfField* Instance()
+		{
+			return reinterpret_cast<CDepthOfField*>(UFG_RVA(0x2129328));
+		}
+
 		bool* DontRender() { return reinterpret_cast<bool*>(UFG_RVA(0x2136120)); }
 
 		void Enable(bool enable)
@@ -31,7 +36,6 @@ namespace Render
 			mFarBlurRadius	= 0.f;
 		}
 	};
-	CDepthOfField* DepthOfField = reinterpret_cast<CDepthOfField*>(UFG_RVA(0x2129328));
 
 	bool IsLoadScreenRendering()
 	{

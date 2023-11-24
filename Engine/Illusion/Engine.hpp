@@ -14,6 +14,10 @@ namespace Illusion
 		UFG::CLinearAllocator* PrimitiveFrameWriteMemory;
 		UFG::CLinearAllocator* FramePatchMemory;
 		UFG::CLinearAllocator* FrameIndexMemory;
+
+		static CEngine* Instance()
+		{
+			return reinterpret_cast<CEngine*>(UFG_RVA(0x2167800));
+		}
 	};
-	CEngine* gEngine = reinterpret_cast<CEngine*>(UFG_RVA(0x2167800));
 }

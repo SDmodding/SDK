@@ -63,8 +63,12 @@ namespace UFG
 	public:
 		bool FreezeInputs;
 		bool CheckForNewController;
+
+		static CDxInputSystem* Instance()
+		{
+			return reinterpret_cast<CDxInputSystem*>(UFG_RVA(0x249CDE8));
+		}
 	};
-	CDxInputSystem* DxInputSystem = reinterpret_cast<CDxInputSystem*>(UFG_RVA(0x249CDE8));
 
 	class CInputSystem
 	{
@@ -106,6 +110,11 @@ namespace UFG
 		bool SavedRestrictAndHideSettings[32];
 		int PCKeyboardSwapMode;
 
+		static CInputSystem001* Instance()
+		{
+			return reinterpret_cast<CInputSystem001*>(UFG_RVA(0x235FB80));
+		}
+
 		void SetRestrictCursor(bool m_bValue)
 		{
 			ShouldRestrictCursor = m_bValue;
@@ -115,7 +124,6 @@ namespace UFG
 			ShouldRestrictCursorKeyboard[1] = m_bValue;
 		}
 	};
-	CInputSystem001* InputSystem001 = reinterpret_cast<CInputSystem001*>(UFG_RVA(0x235FB80));
 
 	class CInputActionData
 	{
@@ -166,10 +174,13 @@ namespace UFG
 
 			m_bLastValue = m_bValue;
 			{
-				DxInputSystem->FreezeInputs = !m_bValue;
-				InputSystem001->ShouldHideCursor = m_bValue;
+				CDxInputSystem::Instance()->FreezeInputs = !m_bValue;
 
-				InputSystem001->SetRestrictCursor(m_bValue);
+				CInputSystem001* m_InputSystem001 = CInputSystem001::Instance();
+				{
+					m_InputSystem001->ShouldHideCursor = m_bValue;
+					m_InputSystem001->SetRestrictCursor(m_bValue);
+				}
 			}
 		}
 

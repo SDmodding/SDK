@@ -37,10 +37,14 @@ namespace UFG
 		void* mDeferredTimeSettings;
 		qString mLoadScreenTexturePack;
 
+		static CLoadingLogic* Instance()
+		{
+			return reinterpret_cast<CLoadingLogic*>(UFG_RVA(0x207B220));
+		}
+
 		void StartLoadScreen(uint32_t p_Flags, void* p_Images, uint32_t p_NumImages)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t, void*, uint32_t)>(UFG_RVA(0x417860))(this, p_Flags, p_Images, p_NumImages);
 		}
 	};
-	CLoadingLogic* LoadingLogic = reinterpret_cast<CLoadingLogic*>(UFG_RVA(0x207B220));
 }

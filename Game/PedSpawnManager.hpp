@@ -87,7 +87,7 @@ namespace UFG
 
 		float GetSpawnDelta()
 		{
-			return (Metrics->mSimTimeFloat - mSpawnTime);
+			return (CMetrics::Instance()->mSimTimeFloat - mSpawnTime);
 		}
 
 		bool CanDraw()

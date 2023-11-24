@@ -23,6 +23,10 @@ namespace UFG
 		float mSimTimeScaleSlow;
 		float mSimTimeScaleTurbo;
 		float mSimTimeScaleMax;
+
+		static CMetrics* Instance()
+		{
+			return reinterpret_cast<CMetrics*>(UFG_RVA(0x203C920));
+		}
 	};
-	CMetrics* Metrics = reinterpret_cast<CMetrics*>(UFG_RVA(0x203C920));
 }

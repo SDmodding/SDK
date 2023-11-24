@@ -48,11 +48,14 @@ namespace UFG
 			return reinterpret_cast<const char*(__fastcall*)(void*)>(UFG_RVA(0x1713C0))(this);
 		}
 	};
-	CMemoryPool* gMainMemoryPool = reinterpret_cast<CMemoryPool*>(UFG_RVA(0x22581A0));
-	qList<CMemoryPool>* gMemoryPoolList = reinterpret_cast<qList<CMemoryPool>*>(UFG_RVA(0x235B2D8));
 
 	namespace MemoryPool
 	{
+		CMemoryPool* GetMainPool()
+		{
+			return reinterpret_cast<CMemoryPool*>(UFG_RVA(0x22581A0));
+		}
+
 		CMemoryPool* GetSimulationPool()
 		{
 			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x235C278));
@@ -63,9 +66,15 @@ namespace UFG
 			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x23F1B00));
 		}
 
+		qList<CMemoryPool>* GetList()
+		{
+			return reinterpret_cast<qList<CMemoryPool>*>(UFG_RVA(0x235B2D8));
+		}
+
 		CMemoryPool* FindByName(const char* m_Name)
 		{
-			for (qNode<CMemoryPool>* i = gMemoryPoolList->mNode.mNext; i != &gMemoryPoolList->mNode; i = i->mNext)
+			qList<CMemoryPool>* m_List = GetList();
+			for (qNode<CMemoryPool>* i = m_List->mNode.mNext; i != &m_List->mNode; i = i->mNext)
 			{
 				CMemoryPool* m_MemoryPool = i->GetPointer();
 				const char* m_MemoryPoolName = m_MemoryPool->GetName();

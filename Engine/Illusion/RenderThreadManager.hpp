@@ -38,10 +38,14 @@ namespace Illusion
 		uint32_t mEventWaitTimeoutMicroSeconds;
 		bool mSubFlipEnabled;
 
+		static CRenderThreadManager* Instance()
+		{
+			return reinterpret_cast<CRenderThreadManager*>(UFG_RVA(0x2452740));
+		}
+
 		const char* GetCommandName()
 		{
 			return reinterpret_cast<const char*>(UFG_RVA(0x1A183C8));
 		}
 	};
-	CRenderThreadManager* gRenderThreadManager = reinterpret_cast<CRenderThreadManager*>(UFG_RVA(0x2452740));
 }

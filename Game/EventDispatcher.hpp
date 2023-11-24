@@ -96,6 +96,11 @@ namespace UFG
 	class CEventDispatcher
 	{
 	public:
+		static CEventDispatcher* Instance()
+		{
+			return reinterpret_cast<CEventDispatcher*>(UFG_RVA(0x235F740));
+		}
+
 		void* Register(CEventHandler* p_Handler, uint32_t p_ChannelID, const char* p_Name = nullptr, uint32_t p_DepID = 0)
 		{
 			return reinterpret_cast<void*(__fastcall*)(void*, CEventHandler*, uint32_t, const char*, uint32_t)>(UFG_RVA(0x1B65C0))(this, p_Handler, p_ChannelID, p_Name, p_DepID);
@@ -106,5 +111,4 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CEventHandler*, unsigned int)>(UFG_RVA(0x1B6890))(this, p_Handler, p_ChannelID);
 		}
 	};
-	CEventDispatcher* gEventDispatcher = reinterpret_cast<CEventDispatcher*>(UFG_RVA(0x235F740));
 }

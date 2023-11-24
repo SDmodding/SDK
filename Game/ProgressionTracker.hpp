@@ -10,6 +10,11 @@ namespace UFG
 		qSymbol mActiveFlowId;
 		bool mIsPossessedPedsEnabled;
 
+		static CProgressionTracker* Instance()
+		{
+			reinterpret_cast<CProgressionTracker*>(UFG_RVA(0x240A0E0));
+		}
+
 		CGameSlice* Find(qSymbol name, bool searchDisabledSlices)
 		{
 			return reinterpret_cast<CGameSlice*(__fastcall*)(void*, qSymbol*, bool)>(UFG_RVA(0x4A0380))(this, &name, searchDisabledSlices);
@@ -55,5 +60,4 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CGameSlice*, CGameSlice*, bool)>(UFG_RVA(0x4BB8B0))(this, pActiveMaster, pCheckpoint, forceSave);
 		}
 	};
-	CProgressionTracker* ProgressionTracker = reinterpret_cast<CProgressionTracker*>(UFG_RVA(0x240A0E0));
 }

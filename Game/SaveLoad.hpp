@@ -23,6 +23,11 @@ namespace UFG
 		bool m_bPhotoExists[1];
 		bool m_FirstLoad;
 
+		static CSaveLoad* Instance()
+		{
+			return reinterpret_cast<CSaveLoad*>(UFG_RVA(0x2409D30));
+		}
+
 		bool LoadGameOptions()
 		{ 
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x4AE5A0))(this);
@@ -38,6 +43,4 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4BB700))(this, &flowId);
 		}
 	};
-
-	CSaveLoad* SaveLoad = reinterpret_cast<CSaveLoad*>(UFG_RVA(0x2409D30));
 }

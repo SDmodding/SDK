@@ -7,16 +7,21 @@ namespace UFG
 	public:
 		CPropertySetHandle mProperties;
 
-		// 0 - Clothing | 1 - Vehicles | 2 - Boats
-		void LoadStoreData(int inventoryType)
+		static CStoreFrontTracker* Instance()
 		{
-			qSymbol m_InventoryTypes[3] = { 0x9773EC16, 0x9B06086B, 0xACB107F7 };
-			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4AEFF0))(this, &m_InventoryTypes[inventoryType]);
+			return reinterpret_cast<CStoreFrontTracker*>(UFG_RVA(0x2408280));
 		}
 
-		qPropertySet* FindItemSlow(qSymbol* itemName)
+		// 0 - Clothing | 1 - Vehicles | 2 - Boats
+		void LoadStoreData(int p_InventoryType)
 		{
-			return reinterpret_cast<qPropertySet*(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4A0690))(this, itemName);
+			qSymbol m_InventoryTypes[3] = { 0x9773EC16, 0x9B06086B, 0xACB107F7 };
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4AEFF0))(this, &m_InventoryTypes[p_InventoryType % 3]);
+		}
+
+		qPropertySet* FindItemSlow(qSymbol p_ItemName)
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x4A0690))(this, &p_ItemName);
 		}
 
 		void ResetEquipment()
@@ -24,29 +29,29 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x4B6A50))(this);
 		}
 	};
-	CStoreFrontTracker* StoreFrontTracker = reinterpret_cast<CStoreFrontTracker*>(UFG_RVA(0x2408280));
 
 	namespace StoreFront
 	{
-		void EquipItem(qPropertySet* pItem, bool bSaveToStats, bool bRefreshPlayer, bool bRemoveAnyPredefinedOutfit, bool bUpdateLastEquipItem, bool bPreviewing)
+		void EquipItem(qPropertySet* p_Item, bool p_SaveToStats, bool p_RefreshPlayer, bool p_RemoveAnyPredefinedOutfit, bool p_UpdateLastEquipItem, bool p_Previewing)
 		{
-			reinterpret_cast<void(__fastcall*)(qPropertySet*, bool, bool, bool, bool, bool)>(UFG_RVA(0x49E860))(pItem, bSaveToStats, bRefreshPlayer, bRemoveAnyPredefinedOutfit, bUpdateLastEquipItem, bPreviewing);
+			reinterpret_cast<void(__fastcall*)(qPropertySet*, bool, bool, bool, bool, bool)>(UFG_RVA(0x49E860))(p_Item, p_SaveToStats, p_RefreshPlayer, p_RemoveAnyPredefinedOutfit, p_UpdateLastEquipItem, p_Previewing);
 		}
 
-		void EquipItem(qSymbol m_Item, bool bSaveToStats, bool bRefreshPlayer, bool bRemoveAnyPredefinedOutfit, bool bUpdateLastEquipItem, bool bPreviewing)
+		void EquipItem(qSymbol p_Item, bool p_SaveToStats, bool p_RefreshPlayer, bool p_RemoveAnyPredefinedOutfit, bool p_UpdateLastEquipItem, bool p_Previewing)
 		{
-			StoreFrontTracker->LoadStoreData(0);
-			qPropertySet* m_ItemPropertySet = UFG::StoreFrontTracker->FindItemSlow(&m_Item);
+			UFG::CStoreFrontTracker* m_StoreFrontTracker = CStoreFrontTracker::Instance();
+			m_StoreFrontTracker->LoadStoreData(0);
+			qPropertySet* m_ItemPropertySet = m_StoreFrontTracker->FindItemSlow(p_Item);
 			if (m_ItemPropertySet)
-				UFG::StoreFront::EquipItem(m_ItemPropertySet, bSaveToStats, bRefreshPlayer, bRemoveAnyPredefinedOutfit, bUpdateLastEquipItem, bPreviewing);
+				EquipItem(m_ItemPropertySet, p_SaveToStats, p_RefreshPlayer, p_RemoveAnyPredefinedOutfit, p_UpdateLastEquipItem, p_Previewing);
 		}
 	}
 
 	namespace StoreMeshHelper
 	{
-		void CommitResource(CSimObject* object, qPropertySet* pSet)
+		void CommitResource(CSimObject* p_SimObject, qPropertySet* p_PropertySet)
 		{
-			reinterpret_cast<void(__fastcall*)(CSimObject*, qPropertySet*)>(UFG_RVA(0x4A0690))(object, pSet);
+			reinterpret_cast<void(__fastcall*)(CSimObject*, qPropertySet*)>(UFG_RVA(0x4A0690))(p_SimObject, p_PropertySet);
 		}
 	}
 }

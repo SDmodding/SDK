@@ -204,6 +204,11 @@ namespace UFG
 		qSafePointer<UFG::CTransformNodeComponent> mCamTransformNode;
 		bool mDisplayFXInfo;
 
+		static CFXManager* Instance()
+		{
+			return reinterpret_cast<CFXManager*>(UFG_RVA(0x2366990));
+		}
+
 		qSymbol CreateEffect(qSymbol p_FxID, qVector3 p_Position, qVector3 p_Direction, uint32_t p_SplitScreenViewMask = -1, void* p_OverrideObject = nullptr)
 		{
 			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, qVector3*, qVector3*, uint32_t, void*)>(UFG_RVA(0x1CA250))(this, p_FxID, &p_Position, &p_Direction, p_SplitScreenViewMask, p_OverrideObject);
@@ -229,7 +234,6 @@ namespace UFG
 			return reinterpret_cast<CFXInstance*>(mEffectsTree.Get(p_FxID));
 		}
 	};
-	CFXManager* FXManager = reinterpret_cast<CFXManager*>(UFG_RVA(0x2366990));
 
 	namespace FXOverride
 	{

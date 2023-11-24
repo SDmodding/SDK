@@ -53,7 +53,12 @@ namespace UFG
 		bool mIsExcludingPlayerForRestOfChase;
 		bool mIsAmbientUnitsAllowed;
 		bool mIsSafehouseInstantCooldownActive;
-		unsigned __int64 mHeatLevelTimestamp;
+		uint64_t mHeatLevelTimestamp;
+
+		static CCopSystem* Instance()
+		{
+			return reinterpret_cast<CCopSystem*>(UFG_RVA(0x23D9AA0));
+		}
 
 		float GetHeatThresholdByLevel(eHeatLevelEnum m_HeatLevel)
 		{
@@ -70,5 +75,4 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, m_HeatLevel, m_HeatEvent, m_HeatValue);
 		}
 	};
-	CCopSystem* CopSystem = reinterpret_cast<CCopSystem*>(UFG_RVA(0x23D9AA0));
 }
