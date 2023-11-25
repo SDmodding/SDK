@@ -77,6 +77,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Illusion/Engine.hpp"
 #include "Engine/Illusion/RenderThreadManager.hpp"
 #include "Engine/Illusion/Resources.hpp"
+#include "Engine/Illusion/StateSystem.hpp"
 #include "Engine/Illusion.hpp"
 
 // Engine UEL
@@ -162,6 +163,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/RadarSystem.hpp"
 #include "Game/RoadNetwork.hpp"
 #include "Game/SaveLoad.hpp"
+#include "Game/Scenery.hpp"
 #include "Game/ScreenHud.hpp"
 #include "Game/ScreenOverlay.hpp"
 #include "Game/Store.hpp"

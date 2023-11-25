@@ -33,7 +33,7 @@ namespace UFG
 		int m_WeatherRandomIntervalPreLock;
 		float m_WeatherSurfaceWetness;
 		float m_WeatherChanceOfPrecipitation;
-		char mOverrideStateBlockHandle[0x20];
+		qResourceHandle mOverrideStateBlockHandle;
 		float m_OverrideStateBlockAmount;
 		float m_OverrideSurfaceWetness;
 		float m_NextRainingInterval;
@@ -54,13 +54,18 @@ namespace UFG
 		const float m_DefaultGameSecondsPerRealSecond;
 		int mNumFogTextures;
 		void* mFogCubeTexture[4];
-		unsigned int mCurrStartSlice;
-		unsigned int mCurrEndSlice;
+		uint32_t mCurrStartSlice;
+		uint32_t mCurrEndSlice;
 		int mFogUpdateInterval;
 		void* m_SunFxTransform;
-		unsigned int m_SunFx;
+		uint32_t m_SunFx;
 		qVector3 mCameraPosition;
 		NightFogZone* mNightFogZones;
+
+		static CTimeOfDayManager* Instance()
+		{
+			return reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
+		}
 
 		bool IsAboutToRain()
 		{
@@ -72,9 +77,10 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x6BA30))(this, m_Lock);
 		}
 
-		static CTimeOfDayManager* Instance()
+		// ViewSettings & SkySettings are optional
+		void GetEnvironmentSettings(Illusion::CB_EnvironmentSettings* p_EnvSettings, Render::CViewSettings* p_ViewSettings = nullptr, Illusion::CB_SkySettings* p_SkySettings = nullptr)
 		{
-			return reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
+			reinterpret_cast<void(__fastcall*)(void*, Illusion::CB_EnvironmentSettings*, Render::CViewSettings*, Illusion::CB_SkySettings*)>(UFG_RVA(0x69EC0))(this, p_EnvSettings, p_ViewSettings, p_SkySettings);
 		}
 	};
 }
