@@ -8,6 +8,7 @@
 // UFG
 #include "ResourceData.hpp"
 #include "PropertySet.hpp"
+#include "SceneryGroup.hpp"
 #include "UILocalization.hpp"
 #include "UIScreen.hpp"
 

@@ -20,6 +20,8 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 #define UFG_RVA(x)		(BaseAddress + x)
 #define UFG_RVA_GET(x)	(reinterpret_cast<uintptr_t>(x) - BaseAddress)
 
+#define UFG_CONST_CHAR(x) reinterpret_cast<const char*>(UFG_RVA(x))
+
 #define UFG_PAD_INSERT(x, y) x ## y
 #define UFG_PAD_DEFINE(x, y) UFG_PAD_INSERT(x, y)
 #define UFG_PAD(size) char UFG_PAD_DEFINE(padding_, __LINE__)[size]

@@ -18,12 +18,9 @@ namespace UFG
 		}
 	};
 
-	struct PropertySetHandle_t
+	struct PropertySetHandle_t : ResourceHandle_t
 	{
-		UFG_PAD(0x10);
-		void* m_Data;
-		uint32_t m_NameUID;
-		uint32_t m_TailPad;
+
 	};
 
 	struct PropertySet_t : ResourceData_t // TypeUID: 0x5B9BF81E

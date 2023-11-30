@@ -39,4 +39,13 @@ namespace UFG
 
 		char m_DebugName[36];
 	};
+
+	struct ResourceHandle_t
+	{
+		void* m_Prev = nullptr;
+		void* m_Next = nullptr;
+		void* m_Data = nullptr;
+		uint32_t m_NameUID = 0x0;
+		uint32_t m_TailPad = 0x0;
+	};
 }

@@ -14,6 +14,17 @@ namespace UFG
 		float y1;
 		float v1 = 1.f;
 		void* tile = nullptr;
+
+		ClipRect()
+		{
+			x0 = 0.f; x1 = 0.f; y0 = 0.f; y1 = 0.f;
+		}
+
+		ClipRect(float p_MinX, float p_MaxX, float p_MinY, float p_MaxY)
+		{
+			x0 = p_MinX; x1 = p_MaxX;
+			y0 = p_MinY; y1 = p_MaxY;
+		}
 	};
 
 	class qMutex
@@ -592,6 +603,16 @@ namespace UFG
 	struct UIPoint2f
 	{
 		float x, y;
+
+		UIPoint2f()
+		{
+			x = y = 0.f;
+		}
+
+		UIPoint2f(float f0, float f1)
+		{
+			x = f0; y = f1;
+		}
 	};
 	typedef UIPoint2f ScreenPoint2f, WorldPoint2f, WideMinimapPoint2f, MinimapPoint2f, MinimapTilePoint2f;
 
