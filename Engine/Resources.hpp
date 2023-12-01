@@ -51,6 +51,12 @@ namespace UFG
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(mData) + m_Offset);
 		}
 	}; 
+
+	struct qResourceFileHandle : UFG::qResourceHandle
+	{
+		void* mCallback;
+		void* mCallbackData;
+	};
 	
 	class CPhysicsResourceHandle : public qResourceHandle
 	{

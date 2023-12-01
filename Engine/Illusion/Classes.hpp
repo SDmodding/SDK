@@ -1,4 +1,6 @@
 #pragma once
+#include "Classes/Target.hxx"
+#include "Classes/Texture.hxx"
 
 namespace Illusion
 {

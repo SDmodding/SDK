@@ -74,13 +74,8 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/ResourceWarehouse.hpp"
 
 // Engine Illusion
-#include "Engine/Illusion/Enums.hpp"
-#include "Engine/Illusion/Classes.hpp"
-#include "Engine/Illusion/Engine.hpp"
-#include "Engine/Illusion/RenderThreadManager.hpp"
-#include "Engine/Illusion/Resources.hpp"
-#include "Engine/Illusion/StateSystem.hpp"
-#include "Engine/Illusion.hpp"
+#include "Engine/Illusion/.Illusion.hpp"
+#include "Engine/Illusion.hpp" // TODO: Move this to dedicated 'Illusion' folder.
 
 // Engine UEL
 #include "Engine/UEL/Value.hpp"

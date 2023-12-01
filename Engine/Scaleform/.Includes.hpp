@@ -1,4 +1,3 @@
-#pragma once
 //=============================================================================
 // 
 // Description:		Main include file that includes all necessary
