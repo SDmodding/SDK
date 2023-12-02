@@ -2,6 +2,8 @@
 
 namespace Illusion
 {
+	class CTexture;
+
 	struct TextureLockInfo_t
 	{
 		char* mData;
@@ -36,6 +38,11 @@ namespace Illusion
 	public:
 		UFG::qResourceHandle mAlphaStateHandle;
 		UFG::qResourceHandle mRasterStateHandle;
+
+		void OnLoad(CTexture* p_Texture)
+		{
+			reinterpret_cast<void(_fastcall*)(void*, CTexture*)>(UFG_RVA(0x95F70))(this, p_Texture);
+		}
 	};
 
 	class CTexture : public ITexturePlat, public UFG::qResourceData

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Command.hxx"
 #include "Render.hpp"
 #include "GfxFileOpener.hpp"
 #include "GfxTranslator.hpp"

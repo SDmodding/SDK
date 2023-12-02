@@ -2,88 +2,6 @@
 
 namespace UFG
 {
-	enum UIButtons : unsigned int
-	{
-		INVALID_BUTTON = 0x0,
-		ACCEPT_BUTTON = 0x1,
-		BACK_BUTTON = 0x2,
-		BUTTON1_BUTTON = 0x3,
-		BUTTON2_BUTTON = 0x4,
-		START_BUTTON = 0x5,
-		SELECT_BUTTON = 0x6,
-		L1_BUTTON = 0x7,
-		R1_BUTTON = 0x8,
-		L2_BUTTON = 0x9,
-		R2_BUTTON = 0xA,
-		L3_BUTTON = 0xB,
-		R3_BUTTON = 0xC,
-		L1R1_BUTTON = 0xD,
-		L2R2_BUTTON = 0xE,
-		DPAD_UP_BUTTON = 0xF,
-		DPAD_DOWN_BUTTON = 0x10,
-		DPAD_LEFT_BUTTON = 0x11,
-		DPAD_RIGHT_BUTTON = 0x12,
-		DPAD_LR_BUTTON = 0x13,
-		DPAD_UD_BUTTON = 0x14,
-		L_STICK_BUTTON = 0x15,
-		R_STICK_BUTTON = 0x16,
-		L_STICK_LR_BUTTON = 0x17,
-		L_STICK_UD_BUTTON = 0x18,
-		R_STICK_LR_BUTTON = 0x19,
-		R_STICK_UD_BUTTON = 0x1A,
-		ACCEPT_BUTTON_HOLD = 0x1B,
-		BACK_BUTTON_HOLD = 0x1C,
-		BUTTON1_BUTTON_HOLD = 0x1D,
-		BUTTON2_BUTTON_HOLD = 0x1E,
-		L1_BUTTON_HOLD = 0x1F,
-		R1_BUTTON_HOLD = 0x20,
-		L2_BUTTON_HOLD = 0x21,
-		R2_BUTTON_HOLD = 0x22,
-		F1_BUTTON = 0x23,
-		WHEEL_UP_BUTTON = 0x24,
-		WHEEL_DOWN_BUTTON = 0x25,
-		NUM_BUTTONS = 0x26,
-	};
-
-	enum UIMessageType : unsigned int
-	{
-		UIMESSAGE_UNKNOWN = 0xFFFFFFFF,
-		UIMESSAGE_PAD_INPUT = 0x0,
-		UIMESSAGE_PAD_INPUT_ANALOG_STICK = 0x1,
-		UIMESSAGE_KEYBOARD_INPUT = 0x2,
-		UIMESSAGE_MOUSE_INPUT = 0x3,
-		UIMESSAGE_FLASH = 0x4,
-		UIMESSAGE_NUM = 0x5,
-	};
-
-
-	class CUICommand
-	{
-	public:
-		void* vfptr;
-
-		void* m_Pad0x8[0x2];
-
-		unsigned int m_commandType;
-
-		char m_Pad0x1C[0x4];
-
-		void* m_commandData;
-	};
-
-	class CUIMessage : public CUICommand
-	{
-	public:
-		unsigned int m_messageId;
-		unsigned int m_resultId;
-		unsigned int m_receiverUID;
-		UIMessageType m_messageType;
-
-		char m_Pad0x38[0x18];
-
-		const char* m_messageResult;
-	};
-
 	class CUIPropertySetMenu
 	{
 	public:
@@ -124,11 +42,6 @@ namespace UFG
 
 	namespace UI
 	{
-		CUIScreenManager* GetScreenManager()
-		{
-			return *reinterpret_cast<CUIScreenManager**>(UFG_RVA(0x249C1C0));
-		}
-
 		CUIScreenTextureManager* GetScreenTextureManager()
 		{
 			return *reinterpret_cast<CUIScreenTextureManager**>(UFG_RVA(0x242FF98));
@@ -136,7 +49,7 @@ namespace UFG
 
 		CUIGfxTranslator* GetTranslator()
 		{
-			return GetScreenManager()->m_translator;
+			return CUIScreenManager::Instance()->m_translator;
 		}
 
 		bool IsGamePaused()

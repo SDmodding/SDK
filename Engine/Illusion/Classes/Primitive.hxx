@@ -81,5 +81,12 @@ namespace Illusion
 		{
 			return reinterpret_cast<CPrimitive*(__fastcall*)(const char*)>(UFG_RVA(0xA18A20))(p_Description);
 		}
+
+		__inline CPrimitive* Create(const char* p_Description, CPrimitive::eType p_Type, void* p_VertexStream, int p_NumVerts, CVertexDecl* p_VertexDecl, void* p_IndexStream = nullptr, int p_NumIndices = 0, bool p_DupeVertexBuffer = true)
+		{
+			CPrimitive* Primitive = Create(p_Description);
+			Primitive->SetBuffers(p_Type, p_VertexStream, p_NumVerts, p_VertexDecl, p_IndexStream, p_NumIndices, p_DupeVertexBuffer);
+			return Primitive;
+		}
 	}
 }

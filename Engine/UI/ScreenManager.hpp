@@ -39,6 +39,11 @@ namespace UFG
 		char mLastScreenPopped[64];
 		UFG::qString mDebugStackPrint;*/
 
+		static __inline CUIScreenManager* Instance()
+		{
+			return *reinterpret_cast<CUIScreenManager**>(UFG_RVA(0x249C1C0));
+		}
+
 		CUIScreen* GetScreen(const char* p_FileName)
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*, const char*)>(UFG_RVA(0xA2BA30))(this, p_FileName);
