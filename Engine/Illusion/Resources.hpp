@@ -20,35 +20,6 @@ namespace Illusion
 		uint32_t pad2;
 	};
 
-	class CMaterial : public UFG::qResourceData
-	{
-	public:
-		__declspec(align(16)) UFG::BitFlags128 mStateBlockMask;
-		uint32_t mNumParams;
-		UFG::qOffset64<CMaterialUser> mMaterialUser;
-
-		void UpdateParam(uint32_t p_Index, uint32_t p_TypeUID, uint32_t p_NameUID)
-		{
-			reinterpret_cast<void(_fastcall*)(void*, uint32_t, uint32_t, uint32_t)>(UFG_RVA(0x9360))(this, p_Index, p_TypeUID, p_NameUID);
-		}
-
-		void OnLoad()
-		{
-			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x934A0))(this);
-		}
-
-		void OnUnload()
-		{
-			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x941D0))(this);
-		}
-
-		__inline void Reload()
-		{
-			OnUnload();
-			OnLoad();
-		}
-	};
-
 	class CModel : public UFG::qResourceData
 	{
 	public:

@@ -84,6 +84,11 @@ namespace Render
 			reinterpret_cast<void(__fastcall*)(void*, CViewSettings*, Illusion::CSubmitContext*)>(UFG_RVA(0xC850))(this, p_Settings, p_SubmitCtx);
 		}
 
+		Illusion::CMaterial* CreateSimpleMaterial(uint32_t p_TextureNameUID, uint32_t p_RasterStateUID = 0x62F81854, uint32_t p_AlphaStateUID = 0x2782CCE6, bool p_DepthBias = false)
+		{
+			return reinterpret_cast<Illusion::CMaterial*(__fastcall*)(void*, uint32_t, uint32_t, uint32_t, bool)>(UFG_RVA(0xD590))(this, p_TextureNameUID, p_RasterStateUID, p_AlphaStateUID, p_DepthBias);
+		}
+
 		void BeginTarget(Illusion::CTarget* p_Target, const char* p_Description, uint32_t p_DestSliceFace, uint32_t p_DestMipLevel, Illusion::CViewportScissorState* p_VPScissor, bool p_ClearOnResolve, bool p_IgnoreResolveDepth, bool p_PS4DecompressDepth, bool p_D3DDisableDepthCopy)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CTarget*, const char*, uint32_t, uint32_t, Illusion::CViewportScissorState*, bool, bool, bool, bool)>(UFG_RVA(0xD2D0))(this, p_Target, p_Description, p_DestSliceFace, p_DestMipLevel, p_VPScissor, p_ClearOnResolve, p_IgnoreResolveDepth, p_PS4DecompressDepth, p_D3DDisableDepthCopy);
@@ -102,6 +107,11 @@ namespace Render
 		uint32_t Draw(UFG::qResourceHandle* p_ModelHandle, UFG::qMatrix44* p_LocalWorld, bool p_DoClip)
 		{
 			return reinterpret_cast<uint32_t(__fastcall*)(void*, UFG::qResourceHandle*, UFG::qMatrix44*, bool)>(UFG_RVA(0xE420))(this, p_ModelHandle, p_LocalWorld, p_DoClip);
+		}
+
+		void Draw(Illusion::CPrimitive* p_Primitive, Illusion::CMaterial* p_Material, UFG::qMatrix44* p_LocalWorld)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, Illusion::CPrimitive*, Illusion::CMaterial*, UFG::qMatrix44*)>(UFG_RVA(0xEB70))(this, p_Primitive, p_Material, p_LocalWorld);
 		}
 
 		void DrawColoredRect_Xform(float p_X, float p_Y, float p_Width, float p_Height, UFG::qColour* p_Colour, uint32_t p_TextureUID, float* p_UVs, uint32_t p_AlphaStateUID, uint32_t p_RasterStateUID, UFG::qMatrix44* p_TransformMatrix)

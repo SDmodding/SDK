@@ -4,13 +4,13 @@ namespace UFG
 {
 	struct D3DGlobals_t
 	{
-		void* m_Device;
-		void* m_DeviceCtx;
-		void* m_DXGIFactory;
-		void* m_DXGIAdapter;
-		void* m_DXGIOutput;
-		void* m_DXGIDevice;
-		void* m_DXGISwapChain;
+		ID3D11Device* m_Device;
+		ID3D11DeviceContext* m_DeviceCtx;
+		IDXGIFactory1* m_DXGIFactory;
+		IDXGIAdapter1* m_DXGIAdapter;
+		IDXGIOutput* m_DXGIOutput;
+		IDXGIDevice1* m_DXGIDevice;
+		IDXGISwapChain* m_DXGISwapChain;
 
 		static D3DGlobals_t* Get()
 		{

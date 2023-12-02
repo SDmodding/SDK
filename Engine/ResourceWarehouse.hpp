@@ -105,6 +105,11 @@ namespace UFG
 			return reinterpret_cast<CResourceWarehouse*>(UFG_RVA(0x235B2F0));
 		}
 
+		void Add(qResourceData* p_Data)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qResourceData*)>(UFG_RVA(0x165B60))(this, p_Data);
+		}
+
 		void Load(void* p_Buffer, size_t p_NumBytes)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, void*, size_t)>(UFG_RVA(0x176B50))(this, p_Buffer, p_NumBytes);

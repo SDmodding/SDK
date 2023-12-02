@@ -52,7 +52,13 @@ namespace UFG
 		}
 	}; 
 
-	struct qResourceFileHandle : UFG::qResourceHandle
+	struct qGenericResourceHandle : qResourceHandle
+	{
+		uint32_t mTypeUID;
+	};
+
+
+	struct qResourceFileHandle : qResourceHandle
 	{
 		void* mCallback;
 		void* mCallbackData;

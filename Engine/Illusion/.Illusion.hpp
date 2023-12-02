@@ -7,11 +7,15 @@
 #pragma once
 
 #include "Enums.hpp"
-#include "Classes.hpp"
+#include "StateSystem.hpp"
+
+#include "VertexDecl/.VertexDecl.hxx"
+#include "Classes/.Classes.hxx"
+
 #include "Engine.hpp"
+#include "Factory.hxx"
 #include "RenderThreadManager.hpp"
 #include "Resources.hpp"
-#include "StateSystem.hpp"
 
 // Functions
 namespace Illusion

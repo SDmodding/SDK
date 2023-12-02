@@ -34,10 +34,8 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 	return reinterpret_cast<ReturnType(__fastcall*)(void*, Args...)>(m_Function)(p_Instance, p_Args...);
 }
 
-#define UFG_MIN(a,b) (((a) < (b)) ? (a) : (b))
-#define UFG_MAX(a,b) (((a) > (b)) ? (a) : (b))
-
-#include "Defines/Math.hpp"
+// Math
+#include "Math/.Math.hxx"
 
 #include "Templates.hpp"
 #include "Classes.hpp"

@@ -1,6 +1,8 @@
 #pragma once
-#include "Classes/Target.hxx"
-#include "Classes/Texture.hxx"
+#include "Primitive.hxx"
+#include "Material.hxx"
+#include "Target.hxx"
+#include "Texture.hxx"
 
 namespace Illusion
 {
@@ -58,8 +60,8 @@ namespace Illusion
 		float SIColourTint[4];
 		float Mask[4];
 		float Value0[4];
-	}; 
-	
+	};
+
 	struct CB_SkySettings
 	{
 		float CloudColourTop[4];

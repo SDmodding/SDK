@@ -2,6 +2,16 @@
 
 namespace Illusion
 {
+	class CStateParam
+	{
+	public:
+		uint32_t mNameUID;
+		uint32_t mTypeUID;
+		int16_t mParamIndex;
+
+		UFG_PAD_ALIGN(0x2);
+	};
+
 	class CStateSystem
 	{
 	public:
