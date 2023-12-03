@@ -31,13 +31,12 @@ namespace UFG
 		CUIGfxTranslator* m_translator;
 		CUIGfxFileOpener* m_gfxFileOpener;
 		uint32_t m_currentNumDrawText;
-
-		/*Scaleform::GFx::DrawText* m_drawText[32];
+		class Scaleform_GFx_DrawText* m_drawText[32];
 		int m_inputEnabled;
-		UFG::UIScreenFactory* m_screenFactory;
+		CUIScreenFactory* m_screenFactory;
 		bool mIsMidSwitch;
 		char mLastScreenPopped[64];
-		UFG::qString mDebugStackPrint;*/
+		qString mDebugStackPrint;
 
 		static __inline CUIScreenManager* Instance()
 		{

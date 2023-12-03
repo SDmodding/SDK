@@ -5,6 +5,7 @@
 #include "GfxFileOpener.hpp"
 #include "GfxTranslator.hpp"
 #include "Screen.hpp"
+#include "ScreenFactory.hxx"
 #include "ScreenManager.hpp"
 
 // TiledMap

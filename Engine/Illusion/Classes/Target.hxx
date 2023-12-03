@@ -46,8 +46,8 @@ namespace Illusion
 		int m_Height;
 		int m_Depth;
 		int m_ArraySize;
-		uint8_t m_MrtFormats[4];
-		uint32_t m_NumMrt;
+		uint8_t m_TextureFormats[4];
+		uint32_t m_NumTextures;
 		uint32_t m_TextureType;
 		uint32_t m_TargetFlags;
 		int m_NumMips;
@@ -67,9 +67,9 @@ namespace Illusion
 			m_Height = p_Height;
 			m_Depth = 1;
 			m_ArraySize = 1;
-			m_MrtFormats[0] = 0x0;
-			m_MrtFormats[1] = m_MrtFormats[2] = m_MrtFormats[3] = 0xFF;
-			m_NumMrt = 1;
+			m_TextureFormats[0] = 0x0;
+			m_TextureFormats[1] = m_TextureFormats[2] = m_TextureFormats[3] = 0xFF;
+			m_NumTextures = 1;
 			memset(m_Textures, 0, sizeof(m_Textures));
 			m_TextureType = 0;
 			m_TargetFlags = 0;

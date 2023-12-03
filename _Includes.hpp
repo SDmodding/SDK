@@ -86,6 +86,8 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render/Poly.hpp"
 #include "Engine/Render/RainManager.hpp"
 #include "Engine/Render/View.hpp"
+#include "Engine/Render/Context.hxx"
+#include "Engine/Render/Callbacks.hxx"
 #include "Engine/Render.hpp"
 
 // Engine UI
@@ -170,6 +172,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Game/WheeledVehicleManager.hpp"
 
 #ifdef SDK_SD_OPTIONAL_INCLUDES
+	#include "Optional/Helper/.Helper.hxx"
 	#include "Optional/PermFile/.Includes.hpp"
 	#include "Optional/StringHash.hpp"
 #endif

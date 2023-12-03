@@ -19,6 +19,11 @@ namespace UFG
 		int m_height;
 		bool m_shouldRender;
 		volatile bool mIsLoaded;
+
+		void SetViewport(int p_BufferWidth, int p_BufferHeight, int p_X, int p_Y, int p_Width, int p_Height)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, int, int, int, int, int, int)>(UFG_RVA(0xA32110))(this, p_BufferWidth, p_BufferHeight, p_X, p_Y, p_Width, p_Height);
+		}
 	};
 
 	class CUIScreen
@@ -42,8 +47,8 @@ namespace UFG
 		int mControllerMask;
 		int mInputEnabled;
 		int mPriority;
-		uint32_t mDimType;
-		uint32_t mDimToApplyType;
+		eDimType mDimType;
+		eDimType mDimToApplyType;
 		float mCurDimValue;
 		float mCurDimDirection;
 
@@ -62,9 +67,19 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(CUIScreenRenderable*)>(UFG_RVA(0xA319F0))(mRenderable);
 		}
 
-		virtual void Update(float p_Elapsed)
+		/*
+		*	Called from:
+		*		IF [In-Game]:
+		*			- GameStateInGame::OnUpdate > CBUpdateUI
+		*		ELSE:
+		*			- FlowController::DoMainLoop
+		*	
+		*	Basic function:
+		*		- Handles the Dim logic (alpha of the root movie)
+		*/
+		virtual void Update(float p_TimeDelta)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xA32660))(this, p_Elapsed);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xA32660))(this, p_TimeDelta);
 		}
 
 		// Should be called as last when overriden...
