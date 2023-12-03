@@ -13,6 +13,11 @@ namespace UFG
 		bool mAmbientBlipsPopulated;
 		CUIMapBlipGraphic* mPlayerArrowIcon;
 
+		static __inline CUIMapBlipManager* Instance() 
+		{ 
+			return *reinterpret_cast<CUIMapBlipManager**>(UFG_RVA(0x2430CD8));
+		}
+
 		CUIMapBlip* GetBlip(uint32_t p_NameUID)
 		{
 			return reinterpret_cast<CUIMapBlip*>(mBlipList.Get(p_NameUID));

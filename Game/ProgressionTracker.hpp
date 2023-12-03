@@ -12,7 +12,7 @@ namespace UFG
 
 		static CProgressionTracker* Instance()
 		{
-			reinterpret_cast<CProgressionTracker*>(UFG_RVA(0x240A0E0));
+			return reinterpret_cast<CProgressionTracker*>(UFG_RVA(0x240A0E0));
 		}
 
 		CGameSlice* Find(qSymbol name, bool searchDisabledSlices)

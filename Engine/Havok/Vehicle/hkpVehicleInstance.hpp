@@ -52,4 +52,14 @@ public:
 	int8_t m_currentGear;
 	bool m_delayed;
 	float m_clutchDelayCountdown;
+
+	__inline float CalcKMPH()
+	{
+		return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xE27510))(this);
+	}
+
+	__inline float CalcMPH()
+	{
+		return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xE27590))(this);
+	}
 };

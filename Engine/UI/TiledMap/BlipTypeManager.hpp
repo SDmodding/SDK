@@ -36,5 +36,10 @@ namespace UFG
 	public:
 		qArray<CUIHKMinimapBlipType> mData;
 		uint32_t mNumTypes;
+
+		static __inline CUIMapBlipTypeManager* Instance() 
+		{ 
+			return reinterpret_cast<CUIMapBlipTypeManager * (__fastcall*)()>(UFG_RVA(0xCEFE0))();
+		}
 	};
 }
