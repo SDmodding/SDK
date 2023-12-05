@@ -314,8 +314,6 @@ namespace UFG
 	class CPhysicsVehicle : public CBasePhysicsObject
 	{
 	public:
-		UFG_PAD_ALIGN(0x8);
-
 		void* mWaterFloatingTrackerComponent;
 		CVehicleParams* mParams;
 
@@ -381,6 +379,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x45A630))(this);
 		}
 	};
+	UFG_ASSERT_CLASS(CPhysicsVehicle, 608);
 
 	class CPhysicsWheeledVehicle : public CPhysicsVehicle
 	{
@@ -437,6 +436,7 @@ namespace UFG
 		uint32_t mUseNewBurnoutMethod : 1;
 		uint32_t mWheelFrictionMultiplierOverriddenByFreeman : 1;
 	};
+	UFG_ASSERT_CLASS(CPhysicsWheeledVehicle, 1104);
 
 	class CPhysicsCar : public CPhysicsWheeledVehicle
 	{
@@ -552,6 +552,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x6892E0))(this, p_Reason);
 		}
 	};
+	UFG_ASSERT_CLASS(CPhysicsMoverInterface, 920);
 
 	// Components
 	class CSimObjectVehiclePropertiesComponent : public CSimObjectPropertiesComponent

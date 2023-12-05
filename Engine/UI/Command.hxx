@@ -49,5 +49,10 @@ namespace UFG
 		uint32_t m_resultId;
 		uint32_t m_receiverUID;
 		eUIMessageType m_messageType;
+
+		__inline const char* GetMessageResult()
+		{
+			return *reinterpret_cast<const char**>(reinterpret_cast<uintptr_t>(this) + 0x50);
+		}
 	};
 }
