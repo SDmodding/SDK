@@ -42,7 +42,7 @@ namespace UFG
 	{
 	public:
 		bool mEnable;
-		PropertySetHandle mProperties;
+		CPropertySetHandle mProperties;
 		eAIObjective mObjective;
 		eAIObjective mPostObjective;
 		qSymbol mCurrentWaveType;

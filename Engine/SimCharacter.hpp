@@ -169,7 +169,7 @@ namespace UFG
 		void InitDefaultProperties()
 		{
 			// default-component-AttackRights
-			qPropertySet* m_PropertySet = PropertySet::Get(0xE29C0011);
+			qPropertySet* m_PropertySet = PropertySetManager::GetPropertySet(0xE29C0011);
 
 			InitFromProperties(m_PropertySet);
 		}

@@ -9,7 +9,7 @@ namespace UFG
 
 		bool HasStreamedResource(qPropertySet* m_PropertySet)
 		{
-			qPropertySet* m_StreamedResourceSet = m_PropertySet->GetSet(0xDB4EBBFF); // component_StreamedResource::sPropertyName
+			qPropertySet* m_StreamedResourceSet = m_PropertySet->GetPropertySet(0xDB4EBBFF); // component_StreamedResource::sPropertyName
 			return m_StreamedResourceSet;
 		}
 

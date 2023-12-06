@@ -154,6 +154,11 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, m_Node);
 		}
 
+		void PlayTracks(CActionNodePlayable* p_Node, bool p_OffsetTimeBeginAndEnd, float p_OffsetTime)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*, bool, float)>(UFG_RVA(0x2707F0))(this, p_Node, p_OffsetTimeBeginAndEnd, p_OffsetTime);
+		}
+
 		void Stop()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x272A80))(this);

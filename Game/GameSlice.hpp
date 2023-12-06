@@ -115,8 +115,8 @@ namespace UFG
 		CGameSlice* mpParent;
 		qSetBase<CGameSlice> mDependents;
 		qSetBase<CGameSlice> mChildren;
-		PropertySetHandle mRewardsProperties;
-		PropertySetHandle mRepeatedRewardsProperties;
+		CPropertySetHandle mRewardsProperties;
+		CPropertySetHandle mRepeatedRewardsProperties;
 		CGameSlice* mpDependentMission;
 		CGameSlice* mpLastActiveSublice;
 		void* maMasks[2];

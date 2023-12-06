@@ -26,6 +26,8 @@ uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
 // Asserts
 #define UFG_ASSERT_CLASS(className, classSize) \
     static_assert(sizeof(className) == classSize, "Size of class: '" #className "' is invalid!")
+#define UFG_ASSERT_STRUCT(structName, structSize) \
+    static_assert(sizeof(structName) == structSize, "Size of struct: '" #structName "' is invalid!")
 
 // Pads
 #define UFG_PAD_INSERT(x, y) x ## y
@@ -53,11 +55,14 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Globals/D3D.hxx"
 #include "Globals/Window.hxx"
 
-// Engine Havok
+// Engine (Havok)
 #include "Engine/Havok/.Includes.hpp"
 
-// Engine Scaleform
+// Engine (Scaleform)
 #include "Engine/Scaleform/.Includes.hpp"
+
+// Engine (Skookum)
+#include "Engine/Skookum/.Skookum.hxx"
 
 // Defines
 #include "Defines/NodePlayables.hpp"
@@ -72,21 +77,21 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/MemoryPool.hpp"
 #include "Engine/LinearAllocator.hpp"
 
-#include "Engine/PropertySet.hpp"
+#include "Engine/PropertySet/.PropertySet.hxx"
 #include "Engine/Reflect.hpp"
 #include "Engine/ResourceInventory.hpp"
 #include "Engine/ResourceWarehouse.hpp"
 
-// Engine Illusion
+// Engine (Illusion)
 #include "Engine/Illusion/.Illusion.hpp"
 #include "Engine/Illusion.hpp" // TODO: Move this to dedicated 'Illusion' folder.
 
-// Engine UEL
+// Engine (UEL)
 #include "Engine/UEL/Value.hpp"
 #include "Engine/UEL/Member.hpp"
 #include "Engine/UEL/Expression.hpp"
 
-// Engine Render
+// Engine (Render)
 #include "Engine/Render/BeamManager.hpp"
 #include "Engine/Render/VDynamic.hpp"
 #include "Engine/Render/Poly.hpp"
@@ -96,7 +101,7 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Render/Callbacks.hxx"
 #include "Engine/Render.hpp"
 
-// Engine UI
+// Engine (UI)
 #include "Engine/UI/.UI.hpp"
 
 // Engine

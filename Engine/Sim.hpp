@@ -341,7 +341,7 @@ namespace UFG
 
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr, CSimObject* m_Owner = nullptr)
 		{
-			qPropertySet* m_PropertySet = PropertySet::Get(m_ObjectHash);
+			qPropertySet* m_PropertySet = PropertySetManager::GetPropertySet(m_ObjectHash);
 			if (m_PropertySet)
 				return SpawnObject(m_ObjectName, m_PropertySet, m_Priority, m_OwnerLayer, m_SpawnerSceneObject, m_Owner);
 
@@ -375,7 +375,7 @@ namespace UFG
 
 		CSimObject* SpawnObject(qSymbol m_ObjectName, qSymbol m_ObjectHash, qMatrix44& m_Matrix, int m_Priority = 0, void* m_OwnerLayer = nullptr, void* m_SpawnerSceneObject = nullptr)
 		{
-			qPropertySet* m_PropertySet = PropertySet::Get(m_ObjectHash);
+			qPropertySet* m_PropertySet = PropertySetManager::GetPropertySet(m_ObjectHash);
 			if (m_PropertySet)
 				return SpawnObject(m_ObjectName, m_PropertySet, m_Matrix, m_Priority, m_OwnerLayer, m_SpawnerSceneObject);
 

@@ -1,0 +1,54 @@
+#pragma once
+
+namespace UFG
+{
+	struct qPropertyList : qPropertyCollection
+	{
+		UFG::qOffset64<uint8_t> mValues;
+		uint32_t mTypeUID;
+		uint32_t mElementSize;
+		UFG::qOffset64<uint32_t> mWeights;
+		uint32_t mNumElements;
+		uint32_t mTotalWeight;
+
+		__inline void AddString(const char* p_String)
+		{
+			reinterpret_cast<void(__fastcall*)(qPropertyList*, const char*)>(UFG_RVA(0x1E8CB0))(this, p_String);
+		}
+
+		__inline const char* GetString(uint32_t p_Index)
+		{
+			return reinterpret_cast<const char*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9AB0))(this, p_Index);
+		}
+
+		__inline qSymbol* GetSymbol(uint32_t p_Index)
+		{
+			return reinterpret_cast<qSymbol*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9F80))(this, p_Index);
+		}
+
+		__inline qPropertySet* GetValuePtr(uint32_t p_Index)
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertyList*, uint32_t, uint32_t)>(UFG_RVA(0x1F8920))(this, mTypeUID, p_Index);
+		}
+
+		__inline qPropertySet* GetProperty(uint32_t p_Index)
+		{
+			uintptr_t* m_Item = reinterpret_cast<uintptr_t*>(GetValuePtr(p_Index));
+			if (!m_Item || !*m_Item)
+				return nullptr;
+
+			return reinterpret_cast<qPropertySet*>(reinterpret_cast<uintptr_t>(m_Item) + *m_Item);
+		}
+
+		__inline qPropertySet* Find(qSymbol p_Symbol)
+		{
+			return reinterpret_cast<qPropertySet*(__fastcall*)(qPropertyList*, qSymbol*)>(UFG_RVA(0x464730))(this, &p_Symbol);
+		}
+
+		__inline void RemoveAll()
+		{
+			reinterpret_cast<void(__fastcall*)(qPropertyList*)>(UFG_RVA(0x1FB810))(this);
+		}
+	};
+	UFG_ASSERT_STRUCT(qPropertyList, 48);
+}
