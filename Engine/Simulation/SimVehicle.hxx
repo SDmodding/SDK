@@ -322,7 +322,7 @@ namespace UFG
 		CRigidBodyComponent* mRigidBody;
 		hkpRigidBody* mBulletCollider;
 		hkpRigidBody* mVolumeRigidBody;
-		
+
 		UFG_PAD(0x30);
 		//UFG::PhysicsResourceHandle mCollisionMeshBundle;
 
@@ -564,7 +564,7 @@ namespace UFG
 		eSimObjectBoatTypeEnum m_eSimObjectBoatType;
 
 		UFG_PAD(0x20);
-	
+
 		qArray<void*> mDoorPhantomInfo;
 		bool mIsGarageVehicle;
 	};
@@ -827,8 +827,8 @@ namespace UFG
 		};
 		VehicleCombatStats_t m_CombatStats;
 
-		CarCombat::Attack m_CurrentAttack; 
-		
+		CarCombat::Attack m_CurrentAttack;
+
 		struct EscortInfo_t
 		{
 			CarAI::EEscortMode eEscortMode;
@@ -927,12 +927,12 @@ namespace UFG
 
 		CSimCharacter* GetPassenger(int iIndex, bool excludeEnteringAndExiting)
 		{
-			return reinterpret_cast<CSimCharacter*(__fastcall*)(void*, int, bool)>(UFG_RVA(0x67AF40))(this, iIndex, excludeEnteringAndExiting);
+			return reinterpret_cast<CSimCharacter * (__fastcall*)(void*, int, bool)>(UFG_RVA(0x67AF40))(this, iIndex, excludeEnteringAndExiting);
 		}
 
 		CSimCharacter* GetOccupant(unsigned int index, UFG::eTargetTypeEnum* pTargetType)
 		{
-			return reinterpret_cast<CSimCharacter*(__fastcall*)(void*, unsigned int, UFG::eTargetTypeEnum*)>(UFG_RVA(0x67AE50))(this, index, pTargetType);
+			return reinterpret_cast<CSimCharacter * (__fastcall*)(void*, unsigned int, UFG::eTargetTypeEnum*)>(UFG_RVA(0x67AE50))(this, index, pTargetType);
 		}
 
 		CSimCharacter* FindOccupant(UFG::eTargetTypeEnum m_TargetType)
@@ -951,7 +951,7 @@ namespace UFG
 
 		bool IsOccupant(CSimCharacter* m_Character)
 		{
-			if (mpDriver.m_pPointer == m_Character) 
+			if (mpDriver.m_pPointer == m_Character)
 				return true;
 
 			for (unsigned int i = 0; mSeatCount > i; ++i)
@@ -1063,7 +1063,7 @@ namespace UFG
 
 			return reinterpret_cast<CAiDriverComponent*>(m_Component);
 		}
-		
+
 		CRoadSpaceComponent* GetRoadSpace()
 		{
 			CSimComponent* m_Component = m_Components.p[24].m_pComponent;

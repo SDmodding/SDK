@@ -11,6 +11,31 @@ namespace Illusion
 		int mDepthPitch;
 	};
 
+	struct TextureUserPlat_t
+	{
+		int mExampleOfTextureUserPlatData1;
+		float mExampleOfTextureUserPlatData2;
+	};
+
+	class CTexturePlat
+	{
+	public:
+		UFG::qOffset64<TextureUserPlat_t> mTextureUserPlat;
+		uint32_t mCpuAccess;
+		uint32_t mMappedSubResourceIdx;
+		uint32_t mUploadAfterUnmap;
+
+		UFG_PAD(0x4);
+
+		char* mInitialImageData;
+		ID3D11Resource* mMappedResource;
+		UFG::qVRAMemoryHandle mVRamHandle;
+		UFG::qResourceHandle mTextureD3DResourceHandle;
+
+		UFG_PAD(0x48);
+	};
+	UFG_ASSERT_CLASS(CTexturePlat, 0xB0);
+
 	class ITexturePlat
 	{
 	public:
@@ -22,6 +47,11 @@ namespace Illusion
 			LOCK_MODIFY
 		};
 
+		__inline CTexturePlat* GetPlat()
+		{
+			return reinterpret_cast<CTexturePlat*>(UFG_THIS_OFFSET(0xD0));
+		}
+
 		__inline bool Lock(eLockType p_Type, TextureLockInfo_t* p_Info, int p_MipLevel, int p_FaceIndex)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, eLockType, TextureLockInfo_t*, int, int)>(UFG_RVA(0xA1C560))(this, p_Type, p_Info, p_MipLevel, p_FaceIndex);
@@ -30,6 +60,11 @@ namespace Illusion
 		__inline void Unlock()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA22A70))(this);
+		}
+
+		__inline void CreateTextureData()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA19940))(this);
 		}
 	};
 

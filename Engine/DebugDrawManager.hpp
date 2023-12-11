@@ -82,6 +82,10 @@ namespace UFG
 	class CDebugDrawManager
 	{
 	public:
+		__inline static CDebugDrawManager* Instance() {
+			return *reinterpret_cast<CDebugDrawManager**>(UFG_RVA(0x212B9B8));
+		}
+
 		// Everything above 3 index is available
 		void CreateContext(uint32_t m_Index, int m_MemSize, uint32_t m_FeatureFlags = 0)
 		{
@@ -111,14 +115,13 @@ namespace UFG
 
 	namespace DebugDrawManager
 	{
-		CDebugDrawManager* Get()
-		{
-			return *reinterpret_cast<CDebugDrawManager**>(UFG_RVA(0x212B9B8));
-		}
-
-		bool* DisableDraw()
+		__inline bool* DisableDraw()
 		{
 			return reinterpret_cast<bool*>(UFG_RVA(0x2021C37));
+		}
+
+		__inline void SetDisableDraw(bool p_Value) {
+			*DisableDraw() = p_Value;
 		}
 	}
 }

@@ -62,7 +62,20 @@ namespace UFG
 	{
 		void* mCallback;
 		void* mCallbackData;
+
+		__inline char* GetFileData(int p_Offset)
+		{
+			return reinterpret_cast<char*(__fastcall*)(void*, int)>(UFG_RVA(0x170510))(this, p_Offset);
+		}
 	};
+
+	struct qVRAMemoryHandle : qNode<qVRAMemoryHandle>
+	{
+		char* mData;
+		uint16_t mReadOnlyAndPoolID;
+		uint16_t mBlockID;
+	};
+	UFG_ASSERT_STRUCT(qVRAMemoryHandle, 0x20);
 	
 	class CPhysicsResourceHandle : public qResourceHandle
 	{

@@ -158,7 +158,15 @@ namespace UFG
 
 		UFG_PAD(0x1E8);
 
-		bool mbScriptCameraOn;
+		bool mbScriptCameraOn; 
+		bool mbFollowTarget;
+		bool mbFollowTargetEyeOffset;
+		bool mbAttached;
+		bool mbPanning;
+		bool mbProfiling;
+		bool mbHighlightOn;
+		qSafePointer<CSimObject> mHighlightedCharacter;
+		bool bAllowWideAspectDisplay;
 
 		void SetDesiredEyeLook(UFG::qVector3* eye, UFG::qVector3* look, float duration = 0.f, bool snap = true)
 		{
@@ -197,4 +205,5 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CTransformNodeComponent*, bool, float)>(UFG_RVA(0x3CE500))(this, mTargetTransform, transitionIn, fov);
 		}
 	};
+	UFG_ASSERT_CLASS(CScriptCameraComponent, 0x760);
 }

@@ -38,16 +38,14 @@ namespace UFG
 
 	namespace ObjectResourceManager
 	{
-		__forceinline CObjectResourceManager* Get() { return CObjectResourceManager::Instance(); }
-
-		bool IsLoaded(qPropertySet* m_PropertySet)
+		__inline bool PreloadResource(qPropertySet* p_PropertySet)
 		{
-			CObjectResourceManager* m_ObjectResourceManager = Get();
-			if (!m_ObjectResourceManager)
+			CObjectResourceManager* m_ObjResourceManager = CObjectResourceManager::Instance();
+			if (!m_ObjResourceManager)
 				return false;
 
-			if (!m_ObjectResourceManager->IsLoaded(m_PropertySet))
-				m_ObjectResourceManager->PreLoadCriticalResource(m_PropertySet);
+			if (!m_ObjResourceManager->IsLoaded(p_PropertySet))
+				m_ObjResourceManager->PreLoadCriticalResource(p_PropertySet);
 
 			return true;
 		}

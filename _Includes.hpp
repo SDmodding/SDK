@@ -17,11 +17,12 @@
 
 // Defines
 uintptr_t BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
-#define UFG_RVA(x)		(BaseAddress + x)
-#define UFG_RVA_PTR(x)	reinterpret_cast<void*>(UFG_RVA(x))
-#define UFG_RVA_GET(x)	(reinterpret_cast<uintptr_t>(x) - BaseAddress)
+#define UFG_RVA(x)			(BaseAddress + x)
+#define UFG_RVA_PTR(x)		reinterpret_cast<void*>(UFG_RVA(x))
+#define UFG_RVA_GET(x)		(reinterpret_cast<uintptr_t>(x) - BaseAddress)
 
-#define UFG_CONST_CHAR(x) reinterpret_cast<const char*>(UFG_RVA(x))
+#define UFG_CONST_CHAR(x)	reinterpret_cast<const char*>(UFG_RVA(x))
+#define UFG_THIS_OFFSET(x)	(reinterpret_cast<uintptr_t>(this) + x)
 
 // Asserts
 #define UFG_ASSERT_CLASS(className, classSize) \
@@ -47,13 +48,16 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 
 #include "Templates.hpp"
 #include "Classes.hpp"
-#include "Enums.hpp"
+#include "Enums.hpp" // TODO: Move all those stuff to appropriate folder so it's more readable...
 #include "Typedefs.hpp"
 #include "Functions.hpp"
 
 // Globals
 #include "Globals/D3D.hxx"
 #include "Globals/Window.hxx"
+
+// Engine (AK SoundEngine)
+#include "Engine/AK/.AK.hxx"
 
 // Engine (Havok)
 #include "Engine/Havok/.Includes.hpp"
@@ -104,35 +108,33 @@ __forceinline ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 // Engine (UI)
 #include "Engine/UI/.UI.hpp"
 
-// Engine
+// Engine (Important)
 #include "Engine/Actions.hpp"
 #include "Engine/AIAwareness.hpp"
-#include "Engine/AKSoundEngine.hpp"
 #include "Engine/Animation.hpp"
 #include "Engine/Attachment.hpp"
 #include "Engine/AudioEntity.hpp"
-#include "Engine/BigFile.hpp"
-#include "Engine/BSP.hpp"
 #include "Engine/Collision.hpp"
 #include "Engine/Skeleton.hpp"
 #include "Engine/Creature.hpp"
-#include "Engine/DataStreamer.hpp"
 #include "Engine/DamageRig.hpp"
-#include "Engine/DebugDrawManager.hpp"
 #include "Engine/Rig.hpp"
 #include "Engine/Model.hpp"
-#include "Engine/Components.hpp"
-#include "Engine/Door.hpp"
-#include "Engine/FXManager.hpp"
-#include "Engine/LoadingLogic.hpp"
 #include "Engine/ObjectResourceManager.hpp"
 #include "Engine/Parkour.hpp"
-#include "Engine/Sim.hpp"
 #include "Engine/VoiceProfile.hpp"
-#include "Engine/SimVehicle.hpp"
-#include "Engine/SimWeapon.hpp"
-#include "Engine/SimCharacter.hpp"
-#include "Engine/SimObjectUtility.hpp"
+
+// Engine (Simulation)
+#include "Engine/Simulation/.Simulation.hxx"
+
+// Engine (Common)
+#include "Engine/BigFile.hpp"
+#include "Engine/BSP.hpp"
+#include "Engine/DebugDrawManager.hpp"
+#include "Engine/Door.hpp"
+#include "Engine/DataStreamer.hpp"
+#include "Engine/FXManager.hpp"
+#include "Engine/LoadingLogic.hpp"
 #include "Engine/RenderWorld.hpp"
 #include "Engine/SectionChooser.hpp"
 #include "Engine/SectionLayout.hpp"

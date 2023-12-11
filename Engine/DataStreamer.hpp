@@ -65,10 +65,7 @@ namespace UFG
 			uint64_t mhBufferPerm;
 			void* mhFilePerm;
 			BIGFileSize mFileSizeTemp;
-
-			UFG_PAD(0x20);
-			//UFG::qVRAMemoryHandle mhBufferTemp;
-
+			qResourceHandle mhBufferTemp;
 			void* mhFileTemp;
 			qString mFileName;
 			uint32_t mTagSymbolUID;
@@ -78,6 +75,7 @@ namespace UFG
 			uint32_t mDataLoadedTo;
 			uint64_t mDiskPosSortKey;
 		};
+		UFG_ASSERT_STRUCT(StreamInfo_t, 0x108);
 
 		namespace Handle
 		{
