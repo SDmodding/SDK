@@ -14,7 +14,7 @@ namespace UFG
 			NumSpawnPriorities
 		};
 
-		__inline CSimObject* SpawnObject(qSymbol p_ObjNameUID, qPropertySet* p_PropertySet, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* m_SpawnerSceneObj = nullptr, CSimObject* p_Owner = nullptr)
+		CSimObject* SpawnObject(qSymbol p_ObjNameUID, qPropertySet* p_PropertySet, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* m_SpawnerSceneObj = nullptr, CSimObject* p_Owner = nullptr)
 		{
 			UFG::CObjectResourceManager* m_ObjResourceManager = UFG::CObjectResourceManager::Instance();
 			if (!m_ObjResourceManager)
@@ -38,7 +38,7 @@ namespace UFG
 			return nullptr;
 		}
 
-		__inline CSimObject* SpawnObject(qSymbol p_ObjNameUID, qPropertySet* p_PropertySet, qMatrix44* p_Matrix, SpawnPriority p_Priority = None, void* m_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr)
+		CSimObject* SpawnObject(qSymbol p_ObjNameUID, qPropertySet* p_PropertySet, qMatrix44* p_Matrix, SpawnPriority p_Priority = None, void* m_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr)
 		{
 			UFG::CObjectResourceManager* m_ObjResourceManager = UFG::CObjectResourceManager::Instance();
 			if (!m_ObjResourceManager)
