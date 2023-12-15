@@ -198,6 +198,16 @@ namespace UFG
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + mOffset);
 		}
+
+		__inline void Set(void* p_Ptr)
+		{
+			if (p_Ptr) {
+				mOffset = static_cast<int64_t>(reinterpret_cast<uintptr_t>(p_Ptr) - reinterpret_cast<uintptr_t>(&mOffset));
+				return;
+			}
+
+			mOffset = 0;
+		}
 	};
 
 	// Bin Stuff

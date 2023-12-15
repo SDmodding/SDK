@@ -2,14 +2,49 @@
 
 namespace UFG
 {
+	enum ePropertyType : uint8_t
+	{
+		ePropertyType_Int8 = 0,
+		ePropertyType_Int16,
+		ePropertyType_Int32,
+		ePropertyType_Int64,
+		ePropertyType_Int128,
+		ePropertyType_UInt8,
+		ePropertyType_UInt16,
+		ePropertyType_UInt32,
+		ePropertyType_UInt64,
+		ePropertyType_Bool,
+		ePropertyType_Float,
+		ePropertyType_Double,
+		ePropertyType_String,
+		ePropertyType_RangedFloat,
+		ePropertyType_RangedUInt32,
+		ePropertyType_RangedInt32,
+		ePropertyType_WeightedList,
+		ePropertyType_qVector2,
+		ePropertyType_qVector3,
+		ePropertyType_qVector4,
+		ePropertyType_qMatrix44,
+		ePropertyType_qResHandle,
+		ePropertyType_qSymbol,
+		ePropertyType_qSymbolUC,
+		ePropertyType_qWiseSymbol,
+		ePropertyType_List,
+		ePropertyType_PropertySet,
+		ePropertyType_TransRot,
+		ePropertyType_qTransQuat,
+		ePropertyType_Invalid,
+		ePropertyType_COUNT
+	};
+
 	struct Property_t
 	{
 		uint32_t m_Bits;
 		uint32_t m_NameUID;
 
-		uint8_t GetTypeUID()
+		ePropertyType GetTypeUID()
 		{
-			return reinterpret_cast<uint8_t*>(&m_Bits)[3];
+			return reinterpret_cast<ePropertyType*>(&m_Bits)[3];
 		}
 
 		int64_t GetDataOffset()
@@ -23,10 +58,8 @@ namespace UFG
 
 	};
 
-	struct PropertySet_t : ResourceData_t // TypeUID: 0x5B9BF81E
+	struct PropertySet_t
 	{
-		UFG_PAD(0x10);
-
 		uint32_t m_Flags;
 
 		UFG_PAD(0x4);
@@ -106,6 +139,14 @@ namespace UFG
 
 			return nullptr;
 		}
+	};
+
+	struct PropertySetResource_t : ResourceData_t // TypeUID: 0x5B9BF81E
+	{
+		uint32_t m_Flags;
+		uint32_t m_SourceCRC;
+		int64_t m_NameString;
+		PropertySet_t m_Data;
 	};
 
 	struct PropertyList_t
