@@ -132,16 +132,6 @@ namespace UFG
 		};
 	}
 
-	enum eCopSystemFinishReason
-	{
-		eCopSystemFinishReason_Unknown = 0x0,
-		eCopSystemFinishReason_Arrested = 0x1,
-		eCopSystemFinishReason_Death = 0x2,
-		eCopSystemFinishReason_Escaped = 0x3,
-		eCopSystemFinishReason_Script = 0x4,
-		NUM_COP_SYSTEM_FINISH_REASONS = 0x5,
-	};
-
 	namespace DataStreamer
 	{
 		enum STREAM_STATE

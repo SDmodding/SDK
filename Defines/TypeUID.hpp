@@ -32,6 +32,7 @@
 #define CharacterPropertiesComponent_TypeUID				0xB2000005
 #define CharacterAIScriptInterfaceComponent_TypeUID			0x56000001
 #define CharacterAICoverComponent_TypeUID					0x64000001
+#define CharacterFaceMeterComponent_TypeUID					0x9A000001
 #define CharacterHealthComponent_TypeUID					0xAA000001
 #define CharacterAnimationComponent_TypeUID					0xC6000003
 #define CharacterHitReactionComponent_TypeUID				0xA8000001

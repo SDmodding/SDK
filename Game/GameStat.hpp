@@ -121,6 +121,11 @@ namespace UFG
 		GameSnapshot_t::Time_t mSessionTimer;
 		bool m_bIsApplyingSnapshotEffects : 1;
 
+		__inline static CGameStatTracker* Instance()
+		{
+			return *reinterpret_cast<CGameStatTracker**>(UFG_RVA(0x2405488));
+		}
+
 		void SetStat(GameStat::MapBoolStat m_Stat, qSymbol m_Name, bool m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, GameStat::MapBoolStat, qSymbol*, bool)>(UFG_RVA(0x4BD3E0))(this, m_Stat, &m_Name, m_Value);
@@ -170,11 +175,6 @@ namespace UFG
 	namespace GameStatTracker
 	{
 		uint8_t g_ScrambleKey[] = { 0x37, 0x0C, 0x43, 0xB9, 0x91, 0xC9, 0x8C, 0x6C, 0xE5, 0x6F, 0x9D, 0x69, 0xB4, 0xC7, 0x20, 0xD0, 0x81, 0xAE, 0x0D, 0x93, 0xE9, 0xB5, 0x65, 0x6E, 0xB2, 0xF2, 0x11, 0x7C, 0x74, 0xE8, 0x36, 0xD8 };
-
-		CGameStatTracker* Get()
-		{
-			return *reinterpret_cast<CGameStatTracker**>(UFG_RVA(0x2405488));
-		}
 
 		uint32_t GetBufferHash(uint32_t p_HeaderSize, char* p_Buffer, uint32_t p_BufferSize)
 		{

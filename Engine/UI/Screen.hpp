@@ -145,8 +145,6 @@ namespace UFG
 		}
 	};
 
-	UFG_PAD(sizeof(CUIScreen));
-
 	class CUIScreenDialogBox : public CUIScreen
 	{
 	public:

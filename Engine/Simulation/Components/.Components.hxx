@@ -139,66 +139,6 @@ namespace UFG
 		uint32_t mFlags;
 	};
 
-	class CStreamedResourceComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x4C8);
-
-		bool mPartsBound;
-		bool mFirstResourceLoad;
-		qColour mColourTints[16];
-		qSymbol mActivePriority;
-		qPropertySet* mPropertySet;
-		uint32_t mSpawnPriorityReferenceCount[4];
-		float mCameraDistance;
-		eSimObjectTypeEnum mSimObjectType;
-
-		void Constructor(CSceneObjectProperties* m_SceneObject)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSceneObjectProperties*)>(UFG_RVA(0x4373B0))(this, m_SceneObject);
-		}
-
-		void Destructor()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x438000))(this);
-		}
-
-		void UnbindAllModels(CCompositeDrawableComponent* m_CompositeDrawable)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CCompositeDrawableComponent*)>(UFG_RVA(0x4440F0))(this, m_CompositeDrawable);
-		}
-
-		void BindAllModels(CCompositeDrawableComponent* m_CompositeDrawable, bool m_UsingTempRig = false)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CCompositeDrawableComponent*, bool)>(UFG_RVA(0x438DD0))(this, m_CompositeDrawable, m_UsingTempRig);
-		}
-
-		void Update(float m_Seconds, qVector3* m_StreamPosition)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x444D00))(this, m_Seconds, m_StreamPosition);
-		}
-
-		void UpdateLoadState(CSimObject* m_Object)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x446130))(this, m_Object);
-		}
-
-		void IncrementPriorityReferenceCount(qSymbol m_Priority)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x43DF90))(this, &m_Priority);
-		}
-
-		bool IsLoadActive()
-		{
-			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x43F160))(this);
-		}
-
-		bool AreResourcesLoaded()
-		{
-			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x438CC0))(this);
-		}
-	};
-
 	class CSimObjectPropertiesComponent : public CSimComponent
 	{
 	public:

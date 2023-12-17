@@ -32,7 +32,21 @@ namespace Scaleform
 		public:
 			void* vfptr;
 			int RefCount;
+
+			UFG_PAD_ALIGN(0x4);
+
 			ResourceLibBase* pLib;
+
+			__inline void AddRef() 
+			{
+				_InterlockedIncrement(reinterpret_cast<volatile long*>(&RefCount));
+			}
+
+			__inline void Release()
+			{
+				reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x8FE6A0))(this);
+			}
 		};
+		UFG_ASSERT_CLASS(Resource, 0x18);
 	}
 }

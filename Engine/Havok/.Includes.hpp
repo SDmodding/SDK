@@ -18,6 +18,7 @@
 #include "hkpEntity.hpp"
 #include "hkpRigidBody.hpp"
 #include "hkpAction.hpp"
+#include "hkpWorld.hxx"
 
 // Vehicle
 #include "Vehicle/hkpTyremarksInfo.hpp"

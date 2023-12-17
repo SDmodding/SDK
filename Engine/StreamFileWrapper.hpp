@@ -30,7 +30,8 @@ namespace UFG
 				return false;
 			}
 
-			FILE* m_File = fopen(p_OutputFile, "wb");
+			FILE* m_File = nullptr;
+			fopen_s(&m_File, p_OutputFile, "wb");
 			if (m_File)
 			{
 				fwrite(m_Ptr, sizeof(uint8_t), m_Size, m_File);

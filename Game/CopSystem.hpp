@@ -2,14 +2,6 @@
 
 namespace UFG
 {
-	class CCopSystemStats
-	{
-	public:
-		eCopSystemFinishReason mFinishReason;
-		int mLastLevelSpawnCount;
-		int mLastLevelKillCount;
-	};
-
 	class CCopHeatEvent
 	{
 	public:
@@ -21,12 +13,29 @@ namespace UFG
 	class CCopSystem : public CEncounterBase
 	{
 	public:
+		enum eCopSystemFinishReason
+		{
+			eCopSystemFinishReason_Unknown = 0x0,
+			eCopSystemFinishReason_Arrested = 0x1,
+			eCopSystemFinishReason_Death = 0x2,
+			eCopSystemFinishReason_Escaped = 0x3,
+			eCopSystemFinishReason_Script = 0x4,
+			NUM_COP_SYSTEM_FINISH_REASONS = 0x5,
+		};
+
+		struct Stats_t
+		{
+			eCopSystemFinishReason mFinishReason;
+			int mLastLevelSpawnCount;
+			int mLastLevelKillCount;
+		};
+
 		bool mReloadTuningFiles;
 		int mDebugDrawLevel;
 		bool mShowCops;
 		bool mShowStimulus;
 		bool mShowResources;
-		CCopSystemStats mStats;
+		Stats_t mStats;
 		int mNumArrestAttempts;
 		bool mAreRoadBlocksActive;
 		float mRoadBlockCooldownTimestamp;
@@ -40,11 +49,8 @@ namespace UFG
 		bool mStimulusWatchList[116];
 		char mStimulusCount[116];
 		CCopHeatEvent mHeatEvents[26];
-
-		UFG_PAD(0x30);
-		/*UFG::qSafePointer<UFG::SimObject, UFG::SimObject> mpAmbientSuspect;
-		UFG::qSafePointer<UFG::SimObject, UFG::SimObject> mpArrestRightHumanCop;*/
-
+		qSafePointer<CSimObject> mpAmbientSuspect;
+		qSafePointer<CSimObject> mpArrestRightHumanCop;
 		float mArrestRightTimestamp;
 		qString mLastHeatEventCaption;
 		eHeatEventEnum mLastHeatEventIndex;
@@ -55,24 +61,29 @@ namespace UFG
 		bool mIsSafehouseInstantCooldownActive;
 		uint64_t mHeatLevelTimestamp;
 
-		static CCopSystem* Instance()
+		static __inline CCopSystem* Instance()
 		{
 			return reinterpret_cast<CCopSystem*>(UFG_RVA(0x23D9AA0));
 		}
 
-		float GetHeatThresholdByLevel(eHeatLevelEnum m_HeatLevel)
+		__inline float GetHeatThresholdByLevel(eHeatLevelEnum p_HeatLevel)
 		{
-			return reinterpret_cast<float(__fastcall*)(void*, eHeatLevelEnum)>(UFG_RVA(0x3EDA60))(this, m_HeatLevel);
+			return reinterpret_cast<float(__fastcall*)(void*, eHeatLevelEnum)>(UFG_RVA(0x3EDA60))(this, p_HeatLevel);
 		}
 
-		void ReportInfractionTarget(CSimObject* m_Witness, CSimObject* m_Suspect)
+		__inline void ReportInfractionTarget(CSimObject* p_Witness, CSimObject* p_Suspect)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, m_Witness, m_Suspect);
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, p_Witness, p_Suspect);
 		}
 
-		void SetHeatLevel(eHeatLevelEnum m_HeatLevel, eHeatEventEnum m_HeatEvent, float m_HeatValue)
+		__inline void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent, float p_HeatValue)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, m_HeatLevel, m_HeatEvent, m_HeatValue);
+			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, p_HeatLevel, p_HeatEvent, p_HeatValue);
+		}
+
+		__inline void ResetChaseStats()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3F03C0))(this);
 		}
 	};
 }

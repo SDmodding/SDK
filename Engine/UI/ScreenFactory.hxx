@@ -21,6 +21,7 @@ namespace UFG
 				m_Screen->mNode.mNext = &m_Screen->mNode;
 				m_Screen->mRenderable = nullptr;
 				m_Screen->mLoadThread = nullptr;
+				m_Screen->m_screenNameHash = 0;
 				m_Screen->mScreenUID = UINT32_MAX;
 				m_Screen->mControllerMask = 0;
 				m_Screen->mPriority = 0;

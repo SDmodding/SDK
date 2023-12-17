@@ -15,6 +15,7 @@ public:
 	uint32_t m_filterInfo = 0;
 	uint64_t m_userData = 0;
 
+	hkpWorldRayCastInput() { }
 	hkpWorldRayCastInput(UFG::qVector3 m_Start, UFG::qVector3 m_End, uint32_t m_CollisionFilter)
 	{
 		m_from.Set(m_Start.x, m_Start.y, m_Start.z, 0.f);
@@ -34,6 +35,7 @@ public:
 	hkpCollidable* m_collidable = nullptr;
 	uint64_t m_userData = 0;
 
+	hkpShapeRayCastInput() { }
 	hkpShapeRayCastInput(UFG::qVector3 m_Start, UFG::qVector3 m_End, uint32_t m_CollisionFilter)
 	{
 		m_from.Set(m_Start.x, m_Start.y, m_Start.z, 0.f);

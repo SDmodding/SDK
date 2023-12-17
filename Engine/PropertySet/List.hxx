@@ -11,6 +11,13 @@ namespace UFG
 		uint32_t mNumElements;
 		uint32_t mTotalWeight;
 
+		static __inline qPropertyList* Create(const char* p_DbgStr = UFG_CONST_CHAR(0x168E064))
+		{
+			return reinterpret_cast<qPropertyList*(__fastcall*)(const char*)>(UFG_RVA(0x1F4060))(p_DbgStr);
+		}
+
+		//=====================================================================
+
 		__inline void AddString(const char* p_String)
 		{
 			reinterpret_cast<void(__fastcall*)(qPropertyList*, const char*)>(UFG_RVA(0x1E8CB0))(this, p_String);
@@ -21,10 +28,19 @@ namespace UFG
 			return reinterpret_cast<const char*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9AB0))(this, p_Index);
 		}
 
+		//=====================================================================
+
+		__inline void AddSymbol(qSymbol p_Symbol)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x1E8D50))(this, &p_Symbol);
+		}
+
 		__inline qSymbol* GetSymbol(uint32_t p_Index)
 		{
 			return reinterpret_cast<qSymbol*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1E9F80))(this, p_Index);
 		}
+
+		//=====================================================================
 
 		__inline qPropertySet* GetValuePtr(uint32_t p_Index)
 		{

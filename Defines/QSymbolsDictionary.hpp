@@ -5,7 +5,8 @@ namespace UFG
 	// FilePath to 'QSymbolsDictionary.txt'
 	bool LoadQSymbolsDictionary(const char* p_FilePath, std::unordered_map<qSymbol, std::string>& p_Map)
 	{
-		FILE* m_File = fopen(p_FilePath, "r+");
+		FILE* m_File = nullptr;
+		fopen_s(&m_File, p_FilePath, "r+");
 		if (!m_File)
 			return false;
 

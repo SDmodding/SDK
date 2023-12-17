@@ -67,6 +67,11 @@ namespace UFG
 			return &m_Properties[p_Index];
 		}
 
+		__inline void RemovPropertyByName(qSymbol p_Name)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x1FC160))(this, &p_Name);
+		}
+
 		// Value
 		__inline uintptr_t* GetValuePtrFromIdx(uint32_t p_Index)
 		{
@@ -91,6 +96,11 @@ namespace UFG
 		__inline bool* GetBool(qSymbol p_PropName, uint32_t p_Depth = 1)
 		{
 			return reinterpret_cast<bool*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1EA610))(this, &p_PropName, p_Depth);
+		}
+
+		__inline void SetBool(qSymbol p_PropName, bool p_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1EB270))(this, &p_PropName, p_Value);
 		}
 
 		// String
@@ -133,6 +143,17 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qSymbol*)>(UFG_RVA(0x1EB070))(this, &p_PropName, &p_Symbol);
 		}
 
+		// WiseSymbol
+		__inline qWiseSymbol* GetWiseSymbol(qSymbol p_PropName, uint32_t p_Depth = 1)
+		{
+			return reinterpret_cast<qWiseSymbol*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1EA3B0))(this, &p_PropName, p_Depth);
+		}
+
+		__inline void SetWiseSymbol(qSymbol p_PropName, qWiseSymbol p_WiseSymbol)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qWiseSymbol*)>(UFG_RVA(0x1EB1B0))(this, &p_PropName, &p_WiseSymbol);
+		}
+
 		// PropertySet
 		__inline qPropertySet* GetPropertySet(qSymbol p_PropName, uint32_t p_Depth = 1)
 		{
@@ -148,6 +169,11 @@ namespace UFG
 		__inline qPropertyList* GetPropertyList(qSymbol p_PropName, uint32_t p_Depth = 1)
 		{
 			return reinterpret_cast<qPropertyList*(__fastcall*)(qPropertySet*, qSymbol*, uint32_t)>(UFG_RVA(0x1E9E60))(this, &p_PropName, p_Depth);
+		}
+
+		__inline void SetPropertyList(qSymbol p_PropName, qPropertyList* p_PropertyList)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, qPropertyList*)>(UFG_RVA(0x1EAFE0))(this, &p_PropName, p_PropertyList);
 		}
 
 		// Resource
