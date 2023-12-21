@@ -4,7 +4,6 @@ namespace Illusion
 {
 	struct ModelData_t : UFG::ResourceData_t // TypeUID: 0x6DF963B3 || ChunkUID: 0xA2ADCD77
 	{
-
 		float m_AABBMin[3];
 		uint32_t m_NumPrims;
 		float m_AABBMax[3];

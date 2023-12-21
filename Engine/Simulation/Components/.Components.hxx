@@ -16,33 +16,7 @@ namespace UFG
 		qSafePointer<CSimComponent> mSimComponent;
 	};
 
-	class CTargetingSimObject
-	{
-	public:
-		qNode<CTargetingSimObject> mNode;
-		void* m_pTSBC; // TargetingSystemBaseComponent
-		qSafePointer<CSimObject> m_pTarget;
-		uint8_t m_eTargetType;
-		bool m_bLock;
-	};
-
 	// Components
-	class CActionTreeComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x68);
-
-		bool mNisUpdated;
-		const char* mActionTreeFileName;
-		CActionContext* mpActionContext;
-		CActionController mActionController;
-
-		void Reset()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
-		}
-	};
-
 	class CCompositeDrawableComponent : public CSimComponent
 	{
 	public:
@@ -382,37 +356,6 @@ namespace UFG
 		void DetachEffect(qSymbol fxId, uint32_t killOption = 0x0)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol, uint32_t)>(UFG_RVA(0x1CB150))(this, fxId, killOption);
-		}
-	};
-
-	class CTargetingSystemBaseComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x18);
-
-		CTargetingSimObject* m_pTargets;
-
-		struct TargetingMap_t
-		{
-			uint32_t m_uNumValidTargetTypes;
-			qFixedArray<uint8_t, 91> m_Map;
-		};
-		TargetingMap_t* m_pTargetingMap;
-		qList<CTargetingSimObject> m_TargetedBy;
-
-		CTargetingSimObject* GetTarget(eTargetTypeEnum m_TargetType)
-		{
-			return &m_pTargets[m_pTargetingMap->m_Map.p[m_TargetType]];
-		}
-
-		void SetTarget(eTargetTypeEnum m_TargetType, CSimObject* m_SimObject)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, m_TargetType, m_SimObject);
-		}
-
-		void ClearTarget(eTargetTypeEnum m_TargetType)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, m_TargetType);
 		}
 	};
 

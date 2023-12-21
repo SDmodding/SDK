@@ -15,8 +15,10 @@ namespace UFG
 
 // SimComponent Classes
 #include "SimComponent.hxx"
+#include "Components/ActionTreeComponent.hxx"
 #include "Components/FaceMeterComponent.hxx"
 #include "Components/StreamedResourceComponent.hxx"
+#include "Components/TargetingSystemComponents.hxx"
 #include "Components/.Components.hxx" // TODO: Move them to individual file instead having them in one big file mess...
 
 // SimObject Classes

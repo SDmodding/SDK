@@ -8,6 +8,58 @@
 
 namespace UFG
 {
+	class CIntention
+	{
+	public:
+		float mMotionIntentionSpeedRaw;
+		qVector3 mMotionIntentionDirectionRaw;
+		float mMotionIntentionSpeed;
+		qVector3 mMotionIntentionDirection;
+		bool mEnableManualStrafeFacingDirection;
+		qVector3 mManualStrafeFacingDirection;
+		qVector3 mFacingIntentionDirection;
+		bool mDesireToLookAtPoint;
+		qVector3 mDesiredLookAtPoint;
+		bool mDesireToLookAtPointEye;
+		qVector3 mDesiredLookAtPointEye;
+		AIAwareness::CSubProfileAnimation mAwarenessIntention;
+		float mCurrentRotationInput;
+		float mCurrentRotationSpeed;
+		float mCurrentRotationSignal;
+		float mCurrentRotationAccel;
+		float mCurrentRotationAngularVel;
+		uint32_t mNodeRequestHash;
+		uint64_t mSignals;
+		uint64_t mActionRequests[9];
+		char mActionRequestChargeTimes[548];
+		uint64_t mFacialRequests;
+		char mFacialRequestChargeTimes[32];
+
+		void SetSpeed(float p_Value)
+		{
+			mMotionIntentionSpeedRaw = mMotionIntentionSpeed = p_Value;
+		}
+
+		void SetDirection(qVector3 p_Direction)
+		{
+			mMotionIntentionDirectionRaw = mMotionIntentionDirection = p_Direction;
+		}
+
+		void Set(uint32_t p_ActionRequest, float p_ChargeTime = 4.25f)
+		{
+			auto action_bitwise = (1i64 << (p_ActionRequest & 0x3F));
+			mActionRequests[(signed __int64)(signed int)p_ActionRequest >> 6] |= action_bitwise;
+			mActionRequestChargeTimes[p_ActionRequest] = static_cast<char>(fminf(255.f, p_ChargeTime * 60.f));
+			mSignals |= action_bitwise;
+		}
+
+		bool Has(uint32_t p_ActionRequest)
+		{
+			auto v10 = mActionRequests[(signed __int64)(signed int)p_ActionRequest >> 6];
+			return _bittest64((const signed __int64*)&v10, p_ActionRequest & 0x3F);
+		}
+	};
+
 	// Condition Classes
 	class CCondition : public UEL::CMemberMap
 	{
@@ -133,6 +185,15 @@ namespace UFG
 		char m_OnEnterExitCallbacksEnabled;
 		CActionNodePlayable* m_previousNode;
 		CActionNodePlayable* m_SequenceNode;
+		qList<class ITask> m_RunningTasks;
+		uint64_t m_RunningSpawnTasksTmp[2];
+		qList<class ITask>m_SequencedTasks;
+		float mRunningMasterRate;
+		qList<class IFinishUpdate> m_FinishUpdateTasks;
+		uint64_t m_PlayingMostUsedMask;
+		uint32_t m_NumPlayingNodes;
+		uint32_t m_PlayingNodeUID[32];
+		int m_SequencePriority;
 
 		bool IsPlaying(uint32_t p_ID, uint32_t p_MostUsedInex = -1, bool p_RecurseOnSpawns = false)
 		{
@@ -174,6 +235,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qStringBuilder*, bool, CActionController*, void*)>(UFG_RVA(0x26E5B0))(this, p_StringBuilder, p_ShowAllTracks, p_ControllerToHighlight, p_TrackToHighlight);
 		}
 	};
+	UFG_ASSERT_CLASS(CActionController, 0x118);
 
 	class CActionTreeResource : public qResourceData
 	{

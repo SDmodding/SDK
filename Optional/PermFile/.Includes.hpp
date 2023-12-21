@@ -19,6 +19,7 @@
 #include "Illusion/Mesh.hpp"
 #include "Illusion/ModelData.hpp"
 #include "Illusion/ModelUser.hpp"
+#include "Illusion/ShaderBinary.hxx"
 #include "Illusion/StateBlock.hpp"
 #include "Illusion/Texture.hpp"
 
@@ -112,7 +113,8 @@ namespace SDK
 		{
 			Cleanup();
 
-			FILE* m_File = fopen(p_FilePath, "rb");
+			FILE* m_File = nullptr;
+			fopen_s(&m_File, p_FilePath, "rb");
 			if (!m_File)
 				return false;
 
