@@ -247,6 +247,17 @@ namespace UFG
 		{
 			r = f0; g = f1; b = f2; a = f3;
 		}
+
+		// Hue (0.f to 360.f), Saturation (0.f to 1.f), Vibrance (0.f to 1.f), Alpha (0.f to 1.f)
+		__inline void HSVToRGB(const qColour& p_HSV)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const qColour&)>(UFG_RVA(0x1824E0))(this, p_HSV);
+		}
+
+		__inline void RGBToHSV(const qColour& p_RGB)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const qColour&)>(UFG_RVA(0x182630))(this, p_RGB);
+		}
 	};
 
 	class qBox

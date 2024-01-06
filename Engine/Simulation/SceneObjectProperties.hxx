@@ -21,7 +21,7 @@ namespace UFG
 		uint32_t mPrevNameHash;
 		uint32_t mChildIndex;
 
-		qPropertySet* GetPropertySet()
+		__inline qPropertySet* GetPropertySet()
 		{
 			if (mpWritableProperties)
 				return mpWritableProperties;
@@ -33,9 +33,9 @@ namespace UFG
 		* If 'mpWritableProperties' is nullptr, using this will create New PropertySet and append 'mpConstProperties'.
 		* This is useful if we wanna modify some data.
 		*/
-		qPropertySet* GetWritableProperties()
+		__inline qPropertySet* GetWritableProperties()
 		{
-			return reinterpret_cast<qPropertySet * (__fastcall*)(void*)>(UFG_RVA(0x23E2F0))(this);
+			return reinterpret_cast<qPropertySet*(__fastcall*)(void*)>(UFG_RVA(0x23E2F0))(this);
 		}
 
 		eSimObjectTypeEnum2 GetType()

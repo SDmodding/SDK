@@ -120,6 +120,11 @@ namespace UFG
 			return reinterpret_cast<int*(__fastcall*)(void*, qSymbol*, uint32_t)>(UFG_RVA(0x1E98E0))(this, &p_PropName, p_Depth);
 		}
 
+		__inline void SetInt(qSymbol p_PropName, int p_Value)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, int)>(UFG_RVA(0x1EADD0))(this, &p_PropName, p_Value);
+		}
+
 		// UInt32
 		__inline uint32_t* GetUInt32(qSymbol p_PropName, uint32_t p_Depth = 1)
 		{

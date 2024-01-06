@@ -245,7 +245,7 @@ namespace UFG
 		// Constructor (650 Limit)
 		CFXOverride* Create(const char* p_Name = "FXOverride", CMemoryPool* p_MemoryPool = nullptr)
 		{
-			return reinterpret_cast<CFXOverride * (__fastcall*)(const char*, CMemoryPool*)>(UFG_RVA(0x1CA5A0))(p_Name, p_MemoryPool);
+			return reinterpret_cast<CFXOverride*(__fastcall*)(const char*, CMemoryPool*)>(UFG_RVA(0x1CA5A0))(p_Name, p_MemoryPool);
 		}
 
 		// Own Constructor

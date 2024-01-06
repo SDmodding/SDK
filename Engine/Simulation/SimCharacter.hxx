@@ -704,29 +704,29 @@ namespace UFG
 			}
 		}
 
-		void SetCanDrop(int m_Slot, bool m_CanDrop)
+		void SetCanDrop(int p_Slot, bool p_CanDrop)
 		{
-			m_EquipSlots.p[m_Slot] = m_CanDrop;
+			m_EquipSlots.p[p_Slot] = p_CanDrop;
 		}
 
-		bool Equip(CSimObject* m_ObjectToEquip, bool m_UseEquipSlot = false, int m_Slot = 0)
+		bool Equip(CSimObject* p_ObjectToEquip, bool p_UseEquipSlot = false, int p_Slot = 0)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, bool, int)>(UFG_RVA(0x526F90))(this, m_ObjectToEquip, m_UseEquipSlot, m_Slot);
+			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, bool, int)>(UFG_RVA(0x526F90))(this, p_ObjectToEquip, p_UseEquipSlot, p_Slot);
 		}
 
-		void UnEquip(int m_Slot = 0, bool m_DeleteFromWorld = false)
+		void UnEquip(int p_Slot = 0, bool p_DeleteFromWorld = false)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, bool, int)>(UFG_RVA(0x557A40))(this, m_Slot, m_DeleteFromWorld);
+			reinterpret_cast<void(__fastcall*)(void*, bool, int)>(UFG_RVA(0x557A40))(this, p_Slot, p_DeleteFromWorld);
 		}
 		
-		void RemoveObjectFromInventory(CSimObject* m_Object)
+		void RemoveObjectFromInventory(CSimObject* p_Object)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x549120))(this, m_Object);
+			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x549120))(this, p_Object);
 		}
 
-		void Stow(int m_Slot, int m_DestinationSlot)
+		void Stow(int p_Slot, int p_DestinationSlot)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, int)>(UFG_RVA(0x552A40))(this, m_Slot, m_DestinationSlot);
+			reinterpret_cast<void(__fastcall*)(void*, int, int)>(UFG_RVA(0x552A40))(this, p_Slot, p_DestinationSlot);
 		}
 	};
 

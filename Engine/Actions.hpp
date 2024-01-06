@@ -205,14 +205,14 @@ namespace UFG
 			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, bool)>(UFG_RVA(0x273AB0))(this, &p_ID, p_RecurseOnSpawns);
 		}
 
-		void Play(CActionNode* m_Node, bool m_ForcePlay)
+		void Play(CActionNode* p_Node, bool p_ForcePlay)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, m_Node, m_ForcePlay);
+			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, p_Node, p_ForcePlay);
 		}
 
-		void Play(CActionNodePlayable* m_Node)
+		void Play(CActionNodePlayable* p_Node)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, m_Node);
+			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, p_Node);
 		}
 
 		void PlayTracks(CActionNodePlayable* p_Node, bool p_OffsetTimeBeginAndEnd, float p_OffsetTime)
