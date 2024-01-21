@@ -49,6 +49,7 @@
 #define CharacterWorldContextComponent_TypeUID				0xA6000001
 #define CharacterSubjectComponent_TypeUID					0x68000005
 
+#define VehicleTargetingSystemComponent_TypeUID				0xA0000041
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
 #define VehicleAiDriverComponent_TypeUID					0xD8000003
 #define VehicleRoadSpaceComponent_TypeUID					0xDA000001

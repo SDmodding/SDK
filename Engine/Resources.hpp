@@ -26,27 +26,28 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x161BB0))(this);
 		}
 
-		void Init(uint32_t p_TypeUID, uint32_t p_NameUID)
+		UFG_INLINE void Init(uint32_t p_TypeUID, uint32_t p_NameUID)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t, uint32_t)>(UFG_RVA(0x1734B0))(this, p_TypeUID, p_NameUID);
 		}
 
-		void Close()
+		UFG_INLINE void Close()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x167FB0))(this);
 		}
 
 		template <typename T>
-		__inline T* GetData()
+		UFG_INLINE T* GetData()
 		{
 			return reinterpret_cast<T*>(mData);
 		}
 
 		template <typename T, uintptr_t m_Offset>
-		__inline T* GetData2()
+		UFG_INLINE T* GetData2()
 		{
-			if (!mData)
+			if (!mData) {
 				return nullptr;
+			}
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(mData) + m_Offset);
 		}
@@ -63,7 +64,7 @@ namespace UFG
 		void* mCallback;
 		void* mCallbackData;
 
-		__inline char* GetFileData(int p_Offset)
+		UFG_INLINE char* GetFileData(int p_Offset)
 		{
 			return reinterpret_cast<char*(__fastcall*)(void*, int)>(UFG_RVA(0x170510))(this, p_Offset);
 		}

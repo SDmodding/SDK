@@ -4,22 +4,22 @@ namespace UFG
 {
 	namespace LocalPlayer
 	{
-		__inline CSimCharacter** GetPointer()
+		UFG_INLINE CSimCharacter** GetPointer()
 		{
 			return reinterpret_cast<CSimCharacter**>(UFG_RVA(0x235C488));
 		}
 
-		__inline CSimCharacter* Get()
+		UFG_INLINE CSimCharacter* Get()
 		{
 			return *GetPointer();
 		}
 
-		__forceinline qSymbol GetNameUID()
+		UFG_INLINE qSymbol GetNameUID()
 		{
 			return 0x90ECB5FF;
 		}
 
-		__forceinline qSymbol GetPropertySetUID()
+		UFG_INLINE qSymbol GetPropertySetUID()
 		{
 			return 0xBD387BEE; // object-physical-character-player
 		}

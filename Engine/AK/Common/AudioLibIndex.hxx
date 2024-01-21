@@ -15,7 +15,8 @@ public:
 	CAkIndexItem<void*> m_idxFxShareSets;
 	CAkIndexItem<void*> m_idxFxCustom;
 
-	static __inline CAkAudioLibIndex* Instance() {
+	static UFG_INLINE CAkAudioLibIndex* Instance() 
+	{
 		return *reinterpret_cast<CAkAudioLibIndex**>(UFG_RVA(0x249E9D8));
 	}
 };

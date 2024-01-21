@@ -18,12 +18,12 @@ namespace Scaleform
 		void* vfptr;
 		volatile int RefCount;
 
-		__inline void AddRef()
+		UFG_INLINE void AddRef()
 		{
 			_InterlockedIncrement(reinterpret_cast<volatile long*>(&RefCount));
 		}
 
-		__inline void Release()
+		UFG_INLINE void Release()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x9A7C60))(this);
 		}

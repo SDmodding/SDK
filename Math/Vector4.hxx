@@ -18,27 +18,31 @@ namespace UFG
 		}
 
 		// Operators
-		__forceinline bool operator==(qVector4& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z && w == m_Other.w); }
-		__forceinline bool operator!=(qVector4& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z || w != m_Other.w); }
+		UFG_INLINE bool operator==(const qVector4& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z && w == m_Other.w); }
+		UFG_INLINE bool operator!=(const qVector4& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z || w != m_Other.w); }
 
-		__forceinline qVector4 operator+(qVector4 m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z, w + m_Other.w }; }
-		__forceinline void operator+=(qVector4 m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; w += m_Other.w; }
+		UFG_INLINE qVector4 operator+(const qVector4& m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z, w + m_Other.w }; }
+		UFG_INLINE void operator+=(const qVector4& m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; w += m_Other.w; }
 
-		__forceinline qVector4 operator-(qVector4 m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z, w - m_Other.w }; }
-		__forceinline void operator-=(qVector4 m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; w -= m_Other.w; }
+		UFG_INLINE qVector4 operator-(const qVector4& m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z, w - m_Other.w }; }
+		UFG_INLINE void operator-=(const qVector4& m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; w -= m_Other.w; }
 
-		__forceinline qVector4 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value, w * m_Value }; }
-		__forceinline void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; w *= m_Value; }
+		UFG_INLINE qVector4 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value, w * m_Value }; }
+		UFG_INLINE void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; w *= m_Value; }
 
-		__forceinline qVector4 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value, w / m_Value }; }
-		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; ; w /= m_Value; }
+		UFG_INLINE qVector4 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value, w / m_Value }; }
+		UFG_INLINE void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; ; w /= m_Value; }
 
-		__forceinline qVector4 operator-() { return { -x, -y, -z, -w }; }
+		UFG_INLINE qVector4 operator-() { return { -x, -y, -z, -w }; }
+
+		UFG_INLINE operator qVector3() { return qVector3(x, y, z); }
 
 		// Funcs
-		operator qVector3() { return qVector3(x, y, z); }
-		qVector3 ToVector3() { return qVector3(x, y, z); }
+		UFG_INLINE qVector3 ToVector3() { this->operator UFG::qVector3(); }
 
-		float DotProduct(qVector4& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
+		UFG_INLINE float DotProduct(const qVector4& m_Other) 
+		{ 
+			return (x * m_Other.x + y * m_Other.y + z * m_Other.z); 
+		}
 	};
 }

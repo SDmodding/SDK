@@ -47,22 +47,22 @@ namespace Illusion
 			LOCK_MODIFY
 		};
 
-		__inline CTexturePlat* GetPlat()
+		UFG_INLINE CTexturePlat* GetPlat()
 		{
 			return reinterpret_cast<CTexturePlat*>(UFG_THIS_OFFSET(0xD0));
 		}
 
-		__inline bool Lock(eLockType p_Type, TextureLockInfo_t* p_Info, int p_MipLevel, int p_FaceIndex)
+		UFG_INLINE bool Lock(eLockType p_Type, TextureLockInfo_t* p_Info, int p_MipLevel, int p_FaceIndex)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, eLockType, TextureLockInfo_t*, int, int)>(UFG_RVA(0xA1C560))(this, p_Type, p_Info, p_MipLevel, p_FaceIndex);
 		}
 		
-		__inline void Unlock()
+		UFG_INLINE void Unlock()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA22A70))(this);
 		}
 
-		__inline void CreateTextureData()
+		UFG_INLINE void CreateTextureData()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA19940))(this);
 		}
@@ -74,7 +74,7 @@ namespace Illusion
 		UFG::qResourceHandle mAlphaStateHandle;
 		UFG::qResourceHandle mRasterStateHandle;
 
-		void OnLoad(CTexture* p_Texture)
+		UFG_INLINE void OnLoad(CTexture* p_Texture)
 		{
 			reinterpret_cast<void(_fastcall*)(void*, CTexture*)>(UFG_RVA(0x95F70))(this, p_Texture);
 		}

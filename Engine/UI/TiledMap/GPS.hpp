@@ -31,7 +31,7 @@ namespace UFG
 		bool mTrueDirectionHighwayRamp;
 		unsigned int mTrueDirectionEdgeCount;
 
-		static __inline CUITiledMapGPS* Instance() 
+		static UFG_INLINE CUITiledMapGPS* Instance()
 		{ 
 			return *reinterpret_cast<CUITiledMapGPS**>(UFG_RVA(0x24310A0)); 
 		}

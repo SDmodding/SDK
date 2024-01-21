@@ -7,7 +7,7 @@ namespace Illusion
 	public:
 		UFG::qGenericResourceHandle mResourceHandle;
 
-		__inline void Set(uint32_t p_StateTypeUID, uint32_t p_StateNameUID, uint32_t p_TypeUID, uint32_t p_NameUID)
+		UFG_INLINE void Set(uint32_t p_StateTypeUID, uint32_t p_StateNameUID, uint32_t p_TypeUID, uint32_t p_NameUID)
 		{
 			mTypeUID = p_StateTypeUID;
 			mNameUID = p_StateNameUID;
@@ -15,7 +15,7 @@ namespace Illusion
 			mResourceHandle.mNameUID = p_NameUID;
 		}
 
-		__inline void Set(uint32_t p_StateUID, uint32_t p_TypeUID, uint32_t p_NameUID)
+		UFG_INLINE void Set(uint32_t p_StateUID, uint32_t p_TypeUID, uint32_t p_NameUID)
 		{
 			Set(p_StateUID, p_StateUID, p_TypeUID, p_NameUID);
 		}
@@ -28,27 +28,27 @@ namespace Illusion
 		uint32_t mNumParams;
 		UFG::qOffset64<class CMaterialUser> mMaterialUser;
 
-		__inline CMaterialParam* GetParamTable()
+		UFG_INLINE CMaterialParam* GetParamTable()
 		{
 			return reinterpret_cast<CMaterialParam*>(reinterpret_cast<uintptr_t>(this) + sizeof(CMaterial));
 		}
 
-		void UpdateParam(uint32_t p_Index, uint32_t p_TypeUID, uint32_t p_NameUID)
+		UFG_INLINE void UpdateParam(uint32_t p_Index, uint32_t p_TypeUID, uint32_t p_NameUID)
 		{
 			reinterpret_cast<void(_fastcall*)(void*, uint32_t, uint32_t, uint32_t)>(UFG_RVA(0x9360))(this, p_Index, p_TypeUID, p_NameUID);
 		}
 
-		void OnLoad()
+		UFG_INLINE void OnLoad()
 		{
 			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x934A0))(this);
 		}
 
-		void OnUnload()
+		UFG_INLINE void OnUnload()
 		{
 			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x941D0))(this);
 		}
 
-		__inline void Reload()
+		UFG_INLINE void Reload()
 		{
 			OnUnload();
 			OnLoad();

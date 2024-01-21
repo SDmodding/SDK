@@ -20,37 +20,37 @@ namespace UFG
 		// Operators
 		float& operator[](int m_Index) { return (&x)[m_Index]; }
 
-		__forceinline bool operator==(qVector3& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z); }
-		__forceinline bool operator!=(qVector3& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z); }
+		UFG_INLINE bool operator==(const qVector3& m_Other) { return (x == m_Other.x && y == m_Other.y && z == m_Other.z); }
+		UFG_INLINE bool operator!=(const qVector3& m_Other) { return (x != m_Other.x || y != m_Other.y || z != m_Other.z); }
 
-		__forceinline qVector3 operator+(qVector3 m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z }; }
-		__forceinline void operator+=(qVector3 m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; }
+		UFG_INLINE qVector3 operator+(const qVector3& m_Other) { return { x + m_Other.x, y + m_Other.y, z + m_Other.z }; }
+		UFG_INLINE void operator+=(const qVector3& m_Other) { x += m_Other.x; y += m_Other.y; z += m_Other.z; }
 
-		__forceinline qVector3 operator-(qVector3 m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z }; }
-		__forceinline void operator-=(qVector3 m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; }
+		UFG_INLINE qVector3 operator-(const qVector3& m_Other) { return { x - m_Other.x, y - m_Other.y, z - m_Other.z }; }
+		UFG_INLINE void operator-=(const qVector3& m_Other) { x -= m_Other.x; y -= m_Other.y; z -= m_Other.z; }
 
-		__forceinline qVector3 operator*(qVector3 m_Other) { return { x * m_Other.x, y * m_Other.y, z * m_Other.z }; }
-		__forceinline void operator*=(qVector3 m_Other) { x *= m_Other.x; y *= m_Other.y; z *= m_Other.z; }
+		UFG_INLINE qVector3 operator*(const qVector3& m_Other) { return { x * m_Other.x, y * m_Other.y, z * m_Other.z }; }
+		UFG_INLINE void operator*=(const qVector3& m_Other) { x *= m_Other.x; y *= m_Other.y; z *= m_Other.z; }
 
-		__forceinline qVector3 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value }; }
-		__forceinline void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; }
+		UFG_INLINE qVector3 operator*(float m_Value) { return { x * m_Value, y * m_Value, z * m_Value }; }
+		UFG_INLINE void operator*=(float m_Value) { x *= m_Value; y *= m_Value; z *= m_Value; }
 
-		__forceinline qVector3 operator/(qVector3 m_Other) { return { x / m_Other.x, y / m_Other.y, z / m_Other.z }; }
-		__forceinline void operator/=(qVector3 m_Other) { x /= m_Other.x; y /= m_Other.y; z /= m_Other.z; }
+		UFG_INLINE qVector3 operator/(const qVector3& m_Other) { return { x / m_Other.x, y / m_Other.y, z / m_Other.z }; }
+		UFG_INLINE void operator/=(const qVector3& m_Other) { x /= m_Other.x; y /= m_Other.y; z /= m_Other.z; }
 
-		__forceinline qVector3 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value }; }
-		__forceinline void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; }
+		UFG_INLINE qVector3 operator/(float m_Value) { return { x / m_Value, y / m_Value, z / m_Value }; }
+		UFG_INLINE void operator/=(float m_Value) { x /= m_Value; y /= m_Value; z /= m_Value; }
 
-		__forceinline qVector3 operator-() { return { -x, -y, -z }; }
+		UFG_INLINE qVector3 operator-() { return { -x, -y, -z }; }
 
 		// Funcs
-		float Length()
+		UFG_INLINE float Length()
 		{
 			return sqrtf(x * x + y * y + z * z);
 		}
 
-		float DotProduct(qVector3& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
-		qVector3 Cross(qVector3 m_Other) { return { y * m_Other.z - z * m_Other.y, z * m_Other.x - x * m_Other.z, x * m_Other.y - y * m_Other.x }; }
+		float DotProduct(const qVector3& m_Other) { return x * m_Other.x + y * m_Other.y + z * m_Other.z; }
+		qVector3 Cross(const qVector3& m_Other) { return { y * m_Other.z - z * m_Other.y, z * m_Other.x - x * m_Other.z, x * m_Other.y - y * m_Other.x }; }
 
 		void Normalize()
 		{
@@ -58,23 +58,23 @@ namespace UFG
 			operator/=(m_Length);
 		}
 
-		float DistTo(qVector3* m_Other)
+		float DistTo(const qVector3& m_Other)
 		{
-			qVector3 m_Delta(x - m_Other->x, y - m_Other->y, z - m_Other->z);
+			qVector3 m_Delta(x - m_Other.x, y - m_Other.y, z - m_Other.z);
 			return m_Delta.Length();
 		}
 
-		__inline float DistTo2D(qVector2* m_Other)
+		UFG_INLINE float DistTo2D(qVector2* m_Other)
 		{
 			return reinterpret_cast<qVector2*>(this)->DistTo(m_Other);
 		}
 
-		__inline float DistTo2D(qVector3* m_Other)
+		UFG_INLINE float DistTo2D(qVector3* m_Other)
 		{
 			return DistTo2D(reinterpret_cast<qVector2*>(m_Other));
 		}
 
-		void ConvertToRad()
+		UFG_INLINE void ConvertToRad()
 		{
 			x *= UFG_Deg2Rad_Mul;
 			y *= UFG_Deg2Rad_Mul;

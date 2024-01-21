@@ -53,12 +53,12 @@ public:
 	bool m_delayed;
 	float m_clutchDelayCountdown;
 
-	__inline float CalcKMPH()
+	UFG_INLINE float CalcKMPH()
 	{
 		return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xE27510))(this);
 	}
 
-	__inline float CalcMPH()
+	UFG_INLINE float CalcMPH()
 	{
 		return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xE27590))(this);
 	}

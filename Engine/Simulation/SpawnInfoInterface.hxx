@@ -29,7 +29,7 @@ namespace UFG
 			return m_SimObject;
 		}
 
-		__inline CSimObject* SpawnObject(qSymbol p_ObjNameUID, qSymbol p_PropertyNameUID, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr, CSimObject* p_Owner = nullptr)
+		UFG_INLINE CSimObject* SpawnObject(qSymbol p_ObjNameUID, qSymbol p_PropertyNameUID, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr, CSimObject* p_Owner = nullptr)
 		{
 			qPropertySet* m_PropertySet = PropertySetManager::GetPropertySet(p_PropertyNameUID);
 			if (m_PropertySet) {
@@ -53,7 +53,7 @@ namespace UFG
 			return m_SimObject;
 		}
 
-		__inline CSimObject* SpawnObject(qSymbol p_ObjNameUID, qSymbol p_PropertyNameUID, qMatrix44* p_Matrix, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr)
+		UFG_INLINE CSimObject* SpawnObject(qSymbol p_ObjNameUID, qSymbol p_PropertyNameUID, qMatrix44* p_Matrix, SpawnPriority p_Priority = None, void* p_OwnerLayer = nullptr, CSceneObjectProperties* p_SpawnerSceneObj = nullptr)
 		{
 			qPropertySet* m_PropertySet = PropertySetManager::GetPropertySet(p_PropertyNameUID);
 			if (m_PropertySet) {

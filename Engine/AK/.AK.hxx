@@ -38,12 +38,12 @@ namespace AK
 			return m_ID;
 		}
 
-		__inline AKRESULT LoadBank(AkBankID p_BankID, AkBankCallbackFunc p_Callback, void* p_Cookie, uint32_t p_MemPoolID)
+		UFG_INLINE AKRESULT LoadBank(AkBankID p_BankID, AkBankCallbackFunc p_Callback, void* p_Cookie, uint32_t p_MemPoolID)
 		{
 			return reinterpret_cast<AKRESULT(__fastcall*)(AkBankID, AkBankCallbackFunc, void*, int)>(UFG_RVA(0xA424A0))(p_BankID, p_Callback, p_Cookie, p_MemPoolID);
 		}
 
-		__inline AkExternalSourceArray* PostEvent(AkBankID p_EventID, AkGameObjectID p_GameObjID, uint32_t p_Flags, AkCallbackFunc p_Callback, void* p_Cookie, uint32_t p_NumExternals, AkExternalSourceInfo* p_ExternalSources, uint32_t p_PlayingID = AK_INVALID_PLAYING_ID)
+		UFG_INLINE AkExternalSourceArray* PostEvent(AkBankID p_EventID, AkGameObjectID p_GameObjID, uint32_t p_Flags, AkCallbackFunc p_Callback, void* p_Cookie, uint32_t p_NumExternals, AkExternalSourceInfo* p_ExternalSources, uint32_t p_PlayingID = AK_INVALID_PLAYING_ID)
 		{
 			return reinterpret_cast<AkExternalSourceArray*(__fastcall*)(AkBankID, AkGameObjectID, uint32_t, AkCallbackFunc, void*, uint32_t, AkExternalSourceInfo*, uint32_t)>(UFG_RVA(0xA426F0))(p_EventID, p_GameObjID, p_Flags, p_Callback, p_Cookie, p_NumExternals, p_ExternalSources, p_PlayingID);
 		}

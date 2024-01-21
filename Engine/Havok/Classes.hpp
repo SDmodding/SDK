@@ -4,6 +4,8 @@
 typedef int8_t hkUFloat8;
 typedef uint16_t hkHalf;
 
+struct hkMatrix3f;
+
 struct hkVector4f
 {
 	__m128 m_quad;
@@ -23,9 +25,16 @@ struct hkVector4f
 		m_quad = _mm_set_ps(0.f, m_Vector3.z, m_Vector3.y, m_Vector3.x);
 	}
 
+	float& operator[](int p_Index) { return m_quad.m128_f32[p_Index]; }
+
 	void Set(float x, float y, float z, float w = 0.f)
 	{
 		m_quad = _mm_set_ps(w, z, y, x);
+	}
+
+	void SetRotatedDir(hkMatrix3f* p_Matrix, hkVector4f* p_Vector)
+	{
+		reinterpret_cast<void(__fastcall*)(hkVector4f*, hkMatrix3f*, hkVector4f*)>(UFG_RVA(0xC56EB0))(this, p_Matrix, p_Vector);
 	}
 };
 

@@ -61,27 +61,27 @@ namespace UFG
 		bool mIsSafehouseInstantCooldownActive;
 		uint64_t mHeatLevelTimestamp;
 
-		static __inline CCopSystem* Instance()
+		static UFG_INLINE CCopSystem* Instance()
 		{
 			return reinterpret_cast<CCopSystem*>(UFG_RVA(0x23D9AA0));
 		}
 
-		__inline float GetHeatThresholdByLevel(eHeatLevelEnum p_HeatLevel)
+		UFG_INLINE float GetHeatThresholdByLevel(eHeatLevelEnum p_HeatLevel)
 		{
 			return reinterpret_cast<float(__fastcall*)(void*, eHeatLevelEnum)>(UFG_RVA(0x3EDA60))(this, p_HeatLevel);
 		}
 
-		__inline void ReportInfractionTarget(CSimObject* p_Witness, CSimObject* p_Suspect)
+		UFG_INLINE void ReportInfractionTarget(CSimObject* p_Witness, CSimObject* p_Suspect)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, p_Witness, p_Suspect);
 		}
 
-		__inline void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent, float p_HeatValue)
+		UFG_INLINE void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent, float p_HeatValue)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, p_HeatLevel, p_HeatEvent, p_HeatValue);
 		}
 
-		__inline void ResetChaseStats()
+		UFG_INLINE void ResetChaseStats()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3F03C0))(this);
 		}

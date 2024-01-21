@@ -56,12 +56,12 @@ namespace UFG
 		qVector3 mAABBMax;
 		uint32_t mLastInventoryQueryTransactionNum;
 
-		void AddModelBinding(Illusion::CModelProxy* p_ModelProxy, uint32_t p_ModelIndex = 0, uint32_t p_LOD = 0)
+		UFG_INLINE void AddModelBinding(Illusion::CModelProxy* p_ModelProxy, uint32_t p_ModelIndex = 0, uint32_t p_LOD = 0)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CModelProxy*, void*, uint32_t, uint32_t)>(UFG_RVA(0x1BF470))(this, p_ModelProxy, nullptr, p_ModelIndex, p_LOD);
 		}
 
-		void RemoveModelBinding(Illusion::CModelProxy* p_ModelProxy)
+		UFG_INLINE void RemoveModelBinding(Illusion::CModelProxy* p_ModelProxy)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CModelProxy*)>(UFG_RVA(0x1BFE10))(this, p_ModelProxy);
 		}
@@ -97,17 +97,17 @@ namespace UFG
 			}
 		}
 
-		void RemoveAllSkinModelBindings()
+		UFG_INLINE void RemoveAllSkinModelBindings()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1BFDB0))(this);
 		}
 
-		void RemoveAllRigidModelBindings()
+		UFG_INLINE void RemoveAllRigidModelBindings()
 		{
 			reinterpret_cast<void(__fastcall*)(qList<ModelBindingRigid_t>*)>(UFG_RVA(0x1BEF90))(&mModelBindingRigidTable);
 		}
 
-		__inline void RemoveAllModelBindings()
+		UFG_INLINE void RemoveAllModelBindings()
 		{
 			RemoveAllSkinModelBindings();
 			RemoveAllRigidModelBindings();

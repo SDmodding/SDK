@@ -42,17 +42,17 @@ namespace UFG
 
 	namespace UI
 	{
-		CUIScreenTextureManager* GetScreenTextureManager()
+		UFG_INLINE CUIScreenTextureManager* GetScreenTextureManager()
 		{
 			return *reinterpret_cast<CUIScreenTextureManager**>(UFG_RVA(0x242FF98));
 		}
 
-		CUIGfxTranslator* GetTranslator()
+		UFG_INLINE CUIGfxTranslator* GetTranslator()
 		{
 			return CUIScreenManager::Instance()->m_translator;
 		}
 
-		bool IsGamePaused()
+		UFG_INLINE bool IsGamePaused()
 		{
 			return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x5EE1B0))();
 		}

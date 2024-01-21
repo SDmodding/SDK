@@ -178,12 +178,12 @@ namespace UFG
 			return nullptr;
 		}
 
-		void Update(qVector3 p_CameraPosition, int p_CullIndex, float p_SimTime)
+		UFG_INLINE void Update(qVector3 p_CameraPosition, int p_CullIndex, float p_SimTime)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, int, float)>(UFG_RVA(0x1D8FA0))(this, &p_CameraPosition, p_CullIndex, p_SimTime);
 		}
 
-		void SetFxOverride(CFXOverride* p_FxOverride)
+		UFG_INLINE void SetFxOverride(CFXOverride* p_FxOverride)
 		{
 			reinterpret_cast<void(__fastcall*)(CFXOverride**, CFXOverride*)>(UFG_RVA(0x1D6220))(&mStateBlockOverride, p_FxOverride);
 		}
@@ -204,32 +204,32 @@ namespace UFG
 		qSafePointer<UFG::CTransformNodeComponent> mCamTransformNode;
 		bool mDisplayFXInfo;
 
-		static CFXManager* Instance()
+		static UFG_INLINE CFXManager* Instance()
 		{
 			return reinterpret_cast<CFXManager*>(UFG_RVA(0x2366990));
 		}
 
-		qSymbol CreateEffect(qSymbol p_FxID, qVector3 p_Position, qVector3 p_Direction, uint32_t p_SplitScreenViewMask = -1, void* p_OverrideObject = nullptr)
+		UFG_INLINE qSymbol CreateEffect(qSymbol p_FxID, const qVector3& p_Position, const qVector3& p_Direction, uint32_t p_SplitScreenViewMask = -1, void* p_OverrideObject = nullptr)
 		{
-			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, qVector3*, qVector3*, uint32_t, void*)>(UFG_RVA(0x1CA250))(this, p_FxID, &p_Position, &p_Direction, p_SplitScreenViewMask, p_OverrideObject);
+			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, const qVector3&, const qVector3&, uint32_t, void*)>(UFG_RVA(0x1CA250))(this, p_FxID, p_Position, p_Direction, p_SplitScreenViewMask, p_OverrideObject);
 		}
 
-		qSymbol CreateEffect(qSymbol p_FxID, CTransformNodeComponent* p_Parent, uint32_t p_SplitScreenViewMask = -1, void* p_OverrideObject = nullptr)
+		UFG_INLINE qSymbol CreateEffect(qSymbol p_FxID, CTransformNodeComponent* p_Parent, uint32_t p_SplitScreenViewMask = -1, void* p_OverrideObject = nullptr)
 		{
 			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, CTransformNodeComponent*, uint32_t, void*)>(UFG_RVA(0x1CA510))(this, p_FxID, p_Parent, p_SplitScreenViewMask, p_OverrideObject);
 		}
 
-		qSymbol CreateEffect(qSymbol p_FxID, qMatrix44* p_Matrix, CTransformNodeComponent* p_Parent, float p_Time = 0.f, uint32_t p_SplitScreenViewMask = -1, void* overrideObject = nullptr)
+		UFG_INLINE qSymbol CreateEffect(qSymbol p_FxID, qMatrix44* p_Matrix, CTransformNodeComponent* p_Parent, float p_Time = 0.f, uint32_t p_SplitScreenViewMask = -1, void* overrideObject = nullptr)
 		{
 			return reinterpret_cast<qSymbol(__fastcall*)(void*, qSymbol, qMatrix44*, CTransformNodeComponent*, float, uint32_t, void*)>(UFG_RVA(0x1C9D30))(this, p_FxID, p_Matrix, p_Parent, p_Time, p_SplitScreenViewMask, overrideObject);
 		}
 
-		void KillEffect(qSymbol p_FxID, uint32_t p_KillOption = 0x0)
+		UFG_INLINE void KillEffect(qSymbol p_FxID, uint32_t p_KillOption = 0x0)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol, uint32_t)>(UFG_RVA(0x1D1520))(this, p_FxID, p_KillOption);
 		}
 
-		CFXInstance* FindEffect(qSymbol p_FxID)
+		UFG_INLINE CFXInstance* FindEffect(qSymbol p_FxID)
 		{
 			return reinterpret_cast<CFXInstance*>(mEffectsTree.Get(p_FxID));
 		}
@@ -237,19 +237,19 @@ namespace UFG
 
 	namespace FXOverride
 	{
-		uint32_t* GetNumInstancesInService()
+		UFG_INLINE uint32_t* GetNumInstancesInService()
 		{
 			return reinterpret_cast<uint32_t*>(UFG_RVA(0x2362124));
 		}
 
 		// Constructor (650 Limit)
-		CFXOverride* Create(const char* p_Name = "FXOverride", CMemoryPool* p_MemoryPool = nullptr)
+		UFG_INLINE CFXOverride* Create(const char* p_Name = "FXOverride", CMemoryPool* p_MemoryPool = nullptr)
 		{
 			return reinterpret_cast<CFXOverride*(__fastcall*)(const char*, CMemoryPool*)>(UFG_RVA(0x1CA5A0))(p_Name, p_MemoryPool);
 		}
 
 		// Own Constructor
-		CFXOverride* ForceCreate(const char* p_Name = "FXOverride", CMemoryPool* p_MemoryPool = nullptr)
+		UFG_INLINE CFXOverride* ForceCreate(const char* p_Name = "FXOverride", CMemoryPool* p_MemoryPool = nullptr)
 		{
 			uint32_t* m_NumInstancesInService = GetNumInstancesInService();
 			if (*m_NumInstancesInService > 0) // We force it to always decrease the value so it our new override doesn't count...

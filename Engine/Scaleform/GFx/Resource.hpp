@@ -37,12 +37,12 @@ namespace Scaleform
 
 			ResourceLibBase* pLib;
 
-			__inline void AddRef() 
+			UFG_INLINE void AddRef()
 			{
 				_InterlockedIncrement(reinterpret_cast<volatile long*>(&RefCount));
 			}
 
-			__inline void Release()
+			UFG_INLINE void Release()
 			{
 				reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x8FE6A0))(this);
 			}

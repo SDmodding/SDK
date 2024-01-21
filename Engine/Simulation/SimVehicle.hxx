@@ -2,7 +2,6 @@
 
 namespace UFG
 {
-	class CCharacterOccupantComponent;
 	class CRacePosition;
 	class CRaceTrail;
 	class CRoadNetworkLane;
@@ -277,26 +276,6 @@ namespace UFG
 		float mFlatTireDistance;
 	};
 
-	class CVehicleInput
-	{
-	public:
-		float mSteering;
-		float mForwardWeightShift;
-		float mGasBrakes;
-		float mRawGasBrakes;
-		uint32_t mInReverse : 1;
-		uint32_t mForceNeutral : 1;
-		uint32_t mHandBrakeSet : 1;
-		uint32_t mDoWheelie : 1;
-		uint32_t mDoOneEighty : 1;
-		uint32_t mDoBurnout : 1;
-		uint32_t mFreemanStopTask : 1;
-		uint32_t mFreemanSteerTask : 1;
-		uint32_t mFreemanPreventWheelie : 1;
-		uint32_t mHasHumanDriver : 1;
-		uint32_t mHasAiDriver : 1;
-	};
-
 	class CVehicleInstance : public hkpVehicleInstance
 	{
 	public:
@@ -361,20 +340,42 @@ namespace UFG
 		uint32_t mSuperStop : 1;
 		uint32_t mIsAIControlled : 1;
 
-		void FlipVehicle(float torqueFactor, qVector3* collisionPoint)
+		UFG_INLINE void ApplyTorque(float p_DeltaTime, const qVector3& p_Torque)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x4654C0))(this, torqueFactor, collisionPoint);
+			reinterpret_cast<void(__fastcall*)(void*, float, const qVector3&, const char*)>(UFG_RVA(0x482B30))(this, p_DeltaTime, p_Torque, nullptr);
 		}
 
-		void SetMass(float m) { mRigidBody->SetMass(m); }
-		float GetMass() { return mRigidBody->GetMass(); }
+		UFG_INLINE void ApplyTorque(float p_DeltaTime, const hkVector4f& p_Torque)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, const hkVector4f&, const char*)>(UFG_RVA(0x482AE0))(this, p_DeltaTime, p_Torque, nullptr);
+		}
 
-		void SetMassScaleForCollisions(float scaleMass, float scaleRotMass)
+		UFG_INLINE uint32_t GetNumWheelsOnGround()
+		{
+			return reinterpret_cast<uint32_t(__fastcall*)(void*)>(UFG_RVA(0x466BF0))(this);
+		}
+
+		UFG_INLINE void FlipVehicle(float p_TorqueFactor, qVector3* p_CollisionPoint)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x4654C0))(this, p_TorqueFactor, p_CollisionPoint);
+		}
+
+		UFG_INLINE void SetMass(float p_Mass)
+		{ 
+			mRigidBody->SetMass(p_Mass);
+		}
+
+		UFG_INLINE float GetMass()
+		{ 
+			return mRigidBody->GetMass(); 
+		}
+
+		UFG_INLINE void SetMassScaleForCollisions(float scaleMass, float scaleRotMass)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float, float)>(UFG_RVA(0x475170))(this, scaleMass, scaleRotMass);
 		}
 
-		void ClearMassScaleForCollisions()
+		UFG_INLINE void ClearMassScaleForCollisions()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x45A630))(this);
 		}
@@ -444,135 +445,11 @@ namespace UFG
 
 	};
 
-	class CPhysicsMoverInterface : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x18);
-
-		CVehicleInput mInput;
-
-		UFG_PAD(0x21C);
-
-		CPhysicsVehicle* mPhysicsVehicle;
-		void* mRammingState;
-		float mPostRamImmunityTimer;
-		qVector3 mBoundingBoxMin;
-		qVector3 mBoundingBoxMax;
-		float mForwardSpeed;
-		float mOdometer;
-		float mDamageMultiplierWorldCollisions;
-		float mDamageMultiplierVehicleCollisions;
-		float mDamageMultiplierAttack;
-		float mDamageMultiplierBullets;
-		float mDamageMultiplierTires;
-		float mTireShotImpulse;
-		float mTireBlownImpulse;
-		float mWheelRenderAngle;
-		float mLowLodThrottleAcceleration;
-		float mLowLodBrakesAcceleration;
-		float mLowLodCoastAcceleration;
-		float mLowLodMaxSpeed;
-		float mLowLodMaxLateralAcceleration;
-		float mLowLodMinTurningRadius;
-		float mAutoDeterioratingDamageThreshold;
-		float mAutoDeterioratingDamageRate;
-		float mNotMovingTime;
-		float mPropellerAngle;
-		int mGroundFixupRequired;
-		int mAxleBoneId[4];
-		int mWheelBoneId[4];
-		int mMotorBoneId[2];
-		int mPropellerBoneId[2];
-		int mNumWheels;
-		int mLockAtHighLODMode;
-		float mLockAtHighLODTime;
-		float mVehicleCollisionMinImpulseRequiredToTakeDamage;
-		float mVehicleCollisionDamageDealtAtMinImpulse;
-		float mVehicleCollisionDamageDealtAtMaxImpulse;
-		float mVehicleCollisionDamageDealtAtMinRamImpulse;
-		float mVehicleCollisionDamageDealtAtMaxRamImpulse;
-		float mVehicleCollisionExtraDamageMultiplier;
-		float mVehicleCollisionMinImpulseRequiredToDealDamage;
-		float mVehicleCollisionMaxImpulseForDealingDamage;
-		float mVehicleCollisionMinRamImpulseRequiredToDealDamage;
-		float mVehicleCollisionMaxRamImpulseForDealingDamage;
-		float mSecondsSinceAppliedSpeedBoostRewardFromVehicleTakedown;
-		float mSecondsEngineHasBeenDeteriorating;
-		qVector3 mRamVelocity;
-		unsigned __int32 mLockedAtLowLOD : 1;
-		unsigned __int32 mSuspended : 1;
-		unsigned __int32 mNotMoving : 1;
-		unsigned __int32 mNisMode : 1;
-		unsigned __int32 mCannotExplode : 1;
-		__int8 mVehicleCollisionForceDamageDealer : 1;
-		__int8 mIsRoofSliding : 1;
-		__int8 mLastEngineDamageCouldBeATakedown : 1;
-		__int8 mRamming : 1;
-		__int8 mCollisionShouldTriggerExplosion : 1;
-		__int8 mbWasEngineDeteriorating : 1;
-		float mDistanceToHighLod;
-		float mDistanceToMedLod;
-		bool mDoorsLocked;
-		bool mUntargetable;
-		bool mCreatedWithTemporaryRig;
-		eVehicleTrunkTypeEnum mTrunkType;
-
-		void SetLOD(PhysicsVehicle::Lod lod)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, PhysicsVehicle::Lod)>(UFG_RVA(0x68A9B0))(this, lod);
-		}
-
-		void RepairDamage()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x6899D0))(this);
-		}
-
-		float GetEngineDamage()
-		{
-			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0x67A630))(this);
-		}
-
-		void SetEngineDamage(float damage)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x68A5C0))(this, damage);
-		}
-
-		void SetCannotExplode(bool cannotExplode)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x68A470))(this, cannotExplode);
-		}
-
-		bool AreAllWheelsOnGround()
-		{
-			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x670840))(this);
-		}
-
-		void Reload(uint32_t p_Reason)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x6892E0))(this, p_Reason);
-		}
-	};
-	UFG_ASSERT_CLASS(CPhysicsMoverInterface, 920);
-
 	// Components
-	class CSimObjectVehiclePropertiesComponent : public CSimObjectPropertiesComponent
-	{
-	public:
-		UFG_PAD(0x10);
-
-		eSimObjectVehicleTypeEnum m_eSimObjectVehicleType;
-		eSimObjectBoatTypeEnum m_eSimObjectBoatType;
-
-		UFG_PAD(0x20);
-
-		qArray<void*> mDoorPhantomInfo;
-		bool mIsGarageVehicle;
-	};
-
 	class CTargetingSystemVehicleComponent : public CTargetingSystemBaseComponent
 	{
 	public:
-		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, bool bModifyCollision)
+		UFG_INLINE void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, bool bModifyCollision)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool, float, const char*, void*, void*)>(UFG_RVA(0x54F130))(this, eTargetType, bLock, bModifyCollision, 0.f, nullptr, nullptr, nullptr);
 		}
@@ -591,13 +468,13 @@ namespace UFG
 		__int8 m_bUnloadBanksFlag : 1;
 		__int8 m_bShutdownOnExit : 1;
 
-		bool IsHornTriggered() { return m_bHornOnFlag; }
-		void StartHorn() { m_bHornOnFlag = true; }
-		void StopHorn() { m_bHornOnFlag = false; }
+		UFG_INLINE bool IsHornTriggered() { return m_bHornOnFlag; }
+		UFG_INLINE void StartHorn() { m_bHornOnFlag = true; }
+		UFG_INLINE void StopHorn() { m_bHornOnFlag = false; }
 
-		bool IsSirenTriggered() { return m_bSirenOnFlag; }
-		void StartSiren() { m_bSirenOnFlag = true; }
-		void StopSiren() { m_bSirenOnFlag = false; }
+		UFG_INLINE bool IsSirenTriggered() { return m_bSirenOnFlag; }
+		UFG_INLINE void StartSiren() { m_bSirenOnFlag = true; }
+		UFG_INLINE void StopSiren() { m_bSirenOnFlag = false; }
 	};
 
 	class CVehicleEffectsComponent : public CSimComponent
@@ -915,55 +792,6 @@ namespace UFG
 		}
 	};
 
-	class CVehicleOccupantComponent : public CSimComponent
-	{
-	public:
-		qNode<CVehicleOccupantComponent> mNode;
-		void* mpParkingSpot;
-		qSafePointer<CSimCharacter> mpDriver;
-		qList<CCharacterOccupantComponent> mPassengers;
-		qSafePointer<CSimObject> mpReservations[10];
-		uint32_t mSeatCount;
-
-		CSimCharacter* GetPassenger(int iIndex, bool excludeEnteringAndExiting)
-		{
-			return reinterpret_cast<CSimCharacter * (__fastcall*)(void*, int, bool)>(UFG_RVA(0x67AF40))(this, iIndex, excludeEnteringAndExiting);
-		}
-
-		CSimCharacter* GetOccupant(unsigned int index, UFG::eTargetTypeEnum* pTargetType)
-		{
-			return reinterpret_cast<CSimCharacter * (__fastcall*)(void*, unsigned int, UFG::eTargetTypeEnum*)>(UFG_RVA(0x67AE50))(this, index, pTargetType);
-		}
-
-		CSimCharacter* FindOccupant(UFG::eTargetTypeEnum m_TargetType)
-		{
-			UFG::eTargetTypeEnum m_TargetTypeResult;
-
-			for (unsigned int i = 0; mSeatCount > i; ++i)
-			{
-				CSimCharacter* m_Occupant = GetOccupant(i, &m_TargetTypeResult);
-				if (m_TargetTypeResult == m_TargetType)
-					return m_Occupant;
-			}
-
-			return nullptr;
-		}
-
-		bool IsOccupant(CSimCharacter* m_Character)
-		{
-			if (mpDriver.m_pPointer == m_Character)
-				return true;
-
-			for (unsigned int i = 0; mSeatCount > i; ++i)
-			{
-				if (GetPassenger(i, false) == m_Character)
-					return true;
-			}
-
-			return false;
-		}
-	};
-
 	class CRemoteDriverComponent
 	{
 	public:
@@ -980,179 +808,52 @@ namespace UFG
 	class CSimVehicle : public CSimObject
 	{
 	public:
-		CSimObjectVehiclePropertiesComponent* GetVehicleProperties()
+		UFG_INLINE CBaseAnimationComponent* GetAnimation()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehiclePropertiesComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehiclePropertiesComponent_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[3].m_pComponent;
-
-			return reinterpret_cast<CSimObjectVehiclePropertiesComponent*>(m_Component);
+			return GetComponentOfType<CBaseAnimationComponent>(CharacterAnimationComponent_TypeUID);
 		}
 
-		CBaseAnimationComponent* GetAnimation()
+		UFG_INLINE CSimVehiclePropertiesComponent* GetVehicleProperties()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(CharacterAnimationComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(CharacterAnimationComponent_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[9].m_pComponent;
-
-			return reinterpret_cast<CBaseAnimationComponent*>(m_Component);
+			return GetComponentOfType<CSimVehiclePropertiesComponent>(VehiclePropertiesComponent_TypeUID);
 		}
 
-		CTargetingSystemVehicleComponent* GetTargetingSystemVehicle()
+		UFG_INLINE CTargetingSystemVehicleComponent* GetTargetingSystemVehicle()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(0xA0000041);
-				else
-					m_Component = GetComponentOfType(0xA0000041);
-			}
-			else
-				m_Component = m_Components.p[20].m_pComponent;
-
-			return reinterpret_cast<CTargetingSystemVehicleComponent*>(m_Component);
+			return GetComponentOfType<CTargetingSystemVehicleComponent>(VehicleTargetingSystemComponent_TypeUID);
 		}
 
-		CAiDriverComponent* GetAiDriver()
+		UFG_INLINE CAiDriverComponent* GetAiDriver()
 		{
-			CSimComponent* m_Component = m_Components.p[23].m_pComponent;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehicleAiDriverComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehicleAiDriverComponent_TypeUID);
-			}
-
-			return reinterpret_cast<CAiDriverComponent*>(m_Component);
+			return GetComponentOfType<CAiDriverComponent>(VehicleAiDriverComponent_TypeUID);
 		}
 
-		CRoadSpaceComponent* GetRoadSpace()
+		UFG_INLINE CRoadSpaceComponent* GetRoadSpace()
 		{
-			CSimComponent* m_Component = m_Components.p[24].m_pComponent;
-
-			if (!((m_Flags >> 14) & 1) && (m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1 || (m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehicleRoadSpaceComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehicleRoadSpaceComponent_TypeUID);
-			}
-
-			return reinterpret_cast<CRoadSpaceComponent*>(m_Component);
+			return GetComponentOfType<CRoadSpaceComponent>(VehicleRoadSpaceComponent_TypeUID);
 		}
 
-		CVehicleOccupantComponent* GetOccupant()
+		UFG_INLINE CVehicleOccupantComponent* GetVehicleOccupant()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehicleOccupantComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehicleOccupantComponent_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[30].m_pComponent;
-
-			return reinterpret_cast<CVehicleOccupantComponent*>(m_Component);
+			return GetComponentOfType<CVehicleOccupantComponent>(VehicleOccupantComponent_TypeUID);
 		}
 
-		CVehicleEffectsComponent* GetEffects()
+		UFG_INLINE CVehicleEffectsComponent* GetVehicleEffects()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehicleEffectsComponent_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehicleEffectsComponent_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[32].m_pComponent;
-
-			return reinterpret_cast<CVehicleEffectsComponent*>(m_Component);
+			return GetComponentOfType<CVehicleEffectsComponent>(VehicleEffectsComponent_TypeUID);
 		}
 
-		CPhysicsMoverInterface* GetPhysicsMover()
+		UFG_INLINE CPhysicsMoverInterface* GetPhysicsMover()
 		{
-			CSimComponent* m_Component = nullptr;
-
-			if ((m_Flags >> 14) & 1)
-				return nullptr;
-
-			if ((m_Flags & 0x8000) == 0)
-			{
-				if ((m_Flags >> 13) & 1)
-					return nullptr;
-
-				if ((m_Flags >> 12) & 1)
-					m_Component = GetComponentOfTypeHK(VehiclePhysicsMoverInterface_TypeUID);
-				else
-					m_Component = GetComponentOfType(VehiclePhysicsMoverInterface_TypeUID);
-			}
-			else
-				m_Component = m_Components.p[34].m_pComponent;
-
-			return reinterpret_cast<CPhysicsMoverInterface*>(m_Component);
+			return GetComponentOfType<CPhysicsMoverInterface>(VehiclePhysicsMoverInterface_TypeUID);
 		}
 
 		CRigidBodyComponent* GetRigidBody()
 		{
 			CPhysicsMoverInterface* PhysicsMover = GetPhysicsMover();
-			if (PhysicsMover && PhysicsMover->mPhysicsVehicle)
+			if (PhysicsMover && PhysicsMover->mPhysicsVehicle) {
 				return PhysicsMover->mPhysicsVehicle->mRigidBody;
+			}
 
 			return nullptr;
 		}
@@ -1173,21 +874,9 @@ namespace UFG
 			return nullptr;
 		}
 
-		void UnlockDoors(bool enable) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x65EDB0))(this, enable); }
-	};
-
-	namespace PhysicsMoverInterface
-	{
-		// This can be used to itter through all in - game vehicles, just make sure to break out the loop when nullptr is hit to prevent infite - loop.
-		CPhysicsMoverInterface* Itter(CPhysicsMoverInterface* m_This = nullptr)
-		{
-			static const uintptr_t m_List = UFG_RVA(0x2091350);
-
-			uintptr_t m_Next = *reinterpret_cast<uintptr_t*>((m_This ? reinterpret_cast<uintptr_t>(m_This) : m_List) + 0x50) - 0x48;
-			if (m_Next == m_List)
-				return nullptr;
-
-			return reinterpret_cast<CPhysicsMoverInterface*>(m_Next);
+		UFG_INLINE void UnlockDoors(bool p_Unlock)
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x65EDB0))(this, p_Unlock);
 		}
-	}
+	};
 }

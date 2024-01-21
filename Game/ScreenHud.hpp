@@ -133,33 +133,36 @@ namespace UFG
 		bool mVoiceMail;
 		float mTime;
 
-		void DeactivateAll()
+		UFG_INLINE void DeactivateAll()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D6080))(this);
 		}
 
 		// This crap is for some reason defined in global ptr...
 		// And its used only in "PDAPhoneContactsWidget::LaunchCallMission", but it will call function from this class anyway, so it could be defined under class.
-		__inline qString* GetContactImage() { return reinterpret_cast<qString*>(UFG_RVA(0x2431410)); }
+		static UFG_INLINE qString* GetContactImage() 
+		{ 
+			return reinterpret_cast<qString*>(UFG_RVA(0x2431410)); 
+		}
 
-		void AnswerPhoneCall(const char* m_ContactName, const char* m_Portrait, bool m_VoiceMail)
+		UFG_INLINE void AnswerPhoneCall(const char* p_ContactName, const char* p_Portrait, bool p_VoiceMail)
 		{
 			// Information needed because the function below will call (PDAIncomingCallWidget::SetCallerName)
-			mPhoneContact.Set(m_ContactName);
-			GetContactImage()->Set(m_Portrait);
-			mVoiceMail = m_VoiceMail;
+			mPhoneContact.Set(p_ContactName);
+			GetContactImage()->Set(p_Portrait);
+			mVoiceMail = p_VoiceMail;
 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D3B10))(this);
 		}
 
-		void QueueIncomingPhoneCall(const char* m_ContactName, bool m_Outgoing, bool m_AutoAnswer, bool m_VoiceMail)
+		UFG_INLINE void QueueIncomingPhoneCall(const char* p_ContactName, bool p_Outgoing, bool p_AutoAnswer, bool p_VoiceMail)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, bool, bool, bool)>(UFG_RVA(0x5FE9C0))(this, m_ContactName, m_Outgoing, m_AutoAnswer, m_VoiceMail);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, bool, bool, bool)>(UFG_RVA(0x5FE9C0))(this, p_ContactName, p_Outgoing, p_AutoAnswer, p_VoiceMail);
 		}
 
-		bool EndPhoneCall(bool m_PlaySound)
+		UFG_INLINE bool EndPhoneCall(bool p_PlaySound)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, bool)>(UFG_RVA(0x5D7150))(this, m_PlaySound);
+			return reinterpret_cast<bool(__fastcall*)(void*, bool)>(UFG_RVA(0x5D7150))(this, p_PlaySound);
 		}
 	};
 
@@ -167,17 +170,17 @@ namespace UFG
 	class CActionButton
 	{
 	public:
-		void Hide() 
+		UFG_INLINE void Hide()
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5EC990))(this); 
 		}
 
-		void Show(const char* actionText, unsigned int button, const char* actionType) 
+		UFG_INLINE void Show(const char* actionText, unsigned int button, const char* actionType)
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int, const char*)>(UFG_RVA(0x60CA80))(this, actionText, button, actionType); 
 		}
 
-		void ShowOneFrame(const char* actionText, unsigned int button, const char* actionType)
+		UFG_INLINE void ShowOneFrame(const char* actionText, unsigned int button, const char* actionType)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int, const char*)>(UFG_RVA(0x610C90))(this, actionText, button, actionType);
 		}
@@ -199,22 +202,31 @@ namespace UFG
 		bool mVisible;
 		bool mChanged;
 
-		void Clear() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D50D0))(this); }
+		UFG_INLINE void Clear() 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D50D0))(this); 
+		}
 
-		void SetState(unsigned int state, unsigned int slot) { reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int)>(UFG_RVA(0x609040))(this, state, slot); }
+		UFG_INLINE void SetState(unsigned int state, unsigned int slot) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int)>(UFG_RVA(0x609040))(this, state, slot); 
+		}
 
-		void SetText(const char* text, unsigned int slot) { reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int)>(UFG_RVA(0x609FF0))(this, text, slot); }
+		UFG_INLINE void SetText(const char* text, unsigned int slot) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, const char*, unsigned int)>(UFG_RVA(0x609FF0))(this, text, slot); 
+		}
 	};
 
 	class CInfoPopup
 	{
 	public:
-		void Show(const char* caption, qSymbol type, float duration, int position = 0)
+		UFG_INLINE void Show(const char* caption, qSymbol type, float duration, int position = 0)
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*, const char*, qSymbol*, float, int)>(UFG_RVA(0x60D100))(this, caption, &type, duration, position); 
 		}
 
-		void Hide()
+		UFG_INLINE void Hide()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECBD0))(this);
 		}
@@ -230,29 +242,35 @@ namespace UFG
 		float mHealth;
 		qString mCaption;
 
-		void SetCaption(const char* caption) { reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x605610))(this, caption); }
+		UFG_INLINE void SetCaption(const char* caption) { reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x605610))(this, caption); }
 
-		void SetHealth(float value) 
+		UFG_INLINE void SetHealth(float value)
 		{
-			if (mHealth == value) return;
-
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x606230))(this, value); 
+			if (mHealth != value) {
+				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x606230))(this, value);
+			}
 		}
 
-		void SetSuccess(bool success) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x609F80))(this, success); }
+		UFG_INLINE void SetSuccess(bool success) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x609F80))(this, success); 
+		}
 
-		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C630))(this, visible); }
+		UFG_INLINE void SetVisible(bool visible) 
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C630))(this, visible);
+		}
 	};
 
 	class CTurnHintWidget
 	{
 	public:
-		void Show(qSymbol m_Icon)
+		UFG_INLINE void Show(qSymbol m_Icon)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x60D260))(this, &m_Icon);
 		}
 
-		void Hide()
+		UFG_INLINE void Hide()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECC40))(this);
 		}

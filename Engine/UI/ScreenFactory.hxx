@@ -49,12 +49,12 @@ namespace UFG
 		qTreeRB m_factoryList;
 		char m_rootDir[128];
 
-		__inline void AddScreenMapping(const char* p_Name, void* p_Factory)
+		UFG_INLINE void AddScreenMapping(const char* p_Name, void* p_Factory)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*, void*)>(UFG_RVA(0xA292F0))(this, p_Name, p_Factory);
 		}
 
-		__inline CUIScreen* CreateScreen(const char* p_Name = nullptr)
+		UFG_INLINE CUIScreen* CreateScreen(const char* p_Name = nullptr)
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*, const char*)>(UFG_RVA(0xA2A6E0))(this, p_Name);
 		}

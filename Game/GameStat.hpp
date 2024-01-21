@@ -121,52 +121,52 @@ namespace UFG
 		GameSnapshot_t::Time_t mSessionTimer;
 		bool m_bIsApplyingSnapshotEffects : 1;
 
-		__inline static CGameStatTracker* Instance()
+		static UFG_INLINE CGameStatTracker* Instance()
 		{
 			return *reinterpret_cast<CGameStatTracker**>(UFG_RVA(0x2405488));
 		}
 
-		void SetStat(GameStat::MapBoolStat m_Stat, qSymbol m_Name, bool m_Value)
+		UFG_INLINE void SetStat(GameStat::MapBoolStat m_Stat, qSymbol m_Name, bool m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, GameStat::MapBoolStat, qSymbol*, bool)>(UFG_RVA(0x4BD3E0))(this, m_Stat, &m_Name, m_Value);
 		}
 
-		__forceinline void SetStat(GameStat::BoolStat m_Stat, bool m_Value)
+		UFG_INLINE void SetStat(GameStat::BoolStat m_Stat, bool m_Value)
 		{
 			mpSnapshots[0]->mBools[m_Stat] = m_Value;
 		}
 
-		__forceinline void SetStat(GameStat::FloatStat m_Stat, float m_Value)
+		UFG_INLINE void SetStat(GameStat::FloatStat m_Stat, float m_Value)
 		{
 			mpSnapshots[0]->mFloats[m_Stat] = m_Value;
 		}
 
-		__forceinline void SetStat(GameStat::IDStat m_Stat, qSymbol m_Value)
+		UFG_INLINE void SetStat(GameStat::IDStat m_Stat, qSymbol m_Value)
 		{
 			mpSnapshots[0]->mIDs[m_Stat] = m_Value;
 		}
 
-		__forceinline void SetStat(GameStat::Int32Stat m_Stat, int m_Value)
+		UFG_INLINE void SetStat(GameStat::Int32Stat m_Stat, int m_Value)
 		{
 			mpSnapshots[0]->mInts[m_Stat] = m_Value;
 		}
 
-		__forceinline bool GetStat(GameStat::BoolStat m_Stat)
+		UFG_INLINE bool GetStat(GameStat::BoolStat m_Stat)
 		{
 			return mpSnapshots[0]->mBools[m_Stat];
 		}
 
-		__forceinline float GetStat(GameStat::FloatStat m_Stat)
+		UFG_INLINE float GetStat(GameStat::FloatStat m_Stat)
 		{
 			return mpSnapshots[0]->mFloats[m_Stat];
 		}
 
-		__forceinline qSymbol GetStat(GameStat::IDStat m_Stat)
+		UFG_INLINE qSymbol GetStat(GameStat::IDStat m_Stat)
 		{
 			return mpSnapshots[0]->mIDs[m_Stat];
 		}
 
-		__forceinline int GetStat(GameStat::Int32Stat m_Stat)
+		UFG_INLINE int GetStat(GameStat::Int32Stat m_Stat)
 		{
 			return mpSnapshots[0]->mInts[m_Stat];
 		}

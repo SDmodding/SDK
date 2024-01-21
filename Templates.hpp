@@ -178,28 +178,32 @@ namespace UFG
 	{
 		int64_t mOffset;
 
-		__inline bool IsValid() { return mOffset; }
+		UFG_INLINE bool IsValid() 
+		{ 
+			return mOffset; 
+		}
 
-		T* Get(uint32_t m_Index, uintptr_t m_Size)
+		UFG_INLINE T* Get(uint32_t m_Index, uintptr_t m_Size)
 		{
 			uintptr_t m_Address = reinterpret_cast<uintptr_t>(this) + mOffset;
 			return reinterpret_cast<T*>(m_Address + static_cast<uintptr_t>(m_Index) * m_Size);
 		}
 
-		T* Get(uint32_t m_Index)
+		UFG_INLINE T* Get(uint32_t m_Index)
 		{
 			return Get(m_Index, sizeof(T));
 		}
 
-		T* GetPointer()
+		UFG_INLINE T* GetPointer()
 		{
-			if (!IsValid())
+			if (!IsValid()) {
 				return nullptr;
+			}
 
 			return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + mOffset);
 		}
 
-		__inline void Set(void* p_Ptr)
+		UFG_INLINE void Set(void* p_Ptr)
 		{
 			if (p_Ptr) {
 				mOffset = static_cast<int64_t>(reinterpret_cast<uintptr_t>(p_Ptr) - reinterpret_cast<uintptr_t>(&mOffset));

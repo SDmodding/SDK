@@ -210,7 +210,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1620A0))(this);
 		}
 
-		void Set(const char* p_Text)
+		UFG_INLINE void Set(const char* p_Text)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x17C9B0))(this, p_Text);
 		}
@@ -249,12 +249,12 @@ namespace UFG
 		}
 
 		// Hue (0.f to 360.f), Saturation (0.f to 1.f), Vibrance (0.f to 1.f), Alpha (0.f to 1.f)
-		__inline void HSVToRGB(const qColour& p_HSV)
+		UFG_INLINE void HSVToRGB(const qColour& p_HSV)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const qColour&)>(UFG_RVA(0x1824E0))(this, p_HSV);
 		}
 
-		__inline void RGBToHSV(const qColour& p_RGB)
+		UFG_INLINE void RGBToHSV(const qColour& p_RGB)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const qColour&)>(UFG_RVA(0x182630))(this, p_RGB);
 		}

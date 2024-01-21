@@ -8,7 +8,7 @@ namespace UFG
 		qSymbol mName;
 		qPropertySet* mpPropSet;
 
-		void Bind()
+		UFG_INLINE void Bind()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1F20C0))(this);
 		}
@@ -16,9 +16,9 @@ namespace UFG
 
 	struct qPropertySetHandle : qResourceHandle
 	{
-		__inline qPropertySet* Get()
+		UFG_INLINE qPropertySet* Get()
 		{
-			return reinterpret_cast<qPropertySet * (__fastcall*)(void*)>(UFG_RVA(0x1F6680))(this);
+			return reinterpret_cast<qPropertySet*(__fastcall*)(void*)>(UFG_RVA(0x1F6680))(this);
 		}
 	};
 }

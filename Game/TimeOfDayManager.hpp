@@ -62,23 +62,23 @@ namespace UFG
 		qVector3 mCameraPosition;
 		NightFogZone* mNightFogZones;
 
-		static CTimeOfDayManager* Instance()
+		static UFG_INLINE CTimeOfDayManager* Instance()
 		{
 			return reinterpret_cast<CTimeOfDayManager*>(UFG_RVA(0x2163510));
 		}
 
-		bool IsAboutToRain()
+		UFG_INLINE bool IsAboutToRain()
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x6B420))(this);
 		}
 
-		void LockWeather(bool m_Lock)
+		UFG_INLINE void LockWeather(bool m_Lock)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x6BA30))(this, m_Lock);
 		}
 
 		// ViewSettings & SkySettings are optional
-		void GetEnvironmentSettings(Illusion::CB_EnvironmentSettings* p_EnvSettings, Render::CViewSettings* p_ViewSettings = nullptr, Illusion::CB_SkySettings* p_SkySettings = nullptr)
+		UFG_INLINE void GetEnvironmentSettings(Illusion::CB_EnvironmentSettings* p_EnvSettings, Render::CViewSettings* p_ViewSettings = nullptr, Illusion::CB_SkySettings* p_SkySettings = nullptr)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, Illusion::CB_EnvironmentSettings*, Render::CViewSettings*, Illusion::CB_SkySettings*)>(UFG_RVA(0x69EC0))(this, p_EnvSettings, p_ViewSettings, p_SkySettings);
 		}

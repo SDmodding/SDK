@@ -141,14 +141,14 @@ namespace UFG
 		void* mLightingSubmitTaskParams;
 		void* mRenderContextPlat;
 
-		static __inline CRenderContext* Instance()
+		static UFG_INLINE CRenderContext* Instance()
 		{
 			return *reinterpret_cast<CRenderContext**>(UFG_RVA(0x21299D8));
 		}
 
-		void EnableAntiAlias(bool enable)
+		UFG_INLINE void EnableAntiAlias(bool p_Enable)
 		{
-			mAntiAliasState = (enable ? 1 : 0);
+			mAntiAliasState = (p_Enable ? 1 : 0);
 		}
 	};
 }

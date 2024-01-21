@@ -12,7 +12,7 @@ namespace UFG
 			mRep = 0;
 		}
 
-		__inline qHalfFloat(float p_Float)
+		qHalfFloat(float p_Float)
 		{
 			uint32_t m_FloatBytes = *reinterpret_cast<uint32_t*>(&p_Float);
 			uint32_t m_Mantissa = m_FloatBytes & 0x7FFFFFFF;
@@ -30,7 +30,7 @@ namespace UFG
 				mRep = m_Exponent | 0x7FFF;
 		}
 
-		__inline operator float()
+		UFG_INLINE operator float()
 		{
 			uint32_t m_FloatValue = ((((mRep >> 10) & 0x1F) + 0x70) << 23) & 0x7F800000 | ((mRep & 0x3FF | (8 * (mRep & 0xFFFF8000))) << 13);
 			return *reinterpret_cast<float*>(&m_FloatValue);

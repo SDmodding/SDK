@@ -79,19 +79,19 @@ namespace UFG
 		float m_fRegenerativeHealthRate;
 		float m_fRegenerativeHealthRatio;
 
-		void Reset()
+		UFG_INLINE void Reset()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5497A0))(this);
 		}
 
-		void SetHealth(int uHealth)
+		UFG_INLINE void SetHealth(int p_Health)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, void*)>(UFG_RVA(0x54D3D0))(this, uHealth, nullptr);
+			reinterpret_cast<void(__fastcall*)(void*, int, void*)>(UFG_RVA(0x54D3D0))(this, p_Health, nullptr);
 		}
 
-		void SetRegenerativeHealthRatio(float fRegenerativeHealthRatio, bool saveSnapshot)
+		UFG_INLINE void SetRegenerativeHealthRatio(float p_RegenerativeHealthRatio, bool p_SaveSnapshot)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float, bool)>(UFG_RVA(0x54E570))(this, fRegenerativeHealthRatio, saveSnapshot);
+			reinterpret_cast<void(__fastcall*)(void*, float, bool)>(UFG_RVA(0x54E570))(this, p_RegenerativeHealthRatio, p_SaveSnapshot);
 		}
 	};
 
@@ -246,58 +246,6 @@ namespace UFG
 		eFightingClassEnum m_eFightingClass;
 		eFactionClassEnum m_eFactionClass;
 		qSymbol m_symFactionClass;
-	};
-
-	class CHitReactionComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x18);
-
-		float mAttackTimer;
-		eAttackPhaseEnum mAttackPhaseEnum;
-		bool mHitRecordProcessing;
-		unsigned int mReceiverDamageMultiplierPct;
-		qSharedString mHitTreeFileName;
-		CActionPath mHitReactionOpeningBranchFullPath;
-		CActionNode* mHitTree;
-
-		struct IncomingAttackInfo_t
-		{
-			eAttackPhaseEnum mAttackPhaseEnum;
-			int mAttackTypeID;
-			qSafePointer<CSimObject> mAttacker;
-			int mAttackLocationLateralID;
-			int mAttackLocationHorizontalID;
-			int mTimeSinceUpdated;
-		};
-		IncomingAttackInfo_t mIncomingAttackInfo;
-
-		struct HitRecord_t
-		{
-			bool mHitRecordProcessed;
-			bool mIsDeadly;
-			bool mDamageHandled;
-			bool mEffectTriggered;
-			int mAttackTypeID;
-			int mDamage;
-			qSafePointer<CSimObject> mAttacker;
-			float mTimeSinceHit;
-			int mFramesSinceHit;
-			/*UFG::MeleeInfo mMeleeInfo;
-			UFG::ProjectileInfo mProjectileInfo;
-			UFG::CollisionInfo mCollisionInfo;
-			int mEffectBone;
-			UFG::qVector3 mEffectOffset;
-			float mDistanceFromExplosionSquared;
-			UFG::ExplosionTypeInfo* mExplosionInfo;
-			unsigned int mAttackerNetworkID;
-			HitRecord_t* mNext;*/
-		};
-		HitRecord_t mHitRecord;
-
-		/*int mNumHits;
-		UFG::RebindingComponentHandle<UFG::ActionTreeComponent, 0> mActionTreeComponent;
-		bool mWasProxy;*/
 	};
 
 	class CAIScriptInterfaceComponent
@@ -531,57 +479,41 @@ namespace UFG
 		unsigned int mLevelOfDetail;
 		unsigned int mDesiredLevelOfDetail;
 
-		bool IsActive()
+		UFG_INLINE bool IsActive()
 		{
 			return (mPoseState == RagdollComponent::STATE_POWERED_TRACKING);
 		}
 
-		void ApplyAngularImpulse(int m_Bone, qVector3 m_Impulse, float m_ConnectionTransfer)
+		UFG_INLINE void ApplyAngularImpulse(int p_Bone, const qVector3& p_Impulse, float p_ConnectionTransfer)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, float)>(UFG_RVA(0x456310))(this, m_Bone, &m_Impulse, m_ConnectionTransfer);
+			reinterpret_cast<void(__fastcall*)(void*, int, const qVector3&, float)>(UFG_RVA(0x456310))(this, p_Bone, p_Impulse, p_ConnectionTransfer);
 		}
 
-		void ApplyImpulse(int m_Bone, qVector3 m_Location, qVector3 m_Impulse)
+		UFG_INLINE void ApplyImpulse(int p_Bone, const qVector3& p_Location, const qVector3& p_Impulse)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int, qVector3*, qVector3*)>(UFG_RVA(0x4585F0))(this, m_Bone, &m_Location, &m_Impulse);
+			reinterpret_cast<void(__fastcall*)(void*, int, const qVector3&, const qVector3&)>(UFG_RVA(0x4585F0))(this, p_Bone, p_Location, p_Impulse);
 		}
 
-		void SetVelocity(qVector3 m_Velocity)
+		UFG_INLINE void SetVelocity(qVector3 m_Velocity)
 		{
-			if (mRagdoll)
+			if (mRagdoll) {
 				reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xB2780))(this, &m_Velocity);
+			}
 		}
 
-		void SetMotorMaxForce(float m_Value)
+		UFG_INLINE void SetMotorMaxForce(float m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475360))(this, m_Value);
 		}
 
-		void SetLimitStiffness(float m_Value)
+		UFG_INLINE void SetLimitStiffness(float m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475160))(this, m_Value);
 		}
 
-		void SetPositionTrackingStiffness(float m_Value)
+		UFG_INLINE void SetPositionTrackingStiffness(float m_Value)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475540))(this, m_Value);
-		}
-	};
-
-	class CCharacterOccupantComponent : public CSimComponent
-	{
-	public:
-		qNode<CCharacterOccupantComponent> mNode;
-		UFG::eTargetTypeEnum mTargetType;
-		uint32_t mSeatIndex;
-		RebindingComponentHandle<CVehicleOccupantComponent> mCurrentVOC;
-
-		CSimVehicle* GetCurrentVehicle()
-		{
-			if (mCurrentVOC.m_pSimComponent)
-				return reinterpret_cast<CSimVehicle*>(mCurrentVOC.m_pSimComponent->m_pSimObject);
-
-			return nullptr;
 		}
 	};
 
@@ -921,102 +853,102 @@ namespace UFG
 	class CSimCharacter : public CSimObject
 	{
 	public:
-		__inline CCharacterAudioComponent* GetAudio()
+		UFG_INLINE CCharacterAudioComponent* GetAudio()
 		{
 			return reinterpret_cast<CCharacterAudioComponent*>(GetComponentOfType(CharacterAudioComponent_TypeUID));
 		}
 
-		__inline CCharacterPropertiesComponent* GetCharacterProperties()
+		UFG_INLINE CCharacterPropertiesComponent* GetCharacterProperties()
 		{
 			return GetComponentOfType<CCharacterPropertiesComponent>(CharacterPropertiesComponent_TypeUID);
 		}
 
-		__inline CAIScriptInterfaceComponent* GetAIScriptInterface()
+		UFG_INLINE CAIScriptInterfaceComponent* GetAIScriptInterface()
 		{
 			return GetComponentOfType<CAIScriptInterfaceComponent>(CharacterAIScriptInterfaceComponent_TypeUID);
 		}
 
-		__inline CAICoverComponent* GetAICover()
+		UFG_INLINE CAICoverComponent* GetAICover()
 		{
 			return GetComponentOfType<CAICoverComponent>(CharacterAICoverComponent_TypeUID);
 		}
 
-		__inline CHealthComponent* GetHealth()
+		UFG_INLINE CHealthComponent* GetHealth()
 		{
 			return GetComponentOfType<CHealthComponent>(CharacterHealthComponent_TypeUID);
 		}
 
-		__inline CCharacterAnimationComponent* GetAnimation()
+		UFG_INLINE CCharacterAnimationComponent* GetAnimation()
 		{
 			return GetComponentOfType<CCharacterAnimationComponent>(CharacterAnimationComponent_TypeUID);
 		}
 
-		__inline CHitReactionComponent* GetHitReaction()
+		UFG_INLINE CHitReactionComponent* GetHitReaction()
 		{
 			return GetComponentOfType<CHitReactionComponent>(CharacterHitReactionComponent_TypeUID);
 		}
 
-		__inline CAIActionTreeComponent* GetAIActionTree()
+		UFG_INLINE CAIActionTreeComponent* GetAIActionTree()
 		{
 			return GetComponentOfType<CAIActionTreeComponent>(CharacterAIActionTreeComponent_TypeUID);
 		}
 
-		__inline CTargetingSystemPedBaseComponent* GetTargetingSystemPed()
+		UFG_INLINE CTargetingSystemPedBaseComponent* GetTargetingSystemPed()
 		{
 			return GetComponentOfType<CTargetingSystemPedBaseComponent>(CharacterTargetingPedComponent_TypeUID);
 		}
 
-		__inline CTargetingSystemPedPlayerComponent* GetTargetingSystemPlayer()
+		UFG_INLINE CTargetingSystemPedPlayerComponent* GetTargetingSystemPlayer()
 		{
 			return GetComponentOfType<CTargetingSystemPedPlayerComponent>(CharacterTargetingPedPlayerComponent_TypeUID);
 		}
 
-		__inline CAICharacterControllerBaseComponent* GetAICharacterController()
+		UFG_INLINE CAICharacterControllerBaseComponent* GetAICharacterController()
 		{
 			return GetComponentOfType<CAICharacterControllerBaseComponent>(CharacterAICharacterControllerComponent_TypeUID);
 		}
 
-		__inline CActiveAIEntityComponent* GetActiveAIEntity()
+		UFG_INLINE CActiveAIEntityComponent* GetActiveAIEntity()
 		{
 			return GetComponentOfType<CActiveAIEntityComponent>(CharacterActiveAIEntityComponent_TypeUID);
 		}
 
-		__inline CCharacterPhysicsComponent* GetCharacterPhysics()
+		UFG_INLINE CCharacterPhysicsComponent* GetCharacterPhysics()
 		{
 			return GetComponentOfType<CCharacterPhysicsComponent>(CharacterPhysicsComponent_TypeUID);
 		}
 
-		__inline CCharacterNavComponent* GetNav()
+		UFG_INLINE CCharacterNavComponent* GetNav()
 		{
 			return GetComponentOfType<CCharacterNavComponent>(CharacterNavComponent_TypeUID);
 		}
 
-		__inline CCharacterSubjectComponent* GetCharacterSubject()
+		UFG_INLINE CCharacterSubjectComponent* GetCharacterSubject()
 		{
 			return GetComponentOfType<CCharacterSubjectComponent>(CharacterSubjectComponent_TypeUID);
 		}
 
-		__inline CInventoryComponent* GetInventory()
+		UFG_INLINE CInventoryComponent* GetInventory()
 		{
 			return GetComponentOfType<CInventoryComponent>(CharacterInventoryComponent_TypeUID);
 		}
 
-		__inline CRagdollComponent* GetRagdoll()
+		UFG_INLINE CRagdollComponent* GetRagdoll()
 		{
 			return GetComponentOfType<CRagdollComponent>(CharacterRagdollComponent_TypeUID);
 		}
 
-		__inline CCharacterOccupantComponent* GetCharacterOccupant()
+		UFG_INLINE CCharacterOccupantComponent* GetCharacterOccupant()
 		{
 			return GetComponentOfType<CCharacterOccupantComponent>(CharacterOccupantComponent_TypeUID);
 		}
 
-		__inline CAttackRightsComponent* GetAttackRights()
+		UFG_INLINE CAttackRightsComponent* GetAttackRights()
 		{
 			return GetComponentOfType<CAttackRightsComponent>(CharacterAttackRightsComponent_TypeUID);
 		}
 
-		__inline CAimingPlayerComponent* GetAimingPlayer()
+		UFG_INLINE CAimingPlayerComponent* GetAimingPlayer()
 		{
 			return GetComponentOfType<CAimingPlayerComponent>(CharacterAimingPlayerComponent_TypeUID);
 		}

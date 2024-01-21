@@ -113,21 +113,6 @@ namespace UFG
 		uint32_t mFlags;
 	};
 
-	class CSimObjectPropertiesComponent : public CSimComponent
-	{
-	public:
-		UFG_PAD(0x10);
-
-		eSimObjectTypeEnum m_eSimObjectType;
-
-		UFG_PAD(0x4);
-
-		void* m_pSubTargetingProfile;
-		unsigned char m_BitField[8];
-
-		UFG_PAD(0x30);
-	};
-
 	class CTransformNodeComponent : public CSimComponent
 	{
 	public:
@@ -280,68 +265,71 @@ namespace UFG
 		float mTimeSinceAddedToWorld;
 		uint32_t mStoredCollisionFilter;
 
-		void ApplyForce(qVector3* force, qVector3* point)
+		UFG_INLINE void ApplyForce(float p_TimeDelta, const qVector3& p_Force, const qVector3& p_Point)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*, qVector3*)>(UFG_RVA(0xA0EA0))(this, 0.f, force, point);
+			reinterpret_cast<void(__fastcall*)(void*, float, const qVector3&, const qVector3&)>(UFG_RVA(0xA0EA0))(this, p_TimeDelta, p_Force, p_Point);
 		}
 
-		void ApplyLinearImpulse(qVector3* impulse, qVector3* point)
+		UFG_INLINE void ApplyLinearImpulse(const qVector3& p_Impulse, const qVector3& p_Point)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, qVector3*, qVector3*)>(UFG_RVA(0xA1000))(this, impulse, point);
+			reinterpret_cast<void(__fastcall*)(void*, const qVector3&, const qVector3&)>(UFG_RVA(0xA1000))(this, p_Impulse, p_Point);
 		}
 
-		void ApplyAngularImpulse(qVector3* vel)
+		UFG_INLINE void ApplyAngularImpulse(const qVector3& p_Impulse)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xA0BC0))(this, vel);
+			reinterpret_cast<void(__fastcall*)(void*, const qVector3&)>(UFG_RVA(0xA0BC0))(this, p_Impulse);
 		}
 
-		void SetMotionType(unsigned int mode)
+		UFG_INLINE void SetMotionType(uint32_t p_Mode)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0xB1500))(this, mode);
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0xB1500))(this, p_Mode);
 		}
 
-		void SetVelocity(UFG::qVector3* vel)
+		UFG_INLINE void SetVelocity(const qVector3& p_Velocity)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*)>(UFG_RVA(0xB2850))(this, vel);
+			reinterpret_cast<void(__fastcall*)(void*, const qVector3&)>(UFG_RVA(0xB2850))(this, p_Velocity);
 		}
 
-		void GetVelocity(UFG::qVector3* result)
+		UFG_INLINE void GetVelocity(qVector3* p_Result)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*)>(UFG_RVA(0xAB970))(this, result);
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xAB970))(this, p_Result);
 		}
 
 		// NotifyProxyModeChanged
-		void EnablePhysics(bool m_Enable)
+		UFG_INLINE void EnablePhysics(bool p_Enable)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, int)>(UFG_RVA(0x46D870))(this, m_Enable ? 0 : 2);
+			reinterpret_cast<void(__fastcall*)(void*, int)>(UFG_RVA(0x46D870))(this, p_Enable ? 0 : 2);
 		}
 
-		float GetMass()
+		UFG_INLINE float GetMass()
 		{
 			return reinterpret_cast<float(__fastcall*)(void*)>(UFG_RVA(0xAA990))(this);
 		}
 
-		void SetMass(float m)
+		UFG_INLINE void SetMass(float p_Mass)
 		{
-			if (mBody)
-				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xD62710))(mBody, m);
+			if (mBody) {
+				reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0xD62710))(mBody, p_Mass);
+			}
 		}
 
 		// This actually adds the Rigidbody to hkpWorld...
-		void Inflate(bool p_AddToWorld)
+		UFG_INLINE void Inflate(bool p_AddToWorld)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x468BD0))(this, p_AddToWorld);
 		}
 
-		void Deflate()
+		// Calling this without having 'INFLATED' flag can cause game to crash!
+		UFG_INLINE void Deflate()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xA68C0))(this);
 		}
 
-		__inline void DeflateSafe()
+		UFG_INLINE void DeflateSafe()
 		{
-			if (mFlags & INFLATED)
+			if (mFlags & INFLATED) {
 				Deflate();
+			}
 		}
 	};
 

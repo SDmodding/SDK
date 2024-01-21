@@ -21,10 +21,11 @@ namespace UFG
 		uint32_t mPrevNameHash;
 		uint32_t mChildIndex;
 
-		__inline qPropertySet* GetPropertySet()
+		UFG_INLINE qPropertySet* GetPropertySet()
 		{
-			if (mpWritableProperties)
+			if (mpWritableProperties) {
 				return mpWritableProperties;
+			}
 
 			return mpConstProperties;
 		}
@@ -33,7 +34,7 @@ namespace UFG
 		* If 'mpWritableProperties' is nullptr, using this will create New PropertySet and append 'mpConstProperties'.
 		* This is useful if we wanna modify some data.
 		*/
-		__inline qPropertySet* GetWritableProperties()
+		UFG_INLINE qPropertySet* GetWritableProperties()
 		{
 			return reinterpret_cast<qPropertySet*(__fastcall*)(void*)>(UFG_RVA(0x23E2F0))(this);
 		}

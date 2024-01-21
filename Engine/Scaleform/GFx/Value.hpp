@@ -53,37 +53,37 @@ namespace Scaleform
 			ValueUnion mValue = { 0 };
 			uint64_t DataAux = 0;
 
-			__inline void SetNull()
+			UFG_INLINE void SetNull()
 			{
 				Type = VT_Null;
 				mValue.pData = nullptr;
 			}
 
-			__inline void SetBoolean(bool p_Value)
+			UFG_INLINE void SetBoolean(bool p_Value)
 			{
 				Type = VT_Boolean;
 				mValue.BValue = p_Value;
 			}
 
-			__inline void SetInt(int p_Value)
+			UFG_INLINE void SetInt(int p_Value)
 			{
 				Type = VT_Int;
 				mValue.IValue = p_Value;
 			}
 
-			__inline void SetUInt(uint32_t p_Value)
+			UFG_INLINE void SetUInt(uint32_t p_Value)
 			{
 				Type = VT_UInt;
 				mValue.UIValue = p_Value;
 			}
 
-			__inline void SetNumber(float p_Value)
+			UFG_INLINE void SetNumber(float p_Value)
 			{
 				Type = VT_Number;
 				mValue.NValue = static_cast<long double>(p_Value);
 			}
 
-			__inline void SetNumber(double p_Value)
+			UFG_INLINE void SetNumber(double p_Value)
 			{
 				Type = VT_Number;
 				mValue.NValue = static_cast<long double>(p_Value);

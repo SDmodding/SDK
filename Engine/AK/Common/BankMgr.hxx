@@ -26,7 +26,8 @@ public:
 	AkSortedKeyArray<AkMediaInformation, AkSrcTypeInfo, ArrayPoolDefault, CAkBankMgr::AkSortedPreparationListGetKey, 8> m_PreparationAccumulator;
 	bool m_bAccumulating;*/
 
-	static __inline CAkBankMgr* Instance() {
+	static UFG_INLINE CAkBankMgr* Instance() 
+	{
 		return *reinterpret_cast<CAkBankMgr**>(UFG_RVA(0x249E950));
 	}
 };

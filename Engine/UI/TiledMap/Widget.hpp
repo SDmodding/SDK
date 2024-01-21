@@ -21,7 +21,7 @@ namespace UFG
 		float mViewportScaleH;
 		float mViewportScaleV;
 
-		__inline void AdjustClipRect(ClipRect* p_ClipRect)
+		UFG_INLINE void AdjustClipRect(ClipRect* p_ClipRect)
 		{
 			float m_Scale	= m_mapGeo.GetAdjustedScale() * ZoomCalc.mScale;
 			float m_OffsetX	= m_mapGeo.centerPosition.x * m_Scale;

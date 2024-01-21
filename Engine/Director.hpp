@@ -2,24 +2,25 @@
 
 namespace UFG
 {
-	class CDirector : public CSimComponent
+	class CDirector : public CSimComponent, public qNode<CDirector>
 	{
 	public:
-		char m_Pad0[0x10];
-
 		CBaseCameraComponent* mCurrentCamera;
-	};
 
-	namespace Director
-	{
-		CDirector* Get()
+		static UFG_INLINE CDirector* Instance()
 		{
 			return *reinterpret_cast<CDirector**>(UFG_RVA(0x2173DF0));
 		}
-
-		CBaseCameraComponent* GetCurrentCamera()
+		
+		static UFG_INLINE CBaseCameraComponent* GetCurrentCamera()
 		{
-			return Get()->mCurrentCamera;
+			return Instance()->mCurrentCamera;
 		}
-	}
+
+		UFG_INLINE void SetCurrentCamera(CBaseCameraComponent* p_NewCamera)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, CBaseCameraComponent*)>(UFG_RVA(0xBA270))(this, p_NewCamera);
+		}
+	};
+	UFG_ASSERT_CLASS(CDirector, 0x58);
 }

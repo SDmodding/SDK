@@ -38,22 +38,22 @@ namespace UFG
 		char mLastScreenPopped[64];
 		qString mDebugStackPrint;
 
-		static __inline CUIScreenManager* Instance()
+		static UFG_INLINE CUIScreenManager* Instance()
 		{
 			return *reinterpret_cast<CUIScreenManager**>(UFG_RVA(0x249C1C0));
 		}
 
-		CUIScreen* GetScreen(const char* p_FileName)
+		UFG_INLINE CUIScreen* GetScreen(const char* p_FileName)
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*, const char*)>(UFG_RVA(0xA2BA30))(this, p_FileName);
 		}
 
-		CUIScreen* GetScreen(uint32_t p_ScreenUID)
+		UFG_INLINE CUIScreen* GetScreen(uint32_t p_ScreenUID)
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0xA2B9E0))(this, p_ScreenUID);
 		}
 
-		CUIScreen* GetOverlay(const char* p_FileName)
+		UFG_INLINE CUIScreen* GetOverlay(const char* p_FileName)
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*, const char*)>(UFG_RVA(0xA2B9A0))(this, p_FileName);
 		}
@@ -70,12 +70,12 @@ namespace UFG
 			return nullptr;
 		}
 
-		CUIScreen* GetTopScreen()
+		UFG_INLINE CUIScreen* GetTopScreen()
 		{
 			return reinterpret_cast<CUIScreen*(__fastcall*)(void*)>(UFG_RVA(0xA2BEF0))(this);
 		}
 
-		void QueuePushOverlay(const char* p_ScreenName, int p_Priority = 0, int p_ControllerMask = -1)
+		UFG_INLINE void QueuePushOverlay(const char* p_ScreenName, int p_Priority = 0, int p_ControllerMask = -1)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*, int, int)>(UFG_RVA(0xA31720))(this, p_ScreenName, p_Priority, p_ControllerMask);
 		}
@@ -84,7 +84,7 @@ namespace UFG
 	class CUIScreenTextureManager
 	{
 	public:
-		void QueueTexturePackLoad(const char* p_TextureName, DataStreamer::PRIORITY p_Priority = DataStreamer::DEFAULT_PRIORITY, void* p_Callback = nullptr, void* p_CallbackParam = nullptr)
+		UFG_INLINE void QueueTexturePackLoad(const char* p_TextureName, DataStreamer::PRIORITY p_Priority = DataStreamer::DEFAULT_PRIORITY, void* p_Callback = nullptr, void* p_CallbackParam = nullptr)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, const char*, DataStreamer::PRIORITY, void*, void*)>(UFG_RVA(0x5C1CA0))(this, p_TextureName, p_Priority, p_Callback, p_CallbackParam);
 		}

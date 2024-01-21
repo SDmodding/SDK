@@ -10,9 +10,9 @@ namespace UFG
 		qVector4 v2; // Up
 		qVector4 v3; // Position
 
-		__forceinline qVector3 GetForward() { return v0; }
-		__forceinline qVector3 GetRight() { return v1; }
-		__forceinline qVector3 GetUp() { return v2; }
+		UFG_INLINE qVector3 GetForward() { return v0; }
+		UFG_INLINE qVector3 GetRight() { return v1; }
+		UFG_INLINE qVector3 GetUp() { return v2; }
 
 		void SetRotation(qVector3 m_Rotation)
 		{
@@ -39,9 +39,9 @@ namespace UFG
 		}
 
 		// Euler in Radians
-		void SetRotationEuler(qVector3* p_Euler)
+		UFG_INLINE void SetRotationEuler(const qVector3& p_Euler)
 		{
-			reinterpret_cast<void(__fastcall*)(qMatrix44*, qVector3*)>(UFG_RVA(0x18A6A0))(this, p_Euler);
+			reinterpret_cast<void(__fastcall*)(qMatrix44*, const qVector3&)>(UFG_RVA(0x18A6A0))(this, p_Euler);
 		}
 
 		// Use only if you know what you're doing!
@@ -79,7 +79,7 @@ namespace UFG
 		}
 
 		// Crashes on 'hkQsTransformf::get4x4ColumnMajor' for some odd reason.
-		void BlendSlerp(qMatrix44* p_SourceA, qMatrix44* p_SourceB, float p_Weight)
+		UFG_INLINE void BlendSlerp(qMatrix44* p_SourceA, qMatrix44* p_SourceB, float p_Weight)
 		{
 			reinterpret_cast<void(__fastcall*)(qMatrix44*, qMatrix44*, qMatrix44*, float)>(UFG_RVA(0x3A4A20))(this, p_SourceA, p_SourceB, p_Weight);
 		}

@@ -46,17 +46,17 @@ namespace Illusion
 		UFG::qResourceHandle mMorphTargetsHandle;
 		UFG::qResourceHandle mLocatorsHandle;
 
-		void OnLoad()
+		UFG_INLINE void OnLoad()
 		{
 			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x937A0))(this);
 		}
 
-		void OnUnload()
+		UFG_INLINE void OnUnload()
 		{
 			reinterpret_cast<void(_fastcall*)(void*)>(UFG_RVA(0x943D0))(this);
 		}
 
-		__inline void Reload()
+		UFG_INLINE void Reload()
 		{
 			OnUnload();
 			OnLoad();
@@ -73,7 +73,7 @@ namespace Illusion
 		uint32_t mNumValues;
 		uint32_t mStateUID;
 
-		uintptr_t GetDataPointer() 
+		UFG_INLINE uintptr_t GetDataPointer()
 		{ 
 			return (reinterpret_cast<uintptr_t>(this) + sizeof(CStateBlock) + 0x8); 
 		}

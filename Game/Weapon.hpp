@@ -136,12 +136,17 @@ namespace UFG
 		};
 		qArray<WeaponEntry_t> mElements;
 
-		void FastDelete(uint32_t p_Index)
+		static UFG_INLINE CWeaponManager* Instance()
+		{
+			return *reinterpret_cast<CWeaponManager**>(UFG_RVA(0x2401618));
+		}
+
+		UFG_INLINE void FastDelete(uint32_t p_Index)
 		{
 			reinterpret_cast<void(__fastcall*)(qArray<WeaponEntry_t>*, uint32_t)>(UFG_RVA(0x43CAE0))(&mElements, p_Index);
 		}
 
-		void AddWeapon(CSimWeaponPropertiesComponent* p_WeaponProperties)
+		UFG_INLINE void AddWeapon(CSimWeaponPropertiesComponent* p_WeaponProperties)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CSimWeaponPropertiesComponent*)>(UFG_RVA(0x438920))(this, p_WeaponProperties);
 		}
@@ -174,12 +179,4 @@ namespace UFG
 			return false;
 		}
 	};
-
-	namespace WeaponManager
-	{
-		CWeaponManager* Get()
-		{
-			return *reinterpret_cast<CWeaponManager**>(UFG_RVA(0x2401618));
-		}
-	}
 }
