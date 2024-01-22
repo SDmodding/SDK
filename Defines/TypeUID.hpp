@@ -20,6 +20,7 @@
 #define SimObjectStreamedResource_TypeUID					0x72000001
 #define SimObjectFXComponent_TypeUID						0x32000001
 #define SimObjectInventoryItemComponent_TypeUID				0xAE000001
+#define SimObjectTargetingSystemComponent_TypeUID			0xA0000001
 #define SimTSActorComponent_TypeUID							0x8A000001
 #define SimObjectWaterPhantomComponent_TypeUID				0x78000001
 

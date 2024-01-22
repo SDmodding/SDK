@@ -97,6 +97,17 @@ namespace UFG
 		BinPtrArray<CTrack> mTracks;
 	};
 
+	// Task
+	class CTask
+	{
+	public:
+		void* vfptr;
+		qNode<CTask> mNode;
+		void** m_Track;
+		float m_TimeBegin;
+		float m_TimeEnd;
+	};
+
 	// Action Classes
 	class CActionPath
 	{

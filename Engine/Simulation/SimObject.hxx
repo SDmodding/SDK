@@ -73,7 +73,7 @@ namespace UFG
 
 		UFG_INLINE CSimComponent* GetComponentOfType(uint32_t p_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent * (__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, p_TypeUID);
+			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, p_TypeUID);
 		}
 
 		template <typename T>
@@ -84,7 +84,7 @@ namespace UFG
 
 		UFG_INLINE CSimComponent* GetComponentOfTypeHK(uint32_t p_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent * (__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, p_TypeUID);
+			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, p_TypeUID);
 		}
 
 		template <typename T>
@@ -130,14 +130,14 @@ namespace UFG
 
 		// Functions
 
-		UFG_INLINE bool TargetAttach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, CSimObject** ppOutSimObjectTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendInTime, bool attachRelative, float attachRelativeMaxDistance, bool attachToTarget, bool addToInventory, bool assignTarget, eTargetTypeEnum assignmentTargetType, bool lockTarget, bool positionOnly, bool positionXYOnly, bool* managePowerLevel)
+		UFG_INLINE bool TargetAttach(eTargetTypeEnum p_TargetType, CSimObject* p_OverrideTarget, CSimObject** p_OutSimObjectTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendInTime, bool p_AttachRelative, float p_AttachRelativeMaxDistance, bool p_AttachToTarget, bool p_AddToInventory, bool p_AssignTarget, eTargetTypeEnum p_AssignmentTargetType, bool p_LockTarget, bool p_PositionOnly, bool p_PositionXYOnly, bool* p_ManagePowerLevel)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, CSimObject**, qSymbol*, qSymbol*, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, targetType, pOverrideTarget, ppOutSimObjectTarget, &attachJoint, &targetAttachJoint, blendInTime, attachRelative, attachRelativeMaxDistance, attachToTarget, addToInventory, assignTarget, assignmentTargetType, lockTarget, positionOnly, positionXYOnly, managePowerLevel);
+			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, CSimObject**, const qSymbol&, const qSymbol&, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, p_TargetType, p_OverrideTarget, p_OutSimObjectTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendInTime, p_AttachRelative, p_AttachRelativeMaxDistance, p_AttachToTarget, p_AddToInventory, p_AssignTarget, p_AssignmentTargetType, p_LockTarget, p_PositionOnly, p_PositionXYOnly, p_ManagePowerLevel);
 		}
 
-		UFG_INLINE bool TargetDetach(eTargetTypeEnum targetType, CSimObject* pOverrideTarget, qSymbol attachJoint, qSymbol targetAttachJoint, float blendOutTime, bool detachFromTarget, bool removeFromInventory, bool deleteOnDetach, bool releaseTarget, bool makeUpright, bool fadeAwayOnDetach, float disableCollisionDelay, float clampVelocity, bool managePowerLevel)
+		UFG_INLINE bool TargetDetach(eTargetTypeEnum p_TargetType, CSimObject* p_OverrideTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendOutTime, bool p_DetachFromTarget, bool p_RemoveFromInventory, bool p_DeleteOnDetach, bool p_ReleaseTarget, bool p_MakeUpright, bool p_FadeAwayOnDetach, float p_DisableCollisionDelay, float p_ClampVelocity, bool p_ManagePowerLevel)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, qSymbol*, qSymbol*, float, bool, bool, bool, bool, bool, bool, float, float, bool)>(UFG_RVA(0x554F50))(this, targetType, pOverrideTarget, &attachJoint, &targetAttachJoint, blendOutTime, detachFromTarget, removeFromInventory, deleteOnDetach, releaseTarget, makeUpright, fadeAwayOnDetach, disableCollisionDelay, clampVelocity, managePowerLevel);
+			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, const qSymbol&, const qSymbol&, float, bool, bool, bool, bool, bool, bool, float, float, bool)>(UFG_RVA(0x554F50))(this, p_TargetType, p_OverrideTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendOutTime, p_DetachFromTarget, p_RemoveFromInventory, p_DeleteOnDetach, p_ReleaseTarget, p_MakeUpright, p_FadeAwayOnDetach, p_DisableCollisionDelay, p_ClampVelocity, p_ManagePowerLevel);
 		}
 
 		UFG_INLINE bool IsAttached()
