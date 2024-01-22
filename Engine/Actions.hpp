@@ -8,6 +8,15 @@
 
 namespace UFG
 {
+	enum eActionTreeType : short
+	{
+		eACTION_TREE_TYPE_NONE = 0x0,
+		eACTION_TREE_TYPE_ACTION = 0x1,
+		eACTION_TREE_TYPE_AI = 0x2,
+		eACTION_TREE_TYPE_FACIAL = 0x3,
+		NUM_ACTION_TREE_TYPES = 0x4,
+	};
+
 	class CIntention
 	{
 	public:
@@ -60,7 +69,9 @@ namespace UFG
 		}
 	};
 
+	//====================================================
 	// Condition Classes
+
 	class CCondition : public UEL::CMemberMap
 	{
 	public:
@@ -77,7 +88,9 @@ namespace UFG
 		BinPtrArray<CCondition> mConditions;
 	};
 
+	//====================================================
 	// Track Classes
+
 	class CTrack : public UEL::CMemberMap
 	{
 	public:
@@ -97,18 +110,9 @@ namespace UFG
 		BinPtrArray<CTrack> mTracks;
 	};
 
-	// Task
-	class CTask
-	{
-	public:
-		void* vfptr;
-		qNode<CTask> mNode;
-		void** m_Track;
-		float m_TimeBegin;
-		float m_TimeEnd;
-	};
-
+	//====================================================
 	// Action Classes
+
 	class CActionPath
 	{
 	public:
@@ -181,7 +185,13 @@ namespace UFG
 		CActionContext* mParentContext;
 		bool mDebugBreak;
 		uint64_t mSignals;
+		eActionTreeType m_ActionTreeType;
+		class CActionTreeComponentBase* mActionTreeComponentBase[4];
+		char mMostUsedPlayCount[64];
+		char mProbabilitiesValid;
+		float mProbabilitys[10];
 	};
+	UFG_ASSERT_CLASS(CActionContext, 0xD8);
 
 	class CActionController : public UEL::CMemberMap
 	{
@@ -196,9 +206,9 @@ namespace UFG
 		char m_OnEnterExitCallbacksEnabled;
 		CActionNodePlayable* m_previousNode;
 		CActionNodePlayable* m_SequenceNode;
-		qList<class ITask> m_RunningTasks;
+		qList<class CTask> m_RunningTasks;
 		uint64_t m_RunningSpawnTasksTmp[2];
-		qList<class ITask>m_SequencedTasks;
+		qList<class CTask> m_SequencedTasks;
 		float mRunningMasterRate;
 		qList<class IFinishUpdate> m_FinishUpdateTasks;
 		uint64_t m_PlayingMostUsedMask;
@@ -316,4 +326,31 @@ namespace UFG
 			return m_ActionPlayables;
 		};
 	}
+	
+	//====================================================
+	// Tasks
+
+	class CTask
+	{
+	public:
+		void* vfptr;
+		qNode<CTask> mNode;
+		CTrack* m_Track;
+		float m_TimeBegin;
+		float m_TimeEnd;
+	};
+	UFG_ASSERT_CLASS(CTask, 0x28);
+
+	class CSpawnTask : public CTask
+	{
+	public:
+		UFG_PAD(0x10);
+
+		CActionContext* m_CallingActionContext;
+		CActionContext m_ActionContext;
+		char m_isParent;
+		char m_isKeepAlive;
+		CActionController m_ActionController;
+	};
+	UFG_ASSERT_CLASS(CSpawnTask, 0x238);
 }
