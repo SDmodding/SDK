@@ -80,9 +80,14 @@ namespace UFG
 		bool mbCheckForControllerDisconnect;
 		int mKeyboardIndex;
 
-		CController* AcquireController(int index)
+		static UFG_INLINE CInputSystem* Instance()
 		{
-			return reinterpret_cast<CController*(__fastcall*)(void*, int)>(UFG_RVA(0x1B6EB0))(this, index);
+			return *reinterpret_cast<CInputSystem**>(UFG_RVA(0x235F860));
+		}
+
+		UFG_INLINE CController* AcquireController(int p_Index)
+		{
+			return reinterpret_cast<CController*(__fastcall*)(void*, int)>(UFG_RVA(0x1B6EB0))(this, p_Index);
 		}
 	};
 
@@ -110,18 +115,18 @@ namespace UFG
 		bool SavedRestrictAndHideSettings[32];
 		int PCKeyboardSwapMode;
 
-		static CInputSystem001* Instance()
+		static UFG_INLINE CInputSystem001* Instance()
 		{
 			return reinterpret_cast<CInputSystem001*>(UFG_RVA(0x235FB80));
 		}
 
-		void SetRestrictCursor(bool m_bValue)
+		UFG_INLINE void SetRestrictCursor(bool p_Value)
 		{
-			ShouldRestrictCursor = m_bValue;
-			ShouldRestrictCursorGamepad[0] = m_bValue;
-			ShouldRestrictCursorGamepad[1] = m_bValue;
-			ShouldRestrictCursorKeyboard[0] = m_bValue;
-			ShouldRestrictCursorKeyboard[1] = m_bValue;
+			ShouldRestrictCursor = p_Value;
+			ShouldRestrictCursorGamepad[0] = p_Value;
+			ShouldRestrictCursorGamepad[1] = p_Value;
+			ShouldRestrictCursorKeyboard[0] = p_Value;
+			ShouldRestrictCursorKeyboard[1] = p_Value;
 		}
 	};
 
@@ -144,9 +149,14 @@ namespace UFG
 		unsigned int mServicedFlag;
 		bool mActionTrue;
 
-		float GetAxisVelX() { return mAxisRawX[0] - mAxisRawX[1]; }
+		UFG_INLINE float GetAxisVelX() 
+		{
+			return mAxisRawX[0] - mAxisRawX[1]; }
 
-		float GetAxisVelY() { return mAxisRawY[0] - mAxisRawY[1]; }
+		UFG_INLINE float GetAxisVelY() 
+		{ 
+			return mAxisRawY[0] - mAxisRawY[1];
+		}
 	};
 
 	class CInputActionDef
@@ -157,105 +167,192 @@ namespace UFG
 
 	namespace Input
 	{
-		CInputSystem* Get()
-		{
-			return *reinterpret_cast<CInputSystem**>(UFG_RVA(0x235F860));
-		}
-
-		int GetActiveControllerNum()
+		UFG_INLINE int GetActiveControllerNum()
 		{
 			return *reinterpret_cast<int*>(UFG_RVA(0x235FB78));
 		}
 
-		void EnableGameInput(bool m_bValue)
+		UFG_INLINE void EnableGameInput(bool p_Enable, bool* p_PrevEnable)
 		{
-			static bool m_bLastValue = true;
-			if (m_bValue && m_bLastValue) return;
+			if (p_Enable && *p_PrevEnable) {
+				return;
+			}
 
-			m_bLastValue = m_bValue;
+			*p_PrevEnable = p_Enable;
+			
+			CDxInputSystem::Instance()->FreezeInputs = !p_Enable;
+			CInputSystem001* _InputSystem001 = CInputSystem001::Instance();
 			{
-				CDxInputSystem::Instance()->FreezeInputs = !m_bValue;
-
-				CInputSystem001* m_InputSystem001 = CInputSystem001::Instance();
-				{
-					m_InputSystem001->ShouldHideCursor = m_bValue;
-					m_InputSystem001->SetRestrictCursor(m_bValue);
-				}
+				_InputSystem001->ShouldHideCursor = p_Enable;
+				_InputSystem001->SetRestrictCursor(p_Enable);
 			}
 		}
 
-		CInputActionData* Get_Move() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4988))->mDataPerController[GetActiveControllerNum()]; }
+		UFG_INLINE CInputActionData* Get_Move()
+		{ 
+			return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4988))->mDataPerController[GetActiveControllerNum()]; 
+		}
 
-		CInputActionData* Get_Mouse() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x235FD50))->mDataPerController[GetActiveControllerNum()]; }
+		UFG_INLINE CInputActionData* Get_Mouse()
+		{
+			return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x235FD50))->mDataPerController[GetActiveControllerNum()];
+		}
 
 		namespace Gamepad
 		{
 			bool IsActive()
 			{
-				CInputSystem* m_InputSystem = Get();
-				if (!m_InputSystem)
+				CInputSystem* _InputSystem = CInputSystem::Instance();
+				if (!_InputSystem)
 					return false;
 
-				CController* m_Controller = m_InputSystem->AcquireController(GetActiveControllerNum());
-				if (m_Controller && m_Controller->m_IsKeyboardController)
+				CController* _Controller = _InputSystem->AcquireController(GetActiveControllerNum());
+				if (_Controller && _Controller->m_IsKeyboardController) {
 					return false;
+				}
 
 				return true;
 			}
 
-			CInputActionData* Get_CamMove() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E43C8))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_CamMove() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E43C8))->mDataPerController[GetActiveControllerNum()];
+			}
 		}
 
 		namespace Button
 		{
-			CInputActionData* Get_Left() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0B0))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_Left_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0D8))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Left() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0B0))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_Right() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B128))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_Right_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B150))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Left_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B0D8))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_Up() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1A0))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_Up_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1C8))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Right() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B128))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_Down() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B218))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_Down_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B240))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Right_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B150))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_Up() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1A0))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_Up_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B1C8))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_Down() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B218))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_Down_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B240))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - Up Arrow
-			CInputActionData* Get_EquipUp() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4E10))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_EquipUp() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4E10))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_Fire() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4D20))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Fire() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4D20))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - H
-			CInputActionData* Get_VehicleHorn_Start() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47D0))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_VehicleHorn_Stop() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47F8))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_VehicleHorn_Start() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47D0))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_VehicleHorn_Stop() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E47F8))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - Q
-			CInputActionData* Get_VehicleActionHijack() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4F78))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_VehicleActionHijack() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4F78))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_L1() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B5D8))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_L1_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B600))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_L1() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B5D8))->mDataPerController[GetActiveControllerNum()];
+			}
 
-			CInputActionData* Get_R1() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B740))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_R1_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B768))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_L1_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B600))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_R1() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B740))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_R1_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B768))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - CTRL
-			CInputActionData* Get_L2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B650))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_L2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B678))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_L2() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B650))->mDataPerController[GetActiveControllerNum()]; 
+			}
+
+			UFG_INLINE CInputActionData* Get_L2_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B678))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - SHIFT
-			CInputActionData* Get_R2() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7B8))->mDataPerController[GetActiveControllerNum()]; }
-			CInputActionData* Get_R2_Repeat() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7E0))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_R2() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7B8))->mDataPerController[GetActiveControllerNum()];
+			}
+
+			UFG_INLINE CInputActionData* Get_R2_Repeat() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B7E0))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - M (Cycle objectives)
-			CInputActionData* Get_L3() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B6C8))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_L3() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B6C8))->mDataPerController[GetActiveControllerNum()];
+			}
 
 			// Keyboard - E (Interact / Enter vehicle)
-			CInputActionData* Get_Action() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4C30))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_Action() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x23E4C30))->mDataPerController[GetActiveControllerNum()]; 
+			}
 
+			UFG_INLINE CInputActionData* Get_UIAccept() 
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B290))->mDataPerController[GetActiveControllerNum()]; 
+			}
 
-			CInputActionData* Get_UIAccept() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B290))->mDataPerController[GetActiveControllerNum()]; }
-
-			CInputActionData* Get_UIBack() { return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B308))->mDataPerController[GetActiveControllerNum()]; }
+			UFG_INLINE CInputActionData* Get_UIBack()
+			{ 
+				return reinterpret_cast<CInputActionDef*>(UFG_RVA(0x249B308))->mDataPerController[GetActiveControllerNum()]; 
+			}
 		}
 	}
 }
