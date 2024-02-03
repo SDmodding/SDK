@@ -79,18 +79,15 @@ namespace UFG
 		qVector3 mPoseAABBMax;
 		qSafePointer<CTransformNodeComponent> mRootTransformNode;
 
-		UFG_PAD(0x10);
-
-		struct RigHandle_t
+		struct RigHandle_t : qResourceHandle
 		{
-			void* mData;
-			uint32_t mNameUID;
-
-			UFG_PAD(0x1C);
+			void* mLoadFunction;
+			void* mUnloadFunction;
+			void* mUserData;
+			CSkeleton* mUFGSkeleton;
 		};
 		RigHandle_t mRigHandle;
 
-		CSkeleton* mUFGSkeleton;
 		void* mHavokPose;
 
 		// (Translation) Get

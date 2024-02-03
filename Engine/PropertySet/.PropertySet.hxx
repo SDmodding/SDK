@@ -67,12 +67,17 @@ namespace UFG
 			return &m_Properties[p_Index];
 		}
 
-		UFG_INLINE void RemovPropertyByName(qSymbol p_Name)
+		UFG_INLINE void RemovePropertyByName(qSymbol p_Name)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x1FC160))(this, &p_Name);
 		}
 
 		// Value
+		UFG_INLINE int64_t GetValuePtr(uint32_t p_TypeUID, uint32_t p_NameUID, uint32_t p_Depth = 1)
+		{
+			return reinterpret_cast<int64_t(__fastcall*)(void*, uint32_t, uint32_t, uint32_t, void*)>(UFG_RVA(0x1F8990))(this, p_TypeUID, p_NameUID, p_Depth, nullptr);
+		}
+
 		UFG_INLINE uintptr_t* GetValuePtrFromIdx(uint32_t p_Index)
 		{
 			qProperty* m_Property = GetPropertyFromIdx(p_Index);

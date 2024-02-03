@@ -44,4 +44,12 @@ namespace UFG
 		}
 	};
 	UFG_ASSERT_CLASS(CCamera, 0x260);
+
+	namespace Camera
+	{
+		UFG_INLINE bool IsUsingHighZoom()
+		{
+			return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x3C5F10))();
+		}
+	}
 }

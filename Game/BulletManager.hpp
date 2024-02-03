@@ -38,6 +38,8 @@ namespace UFG
 		__int8 firstHit : 1;
 	};
 
+	//================================================================================================================================
+
 	class CBulletManager
 	{
 	public:
@@ -45,13 +47,16 @@ namespace UFG
 		qList<void*> mTargetSpheres;
 		qList<CBullet> mBulletList;
 		qArray<qSymbol> mSimObjectsToIgnore;
-	};
 
-	namespace BulletManager
-	{
-		CBulletManager* Get()
+		static UFG_INLINE CBulletManager* Instance()
 		{
 			return *reinterpret_cast<CBulletManager**>(UFG_RVA(0x24033D0));
 		}
-	}
+
+		UFG_INLINE qResourceHandle* GetBeamSettingsHandle(uint32_t p_NameUID)
+		{
+			return reinterpret_cast<qResourceHandle*(__fastcall*)(void*, uint32_t*)>(UFG_RVA(0x4661D0))(this, &p_NameUID);
+		}
+	};
+	UFG_ASSERT_CLASS(CBulletManager, 0x38);
 }

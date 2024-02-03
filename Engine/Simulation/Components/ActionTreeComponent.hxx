@@ -15,7 +15,12 @@ namespace UFG
 		qList<class PostAnimUpdateTask> mPostAnimUpdateList;
 		CIntention m_Intention;
 
-		void Reset()
+		UFG_INLINE void InitActionTree()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x582D80))(this);
+		}
+
+		UFG_INLINE void Reset()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
 		}

@@ -28,27 +28,20 @@ namespace UFG
 		float mUnloadTime;
 		float mInitHandleTime;
 
-		std::vector<qPropertySetResource*> GetContents()
-		{
-			std::vector<qPropertySetResource*> m_Return;
-
-			for (qBaseNodeRB* i = mResourceDatas.GetHead(); i; i = mResourceDatas.GetNext(i))
-				m_Return.emplace_back(reinterpret_cast<qPropertySetResource*>(i));
-
-			return m_Return;
-		}
-	};
-
-	namespace ResourceInventory
-	{
-		qResourceInventory* Get()
+		static UFG_INLINE qResourceInventory* Instance()
 		{
 			return reinterpret_cast<qResourceInventory*>(UFG_RVA(0x23693F0));
 		}
 
-		std::vector<qPropertySetResource*> GetContents(qResourceInventory* m_ResourceInventory)
+		std::vector<qPropertySetResource*> GetContents()
 		{
-			return m_ResourceInventory->GetContents();
+			std::vector<qPropertySetResource*> _Return;
+
+			for (qBaseNodeRB* i = mResourceDatas.GetHead(); i; i = mResourceDatas.GetNext(i)) {
+				_Return.emplace_back(reinterpret_cast<qPropertySetResource*>(i));
+			}
+
+			return _Return;
 		}
-	}
+	};
 }
