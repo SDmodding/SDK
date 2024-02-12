@@ -6,22 +6,22 @@
 #pragma once
 
 // UFG
-#include "ResourceData.hpp"
-#include "PropertySet.hpp"
-#include "SceneryGroup.hpp"
-#include "UILocalization.hpp"
-#include "UIScreen.hpp"
+#include "ResourceData.hh"
+#include "PropertySet.hh"
+#include "SceneryGroup.hh"
+#include "UILocalization.hh"
+#include "UIScreen.hh"
 
 // Illusion
-#include "Illusion/BonePalette.hpp"
-#include "Illusion/Buffer.hpp"
-#include "Illusion/Material.hpp"
-#include "Illusion/Mesh.hpp"
-#include "Illusion/ModelData.hpp"
-#include "Illusion/ModelUser.hpp"
-#include "Illusion/ShaderBinary.hxx"
-#include "Illusion/StateBlock.hpp"
-#include "Illusion/Texture.hpp"
+#include "Illusion/BonePalette.hh"
+#include "Illusion/Buffer.hh"
+#include "Illusion/Material.hh"
+#include "Illusion/Mesh.hh"
+#include "Illusion/ModelData.hh"
+#include "Illusion/ModelUser.hh"
+#include "Illusion/ShaderBinary.hh"
+#include "Illusion/StateBlock.hh"
+#include "Illusion/Texture.hh"
 
 // Helpers
 namespace SDK

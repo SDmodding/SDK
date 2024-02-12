@@ -1,8 +1,8 @@
 #pragma once
-#include "Primitive.hxx"
-#include "Material.hxx"
-#include "Target.hxx"
-#include "Texture.hxx"
+#include "Primitive.hh"
+#include "Material.hh"
+#include "Target.hh"
+#include "Texture.hh"
 
 namespace Illusion
 {

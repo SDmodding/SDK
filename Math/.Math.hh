@@ -11,9 +11,9 @@
 #define UFG_Rad2Deg(x)			(x * UFG_Rad2Deg_Mul)
 
 // Includes
-#include "HalfFloat.hxx"
-#include "Vector2.hxx"
-#include "Vector3.hxx"
-#include "Vector4.hxx"
-#include "Matrix44.hxx"
-#include "Quaternion.hxx"
+#include "HalfFloat.hh"
+#include "Vector2.hh"
+#include "Vector3.hh"
+#include "Vector4.hh"
+#include "Matrix44.hh"
+#include "Quaternion.hh"

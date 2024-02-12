@@ -9,17 +9,17 @@
 typedef _RTL_CRITICAL_SECTION CAkLock;
 
 // Includes
-#include "Types.hxx"
-#include "Classes.hxx"
+#include "Types.hh"
+#include "Classes.hh"
 
 // Common (Important)
-#include "Common/Indexable.hxx"
+#include "Common/Indexable.hh"
 
 // Common
-#include "Common/AudioLibIndex.hxx"
-#include "Common/Callback.hxx"
-#include "Common/BankReader.hxx"
-#include "Common/BankMgr.hxx"
+#include "Common/AudioLibIndex.hh"
+#include "Common/Callback.hh"
+#include "Common/BankReader.hh"
+#include "Common/BankMgr.hh"
 
 namespace AK
 {

@@ -6,15 +6,15 @@
 //=============================================================================
 #pragma once
 
-#include "LocalTypes.hpp"
-#include "Templates.hpp"
+#include "LocalTypes.hh"
+#include "Templates.hh"
 
 // Important
-#include "Memory.hpp"
+#include "Memory.hh"
 
 // GFx
-#include "GFx/StringManager.hpp"
-#include "GFx/Value.hpp"
-#include "GFx/Resource.hpp"
-#include "GFx/Loader.hpp"
-#include "GFx/Movie.hpp"
+#include "GFx/StringManager.hh"
+#include "GFx/Value.hh"
+#include "GFx/Resource.hh"
+#include "GFx/Loader.hh"
+#include "GFx/Movie.hh"

@@ -11,56 +11,56 @@ namespace UFG
 	class CSimObject;
 }
 
-#include "SceneObjectProperties.hxx"
+#include "SceneObjectProperties.hh"
 
 //=============================================================================
 // SimComponent Classes
 
 // Main
-#include "SimComponent.hxx"
+#include "SimComponent.hh"
 
 // Important...
-#include "Components/SimObjectPropertiesComponent.hxx"
-#include "Components/SimVehiclePropertiesComponent.hxx"
-#include "Components/SimWeaponPropertiesComponent.hxx"
+#include "Components/SimObjectPropertiesComponent.hh"
+#include "Components/SimVehiclePropertiesComponent.hh"
+#include "Components/SimWeaponPropertiesComponent.hh"
 
 // Others...
-#include "Components/ActionTreeComponent.hxx"
-#include "Components/VehicleOccupantComponent.hxx"
-#include "Components/CharacterOccupantComponent.hxx"
-#include "Components/FaceMeterComponent.hxx"
-#include "Components/GunComponent.hxx"
-#include "Components/HitReactionComponent.hxx"
-#include "Components/InventoryItemComponent.hxx"
-#include "Components/PhysicsMoverInterface.hxx"
-#include "Components/StreamedResourceComponent.hxx"
-#include "Components/TargetingSystemComponents.hxx"
-#include "Components/.Components.hxx" // TODO: Move them to individual file instead having them in one big file mess...
+#include "Components/ActionTreeComponent.hh"
+#include "Components/VehicleOccupantComponent.hh"
+#include "Components/CharacterOccupantComponent.hh"
+#include "Components/FaceMeterComponent.hh"
+#include "Components/GunComponent.hh"
+#include "Components/HitReactionComponent.hh"
+#include "Components/InventoryItemComponent.hh"
+#include "Components/PhysicsMoverInterface.hh"
+#include "Components/StreamedResourceComponent.hh"
+#include "Components/TargetingSystemComponents.hh"
+#include "Components/.Components.hh" // TODO: Move them to individual file instead having them in one big file mess...
 
 //=============================================================================
 // SimObject Classes
 
-#include "SimObject.hxx"
-#include "SimVehicle.hxx"
-#include "SimWeapon.hxx"
-#include "SimCharacter.hxx"
+#include "SimObject.hh"
+#include "SimVehicle.hh"
+#include "SimWeapon.hh"
+#include "SimCharacter.hh"
 
 //=============================================================================
 // Camera Components
 
-#include "Components/Camera/BaseCameraComponent.hxx"
-#include "Components/Camera/GameCameraComponent.hxx"
-#include "Components/Camera/AnimatedCameraComponent.hxx"
-#include "Components/Camera/FollowCameraComponent.hxx"
-#include "Components/Camera/ChaseCameraComponent.hxx"
-#include "Components/Camera/ScriptCameraComponent.hxx"
+#include "Components/Camera/BaseCameraComponent.hh"
+#include "Components/Camera/GameCameraComponent.hh"
+#include "Components/Camera/AnimatedCameraComponent.hh"
+#include "Components/Camera/FollowCameraComponent.hh"
+#include "Components/Camera/ChaseCameraComponent.hh"
+#include "Components/Camera/ScriptCameraComponent.hh"
 
 //=============================================================================
 // Utils
 
-#include "SimObjectUtility.hxx"
-#include "SimVehicleUtility.hxx"
-#include "SpawnInfoInterface.hxx"
+#include "SimObjectUtility.hh"
+#include "SimVehicleUtility.hh"
+#include "SpawnInfoInterface.hh"
 
 namespace UFG
 {

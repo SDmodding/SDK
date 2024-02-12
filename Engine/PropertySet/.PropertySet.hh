@@ -1,7 +1,7 @@
 #pragma once
 
 // Components
-#include "Components/PhysicsMoverComponent.hxx"
+#include "Components/PhysicsMoverComponent.hh"
 
 // ...
 namespace UFG
@@ -9,9 +9,9 @@ namespace UFG
 	struct qPropertySet;
 	struct qPropertySetResource;
 }
-#include "Collection.hxx"
-#include "Handle.hxx"
-#include "List.hxx"
+#include "Collection.hh"
+#include "Handle.hh"
+#include "List.hh"
 
 namespace UFG
 {

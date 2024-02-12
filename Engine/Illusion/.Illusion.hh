@@ -6,16 +6,16 @@
 //=============================================================================
 #pragma once
 
-#include "Enums.hpp"
-#include "StateSystem.hpp"
+#include "Enums.hh"
+#include "StateSystem.hh"
 
-#include "VertexDecl/.VertexDecl.hxx"
-#include "Classes/.Classes.hxx"
+#include "VertexDecl/.VertexDecl.hh"
+#include "Classes/.Classes.hh"
 
-#include "Engine.hpp"
-#include "Factory.hxx"
-#include "RenderThreadManager.hpp"
-#include "Resources.hpp"
+#include "Engine.hh"
+#include "Factory.hh"
+#include "RenderThreadManager.hh"
+#include "Resources.hh"
 
 // Functions
 namespace Illusion

@@ -37,4 +37,4 @@ namespace Illusion
 	};
 }
 
-#include "Dynamic.hxx"
+#include "Dynamic.hh"
