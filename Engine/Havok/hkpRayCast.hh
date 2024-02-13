@@ -16,12 +16,12 @@ public:
 	uint64_t m_userData = 0;
 
 	hkpWorldRayCastInput() { }
-	hkpWorldRayCastInput(UFG::qVector3 m_Start, UFG::qVector3 m_End, uint32_t m_CollisionFilter)
+	hkpWorldRayCastInput(const UFG::qVector3& p_Start, const UFG::qVector3& p_End, uint32_t p_CollisionFilter)
 	{
-		m_from.Set(m_Start.x, m_Start.y, m_Start.z, 0.f);
-		m_to.Set(m_End.x, m_End.y, m_End.z, 0.f);
+		m_from.Set(p_Start.x, p_Start.y, p_Start.z, 0.f);
+		m_to.Set(p_End.x, p_End.y, p_End.z, 0.f);
 		m_enableShapeCollectionFilter = true;
-		m_filterInfo = m_CollisionFilter;
+		m_filterInfo = p_CollisionFilter;
 	}
 };
 
@@ -36,11 +36,11 @@ public:
 	uint64_t m_userData = 0;
 
 	hkpShapeRayCastInput() { }
-	hkpShapeRayCastInput(UFG::qVector3 m_Start, UFG::qVector3 m_End, uint32_t m_CollisionFilter)
+	hkpShapeRayCastInput(const UFG::qVector3& p_Start, const UFG::qVector3& p_End, uint32_t p_CollisionFilter)
 	{
-		m_from.Set(m_Start.x, m_Start.y, m_Start.z, 0.f);
-		m_to.Set(m_End.x, m_End.y, m_End.z, 0.f);
-		m_filterInfo = m_CollisionFilter;
+		m_from.Set(p_Start.x, p_Start.y, p_Start.z, 0.f);
+		m_to.Set(p_End.x, p_End.y, p_End.z, 0.f);
+		m_filterInfo = p_CollisionFilter;
 	}
 };
 
