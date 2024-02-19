@@ -14,6 +14,11 @@ namespace UFG
 		UFG_INLINE qVector3 GetRight() { return v1; }
 		UFG_INLINE qVector3 GetUp() { return v2; }
 
+		UFG_INLINE void SetIdentity()
+		{
+			*reinterpret_cast<qMatrix44*>(this) = *reinterpret_cast<qMatrix44*>(UFG_RVA(0x203BD40));
+		}
+
 		void SetRotation(qVector3 m_Rotation)
 		{
 			m_Rotation *= UFG_Deg2Rad_Mul;

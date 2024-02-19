@@ -218,7 +218,16 @@ namespace UFG
 	};
 	UFG_ASSERT_STRUCT(qPropertySetResource, 192);
 
-	// Functions
+	//==========================================================================
+
+	namespace PropertySetCache
+	{
+		UFG_INLINE qPropertySetResource* GetResource(qSymbol p_NameUID)
+		{
+			return reinterpret_cast<qPropertySetResource*(__fastcall*)(qSymbol*)>(UFG_RVA(0x1F8090))(&p_NameUID);
+		}
+	}
+
 	namespace PropertySetManager
 	{
 		UFG_INLINE qPropertySet* CreateOrFindPropertySet(qSymbol p_NameUID)

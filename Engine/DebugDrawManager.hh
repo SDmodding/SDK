@@ -2,6 +2,30 @@
 
 namespace UFG
 {
+	class __declspec(align(128)) CDebugDrawData
+	{
+	public:
+		qResourceHandle mDebugFontHandle;
+		qList<class DebugText> mDebugTextLines;
+		qList<class DebugRect> mDebugRects;
+		qList<class DebugIcon> mDebugIcons;
+		qList<class DebugLineStrip> mDebugLineStrips;
+		qList<class DebugTriStrip> mDebugTriStrips;
+		qList<class DebugAABB> mDebugAABB;
+		qList<class DebugSphere> mDebugSphere;
+		qList<class DebugCylinder> mDebugCylinder;
+		qList<class DebugCircle> mDebugCircle;
+		qList<class DebugArc> mDebugArc;
+		qList<class DebugAxis> mDebugAxis;
+		unsigned int mHaveExceededPool;
+		char* mDebugPool;
+		__declspec(align(64)) CLinearAllocator mDebugMemory;
+		unsigned int mDebugPoolSize;
+	};
+	UFG_ASSERT_CLASS(CDebugDrawData, 0x200);
+
+	//==========================================
+
 	/*
 	* Note:
 	*	- DisableDraw must be "false" in order to render data
@@ -10,9 +34,28 @@ namespace UFG
 	*		~ DebugDrawManager->FlushContexts();
 	*		~ DebugDrawContext->Flush();
 	*/
-	class CDebugDrawContext
+	class CDebugDrawContext : public qNode<CDebugDrawContext>
 	{
 	public:
+		uint32_t mUID;
+		uint32_t mFeatureFlags;
+		Render::CView* mView;
+		int mTargetWidth;
+		int mTargetHeight;
+		CDebugDrawData* mDebugData;
+		uint32_t mFrame;
+
+		enum eAlign : uint32_t
+		{
+			AlignHoriz_left = 0x1,
+			AlignHoriz_center = 0x2,
+			AlignHoriz_right = 0x4,
+			AlignVert_top = 0x8,
+			AlignVert_center = 0x10,
+			AlignVert_bottom = 0x20,
+			Align__default = 0x9,
+		};
+
 		static UFG_INLINE qMatrix44* GetMatrix() 
 		{ 
 			return reinterpret_cast<qMatrix44*>(UFG_RVA(0x203BD40)); 
@@ -71,6 +114,15 @@ namespace UFG
 		}
 
 		template<typename FORMAT = const char*, typename... Args>
+		UFG_INLINE void DrawTextAligned(const qVector3& p_WorldPosition, uint32_t p_AlignFlags, const qColour& p_Colour, FORMAT p_Format, Args... p_Args)
+		{
+			CDebugDrawData* _DebugDrawData = this->mDebugData;
+			if (_DebugDrawData) {
+				reinterpret_cast<void(*)(void*, const qVector3&, uint32_t, void*, const qColour&, FORMAT, Args...)>(UFG_RVA(0x18F00))(this, p_WorldPosition, p_AlignFlags, &_DebugDrawData->mDebugFontHandle, p_Colour, p_Format, p_Args...);
+			}
+		}
+
+		template<typename FORMAT = const char*, typename... Args>
 		UFG_INLINE void DrawTextA(int p_X, int p_Y, const qColour& p_Colour, FORMAT p_Format, Args... p_Args)
 		{
 			reinterpret_cast<void(*)(void*, int, int, const qColour&, FORMAT, Args...)>(UFG_RVA(0x18EB0))(this, p_X, p_Y, p_Colour, p_Format, p_Args...);
@@ -81,6 +133,7 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qVector3*, float, qColour*, qMatrix44*, void*)>(UFG_RVA(0x18D00))(this, &m_Center, m_Radius, &m_Color, m_Matrix, m_Callback);
 		}
 	};
+	UFG_ASSERT_CLASS(CDebugDrawContext, 0x38);
 
 	class CDebugDrawManager
 	{

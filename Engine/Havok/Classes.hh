@@ -2,7 +2,6 @@
 #include <xmmintrin.h>
 
 typedef int8_t hkUFloat8;
-typedef uint16_t hkHalf;
 
 struct hkMatrix3f;
 

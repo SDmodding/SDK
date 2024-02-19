@@ -1,11 +1,19 @@
 #pragma once
 
+//=========================================
 // Important
+
 #include "Enums.hh"
 #include "Classes.hh"
 #include "Templates.hh"
 
-// ...
+//=========================================
+// Types
+
+#include "Types/hkHalf.hh"
+
+//=========================================
+
 #include "hkMemoryAllocator.hh"
 #include "hkReferencedObject.hh"
 #include "hkpWorldObject.hh"
@@ -20,7 +28,9 @@
 #include "hkpAction.hh"
 #include "hkpWorld.hh"
 
+//=========================================
 // Vehicle
+
 #include "Vehicle/hkpTyremarksInfo.hh"
 #include "Vehicle/hkpVehicle.hh"
 #include "Vehicle/hkpVehicleAerodynamics.hh"
@@ -32,7 +42,9 @@
 #include "Vehicle/hkpVehicleWheelCollide.hh"
 #include "Vehicle/hkpVehicleInstance.hh"
 
+//=========================================
 // Shapes
+
 #include "Shapes/hkpShape.hh"
 #include "Shapes/hkpBvTreeShape.hh"
 #include "Shapes/hkpConvexShape.hh"
@@ -40,5 +52,7 @@
 #include "Shapes/hkpExtendedMeshShape.hh"
 #include "Shapes/hkpShapePhantom.hh"
 
+//=========================================
 // Util
+
 #include "Util/hkpMoppUtility.hh"
