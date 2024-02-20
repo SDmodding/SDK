@@ -22,7 +22,7 @@ namespace UFG
 		SimpleTimer mMaxSpeedTime;
 		CCruiseControl* mCruiseControl;
 		class CController* mController;
-		unsigned int mVehicleType;
+		eSimObjectVehicleTypeEnum mVehicleType;
 		float mJumpLocHeight;
 		float mJumpDistance;
 		float mHighestJump;

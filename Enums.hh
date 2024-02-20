@@ -929,7 +929,7 @@ namespace UFG
 		eSIM_OBJ_TYPE2_SpawnRegion
 	};
 
-	enum eSimObjectVehicleTypeEnum
+	enum eSimObjectVehicleTypeEnum : uint32_t
 	{
 		eSIM_OBJ_VEHICLE_TYPE_INVALID = 0x0,
 		eSIM_OBJ_VEHICLE_TYPE_BIKE = 0x1,
