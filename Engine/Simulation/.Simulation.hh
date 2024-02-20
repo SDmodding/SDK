@@ -12,12 +12,17 @@ namespace UFG
 }
 
 #include "SceneObjectProperties.hh"
+#include "Components/.TypeUID.hh"
 
 //=============================================================================
 // SimComponent Classes
 
 // Main
 #include "SimComponent.hh"
+
+// Interface
+#include "Components/Interface/.Interface.hh"
+#include "Components/Interface/VehicleDriverInterface.hh"
 
 // Important...
 #include "Components/SimObjectPropertiesComponent.hh"
@@ -31,6 +36,7 @@ namespace UFG
 #include "Components/FaceMeterComponent.hh"
 #include "Components/GunComponent.hh"
 #include "Components/HitReactionComponent.hh"
+#include "Components/HumanDriverComponent.hh"
 #include "Components/InventoryItemComponent.hh"
 #include "Components/PhysicsMoverInterface.hh"
 #include "Components/StreamedResourceComponent.hh"

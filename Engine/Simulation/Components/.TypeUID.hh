@@ -1,15 +1,5 @@
 #pragma once
 
-#define AnimatedCameraComponent_TypeUID						0x1E00000D
-#define BaseCameraComponent_TypeUID							0x1E000001
-#define ChaseCameraComponent_TypeUID						0x1E000045
-#define DebugCameraComponent_TypeUID						0x1E000003
-#define FollowCameraComponent_TypeUID						0x1E000025
-#define GameCameraComponent_TypeUID							0x1E000005
-#define ProgressionCameraComponent_TypeUID					0x1E000015
-#define ScriptCameraComponent_TypeUID						0x1E000085
-#define TurfCameraComponent_TypeUID							0x1E000101
-
 #define SimObjectActionTreeComponent_TypeUID				0xC8000001
 #define SimObjectProperties_TypeUID							0xB2000001
 #define SimObjectCompositeDrawable_TypeUID					0x04000001
@@ -60,3 +50,23 @@
 
 #define WeaponGunComponent_TypeUID							0x9C000001
 #define WeaponPropertiesComponent_TypeUID					0xB2000003
+
+//=========================================================================
+// New Format
+
+#define AnimatedCameraComponent_TypeUID						0x1E00000D
+#define BaseCameraComponent_TypeUID							0x1E000001
+#define ChaseCameraComponent_TypeUID						0x1E000045
+#define DebugCameraComponent_TypeUID						0x1E000003
+#define FollowCameraComponent_TypeUID						0x1E000025
+#define GameCameraComponent_TypeUID							0x1E000005
+#define ProgressionCameraComponent_TypeUID					0x1E000015
+#define ScriptCameraComponent_TypeUID						0x1E000085
+#define TurfCameraComponent_TypeUID							0x1E000101
+
+//=========================================================================
+
+#define HumanDriverComponent_TypeUID						0xD8000005
+#define BoatHumanDriverComponent_TypeUID					0xD800000D
+#define BikeHumanDriverComponent_TypeUID					0xD8000015
+#define CarHumanDriverComponent_TypeUID						0xD8000025

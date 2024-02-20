@@ -70,7 +70,6 @@ UFG_INLINE ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Defines/BoneUID.hh"
 #include "Defines/QSymbolsDictionary.hh"
 #include "Defines/StringDictionary.hh"
-#include "Defines/TypeUID.hh"
 
 //==========================================================================
 // Engine Important
@@ -132,6 +131,7 @@ UFG_INLINE ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/Model.hh"
 #include "Engine/ObjectResourceManager.hh"
 #include "Engine/Parkour.hh"
+#include "Engine/SimpleTimer.hh"
 #include "Engine/VoiceProfile.hh"
 
 //==========================================================================

@@ -64,7 +64,10 @@ namespace UFG
 		float mPropellerAngle;
 		int mGroundFixupRequired;
 		int mAxleBoneId[4];
+
+		// Right wheel check: (x % 2) == 1 
 		int mWheelBoneId[4];
+
 		int mMotorBoneId[2];
 		int mPropellerBoneId[2];
 		int mNumWheels;
