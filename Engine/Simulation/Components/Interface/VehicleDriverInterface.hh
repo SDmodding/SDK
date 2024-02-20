@@ -16,7 +16,7 @@ namespace UFG
 	class CVehicleDriverInterface : public CSimComponent, public CUpdateInterface, public qNode<CVehicleDriverInterface>
 	{
 	public:
-		RebindingComponentHandle<class ChysicsMoverInterface> mMoverComponent;
+		RebindingComponentHandle<class CPhysicsMoverInterface> mMoverComponent;
 		RebindingComponentHandle<class CVehicleEffectsComponent> mRenderComponent;
 		RebindingComponentHandle<class CVehicleAudioComponent> mAudioComponent;
 		qSafePointer<CSimObject> mDriver;
