@@ -14,7 +14,7 @@ namespace UFG
 			qMatrix44 m_Matrix = p_SimObject->m_pTransformNodeComponent->mWorldTransform;
 			{
 				m_Matrix.v3.x = p_X;
-				m_Matrix.v3.y = p_X;
+				m_Matrix.v3.y = p_Y;
 				m_Matrix.v3.z = p_Z;
 			}
 
