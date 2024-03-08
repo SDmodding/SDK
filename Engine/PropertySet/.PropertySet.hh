@@ -230,6 +230,11 @@ namespace UFG
 
 	namespace PropertySetManager
 	{
+		/*	
+		*	This crap is kinda un - safe since if you Create PropertySet it will set prefix & suffix with '·' for ResourceSet.
+		*	Simply calling this function twice with same nameUID will create new propertyset twice even tho it already exist.
+		*	~ If you will use this function first try call GetPropertySet with nameUID with prefix & suffix otherwise use this function.
+		*/
 		UFG_INLINE qPropertySet* CreateOrFindPropertySet(qSymbol p_NameUID)
 		{
 			return reinterpret_cast<qPropertySet*(__fastcall*)(qSymbol*)>(UFG_RVA(0x1F4680))(&p_NameUID);

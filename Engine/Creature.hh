@@ -21,10 +21,10 @@ namespace UFG
 
 		uint32_t mPoseCRC;
 
-		UFG_PAD(0x60 + 0xC);
-		/*hkQsTransformf mPrevMotion;
-		hkQsTransformf mLastSetPosition;*/
+		UFG_PAD(0xC);
 
+		hkQsTransformf mPrevMotion;
+		hkQsTransformf mLastSetPosition;
 		qVector3 mGroundNormal;
 		qList<CAttachment> mAttachments;
 		qVector3 mAnimatedMoveDirection;
@@ -61,49 +61,68 @@ namespace UFG
 		uint32_t mNetPoseSequence;
 
 		// HashUpper32
-		int GetBoneID(uint32_t m_BoneUID)
+		UFG_INLINE int GetBoneID(uint32_t p_BoneUID)
 		{
 			if (!mPose.mRigHandle.mData) {
 				return -1;
 			}
 
-			return mPose.mRigHandle.mUFGSkeleton->GetBoneID(m_BoneUID);
+			return mPose.mRigHandle.mUFGSkeleton->GetBoneID(p_BoneUID);
 		}
 
-		void GetPositionhkQ(hkQsTransformf* p_Result)
+		UFG_INLINE void GetPositionhkQ(hkQsTransformf* p_Result)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, hkQsTransformf*)>(UFG_RVA(0x3A9570))(this, p_Result);
 		}
 
-		CAttachment* GetAttachment(UFG::CSimObject* m_AttachedSimObject)
+		//==========================================================
+		// Attachments
+
+		CAttachment* GetAttachment(CSimObject* p_AttachedSimObject)
 		{
-			for (qNode<CAttachment>* i = mAttachments.mNode.mNext; i != &mAttachments.mNode; i = i->mNext)
+			for (auto i = mAttachments.mNode.mNext; i != &mAttachments.mNode; i = i->mNext)
 			{
-				CAttachment* m_Attachment = i->GetPointerSub<offsetof(CAttachment, mNode)>();
-				if (m_Attachment->mAttachedSimObject.m_pPointer == m_AttachedSimObject)
-					return m_Attachment;
+				CAttachment* _Attachment = i->GetPointerSub<offsetof(CAttachment, mNode)>();
+				if (_Attachment->mAttachedSimObject.m_pPointer == p_AttachedSimObject) {
+					return _Attachment;
+				}
 			}
 			
 			return nullptr;
 		}
 
-		void* AddAttachment(UFG::CSimObject* m_Self, int m_AttachBoneID, UFG::CSimObject* m_AttachedSimObject, int m_AttachmentBoneID, bool m_PositionOnly = false, float m_BlendIn = 0.f)
+		CAttachment* GetAttachment(int p_AttachBoneID)
 		{
-			return reinterpret_cast<void*(__fastcall*)(void*, UFG::CSimObject*, int, UFG::CSimObject*, int, bool, float)>(UFG_RVA(0x3A0BE0))(this, m_Self, m_AttachBoneID, m_AttachedSimObject, m_AttachmentBoneID, m_PositionOnly, m_BlendIn);
-		}
-
-		bool RemoveAttachment(UFG::CSimObject* m_Self, UFG::CSimObject* m_AttachedSimObject, int m_AttachBoneID = -1)
-		{
-			if (m_AttachBoneID == -1)
+			for (auto i = mAttachments.mNode.mNext; i != &mAttachments.mNode; i = i->mNext)
 			{
-				UFG::CAttachment* m_Attachment = GetAttachment(m_AttachedSimObject);
-				if (!m_Attachment)
-					return false;
-
-				m_AttachBoneID = m_Attachment->attachedJoint;
+				CAttachment* _Attachment = i->GetPointerSub<offsetof(CAttachment, mNode)>();
+				if (_Attachment->attachedJoint == p_AttachBoneID) {
+					return _Attachment;
+				}
 			}
 
-			return reinterpret_cast<bool(__fastcall*)(void*, UFG::CSimObject*, int, UFG::CSimObject*)>(UFG_RVA(0x3ADFB0))(this, m_Self, m_AttachBoneID, m_AttachedSimObject);
+			return nullptr;
+		}
+
+		UFG_INLINE void* AddAttachment(CSimObject* p_Self, int p_AttachBoneID, CSimObject* p_AttachedSimObject, int p_AttachmentBoneID, bool p_PositionOnly = false, float p_BlendIn = 0.f)
+		{
+			return reinterpret_cast<void*(__fastcall*)(void*, CSimObject*, int, CSimObject*, int, bool, float)>(UFG_RVA(0x3A0BE0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject, p_AttachmentBoneID, p_PositionOnly, p_BlendIn);
+		}
+
+		UFG_INLINE bool RemoveAttachment(CSimObject* p_Self, CSimObject* p_AttachedSimObject, int p_AttachBoneID = -1)
+		{
+			if (p_AttachBoneID == -1)
+			{
+				UFG::CAttachment* _Attachment = GetAttachment(p_AttachedSimObject);
+				if (!_Attachment) {
+					return false;
+				}
+
+				p_AttachBoneID = _Attachment->attachedJoint;
+			}
+
+			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, int, CSimObject*)>(UFG_RVA(0x3ADFB0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject);
 		}
 	};
+	UFG_ASSERT_CLASS(CCreature, 0x3A0);
 }

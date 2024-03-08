@@ -5,7 +5,7 @@ namespace UFG
 	class CUIGfxTranslator
 	{
 	public:
-		char* Translate(uint32_t p_Hash) 
+		UFG_INLINE char* Translate(uint32_t p_Hash)
 		{ 
 			return reinterpret_cast<char*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0xA28340))(this, p_Hash);
 		}

@@ -56,6 +56,11 @@ namespace UFG
 		{
 			return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x5EE1B0))();
 		}
+
+		UFG_INLINE const char* LocalizeText(const char* p_Tag)
+		{
+			return reinterpret_cast<const char*(__fastcall*)(const char*)>(UFG_RVA(0x5F1C00))(p_Tag);
+		}
 	}
 }
 
