@@ -76,9 +76,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, p_Witness, p_Suspect);
 		}
 
-		UFG_INLINE void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent, float p_HeatValue)
+		UFG_INLINE void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum, float)>(UFG_RVA(0x3F0550))(this, p_HeatLevel, p_HeatEvent, p_HeatValue);
+			reinterpret_cast<void(__fastcall*)(void*, eHeatLevelEnum, eHeatEventEnum)>(UFG_RVA(0x3F0550))(this, p_HeatLevel, p_HeatEvent);
 		}
 
 		UFG_INLINE void ResetChaseStats()
