@@ -80,17 +80,24 @@ namespace UFG
 		};
 		qArray<VisualDamageTarget_t> mVisualDamageTargets;
 
-		void ApplyCharredEffect(float p_Value)
+		UFG_INLINE void SetVisualDamage(uint32_t p_BoneIndex, float p_Damage, float p_Duration)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t, float, float)>(UFG_RVA(0x3AF920))(this, p_BoneIndex, p_Damage, p_Duration);
+		}
+
+		UFG_INLINE void ResetDamage()
+		{
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x3AE110))(this);
+		}
+
+		// Re-write this in your project if you want to use it...
+
+		/*void ApplyCharredEffect(float p_Value)
 		{
 			p_Value = fmaxf(0.f, fminf(p_Value, 1.f));
 			this->mCharredEffectAmount			= p_Value;
 			this->mCharredEffectInitialAmount	= p_Value;
 			this->mCharredEffectElapsedTime		= 0.f;
-		}
-
-		void SetVisualDamage(uint32_t p_BoneIndex, float p_Damage, float p_Duration)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, uint32_t, float, float)>(UFG_RVA(0x3AF920))(this, p_BoneIndex, p_Damage, p_Duration);
 		}
 
 		void ResetVisualDamage()
@@ -99,6 +106,6 @@ namespace UFG
 
 			for (CharacterMarker_t& m_Marker : mCharacterMarkers)
 				memset(&m_Marker.mValue, 0, sizeof(CharacterMarker_t::mValue));
-		}
+		}*/
 	};
 }
