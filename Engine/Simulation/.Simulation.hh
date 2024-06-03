@@ -32,6 +32,7 @@ namespace UFG
 // Others...
 #include "Components/ActionTreeComponent.hh"
 #include "Components/VehicleOccupantComponent.hh"
+#include "Components/VehicleEffectsComponent.hh"
 #include "Components/CharacterOccupantComponent.hh"
 #include "Components/FaceMeterComponent.hh"
 #include "Components/GunComponent.hh"
