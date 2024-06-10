@@ -13,5 +13,10 @@ namespace UFG
 		{
 			return reinterpret_cast<uint32_t(__fastcall*)(qVector3*, bool)>(UFG_RVA(0x232460))(p_Position, false);
 		}
+
+		UFG_INLINE void FlushAltLayer(const char* p_szLayerName, bool p_bEnable)
+		{
+			reinterpret_cast<void(__fastcall*)(const char*, bool)>(UFG_RVA(0x2316D0))(p_szLayerName, p_bEnable);
+		}
 	}
 }

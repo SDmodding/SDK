@@ -114,4 +114,12 @@ namespace UFG
 			return *reinterpret_cast<CSectionLayout**>(UFG_RVA(0x23A8DE8));
 		}
 	};
+
+	namespace SectionLayout
+	{
+		UFG_INLINE bool SetLayerActive(const char* p_szLayerName, bool p_bEnable)
+		{
+			return reinterpret_cast<bool(__fastcall*)(const char*, bool)>(UFG_RVA(0x2350F0))(p_szLayerName, p_bEnable);
+		}
+	}
 }
