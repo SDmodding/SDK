@@ -4,9 +4,9 @@ namespace UFG
 {
 	namespace ExplosionManager
 	{
-		void CreateExplosion(qVector3* m_Position, qSymbol m_ExplosionHash, CSimObject* m_Source, CSimObject* m_Attacker)
+		UFG_INLINE void CreateExplosion(const qVector3& p_vPosition, qSymbol p_qExplosionName, CSimObject* p_Source, CSimObject* p_Attacker)
 		{
-			reinterpret_cast<void(__fastcall*)(qVector3*, qSymbol*, CSimObject*, CSimObject*)>(UFG_RVA(0x45C900))(m_Position, &m_ExplosionHash, m_Source, m_Attacker);
+			reinterpret_cast<void(__fastcall*)(const qVector3&, qSymbol*, CSimObject*, CSimObject*)>(UFG_RVA(0x45C900))(p_vPosition, &p_qExplosionName, p_Source, p_Attacker);
 		}
 	}
 }

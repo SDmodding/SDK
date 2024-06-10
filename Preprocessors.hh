@@ -4,11 +4,11 @@
 // Defines
 
 #ifdef SDK_NO_RVA_PREPROCESSOR
-    #define UFG_RVA(x)      x
-    #define UFG_RVA_GET(x)  x
+    #define UFG_RVA(x)          x
+    #define UFG_RVA_GET(x)      x
 #else   
-    #define UFG_RVA(x)      (g_BaseAddress + x)
-    #define UFG_RVA_GET(x)  (reinterpret_cast<uintptr_t>(x) - g_BaseAddress)
+    #define UFG_RVA(x)          (UFG::g_BaseAddress + x)
+    #define UFG_RVA_GET(x)      (reinterpret_cast<uintptr_t>(x) - UFG::g_BaseAddress)
 #endif
 #define UFG_RVA_PTR(x)		    reinterpret_cast<void*>(UFG_RVA(x))
 
@@ -25,13 +25,14 @@
 
 //==============================================================================
 // Asserts
+
 #define UFG_ASSERT_CLASS(className, classSize) \
     static_assert(sizeof(className) == classSize, "Size of class: '" #className "' is invalid!")
 #define UFG_ASSERT_STRUCT(structName, structSize) \
     static_assert(sizeof(structName) == structSize, "Size of struct: '" #structName "' is invalid!")
 
 //==============================================================================
-// Pads
+// Padding
 
 #define UFG_PAD_INSERT(x, y) x ## y
 #define UFG_PAD_DEFINE(x, y) UFG_PAD_INSERT(x, y)

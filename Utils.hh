@@ -7,7 +7,7 @@ namespace SDK
         namespace ActionNode
         {
 #ifndef SDK_SD_MINIMAL_BUILD
-            const char* GetName(uint32_t m_Hash)
+            static const char* GetName(uint32_t m_Hash)
             {
                 static std::unordered_map<uint32_t, const char*> m_Map;
                 if (m_Map.empty())
@@ -27,7 +27,7 @@ namespace SDK
                 return (*m_It).second;
             }
 
-            std::string ResolvePath(UFG::CActionNode* m_Node)
+            static std::string ResolvePath(UFG::CActionNode* m_Node)
             {         
                 std::string m_Path;
 
@@ -45,7 +45,7 @@ namespace SDK
         }
 
         // Integrity check if SDK can be used on game executable.
-        bool IsValidExecutable()
+        UFG_INLINE bool IsValidExecutable()
         {
             return (*reinterpret_cast<uint32_t*>(UFG_RVA(0x201D59C)) == 0x201E094); // Export directory (name) - sdhdship.exe
         }

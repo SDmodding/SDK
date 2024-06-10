@@ -29,15 +29,15 @@ namespace UFG
 	{
 	public:
 		// TODO
+
+		static UFG_INLINE CRadarSystem* Instance()
+		{
+			return *reinterpret_cast<CRadarSystem**>(UFG_RVA(0x23DC110));
+		}
 	};
 
 	namespace RadarSystem
 	{
-		CRadarSystem* Get()
-		{
-			return *reinterpret_cast<CRadarSystem**>(UFG_RVA(0x23DC110));
-		}
-
 		struct RevealParam_t
 		{
 			qSymbol mTypeSymbol;
@@ -50,13 +50,13 @@ namespace UFG
 		};
 
 		// Array size of eRadarType_Count
-		RevealParam_t* GetRevealParams()
+		UFG_INLINE RevealParam_t* GetRevealParams()
 		{
 			return reinterpret_cast<RevealParam_t*>(UFG_RVA(0x23DC2F0));
 		}
 
 		// Array size of eRadarType_Count
-		qColour* GetTypeColors()
+		UFG_INLINE qColour* GetTypeColors()
 		{
 			return reinterpret_cast<qColour*>(UFG_RVA(0x23DC470));
 		}

@@ -2,7 +2,7 @@
 
 namespace SDK
 {
-	uint32_t g_CRC32Table[] = {
+	static uint32_t s_CRC32Table[] = {
 		0x00000000, 0x04c11db7, 0x09823b6e, 0x0d4326d9, 0x130476dc, 0x17c56b6b, 0x1a864db2, 0x1e475005, 0x2608edb8, 0x22c9f00f, 0x2f8ad6d6, 0x2b4bcb61, 
 		0x350c9b64, 0x31cd86d3, 0x3c8ea00a, 0x384fbdbd, 0x4c11db70, 0x48d0c6c7, 0x4593e01e, 0x4152fda9, 0x5f15adac, 0x5bd4b01b, 0x569796c2, 0x52568b75, 
 		0x6a1936c8, 0x6ed82b7f, 0x639b0da6, 0x675a1011, 0x791d4014, 0x7ddc5da3, 0x709f7b7a, 0x745e66cd, 0x9823b6e0, 0x9ce2ab57, 0x91a18d8e, 0x95609039, 
@@ -27,7 +27,7 @@ namespace SDK
 		0xbcb4666d, 0xb8757bda, 0xb5365d03, 0xb1f740b4
 	};
 
-	uint32_t StringHash32(const char* p_Str, uint32_t p_PrevHash = 0xFFFFFFFF)
+	static uint32_t StringHash32(const char* p_Str, uint32_t p_PrevHash = 0xFFFFFFFF)
 	{
 		uint32_t m_Hash = p_PrevHash;
 		while (1)
@@ -36,14 +36,14 @@ namespace SDK
 			if (m_Char == '\0')
 				break;
 
-			m_Hash = (m_Hash << 8) ^ g_CRC32Table[((m_Hash >> 24) ^ m_Char) & 0xFF];
+			m_Hash = (m_Hash << 8) ^ s_CRC32Table[((m_Hash >> 24) ^ m_Char) & 0xFF];
 			++p_Str;
 		}
 
 		return m_Hash;
 	}
 
-	uint32_t StringHashUpper32(const char* p_Str, uint32_t p_PrevHash = 0xFFFFFFFF)
+	static uint32_t StringHashUpper32(const char* p_Str, uint32_t p_PrevHash = 0xFFFFFFFF)
 	{
 		uint32_t m_Hash = p_PrevHash;
 		while (1)
@@ -55,7 +55,7 @@ namespace SDK
 			if (m_Char >= 'a' && m_Char <= 'z')
 				m_Char -= 0x20;
 
-			m_Hash = (m_Hash << 8) ^ g_CRC32Table[((m_Hash >> 24) ^ m_Char) & 0xFF];
+			m_Hash = (m_Hash << 8) ^ s_CRC32Table[((m_Hash >> 24) ^ m_Char) & 0xFF];
 			++p_Str;
 		}
 

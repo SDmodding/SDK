@@ -51,13 +51,10 @@ namespace UFG
 		uint32_t mNumQueries;
 		uint32_t mConnectivityUpdateBucket;
 		qList<CParkourQuery> mQueries;
-	};
 
-	namespace Parkour
-	{
-		CParkourQueryManager* GetQueryManager()
+		static UFG_INLINE CParkourQueryManager* Instance()
 		{
 			return *reinterpret_cast<CParkourQueryManager**>(UFG_RVA(0x2403598));
 		}
-	}
+	};
 }

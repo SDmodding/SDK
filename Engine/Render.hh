@@ -15,18 +15,24 @@ namespace Render
 		float mFarBlurRadius;
 		bool mNearBlurRendered;
 
-		static CDepthOfField* Instance()
+		static UFG_INLINE CDepthOfField* Instance()
 		{
 			return reinterpret_cast<CDepthOfField*>(UFG_RVA(0x2129328));
 		}
 
-		bool* DontRender() { return reinterpret_cast<bool*>(UFG_RVA(0x2136120)); }
+		UFG_INLINE bool* DontRender() 
+		{ 
+			return reinterpret_cast<bool*>(UFG_RVA(0x2136120)); 
+		}
 
-		void Enable(bool enable)
+		void Enable(bool p_bEnable)
 		{
-			if (*DontRender() != enable) return;
+			bool* pDontRender = DontRender();
+			if (*pDontRender != p_bEnable) {
+				return;
+			}
 
-			*DontRender() = !enable;
+			*pDontRender = !p_bEnable;
 
 			mFocalDistance	= 0.f;
 			mInFocusRange	= 0.f;
@@ -37,27 +43,28 @@ namespace Render
 		}
 	};
 
-	bool IsLoadScreenRendering()
+	UFG_INLINE bool IsLoadScreenRendering()
 	{
 		return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x48050))();
 	}
 
-	bool IsFullscreen()
+	UFG_INLINE bool IsFullscreen()
 	{
 		return *reinterpret_cast<bool*>(UFG_RVA(0x2439A42));
 	}
 
-	int* GetScreenSize()
+	UFG_INLINE int* GetScreenSize()
 	{
 		return reinterpret_cast<int*>(UFG_RVA(0x2439A94));
 	}
 
-	ID3D11RenderTargetView** GetRenderTargetView()
+	UFG_INLINE ID3D11RenderTargetView** GetRenderTargetView()
 	{
-		if (!IsFullscreen())
+		if (!IsFullscreen()) {
 			return reinterpret_cast<ID3D11RenderTargetView**>(UFG_RVA(0x2439B18));
+		}
 
-		Illusion::CTarget* m_BackBufferTarget = *reinterpret_cast<Illusion::CTarget**>(UFG_RVA(0x2439A50));
-		return m_BackBufferTarget->mTargetPlat->mRenderTargetView[0];
+		Illusion::CTarget* pBackBuffer = *reinterpret_cast<Illusion::CTarget**>(UFG_RVA(0x2439A50));
+		return pBackBuffer->mTargetPlat->mRenderTargetView[0];
 	}
 }

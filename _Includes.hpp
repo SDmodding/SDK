@@ -1,13 +1,16 @@
 #pragma once
 
+//==========================================================================
+// Defines
+
 /*
-// Use this define before including SDK if you don't wanna use strings inside projects and etc...
-// #define SDK_SD_MINIMAL_BUILD
+*  - Use this define before including SDK if you don't wanna use strings inside projects and etc...
+*  #define SDK_SD_MINIMAL_BUILD
 */
 
 /*
-// Use this define before including SDK if you want use some optional includes...
-// #define SDK_SD_OPTIONAL_INCLUDES
+*  - Use this define before including SDK if you want use some optional includes...
+*  #define SDK_SD_OPTIONAL_INCLUDES
 */
 
 //==========================================================================
@@ -17,7 +20,11 @@
 #include <map>
 #include <d3d11.h>
 
-uintptr_t g_BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
+namespace UFG
+{
+	inline uintptr_t g_BaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(0));
+}
+
 #include "Preprocessors.hh"
 
 template <uint32_t Index, typename ReturnType, typename... Args>

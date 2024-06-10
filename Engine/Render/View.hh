@@ -2,15 +2,15 @@
 
 namespace Render
 {
-	Illusion::CTarget* GetBackBufferTarget()
+	UFG_INLINE Illusion::CTarget* GetBackBufferTarget()
 	{
 		return *reinterpret_cast<Illusion::CTarget**>(UFG_RVA(0x2439A50));
 	}
 
 	UFG_INLINE UFG::qVector2 GetViewportScale()
 	{
-		Illusion::CTarget* _BackBufferTarget = GetBackBufferTarget();
-		return { static_cast<float>(_BackBufferTarget->mWidth), static_cast<float>(_BackBufferTarget->mHeight) };
+		Illusion::CTarget* pBackBuffer = GetBackBufferTarget();
+		return { static_cast<float>(pBackBuffer->mWidth), static_cast<float>(pBackBuffer->mHeight) };
 	}
 
 	//=====================================================================================

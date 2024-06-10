@@ -18,9 +18,9 @@ namespace SimpleXML
 
 	namespace XMLCache
 	{
-		char* ExtractFromCache(const char* filename)
+		UFG_INLINE char* ExtractFromCache(const char* p_szFilename)
 		{
-			return reinterpret_cast<char*(__fastcall*)(const char*)>(UFG_RVA(0x8A580))(filename);
+			return reinterpret_cast<char*(__fastcall*)(const char*)>(UFG_RVA(0x8A580))(p_szFilename);
 		}
 	}
 }

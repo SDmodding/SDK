@@ -51,13 +51,10 @@ namespace UFG
 		UFG::qString mGlobalFallbackAnimation;
 		bool mUseFallbackAnimations;
 		UFG::StreamPrioritySystem* m_pStreamPrioritySystem;*/
-	};
 
-	namespace AnimationBase
-	{
-		CAnimationDataBase* Get()
+		static UFG_INLINE CAnimationDataBase* Instance()
 		{
 			return *reinterpret_cast<CAnimationDataBase**>(UFG_RVA(0x23CE050));
 		}
-	}
+	};
 }

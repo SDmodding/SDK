@@ -28,7 +28,7 @@ namespace UFG
 
 	namespace DoorStateManager
 	{
-		qBaseTreeRB* GetDoors()
+		UFG_INLINE qBaseTreeRB* GetDoors()
 		{
 			return reinterpret_cast<qBaseTreeRB*>(UFG_RVA(0x242E8A0));
 		}

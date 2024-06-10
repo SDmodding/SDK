@@ -51,35 +51,36 @@ namespace UFG
 
 	namespace MemoryPool
 	{
-		CMemoryPool* GetMainPool()
+		UFG_INLINE CMemoryPool* GetMainPool()
 		{
 			return reinterpret_cast<CMemoryPool*>(UFG_RVA(0x22581A0));
 		}
 
-		CMemoryPool* GetSimulationPool()
+		UFG_INLINE CMemoryPool* GetSimulationPool()
 		{
 			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x235C278));
 		}
 
-		CMemoryPool* GetScaleformPool()
+		UFG_INLINE CMemoryPool* GetScaleformPool()
 		{
 			return *reinterpret_cast<CMemoryPool**>(UFG_RVA(0x23F1B00));
 		}
 
-		qList<CMemoryPool>* GetList()
+		UFG_INLINE qList<CMemoryPool>* GetList()
 		{
 			return reinterpret_cast<qList<CMemoryPool>*>(UFG_RVA(0x235B2D8));
 		}
 
-		CMemoryPool* FindByName(const char* m_Name)
+		static UFG_INLINE CMemoryPool* FindByName(const char* m_Name)
 		{
-			qList<CMemoryPool>* m_List = GetList();
-			for (qNode<CMemoryPool>* i = m_List->mNode.mNext; i != &m_List->mNode; i = i->mNext)
+			qList<CMemoryPool>* pList = GetList();
+			for (qNode<CMemoryPool>* i = pList->mNode.mNext; i != &pList->mNode; i = i->mNext)
 			{
-				CMemoryPool* m_MemoryPool = i->GetPointer();
-				const char* m_MemoryPoolName = m_MemoryPool->GetName();
-				if (strcmp(m_MemoryPoolName, m_Name) == 0)
-					return m_MemoryPool;
+				CMemoryPool* pMemoryPool = i->GetPointer();
+
+				if (strcmp(pMemoryPool->GetName(), m_Name) == 0) {
+					return pMemoryPool;
+				}
 			}
 
 			return nullptr;

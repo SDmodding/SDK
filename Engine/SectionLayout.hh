@@ -108,13 +108,10 @@ namespace UFG
 		qOffset64<CLayer> mLayers;
 		uint32_t mOverrideCount;
 		qOffset64<qOffset64<uint32_t>> mOverrides;
-	};
 
-	namespace SectionLayout
-	{
-		CSectionLayout* Get()
+		static UFG_INLINE CSectionLayout* Instance()
 		{
 			return *reinterpret_cast<CSectionLayout**>(UFG_RVA(0x23A8DE8));
 		}
-	}
+	};
 }

@@ -113,6 +113,4 @@ namespace UFG
 			RemoveAllRigidModelBindings();
 		}
 	};
-
-	UFG_PAD(sizeof(qNode<CModelType>));
 }

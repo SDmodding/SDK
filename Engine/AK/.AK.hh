@@ -26,7 +26,7 @@ namespace AK
 	namespace SoundEngine
 	{
 		// Rewritten from scratch. Reference: (.text:0000000140A41FD0)
-		uint32_t GetIDFromString(const char* p_Str)
+		UFG_INLINE uint32_t GetIDFromString(const char* p_Str)
 		{
 			uint32_t m_ID = 0x811C9DC5;
 			for (; *p_Str; ++p_Str)

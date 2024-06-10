@@ -52,7 +52,7 @@ namespace Scaleform
 
 	namespace Memory
 	{
-		MemoryHeap* GetGlobalHeap()
+		UFG_INLINE MemoryHeap* GetGlobalHeap()
 		{
 			return *reinterpret_cast<MemoryHeap**>(UFG_RVA(0x2451A10));
 		}

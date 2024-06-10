@@ -200,14 +200,15 @@ namespace UFG
 
 		namespace Gamepad
 		{
-			bool IsActive()
+			UFG_INLINE bool IsActive()
 			{
-				CInputSystem* _InputSystem = CInputSystem::Instance();
-				if (!_InputSystem)
+				CInputSystem* pInputSystem = CInputSystem::Instance();
+				if (!pInputSystem) {
 					return false;
+				}
 
-				CController* _Controller = _InputSystem->AcquireController(GetActiveControllerNum());
-				if (_Controller && _Controller->m_IsKeyboardController) {
+				CController* pController = pInputSystem->AcquireController(GetActiveControllerNum());
+				if (pController && pController->m_IsKeyboardController) {
 					return false;
 				}
 

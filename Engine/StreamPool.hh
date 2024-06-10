@@ -2,8 +2,6 @@
 
 namespace UFG
 {
-	UFG_PAD(sizeof(UFG::qTreeRB));
-
 	class CStreamPool
 	{
 	public:
@@ -35,17 +33,17 @@ namespace UFG
 
 	namespace StreamPool
 	{
-		CStreamPool* Get(uint32_t p_Index)
+		UFG_INLINE CStreamPool* Get(uint32_t p_Index)
 		{
 			return reinterpret_cast<CStreamPool**>(UFG_RVA(0x236FBD0))[p_Index];
 		}
 
-		bool Create(uint32_t p_Index, uint64_t p_PageSize, uint32_t p_PageCount, uint32_t p_Alignment, bool p_AllowDefrag, const char* p_Name, CMemoryPool* p_MemoryPool)
+		UFG_INLINE bool Create(uint32_t p_Index, uint64_t p_PageSize, uint32_t p_PageCount, uint32_t p_Alignment, bool p_AllowDefrag, const char* p_Name, CMemoryPool* p_MemoryPool)
 		{
 			return reinterpret_cast<bool(__fastcall*)(uint32_t, uint64_t, uint32_t, uint32_t, bool, const char*, CMemoryPool*)>(UFG_RVA(0x22E5D0))(p_Index, p_PageSize, p_PageCount, p_Alignment, p_AllowDefrag, p_Name, p_MemoryPool);
 		}
 
-		bool Create(uint32_t p_Index, uint64_t p_PageSize, uint32_t p_Alignment, bool p_AllowDefrag, const char* p_Name, CMemoryPool* p_MemoryPool)
+		UFG_INLINE bool Create(uint32_t p_Index, uint64_t p_PageSize, uint32_t p_Alignment, bool p_AllowDefrag, const char* p_Name, CMemoryPool* p_MemoryPool)
 		{
 			return reinterpret_cast<bool(__fastcall*)(uint32_t, uint64_t, uint32_t, bool, const char*, CMemoryPool*)>(UFG_RVA(0x22E6A0))(p_Index, p_PageSize, p_Alignment, p_AllowDefrag, p_Name, p_MemoryPool);
 		}

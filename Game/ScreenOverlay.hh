@@ -7,22 +7,22 @@ namespace UFG
 {
 	namespace ScreenOverlay
 	{
-		void* Get()
+		UFG_INLINE void* Get()
 		{
 			return *reinterpret_cast<void**>(UFG_RVA(0x2430D38));
 		}
 
-		void ShowCurtains(float fadeInTime, bool bMuteAudio)
+		UFG_INLINE void ShowCurtains(float p_fFadeInTime, bool p_bMuteAudio)
 		{
-			reinterpret_cast<void(__fastcall*)(float, bool)>(UFG_RVA(0x60D3C0))(fadeInTime, bMuteAudio);
+			reinterpret_cast<void(__fastcall*)(float, bool)>(UFG_RVA(0x60D3C0))(p_fFadeInTime, p_bMuteAudio);
 		}
 
-		void HideCurtains(float fadeOutTime, bool bUseNonLinearFade)
+		UFG_INLINE void HideCurtains(float p_fFadeOutTime, bool p_bUseNonLinearFade)
 		{
-			reinterpret_cast<void(__fastcall*)(float, bool)>(UFG_RVA(0x5ECCA0))(fadeOutTime, bUseNonLinearFade);
+			reinterpret_cast<void(__fastcall*)(float, bool)>(UFG_RVA(0x5ECCA0))(p_fFadeOutTime, p_bUseNonLinearFade);
 		}
 
-		void YouDied()
+		UFG_INLINE void YouDied()
 		{
 			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x61F620))();
 		}
@@ -30,43 +30,52 @@ namespace UFG
 
 	namespace ScreenDialogBox
 	{
-		void InfoStart(const char* bodyText, bool fullscreen = true, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		UFG_INLINE void InfoStart(const char* p_szBodyText, bool p_bFullscreen = true, const char* p_szFlashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, bool, const char*)>(UFG_RVA(0x61FB90))(nullptr, "", bodyText, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, bool, const char*)>(UFG_RVA(0x61FB90))(nullptr, "", p_szBodyText, p_bFullscreen, p_szFlashFile);
 		}
 		
-		void InfoEnd()
+		UFG_INLINE void InfoEnd()
 		{
 			reinterpret_cast<void(__fastcall*)(void*, DWORD)>(UFG_RVA(0xA31600))(*(uintptr_t**)UFG_RVA(0x249C1C0), UFG_DIALOGBOX_TOP_LAYER);
 		}
 
-		void OneButton(const char* bodyText, const char* optionText, bool fullscreen = true, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		UFG_INLINE void OneButton(const char* p_szBodyText, const char* p_szOptionText, bool p_bFullscreen = true, uint32_t p_uOptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* p_szFlashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, bool, const char*)>(UFG_RVA(0x61F500))(nullptr, "", bodyText, optionText, m_OptionHash, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, bool, const char*)>(UFG_RVA(0x61F500))(nullptr, "", p_szBodyText, p_szOptionText, p_uOptionHash, p_bFullscreen, p_szFlashFile);
 		}
 
-		void TwoButton(const char* bodyText, const char* option1Text, const char* option2Text, bool fullscreen = true, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		UFG_INLINE void TwoButton(const char* p_szBodyText, const char* p_szOption1, const char* p_szOption2, bool p_bFullscreen = true, uint32_t p_uOptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* p_szFlashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, uint32_t, bool, const char*)>(UFG_RVA(0x61F970))(nullptr, "", bodyText, option1Text, m_OptionHash, option2Text, m_OptionHash + 1, 0, fullscreen, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, uint32_t, bool, const char*)>(UFG_RVA(0x61F970))(nullptr, "", p_szBodyText, p_szOption1, p_uOptionHash, p_szOption2, p_uOptionHash + 1, 0, p_bFullscreen, p_szFlashFile);
 		}
 
-		void ThreeButton(const char* bodyText, const char* option1Text, const char* option2Text, const char* option3Text, uint32_t m_OptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* flashFile = UFG_DIALOGBOX_FLASHFILE)
+		UFG_INLINE void ThreeButton(const char* p_szBodyText, const char* p_szOption1, const char* p_szOption2, const char* p_szOption3, uint32_t p_uOptionHash = UFG_DIALOGBOX_OPTION_HASH, const char* p_szFlashFile = UFG_DIALOGBOX_FLASHFILE)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, const char*, uint32_t, uint32_t, const char*)>(UFG_RVA(0x61F820))(nullptr, "", bodyText, option1Text, m_OptionHash, option2Text, m_OptionHash + 1, option3Text, m_OptionHash + 2, 0, flashFile);
+			reinterpret_cast<void(__fastcall*)(void*, const char*, const char*, const char*, uint32_t, const char*, uint32_t, const char*, uint32_t, uint32_t, const char*)>(UFG_RVA(0x61F820))(nullptr, "", p_szBodyText, p_szOption1, p_uOptionHash, p_szOption2, p_uOptionHash + 1, p_szOption3, p_uOptionHash + 2, 0, p_szFlashFile);
 		}
 	}
 
 	namespace ScreenMissionComplete
 	{
-		void Actiate(qSymbol gamesliceType, qSymbol gamesliceSubType, const char* caption, bool show_xp_tutorial) 
+		UFG_INLINE void Actiate(qSymbol p_qGamesliceType, qSymbol p_qGamesliceSubType, const char* p_szCaption, bool p_bShowXPTutorial)
 		{ 
-			reinterpret_cast<void(__fastcall*)(qSymbol*, qSymbol*, const char*, bool)>(UFG_RVA(0x5D10C0))(&gamesliceType, &gamesliceSubType, caption, show_xp_tutorial);
+			reinterpret_cast<void(__fastcall*)(qSymbol*, qSymbol*, const char*, bool)>(UFG_RVA(0x5D10C0))(&p_qGamesliceType, &p_qGamesliceSubType, p_szCaption, p_bShowXPTutorial);
 		}
 
-		void ClearRacers() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5860))(); }
+		UFG_INLINE void ClearRacers() 
+		{ 
+			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5860))(); 
+		}
 
-		void ClearRewards() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5900))(); }
+		UFG_INLINE void ClearRewards() 
+		{ 
+			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5900))(); 
+		}
 
-		void FillRacerInfo(qArray<qString>* racerNames) { reinterpret_cast<void(__fastcall*)(qArray<qString>*)>(UFG_RVA(0x5D8360))(racerNames); }
+		UFG_INLINE void FillRacerInfo(qArray<qString>* p_arrRacerNames) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(qArray<qString>*)>(UFG_RVA(0x5D8360))(p_arrRacerNames);
+		}
 	}
 }

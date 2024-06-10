@@ -107,7 +107,7 @@ namespace UFG
 
 	namespace PhysicsPropertyManager
 	{
-		qTreeRB* GetObjectPropertiesLookup()
+		UFG_INLINE qTreeRB* GetObjectPropertiesLookup()
 		{
 			return reinterpret_cast<qTreeRB*>(UFG_RVA(0x216DBA0));
 		}

@@ -50,17 +50,22 @@ namespace UFG
 
 		char mName[32];
 
-		CBSPNode* GetNodeByIndex(uint32_t p_Index)
+		static UFG_INLINE CBSP* Instance()
+		{
+			return *reinterpret_cast<CBSP**>(UFG_RVA(0x23A8D78));
+		}
+
+		UFG_INLINE CBSPNode* GetNodeByIndex(uint32_t p_Index)
 		{
 			return mNodes.Get(p_Index, sizeof(CBSPFace));
 		}
 
-		CBSPFace* GetFaceByIndex(uint32_t p_Index)
+		UFG_INLINE CBSPFace* GetFaceByIndex(uint32_t p_Index)
 		{
 			return mFaces.Get(p_Index, sizeof(CBSPFace));
 		}
 
-		CBSPSpace* GetSpaceByIndex(uint32_t p_Index)
+		UFG_INLINE CBSPSpace* GetSpaceByIndex(uint32_t p_Index)
 		{
 			return mSpaces.Get(p_Index, sizeof(CBSPSpace));
 		}

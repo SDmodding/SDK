@@ -79,27 +79,28 @@ namespace UFG
 
 		namespace Handle
 		{
-			Handle_t* New(const char* p_Name)
+			UFG_INLINE Handle_t* New(const char* p_szName)
 			{
-				Handle_t* m_Handle = reinterpret_cast<Handle_t*>(Malloc(sizeof(Handle_t), p_Name, 0));
-				if (m_Handle)
-					m_Handle->Initialize();
+				Handle_t* pHandle = reinterpret_cast<Handle_t*>(Malloc(sizeof(Handle_t), p_szName, 0));
+				if (pHandle) {
+					pHandle->Initialize();
+				}
 
-				return m_Handle;
+				return pHandle;
 			}
 		}
 
-		bool QueueStream(Handle_t* p_Handle, const char* p_FileName, uint32_t p_DataType, PRIORITY p_Priority, uint32_t p_Flags, void* p_Callback, void* p_CallbackParam)
+		UFG_INLINE bool QueueStream(Handle_t* p_Handle, const char* p_FileName, uint32_t p_DataType, PRIORITY p_Priority, uint32_t p_Flags, void* p_Callback, void* p_CallbackParam)
 		{
 			return reinterpret_cast<bool(__fastcall*)(Handle_t*, const char*, uint32_t, PRIORITY, uint32_t, void*, void*)>(UFG_RVA(0x22C580))(p_Handle, p_FileName, p_DataType, p_Priority, p_Flags, p_Callback, p_CallbackParam);
 		}
 
-		bool UnloadStreamResources(Handle_t* p_Handle)
+		UFG_INLINE bool UnloadStreamResources(Handle_t* p_Handle)
 		{
 			return reinterpret_cast<bool(__fastcall*)(Handle_t*)>(UFG_RVA(0x22ED00))(p_Handle);
 		}
 
-		bool ReleaseStream(Handle_t* p_Handle)
+		UFG_INLINE bool ReleaseStream(Handle_t* p_Handle)
 		{
 			return reinterpret_cast<bool(__fastcall*)(Handle_t*)>(UFG_RVA(0x22CBE0))(p_Handle);
 		}

@@ -45,28 +45,26 @@ namespace UFG
 		CTrueCrowdDefinition mDefinition;
 		unsigned int mNumComponentEntries;
 
-		void* QueryDataBase(qPropertySet* property_set, void* dataPtr = nullptr)
+		static UFG_INLINE CTrueCrowdDataBase* Instance()
 		{
-			return reinterpret_cast<void*(__fastcall*)(void*, qPropertySet*, void*)>(UFG_RVA(0x4408F0))(this, property_set, dataPtr);
+			return *reinterpret_cast<CTrueCrowdDataBase**>(UFG_RVA(0x24015E0));
 		}
 
-		uint32_t GetEntityIndex(uint32_t m_NameUID)
+		UFG_INLINE void* QueryDataBase(qPropertySet* p_PropertySet, void* p_DataPtr = nullptr)
+		{
+			return reinterpret_cast<void*(__fastcall*)(void*, qPropertySet*, void*)>(UFG_RVA(0x4408F0))(this, p_PropertySet, p_DataPtr);
+		}
+
+		UFG_INLINE uint32_t GetEntityIndex(uint32_t m_NameUID)
 		{
 			for (uint32_t i = 0; mDefinition.mEntityCount > i; ++i)
 			{
-				if (mDefinition.mEntities[i].mNameUID == m_NameUID)
+				if (mDefinition.mEntities[i].mNameUID == m_NameUID) {
 					return i;
+				}
 			}
 
 			return -1;
 		}
 	};
-
-	namespace TrueCrowdDataBase
-	{
-		CTrueCrowdDataBase* Get()
-		{
-			return *reinterpret_cast<CTrueCrowdDataBase**>(UFG_RVA(0x24015E0));
-		}
-	}
 }

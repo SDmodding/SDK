@@ -170,6 +170,11 @@ namespace UFG
 	class CActionButton
 	{
 	public:
+		static UFG_INLINE CActionButton* Instance() 
+		{ 
+			return *reinterpret_cast<CActionButton**>(UFG_RVA(0x2430BB8)); 
+		}
+
 		UFG_INLINE void Hide()
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5EC990))(this); 
@@ -202,6 +207,11 @@ namespace UFG
 		bool mVisible;
 		bool mChanged;
 
+		static UFG_INLINE CMissionProgress* Instance() 
+		{ 
+			return *reinterpret_cast<CMissionProgress**>(UFG_RVA(0x2430BD0)); 
+		}
+
 		UFG_INLINE void Clear() 
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5D50D0))(this); 
@@ -221,6 +231,11 @@ namespace UFG
 	class CInfoPopup
 	{
 	public:
+		static UFG_INLINE CInfoPopup* Instance() 
+		{ 
+			return *reinterpret_cast<CInfoPopup**>(UFG_RVA(0x2430BD8));
+		}
+
 		UFG_INLINE void Show(const char* caption, qSymbol type, float duration, int position = 0)
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*, const char*, qSymbol*, float, int)>(UFG_RVA(0x60D100))(this, caption, &type, duration, position); 
@@ -241,6 +256,11 @@ namespace UFG
 		bool mSuccess;
 		float mHealth;
 		qString mCaption;
+
+		static UFG_INLINE CMissionHealth* Instance() 
+		{ 
+			return *reinterpret_cast<CMissionHealth**>(UFG_RVA(0x2430BE0));
+		}
 
 		UFG_INLINE void SetCaption(const char* caption) { reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x605610))(this, caption); }
 
@@ -265,6 +285,11 @@ namespace UFG
 	class CTurnHintWidget
 	{
 	public:
+		static UFG_INLINE CTurnHintWidget* Instance() 
+		{ 
+			return *reinterpret_cast<CTurnHintWidget**>(UFG_RVA(0x2430BE8)); 
+		}
+
 		UFG_INLINE void Show(qSymbol m_Icon)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x60D260))(this, &m_Icon);
@@ -279,30 +304,55 @@ namespace UFG
 	class CRaceTimerWidget
 	{
 	public:
-		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C650))(this, visible); }
-
-		void SetTime(unsigned int minutes, unsigned int seconds, unsigned int thousandths) 
+		static UFG_INLINE CRaceTimerWidget* Instance() 
 		{ 
-			reinterpret_cast<void(__fastcall*)(void*, unsigned int, unsigned int, unsigned int)>(UFG_RVA(0x60A0C0))(this, minutes, seconds, thousandths);
+			return *reinterpret_cast<CRaceTimerWidget**>(UFG_RVA(0x2430BF0)); 
 		}
 
-		void SetTime(float m_FloatTime)
+		UFG_INLINE void SetVisible(bool p_bVisible) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C650))(this, p_bVisible);
+		}
+
+		UFG_INLINE void SetTime(uint32_t p_uMinutes, uint32_t p_uSeconds, uint32_t p_uThousandths)
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t, uint32_t, uint32_t)>(UFG_RVA(0x60A0C0))(this, p_uMinutes, p_uSeconds, p_uThousandths);
+		}
+
+		UFG_INLINE void SetTime(float p_fTime)
 		{
-			uint32_t m_Time = static_cast<uint32_t>(m_FloatTime * 1000.f);
-			SetTime((m_Time / 1000 / 60), (m_Time / 1000 % 60), (m_Time % 1000));
+			uint32_t uTime = static_cast<uint32_t>(p_fTime * 1000.f);
+			SetTime((uTime / 1000 / 60), (uTime / 1000 % 60), (uTime % 1000));
 		}
 
-		void StartCountdown() { reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x4F2480))(); }
+		static UFG_INLINE void StartCountdown() 
+		{ 
+			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x4F2480))(); 
+		}
 	};
 
 	class CRacePositionWidget
 	{
 	public:
-		void SetVisible(bool visible) { reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C640))(this, visible); }
+		static UFG_INLINE CRacePositionWidget* Instance() 
+		{ 
+			return *reinterpret_cast<CRacePositionWidget**>(UFG_RVA(0x2430BF8)); 
+		}
 
-		void SetNumRacers(unsigned int numRacers) { reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x606620))(this, numRacers); }
+		UFG_INLINE void SetVisible(bool p_bVisible) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x60C640))(this, p_bVisible);
+		}
 
-		void SetPlayerRank(unsigned int rank) { reinterpret_cast<void(__fastcall*)(void*, unsigned int)>(UFG_RVA(0x606F00))(this, rank); }
+		UFG_INLINE void SetNumRacers(uint32_t p_uNumRacers) 
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x606620))(this, p_uNumRacers);
+		}
+
+		UFG_INLINE void SetPlayerRank(uint32_t p_uRank)
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x606F00))(this, p_uRank);
+		}
 	};
 
 	class CRacePathWidget
@@ -314,7 +364,15 @@ namespace UFG
 		uint32_t m_MarkerPositionsCapacity;
 		qVector3* m_MarkerPositionsPointer;
 
-		void SetVisible(bool m_Enable) { *reinterpret_cast<bool*>(UFG_RVA(0x2173F01)) = m_Enable; }
+		static UFG_INLINE CRacePathWidget* Instance() 
+		{ 
+			return *reinterpret_cast<CRacePathWidget**>(UFG_RVA(0x2430C28)); 
+		}
+
+		static UFG_INLINE void SetVisible(bool p_bVisible)
+		{
+			*reinterpret_cast<bool*>(UFG_RVA(0x2173F01)) = p_bVisible;
+		}
 
 		void GenerateSpline(qVector3* m_Array, uint32_t m_Size)
 		{
@@ -327,7 +385,7 @@ namespace UFG
 			m_MarkerPositionsSize		= 0;
 		}
 
-		void Clear() 
+		UFG_INLINE void Clear()
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xBE980))(this); 
 			SetVisible(false);
@@ -337,9 +395,20 @@ namespace UFG
 	class CHintText
 	{
 	public:
-		void Show(const char* text, float displayTime, bool repeat = false, float repeatTime = 0.f) { reinterpret_cast<void(__fastcall*)(void*, const char*, float, bool, float)>(UFG_RVA(0x63AFD0))(this, text, displayTime, repeat, repeatTime); }
+		static UFG_INLINE CHintText* Instance() 
+		{ 
+			return *reinterpret_cast<CHintText**>(UFG_RVA(0x2430C40)); 
+		}
 
-		void Hide() { reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x62FBF0))(this); }
+		UFG_INLINE void Show(const char* p_szText, float p_fDisplayTime, bool p_bRepeat = false, float p_fRepeatTime = 0.f)
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*, const char*, float, bool, float)>(UFG_RVA(0x63AFD0))(this, p_szText, p_fDisplayTime, p_bRepeat, p_fRepeatTime);
+		}
+
+		UFG_INLINE void Hide()
+		{ 
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x62FBF0))(this); 
+		}
 	};
 
 	class CMissionComplete
@@ -351,12 +420,18 @@ namespace UFG
 	class CSecondaryTutorialWidget
 	{
 	public:
-		void Show(const char* m_Text)
-		{
-			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x60D240))(this, m_Text);
+		static UFG_INLINE CSecondaryTutorialWidget* Instance() 
+		{ 
+			return *reinterpret_cast<CSecondaryTutorialWidget**>(UFG_RVA(0x2430C58)); 
 		}
 
-		void Hide() 
+
+		UFG_INLINE void Show(const char* p_szText)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, const char*)>(UFG_RVA(0x60D240))(this, p_szText);
+		}
+
+		UFG_INLINE void Hide()
 		{ 
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x5ECC30))(this);
 		}
@@ -391,70 +466,74 @@ namespace UFG
 		bool mStatGameInfoActive;
 		bool mUpdateStatGamePosition;
 		bool mHudEnable;*/
+
+		static UFG_INLINE CScreenHud* Instance() 
+		{ 
+			return *reinterpret_cast<CScreenHud**>(UFG_RVA(0x2430CC8)); 
+		}
 	};
 
 	namespace ScreenHud
 	{
-		CScreenHud* Get() { return *reinterpret_cast<CScreenHud**>(UFG_RVA(0x2430CC8)); }
-
-		CActionButton* GetActionButton() { return *reinterpret_cast<CActionButton**>(UFG_RVA(0x2430BB8)); }
-
-		CMissionProgress* GetMissionProgress() { return *reinterpret_cast<CMissionProgress**>(UFG_RVA(0x2430BD0)); }
-
-		CInfoPopup* GetInfoPopup() { return *reinterpret_cast<CInfoPopup**>(UFG_RVA(0x2430BD8)); }
-
-		CMissionHealth* GetMissionHealth() { return *reinterpret_cast<CMissionHealth**>(UFG_RVA(0x2430BE0)); }
-
-		CTurnHintWidget* GetTurnHintWidget() { return *reinterpret_cast<CTurnHintWidget**>(UFG_RVA(0x2430BE8)); }
-
-		CRaceTimerWidget* GetRaceTimerWidget() { return *reinterpret_cast<CRaceTimerWidget**>(UFG_RVA(0x2430BF0)); }
-
-		CRacePositionWidget* GetRacePositionWidget() { return *reinterpret_cast<CRacePositionWidget**>(UFG_RVA(0x2430BF8)); }
-
-		CRacePathWidget* GetRacePathWidget() { return *reinterpret_cast<CRacePathWidget**>(UFG_RVA(0x2430C28)); }
-
-		CHintText* GetHintText() { return *reinterpret_cast<CHintText**>(UFG_RVA(0x2430C40)); }
-
-		CSecondaryTutorialWidget* GetSecondaryTutorialWidget() { return *reinterpret_cast<CSecondaryTutorialWidget**>(UFG_RVA(0x2430C58)); }
-
-		void SetVisible(bool value)
+		UFG_INLINE void SetVisible(bool value)
 		{
 			reinterpret_cast<void(__fastcall*)(bool)>(UFG_RVA(0x60C670))(value);
 		}
 
-		bool GetVisible()
+		UFG_INLINE bool GetVisible()
 		{
 			return *reinterpret_cast<bool*>(UFG_RVA(0x208E330));
 		}
 
 		namespace MissionComplete
 		{
-			int* TotalScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C04)); }
-			int* PoliceScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C20)); }
-			int* TriadScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C24)); }
-			int* UncappedTotalScore() { return reinterpret_cast<int*>(UFG_RVA(0x2430C38)); }
+			UFG_INLINE int* TotalScore() 
+			{ 
+				return reinterpret_cast<int*>(UFG_RVA(0x2430C04)); 
+			}
 
+			UFG_INLINE int* PoliceScore() 
+			{ 
+				return reinterpret_cast<int*>(UFG_RVA(0x2430C20));
+			}
 
-			float* PoliceScorePercentage() { return reinterpret_cast<float*>(UFG_RVA(0x243121C)); }
-			float* TriadScorePercentage() { return reinterpret_cast<float*>(UFG_RVA(0x2431CEC)); }
+			UFG_INLINE int* TriadScore() 
+			{ 
+				return reinterpret_cast<int*>(UFG_RVA(0x2430C24));
+			}
 
-			void Activate(qSymbol m_GameSliceType, qSymbol m_GameSliceSubType, const char* m_Caption, bool m_ShowXPTutorial)
+			UFG_INLINE int* UncappedTotalScore() 
+			{ 
+				return reinterpret_cast<int*>(UFG_RVA(0x2430C38)); 
+			}
+
+			UFG_INLINE float* PoliceScorePercentage() 
+			{ 
+				return reinterpret_cast<float*>(UFG_RVA(0x243121C)); 
+			}
+
+			UFG_INLINE float* TriadScorePercentage() 
+			{ 
+				return reinterpret_cast<float*>(UFG_RVA(0x2431CEC)); 
+			}
+
+			UFG_INLINE void Activate(qSymbol m_GameSliceType, qSymbol m_GameSliceSubType, const char* m_Caption, bool m_ShowXPTutorial)
 			{
 				reinterpret_cast<void(__fastcall*)(qSymbol*, qSymbol*, const char*, bool)>(UFG_RVA(0x5D10C0))(&m_GameSliceType, &m_GameSliceSubType, m_Caption, m_ShowXPTutorial);
 			}
 
-			void AddReward(const char* m_Caption, qSymbol m_Icon)
+			UFG_INLINE void AddReward(const char* m_Caption, qSymbol m_Icon)
 			{
-				static qSymbol m_UIScreenType = 0xD1FAADB0;
-				reinterpret_cast<void(__fastcall*)(const char*, qSymbol, qSymbol*)>(UFG_RVA(0x5D2A70))(m_Caption, m_Icon, &m_UIScreenType);
+				qSymbol qScreenType = 0xD1FAADB0; // I FORGOT WHAT IS THIS
+				reinterpret_cast<void(__fastcall*)(const char*, qSymbol, qSymbol*)>(UFG_RVA(0x5D2A70))(m_Caption, m_Icon, &qScreenType);
 			}
 
-			void ClearRacers()
+			UFG_INLINE void ClearRacers()
 			{
 				reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5860))();
 			}
 
-			void ClearRewards()
+			UFG_INLINE void ClearRewards()
 			{
 				reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5D5900))();
 			}

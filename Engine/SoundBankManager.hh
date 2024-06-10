@@ -23,59 +23,59 @@ namespace UFG
 
 	namespace SoundBankManager
 	{
-		bool AreAllImportantBankLoadsComplete()
+		UFG_INLINE bool AreAllImportantBankLoadsComplete()
 		{
 			return reinterpret_cast<bool(__fastcall*)()>(UFG_RVA(0x142D60))();
 		}
 
-		bool BankLoadRequestFinished(uint32_t m_BankID)
+		UFG_INLINE bool BankLoadRequestFinished(uint32_t p_BankID)
 		{
-			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x143470))(&m_BankID);
+			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x143470))(&p_BankID);
 		}
 
-		bool BankLoadRequested(uint32_t m_BankID)
+		UFG_INLINE bool BankLoadRequested(uint32_t p_BankID)
 		{
-			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x1434B0))(&m_BankID);
+			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x1434B0))(&p_BankID);
 		}
 
-		bool BankLoaded(uint32_t m_BankID)
+		UFG_INLINE bool BankLoaded(uint32_t p_BankID)
 		{
-			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x1434F0))(&m_BankID);
+			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x1434F0))(&p_BankID);
 		}
 
-		bool BankLoadedOrLoading(uint32_t m_BankID)
+		UFG_INLINE bool BankLoadedOrLoading(uint32_t p_BankID)
 		{
-			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x143590))(&m_BankID);
+			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x143590))(&p_BankID);
 		}
 
-		qBaseTreeRB* FindOrCreateGroup(uint32_t m_GroupID)
+		UFG_INLINE qBaseTreeRB* FindOrCreateGroup(uint32_t p_GroupID)
 		{
-			return reinterpret_cast<qBaseTreeRB*(__fastcall*)(uint32_t)>(UFG_RVA(0x145860))(m_GroupID);
+			return reinterpret_cast<qBaseTreeRB*(__fastcall*)(uint32_t)>(UFG_RVA(0x145860))(p_GroupID);
 		}
 
-		CSoundBank* FindOrCreateSoundBank(uint32_t m_BankID)
+		UFG_INLINE CSoundBank* FindOrCreateSoundBank(uint32_t p_BankID)
 		{
-			return reinterpret_cast<CSoundBank*(__fastcall*)(uint32_t*)>(UFG_RVA(0x1458E0))(&m_BankID);
+			return reinterpret_cast<CSoundBank*(__fastcall*)(uint32_t*)>(UFG_RVA(0x1458E0))(&p_BankID);
 		}
 
-		uint32_t GetBytesRemainingToLoad()
+		UFG_INLINE uint32_t GetBytesRemainingToLoad()
 		{
 			return reinterpret_cast<uint32_t(__fastcall*)()>(UFG_RVA(0x145C30))();
 		}
 
-		bool QueueBankForLoad(uint32_t m_BankID)
+		UFG_INLINE bool QueueBankForLoad(uint32_t p_BankID)
 		{
-			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x14AE00))(&m_BankID);
+			return reinterpret_cast<bool(__fastcall*)(uint32_t*)>(UFG_RVA(0x14AE00))(&p_BankID);
 		}
 
-		void QueueBankForUnload(uint32_t m_BankID)
+		UFG_INLINE void QueueBankForUnload(uint32_t p_BankID)
 		{
-			reinterpret_cast<void(__fastcall*)(uint32_t*)>(UFG_RVA(0x14AE30))(&m_BankID);
+			reinterpret_cast<void(__fastcall*)(uint32_t*)>(UFG_RVA(0x14AE30))(&p_BankID);
 		}
 
-		void Update(float m_TimeDelta = 0.f)
+		UFG_INLINE void Update(float p_fTimeDelta = 0.f)
 		{
-			reinterpret_cast<void(__fastcall*)(float)>(UFG_RVA(0x14DE20))(m_TimeDelta);
+			reinterpret_cast<void(__fastcall*)(float)>(UFG_RVA(0x14DE20))(p_fTimeDelta);
 		}
 	}
 }

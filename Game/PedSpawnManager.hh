@@ -85,22 +85,27 @@ namespace UFG
 		ePedType mPedType;
 		uint32_t mStatusChangedFrame;
 
-		float GetSpawnDelta()
+		static UFG_INLINE CPedSpawningInfo* GetLastRegisterPedInfo()
+		{
+			return *reinterpret_cast<CPedSpawningInfo**>(UFG_RVA(0x23DE338));
+		}
+
+		UFG_INLINE float GetSpawnDelta()
 		{
 			return (CMetrics::Instance()->mSimTimeFloat - mSpawnTime);
 		}
 
-		bool CanDraw()
+		UFG_INLINE bool CanDraw()
 		{
 			return (mCulledTime == 0.f && (mPrevCulledTime <= 0.f || mLocationClassification));
 		}
 
-		void Reset(bool m_PreserveProxies = false)
+		UFG_INLINE void Reset(bool p_bPreserveProxies = false)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x415820))(this, m_PreserveProxies);
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x415820))(this, p_bPreserveProxies);
 		}
 
-		void Unregister()
+		UFG_INLINE void Unregister()
 		{
 			mProxySimObjectPtr = nullptr;
 			mSimObjectPtr.m_pPointer = nullptr;
@@ -128,35 +133,46 @@ namespace UFG
 		int mPedSpawnHistoryIndex;
 		uint32_t mNetRecycleCounter;
 
-		void ReInitAmbient()
-		{
-			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x413F20))(this);
-		}
-
-		CPedSpawningInfo* FindPedInfo(CSimObject* m_SimObject)
-		{
-			return reinterpret_cast<CPedSpawningInfo*(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x40B4E0))(this, m_SimObject);
-		}
-
-		static bool* AmbientSpawningEnable() { return reinterpret_cast<bool*>(UFG_RVA(0x207AE69)); }
-		static bool* AmbientStatusCheckEnable() { return reinterpret_cast<bool*>(UFG_RVA(0x207AE6A)); }
-		static bool* ScriptedStatusCheckEnable() { return reinterpret_cast<bool*>(UFG_RVA(0x207AE6B)); }
-		static int* CheckStatusMode() { return reinterpret_cast<int*>(UFG_RVA(0x207AE6C)); }
-		static bool* ResourcesSuspended() { return reinterpret_cast<bool*>(UFG_RVA(0x23DE286)); }
-	};
-
-	namespace PedSpawnManager
-	{
-		CPedSpawnManager* Get()
+		static UFG_INLINE CPedSpawnManager* Instance()
 		{
 			return *reinterpret_cast<CPedSpawnManager**>(UFG_RVA(0x23DC610));
 		}
 
-		CPedSpawningInfo* GetLastRegisterPedInfo()
+		UFG_INLINE void ReInitAmbient()
 		{
-			return *reinterpret_cast<CPedSpawningInfo**>(UFG_RVA(0x23DE338));
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x413F20))(this);
 		}
-	}
+
+		UFG_INLINE CPedSpawningInfo* FindPedInfo(CSimObject* p_SimObject)
+		{
+			return reinterpret_cast<CPedSpawningInfo*(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x40B4E0))(this, p_SimObject);
+		}
+
+		static UFG_INLINE bool* AmbientSpawningEnable() 
+		{ 
+			return reinterpret_cast<bool*>(UFG_RVA(0x207AE69));
+		}
+
+		static UFG_INLINE bool* AmbientStatusCheckEnable() 
+		{
+			return reinterpret_cast<bool*>(UFG_RVA(0x207AE6A)); 
+		}
+
+		static UFG_INLINE bool* ScriptedStatusCheckEnable() 
+		{
+			return reinterpret_cast<bool*>(UFG_RVA(0x207AE6B)); 
+		}
+
+		static UFG_INLINE int* CheckStatusMode() 
+		{ 
+			return reinterpret_cast<int*>(UFG_RVA(0x207AE6C));
+		}
+
+		static UFG_INLINE bool* ResourcesSuspended() 
+		{ 
+			return reinterpret_cast<bool*>(UFG_RVA(0x23DE286));
+		}
+	};
 
 	/* DebugInfo
 	*

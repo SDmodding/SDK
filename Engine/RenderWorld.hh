@@ -5,19 +5,19 @@ namespace UFG
 {
 	namespace RenderWorld
 	{
-		void EnableAltColorEffect(bool enable) 
+		UFG_INLINE void EnableAltColorEffect(bool p_bEnable) 
 		{ 
-			reinterpret_cast<void(__fastcall*)(bool)>(UFG_RVA(0x6FF90))(enable); 
+			reinterpret_cast<void(__fastcall*)(bool)>(UFG_RVA(0x6FF90))(p_bEnable);
 		}
 
-		void SetGlobalEffectUID(unsigned int uid) 
+		UFG_INLINE void SetGlobalEffectUID(uint32_t p_UID)
 		{ 
-			reinterpret_cast<void(__fastcall*)(unsigned int)>(UFG_RVA(0x708D0))(uid); 
+			reinterpret_cast<void(__fastcall*)(unsigned int)>(UFG_RVA(0x708D0))(p_UID);
 		}
 
-		void RequestScreenShot(void* m_Callback, float m_Scale)
+		UFG_INLINE void RequestScreenShot(void* p_fnCallback, float p_fScale)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float, int)>(UFG_RVA(0x5AED0))(m_Callback, m_Scale, 0);
+			reinterpret_cast<void(__fastcall*)(void*, float, int)>(UFG_RVA(0x5AED0))(p_fnCallback, p_fScale, 0);
 		}
 	}
 }

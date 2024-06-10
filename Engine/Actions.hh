@@ -264,10 +264,11 @@ namespace UFG
 		qOffset64<CActionNodeRoot> mRootNode;
 		qOffset64<void*> mTypeTable;
 
-		CActionNodeRoot* GetRoot()
+		UFG_INLINE CActionNodeRoot* GetRoot()
 		{
-			if (!mRootNode.mOffset)
+			if (!mRootNode.mOffset) {
 				return nullptr;
+			}
 
 			return reinterpret_cast<CActionNodeRoot*>(reinterpret_cast<uintptr_t>(this) + mRootNode.mOffset + sizeof(qResourceData));
 		}
@@ -275,9 +276,9 @@ namespace UFG
 
 	namespace ActionNode
 	{
-		CActionNodePlayable* FindNode(const char* p_Path)
+		UFG_INLINE CActionNodePlayable* FindNode(const char* p_szPath)
 		{
-			return reinterpret_cast<CActionNodePlayable*(__fastcall*)(void*, const char*)>(UFG_RVA(0x26DE60))(nullptr, p_Path);
+			return reinterpret_cast<CActionNodePlayable*(__fastcall*)(void*, const char*)>(UFG_RVA(0x26DE60))(nullptr, p_szPath);
 		}
 	}
 
@@ -285,46 +286,50 @@ namespace UFG
 	{
 	public:
 		qTreeRB mPlayables;
+
+		static UFG_INLINE CActionNodePlayableDatabase* Instance()
+		{
+			return *reinterpret_cast<CActionNodePlayableDatabase**>(UFG_RVA(0x23B1310));
+		}
 	};
 
 	namespace ActionNodePlayableDatabase
 	{
-		CActionNodePlayableDatabase* Get()
+		static CActionNodePlayable* Find(uint32_t m_ID)
 		{
-			return *reinterpret_cast<CActionNodePlayableDatabase**>(UFG_RVA(0x23B1310));
-		}
-
-		CActionNodePlayable* Find(uint32_t m_ID)
-		{
-			qTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables;
-			for (qNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
+			qTreeRB* pPlayables = &CActionNodePlayableDatabase::Instance()->mPlayables;
+			for (qNodeRB* i = pPlayables->GetHead(); i; i = pPlayables->GetNext(i))
 			{
-				if (i->mUID == -1)
+				if (i->mUID == -1) {
 					continue;
+				}
 
-				UFG::CActionNodePlayable* m_ActioNodePlayable = i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>();
-				if (m_ActioNodePlayable->mUniqueID == m_ID)
-					return m_ActioNodePlayable;
+				UFG::CActionNodePlayable* pActioNodePlayable = i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>();
+				if (pActioNodePlayable->mUniqueID == m_ID) {
+					return pActioNodePlayable;
+				}
 			}
 
 			return nullptr;
 		}
 
-		std::vector<CActionNodePlayable*> GetContents()
+		// Just reference...
+		/*std::vector<CActionNodePlayable*> GetContents()
 		{
-			std::vector<CActionNodePlayable*> m_ActionPlayables;
+			std::vector<CActionNodePlayable*> vActionPlayables;
 
-			qTreeRB* m_ActionNodePlayableDatabase = &Get()->mPlayables;
-			for (qNodeRB* i = m_ActionNodePlayableDatabase->GetHead(); i; i = m_ActionNodePlayableDatabase->GetNext(i))
+			qTreeRB* pPlayables = &CActionNodePlayableDatabase::Instance()->mPlayables;
+			for (qNodeRB* i = pPlayables->GetHead(); i; i = pPlayables->GetNext(i))
 			{
-				if (i->mUID == -1)
+				if (i->mUID == -1) {
 					continue;
+				}
 
-				m_ActionPlayables.emplace_back(i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>());
+				vActionPlayables.emplace_back(i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>());
 			}
 			
-			return m_ActionPlayables;
-		};
+			return vActionPlayables;
+		};*/
 	}
 	
 	//====================================================

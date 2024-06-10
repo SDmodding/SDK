@@ -15,7 +15,7 @@ namespace UFG
 		__int8 m_isTrueCrowd : 1;
 		__int8 m_loadSubtitlesOnBoot : 1;
 
-		bool BankRequiredForExertions()
+		UFG_INLINE bool BankRequiredForExertions()
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x596FF0))(this);
 		}
@@ -23,19 +23,19 @@ namespace UFG
 
 	namespace VoiceProfileManager
 	{
-		CVoiceProfile* AddOrGetVoiceProfile(const char* m_VoiceName, qWiseSymbol m_VoiceTag)
+		UFG_INLINE CVoiceProfile* AddOrGetVoiceProfile(const char* p_szVoiceName, qWiseSymbol p_qVoiceTag)
 		{
-			return reinterpret_cast<CVoiceProfile*(__fastcall*)(const char* , qWiseSymbol*)>(UFG_RVA(0x596590))(m_VoiceName, &m_VoiceTag);
+			return reinterpret_cast<CVoiceProfile*(__fastcall*)(const char* , qWiseSymbol*)>(UFG_RVA(0x596590))(p_szVoiceName, &p_qVoiceTag);
 		}
 
-		CVoiceProfile* AssignVoice(CSimObject* m_SimObject)
+		UFG_INLINE CVoiceProfile* AssignVoice(CSimObject* p_SimObject)
 		{
-			return reinterpret_cast<CVoiceProfile*(__fastcall*)(CSimObject*)>(UFG_RVA(0x596970))(m_SimObject);
+			return reinterpret_cast<CVoiceProfile*(__fastcall*)(CSimObject*)>(UFG_RVA(0x596970))(p_SimObject);
 		}
 
-		CVoiceProfile* AssignVoice(qPropertySet* m_PropertySet)
+		UFG_INLINE CVoiceProfile* AssignVoice(qPropertySet* p_PropertySet)
 		{
-			return reinterpret_cast<CVoiceProfile*(__fastcall*)(qPropertySet*)>(UFG_RVA(0x596CE0))(m_PropertySet);
+			return reinterpret_cast<CVoiceProfile*(__fastcall*)(qPropertySet*)>(UFG_RVA(0x596CE0))(p_PropertySet);
 		}
 	}
 }

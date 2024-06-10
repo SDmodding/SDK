@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	const char* g_ActionNodesDictionary[] = 
+	static const char* g_ActionNodesDictionary[] = 
 	{ 
 	#ifdef SDK_SD_MINIMAL_BUILD
 		""
