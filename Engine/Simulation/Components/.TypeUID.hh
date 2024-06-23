@@ -43,6 +43,7 @@
 #define VehicleTargetingSystemComponent_TypeUID				0xA0000041
 #define VehiclePropertiesComponent_TypeUID					0xB2000009
 #define VehicleAiDriverComponent_TypeUID					0xD8000003
+#define VehicleAudioComponent_TypeUID						0xD2000005
 #define VehicleRoadSpaceComponent_TypeUID					0xDA000001
 #define VehicleOccupantComponent_TypeUID					0xDE000001
 #define VehicleEffectsComponent_TypeUID						0xE2000001

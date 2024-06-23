@@ -460,21 +460,18 @@ namespace UFG
 	public:
 		UFG_PAD(0x23E);
 
-		__int8 m_bHornOn : 1;
-		__int8 m_bHornOnFlag : 1;
-		__int8 m_bHornHasStimulus : 1;
-		__int8 m_bSirenOn : 1;
-		__int8 m_bSirenOnFlag : 1;
-		__int8 m_bUnloadBanksFlag : 1;
-		__int8 m_bShutdownOnExit : 1;
+		bool m_bHornOn : 1;
+		bool m_bHornOnFlag : 1;
+		bool m_bHornHasStimulus : 1;
+		bool m_bSirenOn : 1;
+		bool m_bSirenOnFlag : 1;
+		bool m_bUnloadBanksFlag : 1;
+		bool m_bShutdownOnExit : 1;
 
-		UFG_INLINE bool IsHornTriggered() { return m_bHornOnFlag; }
-		UFG_INLINE void StartHorn() { m_bHornOnFlag = true; }
-		UFG_INLINE void StopHorn() { m_bHornOnFlag = false; }
-
-		UFG_INLINE bool IsSirenTriggered() { return m_bSirenOnFlag; }
-		UFG_INLINE void StartSiren() { m_bSirenOnFlag = true; }
-		UFG_INLINE void StopSiren() { m_bSirenOnFlag = false; }
+		UFG_INLINE void DoStopHorn(bool p_Stimulus)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x677130))(this, p_Stimulus);
+		}
 	};
 
 	class CRoadSpaceComponent : public CSimComponent
@@ -735,6 +732,11 @@ namespace UFG
 		UFG_INLINE CAiDriverComponent* GetAiDriver()
 		{
 			return GetComponentOfType<CAiDriverComponent>(VehicleAiDriverComponent_TypeUID);
+		}
+
+		UFG_INLINE CVehicleAudioComponent* GetAudio()
+		{
+			return GetComponentOfType<CVehicleAudioComponent>(VehicleAudioComponent_TypeUID);
 		}
 
 		UFG_INLINE CRoadSpaceComponent* GetRoadSpace()
