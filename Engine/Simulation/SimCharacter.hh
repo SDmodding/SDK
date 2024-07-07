@@ -468,14 +468,33 @@ namespace UFG
 	class CRagdollComponent : public CSimComponent
 	{
 	public:
+		enum CollisionState
+		{
+			CS_DYNAMIC = 0x0,
+			CS_KEYFRAMED_RAGDOLL_LAYER = 0x1,
+			CS_KEYFRAMED_RAGDOLL_LAYER_2 = 0x2,
+			CS_KEYFRAMED_NO_COLLISION = 0x3
+		};
+
+		enum PoseState
+		{
+			STATE_VELOCITY_TRACKING = 0x0,
+			STATE_POWERED_TRACKING = 0x1,
+			STATE_TRANSITION_TO_POWERED = 0x2,
+			STATE_FORCE = 0x3,
+			STATE_UNINITIALIZED = 0x4,
+			STATE_KEYFRAME_TRACKING = 0x5,
+			STATE_FREEZE_TRACKING = 0x6,
+		};
+
 		UFG_PAD(0x30);
 
 		void* mRagdoll;
 		void* mPose;
 		float mRagDollWeight;
 		float mVelocityFromProxyScale;
-		RagdollComponent::PoseState mPoseState;
-		RagdollComponent::PoseState mDesiredPoseState;
+		PoseState mPoseState;
+		PoseState mDesiredPoseState;
 		uint32_t mLevelOfDetail;
 		uint32_t mDesiredLevelOfDetail;
 		__declspec(align(16)) qMatrix44 mPelvisRagdollWS;
@@ -483,6 +502,13 @@ namespace UFG
 		int mAnimPelvisBoneIndex;
 		int mReferenceCount;
 		int mNumFramesInKeyframedMode;
+
+		// This is should be only use to check if ragdoll is currently ragdolling be collision or some other source.
+		// This will return false if the ragdoll is keyframed by some animation!
+		UFG_INLINE bool IsActive()
+		{
+			return (mPoseState != STATE_VELOCITY_TRACKING && mPoseState != STATE_POWERED_TRACKING);
+		}
 
 		static UFG_INLINE CRagdollComponent* Acquire(CSimObject* p_Object)
 		{
@@ -504,9 +530,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, int, const qVector3&, const qVector3&)>(UFG_RVA(0x4585F0))(this, p_Bone, p_Location, p_Impulse);
 		}
 
-		UFG_INLINE void SetCollisionState(RagdollComponent::CollisionState p_CollisionState)
+		UFG_INLINE void SetCollisionState(CollisionState p_CollisionState)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, RagdollComponent::CollisionState)>(UFG_RVA(0x474A00))(this, p_CollisionState);
+			reinterpret_cast<void(__fastcall*)(void*, CollisionState)>(UFG_RVA(0x474A00))(this, p_CollisionState);
 		}
 
 		UFG_INLINE void SetVelocity(const qVector3& p_Velocity)

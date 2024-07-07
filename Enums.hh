@@ -258,28 +258,6 @@ namespace UFG
 		};
 	}
 
-	namespace RagdollComponent
-	{
-		enum CollisionState
-		{
-			CS_DYNAMIC = 0x0,
-			CS_KEYFRAMED_RAGDOLL_LAYER = 0x1,
-			CS_KEYFRAMED_RAGDOLL_LAYER_2 = 0x2,
-			CS_KEYFRAMED_NO_COLLISION = 0x3
-		};
-
-		enum PoseState
-		{
-			STATE_VELOCITY_TRACKING = 0x0,
-			STATE_POWERED_TRACKING = 0x1,
-			STATE_TRANSITION_TO_POWERED = 0x2,
-			STATE_FORCE = 0x3,
-			STATE_UNINITIALIZED = 0x4,
-			STATE_KEYFRAME_TRACKING = 0x5,
-			STATE_FREEZE_TRACKING = 0x6,
-		};
-	}
-
 	enum eLODSetting
 	{
 		LOD_SETTING_LOW = 0x0,
