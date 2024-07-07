@@ -4,33 +4,11 @@ namespace UFG
 {
 	class CTransformNodeComponent;
 
-	class CHavokBone // hkaBone
-	{
-	public:
-		const char* m_name;
-		bool m_lockTranslation;
-	};
-
-	class CHavokSkeleton // hkaSkeleton
-	{
-	public:
-		UFG_PAD(0x10);
-
-		const char* m_name;
-		HavokArray<short> m_parentIndices;
-		HavokArray<CHavokBone> m_bones;
-		HavokArray<void*> m_referencePose;
-		HavokArray<float> m_referenceFloats;
-		HavokArray<const char*> m_floatSlots;
-		HavokArray<void*> m_localFrames;
-		HavokArray<void*> m_partitions;
-	};
-
 	class CSkeleton
 	{
 	public:
 		uint32_t mNameUID;
-		CHavokSkeleton* mhkaSkeleton;
+		hkaSkeleton* mhkaSkeleton;
 
 		struct BoneLookUpEntry_t
 		{
@@ -44,20 +22,21 @@ namespace UFG
 		float mBoneScale;
 		qMatrix44* mInverseModelSpace;
 
-		uint32_t GetBoneUID(int m_BoneID)
+		uint32_t GetBoneUID(int p_BoneID)
 		{
 			for (int i = 0; mhkaSkeleton->m_bones.m_size > i; ++i)
 			{
-				if (mBoneIDLookup[i].index == m_BoneID)
+				if (mBoneIDLookup[i].index == p_BoneID) {
 					return mBoneIDLookup[i].guid;
+				}
 			}
 
 			return -1;
 		}
 
-		int GetBoneID(uint32_t m_BoneUID)
+		UFG_INLINE int GetBoneID(uint32_t p_BoneUID)
 		{
-			return reinterpret_cast<int(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1B9390))(this, m_BoneUID);
+			return reinterpret_cast<int(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x1B9390))(this, p_BoneUID);
 		}
 	};
 

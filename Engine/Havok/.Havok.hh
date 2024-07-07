@@ -29,6 +29,12 @@
 #include "hkpWorld.hh"
 
 //=========================================
+// Animation
+
+#include "Animation/Rig/hkaBone.hh"
+#include "Animation/Rig/hkaSkeleton.hh"
+
+//=========================================
 // Vehicle
 
 #include "Vehicle/hkpTyremarksInfo.hh"
