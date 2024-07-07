@@ -82,9 +82,9 @@ namespace Render
 			reinterpret_cast<void(__fastcall*)(void*, CViewSettings*, Illusion::CSubmitContext*)>(UFG_RVA(0xC850))(this, p_Settings, p_SubmitCtx);
 		}
 
-		Illusion::CMaterial* CreateSimpleMaterial(uint32_t p_TextureNameUID, uint32_t p_RasterStateUID = 0x62F81854, uint32_t p_AlphaStateUID = 0x2782CCE6, bool p_DepthBias = false)
+		static UFG_INLINE Illusion::CMaterial* CreateSimpleMaterial(uint32_t p_TextureNameUID, uint32_t p_RasterStateUID = 0x62F81854, uint32_t p_AlphaStateUID = 0x2782CCE6, bool p_DepthBias = false)
 		{
-			return reinterpret_cast<Illusion::CMaterial*(__fastcall*)(void*, uint32_t, uint32_t, uint32_t, bool)>(UFG_RVA(0xD590))(this, p_TextureNameUID, p_RasterStateUID, p_AlphaStateUID, p_DepthBias);
+			return reinterpret_cast<Illusion::CMaterial*(__fastcall*)(uint32_t, uint32_t, uint32_t, bool)>(UFG_RVA(0xD590))(p_TextureNameUID, p_RasterStateUID, p_AlphaStateUID, p_DepthBias);
 		}
 
 		void BeginTarget(Illusion::CTarget* p_Target, const char* p_Description, uint32_t p_DestSliceFace, uint32_t p_DestMipLevel, Illusion::CViewportScissorState* p_VPScissor, bool p_ClearOnResolve, bool p_IgnoreResolveDepth, bool p_PS4DecompressDepth, bool p_D3DDisableDepthCopy)

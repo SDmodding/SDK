@@ -449,19 +449,19 @@ namespace UFG
 		unsigned __int32 mIsPlayer : 1;
 		unsigned __int32 mBullShitCurbHack : 1;
 
-		void Update(float m_DeltaTime)
+		UFG_INLINE void Update(float p_TimeDelta)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x476DC0))(this, m_DeltaTime);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x476DC0))(this, p_TimeDelta);
 		}
 
-		void GetVelocity(qVector3* m_Result)
+		UFG_INLINE void GetVelocity(qVector3* p_Result)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x468150))(this, m_Result);
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x468150))(this, p_Result);
 		}
 
-		void SetVelocity(qVector3* m_Velocity)
+		UFG_INLINE void SetVelocity(const qVector3& p_Velocity)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0x4757C0))(this, m_Velocity);
+			reinterpret_cast<void(__fastcall*)(void*, const qVector3&)>(UFG_RVA(0x4757C0))(this, p_Velocity);
 		}
 	};
 
@@ -476,12 +476,22 @@ namespace UFG
 		float mVelocityFromProxyScale;
 		RagdollComponent::PoseState mPoseState;
 		RagdollComponent::PoseState mDesiredPoseState;
-		unsigned int mLevelOfDetail;
-		unsigned int mDesiredLevelOfDetail;
+		uint32_t mLevelOfDetail;
+		uint32_t mDesiredLevelOfDetail;
+		__declspec(align(16)) qMatrix44 mPelvisRagdollWS;
+		bool mLockHighLOD;
+		int mAnimPelvisBoneIndex;
+		int mReferenceCount;
+		int mNumFramesInKeyframedMode;
 
-		UFG_INLINE bool IsActive()
+		static UFG_INLINE CRagdollComponent* Acquire(CSimObject* p_Object)
 		{
-			return (mPoseState == RagdollComponent::STATE_POWERED_TRACKING);
+			return reinterpret_cast<CRagdollComponent*(__fastcall*)(CSimObject*)>(UFG_RVA(0x454510))(p_Object);
+		}
+
+		UFG_INLINE void Update(float p_TimeDelta)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x47BDC0))(this, p_TimeDelta);
 		}
 
 		UFG_INLINE void ApplyAngularImpulse(int p_Bone, const qVector3& p_Impulse, float p_ConnectionTransfer)
@@ -494,26 +504,31 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, int, const qVector3&, const qVector3&)>(UFG_RVA(0x4585F0))(this, p_Bone, p_Location, p_Impulse);
 		}
 
-		UFG_INLINE void SetVelocity(qVector3 m_Velocity)
+		UFG_INLINE void SetCollisionState(RagdollComponent::CollisionState p_CollisionState)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, RagdollComponent::CollisionState)>(UFG_RVA(0x474A00))(this, p_CollisionState);
+		}
+
+		UFG_INLINE void SetVelocity(const qVector3& p_Velocity)
 		{
 			if (mRagdoll) {
-				reinterpret_cast<void(__fastcall*)(void*, qVector3*)>(UFG_RVA(0xB2780))(this, &m_Velocity);
+				reinterpret_cast<void(__fastcall*)(void*, const qVector3&)>(UFG_RVA(0xB2780))(this, p_Velocity);
 			}
 		}
 
-		UFG_INLINE void SetMotorMaxForce(float m_Value)
+		UFG_INLINE void SetMotorMaxForce(float p_fValue)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475360))(this, m_Value);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475360))(this, p_fValue);
 		}
 
-		UFG_INLINE void SetLimitStiffness(float m_Value)
+		UFG_INLINE void SetLimitStiffness(float p_fValue)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475160))(this, m_Value);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475160))(this, p_fValue);
 		}
 
-		UFG_INLINE void SetPositionTrackingStiffness(float m_Value)
+		UFG_INLINE void SetPositionTrackingStiffness(float p_fValue)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475540))(this, m_Value);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x475540))(this, p_fValue);
 		}
 	};
 

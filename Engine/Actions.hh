@@ -216,42 +216,42 @@ namespace UFG
 		uint32_t m_PlayingNodeUID[32];
 		int m_SequencePriority;
 
-		bool IsPlaying(uint32_t p_ID, uint32_t p_MostUsedInex = -1, bool p_RecurseOnSpawns = false)
+		UFG_INLINE bool IsPlaying(uint32_t p_ID, uint32_t p_MostUsedInex = -1, bool p_RecurseOnSpawns = false)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, uint32_t, bool)>(UFG_RVA(0x26F170))(this, &p_ID, p_MostUsedInex, p_RecurseOnSpawns);
 		}
 
-		bool WasPlaying(uint32_t p_ID, bool p_RecurseOnSpawns = false)
+		UFG_INLINE bool WasPlaying(uint32_t p_ID, bool p_RecurseOnSpawns = false)
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*, uint32_t*, bool)>(UFG_RVA(0x273AB0))(this, &p_ID, p_RecurseOnSpawns);
 		}
 
-		void Play(CActionNode* p_Node, bool p_ForcePlay)
+		UFG_INLINE void Play(CActionNode* p_Node, bool p_ForcePlay)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CActionNode*, bool)>(UFG_RVA(0x270140))(this, p_Node, p_ForcePlay);
 		}
 
-		void Play(CActionNodePlayable* p_Node)
+		UFG_INLINE void Play(CActionNodePlayable* p_Node)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*)>(UFG_RVA(0x270360))(this, p_Node);
 		}
 
-		void PlayTracks(CActionNodePlayable* p_Node, bool p_OffsetTimeBeginAndEnd, float p_OffsetTime)
+		UFG_INLINE void PlayTracks(CActionNodePlayable* p_Node, bool p_OffsetTimeBeginAndEnd, float p_OffsetTime)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, CActionNodePlayable*, bool, float)>(UFG_RVA(0x2707F0))(this, p_Node, p_OffsetTimeBeginAndEnd, p_OffsetTime);
 		}
 
-		void Stop()
+		UFG_INLINE void Stop()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x272A80))(this);
 		}
 
-		void Update(float timeDelta)
+		UFG_INLINE void Update(float p_TimeDelta)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x272E40))(this, timeDelta);
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x272E40))(this, p_TimeDelta);
 		}
 
-		void GetDebugString(qStringBuilder* p_StringBuilder, bool p_ShowAllTracks, CActionController* p_ControllerToHighlight = nullptr, void* p_TrackToHighlight = nullptr)
+		UFG_INLINE void GetDebugString(qStringBuilder* p_StringBuilder, bool p_ShowAllTracks, CActionController* p_ControllerToHighlight = nullptr, void* p_TrackToHighlight = nullptr)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qStringBuilder*, bool, CActionController*, void*)>(UFG_RVA(0x26E5B0))(this, p_StringBuilder, p_ShowAllTracks, p_ControllerToHighlight, p_TrackToHighlight);
 		}
@@ -295,18 +295,18 @@ namespace UFG
 
 	namespace ActionNodePlayableDatabase
 	{
-		static CActionNodePlayable* Find(uint32_t m_ID)
+		static UFG_INLINE CActionNodePlayable* Find(uint32_t p_UniqueID)
 		{
-			qTreeRB* pPlayables = &CActionNodePlayableDatabase::Instance()->mPlayables;
-			for (qNodeRB* i = pPlayables->GetHead(); i; i = pPlayables->GetNext(i))
+			auto pPlayables = &CActionNodePlayableDatabase::Instance()->mPlayables;
+			for (auto pNode = pPlayables->GetHead(); pNode; pNode = pPlayables->GetNext(pNode))
 			{
-				if (i->mUID == -1) {
+				if (pNode->mUID == -1) {
 					continue;
 				}
 
-				UFG::CActionNodePlayable* pActioNodePlayable = i->ReadPointerOffset<UFG::CActionNodePlayable, 0x20>();
-				if (pActioNodePlayable->mUniqueID == m_ID) {
-					return pActioNodePlayable;
+				auto pNodePlayable = pNode->ReadPointerOffset<CActionNodePlayable, 0x20>();
+				if (pNodePlayable->mUniqueID == p_UniqueID) {
+					return pNodePlayable;
 				}
 			}
 

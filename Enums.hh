@@ -260,6 +260,14 @@ namespace UFG
 
 	namespace RagdollComponent
 	{
+		enum CollisionState
+		{
+			CS_DYNAMIC = 0x0,
+			CS_KEYFRAMED_RAGDOLL_LAYER = 0x1,
+			CS_KEYFRAMED_RAGDOLL_LAYER_2 = 0x2,
+			CS_KEYFRAMED_NO_COLLISION = 0x3
+		};
+
 		enum PoseState
 		{
 			STATE_VELOCITY_TRACKING = 0x0,

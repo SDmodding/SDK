@@ -74,6 +74,11 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, hkQsTransformf*)>(UFG_RVA(0x3A9570))(this, p_Result);
 		}
+		
+		UFG_INLINE void MakeUpright(float p_fUprightTime)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x3AB730))(this, p_fUprightTime);
+		}
 
 		//==========================================================
 		// Attachments

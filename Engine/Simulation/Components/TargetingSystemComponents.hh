@@ -29,19 +29,25 @@ namespace UFG
 		TargetingMap_t* m_pTargetingMap;
 		qList<CTargetingSimObject> m_TargetedBy;
 
-		CTargetingSimObject* GetTarget(eTargetTypeEnum m_TargetType)
+		UFG_INLINE CTargetingSimObject* GetTarget(eTargetTypeEnum p_TargetType)
 		{
-			return &m_pTargets[m_pTargetingMap->m_Map.p[m_TargetType]];
+			return &m_pTargets[m_pTargetingMap->m_Map.p[p_TargetType]];
 		}
 
-		void SetTarget(eTargetTypeEnum m_TargetType, CSimObject* m_SimObject)
+		template <typename T>
+		UFG_INLINE T* GetTargetPtr(eTargetTypeEnum p_TargetType)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, m_TargetType, m_SimObject);
+			return reinterpret_cast<T*>(GetTarget(p_TargetType)->m_pTarget);
 		}
 
-		void ClearTarget(eTargetTypeEnum m_TargetType)
+		UFG_INLINE void SetTarget(eTargetTypeEnum p_TargetType, CSimObject* p_SimObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, m_TargetType);
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, p_TargetType, p_SimObject);
+		}
+
+		UFG_INLINE void ClearTarget(eTargetTypeEnum p_TargetType)
+		{
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, p_TargetType);
 		}
 	};
 

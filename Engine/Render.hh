@@ -1,5 +1,21 @@
 #pragma once
 
+namespace UFG
+{
+	class DrawInfo
+	{
+	public:
+		qColour mColour1;
+		qColour mColour2;
+		float mScale;
+		uint32_t mAlphaBlend;
+		bool mDepthBuffer;
+		bool mFaceCull;
+		bool mDepthBias;
+		void* mPreDrawCallback;
+	};
+}
+
 namespace Render
 {
 	class CDepthOfField
