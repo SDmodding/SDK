@@ -507,7 +507,7 @@ namespace UFG
 		// This will return false if the ragdoll is keyframed by some animation!
 		UFG_INLINE bool IsActive()
 		{
-			return (mPoseState != STATE_VELOCITY_TRACKING && mPoseState != STATE_POWERED_TRACKING);
+			return (mPoseState == STATE_VELOCITY_TRACKING && mPoseState == STATE_POWERED_TRACKING);
 		}
 
 		static UFG_INLINE CRagdollComponent* Acquire(CSimObject* p_Object)
