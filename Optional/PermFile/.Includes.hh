@@ -39,19 +39,22 @@ namespace SDK
 		{
 			if (m_Data)
 			{
-				if (!m_LoadedFromMemory)
+				if (!m_LoadedFromMemory) {
 					delete[] m_Data;
+				}
 
 				m_Data = nullptr;
 			}
 
 			m_Size = 0;
 
-			if (!m_Name.empty())
+			if (!m_Name.empty()) {
 				m_Name.clear();
+			}
 
-			if (!m_Resources.empty())
+			if (!m_Resources.empty()) {
 				m_Resources.clear();
+			}
 
 			m_LoadedFromMemory = false;
 		}
@@ -65,11 +68,11 @@ namespace SDK
 
 		UFG::ResourceEntry_t* GetResourceByName(uint32_t p_NameUID)
 		{
-			for (UFG::ResourceEntry_t* m_Resource : m_Resources)
+			for (auto pResource : m_Resources)
 			{
-				UFG::ResourceData_t* m_ResourceData = m_Resource->GetData();
-				if (m_ResourceData->m_NameUID == p_NameUID)
-					return m_Resource;
+				if (pResource->GetData()->m_NameUID == p_NameUID) {
+					return pResource;
+				}
 			}
 
 			return nullptr;
@@ -77,23 +80,21 @@ namespace SDK
 
 		UFG::ResourceData_t* GetResourceDataByName(uint32_t p_NameUID)
 		{
-			UFG::ResourceEntry_t* m_Resource = GetResourceByName(p_NameUID);
-			if (m_Resource)
-				return m_Resource->GetData();
-
-			return nullptr;
+			auto pResource = GetResourceByName(p_NameUID);
+			return (pResource ? pResource->GetData() : nullptr);
 		}
 
 		void ParseData()
 		{
-			size_t m_Offset = 0;
-			while (m_Size > m_Offset)
+			size_t sOffset = 0;
+			while (m_Size > sOffset)
 			{
-				UFG::ResourceEntry_t* m_ResourceEntry = reinterpret_cast<UFG::ResourceEntry_t*>(&m_Data[m_Offset]);
-				if (m_ResourceEntry->m_TypeUID && m_ResourceEntry->m_EntrySize[0])
-					m_Resources.emplace_back(m_ResourceEntry);
+				auto pResourceEntry = reinterpret_cast<UFG::ResourceEntry_t*>(&m_Data[sOffset]);
+				if (pResourceEntry->m_TypeUID && pResourceEntry->m_EntrySize[0]) {
+					m_Resources.emplace_back(pResourceEntry);
+				}
 
-				m_Offset += static_cast<size_t>(m_ResourceEntry->GetEntrySize());
+				sOffset += static_cast<size_t>(pResourceEntry->GetEntrySize());
 			}
 		}
 
@@ -113,32 +114,35 @@ namespace SDK
 		{
 			Cleanup();
 
-			FILE* m_File = nullptr;
-			fopen_s(&m_File, p_FilePath, "rb");
-			if (!m_File)
+			FILE* pFile = nullptr;
+			fopen_s(&pFile, p_FilePath, "rb");
+			if (!pFile) {
 				return false;
+			}
 
 			m_Name = p_FilePath;
 			{
-				size_t m_Offset = m_Name.find_last_of("/\\");
-				if (m_Offset && m_Offset != std::string::npos)
-					m_Name.erase(0, m_Offset + 1);
+				size_t sOffset = m_Name.find_last_of("/\\");
+				if (sOffset && sOffset != std::string::npos) {
+					m_Name.erase(0, sOffset + 1);
+				}
 				m_Name = m_Name.substr(0, m_Name.find_first_of('.'));
 			}
 
-			fseek(m_File, 0, SEEK_END);
+			fseek(pFile, 0, SEEK_END);
 
-			m_Size = static_cast<size_t>(ftell(m_File));
+			m_Size = static_cast<size_t>(ftell(pFile));
 			m_Data = new uint8_t[m_Size];
 
-			fseek(m_File, 0, SEEK_SET);
+			fseek(pFile, 0, SEEK_SET);
 
-			size_t m_ReadRes = fread(m_Data, 1, m_Size, m_File);
+			size_t sReadSize = fread(m_Data, 1, m_Size, pFile);
 
-			fclose(m_File);
+			fclose(pFile);
 
-			if (m_ReadRes != m_Size)
+			if (sReadSize != m_Size) {
 				return false;
+			}
 
 			ParseData();
 			return true;

@@ -37,7 +37,7 @@ namespace UFG
 		template <typename T>
 		UFG_INLINE T* GetTargetPtr(eTargetTypeEnum p_TargetType)
 		{
-			return reinterpret_cast<T*>(GetTarget(p_TargetType)->m_pTarget);
+			return reinterpret_cast<T*>(GetTarget(p_TargetType)->m_pTarget.m_pPointer);
 		}
 
 		UFG_INLINE void SetTarget(eTargetTypeEnum p_TargetType, CSimObject* p_SimObject)
