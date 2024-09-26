@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	class CTargetPlat
+	class TargetPlat
 	{
 	public:
 		char mResolveDepthSurface;
@@ -16,7 +16,7 @@ namespace Illusion
 		ID3D11DepthStencilView* mDepthStencilViewRO;
 		void* mMSAATargetTexture[4];
 		void* mMSAADepthTexture;
-	};
+	}; typedef TargetPlat CTargetPlat;
 
 	class ITargetPlat
 	{
@@ -24,22 +24,22 @@ namespace Illusion
 
 	};
 
-	class CTarget : public ITargetPlat
+	class Target : public ITargetPlat
 	{
 	public:
 		int mWidth;
 		int mHeight;
-		CTargetPlat* mTargetPlat;
+		TargetPlat* mTargetPlat;
 		unsigned int mNumTargetTextures;
-		class CTexture* mTargetTexture[4];
+		class Texture* mTargetTexture[4];
 		char mOwnsTargetTexture[4];
-		class CTexture* mDepthTexture;
-		class CTexture* mDepthTextureCopy;
+		class Texture* mDepthTexture;
+		class Texture* mDepthTextureCopy;
 		char mOwnsDepthTexture;
 		char mDescription[32];
-	};
+	}; typedef Target CTarget;
 
-	struct CreateTargetParams_t
+	struct CreateTargetParams
 	{
 		UFG::qString m_Name;
 		int m_Width;
@@ -51,8 +51,8 @@ namespace Illusion
 		uint32_t m_TextureType;
 		uint32_t m_TargetFlags;
 		int m_NumMips;
-		class CTexture* m_Textures[4];
-		class CTexture* m_DepthTexture;
+		class Texture* m_Textures[4];
+		class Texture* m_DepthTexture;
 		uint32_t m_ESRAM_Offset[4];
 		uint32_t m_ESRAM_UsageBytes[4];
 		uint32_t m_ESRAM_OffsetDepth;
@@ -60,7 +60,7 @@ namespace Illusion
 		bool m_UseESRAM[4];
 		bool m_UseESRAM_Depth;
 
-		CreateTargetParams_t(const char* p_Name, int p_Width, int p_Height)
+		CreateTargetParams(const char* p_Name, int p_Width, int p_Height)
 		{
 			m_Name.Set(p_Name);
 			m_Width = p_Width;

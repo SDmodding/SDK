@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CCruiseControl
+	class CruiseControl
 	{
 	public:
 		void* vfptr;
@@ -10,17 +10,17 @@ namespace UFG
 		float mSetSpeedMPS;
 		bool mIsActive;
 		bool mIsEnabled;
-	};
-	UFG_ASSERT_CLASS(CCruiseControl, 0x18);
+	}; typedef CruiseControl CCruiseControl;
+	UFG_ASSERT_CLASS(CruiseControl, 0x18);
 
 	//=================================================================
 
-	class CHumanDriverComponent : public CVehicleDriverInterface, public qNode<CHumanDriverComponent>
+	class HumanDriverComponent : public VehicleDriverInterface, public qNode<HumanDriverComponent>
 	{
 	public:
 		SimpleTimer mHangTime;
 		SimpleTimer mMaxSpeedTime;
-		CCruiseControl* mCruiseControl;
+		CruiseControl* mCruiseControl;
 		class CController* mController;
 		eSimObjectVehicleTypeEnum mVehicleType;
 		float mJumpLocHeight;
@@ -33,6 +33,6 @@ namespace UFG
 		bool mIsInAir;
 		bool mSirenIsOn;
 		bool mEnableMaxSpeedStat;
-	};
-	UFG_ASSERT_CLASS(CHumanDriverComponent, 0x190);
+	}; typedef HumanDriverComponent CHumanDriverComponent;
+	UFG_ASSERT_CLASS(HumanDriverComponent, 0x190);
 }

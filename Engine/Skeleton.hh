@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CTransformNodeComponent;
+	class TransformNodeComponent;
 
 	class CSkeleton
 	{
@@ -56,7 +56,7 @@ namespace UFG
 		uint32_t mCachedTransformChangeID;
 		qVector3 mPoseAABBMin;
 		qVector3 mPoseAABBMax;
-		qSafePointer<CTransformNodeComponent> mRootTransformNode;
+		qSafePointer<TransformNodeComponent> mRootTransformNode;
 
 		struct RigHandle_t : qResourceHandle
 		{

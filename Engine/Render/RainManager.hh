@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CTransformNodeComponent;
+	class TransformNodeComponent;
 }
 
 namespace Render
@@ -53,7 +53,7 @@ namespace Render
 		UFG::qVector3 mPreviousCameraPosition;
 		UFG::qMatrix44 mPreviousWorldViewProjMatrix;
 		bool mRainEnabled;
-		UFG::CTransformNodeComponent* mRainDropSplashEffectTransform;
+		UFG::TransformNodeComponent* mRainDropSplashEffectTransform;
 		uint32_t mRainDropSplashEffectID;
 		float mRainInteriorBlend;
 		float mRainIndoorAlphaOverride;

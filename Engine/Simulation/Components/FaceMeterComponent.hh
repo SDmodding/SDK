@@ -14,7 +14,7 @@ namespace UFG
 		qString mCaption;
 	};
 
-	class CFaceMeterComponent : public SimComponent, public qNode<CFaceMeterComponent>
+	class FaceMeterComponent : public SimComponent, public qNode<FaceMeterComponent>
 	{
 	public:
 		ScoreAffector_t mAffectors[107];
@@ -22,6 +22,6 @@ namespace UFG
 		bool mFaceMeterEnabled;
 		bool mFaceMeterActivated;
 		CPropertySetHandle mProperties;
-	};
-	UFG_ASSERT_CLASS(CFaceMeterComponent, 0x21E0);
+	}; typedef FaceMeterComponent CFaceMeterComponent;
+	UFG_ASSERT_CLASS(FaceMeterComponent, 0x21E0);
 }

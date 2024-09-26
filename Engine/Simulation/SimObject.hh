@@ -10,7 +10,7 @@ namespace UFG
 		uint16_t m_Flags;
 		char m_ReservedComponentSlots;
 		char m_ResolveRefCount;
-		CSceneObjectProperties* m_pSceneObj;
+		SceneObjectProperties* m_pSceneObj;
 		CTransformNodeComponent* m_pTransformNodeComponent;
 		qArray<SimComponentHolder> m_Components;
 		qList<RebindingComponentHandle<SimComponent>> m_UnboundComponentHandles;

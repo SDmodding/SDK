@@ -104,10 +104,10 @@ namespace UFG
 
 	//================================================================================================================================
 
-	class CSimWeaponPropertiesComponent : public CSimObjectPropertiesComponent
+	class SimWeaponPropertiesComponent : public SimObjectPropertiesComponent
 	{
 	public:
-		qNode<CSimWeaponPropertiesComponent> mNode;
+		qNode<SimWeaponPropertiesComponent> mNode;
 		uint32_t mLastOwner;
 		uint32_t mFireMode;
 		WeaponTypeInfo_t* mWeaponTypeInfo;
@@ -127,6 +127,6 @@ namespace UFG
 			*reinterpret_cast<uint32_t*>(UFG_RVA(0x240E3D8)) = 0; // sNumWeaponTypeInfos
 			reinterpret_cast<void(__fastcall*)()>(UFG_RVA(0x5500F0))();
 		}
-	};
-	UFG_ASSERT_CLASS(CSimWeaponPropertiesComponent, 0xE8);
+	}; typedef SimWeaponPropertiesComponent CSimWeaponPropertiesComponent;
+	UFG_ASSERT_CLASS(SimWeaponPropertiesComponent, 0xE8);
 }

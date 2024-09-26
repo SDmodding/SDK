@@ -28,11 +28,11 @@ namespace UFG
 
 	//==========================================================================================
 
-	class CPhysicsMoverInterface : public SimComponent
+	class PhysicsMoverInterface : public SimComponent
 	{
 	public:
 		void* m_UpdateInterfaceVfptr;
-		qNode<CPhysicsMoverInterface> mNode;
+		qNode<PhysicsMoverInterface> mNode;
 		CVehicleInput mInput;
 
 		UFG_PAD(0x21C);
@@ -104,11 +104,11 @@ namespace UFG
 		bool mCreatedWithTemporaryRig;
 		eVehicleTrunkTypeEnum mTrunkType;
 
-		static UFG_INLINE qList<CPhysicsMoverInterface>* GetList()
+		static UFG_INLINE qList<PhysicsMoverInterface>* GetList()
 		{
 			// You can itter through list (node) to get all physics mover interface active in the world.
-			// mNode->GetPointerSub<offsetof(CPhysicsMoverInterface, mNode)>();
-			return reinterpret_cast<qList<CPhysicsMoverInterface>*>(UFG_RVA(0x2091398));
+			// mNode->GetPointerSub<offsetof(PhysicsMoverInterface, mNode)>();
+			return reinterpret_cast<qList<PhysicsMoverInterface>*>(UFG_RVA(0x2091398));
 		}
 
 		UFG_INLINE void SetLOD(PhysicsVehicle::Lod p_Lod)
@@ -145,6 +145,6 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x6892E0))(this, p_Reason);
 		}
-	};
-	UFG_ASSERT_CLASS(CPhysicsMoverInterface, 920);
+	}; typedef PhysicsMoverInterface CPhysicsMoverInterface;
+	UFG_ASSERT_CLASS(PhysicsMoverInterface, 920);
 }

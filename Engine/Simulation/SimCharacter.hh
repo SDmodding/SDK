@@ -99,14 +99,14 @@ namespace UFG
 	{
 	public:
 		// Constructor, call with caution!
-		static CAttackRightsComponent* PropertiesOnActivate(CSceneObjectProperties* m_ObjectProperties)
+		static CAttackRightsComponent* PropertiesOnActivate(SceneObjectProperties* m_ObjectProperties)
 		{
-			return reinterpret_cast<CAttackRightsComponent * (__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x37E560))(m_ObjectProperties);
+			return reinterpret_cast<CAttackRightsComponent * (__fastcall*)(SceneObjectProperties*)>(UFG_RVA(0x37E560))(m_ObjectProperties);
 		}
 
-		static bool HasComponent(CSceneObjectProperties* m_ObjectProperties)
+		static bool HasComponent(SceneObjectProperties* m_ObjectProperties)
 		{
-			return reinterpret_cast<bool(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x364DA0))(m_ObjectProperties);
+			return reinterpret_cast<bool(__fastcall*)(SceneObjectProperties*)>(UFG_RVA(0x364DA0))(m_ObjectProperties);
 		}
 
 		void InitFromProperties(qPropertySet* m_PropertySet)
@@ -142,10 +142,10 @@ namespace UFG
 		void* m_rightFootstep;
 
 		UFG_PAD(0x58);
-		/*UFG::AmbientContextManager m_ambientContexts;
-		UFG::qSafePointer<UFG::SimComponent, UFG::HealthComponent> m_healthComponent;
-		UFG::qSafePointer<UFG::SimComponent, UFG::TransformNodeComponent> m_transformNodeComponent;
-		UFG::qSafePointer<UFG::SimComponent, UFG::SimObjectCharacterPropertiesComponent> m_simObjectCharacterPropertiesComponent;*/
+		/*AmbientContextManager m_ambientContexts;
+		qSafePointer<SimComponent, HealthComponent> m_healthComponent;
+		qSafePointer<SimComponent, TransformNodeComponent> m_transformNodeComponent;
+		qSafePointer<SimComponent, SimObjectCharacterPropertiesComponent> m_simObjectCharacterPropertiesComponent;*/
 
 		__int8 m_isSpeakingInConversation : 1;
 		__int8 m_isListeningInAConversation : 1;
@@ -283,9 +283,9 @@ namespace UFG
 		int m_iAllowHoldCoverPositionUpdateRefs;
 		int m_iSyncBoneID;
 
-		static CAICoverComponent* PropertiesOnActivate(CSceneObjectProperties* p_SceneObj)
+		static CAICoverComponent* PropertiesOnActivate(SceneObjectProperties* p_SceneObj)
 		{
-			return reinterpret_cast<CAICoverComponent*(__fastcall*)(CSceneObjectProperties*)>(UFG_RVA(0x37E330))(p_SceneObj);
+			return reinterpret_cast<CAICoverComponent*(__fastcall*)(SceneObjectProperties*)>(UFG_RVA(0x37E330))(p_SceneObj);
 		}
 	};
 
@@ -297,7 +297,7 @@ namespace UFG
 
 		UFG_PAD(0x7);
 		UFG_PAD(0x48);
-		//UFG::qStaticBitField<548> m_ActionRequestMask;
+		//qStaticBitField<548> m_ActionRequestMask;
 
 		bool m_HoldMotionIntention;
 		qVector3 m_HoldMotionIntentionDirection;
@@ -305,9 +305,9 @@ namespace UFG
 		float m_HoldBlend;
 		float m_HoldBlendDelay;
 
-		void DoParkour(UFG::qVector3* p_Direction, uint32_t p_CheckTypes)
+		void DoParkour(qVector3* p_Direction, uint32_t p_CheckTypes)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, UFG::qVector3*, void*, uint32_t, CIntention*, bool)>(UFG_RVA(0x352DE0))(this, p_Direction, nullptr, p_CheckTypes, &m_Intention, false);
+			reinterpret_cast<void(__fastcall*)(void*, qVector3*, void*, uint32_t, CIntention*, bool)>(UFG_RVA(0x352DE0))(this, p_Direction, nullptr, p_CheckTypes, &m_Intention, false);
 		}
 
 		void UpdateHoldMotionIntention(float p_TimeDelta)
@@ -325,25 +325,25 @@ namespace UFG
 	{
 	public:
 		UFG_PAD(0x4F8);
-		/*UFG::RebindingComponentHandle<UFG::TransformNodeComponent, 0> m_pTransformNodeComponent;
-		UFG::RebindingComponentHandle<UFG::ActionTreeComponent, 0> m_pActionTreeComponent;
-		UFG::RebindingComponentHandle<UFG::RigidBodyComponent, 0> m_pRigidBodyComponent;
-		UFG::RebindingComponentHandle<UFG::CharacterAnimationComponent, 0> m_pCharacterAnimationComponent;
-		UFG::RebindingComponentHandle<UFG::SimObjectCharacterPropertiesComponent, 0> m_pSimObjectCharacterPropertiesComponent;
-		UFG::RebindingComponentHandle<UFG::AttackRightsComponent, 0> m_pAttackRightsComponent;
-		UFG::RebindingComponentHandle<UFG::SceneObjectProperties, 0> m_pSceneObjectProperties;
-		UFG::RebindingComponentHandle<UFG::HealthComponent, 0> m_pHealthComponent;
-		UFG::RebindingComponentHandle<UFG::TargetingSystemPedBaseComponent, 0> m_pTargetingSystemBaseComponent;
-		UFG::RebindingComponentHandle<UFG::CharacterOccupantComponent, 0> m_pCharacterOccupantComponent;
-		UFG::SidewalkWanderData m_WanderData;
-		UFG::HeadTrackTarget m_HeadTrackingTarget;
+		/*RebindingComponentHandle<TransformNodeComponent, 0> m_pTransformNodeComponent;
+		RebindingComponentHandle<ActionTreeComponent, 0> m_pActionTreeComponent;
+		RebindingComponentHandle<RigidBodyComponent, 0> m_pRigidBodyComponent;
+		RebindingComponentHandle<CharacterAnimationComponent, 0> m_pCharacterAnimationComponent;
+		RebindingComponentHandle<SimObjectCharacterPropertiesComponent, 0> m_pSimObjectCharacterPropertiesComponent;
+		RebindingComponentHandle<AttackRightsComponent, 0> m_pAttackRightsComponent;
+		RebindingComponentHandle<SceneObjectProperties, 0> m_pSceneObjectProperties;
+		RebindingComponentHandle<HealthComponent, 0> m_pHealthComponent;
+		RebindingComponentHandle<TargetingSystemPedBaseComponent, 0> m_pTargetingSystemBaseComponent;
+		RebindingComponentHandle<CharacterOccupantComponent, 0> m_pCharacterOccupantComponent;
+		SidewalkWanderData m_WanderData;
+		HeadTrackTarget m_HeadTrackingTarget;
 		bool m_AIPositionValid;
 		bool m_HostilityEnabled;
-		UFG::NearbyCharacter* m_pNearbyCharacter;
-		UFG::qSafePointer<UFG::GroupComponent, UFG::GroupComponent> m_pGroupComponent;
-		UFG::qSafePointer<UFG::CombatRegion, UFG::CombatRegion> m_pCombatRegion;
-		UFG::qFixedArray<UFG::ThreatTarget, 10> m_ThreatTargets;
-		UFG::qVector3 m_vCombatRegionMoveToVec;
+		NearbyCharacter* m_pNearbyCharacter;
+		qSafePointer<GroupComponent, GroupComponent> m_pGroupComponent;
+		qSafePointer<CombatRegion, CombatRegion> m_pCombatRegion;
+		qFixedArray<ThreatTarget, 10> m_ThreatTargets;
+		qVector3 m_vCombatRegionMoveToVec;
 		bool m_bActive;
 		bool m_bCanWander;
 		bool m_bRefreshWander;
@@ -664,16 +664,16 @@ namespace UFG
 		bool m_bCheatUnlimitedAmmo;
 		bool m_bDebugDrawInventory;
 
-		static UFG::eTargetTypeEnum GetSlotTarget(int m_Slot)
+		UFG_STATIC_INLINE eTargetTypeEnum GetSlotTarget(int m_Slot)
 		{
 			switch (m_Slot)
 			{
-				default: return UFG::eTARGET_TYPE_EQUIPPED;
-				case 1: return UFG::eTARGET_TYPE_EQUIPPED_LEFT_HAND;
-				case 2: return UFG::eTARGET_TYPE_EQUIPPED_HAT;
-				case 3: return UFG::eTARGET_TYPE_EQUIPPED_GLASSES;
-				case 4: return UFG::eTARGET_TYPE_STOWED_WEAPON;
-				case 5: return UFG::eTARGET_TYPE_STOWED_2H_WEAPON;
+				default: return eTARGET_TYPE_EQUIPPED;
+				case 1: return eTARGET_TYPE_EQUIPPED_LEFT_HAND;
+				case 2: return eTARGET_TYPE_EQUIPPED_HAT;
+				case 3: return eTARGET_TYPE_EQUIPPED_GLASSES;
+				case 4: return eTARGET_TYPE_STOWED_WEAPON;
+				case 5: return eTARGET_TYPE_STOWED_2H_WEAPON;
 			}
 		}
 
@@ -769,7 +769,7 @@ namespace UFG
 		qSafePointer<SimObject> m_FreeAimSimObject;
 
 		UFG_PAD(0x28);
-		//UFG::qReflectHandle<UFG::PhysicsObjectProperties> m_FreeAimPhysicsObjectProperties;
+		//qReflectHandle<PhysicsObjectProperties> m_FreeAimPhysicsObjectProperties;
 
 		int m_iFreeAimOriginBoneID;
 		int m_iFreeAimSyncBoneID;
@@ -785,14 +785,14 @@ namespace UFG
 		float m_fFocusTargetDistanceSeg;
 		bool m_bResetSoftLockOffset;
 		AimingPlayerComponent::eSoftLockTypeEnum m_eSoftLockType;
-		UFG::qVector3 m_vSoftLockOffset;
+		qVector3 m_vSoftLockOffset;
 		float m_fFreeAimSpeedModifier;
 		float m_fInterpolatedFreeAimConeClamp;
-		UFG::eTargetTypeEnum m_eSnapFreeAimIntentionToTarget;
+		eTargetTypeEnum m_eSnapFreeAimIntentionToTarget;
 
 		UFG_PAD(0x20);
-		/*UFG::qList<AimingSoftLockTask, AimingSoftLockList, 0, 0> m_AimingSoftLockTaskList;
-		UFG::qList<AimingFreeAimConeClampTask, AimingFreeAimConeClampList, 0, 0> m_AimingFreeAimConeClampTaskList;*/
+		/*qList<AimingSoftLockTask, AimingSoftLockList, 0, 0> m_AimingSoftLockTaskList;
+		qList<AimingFreeAimConeClampTask, AimingFreeAimConeClampList, 0, 0> m_AimingFreeAimConeClampTaskList;*/
 
 		__int8 m_bPerformAimObscuredCheck : 1;
 		float m_fUnobscuredAimCheckDistance;
@@ -820,9 +820,9 @@ namespace UFG
 	class CSensorComponent : public SimComponent
 	{
 	public:
-		CParkourHandle* FindClosestParkourHandle(UFG::qVector3* p_Position, UFG::qVector3* p_Orentation, float p_Angle, float p_BufferZone, float p_DistanceMinXY, float p_DistanceMaxXY, float p_DistanceMinZ, float p_DistanceMaxZ, eSimObjectVehicleTypeEnum checkAttachedToVehicleType, Parkour::CheckFlags p_CheckFlags, UFG::qVector3* p_ContactPosition)
+		CParkourHandle* FindClosestParkourHandle(qVector3* p_Position, qVector3* p_Orentation, float p_Angle, float p_BufferZone, float p_DistanceMinXY, float p_DistanceMaxXY, float p_DistanceMinZ, float p_DistanceMaxZ, eSimObjectVehicleTypeEnum checkAttachedToVehicleType, Parkour::CheckFlags p_CheckFlags, qVector3* p_ContactPosition)
 		{
-			return reinterpret_cast<CParkourHandle*(__fastcall*)(void*, UFG::qVector3*, UFG::qVector3*, float, float, float, float, float, float, eSimObjectVehicleTypeEnum, Parkour::CheckFlags, UFG::qVector3*)>(UFG_RVA(0x27B370))(this, p_Position, p_Orentation, p_Angle, p_BufferZone, p_DistanceMinXY, p_DistanceMaxXY, p_DistanceMinZ, p_DistanceMaxZ, checkAttachedToVehicleType, p_CheckFlags, p_ContactPosition);
+			return reinterpret_cast<CParkourHandle*(__fastcall*)(void*, qVector3*, qVector3*, float, float, float, float, float, float, eSimObjectVehicleTypeEnum, Parkour::CheckFlags, qVector3*)>(UFG_RVA(0x27B370))(this, p_Position, p_Orentation, p_Angle, p_BufferZone, p_DistanceMinXY, p_DistanceMaxXY, p_DistanceMinZ, p_DistanceMaxZ, checkAttachedToVehicleType, p_CheckFlags, p_ContactPosition);
 		}
 	};
 
@@ -852,8 +852,8 @@ namespace UFG
 		qSafePointer<CParkourHandle> mParkourHandle;
 
 		UFG_PAD(0x80);
-		/*UFG::CoverCornerHandle mFocusCoverCornerHandle;
-		UFG::CoverCornerHandle mLatchedCoverCornerHandle;*/
+		/*CoverCornerHandle mFocusCoverCornerHandle;
+		CoverCornerHandle mLatchedCoverCornerHandle;*/
 
 		void* mpCoverPosition;
 		bool mbSyncingCoverParkour;
@@ -979,9 +979,9 @@ namespace UFG
 			return GetComponentOfType<CRagdollComponent>(CharacterRagdollComponent_TypeUID);
 		}
 
-		UFG_INLINE CCharacterOccupantComponent* GetCharacterOccupant()
+		UFG_INLINE CharacterOccupantComponent* GetCharacterOccupant()
 		{
-			return GetComponentOfType<CCharacterOccupantComponent>(CharacterOccupantComponent_TypeUID);
+			return GetComponentOfType<CharacterOccupantComponent>(CharacterOccupantComponent_TypeUID);
 		}
 
 		UFG_INLINE CAttackRightsComponent* GetAttackRights()

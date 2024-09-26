@@ -2,13 +2,13 @@
 
 namespace UFG
 {
-	class CInventoryItemComponent : public SimComponent
+	class InventoryItemComponent : public SimComponent
 	{
 	public:
-		qNode<CInventoryItemComponent> mNode;
+		qNode<InventoryItemComponent> mNode;
 		qSafePointer<class CInventoryComponent> m_pOwnerInventoryComponent;
 		eInventoryItemEnum m_eInventoryItem;
 		qSymbol m_symInventoryItem;
 		int m_iQuantity;
-	};
+	}; typedef InventoryItemComponent CInventoryItemComponent;
 }

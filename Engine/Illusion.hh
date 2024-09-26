@@ -37,23 +37,23 @@ namespace Illusion
 			return m_Itter;
 		}
 
-		void Add(CStateBlock* m_StateBlock)
+		void Add(StateBlock* m_StateBlock)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CStateBlock*)>(UFG_RVA(0x8DE00))(this, m_StateBlock);
+			reinterpret_cast<void(__fastcall*)(void*, StateBlock*)>(UFG_RVA(0x8DE00))(this, m_StateBlock);
 		}
 
-		void Remove(CStateBlock* m_StateBlock)
+		void Remove(StateBlock* m_StateBlock)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CStateBlock*)>(UFG_RVA(0x94950))(this, m_StateBlock);
+			reinterpret_cast<void(__fastcall*)(void*, StateBlock*)>(UFG_RVA(0x94950))(this, m_StateBlock);
 		}
 
-		CStateBlock* GetStateBlock(unsigned int name_uid, int return_default_data = 1)
+		StateBlock* GetStateBlock(unsigned int name_uid, int return_default_data = 1)
 		{
 			return reinterpret_cast<CStateBlock*(__fastcall*)(void*, unsigned int, int)>(UFG_RVA(0x92690))(this, name_uid, return_default_data);
 		}
 	};
 
-	class CParamOverride
+	class ParamOverride
 	{
 	public:
 		int mStateParamIndex;
@@ -93,9 +93,9 @@ namespace Illusion
 		{
 			SetOverride(p_ParamUID, 0x8B43FABF, p_OverrideNameUID, p_Condition, p_OriginalNameUID);
 		}
-	};
+	}; typedef ParamOverride CParamOverride;
 
-	class CMaterialModifierParams
+	class MaterialModifierParams
 	{
 	public:
 		void* mOverridesPtr;
@@ -103,9 +103,9 @@ namespace Illusion
 
 		UFG_PAD(0x4);
 
-		CParamOverride mOverrides[10];
+		ParamOverride mOverrides[10];
 		int mMaxOverrides;
 
 		UFG_PAD(0x4);
-	};
+	}; typedef MaterialModifierParams CMaterialModifierParams;
 }

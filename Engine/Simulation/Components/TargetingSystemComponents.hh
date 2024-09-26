@@ -2,24 +2,24 @@
 
 namespace UFG
 {
-	class CTargetingSimObject
+	class TargetingSimObject
 	{
 	public:
-		qNode<CTargetingSimObject> mNode;
-		class CTargetingSystemBaseComponent* m_pTSBC;
+		qNode<TargetingSimObject> mNode;
+		class TargetingSystemBaseComponent* m_pTSBC;
 		qSafePointer<SimObject> m_pTarget;
 		uint8_t m_eTargetType;
 		bool m_bLock;
-	};
+	}; typedef TargetingSimObject CTargetingSimObject;
 
 	//================================================================================================================================
 
-	class CTargetingSystemBaseComponent : public SimComponent
+	class TargetingSystemBaseComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x18);
 
-		CTargetingSimObject* m_pTargets;
+		TargetingSimObject* m_pTargets;
 
 		struct TargetingMap_t
 		{
@@ -27,9 +27,9 @@ namespace UFG
 			qFixedArray<uint8_t, 91> m_Map;
 		};
 		TargetingMap_t* m_pTargetingMap;
-		qList<CTargetingSimObject> m_TargetedBy;
+		qList<TargetingSimObject> m_TargetedBy;
 
-		UFG_INLINE CTargetingSimObject* GetTarget(eTargetTypeEnum p_TargetType)
+		UFG_INLINE TargetingSimObject* GetTarget(eTargetTypeEnum p_TargetType)
 		{
 			return &m_pTargets[m_pTargetingMap->m_Map.p[p_TargetType]];
 		}
@@ -49,23 +49,23 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum)>(UFG_RVA(0x15DFB0))(this, p_TargetType);
 		}
-	};
+	}; typedef TargetingSystemBaseComponent CTargetingSystemBaseComponent;
 
 	//================================================================================================================================
 
-	class CTargetingSystemPedBaseComponent : public CTargetingSystemBaseComponent
+	class TargetingSystemPedBaseComponent : public TargetingSystemBaseComponent
 	{
 	public:
-		qNode<CTargetingSystemPedBaseComponent> m_Node;
-		RebindingComponentHandle<CTransformNodeComponent> m_pTransformNodeComponent;
+		qNode<TargetingSystemPedBaseComponent> m_Node;
+		RebindingComponentHandle<TransformNodeComponent> m_pTransformNodeComponent;
 		RebindingComponentHandle<class CAimingBaseComponent> m_pAimingBaseComponent;
-		RebindingComponentHandle<class CActionTreeComponent> m_pActionTreeComponent;
+		RebindingComponentHandle<class ActionTreeComponent> m_pActionTreeComponent;
 		RebindingComponentHandle<class CActiveAIEntityComponent> m_pActiveAIEntityComponent;
 		RebindingComponentHandle<class CCharacterPropertiesComponent> m_pSimObjectCharacterPropertiesComponent;
 		RebindingComponentHandle<class CAICharacterControllerComponent> m_pAICharacterControllerComponent;
 		RebindingComponentHandle<class CAICharacterControllerBaseComponent> m_pAICharacterControllerBaseComponent;
 		RebindingComponentHandle<void*> m_pInterestPointUserComponent;
-		qSafePointer<class CSimWeaponPropertiesComponent> m_pEquippedSOWPC;
+		qSafePointer<class SimWeaponPropertiesComponent> m_pEquippedSOWPC;
 		qList<void*> m_TargetSteerToTaskList;
 		bool m_bHasRangedWeapon;
 		bool m_bIsValidSocialTarget;
@@ -77,7 +77,7 @@ namespace UFG
 		struct ClosePhysicalTarget_t
 		{
 			float m_fDistance2;
-			class CRigidBodyComponent* m_pRigidBodyComponent;
+			class RigidBodyComponent* m_pRigidBodyComponent;
 		};
 		qFixedArray<ClosePhysicalTarget_t, 10> m_ClosePhysicalTargetsList;
 
@@ -96,22 +96,22 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, bool, bool)>(UFG_RVA(0x54EE70))(this, eTargetType, bLock, bModifyCollisionAccordingToLock);
 		}
-	};
+	}; typedef TargetingSystemPedBaseComponent CTargetingSystemPedBaseComponent;
 
 	//================================================================================================================================
 
-	class CTargetingSystemPedNPCCombatantComponent : public CTargetingSystemPedBaseComponent
+	class TargetingSystemPedNPCCombatantComponent : public TargetingSystemPedBaseComponent
 	{
 	public:
 
-	};
+	}; typedef TargetingSystemPedNPCCombatantComponent CTargetingSystemPedNPCCombatantComponent;
 
 	//================================================================================================================================
 
-	class CTargetingSystemPedPlayerComponent : public CTargetingSystemPedBaseComponent
+	class TargetingSystemPedPlayerComponent : public TargetingSystemPedBaseComponent
 	{
 	public:
-		qNode<CTargetingSystemPedPlayerComponent> m_Node;
+		qNode<TargetingSystemPedPlayerComponent> m_Node;
 		RebindingComponentHandle<class CCharacterAnimationComponent> m_pCharacterAnimationComponent;
 		RebindingComponentHandle<class CAimingPlayerComponent> m_pAimingPlayerComponent;
 		RebindingComponentHandle<class CAttackRightsComponent> m_pAttackRightsComponent;
@@ -121,7 +121,7 @@ namespace UFG
 		qSafePointer<SimObject> m_pFocusModeOverrideSimObject;
 		qSafePointer<SimObject> m_pOccupantOfVehicle;
 		qSafePointer<SimObject> m_pVehicleClosestPointSimObject;
-		qSafePointer<CTransformNodeComponent> m_pVehicleClosestPointTNC;
+		qSafePointer<TransformNodeComponent> m_pVehicleClosestPointTNC;
 
 		struct RimLighting_t
 		{
@@ -162,7 +162,7 @@ namespace UFG
 		bool m_TransitTargetingDisabledByMiniGame;
 		bool m_TransitTargetingDisabledByScript;
 		int m_iVisibilityFromBoneID;
-		CSceneObjectProperties* m_pDriverSceneObjectProperties;
+		SceneObjectProperties* m_pDriverSceneObjectProperties;
 		void* m_pDriverFaceActionComponent;
 		int m_eDriverFaceActionType;
 		eInventoryItemEnum m_eDriverSellableItemType;
@@ -175,7 +175,7 @@ namespace UFG
 		struct CloseTarget_t
 		{
 			float m_fDistance2;
-			class CSimObjectPropertiesComponent* m_pSimObjectPropertiesComponent;
+			class SimObjectPropertiesComponent* m_pSimObjectPropertiesComponent;
 			qMatrix44 m_Xform;
 		};
 		qFixedArray<CloseTarget_t, 100> m_CloseTargetsList;
@@ -184,5 +184,5 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, eFocusModeEnum)>(UFG_RVA(0x54D100))(this, p_FocusMode);
 		}
-	};
+	}; typedef TargetingSystemPedPlayerComponent CTargetingSystemPedPlayerComponent;
 }

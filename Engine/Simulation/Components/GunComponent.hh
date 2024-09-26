@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CGunComponent : public SimComponent
+	class GunComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -14,7 +14,7 @@ namespace UFG
 		UFG_PAD(0x4);
 
 		RebindingComponentHandle<CSimWeaponPropertiesComponent> mSimObjectWeaponPropertiesComponent;
-		RebindingComponentHandle<class CInventoryItemComponent> mInventoryItemComponent;
+		RebindingComponentHandle<class InventoryItemComponent> mInventoryItemComponent;
 
 		eTargetTypeEnum mMustHitTarget;
 		int mClipAmmo[2];
@@ -49,5 +49,5 @@ namespace UFG
 		{
 			return reinterpret_cast<int(__fastcall*)(void*)>(UFG_RVA(0x530B50))(this);
 		}
-	};
+	}; typedef GunComponent CGunComponent;
 }

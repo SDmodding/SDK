@@ -17,7 +17,7 @@ namespace UFG
 
 	//================================================================================================================================
 
-	class CVehicleEffectsComponent : public SimComponent
+	class VehicleEffectsComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -29,13 +29,13 @@ namespace UFG
 
 		EffectStatus_t mEffectStatusTable[EFFECT_TABLE_SIZE];
 		RebindingComponentHandle<class CWaterFloatingTrackerComponent> mWaterFloatingTrackerComponent;
-		RebindingComponentHandle<class CCompositeDrawableComponent> mDrawableComponent;
-		RebindingComponentHandle<class CFXSimComponent> mFXComponent;
-		RebindingComponentHandle<class CPhysicsMoverInterface> mMoverComponent;
+		RebindingComponentHandle<class CompositeDrawableComponent> mDrawableComponent;
+		RebindingComponentHandle<class FXSimComponent> mFXComponent;
+		RebindingComponentHandle<class PhysicsMoverInterface> mMoverComponent;
 		RebindingComponentHandle<class CRoadSpaceComponent> mRoadSpaceComponent;
 		RebindingComponentHandle<class CVehicleDriverInterface> mVehicleDriverComponent;
 		unsigned long mSkidEmitters[4];
-		CTransformNodeComponent* mTransformNodes[16];
+		TransformNodeComponent* mTransformNodes[16];
 		unsigned long mWheelBoneId[4];
 		unsigned long mBumperBoneId[4];
 		unsigned long mSkidEffect[4];
@@ -142,6 +142,6 @@ namespace UFG
 				reinterpret_cast<void(__fastcall*)(void*, void*, float, bool, bool)>(UFG_RVA(0x3AEDD0))(mDamageRig, this, p_fDamage, p_bTriggersOnly, p_bSuppressSoundEffects);
 			}
 		}
-	};
-	UFG_ASSERT_CLASS(CVehicleEffectsComponent, 0x760);
+	}; typedef VehicleEffectsComponent CVehicleEffectsComponent;
+	UFG_ASSERT_CLASS(VehicleEffectsComponent, 0x760);
 }

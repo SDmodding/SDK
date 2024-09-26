@@ -43,7 +43,7 @@ namespace UFG
 
 		UFG_PAD_ALIGN(0x4);
 
-		RebindingComponentHandle<CCharacterOccupantComponent> mCharacterOccupantComponent;
+		RebindingComponentHandle<CharacterOccupantComponent> mCharacterOccupantComponent;
 		eActiveZoneClass mLocationClassification;
 		bool mIsDead;
 

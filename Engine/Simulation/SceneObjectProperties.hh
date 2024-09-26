@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CSceneObjectProperties
+	class SceneObjectProperties
 	{
 	public:
 		UFG_PAD(0x18);
@@ -93,5 +93,5 @@ namespace UFG
 			case 0xDE552DA6: return eSIM_OBJ_TYPE2_SpawnRegion;
 			}
 		}
-	};
+	}; typedef SceneObjectProperties CSceneObjectProperties;
 }

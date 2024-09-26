@@ -81,7 +81,7 @@ namespace UFG
 	class CPhysicsResourceHandle : public qResourceHandle
 	{
 	public:
-		class CBasePhysicsObject* mOwner;
+		class BasePhysicsObject* mOwner;
 		bool mUnloading;
 	};
 }

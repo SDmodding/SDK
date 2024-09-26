@@ -10,7 +10,7 @@ namespace UFG
 		qNode<VehicleOccupantComponent> mNode;
 		void* mpParkingSpot;
 		qSafePointer<SimCharacter> mpDriver;
-		qList<class CCharacterOccupantComponent> mPassengers;
+		qList<class CharacterOccupantComponent> mPassengers;
 		qSafePointer<SimObject> mpReservations[10];
 		uint32_t mSeatCount;
 

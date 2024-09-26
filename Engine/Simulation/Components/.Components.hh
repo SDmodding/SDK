@@ -8,16 +8,16 @@ namespace UFG
 	class SimCharacter;
 	class SimVehicle;
 
-	class CBasePhysicsObject
+	class BasePhysicsObject
 	{
 	public:
 		void* vfptr;
 		bool mIsBoat;
 		qSafePointer<SimComponent> mSimComponent;
-	};
+	}; typedef BasePhysicsObject CBasePhysicsObject;
 
 	// Components
-	class CCompositeDrawableComponent : public SimComponent
+	class CompositeDrawableComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x28);
@@ -60,15 +60,15 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, bool)>(UFG_RVA(0x4000))(this, m_Hidden);
 		}
-	};
+	}; typedef CompositeDrawableComponent CCompositeDrawableComponent;
 
-	class CDynamicSceneryInstance
+	class DynamicSceneryInstance
 	{
 	public:
 		UFG_PAD(0x18);
 
 		SimComponent mSimComponent;
-		qNode<CDynamicSceneryInstance> mNode;
+		qNode<DynamicSceneryInstance> mNode;
 		int16_t mHidden;
 		int16_t mForceTransparencyState;
 
@@ -93,34 +93,34 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x2357E0))(this);
 		}
-	};
+	}; typedef DynamicSceneryInstance CDynamicSceneryInstance;
 
-	class CPowerManagementComponent : public SimComponent
+	class PowerManagementComponent : public SimComponent
 	{
 	public:
 		void PreventSuspendTemporarily(float p_Time)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x588930))(this, p_Time);
 		}
-	};
+	}; typedef PowerManagementComponent CPowerManagementComponent;
 
-	class CPhysicsRenderHelper : public SimComponent
+	class PhysicsRenderHelper : public SimComponent
 	{
 	public:
-		qNode<CPhysicsRenderHelper> mNode;
+		qNode<PhysicsRenderHelper> mNode;
 		uint16_t mNumSceneryInstances;
-		CDynamicSceneryInstance** mSceneryInstances;
+		DynamicSceneryInstance** mSceneryInstances;
 		uint32_t mFlags;
-	};
+	}; typedef PhysicsRenderHelper CPhysicsRenderHelper;
 
-	class CTransformNodeComponent : public SimComponent
+	class TransformNodeComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
 
 		void* mChildren[2];
 		unsigned int mChangeID;
-		CTransformNodeComponent* mParent;
+		TransformNodeComponent* mParent;
 		int mChanged;
 
 		UFG_PAD(0xC);
@@ -130,23 +130,24 @@ namespace UFG
 		qVector3 mWorldVelocity;
 		int mInheritXformType;
 
-		static const char* GetName()
+		UFG_STATIC_INLINE const char* GetName()
 		{
 			return reinterpret_cast<const char*>(UFG_RVA(0x16B0BD0));
 		}
 
-		static CTransformNodeComponent* Create(uint32_t p_UID = 0, CTransformNodeComponent* p_Parent = nullptr, bool p_StartSuspended = false)
+		UFG_STATIC_INLINE TransformNodeComponent* Create(uint32_t p_UID = 0, TransformNodeComponent* p_Parent = nullptr, bool p_StartSuspended = false)
 		{
-			CTransformNodeComponent* m_NewTransformComponent = reinterpret_cast<CTransformNodeComponent*>(MemoryPool::GetSimulationPool()->Allocate(sizeof(CTransformNodeComponent), GetName(), 0, 1));
-			if (m_NewTransformComponent)
-				m_NewTransformComponent->Constructor(p_UID, p_Parent, p_StartSuspended);
+			auto pComponent = reinterpret_cast<TransformNodeComponent*>(MemoryPool::GetSimulationPool()->Allocate(sizeof(TransformNodeComponent), GetName(), 0, 1));
+			if (pComponent) {
+				pComponent->Constructor(p_UID, p_Parent, p_StartSuspended);
+			}
 
-			return m_NewTransformComponent;
+			return pComponent;
 		}
 
-		void Constructor(uint32_t p_UID, CTransformNodeComponent* p_Parent, bool p_StartSuspended)
+		void Constructor(uint32_t p_UID, TransformNodeComponent* p_Parent, bool p_StartSuspended)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, uint32_t, CTransformNodeComponent*, bool)>(UFG_RVA(0x18F1E0))(this, p_UID, p_Parent, p_StartSuspended);
+			reinterpret_cast<void(__fastcall*)(void*, uint32_t, TransformNodeComponent*, bool)>(UFG_RVA(0x18F1E0))(this, p_UID, p_Parent, p_StartSuspended);
 		}
 
 		void Destructor()
@@ -168,9 +169,9 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x191D60))(this);
 		}
-	};
+	}; typedef TransformNodeComponent CTransformNodeComponent;
 
-	class CBaseAnimationComponent : public SimComponent
+	class BaseAnimationComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x58);
@@ -216,17 +217,17 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, float)>(UFG_RVA(0x5909E0))(this, m_DeltaSec);
 		}
-	};
+	}; typedef BaseAnimationComponent CBaseAnimationComponent;
 
-	class CRigidBody : public SimComponent, public CBasePhysicsObject
+	class RigidBody : public SimComponent, public BasePhysicsObject
 	{
 	public:
 		CPhysicsResourceHandle mCollisionMeshBundle;
-		CCollisionInstanceData* mInstanceData;
-		CCollisionMeshData* mCollisionMeshData;
+		CollisionInstanceData* mInstanceData;
+		CollisionMeshData* mCollisionMeshData;
 		hkpRigidBody* mBody;
 		class CWaterFloatingTrackerBaseComponent* mWaterFloatingTrackerComponent;
-		RebindingComponentHandle<CTransformNodeComponent> mRootTransformComponent;
+		RebindingComponentHandle<TransformNodeComponent> mRootTransformComponent;
 		class CWindAction* mWindAction;
 		struct BitArray256* mFractureState;
 		qArray<qSafePointer<class CConstraint>> mConstraints;
@@ -248,15 +249,15 @@ namespace UFG
 		Flags mFlags;
 		uint32_t mCollisionLayerOverride;
 		int mCollisionSystem;
-	};
+	}; typedef RigidBody CRigidBody;
 
-	class CRigidBodyComponent : public CRigidBody
+	class RigidBodyComponent : public RigidBody
 	{
 	public:
-		qNode<CRigidBodyComponent> mNode;
+		qNode<RigidBodyComponent> mNode;
 		qSafePointer<class CParkourComponent> mParkourComponent;
-		qSafePointer<class CDynamicCoverComponent> mCoverComponent;
-		qSafePointer<class CPhysicsRenderHelper> mRenderComponent;
+		qSafePointer<class DynamicCoverComponent> mCoverComponent;
+		qSafePointer<class PhysicsRenderHelper> mRenderComponent;
 		qSafePointer<class CStateMachineComponent> mStateMachineComponent;
 		RebindingComponentHandle<class CCharacterAnimationComponent> mAnimationComponent;
 		int16_t mFollowBoneIndex;
@@ -331,9 +332,9 @@ namespace UFG
 				Deflate();
 			}
 		}
-	};
+	}; typedef RigidBodyComponent CRigidBodyComponent;
 
-	class CFXSimComponent : SimComponent
+	class FXSimComponent : SimComponent
 	{
 	public:
 		qSymbol AttachEffect(qSymbol effectId, int jointID, qMatrix44* offset = nullptr, void* overrideObject = nullptr)
@@ -345,9 +346,9 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol, uint32_t)>(UFG_RVA(0x1CB150))(this, fxId, killOption);
 		}
-	};
+	}; typedef FXSimComponent CFXSimComponent;
 
-	class CWaterPhantomComponent : public SimComponent
+	class WaterPhantomComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x68);
@@ -364,5 +365,5 @@ namespace UFG
 
 		float mElevation;
 		uint32_t mIsVolume : 1;
-	};
+	}; typedef WaterPhantomComponent CWaterPhantomComponent;
 }

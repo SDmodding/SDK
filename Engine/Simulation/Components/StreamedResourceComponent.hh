@@ -2,9 +2,9 @@
 
 namespace UFG
 {
-	class CCompositeDrawableComponent;
+	class CompositeDrawableComponent;
 
-	class CStreamedResourceComponent : public SimComponent
+	class StreamedResourceComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x4C8);
@@ -18,9 +18,9 @@ namespace UFG
 		float mCameraDistance;
 		eSimObjectTypeEnum mSimObjectType;
 
-		UFG_INLINE void Constructor(CSceneObjectProperties* p_SceneObject)
+		UFG_INLINE void Constructor(SceneObjectProperties* p_SceneObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSceneObjectProperties*)>(UFG_RVA(0x4373B0))(this, p_SceneObject);
+			reinterpret_cast<void(__fastcall*)(void*, SceneObjectProperties*)>(UFG_RVA(0x4373B0))(this, p_SceneObject);
 		}
 
 		UFG_INLINE void Destructor()
@@ -33,14 +33,14 @@ namespace UFG
 			return reinterpret_cast<qPropertySet*(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x43D0D0))(this, &p_PropName);
 		}
 
-		UFG_INLINE void BindAllModels(CCompositeDrawableComponent* p_CompositeDrawable, bool p_UsingTempRig = false)
+		UFG_INLINE void BindAllModels(CompositeDrawableComponent* p_CompositeDrawable, bool p_UsingTempRig = false)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CCompositeDrawableComponent*, bool)>(UFG_RVA(0x438DD0))(this, p_CompositeDrawable, p_UsingTempRig);
+			reinterpret_cast<void(__fastcall*)(void*, CompositeDrawableComponent*, bool)>(UFG_RVA(0x438DD0))(this, p_CompositeDrawable, p_UsingTempRig);
 		}
 
-		UFG_INLINE void UnbindAllModels(CCompositeDrawableComponent* p_CompositeDrawable)
+		UFG_INLINE void UnbindAllModels(CompositeDrawableComponent* p_CompositeDrawable)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CCompositeDrawableComponent*)>(UFG_RVA(0x4440F0))(this, p_CompositeDrawable);
+			reinterpret_cast<void(__fastcall*)(void*, CompositeDrawableComponent*)>(UFG_RVA(0x4440F0))(this, p_CompositeDrawable);
 		}
 
 		UFG_INLINE void Update(float p_TimeDelta, qVector3* p_StreamPosition)
@@ -67,5 +67,5 @@ namespace UFG
 		{
 			return reinterpret_cast<bool(__fastcall*)(void*)>(UFG_RVA(0x438CC0))(this);
 		}
-	};
+	}; typedef StreamedResourceComponent CStreamedResourceComponent;
 }

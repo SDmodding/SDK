@@ -37,7 +37,7 @@ namespace UFG
 
 	//==========================================================================================
 
-	class CCollisionInfo
+	class CollisionInfo
 	{
 	public:
 		uint64_t mPhysicsObjectPropertyHandleUID;
@@ -50,10 +50,10 @@ namespace UFG
 		float mSpeed;
 		float mForwardSpeed;
 		float mEstimatedImpulseMagnitude;
-	};
-	UFG_ASSERT_CLASS(CCollisionInfo, 0x50);
+	}; typedef CollisionInfo CCollisionInfo;
+	UFG_ASSERT_CLASS(CollisionInfo, 0x50);
 
-	class CExplosionTypeInfo
+	class ExplosionTypeInfo
 	{
 	public:
 		qSymbol mPropertySetName;
@@ -67,10 +67,10 @@ namespace UFG
 		float mDistanceMagnitudeRatio[10][2];
 		bool mExplosionNoDamage : 1;
 		bool mExplosionCanTriggerVehicleExplosion : 1;
-	};
-	UFG_ASSERT_CLASS(CExplosionTypeInfo, 0xC0);
+	}; typedef ExplosionTypeInfo CExplosionTypeInfo;
+	UFG_ASSERT_CLASS(ExplosionTypeInfo, 0xC0);
 
-	class CMeleeInfo
+	class MeleeInfo
 	{
 	public:
 		int mAttackLocationLateralID;
@@ -83,20 +83,20 @@ namespace UFG
 		qVector3 mHitDirection;
 		qVector3 mHitNormal;
 		CActionPath mActionPath;
-	};
-	UFG_ASSERT_CLASS(CMeleeInfo, 0x50);
+	}; typedef MeleeInfo CMeleeInfo;
+	UFG_ASSERT_CLASS(MeleeInfo, 0x50);
 
-	class CProjectileInfo
+	class ProjectileInfo
 	{
 	public:
 		qSafePointer<CSimWeaponPropertiesComponent> m_pSOWPC;
 		class CSubTargetingLocation* m_pSubTargetingLocation;
 		bool m_bIsFullyAccurate;
 		bool m_bIsHardLocked;
-	};
-	UFG_ASSERT_CLASS(CProjectileInfo, 0x28);
+	}; typedef ProjectileInfo CProjectileInfo;
+	UFG_ASSERT_CLASS(ProjectileInfo, 0x28);
 
-	class CHitRecord
+	class HitRecord
 	{
 	public:
 		bool mHitRecordProcessed;
@@ -108,17 +108,17 @@ namespace UFG
 		qSafePointer<SimObject> mAttacker;
 		float mTimeSinceHit;
 		int mFramesSinceHit;
-		CMeleeInfo mMeleeInfo;
-		CProjectileInfo mProjectileInfo;
+		MeleeInfo mMeleeInfo;
+		ProjectileInfo mProjectileInfo;
 		CCollisionInfo mCollisionInfo;
 		int mEffectBone;
 		qVector3 mEffectOffset;
 		float mDistanceFromExplosionSquared;
 		CExplosionTypeInfo* mExplosionInfo;
 		uint32_t mAttackerNetworkID;
-		CHitRecord* mNext;
-	};
-	UFG_ASSERT_CLASS(CHitRecord, 0x128);
+		HitRecord* mNext;
+	}; typedef HitRecord CHitRecord;
+	UFG_ASSERT_CLASS(HitRecord, 0x128);
 
 	class CIncomingAttackInfo
 	{
@@ -134,11 +134,11 @@ namespace UFG
 
 	//==========================================================================================
 
-	class CHitReactionComponent : public SimComponent
+	class HitReactionComponent : public SimComponent
 	{
 	public:
 		void* m_UpdateInterfaceVfptr;
-		qNode<CHitReactionComponent> mNode;
+		qNode<HitReactionComponent> mNode;
 		float mAttackTimer;
 		eAttackPhaseEnum mAttackPhaseEnum;
 		bool mHitRecordProcessing;
@@ -151,6 +151,6 @@ namespace UFG
 		int mNumHits;
 		RebindingComponentHandle<CActionTreeComponent> mActionTreeComponent;
 		bool mWasProxy;
-	};
-	UFG_ASSERT_CLASS(CHitReactionComponent, 0x220);
+	}; typedef HitReactionComponent CHitReactionComponent;
+	UFG_ASSERT_CLASS(HitReactionComponent, 0x220);
 }

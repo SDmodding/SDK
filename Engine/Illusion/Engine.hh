@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	class CEngine
+	class Engine
 	{
 	public:
 		uint32_t mFrameCount;
@@ -15,9 +15,9 @@ namespace Illusion
 		UFG::CLinearAllocator* FramePatchMemory;
 		UFG::CLinearAllocator* FrameIndexMemory;
 
-		static CEngine* Instance()
+		UFG_STATIC_INLINE Engine* Instance()
 		{
-			return reinterpret_cast<CEngine*>(UFG_RVA(0x2167800));
+			return reinterpret_cast<Engine*>(UFG_RVA(0x2167800));
 		}
-	};
+	}; typedef Engine CEngine;
 }

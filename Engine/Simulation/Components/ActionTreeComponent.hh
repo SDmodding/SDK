@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CActionTreeComponent : public SimComponent
+	class ActionTreeComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x68);
@@ -24,6 +24,6 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58B060))(this);
 		}
-	};
-	UFG_ASSERT_CLASS(CActionTreeComponent, 0x560);
+	}; typedef ActionTreeComponent CActionTreeComponent;
+	UFG_ASSERT_CLASS(ActionTreeComponent, 0x560);
 }

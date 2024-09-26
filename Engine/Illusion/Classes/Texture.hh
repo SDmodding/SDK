@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	class CTexture;
+	class Texture;
 
 	struct TextureLockInfo_t
 	{
@@ -17,7 +17,7 @@ namespace Illusion
 		float mExampleOfTextureUserPlatData2;
 	};
 
-	class CTexturePlat
+	class TexturePlat
 	{
 	public:
 		UFG::qOffset64<TextureUserPlat_t> mTextureUserPlat;
@@ -33,8 +33,8 @@ namespace Illusion
 		UFG::qResourceHandle mTextureD3DResourceHandle;
 
 		UFG_PAD(0x48);
-	};
-	UFG_ASSERT_CLASS(CTexturePlat, 0xB0);
+	}; typedef TexturePlat CTexturePlat;
+	UFG_ASSERT_CLASS(TexturePlat, 0xB0);
 
 	class ITexturePlat
 	{
@@ -47,7 +47,7 @@ namespace Illusion
 			LOCK_MODIFY
 		};
 
-		UFG_INLINE CTexturePlat* GetPlat()
+		UFG_INLINE TexturePlat* GetPlat()
 		{
 			return reinterpret_cast<CTexturePlat*>(UFG_THIS_OFFSET(0xD0));
 		}
@@ -68,19 +68,19 @@ namespace Illusion
 		}
 	};
 
-	class CTextureUser
+	class TextureUser
 	{
 	public:
 		UFG::qResourceHandle mAlphaStateHandle;
 		UFG::qResourceHandle mRasterStateHandle;
 
-		UFG_INLINE void OnLoad(CTexture* p_Texture)
+		UFG_INLINE void OnLoad(Texture* p_Texture)
 		{
-			reinterpret_cast<void(_fastcall*)(void*, CTexture*)>(UFG_RVA(0x95F70))(this, p_Texture);
+			reinterpret_cast<void(_fastcall*)(void*, Texture*)>(UFG_RVA(0x95F70))(this, p_Texture);
 		}
-	};
+	}; typedef TextureUser CTextureUser;
 
-	class CTexture : public ITexturePlat, public UFG::qResourceData
+	class Texture : public ITexturePlat, public UFG::qResourceData
 	{
 	public:
 		enum eFormat : uint32_t
@@ -158,7 +158,7 @@ namespace Illusion
 		uint32_t mLastUsedFrameNum;
 		uint64_t mImageDataPosition;
 		class qVRAMemoryPool* mVRAMPool;
-		UFG::CMemoryPool* mMemoryPool;
+		UFG::MemoryPool* mMemoryPool;
 		UFG::qResourceFileHandle mTextureDataHandle;
-	};
+	}; typedef Texture CTexture;
 }

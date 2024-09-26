@@ -485,9 +485,9 @@ namespace UFG
 		CRacePosition* m_pRacePositionSteer;
 
 		// To reset use nullptr for m_Target
-		void SetChaseTarget(CSimVehicle* m_Target)
+		void SetChaseTarget(SimVehicle* m_Target)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6588B0))(this, m_Target);
+			reinterpret_cast<void(__fastcall*)(void*, SimVehicle*)>(UFG_RVA(0x6588B0))(this, m_Target);
 		}
 
 		void SetRaceTrail(CRaceTrail* race_trail)
@@ -668,9 +668,9 @@ namespace UFG
 		bool m_CappingSpeedForStopPoint;
 		bool m_CappingSpeedForNextGuide;
 
-		void SetChaseTarget(CSimVehicle* m_Target)
+		void SetChaseTarget(SimVehicle* m_Target)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimVehicle*)>(UFG_RVA(0x6587A0))(this, m_Target);
+			reinterpret_cast<void(__fastcall*)(void*, SimVehicle*)>(UFG_RVA(0x6587A0))(this, m_Target);
 		}
 
 		void SetDrivingMode(AiDriverComponent::eDriverMode p_Mode)
@@ -768,7 +768,7 @@ namespace UFG
 
 			return nullptr;
 		}
-	};
+	}; typedef SimVehicle CSimVehicle;
 
 	class TSVehicle
 	{

@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CSimVehiclePropertiesComponent : public CSimObjectPropertiesComponent
+	class SimVehiclePropertiesComponent : public SimObjectPropertiesComponent
 	{
 	public:
 		struct AimLimit_t
@@ -20,6 +20,6 @@ namespace UFG
 		float mFaceReplenishMultiplier;
 		qArray<void*> mDoorPhantomInfo;
 		bool mIsGarageVehicle;
-	};
-	UFG_ASSERT_CLASS(CSimVehiclePropertiesComponent, 0xE8);
+	}; typedef SimVehiclePropertiesComponent CSimVehiclePropertiesComponent;
+	UFG_ASSERT_CLASS(SimVehiclePropertiesComponent, 0xE8);
 }

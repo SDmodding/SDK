@@ -2,23 +2,23 @@
 
 namespace UFG
 {
-	class CSimVehicle;
+	class SimVehicle;
 
-	class CCharacterOccupantComponent : public SimComponent
+	class CharacterOccupantComponent : public SimComponent
 	{
 	public:
-		qNode<CCharacterOccupantComponent> mNode;
+		qNode<CharacterOccupantComponent> mNode;
 		eTargetTypeEnum mTargetType;
 		uint32_t mSeatIndex;
 		RebindingComponentHandle<CVehicleOccupantComponent> mCurrentVOC;
 
-		CSimVehicle* GetCurrentVehicle()
+		SimVehicle* GetCurrentVehicle()
 		{
 			if (mCurrentVOC.m_pSimComponent) {
-				return reinterpret_cast<CSimVehicle*>(mCurrentVOC.m_pSimComponent->m_pSimObject);
+				return reinterpret_cast<SimVehicle*>(mCurrentVOC.m_pSimComponent->m_pSimObject);
 			}
 
 			return nullptr;
 		}
-	};
+	}; typedef CharacterOccupantComponent CCharacterOccupantComponent;
 }
