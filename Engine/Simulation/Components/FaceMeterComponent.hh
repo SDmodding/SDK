@@ -14,7 +14,7 @@ namespace UFG
 		qString mCaption;
 	};
 
-	class CFaceMeterComponent : public CSimComponent, public qNode<CFaceMeterComponent>
+	class CFaceMeterComponent : public SimComponent, public qNode<CFaceMeterComponent>
 	{
 	public:
 		ScoreAffector_t mAffectors[107];

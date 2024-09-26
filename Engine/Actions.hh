@@ -179,7 +179,7 @@ namespace UFG
 	class CActionContext
 	{
 	public:
-		qSafePointer<class CSimObject> mSimObject; 
+		qSafePointer<class SimObject> mSimObject; 
 		CActionNode* m_OpeningBranch;
 		class CActionController* mActionController;
 		CActionContext* mParentContext;

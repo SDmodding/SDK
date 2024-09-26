@@ -4,7 +4,7 @@ namespace UFG
 {
 	class CCompositeDrawableComponent;
 
-	class CStreamedResourceComponent : public CSimComponent
+	class CStreamedResourceComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x4C8);
@@ -48,9 +48,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, float, qVector3*)>(UFG_RVA(0x444D00))(this, p_TimeDelta, p_StreamPosition);
 		}
 
-		UFG_INLINE void UpdateLoadState(CSimObject* p_SimObject)
+		UFG_INLINE void UpdateLoadState(SimObject* p_SimObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x446130))(this, p_SimObject);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x446130))(this, p_SimObject);
 		}
 
 		UFG_INLINE void IncrementPriorityReferenceCount(qSymbol p_Priority)

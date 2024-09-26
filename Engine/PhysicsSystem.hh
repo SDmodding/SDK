@@ -106,19 +106,19 @@ namespace UFG
 			return *reinterpret_cast<CPhysicsSystem**>(UFG_RVA(0x216B2C8));
 		}
 
-		UFG_INLINE CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, CSimObject* p_SimObject)
+		UFG_INLINE CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, SimObject* p_SimObject)
 		{
-			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CCollisionInstanceData*, CCollisionMeshData*, uint32_t, uint32_t, CSimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);
+			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CCollisionInstanceData*, CCollisionMeshData*, uint32_t, uint32_t, SimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);
 		}
 
-		UFG_INLINE void AddRenderHelper(CSimObject* p_SimObject, CRigidBodyComponent* p_RigidBody, CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh)
+		UFG_INLINE void AddRenderHelper(SimObject* p_SimObject, CRigidBodyComponent* p_RigidBody, CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
 		}
 
-		UFG_INLINE void AddDynamicCover(CSimObject* p_SimObject, qResourceHandle* p_DynamicCoverHandle)
+		UFG_INLINE void AddDynamicCover(SimObject* p_SimObject, qResourceHandle* p_DynamicCoverHandle)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, qResourceHandle*)>(UFG_RVA(0x45BE80))(this, p_SimObject, reinterpret_cast<qResourceHandle*>(reinterpret_cast<uintptr_t>(p_DynamicCoverHandle) - 0x50));
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, qResourceHandle*)>(UFG_RVA(0x45BE80))(this, p_SimObject, reinterpret_cast<qResourceHandle*>(reinterpret_cast<uintptr_t>(p_DynamicCoverHandle) - 0x50));
 		}
 
 		// return: true (if hit something)
@@ -132,14 +132,14 @@ namespace UFG
 			return reinterpret_cast<bool(__fastcall*)(void*, CShapeCasterCollector*, qVector3*, qVector3*)>(UFG_RVA(0xA1DD0))(this, p_ShapeCasterCollector, &p_Start, &p_End);
 		}
 
-		UFG_INLINE void DisableCollisionsBetween(CSimObject* p_SimObjectA, CSimObject* p_SimObjectB)
+		UFG_INLINE void DisableCollisionsBetween(SimObject* p_SimObjectA, SimObject* p_SimObjectB)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x461A40))(this, p_SimObjectA, p_SimObjectB);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, SimObject*)>(UFG_RVA(0x461A40))(this, p_SimObjectA, p_SimObjectB);
 		}
 
-		UFG_INLINE void ReEnableCollisionsBetween(CSimObject* p_SimObjectA, CSimObject* p_SimObjectB)
+		UFG_INLINE void ReEnableCollisionsBetween(SimObject* p_SimObjectA, SimObject* p_SimObjectB)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x4723A0))(this, p_SimObjectA, p_SimObjectB);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, SimObject*)>(UFG_RVA(0x4723A0))(this, p_SimObjectA, p_SimObjectB);
 		}
 	};
 	UFG_ASSERT_CLASS(CPhysicsSystem, 0x18620);

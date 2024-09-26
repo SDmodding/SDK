@@ -51,9 +51,9 @@ namespace UFG
 
 	namespace StoreMeshHelper
 	{
-		UFG_INLINE void CommitResource(CSimObject* p_SimObject, qPropertySet* p_PropertySet)
+		UFG_INLINE void CommitResource(SimObject* p_SimObject, qPropertySet* p_PropertySet)
 		{
-			reinterpret_cast<void(__fastcall*)(CSimObject*, qPropertySet*)>(UFG_RVA(0x4A0690))(p_SimObject, p_PropertySet);
+			reinterpret_cast<void(__fastcall*)(SimObject*, qPropertySet*)>(UFG_RVA(0x4A0690))(p_SimObject, p_PropertySet);
 		}
 	}
 }

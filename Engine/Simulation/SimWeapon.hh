@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CSimWeapon : public CSimObject
+	class SimWeapon : public SimObject
 	{
 	public:
 		UFG_INLINE CGunComponent* GetGun()
@@ -14,5 +14,5 @@ namespace UFG
 		{
 			return GetComponentOfType<CSimWeaponPropertiesComponent>(WeaponPropertiesComponent_TypeUID);
 		}
-	};
+	}; typedef SimWeapon CSimWeapon;
 }

@@ -287,7 +287,7 @@ namespace UFG
 	public:
 		UFG_PAD(0x18);
 
-		CSimObject* mSimObject;
+		SimObject* mSimObject;
 	};
 
 	class CPhysicsVehicle : public CBasePhysicsObject
@@ -455,7 +455,7 @@ namespace UFG
 		}
 	};
 
-	class CVehicleAudioComponent : public CSimComponent
+	class CVehicleAudioComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x23E);
@@ -474,7 +474,7 @@ namespace UFG
 		}
 	};
 
-	class CRoadSpaceComponent : public CSimComponent
+	class CRoadSpaceComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x630);
@@ -511,10 +511,10 @@ namespace UFG
 		}
 	};
 
-	class CAiDriverComponent : public CSimComponent
+	class CAiDriverComponent : public SimComponent
 	{
 	public:
-		UFG_PAD(0x130 - sizeof(CSimComponent));
+		UFG_PAD(0x130 - sizeof(SimComponent));
 		// TODO:
 		// - Parent class is VehicleDriverInterface rather than SimComponent...
 
@@ -538,7 +538,7 @@ namespace UFG
 		AiDriverComponent::eDriverMode m_DrivingMode;
 		AiDriverComponent::eDriverRole m_DrivingRole;
 		qPropertySet* m_DriverProfile;
-		qSafePointer<CSimObject> m_CatchupTarget;
+		qSafePointer<SimObject> m_CatchupTarget;
 
 		UFG_PAD(0x98);
 		// UFG::qPidControllerCore m_CatchupPid;
@@ -598,7 +598,7 @@ namespace UFG
 		float m_fPassingBias;
 		void* m_AvoidableSensor;
 		int m_NumAvoidableOverlaps;
-		qSafePointer<CSimObject> m_CurrentAvoidable;
+		qSafePointer<SimObject> m_CurrentAvoidable;
 		bool m_BlockedByAvoidable;
 		void* m_pCastingSphere;
 		void* m_pCastingPhantom;
@@ -644,7 +644,7 @@ namespace UFG
 		bool m_AvoidGeoEnabled;
 		bool m_GoToSlowDownForDestination;
 		bool m_GoToStopAtEnabled;
-		qSafePointer<CSimObject> m_PathingTarget;
+		qSafePointer<SimObject> m_PathingTarget;
 		float m_FacingTargetAngle;
 		float m_StopAtDist;
 		bool m_StopAtUseDestinationDirection;
@@ -711,7 +711,7 @@ namespace UFG
 	};
 
 	// Main
-	class CSimVehicle : public CSimObject
+	class SimVehicle : public SimObject
 	{
 	public:
 		UFG_INLINE CBaseAnimationComponent* GetAnimation()

@@ -43,12 +43,12 @@ namespace UFG
 
 	//===============================================================
 
-	class CCollisionInstanceData
+	class CollisionInstanceData
 	{
 	public:
 		struct Part
 		{
-			qSafePointer<CSimObject> mSimObject;
+			qSafePointer<SimObject> mSimObject;
 			qSymbol mSimObjectGuid;
 			uint32_t mInstanceUid;
 		};
@@ -57,7 +57,7 @@ namespace UFG
 		hkQuaternionf mInitialOrientation;
 		hkVector4f mPosition;
 		hkVector4f mInitialPosition;
-		class CSimComponent* mPhysicsComponent;
+		class SimComponent* mPhysicsComponent;
 		qSymbol mSimObjectName;
 		uint32_t mNumParts;
 		Part* mParts;
@@ -66,13 +66,14 @@ namespace UFG
 		uint32_t mCollisionModelGuid;
 		uint32_t mPadding;
 
-		CCollisionInstanceData()
+		UFG_INLINE CollisionInstanceData()
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x975F0))(this);
 		}
 	};
+	typedef CollisionInstanceData CCollisionInstanceData;
 
-	class CCollisionMeshData
+	class CollisionMeshData
 	{
 	public:
 		qNodeRB mNode;
@@ -109,9 +110,10 @@ namespace UFG
 		qReflectHandle<class CPhysicsObjectProperties> mObjectProperties;
 		unsigned int padding[2];
 
-		void Constructor(hkpShape* p_Shape)
+		UFG_INLINE void Ctor(hkpShape* p_Shape)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t, hkpShape*)>(UFG_RVA(0x978C0))(this, 0, p_Shape);
 		}
 	};
+	typedef CollisionMeshData CCollisionMeshData;
 }

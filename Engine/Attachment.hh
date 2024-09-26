@@ -3,7 +3,7 @@
 namespace UFG
 {
 	class CCreature;
-	class CSimObject;
+	class SimObject;
 
 	class CAttachment
 	{
@@ -16,9 +16,9 @@ namespace UFG
 		bool mScaleRelative;
 		bool mUseRubberBand;
 		int attachedJoint;
-		qSafePointer<CSimObject> mRootSimObject;
+		qSafePointer<SimObject> mRootSimObject;
 		qSafePointer<CCreature> mRootCreature;
-		qSafePointer<CSimObject> mAttachedSimObject;
+		qSafePointer<SimObject> mAttachedSimObject;
 		qMatrix44 mRelativeAttachmentLS;
 		qVector3 mRelativeScaleLS;
 		float mBlendRate;

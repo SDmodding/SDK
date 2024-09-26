@@ -4,12 +4,12 @@ namespace UFG
 {
 	namespace LocalPlayer
 	{
-		UFG_INLINE CSimCharacter** GetPointer()
+		UFG_INLINE SimCharacter** GetPointer()
 		{
-			return reinterpret_cast<CSimCharacter**>(UFG_RVA(0x235C488));
+			return reinterpret_cast<SimCharacter**>(UFG_RVA(0x235C488));
 		}
 
-		UFG_INLINE CSimCharacter* Get()
+		UFG_INLINE SimCharacter* Get()
 		{
 			return *GetPointer();
 		}

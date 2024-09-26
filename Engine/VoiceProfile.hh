@@ -28,9 +28,9 @@ namespace UFG
 			return reinterpret_cast<CVoiceProfile*(__fastcall*)(const char* , qWiseSymbol*)>(UFG_RVA(0x596590))(p_szVoiceName, &p_qVoiceTag);
 		}
 
-		UFG_INLINE CVoiceProfile* AssignVoice(CSimObject* p_SimObject)
+		UFG_INLINE CVoiceProfile* AssignVoice(SimObject* p_SimObject)
 		{
-			return reinterpret_cast<CVoiceProfile*(__fastcall*)(CSimObject*)>(UFG_RVA(0x596970))(p_SimObject);
+			return reinterpret_cast<CVoiceProfile*(__fastcall*)(SimObject*)>(UFG_RVA(0x596970))(p_SimObject);
 		}
 
 		UFG_INLINE CVoiceProfile* AssignVoice(qPropertySet* p_PropertySet)

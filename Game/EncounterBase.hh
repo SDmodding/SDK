@@ -7,8 +7,8 @@ namespace UFG
 	class CEncounterUnitContext
 	{
 	public:
-		CSimObject* mpSimObject;
-		CSimObject* mpVehicle;
+		SimObject* mpSimObject;
+		SimObject* mpVehicle;
 		float mWaterContextTimer;
 		bool mIsOnFootRaw;
 		bool mIsInsideInterior;
@@ -19,7 +19,7 @@ namespace UFG
 		bool mOpenFiredWithHostage;
 	};
 
-	class CEncounterUnitComponent : public CSimComponent
+	class CEncounterUnitComponent : public SimComponent
 	{
 	public:
 		int mRole; // 0 - None | 1 - Enforcer | 2 - Supporter
@@ -33,7 +33,7 @@ namespace UFG
 		float mInsideRadiusTimer;
 		float mAcquiredTimer;
 		float mVehicleFlipTimer;
-		qSafePointer<CSimObject> mGroupVehicle;
+		qSafePointer<SimObject> mGroupVehicle;
 		void* mpObjectiveIndicator;
 		CEncounterUnitContext mContext;
 	};
@@ -98,18 +98,18 @@ namespace UFG
 		UFG_PAD(0x850);
 		//UFG::WayTraversalClient mWayTraversalClient;
 
-		qSafePointer<CSimObject> mpFocusTarget;
-		qSafePointer<CSimObject> mpSecondaryTarget;
+		qSafePointer<SimObject> mpFocusTarget;
+		qSafePointer<SimObject> mpSecondaryTarget;
 		qSafePointer<void*> mpCombatRegion;
 
-		CSimObject* GetFocusTarget()
+		SimObject* GetFocusTarget()
 		{
 			return mpFocusTarget.m_pPointer;
 		}
 
-		void SetFocusTarget(CSimObject* m_SimObject)
+		void SetFocusTarget(SimObject* m_SimObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x3F0500))(this, m_SimObject);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x3F0500))(this, m_SimObject);
 		}
 
 		void SetCurrentWaveType(qSymbol m_WaveID)
@@ -117,9 +117,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, qSymbol*)>(UFG_RVA(0x3F9350))(this, &m_WaveID);
 		}
 
-		void UpdateOnFootPopulation(CSimObject* m_Target, CTransformNodeComponent* m_TargetTransform)
+		void UpdateOnFootPopulation(SimObject* m_Target, CTransformNodeComponent* m_TargetTransform)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CTransformNodeComponent*)>(UFG_RVA(0x3FA530))(this, m_Target, m_TargetTransform);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, CTransformNodeComponent*)>(UFG_RVA(0x3FA530))(this, m_Target, m_TargetTransform);
 		}
 	};
 }

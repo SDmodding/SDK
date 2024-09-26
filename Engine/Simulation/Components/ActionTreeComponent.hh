@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CActionTreeComponent : public CSimComponent
+	class CActionTreeComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x68);

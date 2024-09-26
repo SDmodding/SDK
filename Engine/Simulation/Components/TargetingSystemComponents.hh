@@ -7,14 +7,14 @@ namespace UFG
 	public:
 		qNode<CTargetingSimObject> mNode;
 		class CTargetingSystemBaseComponent* m_pTSBC;
-		qSafePointer<CSimObject> m_pTarget;
+		qSafePointer<SimObject> m_pTarget;
 		uint8_t m_eTargetType;
 		bool m_bLock;
 	};
 
 	//================================================================================================================================
 
-	class CTargetingSystemBaseComponent : public CSimComponent
+	class CTargetingSystemBaseComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x18);
@@ -40,9 +40,9 @@ namespace UFG
 			return reinterpret_cast<T*>(GetTarget(p_TargetType)->m_pTarget.m_pPointer);
 		}
 
-		UFG_INLINE void SetTarget(eTargetTypeEnum p_TargetType, CSimObject* p_SimObject)
+		UFG_INLINE void SetTarget(eTargetTypeEnum p_TargetType, SimObject* p_SimObject)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x54ED20))(this, p_TargetType, p_SimObject);
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, SimObject*)>(UFG_RVA(0x54ED20))(this, p_TargetType, p_SimObject);
 		}
 
 		UFG_INLINE void ClearTarget(eTargetTypeEnum p_TargetType)
@@ -72,7 +72,7 @@ namespace UFG
 		uint32_t m_uUpdateBucket;
 		uint32_t* m_pBucketList;
 		bool m_bForceUpdate;
-		qFixedArray<qSafePointer<CSimObject>, 80> m_CachedPedsList;
+		qFixedArray<qSafePointer<SimObject>, 80> m_CachedPedsList;
 
 		struct ClosePhysicalTarget_t
 		{
@@ -89,7 +89,7 @@ namespace UFG
 		void* m_pFocusTargetSubTargetingLocation;
 		void* m_pLastFocusTargetSubTargetingLocation;
 		void* m_pFocusTargetSubTargetingLocationOverride;
-		CSimObject* m_pLastFocusTarget;
+		SimObject* m_pLastFocusTarget;
 		float m_fMinimumTargetDistanceSquared;
 
 		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, const bool bModifyCollisionAccordingToLock)
@@ -117,17 +117,17 @@ namespace UFG
 		RebindingComponentHandle<class CAttackRightsComponent> m_pAttackRightsComponent;
 		qSafePointer<class CRagdollComponent> m_RagdollTarget;
 		qSafePointer<class CRagdollComponent> m_FocusTargetsGrappleTarget;
-		qSafePointer<CSimObject> m_pVehicleFocusTarget;
-		qSafePointer<CSimObject> m_pFocusModeOverrideSimObject;
-		qSafePointer<CSimObject> m_pOccupantOfVehicle;
-		qSafePointer<CSimObject> m_pVehicleClosestPointSimObject;
+		qSafePointer<SimObject> m_pVehicleFocusTarget;
+		qSafePointer<SimObject> m_pFocusModeOverrideSimObject;
+		qSafePointer<SimObject> m_pOccupantOfVehicle;
+		qSafePointer<SimObject> m_pVehicleClosestPointSimObject;
 		qSafePointer<CTransformNodeComponent> m_pVehicleClosestPointTNC;
 
 		struct RimLighting_t
 		{
 			bool m_bEnabled;
 			eTargetTypeEnum m_TargetType;
-			qSafePointer<CSimObject> m_Target;
+			qSafePointer<SimObject> m_Target;
 		};
 		RimLighting_t m_RimLighting;
 

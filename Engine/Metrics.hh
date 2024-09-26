@@ -2,10 +2,10 @@
 
 namespace UFG
 {
-	class CMetrics
+	class Metrics
 	{
 	public:
-		qNode<CMetrics> mNode;
+		qNode<Metrics> mNode;
 		uint64_t mSimTimeMSec;
 		uint32_t mSimTimeTicks;
 		long double mSimTime;
@@ -24,9 +24,10 @@ namespace UFG
 		float mSimTimeScaleTurbo;
 		float mSimTimeScaleMax;
 
-		static CMetrics* Instance()
+		UFG_STATIC_INLINE Metrics* Instance()
 		{
-			return reinterpret_cast<CMetrics*>(UFG_RVA(0x203C920));
+			return reinterpret_cast<Metrics*>(UFG_RVA(0x203C920));
 		}
 	};
+	typedef Metrics CMetrics;
 }

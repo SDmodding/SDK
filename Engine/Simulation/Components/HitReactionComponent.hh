@@ -105,7 +105,7 @@ namespace UFG
 		bool mEffectTriggered;
 		eAttackTypeID mAttackTypeID;
 		int mDamage;
-		qSafePointer<CSimObject> mAttacker;
+		qSafePointer<SimObject> mAttacker;
 		float mTimeSinceHit;
 		int mFramesSinceHit;
 		CMeleeInfo mMeleeInfo;
@@ -125,7 +125,7 @@ namespace UFG
 	public:
 		eAttackPhaseEnum mAttackPhaseEnum;
 		int mAttackTypeID;
-		qSafePointer<CSimObject> mAttacker;
+		qSafePointer<SimObject> mAttacker;
 		int mAttackLocationLateralID;
 		int mAttackLocationHorizontalID;
 		int mTimeSinceUpdated;
@@ -134,7 +134,7 @@ namespace UFG
 
 	//==========================================================================================
 
-	class CHitReactionComponent : public CSimComponent
+	class CHitReactionComponent : public SimComponent
 	{
 	public:
 		void* m_UpdateInterfaceVfptr;

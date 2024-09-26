@@ -22,7 +22,7 @@ namespace UFG
 		qNode<CRadarElement> mNode;
 		eRadarType mType;
 		qVector3 mPosition;
-		qSafePointer<CSimObject> mDrawable;
+		qSafePointer<SimObject> mDrawable;
 	};
 
 	class CRadarSystem

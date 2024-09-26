@@ -19,9 +19,8 @@
 //==============================================================================
 // Inline
 
-#ifndef UFG_INLINE
-    #define UFG_INLINE __forceinline
-#endif
+#define UFG_INLINE          __forceinline
+#define UFG_STATIC_INLINE   __forceinline static
 
 //==============================================================================
 // Asserts

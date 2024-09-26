@@ -8,7 +8,7 @@
 
 namespace UFG
 {
-	class CSimObject;
+	class SimObject;
 }
 
 #include "SceneObjectProperties.hh"
@@ -71,48 +71,49 @@ namespace UFG
 
 namespace UFG
 {
-	class CSimulation
+	class Simulation
 	{
 	public:
 		qTreeRB mSimObjects;
 		qTreeRB mSimObjectsToBeDeleted;
 		qTreeRB mSimObjectsToBeDeletedRecursively;
-		qSafePointer<CSimObject> mpLocalPlayer;
-		qArray<CSimObject> m_aCurrentDestructingObjects;
+		qSafePointer<SimObject> mpLocalPlayer;
+		qArray<SimObject> m_aCurrentDestructingObjects;
 
-		static UFG_INLINE CSimulation* Instance()
+		UFG_STATIC_INLINE Simulation* Instance()
 		{
-			return reinterpret_cast<CSimulation*>(UFG_RVA(0x235C3A0));
+			return reinterpret_cast<Simulation*>(UFG_RVA(0x235C3A0));
 		}
 
 		UFG_INLINE qSymbol GenerateUniqueName(const char* p_Root)
 		{
-			qSymbol m_Symbol;
-			reinterpret_cast<void(__fastcall*)(void*, qSymbol*, const char*)>(UFG_RVA(0x190A50))(this, &m_Symbol, p_Root);
-			return m_Symbol;
+			qSymbol symbol;
+			return *reinterpret_cast<qSymbol*(__fastcall*)(void*, qSymbol*, const char*)>(UFG_RVA(0x190A50))(this, &symbol, p_Root);
 		}
 
-		UFG_INLINE CSimObject* GetSimObject(qSymbol p_ObjectNameUID)
+		UFG_INLINE SimObject* GetSimObject(qSymbol p_ObjectNameUID)
 		{
-			return reinterpret_cast<CSimObject * (__fastcall*)(void*, qSymbol)>(UFG_RVA(0x190C40))(this, p_ObjectNameUID);
+			return reinterpret_cast<SimObject*(__fastcall*)(void*, qSymbol)>(UFG_RVA(0x190C40))(this, p_ObjectNameUID);
 		}
 
-		CSimObject* GetSimObjectHead()
+		UFG_INLINE SimObject* GetSimObjectHead()
 		{
-			qBaseNodeRB* m_Node = mSimObjects.GetHead();
-			if (!m_Node)
+			auto pNode = mSimObjects.GetHead();
+			if (!pNode) {
 				return nullptr;
+			}
 
-			return m_Node->GetPointer<CSimObject, offsetof(CSimObject, m_Node)>();
+			return pNode->GetPointer<SimObject, offsetof(SimObject, m_Node)>();
 		}
 
-		CSimObject* GetSimObjectNext(CSimObject* p_SimObject)
+		UFG_INLINE SimObject* GetSimObjectNext(SimObject* p_SimObject)
 		{
-			qBaseNodeRB* m_NextNode = mSimObjects.GetNext(&p_SimObject->m_Node);
-			if (!m_NextNode || m_NextNode == reinterpret_cast<qBaseNodeRB*>(this))
+			auto pNextNode = mSimObjects.GetNext(&p_SimObject->m_Node);
+			if (!pNextNode || pNextNode == reinterpret_cast<qBaseNodeRB*>(this)) {
 				return nullptr;
+			}
 
-			return m_NextNode->GetPointer<CSimObject, offsetof(CSimObject, m_Node)>();
+			return pNextNode->GetPointer<SimObject, offsetof(SimObject, m_Node)>();
 		}
-	};
+	}; typedef Simulation CSimulation;
 }

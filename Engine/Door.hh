@@ -10,7 +10,7 @@ namespace UFG
 		qVector3 m_position;
 	};
 
-	class CDoorComponent : public CSimComponent
+	class CDoorComponent : public SimComponent
 	{
 	public:
 		qNode<CDoorComponent> mNode;

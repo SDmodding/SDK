@@ -8,7 +8,7 @@ namespace UFG
 
 	//============================================================================
 
-	class CBaseCameraComponent : public CSimComponent, public qNode<CBaseCameraComponent>
+	class CBaseCameraComponent : public SimComponent, public qNode<CBaseCameraComponent>
 	{
 	public:
 		CCamera mCamera;

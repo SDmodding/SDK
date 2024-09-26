@@ -28,7 +28,7 @@ namespace UFG
 
 	//==========================================================================================
 
-	class CPhysicsMoverInterface : public CSimComponent
+	class CPhysicsMoverInterface : public SimComponent
 	{
 	public:
 		void* m_UpdateInterfaceVfptr;

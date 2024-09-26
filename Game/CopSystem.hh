@@ -49,8 +49,8 @@ namespace UFG
 		bool mStimulusWatchList[116];
 		char mStimulusCount[116];
 		CCopHeatEvent mHeatEvents[26];
-		qSafePointer<CSimObject> mpAmbientSuspect;
-		qSafePointer<CSimObject> mpArrestRightHumanCop;
+		qSafePointer<SimObject> mpAmbientSuspect;
+		qSafePointer<SimObject> mpArrestRightHumanCop;
 		float mArrestRightTimestamp;
 		qString mLastHeatEventCaption;
 		eHeatEventEnum mLastHeatEventIndex;
@@ -71,9 +71,9 @@ namespace UFG
 			return reinterpret_cast<float(__fastcall*)(void*, eHeatLevelEnum)>(UFG_RVA(0x3EDA60))(this, p_HeatLevel);
 		}
 
-		UFG_INLINE void ReportInfractionTarget(CSimObject* p_Witness, CSimObject* p_Suspect)
+		UFG_INLINE void ReportInfractionTarget(SimObject* p_Witness, SimObject* p_Suspect)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, CSimObject*)>(UFG_RVA(0x3F02E0))(this, p_Witness, p_Suspect);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, SimObject*)>(UFG_RVA(0x3F02E0))(this, p_Witness, p_Suspect);
 		}
 
 		UFG_INLINE void SetHeatLevel(eHeatLevelEnum p_HeatLevel, eHeatEventEnum p_HeatEvent)

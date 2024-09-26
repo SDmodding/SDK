@@ -2,7 +2,7 @@
 
 namespace Illusion
 {
-	class CBuffer : public UFG::qResourceData
+	class Buffer : public UFG::qResourceData
 	{
 	public:
 		uint8_t mBufferType;
@@ -19,8 +19,9 @@ namespace Illusion
 		uint32_t pad1;
 		uint32_t pad2;
 	};
+	typedef Buffer CBuffer;
 
-	class CModel : public UFG::qResourceData
+	class Model : public UFG::qResourceData
 	{
 	public:
 		float mAABBMin[3];
@@ -62,12 +63,13 @@ namespace Illusion
 			OnLoad();
 		}
 	};
-	typedef CModel CModelData;
+	typedef Model CModel;
+	typedef Model CModelData;
 
-	class CStateBlock : public UFG::qResourceData
+	class StateBlock : public UFG::qResourceData
 	{
 	public:
-		UFG::qNode<CStateBlock> mNode;
+		UFG::qNode<StateBlock> mNode;
 		uint32_t mParentUID;
 		uint32_t mDataByteSize;
 		uint32_t mNumValues;
@@ -75,11 +77,12 @@ namespace Illusion
 
 		UFG_INLINE uintptr_t GetDataPointer()
 		{ 
-			return (reinterpret_cast<uintptr_t>(this) + sizeof(CStateBlock) + 0x8); 
+			return (reinterpret_cast<uintptr_t>(this) + sizeof(StateBlock) + 0x8); 
 		}
 	};
+	typedef StateBlock CStateBlock;
 
-	class CStateBlockVehicleLook : public CStateBlock
+	class StateBlockVehicleLook : public StateBlock
 	{
 	public:
 		UFG_PAD(0x8);
@@ -88,4 +91,5 @@ namespace Illusion
 		float m_Values0[4];
 		float m_Values1[4];
 	};
+	typedef StateBlockVehicleLook CStateBlockVehicleLook;
 }

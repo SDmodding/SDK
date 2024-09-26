@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CSimObject : public qSafePointerNodeWithCallbacks<CSimObject>
+	class SimObject : public qSafePointerNodeWithCallbacks<SimObject>
 	{
 	public:
 		qNodeRB m_Node;
@@ -12,24 +12,24 @@ namespace UFG
 		char m_ResolveRefCount;
 		CSceneObjectProperties* m_pSceneObj;
 		CTransformNodeComponent* m_pTransformNodeComponent;
-		qArray<CSimComponentHolder> m_Components;
-		qList<RebindingComponentHandle<CSimComponent>> m_UnboundComponentHandles;
+		qArray<SimComponentHolder> m_Components;
+		qList<RebindingComponentHandle<SimComponent>> m_UnboundComponentHandles;
 
 		// Virtual Functions
 
-		UFG_INLINE ~CSimObject() 
+		UFG_INLINE ~SimObject()
 		{
 			UFG_VCall<0, void>(this);
 		}
 
-		UFG_INLINE void Attach(CSimComponent* p_Component, uint32_t p_Index)
+		UFG_INLINE void Attach(SimComponent* p_Component, uint32_t p_Index)
 		{
-			UFG_VCall<1, void, CSimComponent*, uint32_t>(this, p_Component, p_Index);
+			UFG_VCall<1, void, SimComponent*, uint32_t>(this, p_Component, p_Index);
 		}
 
-		UFG_INLINE void Detach(CSimComponent* p_Component) 
+		UFG_INLINE void Detach(SimComponent* p_Component)
 		{
-			UFG_VCall<2, void, CSimComponent*>(this, p_Component);
+			UFG_VCall<2, void, SimComponent*>(this, p_Component);
 		}
 
 		// SkookumScript
@@ -71,9 +71,9 @@ namespace UFG
 
 		// Components
 
-		UFG_INLINE CSimComponent* GetComponentOfType(uint32_t p_TypeUID)
+		UFG_INLINE SimComponent* GetComponentOfType(uint32_t p_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, p_TypeUID);
+			return reinterpret_cast<SimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x190AD0))(this, p_TypeUID);
 		}
 
 		template <typename T>
@@ -82,9 +82,9 @@ namespace UFG
 			return reinterpret_cast<T*>(GetComponentOfType(p_TypeUID));
 		}
 
-		UFG_INLINE CSimComponent* GetComponentOfTypeHK(uint32_t p_TypeUID)
+		UFG_INLINE SimComponent* GetComponentOfTypeHK(uint32_t p_TypeUID)
 		{
-			return reinterpret_cast<CSimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, p_TypeUID);
+			return reinterpret_cast<SimComponent*(__fastcall*)(void*, uint32_t)>(UFG_RVA(0x52BBC0))(this, p_TypeUID);
 		}
 
 		template <typename T>
@@ -93,14 +93,14 @@ namespace UFG
 			return reinterpret_cast<T*>(GetComponentOfTypeHK(p_TypeUID));
 		}
 
-		UFG_INLINE CSimComponent* GetActor()
+		UFG_INLINE SimComponent* GetActor()
 		{
-			return GetComponentOfType<CSimComponent>(SimTSActorComponent_TypeUID);
+			return GetComponentOfType<SimComponent>(SimTSActorComponent_TypeUID);
 		}
 
-		UFG_INLINE CSimObjectPropertiesComponent* GetProperties()
+		UFG_INLINE SimObjectPropertiesComponent* GetProperties()
 		{
-			return GetComponentOfType<CSimObjectPropertiesComponent>(SimObjectProperties_TypeUID);
+			return GetComponentOfType<SimObjectPropertiesComponent>(SimObjectProperties_TypeUID);
 		}
 
 		UFG_INLINE CCompositeDrawableComponent* GetCompositeDrawable()
@@ -130,14 +130,14 @@ namespace UFG
 
 		// Functions
 
-		UFG_INLINE bool TargetAttach(eTargetTypeEnum p_TargetType, CSimObject* p_OverrideTarget, CSimObject** p_OutSimObjectTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendInTime, bool p_AttachRelative, float p_AttachRelativeMaxDistance, bool p_AttachToTarget, bool p_AddToInventory, bool p_AssignTarget, eTargetTypeEnum p_AssignmentTargetType, bool p_LockTarget, bool p_PositionOnly, bool p_PositionXYOnly, bool* p_ManagePowerLevel)
+		UFG_INLINE bool TargetAttach(eTargetTypeEnum p_TargetType, SimObject* p_OverrideTarget, SimObject** p_OutSimObjectTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendInTime, bool p_AttachRelative, float p_AttachRelativeMaxDistance, bool p_AttachToTarget, bool p_AddToInventory, bool p_AssignTarget, eTargetTypeEnum p_AssignmentTargetType, bool p_LockTarget, bool p_PositionOnly, bool p_PositionXYOnly, bool* p_ManagePowerLevel)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, CSimObject**, const qSymbol&, const qSymbol&, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, p_TargetType, p_OverrideTarget, p_OutSimObjectTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendInTime, p_AttachRelative, p_AttachRelativeMaxDistance, p_AttachToTarget, p_AddToInventory, p_AssignTarget, p_AssignmentTargetType, p_LockTarget, p_PositionOnly, p_PositionXYOnly, p_ManagePowerLevel);
+			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, SimObject*, SimObject**, const qSymbol&, const qSymbol&, float, bool, float, bool, bool, bool, eTargetTypeEnum, bool, bool, bool, bool*)>(UFG_RVA(0x553240))(this, p_TargetType, p_OverrideTarget, p_OutSimObjectTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendInTime, p_AttachRelative, p_AttachRelativeMaxDistance, p_AttachToTarget, p_AddToInventory, p_AssignTarget, p_AssignmentTargetType, p_LockTarget, p_PositionOnly, p_PositionXYOnly, p_ManagePowerLevel);
 		}
 
-		UFG_INLINE bool TargetDetach(eTargetTypeEnum p_TargetType, CSimObject* p_OverrideTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendOutTime, bool p_DetachFromTarget, bool p_RemoveFromInventory, bool p_DeleteOnDetach, bool p_ReleaseTarget, bool p_MakeUpright, bool p_FadeAwayOnDetach, float p_DisableCollisionDelay, float p_ClampVelocity, bool p_ManagePowerLevel)
+		UFG_INLINE bool TargetDetach(eTargetTypeEnum p_TargetType, SimObject* p_OverrideTarget, const qSymbol& p_AttachJoint, const qSymbol& p_TargetAttachJoint, float p_BlendOutTime, bool p_DetachFromTarget, bool p_RemoveFromInventory, bool p_DeleteOnDetach, bool p_ReleaseTarget, bool p_MakeUpright, bool p_FadeAwayOnDetach, float p_DisableCollisionDelay, float p_ClampVelocity, bool p_ManagePowerLevel)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, CSimObject*, const qSymbol&, const qSymbol&, float, bool, bool, bool, bool, bool, bool, float, float, bool)>(UFG_RVA(0x554F50))(this, p_TargetType, p_OverrideTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendOutTime, p_DetachFromTarget, p_RemoveFromInventory, p_DeleteOnDetach, p_ReleaseTarget, p_MakeUpright, p_FadeAwayOnDetach, p_DisableCollisionDelay, p_ClampVelocity, p_ManagePowerLevel);
+			return reinterpret_cast<bool(__fastcall*)(void*, eTargetTypeEnum, SimObject*, const qSymbol&, const qSymbol&, float, bool, bool, bool, bool, bool, bool, float, float, bool)>(UFG_RVA(0x554F50))(this, p_TargetType, p_OverrideTarget, p_AttachJoint, p_TargetAttachJoint, p_BlendOutTime, p_DetachFromTarget, p_RemoveFromInventory, p_DeleteOnDetach, p_ReleaseTarget, p_MakeUpright, p_FadeAwayOnDetach, p_DisableCollisionDelay, p_ClampVelocity, p_ManagePowerLevel);
 		}
 
 		UFG_INLINE bool IsAttached()
@@ -160,6 +160,6 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x1905C0))(this);
 		}
-	};
-	UFG_ASSERT_CLASS(CSimObject, 0x80);
+	}; typedef SimObject CSimObject;
+	UFG_ASSERT_CLASS(SimObject, 0x80);
 }

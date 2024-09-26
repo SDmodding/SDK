@@ -4,7 +4,7 @@ namespace UFG
 {
 	class CSimVehicle;
 
-	class CCharacterOccupantComponent : public CSimComponent
+	class CCharacterOccupantComponent : public SimComponent
 	{
 	public:
 		qNode<CCharacterOccupantComponent> mNode;

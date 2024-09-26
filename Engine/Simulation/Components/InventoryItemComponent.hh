@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CInventoryItemComponent : public CSimComponent
+	class CInventoryItemComponent : public SimComponent
 	{
 	public:
 		qNode<CInventoryItemComponent> mNode;

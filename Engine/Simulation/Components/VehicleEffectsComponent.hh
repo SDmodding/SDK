@@ -17,7 +17,7 @@ namespace UFG
 
 	//================================================================================================================================
 
-	class CVehicleEffectsComponent : public CSimComponent
+	class CVehicleEffectsComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);

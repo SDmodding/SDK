@@ -83,7 +83,7 @@ namespace UFG
 		//==========================================================
 		// Attachments
 
-		CAttachment* GetAttachment(CSimObject* p_AttachedSimObject)
+		CAttachment* GetAttachment(SimObject* p_AttachedSimObject)
 		{
 			for (auto i = mAttachments.mNode.mNext; i != &mAttachments.mNode; i = i->mNext)
 			{
@@ -109,24 +109,24 @@ namespace UFG
 			return nullptr;
 		}
 
-		UFG_INLINE void* AddAttachment(CSimObject* p_Self, int p_AttachBoneID, CSimObject* p_AttachedSimObject, int p_AttachmentBoneID, bool p_PositionOnly = false, float p_BlendIn = 0.f)
+		UFG_INLINE void* AddAttachment(SimObject* p_Self, int p_AttachBoneID, SimObject* p_AttachedSimObject, int p_AttachmentBoneID, bool p_PositionOnly = false, float p_BlendIn = 0.f)
 		{
-			return reinterpret_cast<void*(__fastcall*)(void*, CSimObject*, int, CSimObject*, int, bool, float)>(UFG_RVA(0x3A0BE0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject, p_AttachmentBoneID, p_PositionOnly, p_BlendIn);
+			return reinterpret_cast<void*(__fastcall*)(void*, SimObject*, int, SimObject*, int, bool, float)>(UFG_RVA(0x3A0BE0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject, p_AttachmentBoneID, p_PositionOnly, p_BlendIn);
 		}
 
-		UFG_INLINE bool RemoveAttachment(CSimObject* p_Self, CSimObject* p_AttachedSimObject, int p_AttachBoneID = -1)
+		UFG_INLINE bool RemoveAttachment(SimObject* p_Self, SimObject* p_AttachedSimObject, int p_AttachBoneID = -1)
 		{
 			if (p_AttachBoneID == -1)
 			{
-				UFG::CAttachment* _Attachment = GetAttachment(p_AttachedSimObject);
-				if (!_Attachment) {
+				auto pAttachment = GetAttachment(p_AttachedSimObject);
+				if (!pAttachment) {
 					return false;
 				}
 
-				p_AttachBoneID = _Attachment->attachedJoint;
+				p_AttachBoneID = pAttachment->attachedJoint;
 			}
 
-			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, int, CSimObject*)>(UFG_RVA(0x3ADFB0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject);
+			return reinterpret_cast<bool(__fastcall*)(void*, SimObject*, int, SimObject*)>(UFG_RVA(0x3ADFB0))(this, p_Self, p_AttachBoneID, p_AttachedSimObject);
 		}
 	};
 	UFG_ASSERT_CLASS(CCreature, 0x3A0);

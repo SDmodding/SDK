@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CSimObjectPropertiesComponent : public CSimComponent
+	class SimObjectPropertiesComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -15,6 +15,6 @@ namespace UFG
 		uint8_t m_BitField[8];
 
 		UFG_PAD(0x30);
-	};
-	UFG_ASSERT_CLASS(CSimObjectPropertiesComponent, 0x98);
+	}; typedef SimObjectPropertiesComponent CSimObjectPropertiesComponent;
+	UFG_ASSERT_CLASS(SimObjectPropertiesComponent, 0x98);
 }

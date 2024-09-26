@@ -58,9 +58,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, float, bool)>(UFG_RVA(0x3C4B80))(this, p_Radians, p_WorldSpace);
 		}
 
-		UFG_INLINE void SetTarget(CSimObject* m_Target)
+		UFG_INLINE void SetTarget(SimObject* m_Target)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x3CD570))(this, m_Target);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x3CD570))(this, m_Target);
 		}
 	};
 }

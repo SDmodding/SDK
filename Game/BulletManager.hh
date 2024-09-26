@@ -6,8 +6,8 @@ namespace UFG
 	{
 	public:
 		qNode<CBullet> mNode;
-		qSafePointer<UFG::CSimWeapon> weaponOwnerSimObject;
-		qSafePointer<UFG::CSimObject> mustHitSimObject;
+		qSafePointer<SimWeapon> weaponOwnerSimObject;
+		qSafePointer<SimObject> mustHitSimObject;
 
 		UFG_PAD(0x30);
 		/*UFG::ProjectileInfo projectileInfo;
@@ -30,12 +30,12 @@ namespace UFG
 		float mObscuredLength;
 		qSymbol grenadeEffectID;
 		eTargetTypeEnum mustHitTarget;
-		__int8 mSharpshooter : 1;
-		__int8 isNetworkProxy : 1;
-		__int8 showTracer : 1;
-		__int8 deleteMe : 1;
-		__int8 hasBeenAbsorbed : 1;
-		__int8 firstHit : 1;
+		bool mSharpshooter : 1;
+		bool isNetworkProxy : 1;
+		bool showTracer : 1;
+		bool deleteMe : 1;
+		bool hasBeenAbsorbed : 1;
+		bool firstHit : 1;
 	};
 
 	//================================================================================================================================

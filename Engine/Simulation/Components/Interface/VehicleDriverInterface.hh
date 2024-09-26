@@ -13,13 +13,13 @@ namespace UFG
 
 	//======================================================================
 
-	class CVehicleDriverInterface : public CSimComponent, public CUpdateInterface, public qNode<CVehicleDriverInterface>
+	class CVehicleDriverInterface : public SimComponent, public CUpdateInterface, public qNode<CVehicleDriverInterface>
 	{
 	public:
 		RebindingComponentHandle<class CPhysicsMoverInterface> mMoverComponent;
 		RebindingComponentHandle<class CVehicleEffectsComponent> mRenderComponent;
 		RebindingComponentHandle<class CVehicleAudioComponent> mAudioComponent;
-		qSafePointer<CSimObject> mDriver;
+		qSafePointer<SimObject> mDriver;
 		VehicleState mState;
 		VehicleState mDesiredState;
 		float mReverseLockoutDelay;

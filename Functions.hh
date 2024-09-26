@@ -7,15 +7,27 @@ namespace UFG
 		return reinterpret_cast<float(__fastcall*)(float, int*)>(UFG_RVA(0x189620))(p_Range, p_Seed);
 	}
 
-	UFG_INLINE __int64 DecompressLZ(void* input, __int64 input_length, void* output, __int64 output_length)
+	UFG_INLINE __int64 DecompressLZ(void* p_Input, __int64 p_Length, void* p_Output, __int64 p_OutputLength)
 	{
-		return reinterpret_cast<__int64(__fastcall*)(void*, __int64, void*, __int64)>(UFG_RVA(0x183080))(input, input_length, output, output_length);
+		return reinterpret_cast<__int64(__fastcall*)(void*, __int64, void*, __int64)>(UFG_RVA(0x183080))(p_Input, p_Length, p_Output, p_OutputLength);
 	}
 
-	UFG_INLINE void* Malloc(unsigned __int64 m_Size, const char* m_Name, unsigned __int64 m_AllocationParams)
+	//==================================================
+	// Memory
+
+	UFG_INLINE void* Malloc(uint64_t p_Size, const char* p_Name, uint64_t p_AllocationParams)
 	{
-		return reinterpret_cast<void*(__fastcall*)(unsigned __int64, const char*, unsigned __int64)>(UFG_RVA(0x187BE0))(m_Size, m_Name, m_AllocationParams);
+		return reinterpret_cast<void*(__fastcall*)(unsigned __int64, const char*, unsigned __int64)>(UFG_RVA(0x187BE0))(p_Size, p_Name, p_AllocationParams);
 	}
+
+	template <typename T>
+	UFG_INLINE T* Malloc(const char* p_Name, uint64_t p_AllocationParams)
+	{
+		return reinterpret_cast<T*>(Malloc(sizeof(T), p_Name, p_AllocationParams));
+	}
+
+	//==================================================
+	// Malloc
 
 	UFG_INLINE uint32_t DataHash32(void* p_Data, uint64_t p_NumBytes, uint32_t p_PrevHash = 0xFFFFFFFF)
 	{

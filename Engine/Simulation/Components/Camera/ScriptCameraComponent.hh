@@ -21,7 +21,7 @@ namespace UFG
 		bool mbPanning;
 		bool mbProfiling;
 		bool mbHighlightOn;
-		qSafePointer<CSimObject> mHighlightedCharacter;
+		qSafePointer<SimObject> mHighlightedCharacter;
 		bool bAllowWideAspectDisplay;
 
 		UFG_INLINE void SetDesiredEyeLook(const qVector3& p_Eye, const qVector3& p_Look, float p_Duration = 0.f, bool p_Snap = true)

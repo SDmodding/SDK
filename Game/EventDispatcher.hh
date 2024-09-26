@@ -50,7 +50,7 @@ namespace UFG
 	class CEntityDiedEvent : public CEvent
 	{
 	public:
-		qSafePointer<CSimObject> pSimObject;
+		qSafePointer<SimObject> pSimObject;
 	};
 
 	class CCollisionEvent : public CEvent
@@ -64,7 +64,7 @@ namespace UFG
 
 		UFG_PAD(0x4);
 
-		qSafePointer<CSimObject> mSimObject[2];
+		qSafePointer<SimObject> mSimObject[2];
 		qVector3 preCollisionPosition[2];
 		qVector3 velocity[2];
 		unsigned __int64 objectPropertyHandleUID[2];

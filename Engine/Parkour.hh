@@ -19,7 +19,7 @@ namespace UFG
 	public:
 		qSafePointerNode<CParkourHandle> mSafeNode;
 		qNode<CParkourHandle> mNode;
-		qSafePointer<class CSimObject> mSimObject;
+		qSafePointer<class SimObject> mSimObject;
 		qSafePointer<CParkourHandle> mCachedLeftNeighbor;
 		qSafePointer<CParkourHandle> mCachedRightNeighbor;
 		qVector3 v0;

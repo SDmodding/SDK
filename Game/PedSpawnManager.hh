@@ -15,13 +15,13 @@ namespace UFG
 	};
 
 
-	class CPedSpawningInfo : public CSimComponent
+	class CPedSpawningInfo : public SimComponent
 	{
 	public:
 		qNode<CPedSpawningInfo> mNode;
 		qNode<CPedSpawningInfo> mNode1;
 		qNode<CPedSpawningInfo> mNode2;
-		CSimObject* mProxySimObjectPtr;
+		SimObject* mProxySimObjectPtr;
 		CTransformNodeComponent* mProxyTransformNode;
 		int mPedIndex;
 		float mSuspendedTime;
@@ -143,9 +143,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x413F20))(this);
 		}
 
-		UFG_INLINE CPedSpawningInfo* FindPedInfo(CSimObject* p_SimObject)
+		UFG_INLINE CPedSpawningInfo* FindPedInfo(SimObject* p_SimObject)
 		{
-			return reinterpret_cast<CPedSpawningInfo*(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x40B4E0))(this, p_SimObject);
+			return reinterpret_cast<CPedSpawningInfo*(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x40B4E0))(this, p_SimObject);
 		}
 
 		static UFG_INLINE bool* AmbientSpawningEnable() 

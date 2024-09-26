@@ -17,7 +17,7 @@ namespace UFG
 			uint32_t mShapeKeyA;
 			hkpCollidable* mCollidableB;
 			uint32_t mShapeKeyB;
-			CSimObject* mSimObject;
+			SimObject* mSimObject;
 			uint64_t mPhysicsObjectPropertyHandleUID;
 			uint64_t mPhysicsSurfacePropertyHandleUID;
 		};

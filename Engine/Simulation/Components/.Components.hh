@@ -3,21 +3,21 @@
 namespace UFG
 {
 	// Classes
-	class CSceneObjectProperties;
-	class CSimObject;
-	class CSimCharacter;
-	class CSimVehicle;
+	class SceneObjectProperties;
+	class SimObject;
+	class SimCharacter;
+	class SimVehicle;
 
 	class CBasePhysicsObject
 	{
 	public:
 		void* vfptr;
 		bool mIsBoat;
-		qSafePointer<CSimComponent> mSimComponent;
+		qSafePointer<SimComponent> mSimComponent;
 	};
 
 	// Components
-	class CCompositeDrawableComponent : public CSimComponent
+	class CCompositeDrawableComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x28);
@@ -67,7 +67,7 @@ namespace UFG
 	public:
 		UFG_PAD(0x18);
 
-		CSimComponent mSimComponent;
+		SimComponent mSimComponent;
 		qNode<CDynamicSceneryInstance> mNode;
 		int16_t mHidden;
 		int16_t mForceTransparencyState;
@@ -95,7 +95,7 @@ namespace UFG
 		}
 	};
 
-	class CPowerManagementComponent : public CSimComponent
+	class CPowerManagementComponent : public SimComponent
 	{
 	public:
 		void PreventSuspendTemporarily(float p_Time)
@@ -104,7 +104,7 @@ namespace UFG
 		}
 	};
 
-	class CPhysicsRenderHelper : public CSimComponent
+	class CPhysicsRenderHelper : public SimComponent
 	{
 	public:
 		qNode<CPhysicsRenderHelper> mNode;
@@ -113,7 +113,7 @@ namespace UFG
 		uint32_t mFlags;
 	};
 
-	class CTransformNodeComponent : public CSimComponent
+	class CTransformNodeComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -170,7 +170,7 @@ namespace UFG
 		}
 	};
 
-	class CBaseAnimationComponent : public CSimComponent
+	class CBaseAnimationComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x58);
@@ -197,14 +197,14 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x58D300))(this);
 		}
 
-		void BindRequiredAnimBanks(CSceneObjectProperties* m_SceneObj, uintptr_t m_DataPtr)
+		void BindRequiredAnimBanks(SceneObjectProperties* m_SceneObj, uintptr_t m_DataPtr)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSceneObjectProperties*, uintptr_t)>(UFG_RVA(0x591CA0))(this, m_SceneObj, m_DataPtr);
+			reinterpret_cast<void(__fastcall*)(void*, SceneObjectProperties*, uintptr_t)>(UFG_RVA(0x591CA0))(this, m_SceneObj, m_DataPtr);
 		}
 
-		void InitPropertySetInfo(CSceneObjectProperties* m_SceneObj, uintptr_t m_DataPtr)
+		void InitPropertySetInfo(SceneObjectProperties* m_SceneObj, uintptr_t m_DataPtr)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSceneObjectProperties*, uintptr_t)>(UFG_RVA(0x583870))(this, m_SceneObj, m_DataPtr);
+			reinterpret_cast<void(__fastcall*)(void*, SceneObjectProperties*, uintptr_t)>(UFG_RVA(0x583870))(this, m_SceneObj, m_DataPtr);
 		}
 
 		void Update(float m_DeltaSec)
@@ -218,7 +218,7 @@ namespace UFG
 		}
 	};
 
-	class CRigidBody : public CSimComponent, public CBasePhysicsObject
+	class CRigidBody : public SimComponent, public CBasePhysicsObject
 	{
 	public:
 		CPhysicsResourceHandle mCollisionMeshBundle;
@@ -333,7 +333,7 @@ namespace UFG
 		}
 	};
 
-	class CFXSimComponent : CSimComponent
+	class CFXSimComponent : SimComponent
 	{
 	public:
 		qSymbol AttachEffect(qSymbol effectId, int jointID, qMatrix44* offset = nullptr, void* overrideObject = nullptr)
@@ -347,7 +347,7 @@ namespace UFG
 		}
 	};
 
-	class CWaterPhantomComponent : public CSimComponent
+	class CWaterPhantomComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x68);

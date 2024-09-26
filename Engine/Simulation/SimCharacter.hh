@@ -36,7 +36,7 @@ namespace UFG
 		float m_maxForce;
 	};
 
-	class CCharacterControllerInterface : public CSimComponent
+	class CCharacterControllerInterface : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -45,7 +45,7 @@ namespace UFG
 	};
 
 	// Components
-	class CAIAwarenessComponent : public UFG::CSimComponent
+	class CAIAwarenessComponent : public SimComponent
 	{
 	public:
 		qNode<CAIAwarenessComponent> mNode;
@@ -56,7 +56,7 @@ namespace UFG
 		bool mEnabled;
 	};
 
-	class CHealthComponent : public CSimComponent
+	class CHealthComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -95,7 +95,7 @@ namespace UFG
 		}
 	};
 
-	class CAttackRightsComponent : public CSimComponent
+	class CAttackRightsComponent : public SimComponent
 	{
 	public:
 		// Constructor, call with caution!
@@ -176,7 +176,7 @@ namespace UFG
 		}
 	};
 
-	class CCharacterEffectsComponent : public CSimComponent, public qNode<CCharacterEffectsComponent>
+	class CCharacterEffectsComponent : public SimComponent, public qNode<CCharacterEffectsComponent>
 	{
 	public:
 		enum Foot
@@ -231,7 +231,7 @@ namespace UFG
 		bool mIsEliteFighter;
 	};
 
-	class CCharacterPropertiesComponent : public CSimObjectPropertiesComponent
+	class CCharacterPropertiesComponent : public SimObjectPropertiesComponent
 	{
 	public:
 		UFG_PAD(0x18);
@@ -252,20 +252,20 @@ namespace UFG
 	{
 	public:
 
-		void SetDesiredTarget(eTargetTypeEnum target_type, CSimObject* target_object)
+		void SetDesiredTarget(eTargetTypeEnum target_type, SimObject* target_object)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, CSimObject*)>(UFG_RVA(0x386060))(this, target_type, target_object);
+			reinterpret_cast<void(__fastcall*)(void*, eTargetTypeEnum, SimObject*)>(UFG_RVA(0x386060))(this, target_type, target_object);
 		}
 	};
 
-	class CAIActionTreeComponent : public CSimComponent
+	class CAIActionTreeComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x98);
 		CActionController mActionController;
 	};
 
-	class CAICoverComponent : public CSimComponent
+	class CAICoverComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
@@ -277,8 +277,8 @@ namespace UFG
 		void* m_pCurrentCoverPosition;
 		void* m_pSyncCoverPosition;
 		eCoverPopoutSideEnum m_ePopoutSide;
-		qSafePointer<CSimObject> m_pSimTargetSync;
-		qSafePointer<CSimObject> m_pSimTargetPopout;
+		qSafePointer<SimObject> m_pSimTargetSync;
+		qSafePointer<SimObject> m_pSimTargetPopout;
 		int m_iHoldCoverPositionRefs;
 		int m_iAllowHoldCoverPositionUpdateRefs;
 		int m_iSyncBoneID;
@@ -321,7 +321,7 @@ namespace UFG
 	public:
 	};
 
-	class CAIEntityComponent : public CSimComponent
+	class CAIEntityComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x4F8);
@@ -374,14 +374,14 @@ namespace UFG
 		bool m_InPOIDynamicBranch;
 		bool m_InPropInteractBranch;
 
-		void AddSupplementaryAttackTarget(CSimObject* attack_target)
+		void AddSupplementaryAttackTarget(SimObject* attack_target)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x340E10))(this, attack_target);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x340E10))(this, attack_target);
 		}
 
-		void AddThreatTarget(CSimObject* pTarget, float radius)
+		void AddThreatTarget(SimObject* pTarget, float radius)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*, float)>(UFG_RVA(0x341190))(this, pTarget, radius);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*, float)>(UFG_RVA(0x341190))(this, pTarget, radius);
 		}
 
 		void SetCurrentObjective(eAIObjective objective)
@@ -395,7 +395,7 @@ namespace UFG
 		}
 	};
 
-	class CCharacterPhysicsComponent : public CSimComponent
+	class CCharacterPhysicsComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x38);
@@ -465,7 +465,7 @@ namespace UFG
 		}
 	};
 
-	class CRagdollComponent : public CSimComponent
+	class CRagdollComponent : public SimComponent
 	{
 	public:
 		enum CollisionState
@@ -510,9 +510,9 @@ namespace UFG
 			return (mPoseState == STATE_VELOCITY_TRACKING || mPoseState == STATE_POWERED_TRACKING);
 		}
 
-		static UFG_INLINE CRagdollComponent* Acquire(CSimObject* p_Object)
+		static UFG_INLINE CRagdollComponent* Acquire(SimObject* p_Object)
 		{
-			return reinterpret_cast<CRagdollComponent*(__fastcall*)(CSimObject*)>(UFG_RVA(0x454510))(p_Object);
+			return reinterpret_cast<CRagdollComponent*(__fastcall*)(SimObject*)>(UFG_RVA(0x454510))(p_Object);
 		}
 
 		UFG_INLINE void Update(float p_TimeDelta)
@@ -558,7 +558,7 @@ namespace UFG
 		}
 	};
 
-	class CCharacterSubjectComponent : public CSimComponent
+	class CCharacterSubjectComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0xF0);
@@ -643,7 +643,7 @@ namespace UFG
 		}
 	};
 
-	class CCharacterNavComponent : public CSimComponent
+	class CCharacterNavComponent : public SimComponent
 	{
 	public:
 		void AddGoalPoint(CHavokNavPosition* npDestination, AiPathGoalMode goalMode, float speed, float fDestinationTolerance)
@@ -652,7 +652,7 @@ namespace UFG
 		}
 	};
 
-	class CInventoryComponent : public CSimComponent
+	class CInventoryComponent : public SimComponent
 	{
 	public:
 		qNode<CInventoryComponent> m_Node;
@@ -682,9 +682,9 @@ namespace UFG
 			m_EquipSlots.p[p_Slot] = p_CanDrop;
 		}
 
-		bool Equip(CSimObject* p_ObjectToEquip, bool p_UseEquipSlot = false, int p_Slot = 0)
+		bool Equip(SimObject* p_ObjectToEquip, bool p_UseEquipSlot = false, int p_Slot = 0)
 		{
-			return reinterpret_cast<bool(__fastcall*)(void*, CSimObject*, bool, int)>(UFG_RVA(0x526F90))(this, p_ObjectToEquip, p_UseEquipSlot, p_Slot);
+			return reinterpret_cast<bool(__fastcall*)(void*, SimObject*, bool, int)>(UFG_RVA(0x526F90))(this, p_ObjectToEquip, p_UseEquipSlot, p_Slot);
 		}
 
 		void UnEquip(int p_Slot = 0, bool p_DeleteFromWorld = false)
@@ -692,9 +692,9 @@ namespace UFG
 			reinterpret_cast<void(__fastcall*)(void*, bool, int)>(UFG_RVA(0x557A40))(this, p_Slot, p_DeleteFromWorld);
 		}
 		
-		void RemoveObjectFromInventory(CSimObject* p_Object)
+		void RemoveObjectFromInventory(SimObject* p_Object)
 		{
-			reinterpret_cast<void(__fastcall*)(void*, CSimObject*)>(UFG_RVA(0x549120))(this, p_Object);
+			reinterpret_cast<void(__fastcall*)(void*, SimObject*)>(UFG_RVA(0x549120))(this, p_Object);
 		}
 
 		void Stow(int p_Slot, int p_DestinationSlot)
@@ -703,7 +703,7 @@ namespace UFG
 		}
 	};
 
-	class CInterestPointUserComponent : public CSimComponent
+	class CInterestPointUserComponent : public SimComponent
 	{
 	public:
 		void StopPOI()
@@ -712,7 +712,7 @@ namespace UFG
 		}
 	};
 
-	class CAimingBaseComponent : public CSimComponent
+	class CAimingBaseComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x18);
@@ -766,7 +766,7 @@ namespace UFG
 		qVector3 m_vFreeAimBaseOffset;
 		qVector3 m_vFreeAimIntention;
 		qVector3 m_vFreeAimTargetPosition;
-		qSafePointer<CSimObject> m_FreeAimSimObject;
+		qSafePointer<SimObject> m_FreeAimSimObject;
 
 		UFG_PAD(0x28);
 		//UFG::qReflectHandle<UFG::PhysicsObjectProperties> m_FreeAimPhysicsObjectProperties;
@@ -798,7 +798,7 @@ namespace UFG
 		float m_fUnobscuredAimCheckDistance;
 		float m_fUnobscuredAimTargetPositionPadDistance;
 		float m_fUnobscuredAimNewPositionPadDistance;
-		qSafePointer<CSimObject> m_pAimTargetPositionSimObject;
+		qSafePointer<SimObject> m_pAimTargetPositionSimObject;
 		qSafePointer<CTransformNodeComponent> m_pAimTargetPositionTNC;
 
 		AimingPlayerComponent::eAimBlendMode m_eAimBlendMode;
@@ -817,7 +817,7 @@ namespace UFG
 		}
 	};
 
-	class CSensorComponent : public CSimComponent
+	class CSensorComponent : public SimComponent
 	{
 	public:
 		CParkourHandle* FindClosestParkourHandle(UFG::qVector3* p_Position, UFG::qVector3* p_Orentation, float p_Angle, float p_BufferZone, float p_DistanceMinXY, float p_DistanceMaxXY, float p_DistanceMinZ, float p_DistanceMaxZ, eSimObjectVehicleTypeEnum checkAttachedToVehicleType, Parkour::CheckFlags p_CheckFlags, UFG::qVector3* p_ContactPosition)
@@ -826,7 +826,7 @@ namespace UFG
 		}
 	};
 
-	class CWorldContextComponent : public CSimComponent
+	class CWorldContextComponent : public SimComponent
 	{
 	public:
 		qNode<CWorldContextComponent> mNode;
@@ -891,7 +891,7 @@ namespace UFG
 	};
 
 	// Main
-	class CSimCharacter : public CSimObject
+	class SimCharacter : public SimObject
 	{
 	public:
 		UFG_INLINE CCharacterAudioComponent* GetAudio()
@@ -993,5 +993,6 @@ namespace UFG
 		{
 			return GetComponentOfType<CAimingPlayerComponent>(CharacterAimingPlayerComponent_TypeUID);
 		}
-	};
+	}; 
+	typedef SimCharacter CSimCharacter;
 }

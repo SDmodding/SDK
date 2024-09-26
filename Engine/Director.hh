@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CDirector : public CSimComponent, public qNode<CDirector>
+	class CDirector : public SimComponent, public qNode<CDirector>
 	{
 	public:
 		CBaseCameraComponent* mCurrentCamera;

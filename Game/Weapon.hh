@@ -165,7 +165,7 @@ namespace UFG
 			return false;
 		}
 		
-		bool RemoveWeapon(CSimObject* p_Weapon)
+		bool RemoveWeapon(SimObject* p_Weapon)
 		{
 			for (uint32_t i = 0; mElements.size > i; ++i)
 			{

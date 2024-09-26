@@ -11,7 +11,7 @@ namespace UFG
 		uint32_t m_NameUID;
 		uint16_t m_Flags;
 		int16_t m_SimObjIndex;
-		CSimObject* m_pSimObject;
+		SimObject* m_pSimObject;
 
 		UFG_PAD(0x58);
 

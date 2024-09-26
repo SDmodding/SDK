@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	class CGunComponent : public CSimComponent
+	class CGunComponent : public SimComponent
 	{
 	public:
 		UFG_PAD(0x10);
