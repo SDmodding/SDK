@@ -110,7 +110,14 @@ namespace UFG
 		qReflectHandle<class CPhysicsObjectProperties> mObjectProperties;
 		unsigned int padding[2];
 
-		UFG_INLINE void Ctor(hkpShape* p_Shape)
+		UFG_STATIC_INLINE CollisionMeshData* New()
+		{
+			auto pData = UFG::Malloc<CollisionMeshData>(reinterpret_cast<const char*>(UFG_RVA(0x1688CE8)), 0);
+			reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0x97AD0))(pData);
+			return pData;
+		}
+
+		UFG_INLINE void SetShape(hkpShape* p_Shape)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, uint32_t, hkpShape*)>(UFG_RVA(0x978C0))(this, 0, p_Shape);
 		}

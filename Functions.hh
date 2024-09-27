@@ -48,4 +48,9 @@ namespace UFG
 	{
 		return reinterpret_cast<uint64_t(__fastcall*)(const char*, uint64_t)>(UFG_RVA(0x18B6D0))(p_Str, p_PrevHash);
 	}
+
+	UFG_INLINE uint64_t HashUpper64(const char* p_Str, uint64_t p_PrevHash = 0xFFFFFFFFFFFFFFFF)
+	{
+		return reinterpret_cast<uint64_t(__fastcall*)(const char*, uint64_t)>(UFG_RVA(0x18B780))(p_Str, p_PrevHash);
+	}
 }

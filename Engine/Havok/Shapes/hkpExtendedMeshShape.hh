@@ -74,11 +74,6 @@ public:
 	float m_triangleRadius;
 	int m_padding;
 
-	~hkpExtendedMeshShape()
-	{
-		reinterpret_cast<void(__fastcall*)(void*)>(UFG_RVA(0xD12CB0))(this);
-	}
-
 	/// Constructs a new hkpExtendedMeshShape.
 	/// This mesh supports triangle soups as well as shape soups.
 	///    - The triangles are grouped in subparts and can be transformed (translation, rotation, scaling) and get a radius applied
@@ -92,13 +87,15 @@ public:
 	/// The subpart is stored in the high bits, so you can extract subpart/terminal indices like this:
 	///    - int subpartIndex = key >> ( 32 - mymesh->getNumBitsForSubpartIndex() );
 	///    - int terminalIndex = key & ( ~0U >> mymesh->getNumBitsForSubpartIndex() );
-	void Constructor(float p_Radius = 0.f, int p_NumBitsForSubpartIndex = 12)
+	UFG_STATIC_INLINE hkpExtendedMeshShape* New(float p_Radius = 0.f, int p_NumBitsForSubpartIndex = 12)
 	{
-		reinterpret_cast<void(__fastcall*)(void*, float, int)>(UFG_RVA(0xD12630))(this, p_Radius, p_NumBitsForSubpartIndex);
+		auto pShape = hkMemoryAllocator::Instance()->BlockAlloc<hkpExtendedMeshShape>();
+		reinterpret_cast<void(__fastcall*)(void*, float, int)>(UFG_RVA(0xD12630))(pShape, p_Radius, p_NumBitsForSubpartIndex);
+		return pShape;
 	}
 
 	// Adds a triangle subpart.
-	void AddTrianglesSubpart(TrianglesSubpart* p_Part)
+	UFG_INLINE void AddTrianglesSubpart(TrianglesSubpart* p_Part)
 	{
 		reinterpret_cast<void(__fastcall*)(void*, TrianglesSubpart*)>(UFG_RVA(0xD12E10))(this, p_Part);
 	}

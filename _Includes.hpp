@@ -91,6 +91,9 @@ UFG_INLINE ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/ResourceInventory.hh"
 #include "Engine/ResourceWarehouse.hh"
 
+#include "Engine/BigFile.hh"
+#include "Engine/DataStreamer.hh"
+
 //==========================================================================
 // Engine (Illusion)
 
@@ -149,11 +152,9 @@ UFG_INLINE ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 //==========================================================================
 // Engine (Common)
 
-#include "Engine/BigFile.hh"
 #include "Engine/BSP.hh"
 #include "Engine/DebugDrawManager.hh"
 #include "Engine/Door.hh"
-#include "Engine/DataStreamer.hh"
 #include "Engine/FXManager.hh"
 #include "Engine/LoadingLogic.hh"
 #include "Engine/RenderWorld.hh"
@@ -166,11 +167,16 @@ UFG_INLINE ReturnType UFG_VCall(void* p_Instance, Args... p_Args)
 #include "Engine/StreamPool.hh"
 #include "Engine/StreamFileWrapper.hh"
 #include "Engine/StreamResourceLoader.hh"
-#include "Engine/PhysicsSystem.hh"
 #include "Engine/PhysicsPropertyManager.hh"
 #include "Engine/TiDoGame.hh"
 #include "Engine/TrueCrowdDatabase.hh"
 #include "Engine/Wwise.hh"
+
+//==========================================================================
+// Engine (Physics)
+
+#include "Engine/Physics/Physics.hh"
+#include "Engine/Physics/ObjectProperties.hh"
 
 //==========================================================================
 // Game (RoadNetwork)

@@ -132,33 +132,6 @@ namespace UFG
 		};
 	}
 
-	namespace DataStreamer
-	{
-		enum STREAM_STATE
-		{
-			STATE_ERROR = 0x0,
-			STATE_EMPTY = 0x1,
-			STATE_LOAD_QUEUED = 0x2,
-			STATE_LOADING = 0x3,
-			STATE_FIXUP_DELAY = 0x4,
-			STATE_RESOURCE_FIXUP = 0x5,
-			STATE_ACTIVE = 0x6,
-			STATE_DEACTIVATING = 0x7,
-			STATE_COUNT = 0x8,
-		};
-
-		enum PRIORITY
-		{
-			VERY_HIGH_PRIORITY = 0x4000,
-			HIGH_PRIORITY = 0x3000,
-			HIGH_ANIM_PRIORITY = 0x2800,
-			DEFAULT_PRIORITY = 0x2000,
-			DEFAULT_ANIM_PRIORITY = 0x2000,
-			LOW_PRIORITY = 0x1000,
-			VERY_LOW_PRIORITY = 0x0,
-		};
-	}
-
 	enum CollisionGeomFlags
 	{
 		CGF_STATIC = 0x1,

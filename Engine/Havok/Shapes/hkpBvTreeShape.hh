@@ -30,8 +30,10 @@ public:
 	hkpSingleShapeContainer m_child;
 	int m_childSize;
 
-	void Constructor(hkpShapeCollection* p_ShapeCollection, hkpMoppCode* p_Code)
+	UFG_STATIC_INLINE hkpMoppBvTreeShape* New(hkpShapeCollection* p_Collection, hkpMoppCode* p_Code)
 	{
-		reinterpret_cast<void(__fastcall*)(void*, hkpShapeCollection*, hkpMoppCode*)>(UFG_RVA(0xD0CAB0))(this, p_ShapeCollection, p_Code);
+		auto pShape = hkMemoryAllocator::Instance()->BlockAlloc<hkpMoppBvTreeShape>();
+		reinterpret_cast<void(__fastcall*)(void*, hkpShapeCollection*, hkpMoppCode*)>(UFG_RVA(0xD0CAB0))(pShape, p_Collection, p_Code);
+		return pShape;
 	}
 };

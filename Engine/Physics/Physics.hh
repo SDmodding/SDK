@@ -29,7 +29,7 @@ namespace UFG
 	};
 	UFG_ASSERT_STRUCT(RayCastData, 0xE0);
 
-	class CPhysicsSystem
+	class PhysicsSystem
 	{
 	public:
 		struct __declspec(align(16)) RaycastBatch_t
@@ -101,17 +101,17 @@ namespace UFG
 		float mWaterWavePhase;
 		float mWaterWaveAngle;
 
-		UFG_INLINE static CPhysicsSystem* Instance()
+		UFG_STATIC_INLINE PhysicsSystem* Instance()
 		{
-			return *reinterpret_cast<CPhysicsSystem**>(UFG_RVA(0x216B2C8));
+			return *reinterpret_cast<PhysicsSystem**>(UFG_RVA(0x216B2C8));
 		}
 
-		UFG_INLINE CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, SimObject* p_SimObject)
+		UFG_INLINE CRigidBodyComponent* OnCollisionInstanceAddedToWorld(CollisionInstanceData* p_Instance, CollisionMeshData* p_Mesh, uint32_t p_OnAddedFlags, uint32_t p_RigidBodyFlags, SimObject* p_SimObject)
 		{
-			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CCollisionInstanceData*, CCollisionMeshData*, uint32_t, uint32_t, SimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);
+			return reinterpret_cast<CRigidBodyComponent*(__fastcall*)(void*, CollisionInstanceData*, CollisionMeshData*, uint32_t, uint32_t, SimObject*)>(UFG_RVA(0x46E150))(this, p_Instance, p_Mesh, p_OnAddedFlags, p_RigidBodyFlags, p_SimObject);
 		}
 
-		UFG_INLINE void AddRenderHelper(SimObject* p_SimObject, CRigidBodyComponent* p_RigidBody, CCollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh)
+		UFG_INLINE void AddRenderHelper(SimObject* p_SimObject, CRigidBodyComponent* p_RigidBody, CollisionInstanceData* p_Instance, CCollisionMeshData* p_Mesh)
 		{
 			reinterpret_cast<void(__fastcall*)(void*, SimObject*, CRigidBodyComponent*, CCollisionInstanceData*, CCollisionMeshData*)>(UFG_RVA(0x455670))(this, p_SimObject, p_RigidBody, p_Instance, p_Mesh);
 		}
@@ -141,21 +141,18 @@ namespace UFG
 		{
 			reinterpret_cast<void(__fastcall*)(void*, SimObject*, SimObject*)>(UFG_RVA(0x4723A0))(this, p_SimObjectA, p_SimObjectB);
 		}
-	};
-	UFG_ASSERT_CLASS(CPhysicsSystem, 0x18620);
 
-	namespace PhysicsSystem
-	{
 		// return: true (If 'p_OutPosition' position has been written)
-		UFG_INLINE bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistance)
+		UFG_STATIC_INLINE bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistance)
 		{
 			return reinterpret_cast<bool(__fastcall*)(qVector3*, qVector3*, float, float)>(UFG_RVA(0x37C400))(p_OutPosition, p_Position, p_HeightAboveGround, p_CastDistance);
 		}
-		
+
 		// return: true (If 'p_OutPosition' position has been written)
-		UFG_INLINE bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistanceDown, float p_CastDistanceUp)
+		UFG_STATIC_INLINE bool PlaceOnGround(qVector3* p_OutPosition, qVector3* p_Position, float p_HeightAboveGround, float p_CastDistanceDown, float p_CastDistanceUp)
 		{
 			return reinterpret_cast<bool(__fastcall*)(qVector3*, qVector3*, float, float, float)>(UFG_RVA(0x37C560))(p_OutPosition, p_Position, p_HeightAboveGround, p_CastDistanceDown, p_CastDistanceUp);
 		}
-	}
+	}; typedef PhysicsSystem CPhysicsSystem;
+	UFG_ASSERT_CLASS(PhysicsSystem, 0x18620);
 }

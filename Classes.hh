@@ -183,12 +183,61 @@ namespace UFG
 	class qTree64Base
 	{
 	public:
-		uint64_t mUID;
-		qTree64Base* mParent;
-		qTree64Base* mChildren[2];
-		qTree64Base* mNeighbours[2];
+		struct BaseNode
+		{
+			uint64_t mUID;
+			UFG::qTree64Base::BaseNode* mParent;
+			UFG::qTree64Base::BaseNode* mChildren[2];
+			UFG::qTree64Base::BaseNode* mNeighbours[2];
+		};
+
+		BaseNode mHead;
+		int64_t mCount;
+
+		UFG_INLINE qTree64Base* Get(uint64_t p_Key)
+		{
+			return reinterpret_cast<qTree64Base*(__fastcall*)(void*, uint64_t)>(UFG_RVA(0x16F0F0))(this, p_Key);
+		}
+
+		UFG_INLINE qTree64Base* GetHead()
+		{
+			return reinterpret_cast<qTree64Base*(__fastcall*)(void*)>(UFG_RVA(0x170B10))(this);
+		}
+
+		UFG_INLINE qTree64Base* GetNext(qTree64Base* p_CurNode)
+		{
+			return reinterpret_cast<qTree64Base*(__fastcall*)(void*, qTree64Base*)>(UFG_RVA(0x1714A0))(this, p_CurNode);
+		}
 	};
-	typedef qTree64Base qTreeNode64;
+
+	template <typename T>
+	class qTreeNode64
+	{
+	public:
+		qTree64Base::BaseNode mBaseNode;
+	};
+
+	template <typename T>
+	class qTree64
+	{
+	public:
+		qTree64Base mTree;
+
+		UFG_INLINE T* Get(uint64_t p_Key)
+		{
+			return reinterpret_cast<T*>(mTree.Get(p_Key));
+		}
+
+		UFG_INLINE T* GetHead()
+		{
+			return reinterpret_cast<T*>(mTree.GetHead());
+		}
+
+		UFG_INLINE T* GetNext(T* p_CurNode)
+		{
+			return reinterpret_cast<T*>(mTree.GetNext(reinterpret_cast<qTree64Base*>(p_CurNode)));
+		}
+	};
 
 	struct qString
 	{
