@@ -16,4 +16,19 @@ namespace UFG
 	public:
 		qBaseNodeRB mNode;
 	};
+
+	class qBaseTreeRB
+	{
+	public:
+		qBaseNodeRB mRoot;
+		qBaseNodeRB mNULL;
+		int mCount;
+	};
+
+	template <typename T>
+	class qTreeRB
+	{
+	public:
+		qBaseTreeRB mTree;
+	};
 }

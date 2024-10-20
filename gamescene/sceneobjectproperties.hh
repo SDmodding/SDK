@@ -10,7 +10,7 @@ namespace UFG
 		SceneObjectProperties* mpParent;
 		qSetLogical<SceneObjectProperties, qSymbol> mChildren;
 		bool mDeleteChildSimObjectOnDestruct;
-		unsigned int mLastTeleportFrame;
+		u32 mLastTeleportFrame;
 		qPropertySet* mpWritableProperties;
 		qPropertySet* mpConstProperties;
 		u32 mPrevNameHash;

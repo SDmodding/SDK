@@ -14,6 +14,8 @@
 #define SDK_STRINGIFY(x)		#x
 #define SDK_TOSTRING(x)			SDK_STRINGIFY(x)
 
+#define SDK_CALL				__fastcall
+
 /* Inline */
 
 #define SDK_INLINE				__forceinline
