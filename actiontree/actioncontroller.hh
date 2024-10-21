@@ -2,7 +2,7 @@
 
 class IFinishUpdate;
 
-class ActionController : public Expression::IMemberMap
+class ActionController : public qProxy<Expression::IMemberMap>
 {
 public:
 	ActionNodePlayable* m_currentNode;

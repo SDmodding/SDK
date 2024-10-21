@@ -6,8 +6,8 @@ class ITask : public UFG::qNode<ITask>
 {
 public:
 	ITrack* m_Track;
-	float m_TimeBegin;
-	float m_TimeEnd;
+	f32 m_TimeBegin;
+	f32 m_TimeEnd;
 
 	virtual ~ITask() = 0;
 	virtual void Begin(ActionContext*) = 0;

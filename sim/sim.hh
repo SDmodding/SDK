@@ -11,7 +11,7 @@ namespace UFG
 		qSafePointer<SimObject> mpLocalPlayer;
 		qArray<SimObject*> m_aCurrentDestructingObjects;
 
-		SDK_SINLINE Simulation* GetInstance() { return reinterpret_cast<Simulation*>(SDK_RVA(0x235C3A0)); }
+		SDK_SINLINE Simulation* Instance() { return reinterpret_cast<Simulation*>(SDK_RVA(0x235C3A0)); }
 
 		/* Functions */
 

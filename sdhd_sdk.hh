@@ -31,18 +31,23 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 /* SDK Includes */
 
-#include "types.hh"
-#include "globals.hh"
-#include "defines.hh"
+#include "sdk/types.hh"
+#include "sdk/globals.hh"
+#include "sdk/defines.hh"
 
 /* Contrib */
+
 #include "contrib/fastdelegate.hh"
+
+#include "contrib/ak/soundengine/common/aktypes.hh"
 
 /* Quark */
 
 #include "quark/types.hh"
 #include "quark/checksum.hh"
 #include "quark/array.hh"
+#include "quark/fixedarray.hh"
+#include "quark/bitfield.hh"
 #include "quark/list.hh"
 #include "quark/safepointer.hh"
 #include "quark/treerb.hh"
@@ -55,6 +60,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/qset.hh"
 #include "quark/qsymbol.hh"
 #include "quark/qticks.hh"
+
+/* Audio */
+
+#include "audio/ratelimitedfloat.hh"
+#include "audio/regioncontainmentinfo.hh"
+#include "audio/audioentity.hh"
+#include "audio/audioevent.hh"
+#include "audio/oneshot.hh"
+#include "audio/oneshothandle.hh"
 
 /* ActionTree */
 
@@ -70,6 +84,21 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "expression/membermap.hh"
 
+/* Wayfinder */
+
+#include "wayfinder/wayfinder.hh"
+
+/* AI */
+
+#include "ai/awareness/awarenessprofileanimation.hh"
+
+#include "ai/vehicles/vehiclewayfinderclient.hh"
+#include "ai/vehicles/waytraversalfinder.hh"
+
+/* Spawning */
+
+#include "spawning/spawninterface.hh"
+
 /* ActionTree */
 
 #include "actiontree/actiontreecomponentbase.hh"
@@ -80,10 +109,26 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/actionnode.hh"
 #include "actiontree/actioncontext.hh"
 #include "actiontree/actioncontroller.hh"
+#include "actiontree/intention.hh"
 
 /* PropertySet */
 
 #include "propertyset/qpropertyset.hh"
+#include "propertyset/qpropertylist.hh"
+#include "propertyset/propertysethandle.hh"
+
+/* Skookum */
+
+#include "skookum/tstimer.hh"
+
+/* AI */
+
+#include "ai/faction.hh"
+
+#include "ai/encounters/encounterunitinfo.hh"
+#include "ai/encounters/encounterbase.hh"
+
+#include "ai/cops/copsystem.hh"
 
 /* Flowcontrol */
 
@@ -112,7 +157,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/interfaces/updateinterface.hh"
 
+/* Sim (Components) */
+
+#include "sim/components/targeting/targetingsimobject.hh"
+#include "sim/components/targeting/targetingmap.hh"
+#include "sim/components/targeting/targetingsystembasecomponent.hh"
+
 #include "sim/components/transformnodecomponent.hh"
+#include "sim/components/actiontreecomponent.hh"
 #include "sim/components/hitreactioncomponent.hh"
 #include "sim/components/healthcomponent.hh"
 

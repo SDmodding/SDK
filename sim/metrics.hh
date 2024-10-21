@@ -25,7 +25,7 @@ namespace UFG
 
 		/* Static Functions */
 
-		SDK_SINLINE Metrics* GetInstance() { return reinterpret_cast<Metrics*>(SDK_RVA(0x203C920)); }
+		SDK_SINLINE Metrics* Instance() { return reinterpret_cast<Metrics*>(SDK_RVA(0x203C920)); }
 		SDK_SINLINE void UpdateAll(u32 realTimeMSecTicks, f32 deltaTime, bool frameRendered, bool nisPlaying) {
 			reinterpret_cast<void(SDK_CALL*)(u32, f32, bool, bool)>(SDK_RVA(0x1919C0))(realTimeMSecTicks, deltaTime, frameRendered, nisPlaying);
 		}

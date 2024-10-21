@@ -40,7 +40,7 @@ namespace UFG
 		int mLoadsLastLoadScreen;
 		qList<StateHistory> mStateHistoryList;
 
-		SDK_SINLINE FlowController* GetInstance() { return reinterpret_cast<FlowController*>(SDK_RVA(0x23ECF00)); }
+		SDK_SINLINE FlowController* Instance() { return reinterpret_cast<FlowController*>(SDK_RVA(0x23ECF00)); }
 	};
 	SDK_ASSERT_SIZEOF(FlowController, 0x158);
 }

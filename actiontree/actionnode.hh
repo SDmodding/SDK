@@ -7,8 +7,8 @@ class ActionNode : public Expression::IMemberMap
 public:
 	UFG::qOffset64<ActionNode*> mParent;
 	ConditionCallback* mFirstCallback;
-	unsigned int mMostUsedIndex;
-	unsigned int mUniqueID;
+	u32 mMostUsedIndex;
+	u32 mUniqueID;
 	ActionID mID;
 	char mBreakPoint;
 	char mDisable;
