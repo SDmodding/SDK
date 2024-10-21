@@ -9,7 +9,7 @@ namespace UFG
 		T* m_pPointer;
 	};
 
-	template <typename T>
+	template <typename T, typename U = T>
 	class qSafePointer : public qSafePointerBase<T>
 	{
 	public:

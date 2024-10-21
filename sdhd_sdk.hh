@@ -35,29 +35,72 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "globals.hh"
 #include "defines.hh"
 
-/* Contrib Includes */
+/* Contrib */
 #include "contrib/fastdelegate.hh"
 
-/* Quark Includes */
+/* Quark */
 
+#include "quark/types.hh"
 #include "quark/checksum.hh"
 #include "quark/array.hh"
 #include "quark/list.hh"
 #include "quark/safepointer.hh"
 #include "quark/treerb.hh"
+#include "quark/treerb64.hh"
 #include "quark/offset.hh"
 #include "quark/math.hh"
 #include "quark/resource.hh"
 #include "quark/string.hh"
+#include "quark/sharedstring.hh"
 #include "quark/qset.hh"
 #include "quark/qsymbol.hh"
 #include "quark/qticks.hh"
 
-/* PropertySet Includes */
+/* ActionTree */
+
+#include "actiontree/binarray.hh"
+#include "actiontree/binptrarray.hh"
+#include "actiontree/binstring.hh"
+
+/* UEL */
+
+#include "uel/uel.hh"
+
+/* Expression */
+
+#include "expression/membermap.hh"
+
+/* ActionTree */
+
+#include "actiontree/actiontreecomponentbase.hh"
+#include "actiontree/condition.hh"
+#include "actiontree/track.hh"
+#include "actiontree/task.hh"
+#include "actiontree/actionid.hh"
+#include "actiontree/actionnode.hh"
+#include "actiontree/actioncontext.hh"
+#include "actiontree/actioncontroller.hh"
+
+/* PropertySet */
 
 #include "propertyset/qpropertyset.hh"
 
-/* Sim Includes */
+/* Flowcontrol */
+
+#include "flowcontrol/gamestate.hh"
+#include "flowcontrol/gamestatecommon.hh"
+#include "flowcontrol/flowcontrol.hh"
+
+/* Schema */
+
+#include "schema/schema_health.hh"
+
+/* Physics */
+
+#include "physics/bulletmanager.hh"
+#include "physics/explosion.hh"
+
+/* Sim */
 
 #include "sim/rebindingcomponenthandle.hh"
 #include "sim/simobject.hh"
@@ -67,9 +110,17 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/localplayer.hh"
 #include "sim/metrics.hh"
 
-#include "sim/components/transformnodecomponent.hh"
+#include "sim/interfaces/updateinterface.hh"
 
-/* Gamescene Includes */
+#include "sim/components/transformnodecomponent.hh"
+#include "sim/components/hitreactioncomponent.hh"
+#include "sim/components/healthcomponent.hh"
+
+/* Gamescene */
 
 #include "gamescene/scenelayerresource.hh"
 #include "gamescene/sceneobjectproperties.hh"
+
+/* UI */
+
+#include "ui/uihkutils.hh"
