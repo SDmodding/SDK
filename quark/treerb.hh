@@ -54,14 +54,14 @@ namespace UFG
 
 		SDK_INLINE bool IsEmpty() { return mTree.IsEmpty(); }
 
-		SDK_INLINE void Add(qBaseNodeRB* x) { mTree.Add(x); }
+		SDK_INLINE void Add(qNodeRB<T>* x) { mTree.Add(&x->mNode); }
 
-		SDK_INLINE bool Contains(qBaseNodeRB* node) { return mTree.Contains(node); }
+		SDK_INLINE bool Contains(qNodeRB<T>* node) { return mTree.Contains(&node->mNode); }
 
-		SDK_INLINE qBaseNodeRB* Get(u32 uid) { return mTree.Get(uid); }
+		SDK_INLINE T* Get(u32 uid) { return reinterpret_cast<T*>(mTree.Get(uid)); }
 
-		SDK_INLINE qBaseNodeRB* GetNext(qBaseNodeRB* x) { return mTree.GetNext(x); }
+		SDK_INLINE T* GetNext(qNodeRB<T>* x) { return reinterpret_cast<T*>(mTree.GetNext(&x->mNode)); }
 
-		SDK_INLINE qBaseNodeRB* GetTail() { return mTree.GetTail(); }
+		SDK_INLINE T* GetTail() { return reinterpret_cast<T*>(mTree.GetTail()); }
 	};
 }
