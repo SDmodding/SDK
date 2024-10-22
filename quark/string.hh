@@ -59,4 +59,10 @@ namespace UFG
 		bool operator==(const qString& text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x1649D0))(this, text); }
 		bool operator==(const char* text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x164A40))(this, text); }
 	};
+
+	/* Functions */
+
+	SDK_SINLINE char* qStringFind(const char* text, const char* find) { return reinterpret_cast<char*(SDK_CALL*)(const char*, const char*)>(SDK_RVA(0x18B200))(text, find); }
+
+	SDK_SINLINE char* qStringFindInsensitive(const char* text, const char* find) { return reinterpret_cast<char*(SDK_CALL*)(const char*, const char*)>(SDK_RVA(0x18B370))(text, find); }
 }
