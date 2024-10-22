@@ -1,7 +1,7 @@
 > [!CAUTION]
 > **This is currently a work in progress.**
 > 
-> Use [<kbd>**old**</kbd>](https://github.com/SDmodding/SDK/tree/old) branch to access old SDK, but keep in mind that it's abandoned and should be refrain for been used as it's poorly written.
+> Use the [<kbd>**old**</kbd>](https://github.com/SDmodding/SDK/tree/old) branch to access the old SDK, but keep in mind that it has been abandoned and should be avoided, as it is poorly written.
 
 ## Usage
 1. Clone repository
