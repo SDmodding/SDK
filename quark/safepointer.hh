@@ -34,6 +34,12 @@ namespace UFG
 		fastdelegate::FastDelegate1<T*> m_UnbindCallback;
 	};
 
+	template <typename T, typename U = T>
+	class qSafePointerWithCallbacks : public qSafePointerWithCallbacksBase<T>
+	{
+	public:
+	};
+
 	template <typename T>
 	class qSafePointerNodeWithCallbacks : public qSafePointerNode<T>
 	{

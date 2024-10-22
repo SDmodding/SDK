@@ -4,6 +4,9 @@
 namespace UFG
 {
 	class SimObject;
+	class SimObjectCharacter;
+	class SimObjectVehicle;
+
 	class SimComponent;
 	class TransformNodeComponent;
 }

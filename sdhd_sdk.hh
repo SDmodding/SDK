@@ -49,12 +49,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/checksum.hh"
 #include "quark/array.hh"
 #include "quark/fixedarray.hh"
+#include "quark/bitflags.hh"
 #include "quark/bitfield.hh"
 #include "quark/list.hh"
 #include "quark/safepointer.hh"
 #include "quark/treerb.hh"
 #include "quark/treerb64.hh"
 #include "quark/offset.hh"
+#include "quark/colour.hh"
 #include "quark/math.hh"
 #include "quark/resource.hh"
 #include "quark/string.hh"
@@ -62,6 +64,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/qset.hh"
 #include "quark/qsymbol.hh"
 #include "quark/qticks.hh"
+#include "quark/memorypool.hh"
+
+/* Streamer */
+
+#include "streamer/datastreamer.hh"
+
+/* SceneDB */
+
+#include "scenedb/streamingmemorymanager.hh"
 
 /* Audio */
 
@@ -124,6 +135,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "skookum/tstimer.hh"
 
+/* objectresourcemanagement */
+
+#include "objectresourcemanagement/resourcerequest.hh"
+#include "objectresourcemanagement/truecrowddatabase.hh"
+
 /* Progression */
 
 #include "progression/persistentdata/basictypes.hh"
@@ -165,6 +181,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/metrics.hh"
 
 #include "sim/interfaces/updateinterface.hh"
+
+/* Gamestate */
+
+#include "gamestate/hk/pedspawnmanager.hh"
 
 /* Sim (Components) */
 

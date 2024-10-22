@@ -9,6 +9,14 @@ namespace UFG
 		qNode<T, U>* mPrev;
 		qNode<T, U>* mNext;
 
+		qNode() : mPrev(this), mNext(this) {}
+		~qNode()
+		{
+			mPrev->mNext = mNext;
+			mNext->mPrev = mPrev;
+			mPrev = mNext = this;
+		}
+
 		SDK_INLINE T* prev() { return static_cast<T*>(mPrev); }
 		SDK_INLINE T* next() { return static_cast<T*>(mNext); }
 		SDK_INLINE T* type() { return static_cast<T*>(this); }

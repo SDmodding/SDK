@@ -5,6 +5,10 @@ class qEnum
 {
 public:
 	T mValue;
+
+	qEnum() {}
+	qEnum(E value) : mValue(static_cast<T>(value)) {}
+	qEnum(T value) : mValue(value) {}
 };
 
 /* Proxy class for handling abstract classes as members. */
