@@ -2,8 +2,6 @@
 
 namespace UFG
 {
-	class SimObject;
-	class SimComponent;
 	class GetInFormationNode;
 	class GetInPedFormationNode;
 	class HasAttackRequestNode;

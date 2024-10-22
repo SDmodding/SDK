@@ -2,8 +2,6 @@
 
 namespace UFG
 {
-	class SimObject;
-
 	class EncounterUnitContext
 	{
 	public:

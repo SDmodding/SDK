@@ -2,9 +2,6 @@
 
 namespace UFG
 {
-	class SimComponent;
-	class SimObject;
-
 	class RebindingComponentHandleBase : public qNode<RebindingComponentHandleBase>
 	{
 	public:

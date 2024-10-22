@@ -35,6 +35,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sdk/globals.hh"
 #include "sdk/defines.hh"
 #include "sdk/utils.hh"
+#include "sdk/forwards.hh"
 
 /* Contrib */
 
@@ -91,6 +92,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 /* AI */
 
+#include "ai/faction.hh"
 #include "ai/awareness/awarenessprofileanimation.hh"
 
 #include "ai/vehicles/vehiclewayfinderclient.hh"
@@ -122,9 +124,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "skookum/tstimer.hh"
 
-/* AI */
+/* Progression */
 
-#include "ai/faction.hh"
+#include "progression/persistentdata/basictypes.hh"
+
+#include "progression/gamestat/gamesnapshot.hh"
+#include "progression/gamestat/gamestatdefinitions.hh"
+#include "progression/gamestat/gamestattracker.hh"
+
+/* AI */
 
 #include "ai/encounters/encounterunitinfo.hh"
 #include "ai/encounters/encounterbase.hh"

@@ -2,7 +2,6 @@
 
 namespace UFG
 {
-	class SimComponent;
 	class SimObjectWeaponPropertiesComponent;
 	class SubTargetingLocation;
 

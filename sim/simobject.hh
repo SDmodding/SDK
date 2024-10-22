@@ -4,8 +4,6 @@ namespace UFG
 {
 	class ComponentIDDesc;
 	class SceneObjectProperties;
-	class SimObject;
-	class TransformNodeComponent;
 
 	//-------------------------------------------------------------------
 	// Component
