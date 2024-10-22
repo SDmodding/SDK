@@ -12,6 +12,17 @@ namespace UFG
 			NUM_THRESHOLD_TYPES
 		};
 
+		enum SnapshotType
+		{
+			Snapshot_Current,
+			Snapshot_OpenWorld,
+			Snapshot_Mission,
+			Snapshot_Replay,
+			Snapshot_Save,
+			Snapshot_Count,
+			Snapshot_Undefined
+		};
+
 		FactionInterface mFactionInterface;
 		qPropertySet* mpDefaultData;
 		qPropertySet* mpRuntimeData;
