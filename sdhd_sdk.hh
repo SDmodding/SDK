@@ -34,6 +34,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sdk/types.hh"
 #include "sdk/globals.hh"
 #include "sdk/defines.hh"
+#include "sdk/utils.hh"
 
 /* Contrib */
 
