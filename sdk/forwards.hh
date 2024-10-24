@@ -10,5 +10,17 @@ namespace UFG
 	class SimObjectVehicle;
 
 	class SimComponent;
+
+	/* Sim (Components) */
+
+	class ActionTreeComponent;
+	class ActiveAIEntityComponent;
 	class TransformNodeComponent;
+
+	class CharacterAnimationComponent;
+	class CharacterOccupantComponent;
+	class HealthComponent;
+	class HitReactionComponent;
+
+	class VehicleOccupantComponent;
 }

@@ -5,6 +5,8 @@ namespace UFG
 	class TransformNodeComponent : public SimComponent, public qNode<TransformNodeComponent>
 	{
 	public:
+		enum { _TypeUID = 0x30000001 };
+
 		enum eInheritXformType : int
 		{
 			eInheritXform_Full,

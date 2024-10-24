@@ -2,8 +2,6 @@
 
 namespace UFG
 {
-	class ActionTreeComponent;
-
 	//-------------------------------------------------------------------
 	// Enums
 	//-------------------------------------------------------------------
@@ -96,6 +94,8 @@ namespace UFG
 	class HitReactionComponent : public SimComponent, public UpdateInterface, public qNode<HitReactionComponent>
 	{
 	public:
+		enum { _TypeUID = 0xA8000001 };
+
 		struct StateVariables
 		{
 			float mAttackTimer;

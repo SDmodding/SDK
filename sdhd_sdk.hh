@@ -167,10 +167,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/vehicles/vehiclewayfinderclient.hh"
 #include "ai/vehicles/waytraversalfinder.hh"
 
-/* Spawning */
-
-#include "spawning/spawninterface.hh"
-
 /* ActionTree */
 
 #include "actiontree/actiontreecomponentbase.hh"
@@ -205,13 +201,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/gamestat/gamesnapshot.hh"
 #include "progression/gamestat/gamestatdefinitions.hh"
 #include "progression/gamestat/gamestattracker.hh"
-
-/* AI */
-
-#include "ai/encounters/encounterunitinfo.hh"
-#include "ai/encounters/encounterbase.hh"
-
-#include "ai/cops/copsystem.hh"
 
 /* Flowcontrol */
 
@@ -256,6 +245,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/transformnodecomponent.hh"
 #include "sim/components/actiontreecomponent.hh"
+
+#include "sim/components/vehicleoccupantcomponent.hh"
+#include "sim/components/characteroccupantcomponent.hh"
+
 #include "sim/components/hitreactioncomponent.hh"
 #include "sim/components/healthcomponent.hh"
 
@@ -263,6 +256,21 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "gamescene/scenelayerresource.hh"
 #include "gamescene/sceneobjectproperties.hh"
+
+#include "gamescene/components/hintcomponentbase.hh"
+#include "gamescene/components/marker.hh"
+
+/* Spawning */
+
+#include "spawning/spawninterface.hh"
+#include "spawning/parkingspot.hh"
+
+/* AI */
+
+#include "ai/encounters/encounterunitinfo.hh"
+#include "ai/encounters/encounterbase.hh"
+
+#include "ai/cops/copsystem.hh"
 
 /* UI */
 

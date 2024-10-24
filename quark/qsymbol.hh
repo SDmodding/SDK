@@ -21,4 +21,10 @@ namespace UFG
 		qSymbolUC(u32 uid) : mUID(uid) {}
 		qSymbolUC(const qSymbolUC& source) : mUID(source.mUID) {}
 	};
+
+	class qNamed
+	{
+	public:
+		qSymbol i_name;
+	};
 }

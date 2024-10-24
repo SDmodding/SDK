@@ -2,14 +2,14 @@
 
 namespace UFG
 {
-	class CharacterAnimationComponent;
 	class HitRecord;
-	class HitReactionComponent;
 	class HealthRegenerateTask;
 
 	class HealthComponent : public SimComponent, public qNode<HealthComponent>
 	{
 	public:
+		enum { _TypeUID = 0xAA000001 };
+
 		bool m_bInitialized;
 		f32 m_fHealth;
 		f32 m_fMinHealth;

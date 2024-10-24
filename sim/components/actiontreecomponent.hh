@@ -4,11 +4,12 @@ class PostAnimUpdateTask;
 
 namespace UFG
 {
-	class ActiveAIEntityComponent;
 
 	class ActionTreeComponent : public SimComponent, public ActionTreeComponentBase, public qNode<ActionTreeComponent>
 	{
 	public:
+		enum { _TypeUID = 0xC8000001 };
+
 		bool mNisUpdated;
 		const char* mActionTreeFileName;
 		ActionContext* mpActionContext;
