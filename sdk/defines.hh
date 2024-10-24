@@ -24,6 +24,7 @@
 
 #define SDK_INLINE								__forceinline
 #define SDK_SINLINE								static SDK_INLINE
+#define SDK_VINLINE								static inline
 
 /* Static Asserts */
 

@@ -1,3 +1,12 @@
+//===========================================================================================
+// 
+//		BASED ON:
+//			https://github.com/dreamcat4/FastDelegate
+// 
+//		NOTE:
+//			Don't implement something that's not needed, keep it simple.
+// 
+//===========================================================================================
 #pragma once
 
 namespace fastdelegate
@@ -10,10 +19,11 @@ namespace fastdelegate
 	class DelegateMemento
 	{
 	public:
-		typedef void (detail::GenericClass::* GenericMemFuncType)(); // arbitrary MFP.
-
 		detail::GenericClass* m_pthis;
-		GenericMemFuncType m_pFunction;
+		void (__fastcall* m_pFunction)(detail::GenericClass*);
+
+		DelegateMemento() : m_pthis(0), m_pFunction(0) {};
+		void clear() { m_pthis = 0; m_pFunction = 0; }
 	};
 
 	namespace detail
@@ -35,5 +45,12 @@ namespace fastdelegate
 		typedef RetType(detail::GenericClass::* GenericMemFn)();
 		typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
 		ClosureType m_Closure;
+
+		FastDelegate1() { m_Closure.clear(); }
+		FastDelegate1(void* pthis, void* function_to_bind)
+		{
+			m_Closure.m_pthis = pthis;
+			m_Closure.m_pFunction = function_to_bind;
+		}
 	};
 }

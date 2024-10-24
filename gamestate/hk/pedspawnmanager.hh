@@ -152,19 +152,19 @@ namespace UFG
 
 		/* Static Members */
 
-		SDK_SINLINE bool& AmbientSpawningEnable() { return SDK_VAR_GET(bool, 0x207AE69); }
-		SDK_SINLINE bool& AmbientStatusCheckEnable() { return SDK_VAR_GET(bool, 0x207AE6A); }
-		SDK_SINLINE bool& ScriptedStatusCheckEnable() { return SDK_VAR_GET(bool, 0x207AE6B); }
-		SDK_SINLINE bool& CheckStatusMode() { return SDK_VAR_GET(bool, 0x207AE6C); }
-		SDK_SINLINE bool& ResourcesSuspended() { return SDK_VAR_GET(bool, 0x23DE286); }
-		SDK_SINLINE bool& RestoreWeiOnPhysicsLoad() { return SDK_VAR_GET(bool, 0x23DE287); }
+		SDK_VINLINE qGlobalVar<bool, 0x207AE69> msAmbientSpawningEnable;
+		SDK_VINLINE qGlobalVar<bool, 0x207AE6A> msAmbientStatusCheckEnable;
+		SDK_VINLINE qGlobalVar<bool, 0x207AE6B> msScriptedStatusCheckEnable;
+		SDK_VINLINE qGlobalVar<bool, 0x207AE6C> msCheckStatusMode;
+		SDK_VINLINE qGlobalVar<bool, 0x23DE286> msResourcesSuspended;
+		SDK_VINLINE qGlobalVar<bool, 0x23DE287> msRestoreWeiOnPhysicsLoad;
 
-		SDK_SINLINE SimObjectCharacter* LastRegistered() { return SDK_VAR_GET(SimObjectCharacter*, 0x23DE330); }
-		SDK_SINLINE PedSpawningInfo* LastRegisteredPedInfo() { return SDK_VAR_GET(PedSpawningInfo*, 0x23DE338); }
-		SDK_SINLINE PedSpawningInfo* PedInfoForLocalZoneChecks() { return SDK_VAR_GET(PedSpawningInfo*, 0x23DE340); }
+		SDK_VINLINE qGlobalPVar<SimObjectCharacter*, 0x23DE330> msLastRegistered;
+		SDK_VINLINE qGlobalPVar<PedSpawningInfo*, 0x23DE338> msLastRegisteredPedInfo;
+		SDK_VINLINE qGlobalPVar<PedSpawningInfo*, 0x23DE340> msPedInfoForLocalZoneChecks;
 
-		SDK_SINLINE int NumDeadAmbientPeds() { return SDK_VAR_GET(int, 0x23DE348); }
-		SDK_SINLINE int NumDeadScriptedPeds() { return SDK_VAR_GET(int, 0x23DE34C); }
+		SDK_VINLINE qGlobalVar<int, 0x23DE348> msNumDeadAmbientPeds;
+		SDK_VINLINE qGlobalVar<int, 0x23DE34C> msNumDeadScriptedPeds;
 
 		/* Virtual Functions */
 

@@ -36,6 +36,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sdk/defines.hh"
 #include "sdk/utils.hh"
 #include "sdk/forwards.hh"
+#include "sdk/hooks.hh"
+
+#include "sdk/resource_uid.hh"
 
 /* Contrib */
 
@@ -58,13 +61,68 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/offset.hh"
 #include "quark/colour.hh"
 #include "quark/math.hh"
+#include "quark/process.hh"
+
+#include "quark/internal/allocator.hh"
+
 #include "quark/resource.hh"
 #include "quark/string.hh"
 #include "quark/sharedstring.hh"
 #include "quark/qset.hh"
 #include "quark/qsymbol.hh"
 #include "quark/qticks.hh"
+
 #include "quark/memorypool.hh"
+#include "quark/vramemorypool.hh"
+#include "quark/memorystream.hh"
+
+#include "quark/task.hh"
+#include "quark/reflection.hh"
+
+/* Illusion */
+
+#include "illusion/pc/modelplat.hh"
+
+#include "illusion/bonepalette.hh"
+#include "illusion/vertexdecl.hh"
+#include "illusion/primitive.hh"
+#include "illusion/state.hh"
+#include "illusion/renderstate.hh"
+
+#include "illusion/textureuser.hh"
+#include "illusion/texture.hh"
+
+#include "illusion/pc/targetplat.hh"
+#include "illusion/target.hh"
+
+#include "illusion/material.hh"
+#include "illusion/materialmodifier.hh"
+
+#include "illusion/model.hh"
+
+#include "illusion/pc/unorderedaccessplat.hh"
+#include "illusion/unorderedaccess.hh"
+
+#include "illusion/stateargs.hh"
+#include "illusion/submitcontext.hh"
+
+/* Shaders */
+
+#include "shaders/stateblocks.hh"
+
+/* Render */
+
+#include "render/viewmetrics.hh"
+#include "render/view.hh"
+
+#include "render/envcubemap.hh"
+
+#include "render/render.hh"
+#include "render/rendercontext.hh"
+
+/* Main */
+
+#include "main/mainloop.hh"
 
 /* Streamer */
 
@@ -160,6 +218,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "flowcontrol/gamestate.hh"
 #include "flowcontrol/gamestatecommon.hh"
 #include "flowcontrol/flowcontrol.hh"
+
+/* EventSystem */
+
+#include "eventsystem/eventbase.hh"
 
 /* Schema */
 
