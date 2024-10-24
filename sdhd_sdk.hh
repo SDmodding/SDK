@@ -20,6 +20,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include <cstring>
 #include <cstdlib>
 #include <new>
+#include <xmmintrin.h>
 
 /* Windows Includes */
 
@@ -52,6 +53,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/checksum.hh"
 #include "quark/array.hh"
 #include "quark/fixedarray.hh"
+#include "quark/safearray.hh"
 #include "quark/bitflags.hh"
 #include "quark/bitfield.hh"
 #include "quark/list.hh"
@@ -78,6 +80,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "quark/task.hh"
 #include "quark/reflection.hh"
+
+/* Havok */
+
+#include "contrib/havok.hh"
 
 /* Illusion */
 
@@ -218,8 +224,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 /* Physics */
 
+#include "physics/sweptspherequery.hh"
 #include "physics/bulletmanager.hh"
 #include "physics/explosion.hh"
+
+#include "physics/vehicleinput.hh"
+#include "physics/physicsvehicle.hh"
 
 /* Sim */
 
