@@ -15,10 +15,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 /* Includes */
 
-#include <cstdarg>
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <new>
 #include <xmmintrin.h>
 
@@ -195,6 +195,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "propertyset/propertysymbols.hh"
 #include "propertyset/qpropertyset.hh"
 #include "propertyset/qpropertylist.hh"
+#include "propertyset/propertysetcache.hh"
 #include "propertyset/propertysethandle.hh"
 #include "propertyset/propertysetmanager.hh"
 #include "propertyset/propertysetwrapper.hh"
