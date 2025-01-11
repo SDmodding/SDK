@@ -111,6 +111,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/pc/unorderedaccessplat.hh"
 #include "illusion/unorderedaccess.hh"
 
+#include "illusion/stateblock.hh"
+
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
 
@@ -122,6 +124,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "render/viewmetrics.hh"
 #include "render/view.hh"
+#include "render/timeofday.hh"
 
 #include "render/envcubemap.hh"
 

@@ -5,7 +5,7 @@ namespace UFG
 	class Metrics : public qNode<Metrics>
 	{
 	public:
-		unsigned __int64 mSimTimeMSec;
+		u64 mSimTimeMSec;
 		qTicks mSimTimeTicks;
 		long double mSimTime;
 		f32 mSimTime_Temp;
