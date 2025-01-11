@@ -44,6 +44,12 @@ namespace UFG
 		qQuaternion(f32 fX, f32 fY, f32 fZ, f32 fW) : x(fX), y(fY), z(fZ), w(fW) {}
 	};
 
+	struct qTransQuat
+	{
+		qQuaternion mRot;
+		qVector3 mTrans;
+	};
+
 	/* Functions */
 
 	SDK_SINLINE int* qGetDefaultSeed() { return SDK_VAR(int*, 0x203BC24); }

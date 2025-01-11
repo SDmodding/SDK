@@ -67,11 +67,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "quark/internal/allocator.hh"
 
+#include "quark/rangedvalue.hh"
 #include "quark/resource.hh"
 #include "quark/string.hh"
 #include "quark/sharedstring.hh"
 #include "quark/qset.hh"
 #include "quark/qsymbol.hh"
+#include "quark/qwisesymbol.hh"
 #include "quark/qticks.hh"
 
 #include "quark/memorypool.hh"
@@ -187,9 +189,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 /* PropertySet */
 
+#include "propertyset/propertysymbols.hh"
 #include "propertyset/qpropertyset.hh"
 #include "propertyset/qpropertylist.hh"
 #include "propertyset/propertysethandle.hh"
+#include "propertyset/propertysetmanager.hh"
+#include "propertyset/propertysetwrapper.hh"
 
 /* Skookum */
 

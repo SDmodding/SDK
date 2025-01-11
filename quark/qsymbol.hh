@@ -10,6 +10,7 @@ namespace UFG
 		qSymbol() : mUID(-1) {}
 		qSymbol(u32 uid) : mUID(uid) {}
 		qSymbol(const qSymbol& source) : mUID(source.mUID) {}
+		qSymbol(const char* pszSymbolString) { SDK_CALL_FUNC(void, 0x18DC30, void*, const char*)(this, pszSymbolString); }
 	};
 
 	class qSymbolUC
