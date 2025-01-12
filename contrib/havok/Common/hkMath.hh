@@ -24,3 +24,29 @@ public:
 	hkVector4f m_col2;
 };
 typedef hkMatrix3f hkMatrix3;
+
+class hkRotationf : public hkMatrix3f
+{
+public:
+};
+
+class hkQuaternionf
+{
+public:
+	hkVector4f m_vec;
+};
+
+class hkTransformf
+{
+public:
+	hkRotationf m_rotation;
+	hkVector4f m_translation;
+};
+
+class hkQsTransformf
+{
+public:
+	hkVector4f m_translation;
+	hkQuaternionf m_rotation;
+	hkVector4f m_scale;
+};

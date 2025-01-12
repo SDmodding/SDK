@@ -2,7 +2,9 @@
 
 struct hkContainerHeapAllocator;
 
-/* Common */
+//------------------------------------
+//	Common
+//------------------------------------
 
 #include "havok/Common/Types/hkBaseTypes.hh"
 #include "havok/Common/Types/hkSimpleProperty.hh"
@@ -17,7 +19,19 @@ struct hkContainerHeapAllocator;
 #include "havok/Common/hkMultiThreadCheck.hh"
 #include "havok/Common/hkStringPtr.hh"
 
-/* Physics2012 */
+#include "havok/Common/Types/hkGeometryTypes.hh"
+
+//------------------------------------
+//	Animation
+//------------------------------------
+
+#include "havok/animation/Rig/hkaBone.hh"
+#include "havok/animation/Rig/hkaSkeleton.hh"
+#include "havok/animation/Rig/hkaPose.hh"
+
+//------------------------------------
+//	Physics
+//------------------------------------
 
 #include "havok/Physics2012/Collide/Mopp/hkpMoppCode.hh"
 #include "havok/Physics2012/Collide/Mopp/hkpMoppCompilerInput.hh"

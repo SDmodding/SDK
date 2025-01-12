@@ -12,3 +12,10 @@ class hkEnum
 public:
 	STORAGE m_storage;
 };
+
+template <class TYPE>
+class hkRefPtr
+{
+public:
+	TYPE* m_pntr;
+};
