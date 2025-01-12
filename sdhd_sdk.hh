@@ -157,6 +157,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/timeofday.hh"
 
 #include "render/envcubemap.hh"
+#include "render/loadscreen.hh"
 
 #include "render/render.hh"
 #include "render/rendercontext.hh"
