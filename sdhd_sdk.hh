@@ -346,6 +346,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/healthcomponent.hh"
 
 //--------------------------------------------------
+//	FX
+//--------------------------------------------------
+
+#include "fx/fxsimcomponent.hh"
+#include "fx/beam.hh"
+
+//--------------------------------------------------
 //	Gamescene
 //--------------------------------------------------
 
