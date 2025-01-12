@@ -4,16 +4,22 @@
 //			- This is main include file for Sleeping Dogs: Definitive Edition (SDK Dev-kit).
 //			
 //		REQUIREMENTS:
-//			- At least C++17
+//			- At least C++17, some features are only enabled under C++20
 //			- Windows & x64 Build only (You're building DLL for game so it should be obvious)
 //			- MSVC (Probably Clang should work too, but not recommended)
 // 
 //==================================================================================================
 #pragma once
 
+#if (__cplusplus >= 202002L || _MSVC_LANG >= 202002L)
+	#define SDK_CXX20 1
+#endif
+
 static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're compiling for x64.");
 
-/* Includes */
+//--------------------------------------------------
+//	Includes
+//--------------------------------------------------
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -22,7 +28,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include <new>
 #include <xmmintrin.h>
 
-/* Windows Includes */
+//--------------------------------------------------
+//	Windows Includes
+//--------------------------------------------------
 
 #define NOGDI
 #define NOMINMAX
@@ -30,7 +38,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include <Windows.h>
 #include <d3d11.h>
 
-/* SDK Includes */
+//--------------------------------------------------
+//	SDK Includes
+//--------------------------------------------------
 
 #include "sdk/types.hh"
 #include "sdk/globals.hh"
@@ -41,13 +51,17 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sdk/resource_uid.hh"
 
-/* Contrib */
+//--------------------------------------------------
+//	Contrib
+//--------------------------------------------------
 
 #include "contrib/fastdelegate.hh"
 
 #include "contrib/ak/soundengine/common/aktypes.hh"
 
-/* Quark */
+//--------------------------------------------------
+//	Quark
+//--------------------------------------------------
 
 #include "quark/types.hh"
 #include "quark/checksum.hh"
@@ -83,11 +97,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/task.hh"
 #include "quark/reflection.hh"
 
-/* Havok */
+//--------------------------------------------------
+//	Havok
+//--------------------------------------------------
 
 #include "contrib/havok.hh"
 
-/* Illusion */
+//--------------------------------------------------
+//	Illusion
+//--------------------------------------------------
 
 #include "illusion/pc/modelplat.hh"
 
@@ -116,11 +134,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
 
-/* Shaders */
+//--------------------------------------------------
+//	Shaders
+//--------------------------------------------------
 
 #include "shaders/stateblocks.hh"
 
-/* Render */
+//--------------------------------------------------
+//	Render
+//--------------------------------------------------
 
 #include "render/viewmetrics.hh"
 #include "render/view.hh"
@@ -130,20 +152,29 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "render/render.hh"
 #include "render/rendercontext.hh"
+#include "render/depthoffield.hh"
 
-/* Main */
+//--------------------------------------------------
+//	Main
+//--------------------------------------------------
 
 #include "main/mainloop.hh"
 
-/* Streamer */
+//--------------------------------------------------
+//	Streamer
+//--------------------------------------------------
 
 #include "streamer/datastreamer.hh"
 
-/* SceneDB */
+//--------------------------------------------------
+//	SceneDB
+//--------------------------------------------------
 
 #include "scenedb/streamingmemorymanager.hh"
 
-/* Audio */
+//--------------------------------------------------
+//	Audio
+//--------------------------------------------------
 
 #include "audio/ratelimitedfloat.hh"
 #include "audio/regioncontainmentinfo.hh"
@@ -152,25 +183,35 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "audio/oneshot.hh"
 #include "audio/oneshothandle.hh"
 
-/* ActionTree */
+//--------------------------------------------------
+//	ActionTree (Dependencies)
+//--------------------------------------------------
 
 #include "actiontree/binarray.hh"
 #include "actiontree/binptrarray.hh"
 #include "actiontree/binstring.hh"
 
-/* UEL */
+//--------------------------------------------------
+//	UEL
+//--------------------------------------------------
 
 #include "uel/uel.hh"
 
-/* Expression */
+//--------------------------------------------------
+//	Expression
+//--------------------------------------------------
 
 #include "expression/membermap.hh"
 
-/* Wayfinder */
+//--------------------------------------------------
+//	Wayfinder
+//--------------------------------------------------
 
 #include "wayfinder/wayfinder.hh"
 
-/* AI */
+//--------------------------------------------------
+//	AI
+//--------------------------------------------------
 
 #include "ai/faction.hh"
 #include "ai/awareness/awarenessprofileanimation.hh"
@@ -178,7 +219,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/vehicles/vehiclewayfinderclient.hh"
 #include "ai/vehicles/waytraversalfinder.hh"
 
-/* ActionTree */
+//--------------------------------------------------
+//	ActionTree
+//--------------------------------------------------
 
 #include "actiontree/actiontreecomponentbase.hh"
 #include "actiontree/condition.hh"
@@ -190,7 +233,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/actioncontroller.hh"
 #include "actiontree/intention.hh"
 
-/* PropertySet */
+//--------------------------------------------------
+//	PropertySet
+//--------------------------------------------------
 
 #include "propertyset/propertysymbols.hh"
 #include "propertyset/qpropertyset.hh"
@@ -200,16 +245,22 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "propertyset/propertysetmanager.hh"
 #include "propertyset/propertysetwrapper.hh"
 
-/* Skookum */
+//--------------------------------------------------
+//	Skookum
+//--------------------------------------------------
 
 #include "skookum/tstimer.hh"
 
-/* objectresourcemanagement */
+//--------------------------------------------------
+//	Object Resource Management
+//--------------------------------------------------
 
 #include "objectresourcemanagement/resourcerequest.hh"
 #include "objectresourcemanagement/truecrowddatabase.hh"
 
-/* Progression */
+//--------------------------------------------------
+//	Progression
+//--------------------------------------------------
 
 #include "progression/persistentdata/basictypes.hh"
 
@@ -217,21 +268,29 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/gamestat/gamestatdefinitions.hh"
 #include "progression/gamestat/gamestattracker.hh"
 
-/* Flowcontrol */
+//--------------------------------------------------
+//	Flow Control
+//--------------------------------------------------
 
 #include "flowcontrol/gamestate.hh"
 #include "flowcontrol/gamestatecommon.hh"
 #include "flowcontrol/flowcontrol.hh"
 
-/* EventSystem */
+//--------------------------------------------------
+//	Event System
+//--------------------------------------------------
 
 #include "eventsystem/eventbase.hh"
 
-/* Schema */
+//--------------------------------------------------
+//	Schema
+//--------------------------------------------------
 
 #include "schema/schema_health.hh"
 
-/* Physics */
+//--------------------------------------------------
+//	Physics
+//--------------------------------------------------
 
 #include "physics/sweptspherequery.hh"
 #include "physics/bulletmanager.hh"
@@ -240,7 +299,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/vehicleinput.hh"
 #include "physics/physicsvehicle.hh"
 
-/* Sim */
+//--------------------------------------------------
+//	Sim
+//--------------------------------------------------
 
 #include "sim/rebindingcomponenthandle.hh"
 #include "sim/simobject.hh"
@@ -252,11 +313,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/interfaces/updateinterface.hh"
 
-/* Gamestate */
+//--------------------------------------------------
+//	Gamestate
+//--------------------------------------------------
 
 #include "gamestate/hk/pedspawnmanager.hh"
 
-/* Sim (Components) */
+//--------------------------------------------------
+//	Sim Components
+//--------------------------------------------------
 
 #include "sim/components/targeting/targetingsimobject.hh"
 #include "sim/components/targeting/targetingmap.hh"
@@ -271,7 +336,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/hitreactioncomponent.hh"
 #include "sim/components/healthcomponent.hh"
 
-/* Gamescene */
+//--------------------------------------------------
+//	Gamescene
+//--------------------------------------------------
 
 #include "gamescene/scenelayerresource.hh"
 #include "gamescene/sceneobjectproperties.hh"
@@ -279,18 +346,24 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "gamescene/components/hintcomponentbase.hh"
 #include "gamescene/components/marker.hh"
 
-/* Spawning */
+//--------------------------------------------------
+//	Spawning
+//--------------------------------------------------
 
 #include "spawning/spawninterface.hh"
 #include "spawning/parkingspot.hh"
 
-/* AI */
+//--------------------------------------------------
+//	AI
+//--------------------------------------------------
 
 #include "ai/encounters/encounterunitinfo.hh"
 #include "ai/encounters/encounterbase.hh"
 
 #include "ai/cops/copsystem.hh"
 
-/* UI */
+//--------------------------------------------------
+//	UI
+//--------------------------------------------------
 
 #include "ui/uihkutils.hh"
