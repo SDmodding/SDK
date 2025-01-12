@@ -60,7 +60,7 @@ namespace UFG
 	public:
 		eFactionStandingEnum mStandings[NUM_FACTIONS][NUM_FACTIONS];
 
-		SDK_SINLINE FactionInterface* Instance() { return reinterpret_cast<FactionInterface*>(SDK_RVA(0x24084D0)); }
+		SDK_SINLINE FactionInterface* Instance() { return SDK_VAR(FactionInterface*, 0x24084D0); }
 
 		/* Functions */
 

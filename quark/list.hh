@@ -33,4 +33,18 @@ namespace UFG
 		SDK_INLINE T* begin() { return mNode.next(); }
 		SDK_INLINE T* end() { return static_cast<T*>(&mNode); }
 	};
+
+	template <typename T, typename U = T>
+	class qSNode
+	{
+	public:
+		qSNode<T, U>* mNext;
+	};
+
+	template <typename T, typename U = T>
+	class qSList
+	{
+	public:
+		qSNode<T, U>* mHead;
+	};
 }

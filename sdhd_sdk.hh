@@ -141,6 +141,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "shaders/stateblocks.hh"
 
 //--------------------------------------------------
+//	Render (Culling)
+//--------------------------------------------------
+
+#include "render/culling/culling.hh"
+#include "render/culling/cullinfo.hh"
+
+//--------------------------------------------------
 //	Render
 //--------------------------------------------------
 
@@ -349,8 +356,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	FX
 //--------------------------------------------------
 
+#include "fx/sharedpointer.hh"
+#include "fx/hardwareocclusionquery.hh"
 #include "fx/fxsimcomponent.hh"
 #include "fx/beam.hh"
+#include "fx/fxmanager.hh"
 
 //--------------------------------------------------
 //	Gamescene

@@ -3,8 +3,6 @@
 namespace UFG
 {
 	class AILightWeightComponent;
-	class CullInfo;
-	class CullResults;
 	class CharacterOccupantComponent;
 	class GroupComponent;
 	class InterestPoint;

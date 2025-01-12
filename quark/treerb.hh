@@ -26,22 +26,22 @@ namespace UFG
 		qBaseNodeRB mNULL;
 		int mCount;
 
-		qBaseTreeRB() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x160CC0))(this); }
-		~qBaseTreeRB() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x167DC0))(this); }
+		qBaseTreeRB() { SDK_CALL_FUNC(void, 0x160CC0, void*)(this); }
+		~qBaseTreeRB() { SDK_CALL_FUNC(void, 0x167DC0, void*)(this); }
 
 		/* Functions */
 
 		SDK_INLINE bool IsEmpty() { return mCount == 0; }
 
-		void Add(qBaseNodeRB* x) { reinterpret_cast<void(SDK_CALL*)(void*, qBaseNodeRB*)>(SDK_RVA(0x1652A0))(this, x); }
+		void Add(qBaseNodeRB* x) { SDK_CALL_FUNC(void, 0x1652A0, void*, qBaseNodeRB*)(this, x); }
 
-		bool Contains(qBaseNodeRB* node) { return reinterpret_cast<bool(SDK_CALL*)(void*, qBaseNodeRB*)>(SDK_RVA(0x16A9E0))(this, node); }
+		bool Contains(qBaseNodeRB* node) { return SDK_CALL_FUNC(bool, 0x16A9E0, void*, qBaseNodeRB*)(this, node); }
 
-		qBaseNodeRB* Get(u32 uid) { return reinterpret_cast<qBaseNodeRB*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x16EFB0))(this, uid); }
+		qBaseTreeRB* Get(u32 uid) { return SDK_CALL_FUNC(qBaseTreeRB*, 0x16EFB0, void*, u32)(this, uid); }
 
-		qBaseNodeRB* GetNext(qBaseNodeRB* x) { return reinterpret_cast<qBaseNodeRB*(SDK_CALL*)(void*, qBaseNodeRB*)>(SDK_RVA(0x171440))(this, x); }
+		qBaseTreeRB* GetNext(qBaseNodeRB* x) { return SDK_CALL_FUNC(qBaseTreeRB*, 0x171440, void*, qBaseNodeRB*)(this, x); }
 
-		qBaseNodeRB* GetTail() { return reinterpret_cast<qBaseNodeRB*(SDK_CALL*)(void*)>(SDK_RVA(0x1725F0))(this); }
+		qBaseNodeRB* GetTail() { return SDK_CALL_FUNC(qBaseNodeRB*, 0x1725F0, void*)(this); }
 	};
 
 	template <typename T>

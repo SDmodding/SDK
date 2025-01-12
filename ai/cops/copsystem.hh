@@ -93,7 +93,7 @@ namespace UFG
 		bool mIsSafehouseInstantCooldownActive;
 		u64 mHeatLevelTimestamp;
 
-		SDK_SINLINE CopSystem* Instance() { return reinterpret_cast<CopSystem*>(SDK_RVA(0x23D9AA0)); }
+		SDK_SINLINE CopSystem* Instance() { return SDK_VAR(CopSystem*, 0x23D9AA0); }
 
 		/* Functions */
 

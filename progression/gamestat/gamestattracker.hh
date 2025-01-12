@@ -36,7 +36,7 @@ namespace UFG
 		SimpleTimer mSessionTimer;
 		bool m_bIsApplyingSnapshotEffects : 1;
 
-		SDK_SINLINE GameStatTracker* Instance() { return reinterpret_cast<GameStatTracker*>(SDK_RVA(0x24084D0)); }
+		SDK_SINLINE GameStatTracker* Instance() { return SDK_VAR(GameStatTracker*, 0x24084D0); }
 
 		/* Functions */
 

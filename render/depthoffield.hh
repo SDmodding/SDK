@@ -42,7 +42,7 @@ namespace Render
 
 		/* Static Functions */
 
-		SDK_SINLINE DepthOfField* Instance() { return reinterpret_cast<DepthOfField*>(SDK_RVA(0x2129328)); }
+		SDK_SINLINE DepthOfField* Instance() { return SDK_VAR(DepthOfField*, 0x2129328); }
 
 		/* Functions */
 
