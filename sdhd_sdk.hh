@@ -220,6 +220,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "expression/membermap.hh"
 
 //--------------------------------------------------
+//	Animation
+//--------------------------------------------------
+
+#include "animation/weightsetdatabase.hh"
+#include "animation/riginventory.hh"
+#include "animation/skeleton.hh"
+#include "animation/skeletalpose.hh"
+
+//--------------------------------------------------
 //	Wayfinder
 //--------------------------------------------------
 
