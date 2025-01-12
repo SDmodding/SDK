@@ -7,7 +7,7 @@ namespace Render
 	public:
 		struct PrecalculatedTriangle
 		{
-			float surfaceArea;
+			f32 surfaceArea;
 			u16 meshIndex;
 			u16 primIndex;
 		};
@@ -23,6 +23,17 @@ namespace Render
 		PrecalculatedTriangle* mTriangleInfo;
 		u32 mNumTriangleInfo;
 		f32 mTotalMeshSurfaceArea;
+
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<int, 0x2362124> sNumInstancesInService;
+
+		/* Static Functions */
+
+		// NOTE: If `sNumInstancesInService` is equal or above 650 this will always return nullptr.
+		SDK_SINLINE FXOverride* CreateOverride(const char* allocationName, UFG::qMemoryPool* memoryPool) { 
+			return SDK_CALL_FUNC(FXOverride*, 0x1CA5A0, const char*, UFG::qMemoryPool*)(allocationName, memoryPool);
+		}
 	};
 	SDK_ASSERT_SIZEOF(FXOverride, 0x70);
 
@@ -50,14 +61,14 @@ namespace Render
 	public:
 		FXSettingsHandle mSettings;
 		UFG::qList<class FXComponentInstance> mComponents;
-		float mStartTime;
-		float mEndTime;
-		unsigned int mId;
-		float mTransformNodeExtraTime;
-		unsigned __int64 mAudioId;
-		unsigned int mSplitScreenViewMask;
-		char mLoop;
-		char mBasisRelativeToParent;
+		f32 mStartTime;
+		f32 mEndTime;
+		u32 mId;
+		f32 mTransformNodeExtraTime;
+		u64 mAudioId;
+		u32 mSplitScreenViewMask;
+		i8 mLoop;
+		i8 mBasisRelativeToParent;
 		UFG::qMatrix44 mCullMatrix;
 		CullInfo* mCullInfo;
 		CullResults* mCullResults;
@@ -66,6 +77,11 @@ namespace Render
 		UFG::qMatrix44 mBasis;
 		UFG::qMatrix44 mRelativeBasis;
 		FX::SharedPointer<FXOverride> mStateBlockOverride;
+
+		/* Functions */
+
+		void EnableOcclusionCulling() { SDK_CALL_FUNC(void, 0x1CBC00, void*)(this); }
+		const UFG::qMatrix44& GetBasis() { return SDK_CALL_FUNC(const UFG::qMatrix44&, 0x1CC300, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(FXInstance, 0x190);
 
