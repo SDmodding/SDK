@@ -23,7 +23,7 @@ namespace Render
 	class Poly
 	{
 	public:
-		Render::vDynamic* mVertices;
+		vDynamic* mVertices;
 
 		void Init(f32 x, f32 y, f32 w, f32 h, f32 z) { SDK_CALL_FUNC(void, 0x15C30, void*, f32, f32, f32, f32, f32)(this, x, y, w, h, z); }
 

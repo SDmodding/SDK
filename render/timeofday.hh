@@ -60,7 +60,7 @@ namespace UFG
 
 		/* Static Functions */
 
-		SDK_SINLINE TimeOfDayManager* Instance() { return reinterpret_cast<TimeOfDayManager*>(SDK_RVA(0x2163510)); }
+		SDK_SINLINE TimeOfDayManager* Instance() { return SDK_VAR(TimeOfDayManager*, 0x2163510); }
 		SDK_SINLINE f32 GetMinimumNightFogValue(f32 secondsSinceMidnight) { return SDK_CALL_FUNC(f32, 0x6AAC0, f32)(secondsSinceMidnight); }
 		SDK_SINLINE bool GetTimeInSeconds(f32 time, int& timeInSeconds) { return SDK_CALL_FUNC(bool, 0x6B0A0, f32, int&)(time, timeInSeconds); }
 		SDK_SINLINE f32 GetWeatherIntensityFromString(const qString& weather) { return SDK_CALL_FUNC(f32, 0x6B1B0, const qString&)(weather); }
