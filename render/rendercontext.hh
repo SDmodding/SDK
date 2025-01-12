@@ -137,6 +137,10 @@ namespace UFG
 		qTask* mLightingSubmitTask;
 		LightingSubmitTaskParams* mLightingSubmitTaskParams;
 		RenderContextPlat* mRenderContextPlat;
+
+		/* Static Functions */
+
+		SDK_SINLINE RenderContext* Instance() { return SDK_VAR_GET(RenderContext*, 0x21299D8); }
 	};
 	SDK_ASSERT_SIZEOF(RenderContext, 0x4D0);
 }

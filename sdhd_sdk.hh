@@ -144,6 +144,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Render
 //--------------------------------------------------
 
+#include "render/altcoloreffect.hh"
 #include "render/viewmetrics.hh"
 #include "render/view.hh"
 #include "render/timeofday.hh"
@@ -153,6 +154,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/render.hh"
 #include "render/rendercontext.hh"
 #include "render/depthoffield.hh"
+
+#include "render/pc/renderplat.hh"
 
 //--------------------------------------------------
 //	Camera
