@@ -101,7 +101,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Havok
 //--------------------------------------------------
 
-#include "contrib/havok.hh"
+#include "contrib/havok/havok.hh"
 
 //--------------------------------------------------
 //	Illusion

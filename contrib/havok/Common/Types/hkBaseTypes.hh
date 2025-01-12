@@ -1,5 +1,7 @@
 #pragma once
 
+class hkClass;
+
 class hkBool
 {
 public:
@@ -18,4 +20,10 @@ class hkRefPtr
 {
 public:
 	TYPE* m_pntr;
+};
+
+struct hkVariant
+{
+	void* m_object;
+	const hkClass* m_class;
 };
