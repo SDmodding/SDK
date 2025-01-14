@@ -1,8 +1,12 @@
 #pragma once
 
+#ifndef SDK_BASE
 #define SDK_BASE								SDK::gBaseAddress
+#endif
 
+#ifndef SDK_RVA
 #define SDK_RVA(x)								SDK_BASE + x
+#endif
 #define SDK_RVA_GET(x)							(reinterpret_cast<uptr>(x) - SDK_BASE)
 #define SDK_RVA_PTR(x)							reinterpret_cast<void*>(SDK_RVA(x))
 
