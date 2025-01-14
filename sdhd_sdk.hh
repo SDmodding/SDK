@@ -38,6 +38,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include <Windows.h>
 #include <d3d11.h>
 
+#define DIRECTINPUT_VERSION 0x800
+#include <dinput.h>
+
 //--------------------------------------------------
 //	SDK Includes
 //--------------------------------------------------
@@ -133,6 +136,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
+
+//--------------------------------------------------
+//	Input
+//--------------------------------------------------
+
+#include "input/input.hh"
+#include "input/hk/inputhk_pc.hh"
+#include "input/pc/inputplat.hh"
 
 //--------------------------------------------------
 //	Shaders

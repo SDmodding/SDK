@@ -29,7 +29,14 @@ class qGlobalVar
 public:
 	SDK_INLINE T operator->() { return SDK_VAR(T, RVA); }
 	SDK_INLINE operator T&() { return SDK_VAR_GET(T, RVA); }
-	SDK_INLINE void operator=(const T& value) { *reinterpret_cast<T*>(SDK_RVA(RVA)) = value; }
+	SDK_INLINE void operator=(const T value) { *reinterpret_cast<T*>(SDK_RVA(RVA)) = value; }
+};
+
+template <typename T, u32 SIZE, uptr RVA>
+class qGlobalArray
+{
+public:
+	SDK_INLINE T& operator[](int index) { return *(reinterpret_cast<T*>(SDK_RVA(RVA)) + index); }
 };
 
 template <typename T, uptr RVA>
