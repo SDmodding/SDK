@@ -358,6 +358,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/interfaces/updateinterface.hh"
 
 //--------------------------------------------------
+//	Effects
+//--------------------------------------------------
+
+#include "effects/radarsystem.hh"
+
+//--------------------------------------------------
 //	Gamestate
 //--------------------------------------------------
 
