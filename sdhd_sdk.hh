@@ -146,6 +146,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "input/pc/inputplat.hh"
 
 //--------------------------------------------------
+//	Hard Drive
+//--------------------------------------------------
+
+#include "harddrive/harddrivecontainer.hh"
+
+//--------------------------------------------------
 //	Shaders
 //--------------------------------------------------
 
@@ -304,6 +310,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/gamestat/gamesnapshot.hh"
 #include "progression/gamestat/gamestatdefinitions.hh"
 #include "progression/gamestat/gamestattracker.hh"
+#include "progression/gamestat/gamesaveload.hh"
 
 //--------------------------------------------------
 //	Flow Control
