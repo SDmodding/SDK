@@ -434,4 +434,5 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/uiscreenrenderable.hh"
 #include "ui/uiscreen.hh"
 #include "ui/uiscreenfactory.hh"
+#include "ui/uigfxallocator.hh"
 #include "ui/uigfxtranslator.hh"

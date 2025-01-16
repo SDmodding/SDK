@@ -49,4 +49,13 @@ namespace UFG
 		Scaleform::GFx::Movie* getMovieSafe() { return SDK_CALL_FUNC(Scaleform::GFx::Movie*, 0xA2B980, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(UIScreen, 0x90);
+
+	class UIPendingScreenLoad : public qNode<UIPendingScreenLoad>
+	{
+	public:
+		UIScreen* mScreen;
+		UICommandData* mCommandData;
+		bool mCancelled;
+		int mDelayedInitCounter;
+	};
 }

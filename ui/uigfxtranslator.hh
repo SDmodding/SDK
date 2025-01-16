@@ -19,7 +19,7 @@ namespace UFG
 		bool mMarkedForDeleteOnLoad;
 		qTreeRB<UIDictionaryEntry> mStringMap;
 		bool mIsLoadedFromMemory;
-		__declspec(align(8)) DataStreamer::Handle mhLocalizationData;
+		DataStreamer::Handle mhLocalizationData;
 		UILocalizationChunkHandle mDatabaseHandle;
 
 		/* Functions */

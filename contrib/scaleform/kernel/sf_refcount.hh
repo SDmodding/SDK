@@ -41,4 +41,15 @@ namespace Scaleform
 	public:
 	};
 
+	template <class C, int Stat>
+	class RefCountBaseV : RefCountBaseStatImpl<RefCountImpl, Stat>
+	{
+	public:
+	};
+
+	template <class C, int Stat>
+	class RefCountBaseNTS : Scaleform::RefCountBaseStatImpl<RefCountImpl, Stat>
+	{
+	public:
+	};
 }
