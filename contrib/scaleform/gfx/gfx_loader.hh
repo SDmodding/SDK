@@ -21,7 +21,7 @@ namespace Scaleform::GFx
 		u32 ExporterFlags;
 	};
 
-	class State
+	class State : public RefCountBase<State, Stat_Default_Mem>
 	{
 	public:
 		enum StateType 
@@ -65,6 +65,8 @@ namespace Scaleform::GFx
 			State_AS2Support,
 			State_AS3Support
 		};
+
+		StateType SType;
 	};
 
 	class StateBag //: public FileTypeConstants
@@ -110,5 +112,11 @@ namespace Scaleform::GFx
 		LoaderImpl* pImpl;
 		ResourceLib* pStrongResourceLib;
 		u32 DefLoadFlags;
+	};
+
+	class Translator : public State
+	{
+	public:
+		u32 WWMode;
 	};
 }
