@@ -119,4 +119,15 @@ namespace Scaleform::GFx
 	public:
 		u32 WWMode;
 	};
+
+	class FileOpenerBase : public State
+	{
+	public:
+	};
+
+	class FileOpener : public FileOpenerBase
+	{
+	public:
+	};
+
 }

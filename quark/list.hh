@@ -34,6 +34,14 @@ namespace UFG
 		SDK_INLINE T* end() { return static_cast<T*>(&mNode); }
 	};
 
+	template <typename T>
+	class qValueNode : public qNode<qValueNode<T>>
+	{
+	public:
+		T mValue;
+	};
+
+
 	template <typename T, typename U = T>
 	class qSNode
 	{
