@@ -50,70 +50,70 @@ namespace UFG
 
 		/* Static Functions */
 
-		SDK_SINLINE void FormatMoneyStr(int money, qString& string) { reinterpret_cast<void(SDK_CALL*)(int, qString&)>(SDK_RVA(0x5E6640))(money, string); }
+		SDK_SINLINE void FormatMoneyStr(int money, qString& string) { SDK_CALL_FUNC(void, 0x5E6640, int, qString&)(money, string); }
 
-		SDK_SINLINE eButtons GetButton(const char* text) { return reinterpret_cast<eButtons(SDK_CALL*)(const char*)>(SDK_RVA(0x5E6DC0))(text); }
+		SDK_SINLINE eButtons GetButton(const char* text) { return SDK_CALL_FUNC(eButtons, 0x5E6DC0, const char*)(text); }
 
 		SDK_SINLINE qPropertySet* GetDLCPropertyNode(const char* rootName, const char* listName) { 
-			return reinterpret_cast<qPropertySet*(SDK_CALL*)(const char*, const char*)>(SDK_RVA(0x5E7480))(rootName, listName); 
+			return SDK_CALL_FUNC(qPropertySet*, 0x5E7480, const char*, const char*)(rootName, listName);
 		}
 
 		SDK_SINLINE qPropertySet* GetDLCPropertyNode(const char* rootName, const char* listName, const char* nodeName, const qSymbol& nodeCompare) { 
-			return reinterpret_cast<qPropertySet*(SDK_CALL*)(const char*, const char*, const char*, const qSymbol&)>(SDK_RVA(0x5E7340))(rootName, listName, nodeName, nodeCompare); 
+			return SDK_CALL_FUNC(qPropertySet*, 0x5E7340, const char*, const char*, const char*, const qSymbol&)(rootName, listName, nodeName, nodeCompare);
 		}
 
-		SDK_SINLINE qString GetDateString(u64 systemTime, bool includeSeconds) { return reinterpret_cast<qString(SDK_CALL*)(u64, bool)>(SDK_RVA(0x5E7550))(systemTime, includeSeconds); }
+		SDK_SINLINE qString GetDateString(u64 systemTime, bool includeSeconds) { return SDK_CALL_FUNC(qString, 0x5E7550, u64, bool)(systemTime, includeSeconds); }
 
-		SDK_SINLINE char* GetGamepadButtonTextureName(eButtons button, bool remappable) { return reinterpret_cast<char*(SDK_CALL*)(eButtons, bool)>(SDK_RVA(0x5E79A0))(button, remappable); }
+		SDK_SINLINE const char* GetGamepadButtonTextureName(eButtons button, bool remappable) { return SDK_CALL_FUNC(const char*, 0x5E79A0, eButtons, bool)(button, remappable); }
 
-		SDK_SINLINE char* GetKeyboardButtonTextureNameNonRemappable(eButtons button) { return reinterpret_cast<char*(SDK_CALL*)(eButtons)>(SDK_RVA(0x5E80C0))(button); }
+		SDK_SINLINE const char* GetKeyboardButtonTextureNameNonRemappable(eButtons button) { return SDK_CALL_FUNC(const char*, 0x5E80C0, eButtons)(button); }
 
-		SDK_SINLINE char* GetPlayerDisplayName() { return reinterpret_cast<char*(SDK_CALL*)()>(SDK_RVA(0x5E8980))(); }
+		SDK_SINLINE const char* GetPlayerDisplayName() { return SDK_CALL_FUNC(const char*, 0x5E8980)(); }
 
-		SDK_SINLINE bool GetPlayerWorldPosition(qVector3* pos, qVector3* dir) { return reinterpret_cast<bool(SDK_CALL*)(qVector3*, qVector3*)>(SDK_RVA(0x5E89E0))(pos, dir); }
+		SDK_SINLINE bool GetPlayerWorldPosition(qVector3& pos, qVector3& dir) { return SDK_CALL_FUNC(bool, 0x5E89E0, qVector3&, qVector3&)(pos, dir); }
 
-		SDK_SINLINE void HandleGameCheckpointRestore() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x5EB870))(); }
+		SDK_SINLINE void HandleGameCheckpointRestore() { SDK_CALL_FUNC(void, 0x5EB870)(); }
 
-		SDK_SINLINE bool InGameIntroChapter() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5ED4C0))(); }
+		SDK_SINLINE bool InGameIntroChapter() { return SDK_CALL_FUNC(bool, 0x5ED4C0)(); }
 
-		SDK_SINLINE bool InMinigame() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5ED510))(); }
+		SDK_SINLINE bool InMinigame() { return SDK_CALL_FUNC(bool, 0x5ED510, )(); }
 
-		SDK_SINLINE void InitHDSettings() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x5ED5D0))(); }
+		SDK_SINLINE void InitHDSettings() { SDK_CALL_FUNC(void, 0x5ED5D0)(); }
 
-		SDK_SINLINE bool IsGamePaused() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5EE1B0))(); }
+		SDK_SINLINE bool IsGamePaused() { return SDK_CALL_FUNC(bool, 0x5EE1B0, )(); }
 
-		SDK_SINLINE bool IsInHDMode() { return *reinterpret_cast<bool*>(SDK_RVA(0x208E691)); }
+		SDK_SINLINE bool IsInHDMode() { return SDK_CALL_FUNC(bool, 0x5EE290, )(); }
 
-		SDK_SINLINE bool IsMissionActive(bool includeEvents) { return reinterpret_cast<bool(SDK_CALL*)(bool)>(SDK_RVA(0x5EE420))(includeEvents); }
+		SDK_SINLINE bool IsMissionActive(bool includeEvents) { return SDK_CALL_FUNC(bool, 0x5EE420, bool)(includeEvents); }
 
-		SDK_SINLINE bool IsMissionWithCheckpointsActive(bool includeEvents) { return reinterpret_cast<bool(SDK_CALL*)(bool)>(SDK_RVA(0x5EE490))(includeEvents); }
+		SDK_SINLINE bool IsMissionWithCheckpointsActive(bool includeEvents) { return SDK_CALL_FUNC(bool, 0x5EE490, bool)(includeEvents); }
 
-		SDK_SINLINE bool IsPlayerInCombat() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5EE680))(); }
+		SDK_SINLINE bool IsPlayerInCombat() { return SDK_CALL_FUNC(bool, 0x5EE680)(); }
 
-		SDK_SINLINE bool IsPlayerInVehicle() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5EE690))(); }
+		SDK_SINLINE bool IsPlayerInVehicle() { return SDK_CALL_FUNC(bool, 0x5EE690, )(); }
 
-		SDK_SINLINE bool IsPlayerInWater() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5EE720))(); }
+		SDK_SINLINE bool IsPlayerInWater() { return SDK_CALL_FUNC(bool, 0x5EE720)(); }
 
-		SDK_SINLINE bool IsPlayerVehiclePassenger() { return reinterpret_cast<bool(SDK_CALL*)()>(SDK_RVA(0x5EE730))(); }
+		SDK_SINLINE bool IsPlayerVehiclePassenger() { return SDK_CALL_FUNC(bool, 0x5EE730)(); }
 
-		SDK_SINLINE const char* LocalizeText(const char* tag) { return reinterpret_cast<const char* (SDK_CALL*)(const char*)>(SDK_RVA(0x5F1C00))(tag); }
+		SDK_SINLINE const char* LocalizeText(const char* tag) { return SDK_CALL_FUNC(const char*, 0x5F1C00, const char*)(tag); }
 
-		SDK_SINLINE void LockGameplayInput() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x5F1CC0))(); }
+		SDK_SINLINE void LockGameplayInput() { SDK_CALL_FUNC(void, 0x5F1CC0)(); }
 
-		SDK_SINLINE void UnlockGameplayInput() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x613270))(); }
+		SDK_SINLINE void UnlockGameplayInput() { SDK_CALL_FUNC(void, 0x613270)(); }
 
-		SDK_SINLINE void ResetGameplayInput() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x6028C0))(); }
+		SDK_SINLINE void ResetGameplayInput() { SDK_CALL_FUNC(void, 0x6028C0)(); }
 
-		SDK_SINLINE void ResetInputCounterHack(u32 counter) { reinterpret_cast<void(SDK_CALL*)(u32)>(SDK_RVA(0x602930))(counter); }
+		SDK_SINLINE void ResetInputCounterHack(UI* counter) { SDK_CALL_FUNC(void, 0x602930, UI*)(counter); }
 
-		SDK_SINLINE bool PauseGame(const char* pauseScreen) { return reinterpret_cast<bool(SDK_CALL*)(const char*)>(SDK_RVA(0x5F3910))(pauseScreen); }
+		SDK_SINLINE char PauseGame(const char* pauseScreen) { return SDK_CALL_FUNC(char, 0x5F3910, const char*)(pauseScreen); }
 
-		SDK_SINLINE void UnpauseGame() { reinterpret_cast<void(SDK_CALL*)()>(SDK_RVA(0x6132A0))(); }
+		SDK_SINLINE void UnpauseGame() { SDK_CALL_FUNC(void, 0x6132A0)(); }
 
-		SDK_SINLINE void StartPauseVFX(u32 hashID) { reinterpret_cast<void(SDK_CALL*)(u32)>(SDK_RVA(0x612150))(hashID); }
+		SDK_SINLINE void StartPauseVFX(u32 hashID) { SDK_CALL_FUNC(void, 0x612150, u32)(hashID); }
 
-		SDK_SINLINE void StopPauseVFX(bool fade) { reinterpret_cast<void(SDK_CALL*)(bool)>(SDK_RVA(0x612670))(fade); }
+		SDK_SINLINE void StopPauseVFX(bool fade) { SDK_CALL_FUNC(void, 0x612670, bool)(fade); }
 
-		SDK_SINLINE void QuitGame(const char* frontEndScreen) { reinterpret_cast<void(SDK_CALL*)(const char*)>(SDK_RVA(0x5FF020))(frontEndScreen); }
+		SDK_SINLINE void QuitGame(const char* frontEndScreen) { SDK_CALL_FUNC(void, 0x5FF020, const char*)(frontEndScreen); }
 	};
 }
