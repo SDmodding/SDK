@@ -8,6 +8,6 @@ public:
 	hkpLinkedCollidable m_collidable;
 	hkMultiThreadCheck m_multiThreadCheck;
 	hkStringPtr m_name;
-	hkArray<hkSimpleProperty, hkContainerHeapAllocator> m_properties;
+	hkArray<hkSimpleProperty> m_properties;
 };
 SDK_ASSERT_SIZEOF(hkpWorldObject, 0xC8);

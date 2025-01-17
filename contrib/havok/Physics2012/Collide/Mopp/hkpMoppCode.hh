@@ -16,7 +16,7 @@ public:
 	};
 
 	hkpMoppCode::CodeInfo m_info;
-	hkArray<u8, hkContainerHeapAllocator> m_data;
+	hkArray<u8> m_data;
 	hkEnum<BuildType, s8> m_buildType;
 };
 SDK_ASSERT_SIZEOF(hkpMoppCode, 0x40);

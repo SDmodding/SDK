@@ -7,8 +7,9 @@ namespace UFG
 	public:
 		f32 x, y;
 
-		qVector2() : x(0.f), y(0.f) {}
-		qVector2(f32 fX, f32 fY) : x(fX), y(fY) {}
+		constexpr qVector2() {}
+		SDK_INLINE qVector2(f32 f) : x(f), y(f) {}
+		SDK_INLINE qVector2(f32 fX, f32 fY) : x(fX), y(fY) {}
 	};
 
 	class qVector3
@@ -16,8 +17,9 @@ namespace UFG
 	public:
 		f32 x, y, z;
 
-		qVector3() : x(0.f), y(0.f), z(0.f) {}
-		qVector3(f32 fX, f32 fY, f32 fZ) : x(fX), y(fY), z(fZ) {}
+		constexpr qVector3() {}
+		SDK_INLINE qVector3(f32 f) : x(f), y(f), z(f) {}
+		SDK_INLINE qVector3(f32 f0, f32 f1, f32 f2) : x(f0), y(f1), z(f2) {}
 	};
 
 	class qVector4
@@ -25,8 +27,9 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		qVector4() : x(0.f), y(0.f), z(0.f), w(0.f) {}
-		qVector4(f32 fX, f32 fY, f32 fZ, f32 fW) : x(fX), y(fY), z(fZ), w(fW) {}
+		constexpr qVector4() {}
+		SDK_INLINE qVector4(f32 f) : x(f), y(f), z(f), w(f) {}
+		SDK_INLINE qVector4(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 	};
 
 	class qMatrix44
@@ -40,8 +43,10 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		qQuaternion() : x(0.f), y(0.f), z(0.f), w(0.f) {}
-		qQuaternion(f32 fX, f32 fY, f32 fZ, f32 fW) : x(fX), y(fY), z(fZ), w(fW) {}
+		constexpr qQuaternion() {}
+		SDK_INLINE qQuaternion(f32 f) : x(f), y(f), z(f), w(f) {}
+		SDK_INLINE qQuaternion(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
+		SDK_INLINE qQuaternion(const qVector4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}
 	};
 
 	struct qTransQuat

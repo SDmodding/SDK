@@ -14,8 +14,15 @@ public:
 	SDK_INLINE T* end() { return m_data + m_size; }
 };
 
-template <typename T, typename Allocator = hkContainerHeapAllocator>
+template <typename T>
 class hkArray : public hkArrayBase<T>
 {
 public:
+};
+
+template <typename T, unsigned N>
+class hkInplaceArray : public hkArray<T>
+{
+public:
+	T m_storage[N];
 };

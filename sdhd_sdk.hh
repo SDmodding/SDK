@@ -75,6 +75,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/bitfield.hh"
 #include "quark/list.hh"
 #include "quark/safepointer.hh"
+#include "quark/tree64.hh"
 #include "quark/treerb.hh"
 #include "quark/treerb64.hh"
 #include "quark/offset.hh"
@@ -99,6 +100,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "quark/task.hh"
 #include "quark/reflection.hh"
+
+#include "quark/reflection/reflectarray.hh"
+#include "quark/reflection/reflectstring.hh"
+#include "quark/reflection/reflecttype.hh"
 
 //--------------------------------------------------
 //	Other Contrib
@@ -337,12 +342,21 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Physics
 //--------------------------------------------------
 
+#include "physics/baseobj.hh"
+#include "physics/bitarray.hh"
+#include "physics/constraints.hh"
+#include "physics/collisionlayers.hh"
+#include "physics/destructionbase.hh"
+#include "physics/objectproperties.hh"
+#include "physics/collisionmesh.hh"
+#include "physics/statemachine.hh"
 #include "physics/sweptspherequery.hh"
 #include "physics/bulletmanager.hh"
 #include "physics/explosion.hh"
+#include "physics/wind.hh"
 
 #include "physics/vehicleinput.hh"
-#include "physics/physicsvehicle.hh"
+#include "physics/physicsvehicledna.hh"
 
 //--------------------------------------------------
 //	Sim
@@ -357,6 +371,18 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/metrics.hh"
 
 #include "sim/interfaces/updateinterface.hh"
+
+//--------------------------------------------------
+//	Physics
+//--------------------------------------------------
+
+#include "physics/components/waterfloatingtrackerbasecomponent.hh"
+#include "physics/components/waterfloatingtrackercomponent.hh"
+
+#include "physics/rigidbody.hh"
+#include "physics/components/rigidbodycomponent.hh"
+
+#include "physics/physicsvehicle.hh"
 
 //--------------------------------------------------
 //	Effects

@@ -17,12 +17,12 @@ public:
 	};
 
 	hkStringPtr m_name;
-	hkArray<i16, hkContainerHeapAllocator> m_parentIndices;
-	hkArray<hkaBone, hkContainerHeapAllocator> m_bones;
-	hkArray<hkQsTransformf, hkContainerHeapAllocator> m_referencePose;
-	hkArray<f32, hkContainerHeapAllocator> m_referenceFloats;
-	hkArray<hkStringPtr, hkContainerHeapAllocator> m_floatSlots;
-	hkArray<LocalFrameOnBone, hkContainerHeapAllocator> m_localFrames;
-	hkArray<Partition, hkContainerHeapAllocator> m_partitions;
+	hkArray<i16> m_parentIndices;
+	hkArray<hkaBone> m_bones;
+	hkArray<hkQsTransformf> m_referencePose;
+	hkArray<f32> m_referenceFloats;
+	hkArray<hkStringPtr> m_floatSlots;
+	hkArray<LocalFrameOnBone> m_localFrames;
+	hkArray<Partition> m_partitions;
 };
 SDK_ASSERT_SIZEOF(hkaSkeleton, 0x88);

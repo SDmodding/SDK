@@ -81,6 +81,13 @@ namespace UFG
 			Flag__update_list_check = 3
 		};
 
+		enum eProxyMode
+		{
+			ePM_LOCAL,
+			ePM_PROXY_LOCAL_PHYSICS,
+			ePM_PROXY_REMOTE_PHYSICS
+		};
+
 		qSymbol m_Name;
 		u16 m_Flags;
 		char m_ReservedComponentSlots;

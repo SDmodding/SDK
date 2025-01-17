@@ -5,8 +5,7 @@ class component_Health
 public:
 	int maxUpgradedHealth;
 	int maxHealth;
-	float regenerativeHealthRate;
+	f32 regenerativeHealthRate;
 	bool InvulnerableCharacter;
-	float healthProjectileDamageMultiplier;
+	f32 healthProjectileDamageMultiplier;
 };
-SDK_ASSERT_SIZEOF(component_Health, 0x14);

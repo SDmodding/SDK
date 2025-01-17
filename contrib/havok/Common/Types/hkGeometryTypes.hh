@@ -20,7 +20,7 @@ class hkSimpleLocalFrame : public hkLocalFrame
 {
 public:
 	hkTransformf m_transform;
-	hkArray<hkLocalFrame*, hkContainerHeapAllocator> m_children;
+	hkArray<hkLocalFrame*> m_children;
 	hkLocalFrame* m_parentFrame;
 	hkLocalFrameGroup* m_group;
 	hkStringPtr m_name;

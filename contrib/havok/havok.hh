@@ -20,6 +20,7 @@ struct hkContainerHeapAllocator;
 #include "Common/hkMath.hh"
 
 #include "Common/Container/hkArray.hh"
+#include "Common/Container/hkSmallArray.hh"
 #include "Common/Container/hkMap.hh"
 #include "Common/Container/hkPointerMap.hh"
 #include "Common/Container/hkCachedHashMap.hh"
@@ -49,9 +50,18 @@ struct hkContainerHeapAllocator;
 //	Physics
 //------------------------------------
 
+#include "Physics/Constraint/Data/hkpConstraintInfo.hh"
+
+//------------------------------------
+//	Physics2012
+//------------------------------------
+
+#include "Physics2012/Collide/hkpCollidableQualityType.hh"
+
 #include "Physics2012/Collide/Mopp/hkpMoppCode.hh"
 #include "Physics2012/Collide/Mopp/hkpMoppCompilerInput.hh"
 
+#include "Physics2012/Collide/Shape/hkpMeshMaterial.hh"
 #include "Physics2012/Collide/Shape/hkcdShape.hh"
 #include "Physics2012/Collide/Shape/hkpShapeBase.hh"
 #include "Physics2012/Collide/Shape/hkpShape.hh"
@@ -61,8 +71,20 @@ struct hkContainerHeapAllocator;
 
 #include "Physics2012/Collide/hkpLinkedCollidable.hh"
 
+#include "Physics2012/Dynamics/Collide/hkpContactListener.hh"
+
+#include "Physics2012/Dynamics/Constraint/hkpConstraintOwner.hh"
+#include "Physics2012/Dynamics/Constraint/hkpConstraintInstance.hh"
+
 #include "Physics2012/Dynamics/World/hkpSimulation.hh"
+#include "Physics2012/Dynamics/World/hkpSimulationIsland.hh"
 #include "Physics2012/Dynamics/World/hkpWorldObject.hh"
 
+#include "Physics2012/Dynamics/hkpAction.hh"
+#include "Physics2012/Dynamics/hkpUnaryAction.hh"
+
 #include "Physics2012/Dynamics/Entity/hkpEntity.hh"
+#include "Physics2012/Dynamics/Entity/hkpEntityListener.hh"
 #include "Physics2012/Dynamics/Entity/hkpRigidBody.hh"
+
+#include "Physics2012/Utilities/Actions/hkpReorientAction.hh"

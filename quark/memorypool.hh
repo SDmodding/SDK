@@ -73,9 +73,34 @@ namespace UFG
 
 	/* Functions */
 
-	SDK_SINLINE void* qMalloc(u64 size, const char* name = "Global New", u64 allocation_params = 0) { 
+	SDK_INLINE void* qMalloc(u64 size, const char* name = SDK_VAR(const char*, 0x16A8A58) /* Global New */, u64 allocation_params = 0) {
 		return SDK_CALL_FUNC(void*, 0x187BE0, u64, const char*, u64)(size, name, allocation_params);
 	}
 
-	SDK_SINLINE void qFree(void* ptr) { gMainMemoryPool->Free(ptr); }
+	/*	This is replacement for "operator new" to allocate new class directly in game memory pool.
+	*	Using this is straight forward just use qNew<Class_Name>(arguments)
+	*	For deleleting the new allocated class use 'qDelete' or 'qFree' if you don't want to call destructor.
+	*/
+	template <typename T, typename... Args>
+	SDK_INLINE T* qNew(Args&&... args)
+	{
+		void* mem = qMalloc(sizeof(T));
+		if (mem) {
+			new (mem) T(args...);
+		}
+
+		return reinterpret_cast<T*>(mem);
+	}
+
+	SDK_INLINE void qFree(void* ptr) { gMainMemoryPool->Free(ptr); }
+
+	template <typename T>
+	SDK_INLINE void qDelete(T* obj)
+	{
+		if (obj)
+		{
+			obj->~T();
+			qFree(obj);
+		}
+	}
 }
