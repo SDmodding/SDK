@@ -80,8 +80,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/treerb64.hh"
 #include "quark/offset.hh"
 #include "quark/colour.hh"
+#include "quark/noise.hh"
 #include "quark/math.hh"
+#include "quark/extramath.hh"
 #include "quark/process.hh"
+#include "quark/beziercurve.hh"
+#include "quark/spline.hh"
 
 #include "quark/internal/allocator.hh"
 
@@ -97,6 +101,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/memorypool.hh"
 #include "quark/vramemorypool.hh"
 #include "quark/memorystream.hh"
+
+#include "quark/averagewindow.hh"
+#include "quark/pidcontroller.hh"
 
 #include "quark/task.hh"
 #include "quark/reflection.hh"
@@ -142,6 +149,24 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
+
+//--------------------------------------------------
+//	Agog Core
+//--------------------------------------------------
+
+#include "agogcore/astringref.hh"
+#include "agogcore/astring.hh"
+#include "agogcore/asymbol.hh"
+#include "agogcore/anamed.hh"
+#include "agogcore/aidptr.hh"
+#include "agogcore/alist.hh"
+#include "agogcore/aparraybase.hh"
+#include "agogcore/apsizedarraybase.hh"
+#include "agogcore/aparray.hh"
+#include "agogcore/apcompactarray.hh"
+#include "agogcore/arefcount.hh"
+#include "agogcore/arefptr.hh"
+#include "agogcore/apsorted.hh"
 
 //--------------------------------------------------
 //	Input
@@ -295,6 +320,30 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "propertyset/propertysetwrapper.hh"
 
 //--------------------------------------------------
+//	Skookum Script
+//--------------------------------------------------
+
+#include "skookumscript/sstyped.hh"
+#include "skookumscript/ssclassdescbase.hh"
+#include "skookumscript/ssqualifier.hh"
+#include "skookumscript/ssparameterbase.hh"
+#include "skookumscript/ssparameters.hh"
+#include "skookumscript/ssobjectbase.hh"
+#include "skookumscript/ssinstance.hh"
+#include "skookumscript/ssdatainstance.hh"
+#include "skookumscript/ssactor.hh"
+#include "skookumscript/ssinvokablebase.hh"
+#include "skookumscript/ssexpressionbase.hh"
+#include "skookumscript/ssidentifier.hh"
+#include "skookumscript/ssinvocation.hh"
+#include "skookumscript/sscoroutine.hh"
+#include "skookumscript/ssmethod.hh"
+#include "skookumscript/ssobjectid.hh"
+#include "skookumscript/ssclass.hh"
+#include "skookumscript/ssinvokedbase.hh"
+#include "skookumscript/ssinvokedcoroutine.hh"
+
+//--------------------------------------------------
 //	Skookum
 //--------------------------------------------------
 
@@ -337,6 +386,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "schema/schema_health.hh"
+#include "schema/schema_physicsmover.hh"
 
 //--------------------------------------------------
 //	Physics
@@ -349,6 +399,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/destructionbase.hh"
 #include "physics/objectproperties.hh"
 #include "physics/collisionmesh.hh"
+#include "physics/sensorphantom.hh"
 #include "physics/statemachine.hh"
 #include "physics/sweptspherequery.hh"
 #include "physics/bulletmanager.hh"
@@ -357,6 +408,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/vehicleinput.hh"
 #include "physics/physicsvehicledna.hh"
+
+//--------------------------------------------------
+//	Road Network
+//--------------------------------------------------
+
+#include "roadnetwork/roadnetworknode.hh"
+#include "roadnetwork/roadnetworkspawnpoint.hh"
 
 //--------------------------------------------------
 //	Sim
@@ -383,6 +441,18 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/components/rigidbodycomponent.hh"
 
 #include "physics/physicsvehicle.hh"
+
+//--------------------------------------------------
+//	Vehicles
+//--------------------------------------------------
+
+#include "vehicles/tempvehicletunables.hh"
+
+#include "vehicles/ai/vehiclecombatstats.hh"
+
+#include "vehicles/components/vehicledrivercomponent.hh"
+#include "vehicles/components/aidrivercomponent.hh"
+#include "vehicles/components/vehiclemovercomponent.hh"
 
 //--------------------------------------------------
 //	Effects

@@ -7,5 +7,7 @@ namespace UFG
 	{
 	public:
 		T array[N];
+
+		SDK_INLINE T& operator[](int index) { return array[index]; }
 	};
 }

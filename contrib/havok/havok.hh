@@ -18,6 +18,7 @@ struct hkContainerHeapAllocator;
 #include "Common/Reflection/hkClassNameRegistry.hh"
 
 #include "Common/hkMath.hh"
+#include "Common/Types/hkMotionState.hh"
 
 #include "Common/Container/hkArray.hh"
 #include "Common/Container/hkSmallArray.hh"
@@ -66,6 +67,9 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Collide/Shape/hkpShapeBase.hh"
 #include "Physics2012/Collide/Shape/hkpShape.hh"
 #include "Physics2012/Collide/Shape/hkpShapeContainer.hh"
+#include "Physics2012/Collide/Shape/hkpSphereRepShape.hh"
+#include "Physics2012/Collide/Shape/hkpConvexShape.hh"
+#include "Physics2012/Collide/Shape/hkpSphereShape.hh"
 #include "Physics2012/Collide/Shape/hkpBvTreeShape.hh"
 #include "Physics2012/Collide/Shape/hkpMoppBvTreeShape.hh"
 
@@ -79,6 +83,10 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Dynamics/World/hkpSimulation.hh"
 #include "Physics2012/Dynamics/World/hkpSimulationIsland.hh"
 #include "Physics2012/Dynamics/World/hkpWorldObject.hh"
+
+#include "Physics2012/Dynamics/Phantom/hkpPhantom.hh"
+#include "Physics2012/Dynamics/Phantom/hkpShapePhantom.hh"
+#include "Physics2012/Dynamics/Phantom/hkpSimpleShapePhantom.hh"
 
 #include "Physics2012/Dynamics/hkpAction.hh"
 #include "Physics2012/Dynamics/hkpUnaryAction.hh"

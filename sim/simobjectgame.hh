@@ -154,6 +154,13 @@ namespace UFG
 	class SimObjectCVBase : public SimObjectGame
 	{
 	public:
+		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
+			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
+		}
+
+		SDK_INLINE AiDriverComponent* GetAiDriver() { 
+			return GetComponent<AiDriverComponent, CVBase_VehicleDriverInterface>(); 
+		}
 	};
 
 	//------------------------------------------------------------------------------
@@ -163,7 +170,7 @@ namespace UFG
 	class SimObjectCharacter : public SimObjectCVBase
 	{
 	public:
-		SDK_INLINE CharacterOccupantComponent* GetCharacterOccupant() {
+		SDK_INLINE CharacterOccupantComponent* GetCharacterOccupant() { 
 			return GetComponent<CharacterOccupantComponent, Character_CharacterOccupantComponent>();
 		}
 	};
@@ -175,7 +182,7 @@ namespace UFG
 	class SimObjectVehicle : public SimObjectCVBase
 	{
 	public:
-		SDK_INLINE VehicleOccupantComponent* GetVehicleOccupant() {
+		SDK_INLINE VehicleOccupantComponent* GetVehicleOccupant() { 
 			return GetComponent<VehicleOccupantComponent, Vehicle_VehicleOccupantComponent>();
 		}
 	};

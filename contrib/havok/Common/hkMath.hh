@@ -2,6 +2,18 @@
 
 class hkMatrix3f;
 
+class hkUFloat8
+{
+public:
+	i8 m_value;
+};
+
+class hkHalf
+{
+public:
+	i16 m_value;
+};
+
 class hkVector4f
 {
 public:
@@ -49,4 +61,14 @@ public:
 	hkVector4f m_translation;
 	hkQuaternionf m_rotation;
 	hkVector4f m_scale;
+};
+
+class hkSweptTransformf
+{
+public:
+	hkVector4f m_centerOfMass0;
+	hkVector4f m_centerOfMass1;
+	hkQuaternionf m_rotation0;
+	hkQuaternionf m_rotation1;
+	hkVector4f m_centerOfMassLocal;
 };
