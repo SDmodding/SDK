@@ -255,6 +255,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/binarray.hh"
 #include "actiontree/binptrarray.hh"
 #include "actiontree/binstring.hh"
+#include "actiontree/tracksenum.hh"
 
 //--------------------------------------------------
 //	UEL
@@ -357,6 +358,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "objectresourcemanagement/truecrowddatabase.hh"
 
 //--------------------------------------------------
+//	Spawning
+//--------------------------------------------------
+
+#include "spawning/spawninterface.hh"
+
+//--------------------------------------------------
 //	Progression
 //--------------------------------------------------
 
@@ -366,6 +373,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/gamestat/gamestatdefinitions.hh"
 #include "progression/gamestat/gamestattracker.hh"
 #include "progression/gamestat/gamesaveload.hh"
+
+#include "progression/upgrades/storefronttracker.hh"
 
 //--------------------------------------------------
 //	Flow Control
@@ -507,7 +516,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Spawning
 //--------------------------------------------------
 
-#include "spawning/spawninterface.hh"
 #include "spawning/parkingspot.hh"
 
 //--------------------------------------------------

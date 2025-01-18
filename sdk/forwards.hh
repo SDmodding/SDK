@@ -24,6 +24,7 @@ namespace UFG
 	class HitReactionComponent;
 	class PhysicsMoverInterface;
 	class RoadSpaceComponent;
+	class StreamedResourceComponent;
 	class TransformNodeComponent;
 	class VehicleAudioComponent;
 	class VehicleDriverInterface;
