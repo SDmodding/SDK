@@ -356,6 +356,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "objectresourcemanagement/resourcerequest.hh"
 #include "objectresourcemanagement/truecrowddatabase.hh"
+#include "objectresourcemanagement/meshresourceloader.hh"
 
 //--------------------------------------------------
 //	Spawning
