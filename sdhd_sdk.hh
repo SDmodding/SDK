@@ -129,18 +129,26 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/vertexdecl.hh"
 #include "illusion/primitive.hh"
 #include "illusion/state.hh"
+
+#include "illusion/shader.hh"
+#include "illusion/shadertemplate.hh"
+#include "illusion/illusionuser/shaderuser.hh"
+
 #include "illusion/renderstate.hh"
 
-#include "illusion/textureuser.hh"
+#include "illusion/illusionuser/textureuser.hh"
 #include "illusion/texture.hh"
+#include "illusion/rtexture.hh"
 
 #include "illusion/pc/targetplat.hh"
 #include "illusion/target.hh"
 
 #include "illusion/material.hh"
 #include "illusion/materialmodifier.hh"
+#include "illusion/rmaterial.hh"
 
 #include "illusion/model.hh"
+#include "illusion/rmodel.hh"
 
 #include "illusion/pc/unorderedaccessplat.hh"
 #include "illusion/unorderedaccess.hh"
@@ -359,6 +367,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "objectresourcemanagement/meshresourceloader.hh"
 
 //--------------------------------------------------
+//	Part Database
+//--------------------------------------------------
+
+#include "partdatabase/parttypes.hh"
+#include "partdatabase/partdatabase.hh"
+#include "partdatabase/partloader.hh"
+
+//--------------------------------------------------
 //	Spawning
 //--------------------------------------------------
 
@@ -439,6 +455,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/metrics.hh"
 
 #include "sim/interfaces/updateinterface.hh"
+
+//--------------------------------------------------
+//	Model Asset
+//--------------------------------------------------
+
+#include "modelasset/modelassetdata.hh"
+#include "modelasset/modelasset.hh"
 
 //--------------------------------------------------
 //	Physics

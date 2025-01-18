@@ -2,19 +2,6 @@
 
 namespace Illusion
 {
-	namespace eRenderPass /* Unknown where this should be placed at. */
-	{
-		enum Enum : s32
-		{
-			Custom = -1,
-			Solid = 0,
-			Decal,
-			FeatherPunchThru,
-			Depth,
-			MAX_PASSES
-		};
-	}
-
 	class ShaderSelector
 	{
 	public:

@@ -7,6 +7,8 @@ namespace UFG
 {
 	class CameraSubject;
 
+	class ModelAsset;
+
 	class SimObject;
 	class SimObjectCharacter;
 	class SimObjectVehicle;

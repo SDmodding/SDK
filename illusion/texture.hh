@@ -28,4 +28,6 @@ namespace Illusion
 		UFG::qResourceFileHandle mTextureDataHandle;
 	};
 	SDK_ASSERT_SIZEOF(Texture, 0xC8);
+
+	class TextureHandle : public UFG::qTypedResourceHandle<RTypeUID_Texture, Texture>{};
 }

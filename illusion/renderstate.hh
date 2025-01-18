@@ -75,4 +75,42 @@ namespace Illusion
 	SDK_ASSERT_SIZEOF(RasterState, 0x80);
 
 	class RasterStateHandle : UFG::qTypedResourceHandle<RTypeUID_RasterState, RasterState> {};
+
+	// Unknown where this should be placed at.
+	namespace eRenderPass 
+	{
+		enum Enum : s32
+		{
+			Custom = -1,
+			Solid = 0,
+			Decal,
+			FeatherPunchThru,
+			Depth,
+			MAX_PASSES
+		};
+
+		class CustomRenderPass
+		{
+		public:
+			class StaticPassData* mStaticPassData;
+			ShaderHandle mShaderHandle;
+			AlphaStateHandle mAlphaStateHandle;
+			RasterStateHandle mRasterStateHandle;
+		};
+
+		class PassData
+		{
+		public:
+			AlphaStateHandle mAlphaStateHandle;
+			RasterStateHandle mRasterStateHandle;
+			bool mIsActive;
+		};
+
+		class StaticPassData
+		{
+		public:
+			ShaderHandle mShaderHandle[4];
+			CustomRenderPass* mCustomRenderPass;
+		};
+	}
 }
