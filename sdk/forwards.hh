@@ -9,6 +9,8 @@ namespace UFG
 
 	class ModelAsset;
 
+	class ParkingSpot;
+
 	class SimObject;
 	class SimObjectCharacter;
 	class SimObjectVehicle;

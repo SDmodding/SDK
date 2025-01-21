@@ -22,6 +22,8 @@ namespace UFG
 		qOffset64<qOffset64<RoadNetworkLane*>*> mLaneList;
 		qOffset64<RoadNetworkConnection*> mConnection;
 		qOffset64<RoadNetworkGate*> mGate;
+
+		void GetValidLanes(u32 laneFlags, qArray<u32>& laneIDs) { SDK_CALL_FUNC(void, 0xDC5C0, void*, u32, qArray<u32>&)(this, laneFlags, laneIDs); }
 	};
 
 	class RoadNetworkGate
@@ -37,6 +39,17 @@ namespace UFG
 		u32 mNumOutgoingConnections;
 		qOffset64<qOffset64<RoadNetworkConnection*>*> mOutgoingConnection;
 		RoadNetworkSpawnPoint* mSpawnPoint;
+
+		/* Functions */
+
+		RoadNetworkLane* GetAnyLaneLeadingHereFromNode(RoadNetworkNode* targetNode) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD5A00, void*, RoadNetworkNode*)(this, targetNode); }
+		RoadNetworkLane* GetAnyLaneLeadingToNode(RoadNetworkNode* targetNode) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD5B30, void*, RoadNetworkNode*)(this, targetNode); }
+		RoadNetworkLane* GetFirstOutgoingLaneLeadingToNode(RoadNetworkNode* targetNode) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD8840, void*, RoadNetworkNode*)(this, targetNode); }
+		RoadNetworkConnection* GetIncomingConnection(u32 index) { return SDK_CALL_FUNC(RoadNetworkConnection*, 0xD8D80, void*, u32)(this, index); }
+		void GetLanesLeadingToNode(RoadNetworkNode* targetNode, RoadNetworkLane** laneList, u32* numLanes, u32 maxLanes, u32 laneFlags) { 
+			SDK_CALL_FUNC(void, 0xD9D40, void*, RoadNetworkNode*, RoadNetworkLane**, u32*, u32, u32)(this, targetNode, laneList, numLanes, maxLanes, laneFlags);
+		}
+		RoadNetworkConnection* GetOutgoingConnection(u32 index) { return SDK_CALL_FUNC(RoadNetworkConnection*, 0xDB330, void*, u32)(this, index); }
 	};
 
 	class RoadNetworkNode
@@ -81,6 +94,31 @@ namespace UFG
 		qOffset64<qOffset64<RoadNetworkConnection*>*> mIncomingConnections;
 		qOffset64<qOffset64<RoadNetworkConnection*>*> mOutgoingConnections;
 		qList<RoadNetworkNodeModification> mModifications;
+
+		/* Impl Functions */
+
+		SDK_INLINE u32 GetCenterLaneIndex() { return (mNumLanes - 1) / 2; }
+
+		/* Functions*/
+
+		RoadNetworkNodeModification* AddChangeLaneFlagsModification(qArray<u32>& laneFlags) { return SDK_CALL_FUNC(RoadNetworkNodeModification*, 0xD1740, void*, qArray<u32>&)(this, laneFlags); }
+		void ApplyAllModifications() { SDK_CALL_FUNC(void, 0xD2370, void*)(this); }
+		RoadNetworkLane* GetCenterLane() { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD5EA0, void*)(this); }
+		RoadNetworkLane* GetClosestLane(const qVector3& pos) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD69B0, void*, const qVector3&)(this, pos); }
+		qVector3 GetClosestPosition(const qVector3& pos, f32* nearestT = 0) { return SDK_CALL_FUNC(qVector3, 0xD70B0, void*, const qVector3&, f32*)(this, pos, nearestT); }
+		f32 GetClosestT(u32 laneIndex, const qVector3& position) { return SDK_CALL_FUNC(f32, 0xD81D0, void*, u32, const qVector3&)(this, laneIndex, position); }
+		RoadNetworkLane* GetLane(const u32 index) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD94E0, void*, const u32)(this, index); }
+		qVector3 GetNearestPos(const qVector3& pos, RoadNetworkLane** nearestLane, f32& nearestT) { 
+			return SDK_CALL_FUNC(qVector3, 0xDAA30, void*, const qVector3&, RoadNetworkLane**, f32&)(this, pos, nearestLane, nearestT);
+		}
+		qVector3 GetNearestPos(const qVector3& pos, const qVector3& _heading, RoadNetworkLane** nearestLane, f32& nearestT) {
+			return SDK_CALL_FUNC(qVector3, 0xDA430, void*, const qVector3&, const qVector3&, RoadNetworkLane**, f32&)(this, pos, _heading, nearestLane, nearestT);
+		}
+		qVector3 GetPos(u32 laneIndex, f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDB470, void*, u32, f32)(this, laneIndex, laneT); }
+		qVector3 GetTangent(u32 laneIndex, f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDC020, void*, u32, f32)(this, laneIndex, laneT); }
+		bool IsConnectedToNode(RoadNetworkNode* roadNode) { return SDK_CALL_FUNC(bool, 0xDE3D0, void*, RoadNetworkNode*)(this, roadNode); }
+		bool IsWater() { return SDK_CALL_FUNC(bool, 0xDEF20, void*)(this); }
+		void RemoveModification(RoadNetworkNodeModification* modification) { SDK_CALL_FUNC(void, 0xE0000, void*, RoadNetworkNodeModification*)(this, modification); }
 	};
 
 	class RoadNetworkLane
@@ -92,6 +130,13 @@ namespace UFG
 			RightLane,
 			LeftLane,
 			EitherLane
+		};
+
+		enum LaneTurnDirection
+		{
+			Straight,
+			LeftTurn,
+			RightTurn
 		};
 
 		enum LaneFlags
@@ -138,6 +183,37 @@ namespace UFG
 		qOffset64<RoadNetworkConnection*> mEndConnection;
 		qOffset64<RoadNetworkConnection*> mNextConnection;
 		qList<RoadNetworkGuide> mCars;
+
+		/* Static Functions */
+
+		SDK_SINLINE qVector3 GetOffsetPos(const qBezierSplineMemImaged* spline, f32 t, f32 offset) { return SDK_CALL_FUNC(qVector3, 0xDB180, const qBezierSplineMemImaged*, f32, f32)(spline, t, offset); }
+		SDK_SINLINE bool GetOffsetPosAndTangent(const qBezierSplineMemImaged* spline, f32 t, f32 offset, qVector3& pos, qVector3& tangent) { 
+			return SDK_CALL_FUNC(bool, 0xDB270, const qBezierSplineMemImaged*, f32, f32, qVector3&, qVector3&)(spline, t, offset, pos, tangent); 
+		}
+
+		/* Impl Functions */
+
+		SDK_INLINE LaneStatus GetStatus() { return static_cast<LaneStatus>(mStatus.mValue); }
+		SDK_INLINE bool IsFlagMatch(u32 laneFlags) { return mLaneFlags & laneFlags; }
+
+		/* Functions */
+
+		void AddCarGuide(RoadNetworkGuide* guide, bool spawned) { SDK_CALL_FUNC(void, 0xD1640, void*, RoadNetworkGuide*, bool)(this, guide, spawned); }
+		f32 CalculateParkingOffset(const qVector3& position) { return SDK_CALL_FUNC(f32, 0xD2DA0, void*, const qVector3&)(this, position); }
+		RoadNetworkGuide* GetClosestCarToStart() { return SDK_CALL_FUNC(RoadNetworkGuide*, 0xD5F50, void*)(this); }
+		f32 GetClosestT(const qVector3& pos) { return SDK_CALL_FUNC(f32, 0xD8160, void*, const qVector3&)(this, pos); }
+		LaneChangeDirection GetLaneDirection(RoadNetworkLane* otherLane) { return SDK_CALL_FUNC(LaneChangeDirection, 0xD9510, void*, RoadNetworkLane*)(this, otherLane); }
+		f32 GetLength() { return SDK_CALL_FUNC(f32, 0xD9EE0, void*)(this); }
+		qVector3 GetNearestPoint(const qVector3& pos, f32* laneT = 0) { return SDK_CALL_FUNC(qVector3, 0xDA3C0, void*, const qVector3&, f32*)(this, pos, laneT); }
+		u32 GetNumberOfCarsInLaneAheadOfDistance(f32 d) { return SDK_CALL_FUNC(u32, 0xDAF70, void*, f32)(this, d); }
+		qVector3 GetOffsetPos(f32 t, f32 offset) { return SDK_CALL_FUNC(qVector3, 0xDB0D0, void*, f32, f32)(this, t, offset); }
+		qVector3 GetPos(f32 t) { return SDK_CALL_FUNC(qVector3, 0xDB360, void*, f32)(this, t); }
+		bool GetPosAndTangent(f32 t, qVector3& pos, qVector3& tangent) { return SDK_CALL_FUNC(bool, 0xDB4C0, void*, f32, qVector3&, qVector3&)(this, t, pos, tangent); }
+		qVector3 GetPosNoOffset(f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDB570, void*, f32)(this, laneT); }
+		LaneTurnDirection GetTurnDirection() { return SDK_CALL_FUNC(LaneTurnDirection, 0xDC430, void*)(this); }
+		bool IsPermissive(bool checkCurrentPhaseOnly) { return SDK_CALL_FUNC(bool, 0xDE7A0, void*, bool)(this, checkCurrentPhaseOnly); }
+		bool IsReversedInNode() { return SDK_CALL_FUNC(bool, 0xDE8A0, void*)(this); }
+		bool LaneChangeAvailable(u32* whichLanes) { return SDK_CALL_FUNC(bool, 0xDF350, void*, u32*)(this, whichLanes); }
 	};
 
 	class RoadNetworkSegment : public RoadNetworkNode
@@ -165,6 +241,23 @@ namespace UFG
 		qVector3 mMax;
 		f32 mSpeedLimit;
 		RoadSegmentBits mBits;
+
+		/* Functions */
+
+		void AddParkingSpot(ParkingSpot* spot) { SDK_CALL_FUNC(void, 0xD1CC0, void*, ParkingSpot*)(this, spot); }
+		void CreateSubSegments() { SDK_CALL_FUNC(void, 0xD3F00, void*)(this); }
+		qPropertySet* GetAdditionalRoadPropertySet() { return SDK_CALL_FUNC(qPropertySet*, 0xD5950, void*)(this); }
+		RoadNetworkLane* GetClosestLaneToCenter(u32 index) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD69F0, void*, u32)(this, index); }
+		RoadNetworkSubSegment* GetClosestSubSegment(RoadNetworkGate* gate) { return SDK_CALL_FUNC(RoadNetworkSubSegment*, 0xD80C0, void*, RoadNetworkGate*)(this, gate); }
+		RoadNetworkSubSegment* GetClosestSubSegment(const qVector3& position) { return SDK_CALL_FUNC(RoadNetworkSubSegment*, 0xD7E20, void*, const qVector3&)(this, position); }
+		f32 GetMatchingT(const u32 laneIndex, double t, const u32 otherLaneIndex) { return SDK_CALL_FUNC(f32, 0xD9F20, void*, const u32, double, const u32)(this, laneIndex, t, otherLaneIndex); }
+		f32 GetRoadDensity() { return SDK_CALL_FUNC(f32, 0xDB6B0, void*)(this); }
+		RoadNetworkNode::RoadNetworkType GetRoadNetworkType() { return SDK_CALL_FUNC(RoadNetworkNode::RoadNetworkType, 0xDB850, void*)(this); }
+		qPropertySet* GetRoadPropertySet() { return SDK_CALL_FUNC(qPropertySet*, 0xDB8A0, void*)(this); }
+		f32 GetTFromDistance(RoadNetworkLane* lane, f32 distance, f32 beginT, bool forward) { return SDK_CALL_FUNC(f32, 0xDBF30, void*, RoadNetworkLane*, f32, f32, bool)(this, lane, distance, beginT, forward); }
+		bool IsWater() { return SDK_CALL_FUNC(bool, 0xDEFA0, void*)(this); }
+		void RecalculateLaneOffset(u32 laneIndex) { SDK_CALL_FUNC(void, 0xDF800, void*, u32)(this, laneIndex); }
+		void SetBitsFromRoadPropertySet() { SDK_CALL_FUNC(void, 0xE0200, void*)(this); }
 	};
 
 	class RoadNetworkSubSegment : public qNode<RoadNetworkSubSegment>
@@ -191,6 +284,18 @@ namespace UFG
 		f32* mBeginTCollection;
 		f32* mEndTCollection;
 		u16 mNumParkingSpots;
-		qList<class ParkingSpot> mParkingSpotCollection;
+		qList<ParkingSpot> mParkingSpotCollection;
+
+		/* Impl Functions */
+
+		SDK_INLINE f32 GetBeginT(u32 laneIndex) { return mBeginTCollection[laneIndex]; }
+		SDK_INLINE f32 GetEndT(u32 laneIndex) { return mEndTCollection[laneIndex]; }
+
+		/* Functions */
+
+		void GetAvailableParkingSpots(qArray<ParkingSpot*>& availableParkingSpots) { SDK_CALL_FUNC(void, 0xD5CB0, void*, qArray<ParkingSpot*>&)(this, availableParkingSpots); }
+		void GetGatesConnectedToSubSegment(qArray<RoadNetworkGate*>& gateCollection) { SDK_CALL_FUNC(void, 0xD8DB0, void*, qArray<RoadNetworkGate*>&)(this, gateCollection); }
+		u32 GetNumAvailableParkingSpots() { return SDK_CALL_FUNC(u32, 0xDAF00, void*)(this); }
+		bool IsWithinSubSegment(RoadNetworkLane* roadLane, f32 laneT) { return SDK_CALL_FUNC(bool, 0xDF000, void*, RoadNetworkLane*, f32)(this, roadLane, laneT); }
 	};
 }
