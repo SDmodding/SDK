@@ -41,7 +41,6 @@ namespace UFG
 		T mValue;
 	};
 
-
 	template <typename T, typename U = T>
 	class qSNode
 	{

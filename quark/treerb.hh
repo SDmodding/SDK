@@ -17,6 +17,8 @@ namespace UFG
 	{
 	public:
 		qBaseNodeRB mNode;
+
+		SDK_INLINE T* Get() { return (this ? static_cast<T*>(this) : reinterpret_cast<T*>(nullptr)); }
 	};
 
 	class qBaseTreeRB
@@ -37,9 +39,11 @@ namespace UFG
 
 		bool Contains(qBaseNodeRB* node) { return SDK_CALL_FUNC(bool, 0x16A9E0, void*, qBaseNodeRB*)(this, node); }
 
-		qBaseTreeRB* Get(u32 uid) { return SDK_CALL_FUNC(qBaseTreeRB*, 0x16EFB0, void*, u32)(this, uid); }
+		qBaseNodeRB* Get(u32 uid) { return SDK_CALL_FUNC(qBaseNodeRB*, 0x16EFB0, void*, u32)(this, uid); }
 
-		qBaseTreeRB* GetNext(qBaseNodeRB* x) { return SDK_CALL_FUNC(qBaseTreeRB*, 0x171440, void*, qBaseNodeRB*)(this, x); }
+		qBaseNodeRB* GetHead() { return SDK_CALL_FUNC(qBaseNodeRB*, 0x2C3100, void*)(this); }
+
+		qBaseNodeRB* GetNext(qBaseNodeRB* x) { return SDK_CALL_FUNC(qBaseNodeRB*, 0x171440, void*, qBaseNodeRB*)(this, x); }
 
 		qBaseNodeRB* GetTail() { return SDK_CALL_FUNC(qBaseNodeRB*, 0x1725F0, void*)(this); }
 	};
@@ -58,10 +62,12 @@ namespace UFG
 
 		SDK_INLINE bool Contains(qNodeRB<T>* node) { return mTree.Contains(&node->mNode); }
 
-		SDK_INLINE T* Get(u32 uid) { return reinterpret_cast<T*>(mTree.Get(uid)); }
+		SDK_INLINE T* Get(u32 uid) { return reinterpret_cast<qNodeRB<T>*>(mTree.Get(uid))->Get(); }
 
-		SDK_INLINE T* GetNext(qNodeRB<T>* x) { return reinterpret_cast<T*>(mTree.GetNext(&x->mNode)); }
+		SDK_INLINE T* GetHead() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetHead())->Get(); }
 
-		SDK_INLINE T* GetTail() { return reinterpret_cast<T*>(mTree.GetTail()); }
+		SDK_INLINE T* GetNext(qNodeRB<T>* x) { return reinterpret_cast<qNodeRB<T>*>(mTree.GetNext(&x->mNode))->Get(); }
+
+		SDK_INLINE T* GetTail() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetTail())->Get(); }
 	};
 }
