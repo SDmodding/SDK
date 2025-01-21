@@ -58,6 +58,8 @@ namespace UFG
 	class PhysicsMoverInterface : public SimComponent, public UpdateInterface, public qNode<PhysicsMoverInterface>
 	{
 	public:
+		enum { _TypeUID = 0xE4000001 };
+
 		enum DamageType
 		{
 			dtWORLD_COLLISION,

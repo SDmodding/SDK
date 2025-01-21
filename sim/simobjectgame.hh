@@ -185,5 +185,9 @@ namespace UFG
 		SDK_INLINE VehicleOccupantComponent* GetVehicleOccupant() { 
 			return GetComponent<VehicleOccupantComponent, Vehicle_VehicleOccupantComponent>();
 		}
+
+		SDK_INLINE PhysicsMoverInterface* GetPhysicsMoverInterface() {
+			return GetComponent<PhysicsMoverInterface, Vehicle_PhysicsMoverInterface>();
+		}
 	};
 }
