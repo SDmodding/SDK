@@ -30,9 +30,11 @@ namespace UFG
 	class RoadSpaceComponent;
 	class StreamedResourceComponent;
 	class TransformNodeComponent;
+	class TriadWarsComponent;
 	class VehicleAudioComponent;
 	class VehicleDriverInterface;
 	class VehicleEffectsComponent;
 	class VehicleOccupantComponent;
 	class VehicleSubjectComponent;
+	class UELComponent;
 }

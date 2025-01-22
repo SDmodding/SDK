@@ -35,6 +35,18 @@ namespace fastdelegate
 		};
 	}
 
+	template<class RetType = void>
+	class FastDelegate0
+	{
+	public:
+		typedef typename void DesiredRetType;
+		typedef DesiredRetType(*StaticFunctionPtr)();
+		typedef RetType(*UnvoidStaticFunctionPtr)();
+		typedef RetType(detail::GenericClass::* GenericMemFn)();
+		typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
+		ClosureType m_Closure;
+	};
+
 	template <class Param1, class RetType = void>
 	class FastDelegate1
 	{

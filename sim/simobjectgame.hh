@@ -154,6 +154,10 @@ namespace UFG
 	class SimObjectCVBase : public SimObjectGame
 	{
 	public:
+		SDK_INLINE UELComponent* GetUEL() {
+			return GetComponent<UELComponent, CVBase_UELComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

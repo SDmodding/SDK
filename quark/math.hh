@@ -7,7 +7,7 @@ namespace UFG
 	public:
 		f32 x, y;
 
-		constexpr qVector2() {}
+		qVector2() {}
 		SDK_INLINE qVector2(f32 f) : x(f), y(f) {}
 		SDK_INLINE qVector2(f32 fX, f32 fY) : x(fX), y(fY) {}
 	};
@@ -17,7 +17,7 @@ namespace UFG
 	public:
 		f32 x, y, z;
 
-		constexpr qVector3() {}
+		qVector3() {}
 		SDK_INLINE qVector3(f32 f) : x(f), y(f), z(f) {}
 		SDK_INLINE qVector3(f32 f0, f32 f1, f32 f2) : x(f0), y(f1), z(f2) {}
 	};
@@ -27,7 +27,7 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		constexpr qVector4() {}
+		qVector4() {}
 		SDK_INLINE qVector4(f32 f) : x(f), y(f), z(f), w(f) {}
 		SDK_INLINE qVector4(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 	};
@@ -43,7 +43,7 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		constexpr qQuaternion() {}
+		qQuaternion() {}
 		SDK_INLINE qQuaternion(f32 f) : x(f), y(f), z(f), w(f) {}
 		SDK_INLINE qQuaternion(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 		SDK_INLINE qQuaternion(const qVector4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}

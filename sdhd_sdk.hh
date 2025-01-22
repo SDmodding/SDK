@@ -270,6 +270,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "uel/uel.hh"
+#include "uel/parameterdeclarations.hh"
 
 //--------------------------------------------------
 //	Expression
@@ -455,6 +456,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/metrics.hh"
 
 #include "sim/interfaces/updateinterface.hh"
+
+//--------------------------------------------------
+//	UEL
+//--------------------------------------------------
+
+#include "uel/component.hh"
 
 //--------------------------------------------------
 //	Model Asset
