@@ -13,6 +13,7 @@ namespace UFG
 	class qSafePointer : public qSafePointerBase<T>
 	{
 	public:
+		SDK_INLINE U* operator->() { return reinterpret_cast<U*>(this->m_pPointer); }
 	};
 
 	template <typename T>

@@ -22,12 +22,14 @@ namespace UFG
 	class AiDriverComponent;
 	class ActionTreeComponent;
 	class ActiveAIEntityComponent;
+	class AIScriptInterfaceComponent;
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
 	class HealthComponent;
 	class HitReactionComponent;
 	class PhysicsMoverInterface;
 	class RoadSpaceComponent;
+	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
 	class StreamedResourceComponent;
 	class TransformNodeComponent;

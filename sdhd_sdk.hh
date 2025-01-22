@@ -297,6 +297,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	AI
 //--------------------------------------------------
 
+#include "ai/aibasics.hh"
 #include "ai/faction.hh"
 #include "ai/awareness/awarenessprofileanimation.hh"
 
@@ -575,6 +576,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/encounters/encounterbase.hh"
 
 #include "ai/cops/copsystem.hh"
+#include "ai/aiscriptinterfacecomponent.hh"
 
 //--------------------------------------------------
 //	UI

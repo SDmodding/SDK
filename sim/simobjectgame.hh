@@ -166,6 +166,14 @@ namespace UFG
 			return GetComponent<TSActorComponent, CVBase_TSActorComponent>();
 		}
 
+		SDK_INLINE AIScriptInterfaceComponent* GetAIScriptInterface() {
+			return GetComponent<AIScriptInterfaceComponent, CVBase_AIScriptInterfaceComponent>();
+		}
+
+		SDK_INLINE HealthComponent* GetHealth() {
+			return GetComponent<HealthComponent, CVBase_HealthComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
