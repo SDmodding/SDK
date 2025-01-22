@@ -13,6 +13,12 @@ public:
 };
 SDK_ASSERT_SIZEOF(ITrack, 0x38);
 
+template <typename T>
+class Track : public ITrack
+{
+public:
+};
+
 class TrackGroup : public Expression::IMemberMap
 {
 public:

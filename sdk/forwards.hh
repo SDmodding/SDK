@@ -28,6 +28,7 @@ namespace UFG
 	class HitReactionComponent;
 	class PhysicsMoverInterface;
 	class RoadSpaceComponent;
+	class SimObjectPropertiesComponent;
 	class StreamedResourceComponent;
 	class TransformNodeComponent;
 	class TriadWarsComponent;

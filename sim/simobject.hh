@@ -5,6 +5,24 @@ namespace UFG
 	class ComponentIDDesc;
 	class SceneObjectProperties;
 
+	enum eSimObjectFlagEnum
+	{
+		eSIM_OBJ_FLAG_UNTARGETABLE,
+		eSIM_OBJ_FLAG_CAN_REGEN_HEALTH,
+		NUM_SIM_OBJECT_FLAGS
+	};
+
+	enum eSimObjectTypeEnum
+	{
+		eSIM_OBJ_TYPE_INVALID,
+		eSIM_OBJ_TYPE_CHARACTER,
+		eSIM_OBJ_TYPE_PICKUP,
+		eSIM_OBJ_TYPE_WEAPON,
+		eSIM_OBJ_TYPE_VEHICLE,
+		eSIM_OBJ_TYPE_INTERACTIVE_PROP,
+		NUM_SIM_OBJECT_TYPES
+	};
+
 	//-------------------------------------------------------------------
 	// Component
 	//-------------------------------------------------------------------

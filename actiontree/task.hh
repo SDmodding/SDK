@@ -15,3 +15,9 @@ public:
 	virtual void End() = 0;
 };
 SDK_ASSERT_SIZEOF(ITask, 0x28);
+
+template <typename>
+class Task : public ITask
+{
+public:
+};

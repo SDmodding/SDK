@@ -507,9 +507,18 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "gamestate/hk/pedspawnmanager.hh"
 
 //--------------------------------------------------
+//	Gameplay
+//--------------------------------------------------
+
+#include "gameplay/actiontree/tasksgame.hh"
+#include "gameplay/actiontree/tracksgame.hh"
+
+//--------------------------------------------------
 //	Sim Components
 //--------------------------------------------------
 
+#include "sim/components/targeting/subtargetinglocationdynamic.hh"
+#include "sim/components/targeting/subtargetingprofile.hh"
 #include "sim/components/targeting/targetingsimobject.hh"
 #include "sim/components/targeting/targetingmap.hh"
 #include "sim/components/targeting/targetingsystembasecomponent.hh"
@@ -522,6 +531,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/hitreactioncomponent.hh"
 #include "sim/components/healthcomponent.hh"
+
+#include "sim/components/simobjectpropertiescomponent.hh"
 
 //--------------------------------------------------
 //	FX

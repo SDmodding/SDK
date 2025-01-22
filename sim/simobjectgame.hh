@@ -158,6 +158,10 @@ namespace UFG
 			return GetComponent<UELComponent, CVBase_UELComponent>();
 		}
 
+		SDK_INLINE SimObjectPropertiesComponent* GetSimObjectProperties() {
+			return GetComponent<SimObjectPropertiesComponent, CVBase_SimObjectPropertiesComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
