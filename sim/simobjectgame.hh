@@ -162,6 +162,10 @@ namespace UFG
 			return GetComponent<SimObjectPropertiesComponent, CVBase_SimObjectPropertiesComponent>();
 		}
 
+		SDK_INLINE TSActorComponent* GetTSActor() {
+			return GetComponent<TSActorComponent, CVBase_TSActorComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

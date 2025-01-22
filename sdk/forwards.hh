@@ -32,6 +32,7 @@ namespace UFG
 	class StreamedResourceComponent;
 	class TransformNodeComponent;
 	class TriadWarsComponent;
+	class TSActorComponent;
 	class VehicleAudioComponent;
 	class VehicleDriverInterface;
 	class VehicleEffectsComponent;

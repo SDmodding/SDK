@@ -350,6 +350,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookumscript/ssmethod.hh"
 #include "skookumscript/ssobjectid.hh"
 #include "skookumscript/ssclass.hh"
+#include "skookumscript/ssactorclass.hh"
 #include "skookumscript/ssinvokedbase.hh"
 #include "skookumscript/ssinvokedcoroutine.hh"
 
@@ -462,6 +463,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "uel/component.hh"
+
+//--------------------------------------------------
+//	Skookum
+//--------------------------------------------------
+
+#include "skookum/tsactor.hh"
 
 //--------------------------------------------------
 //	Model Asset
