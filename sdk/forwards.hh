@@ -7,9 +7,12 @@ namespace UFG
 {
 	class CameraSubject;
 
+	class GameSlice;
 	class ModelAsset;
 
 	class ParkingSpot;
+
+	class TriggerRegion;
 
 	class SimObject;
 	class SimObjectCharacter;
@@ -27,6 +30,7 @@ namespace UFG
 	class CharacterOccupantComponent;
 	class HealthComponent;
 	class HitReactionComponent;
+	class MissionFailConditionComponent;
 	class PhysicsMoverInterface;
 	class RoadSpaceComponent;
 	class SimObjectCharacterPropertiesComponent;

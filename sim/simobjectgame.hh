@@ -178,6 +178,10 @@ namespace UFG
 			return GetComponent<ActionTreeComponent, CVBase_ActionTreeComponent>();
 		}
 
+		SDK_INLINE MissionFailConditionComponent* GetMissionFailCondition() {
+			return GetComponent<MissionFailConditionComponent, CVBase_MissionFailConditionComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

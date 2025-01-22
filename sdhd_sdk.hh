@@ -396,6 +396,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "progression/upgrades/storefronttracker.hh"
 
+#include "progression/pdatriggertracker.hh"
+#include "progression/scenesettings.hh"
+#include "progression/ssgameslice.hh"
+#include "progression/gameslice.hh"
+
 //--------------------------------------------------
 //	Flow Control
 //--------------------------------------------------
@@ -415,6 +420,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "schema/schema_health.hh"
+#include "schema/schema_missionfailcondition.hh"
 #include "schema/schema_physicsmover.hh"
 
 //--------------------------------------------------
@@ -541,6 +547,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/healthcomponent.hh"
 
 #include "sim/components/simobjectpropertiescomponent.hh"
+#include "sim/components/missionfailconditioncomponent.hh"
 
 //--------------------------------------------------
 //	FX

@@ -9,6 +9,8 @@ namespace UFG
 		u32 mCount;
 		u32 mBufferSize;
 		T** mppArray;
+
+		SDK_INLINE T* operator[](int index) { return mppArray[index]; }
 	};
 
 	template <typename T, typename U = T>
