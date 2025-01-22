@@ -174,6 +174,10 @@ namespace UFG
 			return GetComponent<HealthComponent, CVBase_HealthComponent>();
 		}
 
+		SDK_INLINE ActionTreeComponent* GetActionTree() {
+			return GetComponent<ActionTreeComponent, CVBase_ActionTreeComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
