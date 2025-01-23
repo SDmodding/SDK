@@ -47,6 +47,9 @@ struct hkContainerHeapAllocator;
 #include "animation/Rig/hkaSkeleton.hh"
 #include "animation/Rig/hkaPose.hh"
 
+#include "animation/hkaAnimation.hh"
+#include "animation/hkaAnimationBinding.hh"
+
 //------------------------------------
 //	Physics
 //------------------------------------

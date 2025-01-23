@@ -182,6 +182,10 @@ namespace UFG
 			return GetComponent<MissionFailConditionComponent, CVBase_MissionFailConditionComponent>();
 		}
 
+		SDK_INLINE BaseAnimationComponent* GetBaseAnimation() {
+			return GetComponent<BaseAnimationComponent, CVBase_BaseAnimationComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

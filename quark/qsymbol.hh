@@ -21,6 +21,7 @@ namespace UFG
 		qSymbolUC() : mUID(-1) {}
 		qSymbolUC(u32 uid) : mUID(uid) {}
 		qSymbolUC(const qSymbolUC& source) : mUID(source.mUID) {}
+		qSymbolUC(const char* pszSymbolString) { SDK_CALL_FUNC(void, 0x18DC80, void*, const char*)(this, pszSymbolString); }
 	};
 
 	class qNamed

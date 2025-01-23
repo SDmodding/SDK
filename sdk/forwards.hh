@@ -1,18 +1,29 @@
 #pragma once
 /* Declare all forwards here if they're used too many times. */
 
+class ActionContext;
+class ActionNode;
+class Attachment;
+class Creature;
+class ITask;
 class LightingSubmitTaskParams;
+class PoseDriver;
+class TrackGroup;
 
 namespace UFG
 {
 	class CameraSubject;
 
 	class GameSlice;
+	class GroundProperties;
 	class ModelAsset;
 
 	class ParkingSpot;
+	class ParkourHandle;
 
 	class TriggerRegion;
+
+	/* Sim */
 
 	class SimObject;
 	class SimObjectCharacter;
@@ -26,6 +37,7 @@ namespace UFG
 	class ActionTreeComponent;
 	class ActiveAIEntityComponent;
 	class AIScriptInterfaceComponent;
+	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
 	class HealthComponent;

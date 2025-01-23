@@ -283,9 +283,21 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "animation/weightsetdatabase.hh"
+#include "animation/attachment.hh"
+#include "animation/animationdatabase.hh"
+#include "animation/animationresource.hh"
+#include "animation/motionphase.hh"
+#include "animation/skeletalanimation.hh"
+#include "animation/blendtree.hh"
 #include "animation/riginventory.hh"
+#include "animation/riginstance.hh"
+#include "animation/riginfo.hh"
 #include "animation/skeleton.hh"
 #include "animation/skeletalpose.hh"
+#include "animation/posedrivers.hh"
+#include "animation/poserecipe.hh"
+#include "animation/posetask.hh"
+#include "animation/creature.hh"
 
 //--------------------------------------------------
 //	Wayfinder
@@ -419,6 +431,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Schema
 //--------------------------------------------------
 
+#include "schema/schema_baseanimation.hh"
 #include "schema/schema_health.hh"
 #include "schema/schema_missionfailcondition.hh"
 #include "schema/schema_physicsmover.hh"
@@ -539,6 +552,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/transformnodecomponent.hh"
 #include "sim/components/actiontreecomponent.hh"
+#include "sim/components/baseanimationcomponent.hh"
 
 #include "sim/components/vehicleoccupantcomponent.hh"
 #include "sim/components/characteroccupantcomponent.hh"
