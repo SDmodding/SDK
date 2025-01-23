@@ -186,6 +186,10 @@ namespace UFG
 			return GetComponent<BaseAnimationComponent, CVBase_BaseAnimationComponent>();
 		}
 
+		SDK_INLINE StreamedResourceComponent* GetStreamedResource() {
+			return GetComponent<StreamedResourceComponent, CVBase_StreamedResourceComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

@@ -40,6 +40,7 @@ namespace UFG
 	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
+	class CompositeDrawableComponent;
 	class HealthComponent;
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
