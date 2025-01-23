@@ -82,6 +82,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/colour.hh"
 #include "quark/noise.hh"
 #include "quark/math.hh"
+#include "quark/halfmath.hh"
 #include "quark/extramath.hh"
 #include "quark/process.hh"
 #include "quark/beziercurve.hh"
@@ -219,6 +220,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/rendercontext.hh"
 #include "render/depthoffield.hh"
 
+#include "render/skinning/skinning.hh"
+#include "render/skinning/softbody.hh"
+
 #include "render/pc/renderplat.hh"
 
 //--------------------------------------------------
@@ -298,6 +302,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "animation/poserecipe.hh"
 #include "animation/posetask.hh"
 #include "animation/creature.hh"
+#include "animation/modeldatabase.hh"
 
 //--------------------------------------------------
 //	Wayfinder
@@ -576,8 +581,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "fx/sharedpointer.hh"
 #include "fx/hardwareocclusionquery.hh"
 #include "fx/fxsimcomponent.hh"
+#include "fx/decal.hh"
 #include "fx/beam.hh"
 #include "fx/fxmanager.hh"
+
+//--------------------------------------------------
+//	Render
+//--------------------------------------------------
+
+#include "render/components/compositedrawablecomponent.hh"
 
 //--------------------------------------------------
 //	Gamescene

@@ -5,6 +5,8 @@ namespace UFG
 	class StreamedResourceComponent : public SimComponent, public qNode<StreamedResourceComponent>
 	{
 	public:
+		enum { _TypeUID = 0x72000001 };
+
 		bool mUseMeshLoader;
 		MeshResourceLoader mMeshLoader;
 		bool mResourcesBound;

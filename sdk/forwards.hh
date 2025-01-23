@@ -5,6 +5,7 @@ class ActionContext;
 class ActionNode;
 class Attachment;
 class Creature;
+class ICompositeLook;
 class ITask;
 class LightingSubmitTaskParams;
 class PoseDriver;
@@ -45,6 +46,7 @@ namespace UFG
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
 	class PhysicsMoverInterface;
+	class RigidBodyComponent;
 	class RoadSpaceComponent;
 	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
@@ -57,5 +59,7 @@ namespace UFG
 	class VehicleEffectsComponent;
 	class VehicleOccupantComponent;
 	class VehicleSubjectComponent;
+	class WaterFloatingTrackerBaseComponent;
+	class WaterFloatingTrackerComponent;
 	class UELComponent;
 }

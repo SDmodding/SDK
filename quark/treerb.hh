@@ -70,4 +70,19 @@ namespace UFG
 
 		SDK_INLINE T* GetTail() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetTail())->Get(); }
 	};
+
+	template <typename T>
+	class qMapNode32 : public qNodeRB<qMapNode32<T>>
+	{
+	public:
+		T mValue;
+	};
+
+	template <typename T>
+	class qMap
+	{
+	public:
+		qTreeRB<qMapNode32<T>> mTree;
+	};
+
 }

@@ -55,4 +55,10 @@ namespace Illusion
 		UFG::qMemoryPool* mMemoryPool;
 	};
 
+	class ModelProxy
+	{
+	public:
+		ModelHandle mModelHandle;
+		rModel* mRModel;
+	};
 }

@@ -190,6 +190,10 @@ namespace UFG
 			return GetComponent<StreamedResourceComponent, CVBase_StreamedResourceComponent>();
 		}
 
+		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
+			return GetComponent<CompositeDrawableComponent, CVBase_CompositeDrawableComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
