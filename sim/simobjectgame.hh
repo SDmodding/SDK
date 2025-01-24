@@ -206,6 +206,14 @@ namespace UFG
 			return GetComponent<CompositeDrawableComponent, CVBase_CompositeDrawableComponent>();
 		}
 
+		SDK_INLINE HitReactionComponent* GetHitReaction() {
+			return GetComponent<HitReactionComponent, CVBase_HitReactionComponent>();
+		}
+
+		SDK_INLINE EncounterUnitComponent* GetEncounterUnit() {
+			return GetComponent<EncounterUnitComponent, CVBase_EncounterUnitComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
