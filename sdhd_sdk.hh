@@ -261,6 +261,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "audio/oneshothandle.hh"
 
 //--------------------------------------------------
+//	UEL
+//--------------------------------------------------
+
+#include "uel/uel.hh"
+#include "uel/parameterdeclarations.hh"
+
+//--------------------------------------------------
 //	ActionTree (Dependencies)
 //--------------------------------------------------
 
@@ -270,21 +277,25 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/tracksenum.hh"
 
 //--------------------------------------------------
-//	UEL
-//--------------------------------------------------
-
-#include "uel/uel.hh"
-#include "uel/parameterdeclarations.hh"
-
-//--------------------------------------------------
 //	Expression
 //--------------------------------------------------
 
 #include "expression/membermap.hh"
 
 //--------------------------------------------------
+//	ActionTree (Dependencies 2)
+//--------------------------------------------------
+
+#include "actiontree/condition.hh"
+#include "actiontree/track.hh"
+#include "actiontree/task.hh"
+
+//--------------------------------------------------
 //	Animation
 //--------------------------------------------------
+
+#include "animation/actiontree/tasksanimation.hh"
+#include "animation/actiontree/tracksanimation.hh"
 
 #include "animation/weightsetdatabase.hh"
 #include "animation/attachment.hh"
@@ -337,9 +348,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "actiontree/actiontreecomponentbase.hh"
-#include "actiontree/condition.hh"
-#include "actiontree/track.hh"
-#include "actiontree/task.hh"
 #include "actiontree/actionid.hh"
 #include "actiontree/actionnode.hh"
 #include "actiontree/actioncontext.hh"
@@ -568,8 +576,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/targeting/targetingsystembasecomponent.hh"
 
 #include "sim/components/transformnodecomponent.hh"
+
 #include "sim/components/actiontreecomponent.hh"
 #include "sim/components/baseanimationcomponent.hh"
+#include "sim/components/animationlodcomponent.hh"
 
 #include "sim/components/interactioncomponent.hh"
 

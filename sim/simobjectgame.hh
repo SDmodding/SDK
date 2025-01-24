@@ -198,6 +198,10 @@ namespace UFG
 			return GetComponent<InteractableComponent, CVBase_InteractableComponent>();
 		}
 
+		SDK_INLINE AnimationLODComponent* GetAnimationLOD() {
+			return GetComponent<AnimationLODComponent, CVBase_AnimationLODComponent>();
+		}
+
 		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
 			return GetComponent<CompositeDrawableComponent, CVBase_CompositeDrawableComponent>();
 		}

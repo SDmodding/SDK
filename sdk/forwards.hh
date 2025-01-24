@@ -36,13 +36,15 @@ namespace UFG
 
 	class AiDriverComponent;
 	class AIEntityComponent;
+	class AIScriptInterfaceComponent;
 	class ActionTreeComponent;
 	class ActiveAIEntityComponent;
-	class AIScriptInterfaceComponent;
+	class AnimationLODComponent;
 	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
 	class CompositeDrawableComponent;
+	class FacialActionTreeComponent;
 	class InteractableComponent;
 	class InteractorComponent;
 	class InventoryItemComponent;
@@ -68,5 +70,6 @@ namespace UFG
 	class VehicleSubjectComponent;
 	class WaterFloatingTrackerBaseComponent;
 	class WaterFloatingTrackerComponent;
+	class WorldContextComponent;
 	class UELComponent;
 }
