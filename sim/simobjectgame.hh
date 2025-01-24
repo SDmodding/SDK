@@ -214,6 +214,10 @@ namespace UFG
 			return GetComponent<EncounterUnitComponent, CVBase_EncounterUnitComponent>();
 		}
 
+		SDK_INLINE CopUnitComponent* GetCopUnit() {
+			return GetComponent<CopUnitComponent, CVBase_CopUnitComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

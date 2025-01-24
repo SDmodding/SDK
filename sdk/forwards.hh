@@ -43,6 +43,7 @@ namespace UFG
 	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
+	class CopUnitComponent;
 	class CompositeDrawableComponent;
 	class EncounterUnitComponent;
 	class FacialActionTreeComponent;

@@ -568,6 +568,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "gameplay/actiontree/tracksgame.hh"
 
 //--------------------------------------------------
+//	AI (Encounters)
+//--------------------------------------------------
+
+#include "ai/encounters/encounterunitinfo.hh"
+#include "ai/encounters/encounterbase.hh"
+
+//--------------------------------------------------
 //	Sim Components
 //--------------------------------------------------
 
@@ -593,6 +600,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/simobjectpropertiescomponent.hh"
 #include "sim/components/missionfailconditioncomponent.hh"
+#include "sim/components/copunitcomponent.hh"
 
 //--------------------------------------------------
 //	FX
@@ -630,9 +638,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 //	AI
 //--------------------------------------------------
-
-#include "ai/encounters/encounterunitinfo.hh"
-#include "ai/encounters/encounterbase.hh"
 
 #include "ai/cops/copsystem.hh"
 #include "ai/aiscriptinterfacecomponent.hh"
