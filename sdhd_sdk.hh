@@ -443,6 +443,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "schema/schema_baseanimation.hh"
 #include "schema/schema_health.hh"
+#include "schema/schema_interactable.hh"
 #include "schema/schema_missionfailcondition.hh"
 #include "schema/schema_physicsmover.hh"
 
@@ -569,6 +570,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/transformnodecomponent.hh"
 #include "sim/components/actiontreecomponent.hh"
 #include "sim/components/baseanimationcomponent.hh"
+
+#include "sim/components/interactioncomponent.hh"
 
 #include "sim/components/vehicleoccupantcomponent.hh"
 #include "sim/components/characteroccupantcomponent.hh"

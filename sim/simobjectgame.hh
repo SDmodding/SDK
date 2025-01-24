@@ -194,6 +194,10 @@ namespace UFG
 			return GetComponent<StimulusReceiverComponent, CVBase_StimulusReceiverComponent>();
 		}
 
+		SDK_INLINE InteractableComponent* GetInteractable() {
+			return GetComponent<InteractableComponent, CVBase_InteractableComponent>();
+		}
+
 		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
 			return GetComponent<CompositeDrawableComponent, CVBase_CompositeDrawableComponent>();
 		}
@@ -214,6 +218,10 @@ namespace UFG
 	class SimObjectCharacter : public SimObjectCVBase
 	{
 	public:
+		SDK_INLINE InteractorComponent* GetInteractor() {
+			return GetComponent<InteractorComponent, Character_InteractorComponent>();
+		}
+
 		SDK_INLINE CharacterOccupantComponent* GetCharacterOccupant() { 
 			return GetComponent<CharacterOccupantComponent, Character_CharacterOccupantComponent>();
 		}

@@ -43,6 +43,8 @@ namespace UFG
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
 	class CompositeDrawableComponent;
+	class InteractableComponent;
+	class InteractorComponent;
 	class InventoryItemComponent;
 	class HealthComponent;
 	class HitReactionComponent;
