@@ -473,6 +473,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/sweptspherequery.hh"
 #include "physics/bulletmanager.hh"
 #include "physics/explosion.hh"
+#include "physics/volumeproperties.hh"
+#include "physics/phantomcallback.hh"
 #include "physics/wind.hh"
 
 #include "physics/vehicleinput.hh"
@@ -528,6 +530,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Physics
 //--------------------------------------------------
 
+#include "physics/components/phantomvolumecomponent.hh"
 #include "physics/components/waterfloatingtrackerbasecomponent.hh"
 #include "physics/components/waterfloatingtrackercomponent.hh"
 

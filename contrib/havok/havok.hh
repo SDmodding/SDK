@@ -70,6 +70,7 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Collide/Shape/hkpShapeBase.hh"
 #include "Physics2012/Collide/Shape/hkpShape.hh"
 #include "Physics2012/Collide/Shape/hkpShapeContainer.hh"
+#include "Physics2012/Collide/Shape/hkpPhantomCallbackShape.hh"
 #include "Physics2012/Collide/Shape/hkpSphereRepShape.hh"
 #include "Physics2012/Collide/Shape/hkpConvexShape.hh"
 #include "Physics2012/Collide/Shape/hkpSphereShape.hh"

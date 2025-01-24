@@ -218,6 +218,10 @@ namespace UFG
 			return GetComponent<CopUnitComponent, CVBase_CopUnitComponent>();
 		}
 
+		SDK_INLINE PhantomVolumeComponent* GetPhantomVolume() {
+			return GetComponent<PhantomVolumeComponent, CVBase_PhantomVolumeComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

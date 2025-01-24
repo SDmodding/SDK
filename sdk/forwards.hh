@@ -53,6 +53,7 @@ namespace UFG
 	class HealthComponent;
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
+	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class RigidBodyComponent;
 	class RoadSpaceComponent;
