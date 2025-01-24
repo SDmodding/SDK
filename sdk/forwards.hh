@@ -35,6 +35,7 @@ namespace UFG
 	/* Sim (Components) */
 
 	class AiDriverComponent;
+	class AIEntityComponent;
 	class ActionTreeComponent;
 	class ActiveAIEntityComponent;
 	class AIScriptInterfaceComponent;
@@ -42,6 +43,7 @@ namespace UFG
 	class CharacterAnimationComponent;
 	class CharacterOccupantComponent;
 	class CompositeDrawableComponent;
+	class InventoryItemComponent;
 	class HealthComponent;
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
@@ -50,7 +52,10 @@ namespace UFG
 	class RoadSpaceComponent;
 	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
+	class StimulusEmitterComponent;
+	class StimulusReceiverComponent;
 	class StreamedResourceComponent;
+	class TargetingSystemBaseComponent;
 	class TransformNodeComponent;
 	class TriadWarsComponent;
 	class TSActorComponent;

@@ -27,6 +27,8 @@ namespace UFG
 	};
 	SDK_ASSERT_SIZEOF(HandlerNode, 0x30);
 
+	typedef HandlerNode EventHandlerCookieTag;
+
 	//----------------------------------------------------------
 	//	Event, EventChannel
 	//----------------------------------------------------------
@@ -70,7 +72,7 @@ namespace UFG
 
 		/* Functions */
 
-		EventChannel*  CreateChannel(u32 uid, ChannelObj* co, bool dynamic_flag) { return SDK_CALL_FUNC(EventChannel*, 0x1B6030, void*, u32, ChannelObj*, bool)(this, uid, co, dynamic_flag); }
+		EventChannel* CreateChannel(u32 uid, ChannelObj* co, bool dynamic_flag) { return SDK_CALL_FUNC(EventChannel*, 0x1B6030, void*, u32, ChannelObj*, bool)(this, uid, co, dynamic_flag); }
 
 		int DeleteDynamicChannel(u32 uid, EventChannel* channel) { return SDK_CALL_FUNC(int, 0x1B6230, void*, u32, EventChannel*)(this, uid, channel); }
 

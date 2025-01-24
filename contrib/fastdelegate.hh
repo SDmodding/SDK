@@ -35,7 +35,45 @@ namespace fastdelegate
 		};
 	}
 
-	template<class RetType = void>
+	template <typename... Types>
+	class FastDelegate
+	{
+	public:
+		typedef typename void RetType;
+		typedef RetType(*StaticFunctionPtr)();
+		typedef RetType(*UnvoidStaticFunctionPtr)();
+		typedef RetType(detail::GenericClass::* GenericMemFn)();
+		typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
+		ClosureType m_Closure;
+
+		FastDelegate() { m_Closure.clear(); }
+		FastDelegate(void* pthis, void* function_to_bind)
+		{
+			m_Closure.m_pthis = pthis;
+			m_Closure.m_pFunction = function_to_bind;
+		}
+	};
+
+	template <typename... Types>
+	using FastDelegate0 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate1 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate2 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate3 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate4 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate5 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate6 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate7 = FastDelegate<Types...>;
+	template <typename... Types>
+	using FastDelegate8 = FastDelegate<Types...>;
+
+	/*template<class RetType = void>
 	class FastDelegate0
 	{
 	public:
@@ -45,6 +83,13 @@ namespace fastdelegate
 		typedef RetType(detail::GenericClass::* GenericMemFn)();
 		typedef detail::ClosurePtr<GenericMemFn, StaticFunctionPtr, UnvoidStaticFunctionPtr> ClosureType;
 		ClosureType m_Closure;
+
+		FastDelegate0() { m_Closure.clear(); }
+		FastDelegate0(void* pthis, void* function_to_bind)
+		{
+			m_Closure.m_pthis = pthis;
+			m_Closure.m_pFunction = function_to_bind;
+		}
 	};
 
 	template <class Param1, class RetType = void>
@@ -64,5 +109,5 @@ namespace fastdelegate
 			m_Closure.m_pthis = pthis;
 			m_Closure.m_pFunction = function_to_bind;
 		}
-	};
+	};*/
 }

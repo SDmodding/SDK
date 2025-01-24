@@ -190,6 +190,10 @@ namespace UFG
 			return GetComponent<StreamedResourceComponent, CVBase_StreamedResourceComponent>();
 		}
 
+		SDK_INLINE StimulusReceiverComponent* GetStimulusReceiver() {
+			return GetComponent<StimulusReceiverComponent, CVBase_StimulusReceiverComponent>();
+		}
+
 		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
 			return GetComponent<CompositeDrawableComponent, CVBase_CompositeDrawableComponent>();
 		}

@@ -311,11 +311,22 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "wayfinder/wayfinder.hh"
 
 //--------------------------------------------------
+//	Event System
+//--------------------------------------------------
+
+#include "eventsystem/eventbase.hh"
+
+//--------------------------------------------------
 //	AI
 //--------------------------------------------------
 
 #include "ai/aibasics.hh"
 #include "ai/faction.hh"
+
+#include "ai/stimulusdescriptions.hh"
+#include "ai/stimulusparameters.hh"
+#include "ai/stimulus.hh"
+
 #include "ai/awareness/awarenessprofileanimation.hh"
 
 #include "ai/vehicles/vehiclewayfinderclient.hh"
@@ -425,12 +436,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "flowcontrol/gamestate.hh"
 #include "flowcontrol/gamestatecommon.hh"
 #include "flowcontrol/flowcontrol.hh"
-
-//--------------------------------------------------
-//	Event System
-//--------------------------------------------------
-
-#include "eventsystem/eventbase.hh"
 
 //--------------------------------------------------
 //	Schema
@@ -616,6 +621,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "ai/cops/copsystem.hh"
 #include "ai/aiscriptinterfacecomponent.hh"
+#include "ai/stimulusreceivercomponent.hh"
 
 //--------------------------------------------------
 //	UI
