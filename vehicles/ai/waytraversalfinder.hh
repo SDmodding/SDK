@@ -2,9 +2,6 @@
 
 namespace UFG
 {
-	class WayGraph;
-	class WayTraversalSearch;
-
 	enum WayStarSearchState
 	{
 		WAYSTAR_SEARCHING,

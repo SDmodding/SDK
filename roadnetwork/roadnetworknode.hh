@@ -3,6 +3,7 @@
 namespace UFG
 {
 	class RoadNetworkGate;
+	class RoadNetworkGuide;
 	class RoadNetworkLane;
 	class RoadNetworkNode;
 	class RoadNetworkSpawnPoint;
@@ -297,5 +298,81 @@ namespace UFG
 		void GetGatesConnectedToSubSegment(qArray<RoadNetworkGate*>& gateCollection) { SDK_CALL_FUNC(void, 0xD8DB0, void*, qArray<RoadNetworkGate*>&)(this, gateCollection); }
 		u32 GetNumAvailableParkingSpots() { return SDK_CALL_FUNC(u32, 0xDAF00, void*)(this); }
 		bool IsWithinSubSegment(RoadNetworkLane* roadLane, f32 laneT) { return SDK_CALL_FUNC(bool, 0xDF000, void*, RoadNetworkLane*, f32)(this, roadLane, laneT); }
+	};
+
+	class RoadNetworkTrafficLightLocation
+	{
+	public:
+		qVector3 mPosition;
+		qVector3 mDirection;
+		u32 mFlags;
+		u32 mVehicleSignalEffect;
+		u32 mPedestrianSignalEffect;
+	};
+
+	class RoadNetworkTrafficLight
+	{
+	public:
+		qOffset64<RoadNetworkTrafficLightLocation*> mLocation;
+	};
+
+	class RoadNetworkTrafficLightPhase
+	{
+	public:
+		u32 mIndex;
+		f32 mGreenLightTime;
+		f32 mYellowLightTime;
+		u32 mNumProtectedLanes;
+		u32 mNumPermissiveLanes;
+		u32 mNumTrafficLights;
+		RoadNetworkLane::LaneStatus mCurrentStatus;
+		qOffset64<qOffset64<RoadNetworkLane*>*> mProtectedLanes;
+		qOffset64<qOffset64<RoadNetworkLane*>*> mPermissiveLanes;
+		qOffset64<qOffset64<RoadNetworkTrafficLight*>*> mTrafficLightCollection;
+	};
+
+	class RoadNetworkIntersectionModification : public RoadNetworkNodeModification
+	{
+	public:
+		enum AllPhaseStatus
+		{
+			Normal_Behaviour,
+			All_Red,
+			All_Yellow,
+			All_Green
+		};
+
+		AllPhaseStatus mAllPhaseStatus;
+	};
+
+	class RoadNetworkIntersection : RoadNetworkNode
+	{
+	public:
+		qOffset64<qOffset64<RoadNetworkTrafficLightLocation*>*> mTrafficLightLocations;
+		i8 mNumTrafficLightLocations;
+		i8 mIsMerged;
+		i8 mEnableTimer;
+		i8 mNumLightPhases;
+		qOffset64<qOffset64<RoadNetworkTrafficLightPhase*>*> mLightPhases;
+		u32 mCurrentPhaseIndex;
+		f32 mTimer;
+		qVector3 mAABBMin;
+		qVector3 mAABBMax;
+
+		/* Functions */
+
+		void AddLanesToGateModification(u32 gateIndex, u32 flags) { SDK_CALL_FUNC(void, 0xD1940, void*, u32, u32)(this, gateIndex, flags); }
+		void AddPhaseModification(RoadNetworkIntersectionModification::AllPhaseStatus status) { SDK_CALL_FUNC(void, 0xD1DF0, void*, RoadNetworkIntersectionModification::AllPhaseStatus)(this, status); }
+		void ApplyModification(RoadNetworkNodeModification* modification) { SDK_CALL_FUNC(void, 0xD23F0, void*, RoadNetworkNodeModification*)(this, modification); }
+		void EnableLanes(RoadNetworkTrafficLightPhase* phase, bool updateTrafficLightEffects) { SDK_CALL_FUNC(void, 0xD4590, void*, RoadNetworkTrafficLightPhase*, bool)(this, phase, updateTrafficLightEffects); }
+		bool GetBuildVisibleRoadNetworkByGrid() { return SDK_CALL_FUNC(bool, 0xD5E30, void*)(this); }
+		RoadNetworkGate* GetClosestGate(const qVector3& pos) { return SDK_CALL_FUNC(RoadNetworkGate*, 0xD5F70, void*, const qVector3&)(this, pos); }
+		bool GetExtendBeyondVisibleAreaLimit() { return SDK_CALL_FUNC(bool, 0xD87C0, void*)(this); }
+		f32 GetIntersectionRadius() { return SDK_CALL_FUNC(f32, 0xD8F60, void*)(this); }
+		f32 GetRemainingGreenLightTime() { return SDK_CALL_FUNC(f32, 0xDB620, void*)(this); }
+		RoadNetworkNode::RoadNetworkType GetRoadNetworkType() { return SDK_CALL_FUNC(RoadNetworkNode::RoadNetworkType, 0xDB7A0, void*)(this); }
+		RoadNetworkTrafficLightPhase* GetTrafficLightPhase(u32 index) { return SDK_CALL_FUNC(RoadNetworkTrafficLightPhase*, 0xDC3F0, void*, u32)(this, index); }
+		void InitializePhases() { SDK_CALL_FUNC(void, 0xDD970, void*)(this); }
+		bool IsWater() { return SDK_CALL_FUNC(bool, 0xDEE50, void*)(this); }
 	};
 }

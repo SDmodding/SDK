@@ -352,9 +352,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "ai/awareness/awarenessprofileanimation.hh"
 
-#include "ai/vehicles/vehiclewayfinderclient.hh"
-#include "ai/vehicles/waytraversalfinder.hh"
-
 //--------------------------------------------------
 //	ActionTree
 //--------------------------------------------------
@@ -497,6 +494,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "roadnetwork/roadnetworknode.hh"
+#include "roadnetwork/roadnetworkwayfinding.hh"
+#include "roadnetwork/roadnetworkresources.hh"
+#include "roadnetwork/roadnetworkguide.hh"
 #include "roadnetwork/roadnetworkspawnpoint.hh"
 
 //--------------------------------------------------
@@ -561,6 +561,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "vehicles/ai/racetrail.hh"
 #include "vehicles/ai/vehiclecombatstats.hh"
+#include "vehicles/ai/vehiclewayfinderclient.hh"
+#include "vehicles/ai/waytraversalfinder.hh"
 
 #include "vehicles/components/vehicledrivercomponent.hh"
 #include "vehicles/components/aidrivercomponent.hh"

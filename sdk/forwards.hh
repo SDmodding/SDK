@@ -24,6 +24,9 @@ namespace UFG
 
 	class TriggerRegion;
 
+	class WayGraph;
+	class WayTraversalSearch;
+
 	/* Sim */
 
 	class SimObject;
