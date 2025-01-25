@@ -34,14 +34,15 @@ namespace UFG
 
 	/* Sim (Components) */
 
+	class ActionTreeComponent;
+	class ActiveAIEntityComponent;
 	class AIActionTreeComponent;
 	class AICharacterControllerBaseComponent;
 	class AiDriverComponent;
 	class AIEntityComponent;
 	class AIScriptInterfaceComponent;
-	class ActionTreeComponent;
-	class ActiveAIEntityComponent;
 	class AnimationLODComponent;
+	class AttackRightsComponent;
 	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterControllerInterface;
@@ -69,6 +70,7 @@ namespace UFG
 	class StimulusReceiverComponent;
 	class StreamedResourceComponent;
 	class TargetingSystemBaseComponent;
+	class TargetingSystemPedBaseComponent;
 	class TransformNodeComponent;
 	class TriadWarsComponent;
 	class TSActorComponent;

@@ -341,6 +341,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/aibasics.hh"
 #include "ai/faction.hh"
 
+#include "ai/nearbycharactermanager.hh"
+
+#include "ai/aisidewalkdata_game.hh"
+#include "ai/aisidewalkgraph.hh"
+
 #include "ai/stimulusdescriptions.hh"
 #include "ai/stimulusparameters.hh"
 #include "ai/stimulus.hh"
@@ -657,6 +662,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/aiactiontreecomponent.hh"
 #include "ai/aiscriptinterfacecomponent.hh"
 #include "ai/stimulusreceivercomponent.hh"
+#include "ai/aientitycomponent.hh"
 
 //--------------------------------------------------
 //	UI

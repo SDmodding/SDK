@@ -234,6 +234,10 @@ namespace UFG
 			return GetComponent<CharacterControllerInterface, CVBase_CharacterControllerInterface>();
 		}
 
+		SDK_INLINE AIEntityComponent* GetAIEntity() {
+			return GetComponent<AIEntityComponent, CVBase_AIEntityComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
