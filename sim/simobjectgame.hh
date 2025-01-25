@@ -245,6 +245,10 @@ namespace UFG
 		SDK_INLINE AiDriverComponent* GetAiDriver() { 
 			return GetComponent<AiDriverComponent, CVBase_VehicleDriverInterface>(); 
 		}
+
+		SDK_INLINE RoadSpaceComponent* GetRoadSpace() {
+			return GetComponent<RoadSpaceComponent, CVBase_RoadSpaceComponent>();
+		}
 	};
 
 	//------------------------------------------------------------------------------

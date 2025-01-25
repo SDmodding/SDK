@@ -500,6 +500,28 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "roadnetwork/roadnetworkspawnpoint.hh"
 
 //--------------------------------------------------
+//	Daemon Manager
+//--------------------------------------------------
+
+#include "daemonmanager/daemon.hh"
+
+//--------------------------------------------------
+//	Navigation
+//--------------------------------------------------
+
+#include "navigation/navparams.hh"
+#include "navigation/navposition.hh"
+#include "navigation/navresource.hh"
+
+#include "navigation/havok/havoknavposition.hh"
+
+#include "navigation/navobject.hh"
+#include "navigation/navwaypoint.hh"
+#include "navigation/navobjectparkour.hh"
+#include "navigation/navpath.hh"
+#include "navigation/navdaemon.hh"
+
+//--------------------------------------------------
 //	Sim
 //--------------------------------------------------
 
@@ -559,7 +581,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "vehicles/tempvehicletunables.hh"
 
+#include "vehicles/ai/crumbtrail.hh"
 #include "vehicles/ai/racetrail.hh"
+#include "vehicles/ai/navguide.hh"
 #include "vehicles/ai/vehiclecombatstats.hh"
 #include "vehicles/ai/vehicleformations.hh"
 #include "vehicles/ai/vehiclewayfinderclient.hh"
@@ -568,6 +592,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/components/vehicledrivercomponent.hh"
 #include "vehicles/components/aidrivercomponent.hh"
 #include "vehicles/components/vehiclemovercomponent.hh"
+#include "vehicles/components/roadspacecomponent.hh"
 
 //--------------------------------------------------
 //	Effects
