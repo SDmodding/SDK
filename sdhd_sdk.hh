@@ -508,6 +508,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/interfaces/updateinterface.hh"
 #include "sim/interfaces/statecomponent.hh"
+#include "sim/interfaces/charactercontrollerinterface.hh"
 
 //--------------------------------------------------
 //	Object Resource Management

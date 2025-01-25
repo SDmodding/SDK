@@ -230,6 +230,10 @@ namespace UFG
 			return GetComponent<TargetingSystemBaseComponent, CVBase_TargetingSystemBaseComponent>();
 		}
 
+		SDK_INLINE CharacterControllerInterface* GetCharacterControllerInterface() {
+			return GetComponent<CharacterControllerInterface, CVBase_CharacterControllerInterface>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

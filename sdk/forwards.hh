@@ -44,6 +44,7 @@ namespace UFG
 	class AnimationLODComponent;
 	class BaseAnimationComponent;
 	class CharacterAnimationComponent;
+	class CharacterControllerInterface;
 	class CharacterOccupantComponent;
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
