@@ -129,7 +129,7 @@ namespace UFG
 		SDK_INLINE T* GetComponent()
 		{
 			auto component = m_Components.p[index].m_pComponent;
-			if (!component || ((T::_TypeUID ^ component->m_TypeUID) & 0xFE000000) || (component->m_TypeUID & ~T::_TypeUID & ~0xFE000000)) {
+			if (!component || ((component->m_TypeUID ^ T::_TypeUID) & 0xFE000000) || (T::_TypeUID & ~component->m_TypeUID & ~0xFE000000)) {
 				return nullptr;
 			}
 
