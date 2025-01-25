@@ -126,4 +126,10 @@ namespace UFG
 		T* GetComponentOfType(u32 type_uid) { return reinterpret_cast<T*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190AD0))(this, type_uid); }
 	};
 	SDK_ASSERT_SIZEOF(SimObject, 0x80);
+
+	class SimObjectPointer : public qNode<SimObjectPointer>
+	{
+	public:
+		SimObject* pObject;
+	};
 }

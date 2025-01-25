@@ -561,6 +561,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "vehicles/ai/racetrail.hh"
 #include "vehicles/ai/vehiclecombatstats.hh"
+#include "vehicles/ai/vehicleformations.hh"
 #include "vehicles/ai/vehiclewayfinderclient.hh"
 #include "vehicles/ai/waytraversalfinder.hh"
 
