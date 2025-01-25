@@ -34,6 +34,8 @@ namespace UFG
 
 	/* Sim (Components) */
 
+	class AIActionTreeComponent;
+	class AICharacterControllerBaseComponent;
 	class AiDriverComponent;
 	class AIEntityComponent;
 	class AIScriptInterfaceComponent;
@@ -46,13 +48,16 @@ namespace UFG
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
 	class EncounterUnitComponent;
+	class FaceActionComponent;
 	class FacialActionTreeComponent;
 	class InteractableComponent;
 	class InteractorComponent;
+	class InterestPointUserComponent;
 	class InventoryItemComponent;
 	class HealthComponent;
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
+	class NavComponent;
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class RigidBodyComponent;

@@ -222,6 +222,10 @@ namespace UFG
 			return GetComponent<PhantomVolumeComponent, CVBase_PhantomVolumeComponent>();
 		}
 
+		SDK_INLINE AIActionTreeComponent* GetAIActionTree() {
+			return GetComponent<AIActionTreeComponent, CVBase_AIActionTreeComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}

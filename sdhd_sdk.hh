@@ -328,6 +328,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "eventsystem/eventbase.hh"
 
 //--------------------------------------------------
+//	Ticket
+//--------------------------------------------------
+
+#include "ticket/ticket.hh"
+#include "ticket/ticketbooth.hh"
+
+//--------------------------------------------------
 //	AI
 //--------------------------------------------------
 
@@ -500,6 +507,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/metrics.hh"
 
 #include "sim/interfaces/updateinterface.hh"
+#include "sim/interfaces/statecomponent.hh"
 
 //--------------------------------------------------
 //	Object Resource Management
@@ -581,6 +589,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Sim Components
 //--------------------------------------------------
 
+#include "sim/components/statecomponent.hh"
+
 #include "sim/components/targeting/subtargetinglocationdynamic.hh"
 #include "sim/components/targeting/subtargetingprofile.hh"
 #include "sim/components/targeting/targetingsimobject.hh"
@@ -643,6 +653,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "ai/cops/copsystem.hh"
+#include "ai/aiactiontreecomponent.hh"
 #include "ai/aiscriptinterfacecomponent.hh"
 #include "ai/stimulusreceivercomponent.hh"
 
