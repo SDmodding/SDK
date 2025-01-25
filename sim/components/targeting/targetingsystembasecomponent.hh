@@ -5,48 +5,27 @@ namespace UFG
 	class TargetingSystemBaseComponent : public SimComponent, public UpdateInterface, public qNode<TargetingSystemBaseComponent>
 	{
 	public:
+		enum { _TypeUID = 0xA0000001 };
+
 		TargetingSimObject* m_pTargets;
 		TargetingMap* m_pTargetingMap;
 		qList<TargetingSimObject> m_TargetedBy;
 
 		/* Functions */
 
-		void updateMySpawnPointTarget() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x576430))(this); }
-
-		void shutdown() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x56D660))(this); }
-
-		void initialize() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x56A000))(this); }
-
-		void Reset() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x549CB0))(this); }
-
-		void SetTargetLock(eTargetTypeEnum eTargetType, const bool bLock, const bool bDisableCollision) {
-			reinterpret_cast<void(SDK_CALL*)(void*, eTargetTypeEnum, const bool, const bool)>(SDK_RVA(0x54EE40))(this, eTargetType, bLock, bDisableCollision); 
+		void AssignTarget(eTargetTypeEnum eAssignTargetTo, SimObject* pSimObject) { SDK_CALL_FUNC(void, 0x2E7E20, void*, eTargetTypeEnum, SimObject*)(this, eAssignTargetTo, pSimObject); }
+		void AssignTarget(u32 eAssignTargetTo, u32 eAssignTargetFrom) { SDK_CALL_FUNC(void, 0x2E7D90, void*, u32, u32)(this, eAssignTargetTo, eAssignTargetFrom); }
+		void ClearTarget(eTargetTypeEnum eTargetType) { SDK_CALL_FUNC(void, 0x15DFB0, void*, eTargetTypeEnum)(this, eTargetType); }
+		void FindMatrix(SimObject* pSimObject, qMatrix44& matSimObject) { SDK_CALL_FUNC(void, 0x5288E0, SimObject*, qMatrix44&)(pSimObject, matSimObject); }
+		void FindMatrix(TransformNodeComponent* pTNC, SimObject* pSimObject, qMatrix44& matSimObject) { 
+			SDK_CALL_FUNC(void, 0x528910, TransformNodeComponent*, SimObject*, qMatrix44&)(pTNC, pSimObject, matSimObject); 
 		}
-
-		void SetTarget(eTargetTypeEnum eTargetType, SimObject* pSimObject) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, eTargetTypeEnum, SimObject*)>(SDK_RVA(0x54ED20))(this, eTargetType, pSimObject);
-		}
-
-		bool IsTargetedByTypeAndLocked(eTargetTypeEnum eTargetType) { return reinterpret_cast<bool(SDK_CALL*)(void*, eTargetTypeEnum)>(SDK_RVA(0x53C280))(this, eTargetType); }
-
-		bool IsTargetedByType(eTargetTypeEnum eTargetType) { return reinterpret_cast<bool(SDK_CALL*)(void*, eTargetTypeEnum)>(SDK_RVA(0x53C250))(this, eTargetType); }
-
-		UEL::Value GetGrappleTarget_UEL() { return reinterpret_cast<UEL::Value(SDK_CALL*)(void*)>(SDK_RVA(0x52DB90))(this); }
-
-		void FindMatrix(TransformNodeComponent* pTNC, SimObject* pSimObject, qMatrix44* matSimObject) { 
-			reinterpret_cast<void(SDK_CALL*)(TransformNodeComponent*, SimObject*, qMatrix44*)>(SDK_RVA(0x528910))(pTNC, pSimObject, matSimObject); 
-		}
-
-		void FindMatrix(SimObject* pSimObject, qMatrix44* matSimObject) { reinterpret_cast<void(SDK_CALL*)(SimObject*, qMatrix44*)>(SDK_RVA(0x5288E0))(pSimObject, matSimObject); }
-
-		void ClearTarget(eTargetTypeEnum eTargetType) { reinterpret_cast<void(SDK_CALL*)(void*, eTargetTypeEnum)>(SDK_RVA(0x15DFB0))(this, eTargetType); }
-
-		void AssignTarget(eTargetTypeEnum eAssignTargetTo, eTargetTypeEnum eAssignTargetFrom) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, eTargetTypeEnum, eTargetTypeEnum)>(SDK_RVA(0x2E7D90))(this, eAssignTargetTo, eAssignTargetFrom); 
-		}
-
-		void AssignTarget(eTargetTypeEnum eAssignTargetTo, SimObject* pSimObject) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, eTargetTypeEnum, SimObject*)>(SDK_RVA(0x2E7E20))(this, eAssignTargetTo, pSimObject);
+		UEL::Value GetGrappleTarget_UEL() { return SDK_CALL_FUNC(UEL::Value, 0x52DB90, void*)(this); }
+		bool IsTargetedByType(eTargetTypeEnum eTargetType) { return SDK_CALL_FUNC(bool, 0x53C250, void*, eTargetTypeEnum)(this, eTargetType); }
+		bool IsTargetedByTypeAndLocked(eTargetTypeEnum eTargetType) { return SDK_CALL_FUNC(bool, 0x53C280, void*, eTargetTypeEnum)(this, eTargetType); }
+		void SetTarget(u32 eTargetType, SimObject* pSimObject) { SDK_CALL_FUNC(void, 0x54ED20, void*, u32, SimObject*)(this, eTargetType, pSimObject); }
+		void SetTargetLock(eTargetTypeEnum eTargetType, bool bLock, bool bDisableCollision) { 
+			SDK_CALL_FUNC(void, 0x54EE40, void*, eTargetTypeEnum, bool, bool)(this, eTargetType, bLock, bDisableCollision);
 		}
 	};
 	SDK_ASSERT_SIZEOF(TargetingSystemBaseComponent, 0x78);

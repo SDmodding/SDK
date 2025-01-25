@@ -226,6 +226,10 @@ namespace UFG
 			return GetComponent<AIActionTreeComponent, CVBase_AIActionTreeComponent>();
 		}
 
+		SDK_INLINE TargetingSystemBaseComponent* GetTargetingSystemBase() {
+			return GetComponent<TargetingSystemBaseComponent, CVBase_TargetingSystemBaseComponent>();
+		}
+
 		SDK_INLINE VehicleDriverInterface* GetDriverInterface() {
 			return GetComponent<VehicleDriverInterface, CVBase_VehicleDriverInterface>();
 		}
