@@ -77,7 +77,13 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Collide/Shape/hkpBvTreeShape.hh"
 #include "Physics2012/Collide/Shape/hkpMoppBvTreeShape.hh"
 
+#include "Physics2012/Collide/BroadPhase/hkpBroadPhaseHandle.hh"
+#include "Physics2012/Collide/BroadPhase/hkpTypedBroadPhaseHandle.hh"
+
 #include "Physics2012/Collide/hkpLinkedCollidable.hh"
+
+#include "Physics2012/Collide/hkpCdBody.hh"
+#include "Physics2012/Collide/hkpCollidable.hh"
 
 #include "Physics2012/Dynamics/Collide/hkpContactListener.hh"
 

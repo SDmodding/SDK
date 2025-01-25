@@ -226,12 +226,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/pc/renderplat.hh"
 
 //--------------------------------------------------
-//	Camera
-//--------------------------------------------------
-
-#include "camera/camera.hh"
-
-//--------------------------------------------------
 //	Main
 //--------------------------------------------------
 
@@ -489,6 +483,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/vehicleinput.hh"
 #include "physics/physicsvehicledna.hh"
 
+#include "physics/raycast.hh"
+
 //--------------------------------------------------
 //	Road Network
 //--------------------------------------------------
@@ -536,6 +532,16 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/interfaces/updateinterface.hh"
 #include "sim/interfaces/statecomponent.hh"
 #include "sim/interfaces/charactercontrollerinterface.hh"
+
+//--------------------------------------------------
+//	Camera
+//--------------------------------------------------
+
+#include "camera/camera.hh"
+#include "camera/base.hh"
+#include "camera/director.hh"
+
+#include "camera/gamecameracomponent.hh"
 
 //--------------------------------------------------
 //	Object Resource Management

@@ -3,6 +3,22 @@
 namespace UFG
 {
 	template <typename T>
+	class HomerCubic
+	{
+	public:
+		T mDuration;
+		T mParameter;
+		T A;
+		T B;
+		T C;
+		T D;
+		T p0;
+		T p1;
+		T v0;
+		T v1;
+	};
+
+	template <typename T>
 	class RingBuffer
 	{
 	public:
