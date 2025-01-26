@@ -3,6 +3,7 @@
 
 class ActionContext;
 class ActionNode;
+class AnimationNode;
 class Attachment;
 class Creature;
 class ICompositeLook;
@@ -29,6 +30,8 @@ namespace UFG
 
 	/* Sim */
 
+	enum eSimObjectFlagEnum;
+
 	class SimObject;
 	class SimObjectCharacter;
 	class SimObjectVehicle;
@@ -44,6 +47,7 @@ namespace UFG
 	class AiDriverComponent;
 	class AIEntityComponent;
 	class AIScriptInterfaceComponent;
+	class AnimatedCameraComponent;
 	class AnimationLODComponent;
 	class AttackRightsComponent;
 	class BaseAnimationComponent;
@@ -58,6 +62,7 @@ namespace UFG
 	class EncounterUnitComponent;
 	class FaceActionComponent;
 	class FacialActionTreeComponent;
+	class GameCameraComponent;
 	class InteractableComponent;
 	class InteractorComponent;
 	class InterestPointUserComponent;

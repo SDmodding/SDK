@@ -284,13 +284,23 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/condition.hh"
 #include "actiontree/track.hh"
 #include "actiontree/task.hh"
+#include "actiontree/actionid.hh"
 
 //--------------------------------------------------
-//	Animation
+//	ActionTree (Tasks, Tracks)
 //--------------------------------------------------
 
 #include "animation/actiontree/tasksanimation.hh"
 #include "animation/actiontree/tracksanimation.hh"
+
+#include "camera/actiontree/taskscamera.hh"
+
+#include "gameplay/actiontree/tasksgame.hh"
+#include "gameplay/actiontree/tracksgame.hh"
+
+//--------------------------------------------------
+//	Animation
+//--------------------------------------------------
 
 #include "animation/weightsetdatabase.hh"
 #include "animation/attachment.hh"
@@ -352,7 +362,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "actiontree/actiontreecomponentbase.hh"
-#include "actiontree/actionid.hh"
 #include "actiontree/actionnode.hh"
 #include "actiontree/actioncontext.hh"
 #include "actiontree/actioncontroller.hh"
@@ -640,13 +649,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "gamestate/hk/pedspawnmanager.hh"
-
-//--------------------------------------------------
-//	Gameplay
-//--------------------------------------------------
-
-#include "gameplay/actiontree/tasksgame.hh"
-#include "gameplay/actiontree/tracksgame.hh"
 
 //--------------------------------------------------
 //	AI (Encounters)

@@ -18,6 +18,10 @@ namespace UFG
 		f32 mDesaturation;
 		f32 mMotionBlurMagnitude;
 		Render::DepthOfField::Focus mDofParameters;
+
+		/* Static Functions */
+
+		SDK_SINLINE DebugCameraComponent* Instance() { return SDK_VAR_GET(DebugCameraComponent*, 0x23CF1A8); }
 	};
 	SDK_ASSERT_SIZEOF(DebugCameraComponent, 0x350);
 }
