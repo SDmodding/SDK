@@ -569,6 +569,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "camera/followcamera.hh"
 #include "camera/progressioncamera.hh"
 #include "camera/scriptcamera.hh"
+#include "camera/turfcamera.hh"
 
 //--------------------------------------------------
 //	Object Resource Management
