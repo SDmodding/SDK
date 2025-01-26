@@ -50,6 +50,8 @@ namespace UFG
 	class CharacterAnimationComponent;
 	class CharacterControllerInterface;
 	class CharacterOccupantComponent;
+	class CharacterPhysicsComponent;
+	class CharacterSubjectComponent;
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
 	class EncounterUnitComponent;

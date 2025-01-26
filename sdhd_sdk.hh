@@ -84,6 +84,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/math.hh"
 #include "quark/halfmath.hh"
 #include "quark/extramath.hh"
+#include "quark/qbox.hh"
 #include "quark/process.hh"
 #include "quark/beziercurve.hh"
 #include "quark/spline.hh"
@@ -534,15 +535,36 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/interfaces/charactercontrollerinterface.hh"
 
 //--------------------------------------------------
-//	Camera
+//	Camera (Dependencies)
 //--------------------------------------------------
 
 #include "camera/camera.hh"
 #include "camera/base.hh"
 #include "camera/director.hh"
+#include "camera/subject.hh"
+
+//--------------------------------------------------
+//	Sim Components (Important)
+//--------------------------------------------------
+
+#include "sim/components/statecomponent.hh"
+
+#include "sim/components/targeting/subtargetinglocationdynamic.hh"
+#include "sim/components/targeting/subtargetingprofile.hh"
+#include "sim/components/targeting/targetingsimobject.hh"
+#include "sim/components/targeting/targetingmap.hh"
+#include "sim/components/targeting/targetingsystembasecomponent.hh"
+
+#include "sim/components/transformnodecomponent.hh"
+
+#include "sim/components/charactersubjectcomponent.hh"
+
+//--------------------------------------------------
+//	Camera (Components)
+//--------------------------------------------------
 
 #include "camera/gamecameracomponent.hh"
-
+#include "camera/followcamera.hh"
 #include "camera/scriptcamera.hh"
 
 //--------------------------------------------------
@@ -631,16 +653,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 //	Sim Components
 //--------------------------------------------------
-
-#include "sim/components/statecomponent.hh"
-
-#include "sim/components/targeting/subtargetinglocationdynamic.hh"
-#include "sim/components/targeting/subtargetingprofile.hh"
-#include "sim/components/targeting/targetingsimobject.hh"
-#include "sim/components/targeting/targetingmap.hh"
-#include "sim/components/targeting/targetingsystembasecomponent.hh"
-
-#include "sim/components/transformnodecomponent.hh"
 
 #include "sim/components/actiontreecomponent.hh"
 #include "sim/components/baseanimationcomponent.hh"

@@ -112,19 +112,19 @@ namespace UFG
 
 		/* Virtual Functions */
 
-		virtual void _UnkVFunc30() = 0;
-		virtual void _UnkVFunc31() = 0;
+		virtual void SnapToCurrent() = 0;
+		virtual void SnapToDesired() = 0;
 		virtual void HandleDamage(float damage) = 0;
 		virtual void HandleImpact(float magnitude) = 0;
 		virtual const qVector3& MotionRelativeDirection() = 0;
 		virtual const qVector3& GetStreamingPosition() = 0;
-		virtual void _UnkVFunc36() = 0;
-		virtual void _UnkVFunc37() = 0;
-		virtual void _UnkVFunc38() = 0;
-		virtual void _UnkVFunc39() = 0;
-		virtual void _UnkVFunc40() = 0;
-		virtual void _UnkVFunc41() = 0;
-		virtual void _UnkVFunc42() = 0;
+		virtual bool IsUsingHighZoom() = 0;
+		virtual bool IsAiming() = 0;
+		virtual bool IsMotionTowardsPlayer() = 0;
+		virtual bool GetMotionCorrection() = 0;
+		virtual void GunRecoil(f32 scaleKickup, f32 scaleKickback, f32 scaleSpeed) = 0;
+		virtual TargetingSystemBaseComponent* GetTargetingSystem() = 0;
+		virtual f32 GetDofDamageMultiplier() = 0;
 
 		/* Functions */
 

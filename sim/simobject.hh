@@ -60,11 +60,10 @@ namespace UFG
 		virtual void _UnkVFunc7() = 0;
 		virtual void Suspend() = 0;
 		virtual void Restore() = 0;
-		virtual void _UnkVFunc10() = 0;
+		virtual void OnDetatch(SimObject*) = 0;
 		virtual void _UnkVFunc11() = 0;
 		virtual void _UnkVFunc12() = 0;
 		virtual void _UnkVFunc13() = 0;
-		virtual void OnDetatch(SimObject*) = 0;
 	};
 	SDK_ASSERT_SIZEOF(SimComponent, 0x40);
 

@@ -20,9 +20,10 @@ namespace UFG
 
 		/* Virtual Functions */
 
+		virtual void Reset() = 0;
 		virtual void Update(float delta_seconds) = 0;
-		virtual void _UnkVFunc16() = 0;
-		virtual void _UnkVFunc17() = 0;
+		virtual void SetTarget(SimObject* target) = 0;
+		virtual SimObject* GetTarget() = 0;
 		virtual void EnableControllers(bool enable) = 0;
 		virtual float GetFov() = 0;
 		virtual void SetActive(bool active) = 0;
