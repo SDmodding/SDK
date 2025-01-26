@@ -543,6 +543,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "camera/gamecameracomponent.hh"
 
+#include "camera/scriptcamera.hh"
+
 //--------------------------------------------------
 //	Object Resource Management
 //--------------------------------------------------

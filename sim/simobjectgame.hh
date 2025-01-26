@@ -123,18 +123,20 @@ namespace UFG
 
 		// Use this function if you're trying to get component that's outside of the type table ID (look enums above).
 		template <typename T = SimComponent>
-		T* GetComponentOfTypeHK(u32 type_uid) { return reinterpret_cast<T*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x52BBC0))(this, type_uid); }
+		T* GetComponentOfTypeHK(u32 type_uid) { return SDK_CALL_FUNC(T*, 0x52BBC0, void*, u32)(this, type_uid); }
 
-		template <typename T, u32 index>
-		SDK_INLINE T* GetComponent()
+		SimComponent* GetComponent(u32 type_uid, u32 index)
 		{
 			auto component = m_Components.p[index].m_pComponent;
-			if (!component || ((component->m_TypeUID ^ T::_TypeUID) & 0xFE000000) || (T::_TypeUID & ~component->m_TypeUID & ~0xFE000000)) {
+			if (!component || ((component->m_TypeUID ^ type_uid) & 0xFE000000) || (type_uid & ~component->m_TypeUID & ~0xFE000000)) {
 				return nullptr;
 			}
 
-			return reinterpret_cast<T*>(component);
+			return component;
 		}
+
+		template <typename T, u32 index>
+		SDK_INLINE T* GetComponent() { return reinterpret_cast<T*>(GetComponent(T::_TypeUID, index)); }
 	};
 	SDK_ASSERT_SIZEOF(SimObjectGame, 0x90);
 
