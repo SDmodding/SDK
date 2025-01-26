@@ -76,6 +76,7 @@ namespace UFG
 	class StreamedResourceComponent;
 	class TargetingSystemBaseComponent;
 	class TargetingSystemPedBaseComponent;
+	class TargetingSystemPedPlayerComponent;
 	class TransformNodeComponent;
 	class TriadWarsComponent;
 	class TSActorComponent;

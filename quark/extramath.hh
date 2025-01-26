@@ -18,6 +18,14 @@ namespace UFG
 		T v1;
 	};
 
+	class HomerCubicAngular
+	{
+	public:
+		HomerCubic<f32> mHomerCubic;
+		f32 mModuloRecip;
+		f32 mModulo;
+	};
+
 	template <typename T>
 	class RingBuffer
 	{

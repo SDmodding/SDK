@@ -262,4 +262,5 @@ namespace UFG
 		}
 		void TransitionFromSuppDuration(BaseCameraComponent* fromCamera, bool withVelocity) { SDK_CALL_FUNC(void, 0x3CF390, void*, BaseCameraComponent*, bool)(this, fromCamera, withVelocity); }
 	};
+	SDK_ASSERT_SIZEOF(FollowCameraComponent, 0x21C0);
 }
