@@ -1,6 +1,15 @@
 #pragma once
 
+//------------------------------------
+//	Forwards
+//------------------------------------
+
+struct hkpCollisionInput;
 struct hkContainerHeapAllocator;
+
+class hkpEntity;
+class hkpPhantom;
+class hkpWorld;
 
 //------------------------------------
 //	Common
@@ -30,25 +39,32 @@ struct hkContainerHeapAllocator;
 #include "Common/hkMultiThreadCheck.hh"
 #include "Common/hkStringPtr.hh"
 
+#include "Common/Thread/hkSemaphore.hh"
+#include "Common/Thread/hkCriticalSection.hh"
+#include "Common/Thread/hkThreadPool.hh"
+#include "Common/Thread/hkJobThreadPool.hh"
+#include "Common/Thread/hkJobQueue.hh"
+
 #include "Common/Types/hkGeometryTypes.hh"
+#include "Common/Types/hkPhysicsTypes.hh"
 
 //------------------------------------
 //	Serialize
 //------------------------------------
 
-#include "common/serialize/hkResource.hh"
-#include "common/serialize/hkPackfileData.hh"
+#include "Common/serialize/hkResource.hh"
+#include "Common/serialize/hkPackfileData.hh"
 
 //------------------------------------
 //	Animation
 //------------------------------------
 
-#include "animation/Rig/hkaBone.hh"
-#include "animation/Rig/hkaSkeleton.hh"
-#include "animation/Rig/hkaPose.hh"
+#include "Animation/Rig/hkaBone.hh"
+#include "Animation/Rig/hkaSkeleton.hh"
+#include "Animation/Rig/hkaPose.hh"
 
-#include "animation/hkaAnimation.hh"
-#include "animation/hkaAnimationBinding.hh"
+#include "Animation/hkaAnimation.hh"
+#include "Animation/hkaAnimationBinding.hh"
 
 //------------------------------------
 //	Physics
@@ -90,9 +106,15 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Dynamics/Constraint/hkpConstraintOwner.hh"
 #include "Physics2012/Dynamics/Constraint/hkpConstraintInstance.hh"
 
+#include "Physics2012/Dynamics/Phantom/hkpPhantomOverlapListener.hh"
+#include "Physics2012/Dynamics/World/Listener/hkpWorldDeletionListener.hh"
+#include "Physics2012/Dynamics/World/Listener/hkpWorldPostSimulationListener.hh"
+
 #include "Physics2012/Dynamics/World/hkpSimulation.hh"
 #include "Physics2012/Dynamics/World/hkpSimulationIsland.hh"
 #include "Physics2012/Dynamics/World/hkpWorldObject.hh"
+#include "Physics2012/Dynamics/World/hkpWorldCinfo.hh"
+#include "Physics2012/Dynamics/World/hkpBroadPhaseBorder.hh"
 
 #include "Physics2012/Dynamics/Phantom/hkpPhantom.hh"
 #include "Physics2012/Dynamics/Phantom/hkpShapePhantom.hh"
@@ -106,3 +128,23 @@ struct hkContainerHeapAllocator;
 #include "Physics2012/Dynamics/Entity/hkpRigidBody.hh"
 
 #include "Physics2012/Utilities/Actions/hkpReorientAction.hh"
+
+#include "Physics2012/Collide/Shape/Query/hkpShapeRayCastCollectorOutput.hh"
+#include "Physics2012/Collide/Shape/Query/hkpShapeRayCastInput.hh"
+#include "Physics2012/Collide/Shape/Query/hkpShapeRayCastOutput.hh"
+
+#include "Physics2012/Collide/Query/CastUtil/hkpLinearCastInput.hh"
+#include "Physics2012/Collide/Query/CastUtil/hkpWorldRayCastInput.hh"
+#include "Physics2012/Collide/Query/CastUtil/hkpWorldRayCastOutput.hh"
+
+#include "Physics2012/Collide/Query/Collector/hkpRootCdPoint.hh"
+
+#include "Physics2012/Collide/Query/hkpCollisionQueryJobs.hh"
+#include "Physics2012/Collide/Query/hkpRayCastQueryJobs.hh"
+
+#include "Physics2012/Collide/Shape/Query/hkpRayShapeCollectionFilter.hh"
+#include "Physics2012/Collide/Filter/hkpCollidableCollidableFilter.hh"
+#include "Physics2012/Collide/Filter/hkpShapeCollectionFilter.hh"
+#include "Physics2012/Collide/Filter/hkpRayCollidableFilter.hh"
+#include "Physics2012/Collide/Filter/hkpCollisionFilter.hh"
+#include "Physics2012/Collide/Filter/hkpGroupFilter.hh"

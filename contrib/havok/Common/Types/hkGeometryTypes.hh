@@ -1,5 +1,12 @@
 #pragma once
 
+class hkAabb
+{
+public:
+	hkVector4f m_min;
+	hkVector4f m_max;
+};
+
 struct hkAabbUint32
 {
 	u32 m_min[3];

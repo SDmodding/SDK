@@ -243,6 +243,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "scenedb/streamingmemorymanager.hh"
+#include "scenedb/scenedb.hh"
+#include "scenedb/scenerygroup.hh"
 
 //--------------------------------------------------
 //	Audio
@@ -474,8 +476,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Physics
 //--------------------------------------------------
 
+#include "physics/threadsafequeue.hh"
 #include "physics/baseobj.hh"
 #include "physics/bitarray.hh"
+#include "physics/broadphase.hh"
 #include "physics/constraints.hh"
 #include "physics/collisionlayers.hh"
 #include "physics/destructionbase.hh"
@@ -493,7 +497,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/vehicleinput.hh"
 #include "physics/physicsvehicledna.hh"
 
+#include "physics/activeregion.hh"
+#include "physics/customcollisionfilter.hh"
 #include "physics/raycast.hh"
+#include "physics/worldboundaries.hh"
+
+#include "physics/physicsmemory.hh"
+#include "physics/physicssystem.hh"
+#include "physics/physics.hh"
 
 //--------------------------------------------------
 //	Road Network

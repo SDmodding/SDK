@@ -16,12 +16,18 @@ namespace UFG
 {
 	class CameraSubject;
 
+	class CollisionData;
+	class CoverData;
+	class FreeRunData;
+
 	class GameSlice;
 	class GroundProperties;
 	class ModelAsset;
 
 	class ParkingSpot;
 	class ParkourHandle;
+
+	class SkeletonData;
 
 	class TriggerRegion;
 
@@ -75,6 +81,7 @@ namespace UFG
 	class PhysicsMoverInterface;
 	class RigidBodyComponent;
 	class RoadSpaceComponent;
+	class SceneryGroupComponent;
 	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
 	class StimulusEmitterComponent;

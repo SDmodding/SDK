@@ -21,8 +21,9 @@
 #define SDK_VAR(type, rva)						reinterpret_cast<type>(SDK_RVA(rva))
 #define SDK_VAR_GET(type, rva)					*reinterpret_cast<type*>(SDK_RVA(rva))
 
-#define SDK_CALL								__fastcall
-#define SDK_CALL_FUNC(ret_type, rva, ...)		reinterpret_cast<ret_type(SDK_CALL*)(__VA_ARGS__)>(SDK_RVA(rva))
+#define SDK_CALL												__fastcall
+#define SDK_CALL_FUNC(ret_type, rva, ...)						reinterpret_cast<ret_type(SDK_CALL*)(__VA_ARGS__)>(SDK_RVA(rva))
+#define SDK_CALL_VFUNC(ret_type, index, this_ptr, ...)			reinterpret_cast<ret_type(SDK_CALL*)(__VA_ARGS__)>((*reinterpret_cast<void***>(this_ptr))[index])
 
 /* Inline */
 
