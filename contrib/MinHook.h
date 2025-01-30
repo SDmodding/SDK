@@ -50,9 +50,6 @@ typedef enum MH_STATUS
     // MinHook is already initialized.
     MH_ERROR_ALREADY_INITIALIZED,
 
-    // MinHook is not initialized yet, or already uninitialized.
-    MH_ERROR_NOT_INITIALIZED,
-
     // The hook for the specified target function is already created.
     MH_ERROR_ALREADY_CREATED,
 
@@ -94,11 +91,6 @@ MH_STATUS;
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    // Initialize the MinHook library. You must call this function EXACTLY ONCE
-    // at the beginning of your program.
-    MH_STATUS WINAPI MH_Initialize(VOID);
-
     // Uninitialize the MinHook library. You must call this function EXACTLY
     // ONCE at the end of your program.
     MH_STATUS WINAPI MH_Uninitialize(VOID);

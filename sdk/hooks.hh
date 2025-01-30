@@ -8,10 +8,10 @@ namespace SDK
 		void* mOriginal;
 
 		template <typename T = void, typename... Args>
-		SDK_INLINE T operator()(Args... args) 
-		{
-			return (mOriginal ? reinterpret_cast<T(SDK_CALL*)(Args...)>(mOriginal)(args...) : static_cast<T>(0));
-		}
+		SDK_INLINE T operator()(Args... args) { return (mOriginal ? reinterpret_cast<T(SDK_CALL*)(Args...)>(mOriginal)(args...) : static_cast<T>(0)); }
+
+		template <typename T = void, typename... Args>
+		SDK_INLINE T Original(Args... args) { return (mOriginal ? reinterpret_cast<T(SDK_CALL*)(Args...)>(mOriginal)(args...) : static_cast<T>(0)); }
 
 		/* Create Funcs */
 
