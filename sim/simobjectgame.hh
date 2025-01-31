@@ -272,6 +272,10 @@ namespace UFG
 			return GetComponent<CharacterOccupantComponent, Character_CharacterOccupantComponent>();
 		}
 
+		SDK_INLINE AttackRightsComponent* GetAttackRights() {
+			return GetComponent<AttackRightsComponent, Character_AttackRightsComponent>();
+		}
+
 		SDK_INLINE AimingBaseComponent* GetAimingBase() {
 			return GetComponent<AimingBaseComponent, Character_AimingBaseComponent>();
 		}

@@ -71,6 +71,7 @@ namespace UFG
 	class EncounterUnitComponent;
 	class FaceActionComponent;
 	class FacialActionTreeComponent;
+	class FormationManagerComponent;
 	class GameCameraComponent;
 	class InteractableComponent;
 	class InteractorComponent;
