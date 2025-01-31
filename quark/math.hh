@@ -30,7 +30,7 @@ namespace UFG
 		SDK_INLINE void operator/=(const qVector2& vec) { x /= vec.x; y /= vec.y; }
 		SDK_INLINE void operator/=(float v) { x /= v; y /= v; }
 
-		SDK_INLINE qVector2 operator-() { return { -x, -y }; }
+		SDK_INLINE qVector2 operator-() const { return { -x, -y }; }
 
 		/* Impl Functions */
 
@@ -67,7 +67,7 @@ namespace UFG
 		SDK_INLINE void operator/=(const qVector3& vec) { x /= vec.x; y /= vec.y; z /= vec.z; }
 		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; }
 
-		SDK_INLINE qVector3 operator-() { return { -x, -y, -z }; }
+		SDK_INLINE qVector3 operator-() const { return { -x, -y, -z }; }
 
 		/* Impl Functions */
 
@@ -106,7 +106,7 @@ namespace UFG
 		SDK_INLINE void operator/=(const qVector4& vec) { x /= vec.x; y /= vec.y; z /= vec.z; w /= vec.w; }
 		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; w /= v; }
 
-		SDK_INLINE qVector4 operator-() { return { -x, -y, -z, -w }; }
+		SDK_INLINE qVector4 operator-() const { return { -x, -y, -z, -w }; }
 
 		/* Impl Functions */
 
