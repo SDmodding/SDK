@@ -279,6 +279,10 @@ namespace UFG
 		SDK_INLINE AimingNPCComponent* GetAimingNPC() {
 			return GetComponent<AimingNPCComponent, Character_AimingBaseComponent>();
 		}
+
+		SDK_INLINE AimingPlayerComponent* GetAimingPlayer() {
+			return GetComponent<AimingPlayerComponent, Character_AimingBaseComponent>();
+		}
 	};
 
 	//------------------------------------------------------------------------------

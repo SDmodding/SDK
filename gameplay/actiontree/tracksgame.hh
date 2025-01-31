@@ -9,6 +9,17 @@ public:
 	ActionPath m_ActionPath;
 };
 
+class AimingFreeAimConeClampTrack : public Track<AimingFreeAimConeClampTask>
+{
+public:
+	f32 m_fFreeAimConeClamp;
+};
+
+class AimingSoftLockTrack : public Track<AimingSoftLockTask>
+{
+public:
+};
+
 class AimingSoftLockDisableTrack : public Track<AimingSoftLockDisableTask>
 {
 public:

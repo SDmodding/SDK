@@ -8,6 +8,18 @@ public:
 	bool m_bApplied : 1;
 };
 
+class AimingFreeAimConeClampTask : public Task<class AimingFreeAimConeClampTrack>, public UFG::qNode<AimingFreeAimConeClampTask>
+{
+public:
+	ActionContext* m_pActionContext;
+};
+
+class AimingSoftLockTask : public Task<class AimingSoftLockTrack>, public UFG::qNode<AimingSoftLockTask>
+{
+public:
+	ActionContext* m_pActionContext;
+};
+
 class AimingSoftLockDisableTask : public Task<class AimingSoftLockDisableTrack>, public UFG::qNode<AimingSoftLockDisableTask>
 {
 public:
