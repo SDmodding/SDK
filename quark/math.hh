@@ -10,6 +10,33 @@ namespace UFG
 		qVector2() {}
 		SDK_INLINE qVector2(f32 f) : x(f), y(f) {}
 		SDK_INLINE qVector2(f32 fX, f32 fY) : x(fX), y(fY) {}
+
+		/* Operators */
+
+		SDK_INLINE bool operator==(const qVector2& vec) const { return (x == vec.x && y == vec.y); }
+		SDK_INLINE bool operator!=(const qVector2& vec) const { return (x != vec.x || y != vec.y); }
+
+		SDK_INLINE qVector2 operator+(const qVector2& vec) const { return { x + vec.x, y + vec.y }; }
+		SDK_INLINE qVector2 operator-(const qVector2& vec) const { return { x - vec.x, y - vec.y }; }
+		SDK_INLINE qVector2 operator*(const qVector2& vec) const { return { x * vec.x, y * vec.y }; }
+		SDK_INLINE qVector2 operator*(f32 v) const { return { x * v, y * v }; }
+		SDK_INLINE qVector2 operator/(const qVector2& vec) const { return { x / vec.x, y / vec.y }; }
+		SDK_INLINE qVector2 operator/(f32 v) const { return { x / v, y / v }; }
+
+		SDK_INLINE void operator+=(const qVector2& vec) { x += vec.x; y += vec.y; }
+		SDK_INLINE void operator-=(const qVector2& vec) { x -= vec.x; y -= vec.y; }
+		SDK_INLINE void operator*=(const qVector2& vec) { x *= vec.x; y *= vec.y; }
+		SDK_INLINE void operator*=(float v) { x *= v; y *= v; }
+		SDK_INLINE void operator/=(const qVector2& vec) { x /= vec.x; y /= vec.y; }
+		SDK_INLINE void operator/=(float v) { x /= v; y /= v; }
+
+		SDK_INLINE qVector2 operator-() { return { -x, -y }; }
+
+		/* Impl Functions */
+
+		SDK_INLINE f32 DistTo(const qVector2& vec) { return (*this - vec).Length(); }
+		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y); }
+		SDK_INLINE void Normalize() { operator/=(Length()); }
 	};
 
 	class qVector3
@@ -20,6 +47,35 @@ namespace UFG
 		qVector3() {}
 		SDK_INLINE qVector3(f32 f) : x(f), y(f), z(f) {}
 		SDK_INLINE qVector3(f32 f0, f32 f1, f32 f2) : x(f0), y(f1), z(f2) {}
+
+		/* Operators */
+
+		SDK_INLINE bool operator==(const qVector3& vec) const { return (x == vec.x && y == vec.y && z == vec.z); }
+		SDK_INLINE bool operator!=(const qVector3& vec) const { return (x != vec.x || y != vec.y || z != vec.z); }
+
+		SDK_INLINE qVector3 operator+(const qVector3& vec) const { return { x + vec.x, y + vec.y, z + vec.z }; }
+		SDK_INLINE qVector3 operator-(const qVector3& vec) const { return { x - vec.x, y - vec.y, z - vec.z }; }
+		SDK_INLINE qVector3 operator*(const qVector3& vec) const { return { x * vec.x, y * vec.y, z * vec.z }; }
+		SDK_INLINE qVector3 operator*(f32 v) const { return { x * v, y * v, z * v }; }
+		SDK_INLINE qVector3 operator/(const qVector3& vec) const { return { x / vec.x, y / vec.y, z / vec.z }; }
+		SDK_INLINE qVector3 operator/(f32 v) const { return { x / v, y / v, z / v }; }
+
+		SDK_INLINE void operator+=(const qVector3& vec) { x += vec.x; y += vec.y; z += vec.z; }
+		SDK_INLINE void operator-=(const qVector3& vec) { x -= vec.x; y -= vec.y; z -= vec.z; }
+		SDK_INLINE void operator*=(const qVector3& vec) { x *= vec.x; y *= vec.y; z *= vec.z; }
+		SDK_INLINE void operator*=(float v) { x *= v; y *= v; z *= v; }
+		SDK_INLINE void operator/=(const qVector3& vec) { x /= vec.x; y /= vec.y; z /= vec.z; }
+		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; }
+
+		SDK_INLINE qVector3 operator-() { return { -x, -y, -z }; }
+
+		/* Impl Functions */
+
+		SDK_INLINE qVector3 CrossProduct(const qVector3& vec) const { return { y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x }; }
+		SDK_INLINE f32 DistTo(const qVector3& vec) { return (*this - vec).Length(); }
+		SDK_INLINE f32 DotProduct(const qVector3& vec) const { return x * vec.x + y * vec.y + z * vec.z; }
+		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z); }
+		SDK_INLINE void Normalize() { operator/=(Length()); }
 	};
 
 	class qVector4
@@ -30,6 +86,31 @@ namespace UFG
 		qVector4() {}
 		SDK_INLINE qVector4(f32 f) : x(f), y(f), z(f), w(f) {}
 		SDK_INLINE qVector4(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
+
+		/* Operators */
+
+		SDK_INLINE bool operator==(const qVector4& vec) const { return (x == vec.x && y == vec.y && z == vec.z && w == vec.w); }
+		SDK_INLINE bool operator!=(const qVector4& vec) const { return (x != vec.x || y != vec.y || z != vec.z || w != vec.w); }
+
+		SDK_INLINE qVector4 operator+(const qVector4& vec) const { return { x + vec.x, y + vec.y, z + vec.z, w + vec.w }; }
+		SDK_INLINE qVector4 operator-(const qVector4& vec) const { return { x - vec.x, y - vec.y, z - vec.z, w - vec.w }; }
+		SDK_INLINE qVector4 operator*(const qVector4& vec) const { return { x * vec.x, y * vec.y, z * vec.z, w * vec.w }; }
+		SDK_INLINE qVector4 operator*(f32 v) const { return { x * v, y * v, z * v, w * v }; }
+		SDK_INLINE qVector4 operator/(const qVector4& vec) const { return { x / vec.x, y / vec.y, z / vec.z, w / vec.w }; }
+		SDK_INLINE qVector4 operator/(f32 v) const { return { x / v, y / v, z / v, w / v }; }
+
+		SDK_INLINE void operator+=(const qVector4& vec) { x += vec.x; y += vec.y; z += vec.z; w += vec.w; }
+		SDK_INLINE void operator-=(const qVector4& vec) { x -= vec.x; y -= vec.y; z -= vec.z; w -= vec.w; }
+		SDK_INLINE void operator*=(const qVector4& vec) { x *= vec.x; y *= vec.y; z *= vec.z; w *= vec.w; }
+		SDK_INLINE void operator*=(float v) { x *= v; y *= v; z *= v; w *= v; }
+		SDK_INLINE void operator/=(const qVector4& vec) { x /= vec.x; y /= vec.y; z /= vec.z; w /= vec.w; }
+		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; w /= v; }
+
+		SDK_INLINE qVector4 operator-() { return { -x, -y, -z, -w }; }
+
+		/* Impl Functions */
+
+		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z + w * w); }
 	};
 
 	class qMatrix44
