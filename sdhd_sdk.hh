@@ -672,6 +672,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Sim Components
 //--------------------------------------------------
 
+#include "sim/components/aiming/aimingbasecomponent.hh"
+
 #include "sim/components/actiontreecomponent.hh"
 #include "sim/components/baseanimationcomponent.hh"
 #include "sim/components/animationlodcomponent.hh"

@@ -53,6 +53,7 @@ namespace UFG
 	class AiDriverComponent;
 	class AIEntityComponent;
 	class AIScriptInterfaceComponent;
+	class AimingBaseComponent;
 	class AnimatedCameraComponent;
 	class AnimationLODComponent;
 	class AttackRightsComponent;
