@@ -38,6 +38,18 @@ namespace UFG
 		RebindingComponentHandle<CharacterAnimationComponent> m_CharacterAnimationComponent;
 		RebindingComponentHandle<CharacterOccupantComponent> m_CharacterOccupantComponent;
 
+		/* Virtual Functions */
+
+		virtual void _UnkVFunc14() = 0;
+		virtual void _UnkVFunc15() = 0;
+		virtual void _UnkVFunc16() = 0;
+		virtual void _UnkVFunc17() = 0;
+		virtual void _UnkVFunc18() = 0;
+		virtual f32 GetAngularInaccuracyRad() = 0;
+		virtual void GetFiringPositionAtAimPosition(qVector3& vFiringPositionAtAimPosition) = 0;
+		virtual f32 GetRadialInaccuracyAtAimPosition() = 0;
+		virtual void OnTargetChanged() = 0;
+
 		/* Functions */
 
 		void AddAccuracyModifierTask(AccuracyModifierTask* pAccuracyModifierTask) { SDK_CALL_FUNC(void, 0x520800, void*, AccuracyModifierTask*)(this, pAccuracyModifierTask); }
@@ -49,14 +61,12 @@ namespace UFG
 		f32 GetLocalAimDirectionXYRelCover() { return SDK_CALL_FUNC(f32, 0x52E330, void*)(this); }
 		f32 GetLocalAimDirectionXYRelSyncBone() { return SDK_CALL_FUNC(f32, 0x52E630, void*)(this); }
 		f32 GetLocalAimDirectionXZ() { return SDK_CALL_FUNC(f32, 0x52E730, void*)(this); }
-		f32 GetRadialInaccuracyAtAimPosition() { return SDK_CALL_FUNC(f32, 0x52F860, void*)(this); }
 		void GetTargetNormalAimPosition(qVector3& vTargetNormalAimPosition, eTargetTypeEnum eTargetType, qMatrix44* pXform = 0) { 
 			SDK_CALL_FUNC(void, 0x530470, void*, qVector3&, eTargetTypeEnum, qMatrix44*)(this, vTargetNormalAimPosition, eTargetType, pXform);
 		}
 		void GetWeaponProjectileDirection(qVector3& vWeaponProjectileDirection) { SDK_CALL_FUNC(void, 0x532FC0, void*, qVector3&)(this, vWeaponProjectileDirection); }
 		void GetWeaponProjectileSpawnPosition(qVector3& vWeaponProjectileSpawnPosition) { SDK_CALL_FUNC(void, 0x5331B0, void*, qVector3&)(this, vWeaponProjectileSpawnPosition); }
 		float GetWeaponProjectileSpeed() { return SDK_CALL_FUNC(float, 0x5338E0, void*)(this); }
-		void OnTargetChanged() { SDK_CALL_FUNC(void, 0x541DF0, void*)(this); }
 		void UpdateLocalAimDirection(const qMatrix44& matToLocal, const qVector3& vAimAtPosition) {
 			SDK_CALL_FUNC(void, 0x5605C0, void*, const qMatrix44&, const qVector3&)(this, matToLocal, vAimAtPosition);
 		}
