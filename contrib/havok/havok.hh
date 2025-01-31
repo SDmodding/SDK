@@ -148,3 +148,5 @@ class hkpWorld;
 #include "Physics2012/Collide/Filter/hkpRayCollidableFilter.hh"
 #include "Physics2012/Collide/Filter/hkpCollisionFilter.hh"
 #include "Physics2012/Collide/Filter/hkpGroupFilter.hh"
+
+#include "Utilities/hkpCharacterControl.hh"

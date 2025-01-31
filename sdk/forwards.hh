@@ -83,6 +83,7 @@ namespace UFG
 	class NavComponent;
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
+	class RagdollComponent;
 	class RigidBodyComponent;
 	class RoadSpaceComponent;
 	class SceneryGroupComponent;

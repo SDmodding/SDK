@@ -260,6 +260,10 @@ namespace UFG
 	class SimObjectCharacter : public SimObjectCVBase
 	{
 	public:
+		SDK_INLINE CharacterPhysicsComponent* GetCharacterPhysics() {
+			return GetComponent<CharacterPhysicsComponent, Character_CharacterPhysicsComponent>();
+		}
+
 		SDK_INLINE InteractorComponent* GetInteractor() {
 			return GetComponent<InteractorComponent, Character_InteractorComponent>();
 		}

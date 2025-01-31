@@ -61,7 +61,7 @@ namespace UFG
 		virtual void Suspend() = 0;
 		virtual void Restore() = 0;
 		virtual void OnDetatch(SimObject*) = 0;
-		virtual void _UnkVFunc11() = 0;
+		virtual void NotifyProxyModeChanged(int proxyMode) = 0;
 		virtual void _UnkVFunc12() = 0;
 		virtual void _UnkVFunc13() = 0;
 	};

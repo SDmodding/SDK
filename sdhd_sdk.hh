@@ -626,7 +626,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/components/waterfloatingtrackercomponent.hh"
 
 #include "physics/rigidbody.hh"
+#include "physics/characterrigidbody.hh"
 #include "physics/components/rigidbodycomponent.hh"
+
+#include "physics/components/characterphysicscomponent.hh"
 
 #include "physics/physicsvehicle.hh"
 
