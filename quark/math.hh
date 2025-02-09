@@ -7,7 +7,7 @@ namespace UFG
 	public:
 		f32 x, y;
 
-		qVector2() {}
+		SDK_INLINE qVector2() {}
 		SDK_INLINE qVector2(f32 f) : x(f), y(f) {}
 		SDK_INLINE qVector2(f32 fX, f32 fY) : x(fX), y(fY) {}
 
@@ -37,6 +37,14 @@ namespace UFG
 		SDK_INLINE f32 DistTo(const qVector2& vec) { return (*this - vec).Length(); }
 		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y); }
 		SDK_INLINE void Normalize() { operator/=(Length()); }
+
+		SDK_INLINE void NormalizeSafe()
+		{
+			float length = Length();
+			if (*reinterpret_cast<int*>(&length)) {
+				operator/=(length);
+			}
+		}
 	};
 
 	class qVector3
@@ -44,7 +52,7 @@ namespace UFG
 	public:
 		f32 x, y, z;
 
-		qVector3() {}
+		SDK_INLINE qVector3() {}
 		SDK_INLINE qVector3(f32 f) : x(f), y(f), z(f) {}
 		SDK_INLINE qVector3(f32 f0, f32 f1, f32 f2) : x(f0), y(f1), z(f2) {}
 
@@ -76,6 +84,14 @@ namespace UFG
 		SDK_INLINE f32 DotProduct(const qVector3& vec) const { return x * vec.x + y * vec.y + z * vec.z; }
 		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z); }
 		SDK_INLINE void Normalize() { operator/=(Length()); }
+
+		SDK_INLINE void NormalizeSafe() 
+		{
+			float length = Length();
+			if (*reinterpret_cast<int*>(&length)) {
+				operator/=(length);
+			}
+		}
 	};
 
 	class qVector4
@@ -83,7 +99,7 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		qVector4() {}
+		SDK_INLINE qVector4() {}
 		SDK_INLINE qVector4(f32 f) : x(f), y(f), z(f), w(f) {}
 		SDK_INLINE qVector4(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 
@@ -108,6 +124,12 @@ namespace UFG
 
 		SDK_INLINE qVector4 operator-() const { return { -x, -y, -z, -w }; }
 
+		/* Operators (Vector3) */
+
+		SDK_INLINE void operator=(const qVector3& vec) { x = vec.x; y = vec.y; z = vec.z; }
+		SDK_INLINE operator qVector3&() { return reinterpret_cast<qVector3&>(*this); }
+		SDK_INLINE operator const qVector3&() const { return reinterpret_cast<const qVector3&>(*this); }
+
 		/* Impl Functions */
 
 		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z + w * w); }
@@ -116,7 +138,20 @@ namespace UFG
 	class qMatrix44
 	{
 	public:
+		/*
+		* v0 - Right
+		* v1 - Up
+		* v2 - Forward
+		* v3 - Position
+		*/
 		qVector4 v0, v1, v2, v3;
+
+		/* Impl Functions */
+
+		SDK_INLINE const qVector4& GetRight() const { return v0; }
+		SDK_INLINE const qVector4& GetUp() const { return v1; }
+		SDK_INLINE const qVector4& GetForward() const { return v2; }
+		SDK_INLINE const qVector4& GetPosition() const { return v3; }
 	};
 
 	class qQuaternion
@@ -124,7 +159,7 @@ namespace UFG
 	public:
 		f32 x, y, z, w;
 
-		qQuaternion() {}
+		SDK_INLINE qQuaternion() {}
 		SDK_INLINE qQuaternion(f32 f) : x(f), y(f), z(f), w(f) {}
 		SDK_INLINE qQuaternion(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 		SDK_INLINE qQuaternion(const qVector4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}

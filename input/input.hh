@@ -136,6 +136,8 @@ namespace UFG
 	{
 	public:
 		InputActionData* mDataPerController[5];
+
+		SDK_INLINE InputActionData* GetData(int controller = gActiveControllerNum) { return mDataPerController[controller]; }
 	};
 
 	class ActionRemapInfo : public qNode<ActionRemapInfo>
