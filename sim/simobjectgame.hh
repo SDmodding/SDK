@@ -147,6 +147,10 @@ namespace UFG
 	class SimObjectProp : public SimObjectGame
 	{
 	public:
+		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
+			return GetComponent<CompositeDrawableComponent, Prop_CompositeDrawableComponent>();
+		}
+
 	};
 
 	//------------------------------------------------------------------------------

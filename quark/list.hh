@@ -17,8 +17,6 @@ namespace UFG
 			mPrev = mNext = this;
 		}
 
-		SDK_INLINE T* prev() { return static_cast<T*>(mPrev); }
-		SDK_INLINE T* next() { return static_cast<T*>(mNext); }
 		SDK_INLINE T* type() { return static_cast<T*>(this); }
 	};
 
@@ -29,9 +27,9 @@ namespace UFG
 		qNode<T, U> mNode;
 
 		SDK_INLINE bool IsEmpty() { return mNode.mNext == &mNode; }
-		SDK_INLINE T* back() { return mNode.prev(); }
-		SDK_INLINE T* begin() { return mNode.next(); }
-		SDK_INLINE T* end() { return static_cast<T*>(&mNode); }
+		SDK_INLINE qNode<T, U>* back() { return mNode.mPrev; }
+		SDK_INLINE qNode<T, U>* begin() { return mNode.mNext; }
+		SDK_INLINE qNode<T, U>* end() { return &mNode; }
 	};
 
 	template <typename T>
