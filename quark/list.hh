@@ -28,8 +28,26 @@ namespace UFG
 
 		SDK_INLINE bool IsEmpty() { return mNode.mNext == &mNode; }
 		SDK_INLINE qNode<T, U>* back() { return mNode.mPrev; }
-		SDK_INLINE qNode<T, U>* begin() { return mNode.mNext; }
-		SDK_INLINE qNode<T, U>* end() { return &mNode; }
+
+		/* Iterator */
+
+		class Iterator
+		{
+		public:
+			Iterator(qNode<T, U>* node) : mNode(node) {}
+
+			bool operator!=(const Iterator& other) const { return mNode != other.mNode; }
+
+			T* operator*() const { return mNode->type(); }
+
+			Iterator& operator++() { mNode = mNode.mNext; return *this; }
+
+		private:
+			qNode<T, U>* mNode;
+		};
+
+		SDK_INLINE Iterator begin() { return { mNode.mNext }; }
+		SDK_INLINE Iterator end() { return { &mNode }; }
 	};
 
 	template <typename T>

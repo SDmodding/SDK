@@ -18,7 +18,7 @@ namespace UFG
 	public:
 		qBaseNodeRB mNode;
 
-		SDK_INLINE T* Get() { return (this ? static_cast<T*>(this) : reinterpret_cast<T*>(nullptr)); }
+		SDK_INLINE T* type() { return (this ? static_cast<T*>(this) : reinterpret_cast<T*>(nullptr)); }
 	};
 
 	class qBaseTreeRB
@@ -62,13 +62,34 @@ namespace UFG
 
 		SDK_INLINE bool Contains(qNodeRB<T>* node) { return mTree.Contains(&node->mNode); }
 
-		SDK_INLINE T* Get(u32 uid) { return reinterpret_cast<qNodeRB<T>*>(mTree.Get(uid))->Get(); }
+		SDK_INLINE T* Get(u32 uid) { return reinterpret_cast<qNodeRB<T>*>(mTree.Get(uid))->type(); }
 
-		SDK_INLINE T* GetHead() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetHead())->Get(); }
+		SDK_INLINE T* GetHead() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetHead())->type(); }
 
-		SDK_INLINE T* GetNext(qNodeRB<T>* x) { return reinterpret_cast<qNodeRB<T>*>(mTree.GetNext(&x->mNode))->Get(); }
+		SDK_INLINE T* GetNext(qNodeRB<T>* x) { return reinterpret_cast<qNodeRB<T>*>(mTree.GetNext(&x->mNode))->type(); }
 
-		SDK_INLINE T* GetTail() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetTail())->Get(); }
+		SDK_INLINE T* GetTail() { return reinterpret_cast<qNodeRB<T>*>(mTree.GetTail())->type(); }
+
+		/* Iterator */
+
+		class Iterator
+		{
+		public:
+			Iterator(qBaseTreeRB* tree, qBaseNodeRB* node) : mTree(tree), mNode(node) {}
+
+			bool operator!=(const Iterator& other) const { return mNode != other.mNode; }
+
+			T* operator*() const { return reinterpret_cast<qNodeRB<T>*>(mNode)->type(); }
+
+			Iterator& operator++() { mNode = mTree->GetNext(mNode); return *this; }
+
+		private:
+			qBaseTreeRB* mTree;
+			qBaseNodeRB* mNode;
+		};
+
+		SDK_INLINE Iterator begin() { return { &mTree, mTree.GetHead() }; }
+		SDK_INLINE Iterator end() { return { nullptr, nullptr }; }
 	};
 
 	template <typename T>

@@ -147,6 +147,34 @@ namespace UFG
 	class SimObjectProp : public SimObjectGame
 	{
 	public:
+		SDK_INLINE UELComponent* GetUEL() {
+			return GetComponent<UELComponent, Prop_UELComponent>();
+		}
+
+		SDK_INLINE SimObjectPropertiesComponent* GetSimObjectProperties() {
+			return GetComponent<SimObjectPropertiesComponent, Prop_SimObjectPropertiesComponent>();
+		}
+
+		SDK_INLINE TSActorComponent* GetTSActor() {
+			return GetComponent<TSActorComponent, Prop_TSActorComponent>();
+		}
+
+		SDK_INLINE PhantomVolumeComponent* GetPhantomVolume() {
+			return GetComponent<PhantomVolumeComponent, Prop_PhantomVolumeComponent>();
+		}
+
+		SDK_INLINE ActionTreeComponent* GetActionTree() {
+			return GetComponent<ActionTreeComponent, Prop_ActionTreeComponent>();
+		}
+
+		SDK_INLINE StreamedResourceComponent* GetStreamedResource() {
+			return GetComponent<StreamedResourceComponent, Prop_StreamedResourceComponent>();
+		}
+
+		SDK_INLINE BaseAnimationComponent* GetBaseAnimation() {
+			return GetComponent<BaseAnimationComponent, Prop_BaseAnimationComponent>();
+		}
+
 		SDK_INLINE CompositeDrawableComponent* GetCompositeDrawable() {
 			return GetComponent<CompositeDrawableComponent, Prop_CompositeDrawableComponent>();
 		}
