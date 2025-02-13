@@ -64,6 +64,12 @@ namespace UFG
 		virtual void NotifyProxyModeChanged(int proxyMode) = 0;
 		virtual void _UnkVFunc12() = 0;
 		virtual void _UnkVFunc13() = 0;
+
+
+		/* Functions */
+
+		template <typename T = SimComponent>
+		T* GetComponentOfType(u32 type_uid = T::_TypeUID) { return m_pSimObject ? reinterpret_cast<T*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190AD0))(m_pSimObject, type_uid) : nullptr; }
 	};
 	SDK_ASSERT_SIZEOF(SimComponent, 0x40);
 
@@ -122,7 +128,7 @@ namespace UFG
 		/* Functions */
 
 		template <typename T = SimComponent>
-		T* GetComponentOfType(u32 type_uid) { return reinterpret_cast<T*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190AD0))(this, type_uid); }
+		T* GetComponentOfType(u32 type_uid = T::_TypeUID) { return reinterpret_cast<T*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190AD0))(this, type_uid); }
 	};
 	SDK_ASSERT_SIZEOF(SimObject, 0x80);
 

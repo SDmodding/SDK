@@ -67,7 +67,12 @@ namespace UFG
 		void SetEyeAttachment(TransformNodeComponent* pTNC) { SDK_CALL_FUNC(void, 0x3CC400, void*, TransformNodeComponent*)(this, pTNC); }
 		void SetEyeOffsetFromTarget(const qVector3& offset) { SDK_CALL_FUNC(void, 0x3CC480, void*, const qVector3&)(this, offset); }
 		void SetTarget(TransformNodeComponent* pTNC) { SDK_CALL_FUNC(void, 0x3CD600, void*, TransformNodeComponent*)(this, pTNC); }
-		void SwitchToScriptCam(TransformNodeComponent* pTNC, bool transitionIn, f32 fov) { SDK_CALL_FUNC(void, 0x3CE500, void*, TransformNodeComponent*, bool, f32)(this, pTNC, transitionIn, fov); }
+		void SwitchToScriptCam(bool transitionIn = false, f32 fov = 0.f) {
+			SDK_CALL_FUNC(void, 0x3CE500, void*, TransformNodeComponent*, bool, f32)(this, mTargetTransform, transitionIn, fov);
+		}
+		void SwitchToScriptCam(TransformNodeComponent* pTNC, bool transitionIn = false, f32 fov = 0.f) {
+			SDK_CALL_FUNC(void, 0x3CE500, void*, TransformNodeComponent*, bool, f32)(this, pTNC, transitionIn, fov);
+		}
 	};
 	SDK_ASSERT_SIZEOF(ScriptCameraComponent, 0x760);
 }
