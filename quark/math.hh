@@ -146,6 +146,13 @@ namespace UFG
 		*/
 		qVector4 v0, v1, v2, v3;
 
+		SDK_INLINE qMatrix44() {}
+		SDK_INLINE qMatrix44(const qVector4& vec0, const qVector4& vec1, const qVector4& vec2, const qVector4& vec3) : v0(vec0), v1(vec1), v2(vec2), v3(vec3) {}
+
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qMatrix44, 0x203BD40> msIdentity;
+
 		/* Impl Functions */
 
 		SDK_INLINE const qVector4& GetRight() const { return v0; }

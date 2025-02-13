@@ -101,6 +101,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/qticks.hh"
 
 #include "quark/memorypool.hh"
+#include "quark/memorypoollinearallocator.hh"
 #include "quark/vramemorypool.hh"
 #include "quark/memorystream.hh"
 
@@ -225,6 +226,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/skinning/softbody.hh"
 
 #include "render/pc/renderplat.hh"
+
+#include "render/font.hh"
+
+#include "render/debugdraw.hh"
 
 //--------------------------------------------------
 //	Main
