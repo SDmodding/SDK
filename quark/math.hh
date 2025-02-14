@@ -1,5 +1,20 @@
 #pragma once
 
+//---------------------------------------------------------------
+//	Defines / Macros
+//---------------------------------------------------------------
+
+#define UFGM_PI				3.1415926535897932384626433832795
+#define UFGM_PI_F			((f32)(UFGM_PI))
+
+#define UFGM_DEG2RAD_MUL	(UFGM_PI_F / 180.f)
+#define UFGM_DEG2RAD(x)		(x * UFGM_DEG2RAD_MUL)
+
+#define UFGM_RAD2DEG_MUL	(180.f / UFGM_PI_F)
+#define UFGM_RAD2DEG(x)		(x * UFGM_RAD2DEG_MUL)
+
+//---------------------------------------------------------------
+
 namespace UFG
 {
 	class qVector2
@@ -26,9 +41,9 @@ namespace UFG
 		SDK_INLINE void operator+=(const qVector2& vec) { x += vec.x; y += vec.y; }
 		SDK_INLINE void operator-=(const qVector2& vec) { x -= vec.x; y -= vec.y; }
 		SDK_INLINE void operator*=(const qVector2& vec) { x *= vec.x; y *= vec.y; }
-		SDK_INLINE void operator*=(float v) { x *= v; y *= v; }
+		SDK_INLINE void operator*=(f32 v) { x *= v; y *= v; }
 		SDK_INLINE void operator/=(const qVector2& vec) { x /= vec.x; y /= vec.y; }
-		SDK_INLINE void operator/=(float v) { x /= v; y /= v; }
+		SDK_INLINE void operator/=(f32 v) { x /= v; y /= v; }
 
 		SDK_INLINE qVector2 operator-() const { return { -x, -y }; }
 
@@ -40,7 +55,7 @@ namespace UFG
 
 		SDK_INLINE void NormalizeSafe()
 		{
-			float length = Length();
+			f32 length = Length();
 			if (*reinterpret_cast<int*>(&length)) {
 				operator/=(length);
 			}
@@ -71,9 +86,9 @@ namespace UFG
 		SDK_INLINE void operator+=(const qVector3& vec) { x += vec.x; y += vec.y; z += vec.z; }
 		SDK_INLINE void operator-=(const qVector3& vec) { x -= vec.x; y -= vec.y; z -= vec.z; }
 		SDK_INLINE void operator*=(const qVector3& vec) { x *= vec.x; y *= vec.y; z *= vec.z; }
-		SDK_INLINE void operator*=(float v) { x *= v; y *= v; z *= v; }
+		SDK_INLINE void operator*=(f32 v) { x *= v; y *= v; z *= v; }
 		SDK_INLINE void operator/=(const qVector3& vec) { x /= vec.x; y /= vec.y; z /= vec.z; }
-		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; }
+		SDK_INLINE void operator/=(f32 v) { x /= v; y /= v; z /= v; }
 
 		SDK_INLINE qVector3 operator-() const { return { -x, -y, -z }; }
 
@@ -83,15 +98,52 @@ namespace UFG
 		SDK_INLINE f32 DistTo(const qVector3& vec) { return (*this - vec).Length(); }
 		SDK_INLINE f32 DotProduct(const qVector3& vec) const { return x * vec.x + y * vec.y + z * vec.z; }
 		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z); }
+		SDK_INLINE f32 Length2D() const { return sqrtf(x * x + y * y); }
 		SDK_INLINE void Normalize() { operator/=(Length()); }
 
 		SDK_INLINE void NormalizeSafe() 
 		{
-			float length = Length();
+			f32 length = Length();
 			if (*reinterpret_cast<int*>(&length)) {
 				operator/=(length);
 			}
 		}
+
+		void AngleVectors(qVector3& forward)
+		{
+			f32 sp = sinf(x), sy = sinf(y), cp = cosf(x), cy = cosf(y);
+
+			forward.x = cp * cy;
+			forward.y = cp * sy;
+			forward.z = -sp;
+		}
+
+		void AngleVectors(qVector3* forward, qVector3* right = 0, qVector3* up = 0)
+		{
+			f32 sp = sinf(x), sy = sinf(y), sr = sinf(z), cp = cosf(x), cy = cosf(y), cr = cosf(z);
+
+			if (forward)
+			{
+				forward->x = cp * cy;
+				forward->y = cp * sy;
+				forward->z = -sp;
+			}
+
+			if (right)
+			{
+				right->x = (-1 * sr * sp * cy + -1 * cr * -sy);
+				right->y = (-1 * sr * sp * sy + -1 * cr * cy);
+				right->z = -1 * sr * cp;
+			}
+
+			if (up)
+			{
+				up->x = (cr * sp * cy + -sr * -sy);
+				up->y = (cr * sp * sy + -sr * cy);
+				up->z = cr * cp;
+			}
+		}
+
 	};
 
 	class qVector4
@@ -118,9 +170,9 @@ namespace UFG
 		SDK_INLINE void operator+=(const qVector4& vec) { x += vec.x; y += vec.y; z += vec.z; w += vec.w; }
 		SDK_INLINE void operator-=(const qVector4& vec) { x -= vec.x; y -= vec.y; z -= vec.z; w -= vec.w; }
 		SDK_INLINE void operator*=(const qVector4& vec) { x *= vec.x; y *= vec.y; z *= vec.z; w *= vec.w; }
-		SDK_INLINE void operator*=(float v) { x *= v; y *= v; z *= v; w *= v; }
+		SDK_INLINE void operator*=(f32 v) { x *= v; y *= v; z *= v; w *= v; }
 		SDK_INLINE void operator/=(const qVector4& vec) { x /= vec.x; y /= vec.y; z /= vec.z; w /= vec.w; }
-		SDK_INLINE void operator/=(float v) { x /= v; y /= v; z /= v; w /= v; }
+		SDK_INLINE void operator/=(f32 v) { x /= v; y /= v; z /= v; w /= v; }
 
 		SDK_INLINE qVector4 operator-() const { return { -x, -y, -z, -w }; }
 
@@ -188,11 +240,11 @@ namespace UFG
 
 	SDK_SINLINE int qRandom(int range, int* pseed = qGetDefaultSeed()) { return SDK_CALL_FUNC(int, 0x1895E0, int, int*)(range, pseed); }
 
-	SDK_SINLINE f32 qRandom(f32 range, int* pseed = qGetDefaultSeed()) { return SDK_CALL_FUNC(float, 0x189620, f32, int*)(range, pseed); }
+	SDK_SINLINE f32 qRandom(f32 range, int* pseed = qGetDefaultSeed()) { return SDK_CALL_FUNC(f32, 0x189620, f32, int*)(range, pseed); }
 
-	SDK_SINLINE float qHeading2D(const qVector3& v1) { return SDK_CALL_FUNC(float, 0x184CF0, const qVector3&)(v1); }
+	SDK_SINLINE f32 qHeading2D(const qVector3& v1) { return SDK_CALL_FUNC(f32, 0x184CF0, const qVector3&)(v1); }
 
-	SDK_SINLINE float qHeadingDifference2D(const qVector3& v1, const qVector3& v2) { return SDK_CALL_FUNC(float, 0x184D60, const qVector3&, const qVector3&)(v1, v2); }
+	SDK_SINLINE f32 qHeadingDifference2D(const qVector3& v1, const qVector3& v2) { return SDK_CALL_FUNC(f32, 0x184D60, const qVector3&, const qVector3&)(v1, v2); }
 
 	SDK_SINLINE bool qDecomposeAffineEuler(qVector3* sol_a, qVector3* sol_b, qMatrix44* m, bool pos_bias) { 
 		return SDK_CALL_FUNC(bool, 0x182C10, qVector3*, qVector3*, qMatrix44*, bool)(sol_a, sol_b, m, pos_bias);

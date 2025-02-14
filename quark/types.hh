@@ -27,6 +27,7 @@ template <typename T, uptr RVA>
 class qGlobalVar
 {
 public:
+	SDK_INLINE T operator*() { return SDK_VAR(T, RVA); }
 	SDK_INLINE T* operator&() { return SDK_VAR(T*, RVA); }
 	SDK_INLINE T operator->() { return SDK_VAR(T, RVA); }
 	SDK_INLINE operator T&() { return SDK_VAR_GET(T, RVA); }

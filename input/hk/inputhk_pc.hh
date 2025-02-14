@@ -48,7 +48,12 @@ namespace UFG
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B218> ActionDef_UIDownPressed;
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B240> ActionDef_UIDownRepeat;
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B268> ActionDef_UIDownReleased;
-
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B290> ActionDef_UIAcceptPressed;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B2B8> ActionDef_UIAcceptRepeat;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B2E0> ActionDef_UIAcceptReleased;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B308> ActionDef_UIBackPressed;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B330> ActionDef_UIBackRepeat;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B358> ActionDef_UIBackReleased;
 
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B5D8> ActionDef_UIL1Pressed;
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x249B600> ActionDef_UIL1Repeat;
