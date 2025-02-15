@@ -60,7 +60,7 @@ namespace UFG
 		void SetDOF(f32 focalDistance, f32 inFocusHalfRange, f32 nearBlendRange, f32 nearBlurRadius, f32 farBlendRange, f32 farBlurRadius, bool snap) {
 			SDK_CALL_FUNC(void, 0x3CB030, void*, f32, f32, f32, f32, f32, f32, bool)(this, focalDistance, inFocusHalfRange, nearBlendRange, nearBlurRadius, farBlendRange, farBlurRadius, snap);
 		}
-		void SetDesiredEyeLook(const qVector3& eye, const qVector3& look, f32 duration, bool snap) {
+		void SetDesiredEyeLook(const qVector3& eye, const qVector3& look, f32 duration = 0.f, bool snap = true) {
 			SDK_CALL_FUNC(void, 0x3CB090, void*, const qVector3&, const qVector3&, f32, bool)(this, eye, look, duration, snap);
 		}
 		void SetDurations(f32 duration) { SDK_CALL_FUNC(void, 0x3CC100, void*, f32)(this, duration); }
