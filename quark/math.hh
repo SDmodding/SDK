@@ -71,6 +71,18 @@ namespace UFG
 		SDK_INLINE qVector3(f32 f) : x(f), y(f), z(f) {}
 		SDK_INLINE qVector3(f32 f0, f32 f1, f32 f2) : x(f0), y(f1), z(f2) {}
 
+		/* Operators (Vec2) */
+
+		SDK_INLINE qVector3 operator+(const qVector2& vec) const { return { x + vec.x, y + vec.y, z }; }
+		SDK_INLINE qVector3 operator-(const qVector2& vec) const { return { x - vec.x, y - vec.y, z }; }
+		SDK_INLINE qVector3 operator*(const qVector2& vec) const { return { x * vec.x, y * vec.y, z }; }
+		SDK_INLINE qVector3 operator/(const qVector2& vec) const { return { x / vec.x, y / vec.y, z }; }
+
+		SDK_INLINE void operator+=(const qVector2& vec) { x += vec.x; y += vec.y; }
+		SDK_INLINE void operator-=(const qVector2& vec) { x -= vec.x; y -= vec.y; }
+		SDK_INLINE void operator*=(const qVector2& vec) { x *= vec.x; y *= vec.y; }
+		SDK_INLINE void operator/=(const qVector2& vec) { x /= vec.x; y /= vec.y; }
+
 		/* Operators */
 
 		SDK_INLINE bool operator==(const qVector3& vec) const { return (x == vec.x && y == vec.y && z == vec.z); }
@@ -191,9 +203,9 @@ namespace UFG
 	{
 	public:
 		/*
-		* v0 - Right
-		* v1 - Up
-		* v2 - Forward
+		* v0 - Forward
+		* v1 - Right
+		* v2 - Up
 		* v3 - Position
 		*/
 		qVector4 v0, v1, v2, v3;
@@ -207,10 +219,16 @@ namespace UFG
 
 		/* Impl Functions */
 
-		SDK_INLINE const qVector4& GetRight() const { return v0; }
-		SDK_INLINE const qVector4& GetUp() const { return v1; }
-		SDK_INLINE const qVector4& GetForward() const { return v2; }
+		SDK_INLINE const qVector4& GetForward() const { return v0; }
+		SDK_INLINE const qVector4& GetRight() const { return v1; }
+		SDK_INLINE const qVector4& GetUp() const { return v2; }
 		SDK_INLINE const qVector4& GetPosition() const { return v3; }
+
+		// Helper for Transform / Camera Transform as they have swapped members...
+
+		SDK_INLINE const qVector4& GetTransForward() const { return v2; }
+		SDK_INLINE const qVector4& GetTransRight() const { return v0; }
+		SDK_INLINE const qVector4& GetTransUp() const { return v1; }
 	};
 
 	class qQuaternion
