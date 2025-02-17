@@ -4,14 +4,18 @@
 //	Defines / Macros
 //---------------------------------------------------------------
 
-#define UFGM_PI				3.1415926535897932384626433832795
-#define UFGM_PI_F			((f32)(UFGM_PI))
+#define UFGM_PI						3.1415926535897932384626433832795
+#define UFGM_PI_F					((f32)(UFGM_PI))
 
-#define UFGM_DEG2RAD_MUL	(UFGM_PI_F / 180.f)
-#define UFGM_DEG2RAD(x)		(x * UFGM_DEG2RAD_MUL)
+#define UFGM_DEG2RAD_MUL			(UFGM_PI_F / 180.f)
+#define UFGM_DEG2RAD(x)				(x * UFGM_DEG2RAD_MUL)
 
-#define UFGM_RAD2DEG_MUL	(180.f / UFGM_PI_F)
-#define UFGM_RAD2DEG(x)		(x * UFGM_RAD2DEG_MUL)
+#define UFGM_RAD2DEG_MUL			(180.f / UFGM_PI_F)
+#define UFGM_RAD2DEG(x)				(x * UFGM_RAD2DEG_MUL)
+
+#define UFGM_MIN(mn, mx)			(mn < mx ? mn : mx)
+#define UFGM_MAX(mn, mx)			(mn < mx ? mx : mn)
+#define UFGM_CLAMP(v, mn, mx)		((v < mn) ? mn : (v > mx) ? mx : v)
 
 //---------------------------------------------------------------
 
@@ -107,7 +111,7 @@ namespace UFG
 		/* Impl Functions */
 
 		SDK_INLINE qVector3 CrossProduct(const qVector3& vec) const { return { y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x }; }
-		SDK_INLINE f32 DistTo(const qVector3& vec) { return (*this - vec).Length(); }
+		SDK_INLINE f32 DistTo(const qVector3& vec) const { return (*this - vec).Length(); }
 		SDK_INLINE f32 DotProduct(const qVector3& vec) const { return x * vec.x + y * vec.y + z * vec.z; }
 		SDK_INLINE f32 Length() const { return sqrtf(x * x + y * y + z * z); }
 		SDK_INLINE f32 Length2D() const { return sqrtf(x * x + y * y); }
@@ -118,6 +122,16 @@ namespace UFG
 			f32 length = Length();
 			if (*reinterpret_cast<int*>(&length)) {
 				operator/=(length);
+			}
+		}
+
+		SDK_INLINE void NormalizeYaw(f32 angle, f32 wrap)
+		{
+			while (y > angle) {
+				y -= wrap;
+			} 
+			while (y < -angle) {
+				y += wrap;
 			}
 		}
 

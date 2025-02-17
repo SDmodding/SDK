@@ -40,6 +40,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #define DIRECTINPUT_VERSION 0x800
 #include <dinput.h>
+#include <Xinput.h>
 
 //--------------------------------------------------
 //	SDK Includes
@@ -716,6 +717,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "render/components/compositedrawablecomponent.hh"
+#include "render/highlighteffect.hh"
 
 //--------------------------------------------------
 //	Gamescene

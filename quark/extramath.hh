@@ -3,7 +3,7 @@
 namespace UFG
 {
 	template <typename T>
-	class HomerCubic
+	class HomerCubicBase
 	{
 	public:
 		T mDuration;
@@ -16,6 +16,25 @@ namespace UFG
 		T p1;
 		T v0;
 		T v1;
+	};
+
+	template <typename T>
+	class HomerCubic : public HomerCubicBase<T>{};
+
+	template <>
+	class HomerCubic<f32> : public HomerCubicBase<f32>
+	{
+	public:
+		void MakeCoeffs() { SDK_CALL_FUNC(void, 0x3C6BB0, void*)(this); }
+	};
+
+	template <>
+	class HomerCubic<qVector3> : public HomerCubicBase<qVector3>
+	{
+	public:
+		void MakeCoeffs() { SDK_CALL_FUNC(void, 0xB9CC0, void*)(this); }
+		void SetDesiredPosition(const qVector3& position) { SDK_CALL_FUNC(void, 0x3CBF90, void*, const qVector3&)(this, position); }
+		void SetDuration(const qVector3& duration) { SDK_CALL_FUNC(void, 0x3CC070, void*, const qVector3&)(this, duration); }
 	};
 
 	class HomerCubicAngular

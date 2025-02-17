@@ -48,6 +48,25 @@ namespace UFG
 		FALLING_90
 	};
 
+	class RawPadData
+	{
+	public:
+		u16 mGetXIState_Gamepad_wButtons;
+		int mGetState_lRx;
+		int mGetState_lRy;
+		int mGetState_lRz;
+		int mGetState_lX;
+		int mGetState_lY;
+		int mGetState_lZ;
+		s16 mGetXIState_Gamepad_sThumbLX;
+		s16 mGetXIState_Gamepad_sThumbLY;
+		s16 mGetXIState_Gamepad_sThumbRX;
+		s16 mGetXIState_Gamepad_sThumbRY;
+		s8 mGetXIState_Gamepad_bLeftTrigger;
+		s8 mGetXIState_Gamepad_bRightTrigger;
+		u32 mGetState_rgdwPOV0;
+	};
+
 	class InputActionData
 	{
 	public:
@@ -223,7 +242,7 @@ namespace UFG
 		/* Virtual Functions */
 
 		virtual u16 RawPadDataSize() = 0;
-		virtual void* ReadRawPadData() = 0;
+		virtual RawPadData* ReadRawPadData() = 0;
 		virtual void SetRawPadData(const void* prpd) = 0;
 		virtual ~Controller() = 0;
 		virtual void Update(float elapsedTime, const float simTime) = 0;

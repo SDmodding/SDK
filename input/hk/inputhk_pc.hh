@@ -9,6 +9,9 @@ namespace UFG
 
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x23E43C8> ActionDef_CamMoveHorizVert;		// Right Analog
 
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x23E4578> ActionDef_CamZoomIn;
+	SDK_VINLINE qGlobalVar<InputActionDef*, 0x23E45A0> ActionDef_CamZoomOut;
+
 	// Vehicle Horn (Keyboard: H)
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x23E47D0> ActionDef_HornStart;
 	SDK_VINLINE qGlobalVar<InputActionDef*, 0x23E47F8> ActionDef_HornStop;

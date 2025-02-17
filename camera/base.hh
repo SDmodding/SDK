@@ -29,7 +29,7 @@ namespace UFG
 		virtual void SetActive(bool active) = 0;
 		virtual bool IsActive() = 0;
 		virtual void SetCurrent(bool current) = 0;
-		virtual void GetFovRadians(float* fov, float* velocity) = 0;
+		virtual void GetFovRadians(float& fov, float& velocity) = 0;
 		virtual void SetFovRadians(float fov, float velocity) = 0;
 		virtual void GetEyeWorld(qVector3& position, qVector3& velocity) = 0;
 		virtual void GetLookWorld(qVector3& position, qVector3& velocity) = 0;
