@@ -5,9 +5,9 @@ namespace UFG
 	struct HighlightParams
 	{
 		qColour mColour;
-		f32 mOutlineStrength;
-		f32 mXrayStrength;
-		bool mIsDepthEnabled;
+		f32 mOutlineStrength = 1.5f;
+		f32 mXrayStrength = 0.f;
+		bool mIsDepthEnabled = true;
 	};
 
 	class HighlightComponent : public SimComponent, public qNode<HighlightComponent>
