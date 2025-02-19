@@ -205,7 +205,9 @@ namespace UFG
 		/* Operators (Vector3) */
 
 		SDK_INLINE void operator=(const qVector3& vec) { x = vec.x; y = vec.y; z = vec.z; }
+		SDK_INLINE operator qVector3*() { return reinterpret_cast<qVector3*>(this); }
 		SDK_INLINE operator qVector3&() { return reinterpret_cast<qVector3&>(*this); }
+		SDK_INLINE operator const qVector3*() const { return reinterpret_cast<const qVector3*>(this); }
 		SDK_INLINE operator const qVector3&() const { return reinterpret_cast<const qVector3&>(*this); }
 
 		/* Impl Functions */

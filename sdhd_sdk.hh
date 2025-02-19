@@ -243,6 +243,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "streamer/datastreamer.hh"
+#include "streamer/streamingmemorymanager.hh"
 
 //--------------------------------------------------
 //	SceneDB
@@ -419,12 +420,25 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookum/tstimer.hh"
 
 //--------------------------------------------------
+//	Schema
+//--------------------------------------------------
+
+#include "schema/schema_baseanimation.hh"
+#include "schema/schema_health.hh"
+#include "schema/schema_interactable.hh"
+#include "schema/schema_missionfailcondition.hh"
+#include "schema/schema_physicsmover.hh"
+#include "schema/schema_streamedresource.hh"
+
+//--------------------------------------------------
 //	Object Resource Management
 //--------------------------------------------------
 
 #include "objectresourcemanagement/resourcerequest.hh"
 #include "objectresourcemanagement/truecrowddatabase.hh"
 #include "objectresourcemanagement/meshresourceloader.hh"
+#include "objectresourcemanagement/resourcepool.hh"
+#include "objectresourcemanagement/objectresourcemanager.hh"
 
 //--------------------------------------------------
 //	Part Database
@@ -467,16 +481,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "flowcontrol/gamestate.hh"
 #include "flowcontrol/gamestatecommon.hh"
 #include "flowcontrol/flowcontrol.hh"
-
-//--------------------------------------------------
-//	Schema
-//--------------------------------------------------
-
-#include "schema/schema_baseanimation.hh"
-#include "schema/schema_health.hh"
-#include "schema/schema_interactable.hh"
-#include "schema/schema_missionfailcondition.hh"
-#include "schema/schema_physicsmover.hh"
 
 //--------------------------------------------------
 //	Physics

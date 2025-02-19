@@ -46,6 +46,7 @@ namespace UFG
 		SDK_INLINE qPropertySet* CreateTopLevelPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F4760, const qSymbol&)(propSetName); }
 		SDK_INLINE qString DeterminePathAndFilename(const char* propSetName, const char* alt_root_path) { return SDK_CALL_FUNC(qString, 0x1F51D0, const char*, const char*)(propSetName, alt_root_path); }
 		SDK_INLINE qPropertySet* FindPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F5560, const qSymbol&)(propSetName); }
+		SDK_INLINE qPropertySet* GetPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F5560, const qSymbol&)(propSetName); }
 		SDK_INLINE SchemaDef* GetSchema(const qSymbol& schemaName) { return SDK_CALL_FUNC(SchemaDef*, 0x1F8110, const qSymbol&)(schemaName); }
 		SDK_INLINE SchemaDef* GetSchemaForComponentPropertyName(const qSymbol& componentPropertyName) { return SDK_CALL_FUNC(SchemaDef*, 0x1F8190, const qSymbol&)(componentPropertyName); }
 		SDK_INLINE SchemaDef* GetSchemaForProperty(qPropertySet* propertySet, const qSymbol& propertyName) { 

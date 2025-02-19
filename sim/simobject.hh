@@ -130,6 +130,7 @@ namespace UFG
 		template <typename T = SimComponent>
 		T* GetComponentOfType(u32 type_uid = T::_TypeUID) { return SDK_CALL_FUNC(T*, 0x190AD0, void*, u32)(this, type_uid); }
 
+		void Destroy() { SDK_CALL_FUNC(void, 0x1905C0, void*)(this); }
 		int Restore() { return SDK_CALL_FUNC(int, 0x1911F0, void*)(this); }
 		int Suspend() { return SDK_CALL_FUNC(int, 0x1916D0, void*)(this); }
 	};

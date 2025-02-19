@@ -20,8 +20,21 @@ namespace UFG
 		void DestroyQueuedSimObjects() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x190650))(this); }
 		void DestroySimComponent(SimComponent* component) { reinterpret_cast<void(SDK_CALL*)(void*, SimComponent*)>(SDK_RVA(0x190720))(this, component); }
 		void DestroySimObject(SimObject* object) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x190760))(this, object); }
-		qSymbol GenerateUniqueName(const qSymbol& root) { return reinterpret_cast<qSymbol(SDK_CALL*)(void*, const qSymbol&)>(SDK_RVA(0x1909D0))(this, root); }
-		qSymbol GenerateUniqueName(const char* root) { return reinterpret_cast<qSymbol(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x190A50))(this, root); }
+
+		qSymbol GenerateUniqueName(const qSymbol& root) 
+		{
+			qSymbol res;
+			SDK_CALL_FUNC(void, 0x1909D0, void*, qSymbol*, const qSymbol&)(this, &res, root);
+			return res;
+		}
+
+		qSymbol GenerateUniqueName(const char* root) 
+		{
+			qSymbol res;
+			reinterpret_cast<void(SDK_CALL*)(void*, qSymbol*, const char*)>(SDK_RVA(0x190A50))(this, &res, root);
+			return res;
+		}
+
 		SimObject* GetSimObject(const qSymbol& name) { return reinterpret_cast<SimObject*(SDK_CALL*)(void*, const qSymbol&)>(SDK_RVA(0x190BF0))(this, name); }
 		SimObject* GetSimObject(u32 name_uid) { return reinterpret_cast<SimObject*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190C40))(this, name_uid); }
 		void QueueSimObjectToBeDestroyed(SimObject* pSimObj) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x190F10))(this, pSimObj); }

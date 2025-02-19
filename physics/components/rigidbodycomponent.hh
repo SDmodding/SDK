@@ -5,6 +5,8 @@ namespace UFG
 	class RigidBodyComponent : public RigidBody, public qNode<RigidBodyComponent>
 	{
 	public:
+		enum { _TypeUID = 0x16000003 };
+
 		qSafePointer<class ParkourComponent> mParkourComponent;
 		qSafePointer<class DynamicCoverComponent> mCoverComponent;
 		qSafePointer<class PhysicsRenderHelper> mRenderComponent;

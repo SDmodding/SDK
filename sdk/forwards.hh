@@ -26,6 +26,9 @@ namespace UFG
 
 	class ParkingSpot;
 	class ParkourHandle;
+	
+	class SceneLayer;
+	class SceneObjectProperties;
 
 	class SkeletonData;
 
