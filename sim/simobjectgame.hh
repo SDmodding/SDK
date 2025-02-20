@@ -179,6 +179,9 @@ namespace UFG
 			return GetComponent<CompositeDrawableComponent, Prop_CompositeDrawableComponent>();
 		}
 
+		SDK_INLINE InventoryItemComponent* GetInventory() {
+			return GetComponent<InventoryItemComponent, Prop_InventoryItemComponent>();
+		}
 	};
 
 	//------------------------------------------------------------------------------
@@ -302,6 +305,10 @@ namespace UFG
 
 		SDK_INLINE CharacterSubjectComponent* GetCharacterSubject() {
 			return GetComponent<CharacterSubjectComponent, Character_CameraSubject>();
+		}
+
+		SDK_INLINE InventoryComponent* GetInventory() {
+			return GetComponent<InventoryComponent, Character_InventoryComponent>();
 		}
 
 		SDK_INLINE CharacterOccupantComponent* GetCharacterOccupant() { 

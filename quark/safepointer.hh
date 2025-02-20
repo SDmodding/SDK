@@ -7,6 +7,8 @@ namespace UFG
 	{
 	public:
 		T* m_pPointer;
+
+		SDK_INLINE operator bool() const { return m_pPointer; }
 	};
 
 	template <typename T, typename U = T>

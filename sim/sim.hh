@@ -15,33 +15,33 @@ namespace UFG
 
 		/* Functions */
 
-		SimObject* CreateSimObject(const qSymbol& name) { return reinterpret_cast<SimObject*(SDK_CALL*)(void*, const qSymbol&)>(SDK_RVA(0x190320))(this, name); }
-		void DestroyAllSimObjects() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x1905D0))(this); }
-		void DestroyQueuedSimObjects() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x190650))(this); }
-		void DestroySimComponent(SimComponent* component) { reinterpret_cast<void(SDK_CALL*)(void*, SimComponent*)>(SDK_RVA(0x190720))(this, component); }
-		void DestroySimObject(SimObject* object) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x190760))(this, object); }
+		SimObject* CreateSimObject(const qSymbol& name) { return SDK_CALL_FUNC(SimObject*, 0x190320, void*, const qSymbol&)(this, name); }
+		void DestroyAllSimObjects() { SDK_CALL_FUNC(void, 0x1905D0, void*)(this); }
+		void DestroyQueuedSimObjects() { SDK_CALL_FUNC(void, 0x190650, void*)(this); }
+		void DestroySimComponent(SimComponent* component) { SDK_CALL_FUNC(void, 0x190720, void*, SimComponent*)(this, component); }
+		void DestroySimObject(SimObject* object) { SDK_CALL_FUNC(void, 0x190760, void*, SimObject*)(this, object); }
 
 		qSymbol GenerateUniqueName(const qSymbol& root) 
 		{
-			qSymbol res;
+			qProxy<qSymbol> res;
 			SDK_CALL_FUNC(void, 0x1909D0, void*, qSymbol*, const qSymbol&)(this, &res, root);
-			return res;
+			return *res;
 		}
 
 		qSymbol GenerateUniqueName(const char* root) 
 		{
-			qSymbol res;
-			reinterpret_cast<void(SDK_CALL*)(void*, qSymbol*, const char*)>(SDK_RVA(0x190A50))(this, &res, root);
-			return res;
+			qProxy<qSymbol> res;
+			SDK_CALL_FUNC(void, 0x190A50, void*, qSymbol*, const char*)(this, &res, root);
+			return *res;
 		}
 
-		SimObject* GetSimObject(const qSymbol& name) { return reinterpret_cast<SimObject*(SDK_CALL*)(void*, const qSymbol&)>(SDK_RVA(0x190BF0))(this, name); }
-		SimObject* GetSimObject(u32 name_uid) { return reinterpret_cast<SimObject*(SDK_CALL*)(void*, u32)>(SDK_RVA(0x190C40))(this, name_uid); }
-		void QueueSimObjectToBeDestroyed(SimObject* pSimObj) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x190F10))(this, pSimObj); }
-		void QueueSimObjectToBeDestroyedRecursive(SimObject* pSimObj) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x190FA0))(this, pSimObj); }
-		void QueueTrackedSimObjectToBeDestroyed(SimObject* pSimObj) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x191030))(this, pSimObj); }
-		void TrackSimObject(SimObject* pSimObj) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x1917A0))(this, pSimObj); }
-		bool UntrackSimObject(SimObject* pSimObj) { return reinterpret_cast<bool(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x1917C0))(this, pSimObj); }
+		SimObject* GetSimObject(const qSymbol& name) { return SDK_CALL_FUNC(SimObject*, 0x190BF0, void*, const qSymbol&)(this, name); }
+		SimObject* GetSimObject(u32 name_uid) { return SDK_CALL_FUNC(SimObject*, 0x190C40, void*, u32)(this, name_uid); }
+		void QueueSimObjectToBeDestroyed(SimObject* pSimObj) { SDK_CALL_FUNC(void, 0x190F10, void*, SimObject*)(this, pSimObj); }
+		void QueueSimObjectToBeDestroyedRecursive(SimObject* pSimObj) { SDK_CALL_FUNC(void, 0x190FA0, void*, SimObject*)(this, pSimObj); }
+		void QueueTrackedSimObjectToBeDestroyed(SimObject* pSimObj) { SDK_CALL_FUNC(void, 0x191030, void*, SimObject*)(this, pSimObj); }
+		void TrackSimObject(SimObject* pSimObj) { SDK_CALL_FUNC(void, 0x1917A0, void*, SimObject*)(this, pSimObj); }
+		bool UntrackSimObject(SimObject* pSimObj) { return SDK_CALL_FUNC(bool, 0x1917C0, void*, SimObject*)(this, pSimObj); }
 	};
 	SDK_ASSERT_SIZEOF(Simulation, 0x100);
 }

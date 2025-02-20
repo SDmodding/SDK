@@ -79,6 +79,7 @@ namespace UFG
 	class InteractableComponent;
 	class InteractorComponent;
 	class InterestPointUserComponent;
+	class InventoryComponent;
 	class InventoryItemComponent;
 	class HealthComponent;
 	class HitReactionComponent;
@@ -92,6 +93,7 @@ namespace UFG
 	class SceneryGroupComponent;
 	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
+	class SimObjectWeaponPropertiesComponent;
 	class StimulusEmitterComponent;
 	class StimulusReceiverComponent;
 	class StreamedResourceComponent;
@@ -110,4 +112,9 @@ namespace UFG
 	class WaterFloatingTrackerComponent;
 	class WorldContextComponent;
 	class UELComponent;
+}
+
+namespace Render
+{
+	class BeamSettingsHandle;
 }

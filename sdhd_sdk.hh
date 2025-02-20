@@ -701,7 +701,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/hitreactioncomponent.hh"
 #include "sim/components/healthcomponent.hh"
 
+#include "sim/components/inventorycomponent.hh"
+#include "sim/components/inventoryitemcomponent.hh"
+
 #include "sim/components/simobjectpropertiescomponent.hh"
+#include "sim/components/simobjectweaponpropertiescomponent.hh"
+
 #include "sim/components/missionfailconditioncomponent.hh"
 #include "sim/components/copunitcomponent.hh"
 
