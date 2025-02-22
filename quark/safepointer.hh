@@ -15,6 +15,7 @@ namespace UFG
 	class qSafePointer : public qSafePointerBase<T>
 	{
 	public:
+		SDK_INLINE bool operator==(T* other) { return this->m_pPointer == other; }
 		SDK_INLINE U* operator->() { return reinterpret_cast<U*>(this->m_pPointer); }
 	};
 

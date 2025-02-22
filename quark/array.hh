@@ -10,6 +10,8 @@ namespace UFG
 		u32 capacity;
 		T* p;
 
+		SDK_INLINE T* operator[](u32 index) { return &p[index]; }
+
 		SDK_INLINE T* begin() { return p; }
 		SDK_INLINE T* end() { return &p[size]; }
 	};

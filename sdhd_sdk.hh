@@ -232,6 +232,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "render/debugdraw.hh"
 
+#include "render/renderworldscreenshot.hh"
+#include "render/renderworld.hh"
+
 //--------------------------------------------------
 //	Main
 //--------------------------------------------------
@@ -435,6 +438,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "objectresourcemanagement/resourcerequest.hh"
+#include "objectresourcemanagement/truecrowddefinition.hh"
 #include "objectresourcemanagement/truecrowddatabase.hh"
 #include "objectresourcemanagement/meshresourceloader.hh"
 #include "objectresourcemanagement/resourcepool.hh"
