@@ -32,6 +32,9 @@ namespace UFG
 
 	class SkeletonData;
 
+	class SpawnPoint;
+	class SpawnRegion;
+
 	class TriggerRegion;
 
 	class WayGraph;
