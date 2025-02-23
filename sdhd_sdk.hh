@@ -626,6 +626,15 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookum/tsactor.hh"
 
 //--------------------------------------------------
+//	TIDO
+//--------------------------------------------------
+
+#include "tido/basedialogueutils.hh"
+#include "tido/dialogueutils.hh"
+#include "tido/audioentitycomponent.hh"
+#include "tido/actoraudiocomponent.hh"
+
+//--------------------------------------------------
 //	Model Asset
 //--------------------------------------------------
 

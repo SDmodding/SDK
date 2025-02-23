@@ -25,14 +25,14 @@ namespace UFG
 		{
 			qProxy<qSymbol> res;
 			SDK_CALL_FUNC(void, 0x1909D0, void*, qSymbol*, const qSymbol&)(this, &res, root);
-			return *res;
+			return res;
 		}
 
 		qSymbol GenerateUniqueName(const char* root) 
 		{
 			qProxy<qSymbol> res;
 			SDK_CALL_FUNC(void, 0x190A50, void*, qSymbol*, const char*)(this, &res, root);
-			return *res;
+			return res;
 		}
 
 		SimObject* GetSimObject(const qSymbol& name) { return SDK_CALL_FUNC(SimObject*, 0x190BF0, void*, const qSymbol&)(this, name); }
