@@ -54,6 +54,7 @@ namespace UFG
 
 	class ActionTreeComponent;
 	class ActiveAIEntityComponent;
+	class ActorAudioComponent;
 	class AIActionTreeComponent;
 	class AICharacterControllerBaseComponent;
 	class AiDriverComponent;
@@ -79,6 +80,7 @@ namespace UFG
 	class FacialActionTreeComponent;
 	class FormationManagerComponent;
 	class GameCameraComponent;
+	class HkAudioEntityComponent;
 	class InteractableComponent;
 	class InteractorComponent;
 	class InterestPointUserComponent;

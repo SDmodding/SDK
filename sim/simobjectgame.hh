@@ -303,12 +303,24 @@ namespace UFG
 			return GetComponent<InteractorComponent, Character_InteractorComponent>();
 		}
 
+		SDK_INLINE FacialActionTreeComponent* GetFacialActionTree() {
+			return GetComponent<FacialActionTreeComponent, Character_FacialActionTreeComponent>();
+		}
+
 		SDK_INLINE CharacterSubjectComponent* GetCharacterSubject() {
 			return GetComponent<CharacterSubjectComponent, Character_CameraSubject>();
 		}
 
 		SDK_INLINE InventoryComponent* GetInventory() {
 			return GetComponent<InventoryComponent, Character_InventoryComponent>();
+		}
+
+		SDK_INLINE HkAudioEntityComponent* GetHkAudioEntity() {
+			return GetComponent<HkAudioEntityComponent, Character_HkAudioEntityComponent>();
+		}
+
+		SDK_INLINE ActorAudioComponent* GetActorAudio() {
+			return GetComponent<ActorAudioComponent, Character_HkAudioEntityComponent>();
 		}
 
 		SDK_INLINE CharacterOccupantComponent* GetCharacterOccupant() { 
