@@ -51,7 +51,7 @@ namespace UFG
 
 		qOffset64<qPropertySetHandle*> mParents;
 		qOffset64<u8*> mValues;
-		qOffset64<unsigned long*> mDefaultBits;
+		qOffset64<u32*> mDefaultBits;
 		qOffset64<qProperty*> mProperties;
 		qSymbol mName;
 		u16 mRefCount;

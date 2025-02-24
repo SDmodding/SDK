@@ -39,7 +39,7 @@ namespace SDK
 			VirtualProtect(reinterpret_cast<void*>(address), sizeof(opCodes), dwOldProtect, &dwOldProtect);
 		}
 
-		void I_VFunc(uptr address, void* func)
+		void I_FuncPtr(uptr address, void* func)
 		{
 			DWORD dwOldProtect;
 			if (!VirtualProtect(reinterpret_cast<void*>(address), sizeof(void*), PAGE_READWRITE, &dwOldProtect)) {
@@ -53,8 +53,16 @@ namespace SDK
 
 		/* Initializer Wrappers */
 
-
 		SDK_INLINE void I_InitGameSystems(void* func) { I_CallRax(SDK_RVA(0x422691), func); }
+
+		enum ESceneObjectProperties
+		{
+			SceneObjectProperties_Activate,
+			SceneObjectProperties_Deactivate = 0x8,
+			SceneObjectProperties_SimObjectFactory = 0x10
+		};
+
+		SDK_INLINE void I_SceneObjectProperties(ESceneObjectProperties sceneObject, void* func) { I_FuncPtr(SDK_RVA(0x23A9D10 + sceneObject), func); }
 
 		enum EGameState
 		{
@@ -65,11 +73,11 @@ namespace SDK
 			GameState_OnExit = 0x20
 		};
 
-		SDK_INLINE void I_GameStateChangeLocation(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x1784B80 + gameState), func); }
-		SDK_INLINE void I_GameStateInGame(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x1784A90 + gameState), func); }
-		SDK_INLINE void I_GameStateLoadChallenge(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x1784C90 + gameState), func); }
-		SDK_INLINE void I_GameStateLoadGame(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x17846A0 + gameState), func); }
-		SDK_INLINE void I_GameStateLoadNIS(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x1784D50 + gameState), func); }
-		SDK_INLINE void I_GameStateRestoreCheckpoint(EGameState gameState, void* func) { I_VFunc(SDK_RVA(0x1784700 + gameState), func); }
+		SDK_INLINE void I_GameStateChangeLocation(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x1784B80 + gameState), func); }
+		SDK_INLINE void I_GameStateInGame(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x1784A90 + gameState), func); }
+		SDK_INLINE void I_GameStateLoadChallenge(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x1784C90 + gameState), func); }
+		SDK_INLINE void I_GameStateLoadGame(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x17846A0 + gameState), func); }
+		SDK_INLINE void I_GameStateLoadNIS(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x1784D50 + gameState), func); }
+		SDK_INLINE void I_GameStateRestoreCheckpoint(EGameState gameState, void* func) { I_FuncPtr(SDK_RVA(0x1784700 + gameState), func); }
 	};
 }

@@ -51,6 +51,12 @@ namespace UFG
 	};
 
 	template <typename T>
+	class GridIntrusiveNode : public qNode<T>
+	{
+	public:
+	};
+
+	template <typename T>
 	class qValueNode : public qNode<qValueNode<T>>
 	{
 	public:

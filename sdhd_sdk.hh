@@ -658,6 +658,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/physicsvehicle.hh"
 
+#include "physics/covercorner.hh"
+#include "physics/dynamiccover.hh"
+#include "physics/coverdataresource.hh"
+#include "physics/covercornerhandle.hh"
+
 //--------------------------------------------------
 //	Vehicles
 //--------------------------------------------------
@@ -690,8 +695,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "gamestate/hk/pedspawnmanager.hh"
 
 //--------------------------------------------------
-//	AI (Encounters)
+//	AI
 //--------------------------------------------------
+
+#include "ai/cover/coverobjectbase.hh"
+#include "ai/cover/coverobjectgroup.hh"
+#include "ai/cover/coverobjectparkour.hh"
+#include "ai/cover/coverposition.hh"
 
 #include "ai/encounters/encounterunitinfo.hh"
 #include "ai/encounters/encounterbase.hh"
@@ -725,6 +735,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/missionfailconditioncomponent.hh"
 #include "sim/components/copunitcomponent.hh"
+
+#include "sim/components/worldcontextcomponent.hh"
 
 //--------------------------------------------------
 //	FX

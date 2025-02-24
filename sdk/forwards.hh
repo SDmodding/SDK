@@ -75,6 +75,7 @@ namespace UFG
 	class CharacterSubjectComponent;
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
+	class DynamicCoverComponent;
 	class EncounterUnitComponent;
 	class FaceActionComponent;
 	class FacialActionTreeComponent;

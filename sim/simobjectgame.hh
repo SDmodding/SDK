@@ -342,6 +342,10 @@ namespace UFG
 		SDK_INLINE AimingPlayerComponent* GetAimingPlayer() {
 			return GetComponent<AimingPlayerComponent, Character_AimingBaseComponent>();
 		}
+
+		SDK_INLINE PedSpawningInfo* GetPedSpawningInfo() {
+			return GetComponent<PedSpawningInfo, Character_PedSpawningInfo>();
+		}
 	};
 
 	//------------------------------------------------------------------------------

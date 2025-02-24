@@ -48,9 +48,11 @@ namespace UFG
 	};
 	SDK_ASSERT_SIZEOF(ActiveSpawnSetInfo, 0x38);
 
-	class PedSpawningInfo : public qProxy<SimComponent>, qNode<void**>, qNode<void*>, public qNode<PedSpawningInfo>
+	class PedSpawningInfo : public SimComponent, qNode<void**>, qNode<void*>, public qNode<PedSpawningInfo>
 	{
 	public:
+		enum { _TypeUID = 0x6E000001 };
+
 		enum eActiveStatus : s32
 		{
 			Inactive,
@@ -166,8 +168,8 @@ namespace UFG
 		f32 mLastTraversalTime;
 		u32 mLastTraversalFrameCount;
 		int mMode;
-		PedSpawningInfo mAmbientPed[260];
-		PedSpawningInfo mScriptedPed[120];
+		qProxy<PedSpawningInfo> mAmbientPed[260];
+		qProxy<PedSpawningInfo> mScriptedPed[120];
 		ActiveSpawnSetInfo mActiveSpawnSets[40];
 		int mPedSpawnHistoryIndex;
 		u32 mNetRecycleCounter;
