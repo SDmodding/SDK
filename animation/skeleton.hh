@@ -13,7 +13,7 @@ public:
 
 	/* Functions */
 
-	u32 GetBoneID(u32 boneUID) { return SDK_CALL_FUNC(u32, 0x1B9390, void*, u32)(this, boneUID); }
+	int GetBoneID(u32 boneUID) { return SDK_CALL_FUNC(int, 0x1B9390, void*, u32)(this, boneUID); }
 	bool IsParent(int parentID, int childID) { return SDK_CALL_FUNC(bool, 0x1B9440, void*, int, int)(this, parentID, childID); }
 	void setHkaSkeleton(UFG::RigResource* res) { SDK_CALL_FUNC(void, 0x1B9490, void*, UFG::RigResource*)(this, res); }
 };

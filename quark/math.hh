@@ -315,7 +315,7 @@ namespace UFG
 	SDK_SINLINE void qRotationMatrixX(qMatrix44& dest, f32 radians) { SDK_CALL_FUNC(void, 0x18A810, qMatrix44&, f32)(dest, radians); }
 	SDK_SINLINE void qRotationMatrixY(qMatrix44& dest, f32 radians) { SDK_CALL_FUNC(void, 0x18AA00, qMatrix44&, f32)(dest, radians); }
 	SDK_SINLINE void qRotationMatrixZ(qMatrix44& dest, f32 radians) { SDK_CALL_FUNC(void, 0x18AA80, qMatrix44&, f32)(dest, radians); }
-	SDK_SINLINE void qRotationMatrixXYZDepreciated(qMatrix44& rot, const qVector3& radians) { SDK_CALL_FUNC(void, 0x18A890, qMatrix44&, const qVector3&)(rot, radians); }
+	SDK_SINLINE void qRotationMatrixXYZ(qMatrix44& rot, const qVector3& radians) { SDK_CALL_FUNC(void, 0x18A890, qMatrix44&, const qVector3&)(rot, radians); }
 
 	SDK_SINLINE void qTranslationMatrix(qMatrix44& dest, const qVector3& offset) { SDK_CALL_FUNC(void, 0x18C5E0, qMatrix44&, const qVector3&)(dest, offset); }
 	SDK_SINLINE void qScaleMatrix(qMatrix44& dest, const qVector3& scale) { SDK_CALL_FUNC(void, 0x18ABA0, qMatrix44&, const qVector3&)(dest, scale); }

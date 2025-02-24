@@ -86,7 +86,14 @@ public:
 	void GetTransform(UFG::qMatrix44& transform) { SDK_CALL_FUNC(void, 0x3A96B0, void*, UFG::qMatrix44&)(this, transform); }
 	void GetTransform(int boneID, UFG::qMatrix44& transform) { SDK_CALL_FUNC(void, 0x3A96C0, void*, int, UFG::qMatrix44&)(this, boneID, transform); }
 	void GetTransformMS(int boneID, UFG::qMatrix44& transform) { SDK_CALL_FUNC(void, 0x3A96D0, void*, int, UFG::qMatrix44&)(this, boneID, transform); }
-	UFG::qVector3 GetTranslation(int boneID) { return SDK_CALL_FUNC(UFG::qVector3, 0x3A96E0, void*, int)(this, boneID); }
+
+	UFG::qVector3 GetTranslation(int boneID)
+	{
+		qProxy<UFG::qVector3> res;
+		SDK_CALL_FUNC(void*, 0x3A96E0, void*, void*, int)(this, &res, boneID);
+		return res;
+	}
+
 	const UFG::qVector3& GetTranslationMS(int boneID) { return SDK_CALL_FUNC(const UFG::qVector3&, 0x3A9710, void*, int)(this, boneID); }
 	Weightset* GetWeightSet(const UFG::qSymbolUC& weightsetName) { return SDK_CALL_FUNC(Weightset*, 0x3AA090, void*, const UFG::qSymbolUC&)(this, weightsetName); }
 	void InitWeightSet(const char* weightSetNameFile) { SDK_CALL_FUNC(void, 0x3AAE60, void*, const char*)(this, weightSetNameFile); }
