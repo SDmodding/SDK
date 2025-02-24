@@ -299,6 +299,10 @@ namespace UFG
 			return GetComponent<CharacterPhysicsComponent, Character_CharacterPhysicsComponent>();
 		}
 
+		SDK_INLINE WorldContextComponent* GetWorldContext() {
+			return GetComponent<WorldContextComponent, Character_WorldContextComponent>();
+		}
+
 		SDK_INLINE InteractorComponent* GetInteractor() {
 			return GetComponent<InteractorComponent, Character_InteractorComponent>();
 		}
