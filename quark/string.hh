@@ -11,53 +11,109 @@ namespace UFG
 		u32 mStringHash32;
 		u32 mStringHashUpper32;
 
-		qString() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x1620A0))(this); }
-		qString(const qString& text) { reinterpret_cast<void(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x161F50))(this, text); }
+		qString() { SDK_CALL_FUNC(void, 0x1620A0, void*)(this); }
 
 		template <typename... Args>
-		qString(const char* format, Args... args) { reinterpret_cast<void(SDK_CALL*)(void*, const char*, Args...)>(SDK_RVA(0x161FC0))(this, format, args...); }
+		qString(const char* format, Args... args) { SDK_CALL_FUNC(void, 0x161FC0, void*, const char*, Args...)(this, format, args...); }
 
-		~qString() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x1643D0))(this); }
+		~qString() { SDK_CALL_FUNC(void, 0x1643D0, void*)(this); }
+
+		/* Impl Functions */
+
+		SDK_INLINE bool IsEmpty() const { return mLength == 0; }
 
 		/* Functions */
 
 		template <typename... Args>
-		void Format(const char* format, Args... args) { reinterpret_cast<void(SDK_CALL*)(void*, const char*, Args...)>(SDK_RVA(0x16E350))(this, format, args...); }
+		void Format(const char* format, Args... args) { SDK_CALL_FUNC(void, 0x16E350, void*, const char*, Args...)(this, format, args...); }
 
-		qString GetFilePath() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x170750))(this); }
-		qString GetFilePathWithoutExtension() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x170810))(this); }
-		qString GetFilename() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x1708F0))(this); }
-		qString GetFilenameWithoutExtension() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x1709A0))(this); }
-		bool IsEmpty() { return mLength == 0; }
-		void MakeLower() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x177530))(this); }
-		void MakeUpper() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x177580))(this); }
-		int ReplaceCharInPlace(char search_char, char replace_char) { return reinterpret_cast<int(SDK_CALL*)(void*, char, char)>(SDK_RVA(0x17A920))(this, search_char, replace_char); }
-		qString ReplaceExtension(const char* ext) { return reinterpret_cast<qString(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x17A950))(this, ext); }
-		bool ReplaceString(const char* find_text, const char* replace_text, bool ignore_case) {
-			return reinterpret_cast<bool(SDK_CALL*)(void*, const char*, const char*, bool)>(SDK_RVA(0x17AAC0))(this, find_text, replace_text, ignore_case);
+		qString GetFilePath() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x170750, const void*, qString*)(this, &res);
 		}
-		void Set(const char* text, int length) { reinterpret_cast<void(SDK_CALL*)(void*, const char*, int)>(SDK_RVA(0x17C9B0))(this, text, length); }
-		void Set(const char* text, int length, const char* textb, int lengthb) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, const char*, int, const char*, int)>(SDK_RVA(0x17CA00))(this, text, length, textb, lengthb);
+
+		qString GetFilePathWithoutExtension() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x170810, const void*, qString*)(this, &res);
 		}
-		bool StartsWith(const char* text, int length) { return reinterpret_cast<bool(SDK_CALL*)(void*, const char*, int)>(SDK_RVA(0x17DF20))(this, text, length); }
-		bool EndsWith(const char* text, int length) { return reinterpret_cast<bool(SDK_CALL*)(void*, const char*, int)>(SDK_RVA(0x16D410))(this, text, length); }
-		qString Substring(int start, int length) { return reinterpret_cast<qString(SDK_CALL*)(void*, int, int)>(SDK_RVA(0x17E180))(this, start, length); }
-		qString ToLower() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x17E5E0))(this); }
-		qString ToUpper() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x17E6B0))(this); }
-		qString Trim() { return reinterpret_cast<qString(SDK_CALL*)(void*)>(SDK_RVA(0x17EBE0))(this); }
-		int find(const char* str) { return reinterpret_cast<int(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x180FF0))(this, str); }
+
+		qString GetFilename() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x1708F0, const void*, qString*)(this, &res);
+		}
+
+		qString GetFilenameWithoutExtension() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x1709A0, const void*, qString*)(this, &res);
+		}
+
+		void MakeLower() { SDK_CALL_FUNC(void, 0x177530, void*)(this); }
+		void MakeUpper() { SDK_CALL_FUNC(void, 0x177580, void*)(this); }
+		int ReplaceCharInPlace(char search_char, char replace_char) { return SDK_CALL_FUNC(int, 0x17A920, void*, char, char)(this, search_char, replace_char); }
+
+		qString ReplaceExtension(const char* ext) const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x17A950, const void*, qString*, const char*)(this, &res, ext);
+		}
+
+		bool ReplaceString(const char* find_text, const char* replace_text, bool ignore_case = false) {
+			return SDK_CALL_FUNC(bool, 0x17AAC0, void*, const char*, const char*, bool)(this, find_text, replace_text, ignore_case);
+		}
+
+		void Set(const char* text) { SDK_CALL_FUNC(void, 0x17C9B0, void*, const char*)(this, text); }
+
+		void Set(const char* text, int length, const char* textb, int lengthb) {
+			SDK_CALL_FUNC(void, 0x17CA00, void*, const char*, int, const char*, int)(this, text, length, textb, lengthb);
+		}
+
+		bool StartsWith(const char* text, int length = -1) const { return SDK_CALL_FUNC(bool, 0x17DF20, const void*, const char*, int)(this, text, length); }
+		bool EndsWith(const char* text, int length = -1) const { return SDK_CALL_FUNC(bool, 0x16D410, const void*, const char*, int)(this, text, length); }
+
+		qString Substring(int start, int length) const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x17E180, const void*, qString*, int, int)(this, &res, start, length);
+		}
+
+		qString ToLower() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x17E5E0, const void*, qString*)(this, &res);
+		}
+
+		qString ToUpper() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x17E6B0, const void*, qString*)(this, &res);
+		}
+
+		qString Trim() const
+		{
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x17EBE0, const void*, qString*)(this, &res);
+		}
+
+		int find(const char* str) const { return SDK_CALL_FUNC(int, 0x180FF0, const void*, const char*)(this, str); }
 
 		/* Operators */
 
-		bool operator!=(const qString& text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x164AA0))(this, text); }
-		bool operator!=(const char* text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x164B30))(this, text); }
-		void operator+=(const qString& text) { reinterpret_cast<void(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x164CB0))(this, text); }
-		void operator+=(const char* text) { reinterpret_cast<void(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x164CE0))(this, text); }
-		void operator=(const qString& text) { reinterpret_cast<void(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x49230))(this, text); }
-		void operator=(const char* text) { reinterpret_cast<void(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x69DE0))(this, text); }
-		bool operator==(const qString& text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const qString&)>(SDK_RVA(0x1649D0))(this, text); }
-		bool operator==(const char* text) { return reinterpret_cast<bool(SDK_CALL*)(void*, const char*)>(SDK_RVA(0x164A40))(this, text); }
+		SDK_INLINE char operator[](int pos) const { return mData[pos]; }
+		SDK_INLINE operator const char*() const { return mData; }
+
+		bool operator==(const qString& text) const { return SDK_CALL_FUNC(bool, 0x1649D0, const void*, const qString&)(this, text); }
+		bool operator==(const char* text) const { return SDK_CALL_FUNC(bool, 0x164A40, const void*, const char*)(this, text); }
+		bool operator!=(const qString& text) const { return SDK_CALL_FUNC(bool, 0x164AA0, const void*, const qString&)(this, text); }
+		bool operator!=(const char* text) const { return SDK_CALL_FUNC(bool, 0x164B30, const void*, const char*)(this, text); }
+
+		qString& operator+=(const qString& text) { return SDK_CALL_FUNC(qString&, 0x164CB0, void*, const qString&)(this, text); }
+		qString& operator+=(const char* text) { return SDK_CALL_FUNC(qString&, 0x164CE0, void*, const char*)(this, text); }
+		qString& operator=(const qString& text) { return SDK_CALL_FUNC(qString&, 0x49230, void*, const qString&)(this, text); }
+		qString& operator=(const char* text) { return SDK_CALL_FUNC(qString&, 0x69DE0, void*, const char*)(this, text); }
 	};
 
 	class qStringBuilder
