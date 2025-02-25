@@ -48,6 +48,8 @@ class hkpWorld;
 #include "Common/Types/hkGeometryTypes.hh"
 #include "Common/Types/hkPhysicsTypes.hh"
 
+#include "Common/GeometryUtilities/hkInertiaTensorComputer.hh"
+
 //------------------------------------
 //	Serialize
 //------------------------------------
@@ -65,6 +67,9 @@ class hkpWorld;
 
 #include "Animation/hkaAnimation.hh"
 #include "Animation/hkaAnimationBinding.hh"
+
+#include "Animation/Mapper/hkaSkeletonMapperData.hh"
+#include "Animation/Mapper/hkaSkeletonMapper.hh"
 
 //------------------------------------
 //	Physics
@@ -119,8 +124,10 @@ class hkpWorld;
 #include "Physics2012/Dynamics/Phantom/hkpPhantom.hh"
 #include "Physics2012/Dynamics/Phantom/hkpShapePhantom.hh"
 #include "Physics2012/Dynamics/Phantom/hkpSimpleShapePhantom.hh"
+#include "Physics2012/Dynamics/Phantom/hkpAabbPhantom.hh"
 
 #include "Physics2012/Dynamics/hkpAction.hh"
+#include "Physics2012/Dynamics/hkpArrayAction.hh"
 #include "Physics2012/Dynamics/hkpUnaryAction.hh"
 
 #include "Physics2012/Dynamics/Entity/hkpEntity.hh"
@@ -128,6 +135,7 @@ class hkpWorld;
 #include "Physics2012/Dynamics/Entity/hkpRigidBody.hh"
 
 #include "Physics2012/Utilities/Actions/hkpReorientAction.hh"
+#include "Physics2012/Utilities/Actions/hkpEaseConstraintsAction.hh"
 
 #include "Physics2012/Collide/Shape/Query/hkpShapeRayCastCollectorOutput.hh"
 #include "Physics2012/Collide/Shape/Query/hkpShapeRayCastInput.hh"
@@ -150,3 +158,14 @@ class hkpWorld;
 #include "Physics2012/Collide/Filter/hkpGroupFilter.hh"
 
 #include "Utilities/hkpCharacterControl.hh"
+
+//------------------------------------
+//	Animation (Physics2012Bridge)
+//------------------------------------
+
+#include "Animation/Physics2012Bridge/hkaRagdollInstance.hh"
+
+#include "Animation/Physics2012Bridge/Controller/hkaKeyFrameHierarchyUtility.hh"
+#include "Animation/Physics2012Bridge/Controller/hkaRagdollRigidBodyController.hh"
+
+#include "Animation/Physics2012Bridge/hkaDetectRagdollPenetration.hh"
