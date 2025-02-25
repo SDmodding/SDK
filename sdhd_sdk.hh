@@ -332,6 +332,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "animation/posetask.hh"
 #include "animation/creature.hh"
 #include "animation/modeldatabase.hh"
+#include "animation/damagerig.hh"
 
 //--------------------------------------------------
 //	Wayfinder
@@ -668,10 +669,22 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/covercornerhandle.hh"
 
 //--------------------------------------------------
+//	FX
+//--------------------------------------------------
+
+#include "fx/sharedpointer.hh"
+#include "fx/hardwareocclusionquery.hh"
+#include "fx/fxsimcomponent.hh"
+#include "fx/decal.hh"
+#include "fx/beam.hh"
+#include "fx/fxmanager.hh"
+
+//--------------------------------------------------
 //	Vehicles
 //--------------------------------------------------
 
 #include "vehicles/tempvehicletunables.hh"
+#include "vehicles/vehicleeffectmanager.hh"
 
 #include "vehicles/ai/crumbtrail.hh"
 #include "vehicles/ai/racetrail.hh"
@@ -683,6 +696,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "vehicles/components/vehicledrivercomponent.hh"
 #include "vehicles/components/aidrivercomponent.hh"
+#include "vehicles/components/vehicleeffectscomponent.hh"
 #include "vehicles/components/vehiclemovercomponent.hh"
 #include "vehicles/components/roadspacecomponent.hh"
 
@@ -741,17 +755,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/copunitcomponent.hh"
 
 #include "sim/components/worldcontextcomponent.hh"
-
-//--------------------------------------------------
-//	FX
-//--------------------------------------------------
-
-#include "fx/sharedpointer.hh"
-#include "fx/hardwareocclusionquery.hh"
-#include "fx/fxsimcomponent.hh"
-#include "fx/decal.hh"
-#include "fx/beam.hh"
-#include "fx/fxmanager.hh"
 
 //--------------------------------------------------
 //	Render

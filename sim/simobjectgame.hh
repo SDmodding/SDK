@@ -367,6 +367,10 @@ namespace UFG
 			return GetComponent<VehicleOccupantComponent, Vehicle_VehicleOccupantComponent>();
 		}
 
+		SDK_INLINE VehicleEffectsComponent* GetVehicleEffects() {
+			return GetComponent<VehicleEffectsComponent, Vehicle_VehicleEffectsComponent>();
+		}
+
 		SDK_INLINE PhysicsMoverInterface* GetPhysicsMoverInterface() {
 			return GetComponent<PhysicsMoverInterface, Vehicle_PhysicsMoverInterface>();
 		}
