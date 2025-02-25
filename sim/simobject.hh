@@ -113,8 +113,8 @@ namespace UFG
 
 		qSymbol m_Name;
 		u16 m_Flags;
-		char m_ReservedComponentSlots;
-		char m_ResolveRefCount;
+		s8 m_ReservedComponentSlots;
+		s8 m_ResolveRefCount;
 		SceneObjectProperties* m_pSceneObj;
 		TransformNodeComponent* m_pTransformNodeComponent;
 		qArray<SimComponentHolder> m_Components;
@@ -133,6 +133,12 @@ namespace UFG
 		void Destroy() { SDK_CALL_FUNC(void, 0x1905C0, void*)(this); }
 		int Restore() { return SDK_CALL_FUNC(int, 0x1911F0, void*)(this); }
 		int Suspend() { return SDK_CALL_FUNC(int, 0x1916D0, void*)(this); }
+
+		/* Helpers */
+
+		SDK_INLINE bool IsProp() { return m_Flags & Flag_is_prop; }
+		SDK_INLINE bool IsCharacter() { return m_Flags & Flag_is_character; }
+		SDK_INLINE bool IsVehicle() { return m_Flags & Flag_is_vehicle; }
 	};
 	SDK_ASSERT_SIZEOF(SimObject, 0x80);
 
