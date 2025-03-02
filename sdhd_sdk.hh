@@ -817,6 +817,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/uiinputhandler.hh"
 #include "ui/uiscreenmanager.hh"
 
+#include "ui/tiledmap/uirenderquad.hh"
+#include "ui/tiledmap/uitiledmapmath.hh"
+#include "ui/tiledmap/uitiledmapzoomcalc.hh"
+#include "ui/tiledmap/uitiledmapwidget.hh"
+
 #include "ui/widget/uihktimeofdaywidget.hh"
 #include "ui/widget/uihktextoverlay.hh"
 #include "ui/widget/uihk_nisframecounterwidget.hh"
