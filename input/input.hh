@@ -312,12 +312,12 @@ namespace UFG
 		SDK_SINLINE void PushRestrictAndHideSettings() { SDK_CALL_FUNC(void, 0x1B8DD0)(); }
 		SDK_SINLINE void PopRestrictAndHideSettings() { SDK_CALL_FUNC(void, 0x1B8B30)(); }
 
-		SDK_SINLINE void SetShouldHideCursor(bool b_gamepad_window, bool b_keyboard_window, char b_gamepad_fullscreen, char b_keyboard_fullscreen) {
-			SDK_CALL_FUNC(void, 0x1B9030, bool, bool, char, char)(b_gamepad_window, b_keyboard_window, b_gamepad_fullscreen, b_keyboard_fullscreen);
+		SDK_SINLINE void SetShouldHideCursor(bool b_gamepad_window, bool b_keyboard_window, bool b_gamepad_fullscreen, bool b_keyboard_fullscreen) {
+			SDK_CALL_FUNC(void, 0x1B9030, bool, bool, bool, bool)(b_gamepad_window, b_keyboard_window, b_gamepad_fullscreen, b_keyboard_fullscreen);
 		}
 
-		SDK_SINLINE void SetShouldRestrictCursor(bool b_gamepad_window, bool b_keyboard_window, char b_gamepad_fullscreen, char b_keyboard_fullscreen) {
-			SDK_CALL_FUNC(void, 0x1B9050, bool, bool, char, char)(b_gamepad_window, b_keyboard_window, b_gamepad_fullscreen, b_keyboard_fullscreen);
+		SDK_SINLINE void SetShouldRestrictCursor(bool b_gamepad_window, bool b_keyboard_window, bool b_gamepad_fullscreen, bool b_keyboard_fullscreen) {
+			SDK_CALL_FUNC(void, 0x1B9050, bool, bool, bool, bool)(b_gamepad_window, b_keyboard_window, b_gamepad_fullscreen, b_keyboard_fullscreen);
 		}
 		/* Functions */
 

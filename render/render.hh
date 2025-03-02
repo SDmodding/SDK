@@ -163,6 +163,7 @@ namespace Render
 		bool mForceLetterBox;
 		bool mForceSceneryDoubleSided;
 	};
+	SDK_VINLINE qGlobalVar<RenderFrameFeatures, 0x2023900> gRenderFrameFeatures;
 
 	//----------------------------------------------------------------
 	//	Output Params

@@ -48,9 +48,16 @@ namespace UFG
 		bool mIsAcceptButtonSwapped;
 		qList<UIDictionary> mDictionaries;
 
+		/* Virtual Functions */
+
+		virtual void _VFunc1() = 0;
+		virtual void _VFunc2() = 0;
+		virtual void _VFunc3() = 0;
+		virtual void _VFunc4() = 0;
+		virtual const char* Translate(u32 hash) = 0;
+
 		/* Functions */
 
-		const char* Translate(u32 hash) { return SDK_CALL_FUNC(const char*, 0xA28340, void*, u32)(this, hash); }
 		void loadDictionary(const char* sectionName) { SDK_CALL_FUNC(void, 0xA30570, void*, const char*)(this, sectionName); }
 		void reloadDictionary(const char* sectionName) { SDK_CALL_FUNC(void, 0xA31900, void*, const char*)(this, sectionName); }
 		void unloadDictionary(const char* sectionName) { SDK_CALL_FUNC(void, 0xA324B0, void*, const char*)(this, sectionName); }
