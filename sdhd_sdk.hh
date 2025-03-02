@@ -123,6 +123,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "contrib/havok/havok.hh"
 #include "contrib/scaleform/scaleform.hh"
+#include "contrib/steam/steam.hh"
 
 //--------------------------------------------------
 //	Illusion
@@ -791,6 +792,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/attackrightscomponent.hh"
 
 //--------------------------------------------------
+//	Online2
+//--------------------------------------------------
+
+#include "online2/onlinemanager.hh"
+
+//--------------------------------------------------
 //	UI
 //--------------------------------------------------
 
@@ -801,6 +808,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/uiscreenrenderable.hh"
 #include "ui/uiscreen.hh"
 #include "ui/uiscreenfactory.hh"
+#include "ui/uiscreeninvokequeue.hh"
 #include "ui/uigfxallocator.hh"
 #include "ui/uigfxfileopener.hh"
 #include "ui/uigfxtexture.hh"
@@ -808,3 +816,16 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/uitween.hh"
 #include "ui/uiinputhandler.hh"
 #include "ui/uiscreenmanager.hh"
+
+#include "ui/widget/uihktimeofdaywidget.hh"
+#include "ui/widget/uihktextoverlay.hh"
+#include "ui/widget/uihk_nisframecounterwidget.hh"
+#include "ui/widget/uihk_nisoverlay.hh"
+#include "ui/widget/uihkmessageoverlay.hh"
+#include "ui/widget/uihksaveloadoverlay.hh"
+#include "ui/widget/uihkloadingoverlay.hh"
+#include "ui/widget/uihkpopupnotifier.hh"
+#include "ui/widget/uihktutorialoverlay.hh"
+#include "ui/widget/uihkhelpbarwidget.hh"
+
+#include "ui/screens/uihkscreenglobaloverlay.hh"
