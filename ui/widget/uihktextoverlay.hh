@@ -89,11 +89,21 @@ namespace UFG
 		bool mShowItChanged;
 		f32 mSubtitleYOffset;
 
+		/* Static Functions */
+
+		SDK_SINLINE void ShowMessageOnScreen(const char* msg, f32 lifetime, f32 x, f32 y, qString color) {
+			SDK_CALL_FUNC(void, 0x610BA0, const char*, f32, f32, f32, qString*)(msg, lifetime, x, y, &color);
+		}
+
 		/* Virtual Functions */
 
 		virtual ~UIHKTextOverlay() = 0;
 		virtual void update(UIScreen* screen, f32 elapsed) = 0;
 		virtual bool handleMessage(UIScreen* screen, u32 msgId, UIMessage* msg) = 0;
+
+		/* Impl Functions */
+
+		SDK_INLINE void SetSubtitleYOffset(f32 y_offset) { mSubtitleYOffset = y_offset; mChanged = 1; }
 
 		/* Functions */
 
@@ -107,6 +117,7 @@ namespace UFG
 		void OnStartFadeIn(UISubtitleMessage* msg, int subtitleSlotId) { SDK_CALL_FUNC(void, 0x5F31A0, void*, UISubtitleMessage*, int)(this, msg, subtitleSlotId); }
 		void OnStartFadeOut(UISubtitleMessage* msg, int subtitleSlotId) { SDK_CALL_FUNC(void, 0x5F3570, void*, UISubtitleMessage*, int)(this, msg, subtitleSlotId); }
 		u32 QueueMessage(UISubtitleMessage* msg) { return SDK_CALL_FUNC(u32, 0x5FEDD0, void*, UISubtitleMessage*)(this, msg); }
+		void ResetTransitSelectedStopData() { SDK_CALL_FUNC(void, 0x6029C0, void*)(this); }
 		void StartMissionComplete() { SDK_CALL_FUNC(void, 0x611ED0, void*)(this); }
 		void StopAllSubtitles(bool fadeOut) { SDK_CALL_FUNC(void, 0x6124C0, void*, bool)(this, fadeOut); }
 	};

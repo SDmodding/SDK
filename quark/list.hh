@@ -12,9 +12,11 @@ namespace UFG
 		qNode() : mPrev(this), mNext(this) {}
 		~qNode()
 		{
-			mPrev->mNext = mNext;
-			mNext->mPrev = mPrev;
-			mPrev = mNext = this;
+			auto prev = mPrev;
+			auto next = mNext;
+			prev->mNext = next;
+			next->mPrev = prev;
+			mNext = mPrev = this;
 		}
 
 		SDK_INLINE T* type() { return static_cast<T*>(this); }
