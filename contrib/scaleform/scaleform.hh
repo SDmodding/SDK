@@ -22,6 +22,7 @@
 #include "gfx/gfx_player.hh"
 #include "gfx/gfx_drawtext.hh"
 #include "gfx/gfx_fontmap.hh"
+#include "gfx/gfx_fontmanager.hh"
 
 #include "render/render_stats.hh"
 #include "render/render_types2d.hh"

@@ -48,6 +48,12 @@ namespace UFG
 			NUM_BUTTONS
 		};
 
+		enum RemapContext
+		{
+			RemapContext_OnFoot,
+			RemapContext_Driving,
+		};
+
 		/* Static Functions */
 
 		SDK_SINLINE void FormatMoneyStr(int money, qString& string) { SDK_CALL_FUNC(void, 0x5E6640, int, qString&)(money, string); }

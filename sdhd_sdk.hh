@@ -828,4 +828,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/uihktutorialoverlay.hh"
 #include "ui/widget/uihkhelpbarwidget.hh"
 
+#include "ui/widget/hud/uihkgameplayhelpwidget.hh"
+
 #include "ui/screens/uihkscreenglobaloverlay.hh"
