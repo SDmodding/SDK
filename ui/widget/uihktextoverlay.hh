@@ -92,7 +92,7 @@ namespace UFG
 		/* Static Functions */
 
 		SDK_SINLINE void ShowMessageOnScreen(const char* msg, f32 lifetime, f32 x, f32 y, qString color) {
-			SDK_CALL_FUNC(void, 0x610BA0, const char*, f32, f32, f32, qString*)(msg, lifetime, x, y, &color);
+			SDK_CALL_FUNC(void, 0x610BA0, const char*, f32, f32, f32, qString*)(msg, lifetime, x, y, &color); color.mData = 0;
 		}
 
 		/* Virtual Functions */

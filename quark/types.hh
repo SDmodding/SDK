@@ -21,7 +21,7 @@ private:
 public:
 	SDK_INLINE T operator*() { return *reinterpret_cast<T*>(this); }
 	SDK_INLINE T* operator&() { return reinterpret_cast<T*>(this); }
-	SDK_INLINE T* operator->() { return reinterpret_cast<T>(this); }
+	SDK_INLINE T* operator->() { return reinterpret_cast<T*>(this); }
 	SDK_INLINE operator T() { return *reinterpret_cast<T*>(this); }
 };
 
