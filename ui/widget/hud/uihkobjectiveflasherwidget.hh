@@ -17,6 +17,16 @@ namespace UFG
 
 		bool mOldVisible;
 
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<bool, 0x2430FC5> mVisible;
+		SDK_VINLINE qGlobalVar<bool, 0x2430FC7> mUsesPDA;
+		SDK_VINLINE qGlobalVar<bool, 0x2430FD1> mPDAStateChanged;
+		SDK_VINLINE qGlobalVar<eState, 0x2430FE4> mState;
+		SDK_VINLINE qGlobalVar<qString, 0x24310F0> mCaption;
+		SDK_VINLINE qGlobalVar<qString, 0x2433018> mObjectiveType;
+		SDK_VINLINE qGlobalVar<qColour, 0x2433400> mColour;
+
 		/* Static Functions */
 
 		SDK_SINLINE void Clear() { SDK_CALL_FUNC(void, 0x5D5270)(); }
@@ -34,6 +44,6 @@ namespace UFG
 		}
 
 		void Flash_ShowSmartphone(UIScreen* screen) { SDK_CALL_FUNC(void, 0x5E4D10, void*, UIScreen*)(this, screen); }
-		char HandleMessage(UIScreen* screen, u32 msgId, UIMessage* msg) { return SDK_CALL_FUNC(char, 0x5EADE0, void*, UIScreen*, u32, UIMessage*)(this, screen, msgId, msg); }
+		bool HandleMessage(UIScreen* screen, u32 msgId, UIMessage* msg) { return SDK_CALL_FUNC(bool, 0x5EADE0, void*, UIScreen*, u32, UIMessage*)(this, screen, msgId, msg); }
 	};
 }
