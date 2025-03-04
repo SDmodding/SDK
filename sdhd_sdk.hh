@@ -838,6 +838,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/hud/uihkobjectiveflasherwidget.hh"
 #include "ui/widget/hud/uihkhealthmeterwidget.hh"
 #include "ui/widget/hud/uihkweaponammowidget.hh"
+#include "ui/widget/hud/uihkradiostationwidget.hh"
 
 #include "ui/widget/pda/uihk_pdaphonecontactswidget.hh"
 #include "ui/widget/pda/uihk_pdainputlocker.hh"
