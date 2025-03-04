@@ -44,5 +44,8 @@ namespace UFG
 		void Flash_SetStationName(UIScreen* screen) { SDK_CALL_FUNC(void, 0x5E0E40, void*, UIScreen*)(this, screen); }
 		void Flash_SetTexture(UIScreen* screen, const char* texture) { SDK_CALL_FUNC(void, 0x5E1310, void*, UIScreen*, const char*)(this, screen, texture); }
 		void Flash_SetVisible(UIScreen* screen, bool visible) { SDK_CALL_FUNC(void, 0x5E1D20, void*, UIScreen*, bool)(this, screen, visible); }
+		void LoadTextures(int oldStationIdx, int newStationIdx) { SDK_CALL_FUNC(void, 0x5F1870, void*, int, int)(this, oldStationIdx, newStationIdx); }
+		void OnRadioTurnedOff() { SDK_CALL_FUNC(void, 0x5F2EF0, void*)(this); }
+		void ReadStationList() { SDK_CALL_FUNC(void, 0x5FF110, void*)(this); }
 	};
 }

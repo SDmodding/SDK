@@ -50,5 +50,7 @@ namespace UFG
 		bool GetWeaponImageInfo(eInventoryItemEnum iType, const char*& szTexturePack, const char*& szImageName) {
 			return SDK_CALL_FUNC(bool, 0x5E9F50, eInventoryItemEnum, const char*&, const char*&)(iType, szTexturePack, szImageName);
 		}
+
+		void LoadWeaponTexture(const char* texturePack) { SDK_CALL_FUNC(void, 0x5F1B80, void*, const char*)(this, texturePack); }
 	};
 }

@@ -16,6 +16,7 @@ namespace UFG
 	{
 	public:
 		SDK_INLINE bool operator==(T* other) { return this->m_pPointer == other; }
+		SDK_INLINE U* Get() { return reinterpret_cast<U*>(this->m_pPointer); }
 		SDK_INLINE U* operator->() { return reinterpret_cast<U*>(this->m_pPointer); }
 	};
 
