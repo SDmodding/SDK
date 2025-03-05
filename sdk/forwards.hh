@@ -83,6 +83,7 @@ namespace UFG
 	class GameCameraComponent;
 	class GunComponent;
 	class HkAudioEntityComponent;
+	class HudComponent;
 	class InteractableComponent;
 	class InteractorComponent;
 	class InterestPointUserComponent;

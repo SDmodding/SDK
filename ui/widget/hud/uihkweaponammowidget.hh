@@ -52,5 +52,6 @@ namespace UFG
 		}
 
 		void LoadWeaponTexture(const char* texturePack) { SDK_CALL_FUNC(void, 0x5F1B80, void*, const char*)(this, texturePack); }
+		void Update(UIScreen* screen, f32 elapsed) { SDK_CALL_FUNC(void, 0x618760, void*, UIScreen*, f32)(this, screen, elapsed); }
 	};
 }

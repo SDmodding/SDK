@@ -48,5 +48,6 @@ namespace UFG
 		/* Functions */
 
 		void HandleScreenInit(UIScreen* screen) { SDK_CALL_FUNC(void, 0x5EBEC0, void*, UIScreen*)(this, screen); }
+		void Update(UIScreen* screen) { SDK_CALL_FUNC(void, 0x616AC0, void*, UIScreen*)(this, screen); }
 	};
 }

@@ -839,6 +839,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/uihksocialactionmanager.hh"
 #include "ui/widget/uihksecondaryobjectiveswidget.hh"
 #include "ui/widget/uihksniperwidget.hh"
+#include "ui/widget/uihkplayerobjective.hh"
 
 #include "ui/widget/hud/uihkgameplayhelpwidget.hh"
 #include "ui/widget/hud/uihkobjectiveflasherwidget.hh"
@@ -851,6 +852,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/hud/uihkdirectionaldamagewidget.hh"
 #include "ui/widget/hud/uihkheatlevelwidget.hh"
 #include "ui/widget/hud/uihkcombatmeterwidget.hh"
+#include "ui/widget/hud/uihkobjectivedistancewidget.hh"
 
 #include "ui/widget/pda/uihk_pdaphonecontactswidget.hh"
 #include "ui/widget/pda/uihk_pdainputlocker.hh"
