@@ -817,6 +817,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/uitween.hh"
 #include "ui/uiinputhandler.hh"
 #include "ui/uiscreenmanager.hh"
+#include "ui/uihktweakables.hh"
 
 #include "ui/tiledmap/uirenderquad.hh"
 #include "ui/tiledmap/uitiledmapmath.hh"
