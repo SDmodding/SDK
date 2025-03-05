@@ -860,3 +860,4 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/pda/uihk_pdawidget.hh"
 
 #include "ui/screens/uihkscreenglobaloverlay.hh"
+#include "ui/screens/uihkscreenhud.hh"
