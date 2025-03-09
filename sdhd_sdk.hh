@@ -163,6 +163,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
+#include "illusion/renderqueue.hh"
 
 //--------------------------------------------------
 //	Agog Core
@@ -235,7 +236,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/debugdraw.hh"
 
 #include "render/renderworldscreenshot.hh"
-#include "render/renderworld.hh"
 
 //--------------------------------------------------
 //	Main
@@ -762,8 +762,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Render
 //--------------------------------------------------
 
+#include "render/renderworld.hh"
+
 #include "render/components/compositedrawablecomponent.hh"
 #include "render/highlighteffect.hh"
+
+#include "render/renderstageplugin.hh"
+#include "render/posteffects.hh"
 
 //--------------------------------------------------
 //	Gamescene

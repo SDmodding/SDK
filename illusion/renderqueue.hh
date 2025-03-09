@@ -1,0 +1,87 @@
+#pragma once
+
+namespace Illusion
+{
+	enum QueueCommandType
+	{
+		QCMD_NOP,
+		QCMD_SET_SHADER,
+		QCMD_SET_SHADER_VALUE,
+		QCMD_SET_VERTEX_DECL,
+		QCMD_SET_INDEX_BUFFER,
+		QCMD_SET_VERTEX_BUFFER,
+		QCMD_SET_INSTANCE_BUFFER,
+		QCMD_SET_ALPHA_STATE,
+		QCMD_SET_RASTER_STATE,
+		QCMD_SET_VIEWPORT_SCISSOR,
+		QCMD_SUBMIT_MESH,
+		QCMD_SUBMIT_RMESH,
+		QCMD_SUBMIT_PRIMITIVE,
+		QCMD_SUBMIT_MESH_INSTANCED,
+		QCMD_SET_TARGET,
+		QCMD_END_TARGET,
+		QCMD_CLEAR_TARGET,
+		QCMD_CALLBACK,
+		QCMD_QUERY_START,
+		QCMD_QUERY_END,
+		QCMD_GPU_MARKER_PUSH,
+		QCMD_GPU_MARKER_POP,
+		QCMD_GPU_TIMER_START,
+		QCMD_GPU_TIMER_END,
+		QCMD_SET_CLIP_PLANES,
+		QCMD_SET_DEPTH_BOUNDS,
+		QCMD_DISPATCH_COMPUTE,
+		QCMD_SCALEFORM_HACK_RESET_DEVICE,
+		QCMD_DMA,
+		QCMD_PS3_SET_SHADER_FRAGMENT,
+		QCMD_PS3_SET_SHADER_VALUE_PATCHEE,
+		QCMD_PS3_SUBMIT_MESH,
+		QCMD_PS3_SUBMIT_MESH_PATCHED,
+		QCMD_PS3_SUBMIT_PRIMITIVE_PATCHED,
+		QCMD_PS3_SUBMIT_MESH_INSTANCED,
+		QCMD_PS3_SUBMIT_MESH_INSTANCED_PATCHED,
+		QCMD_PS3_SET_ZCULL_CONTROL,
+		QCMD_PS3_REPORT,
+		QCMD_PS3_CONDITIONAL_RENDER,
+		QCMD_PS3_CONDITIONAL_RENDER_SUBMIT,
+		QCMD_PS3_DMA_REPORTS,
+		QCMD_PS3_SET_GPU_LABEL,
+		QCMD_NUM_COMMANDS
+	};
+
+	class QueueCommand
+	{
+	public:
+		i16 mCommandType;
+		i16 mIndex;
+		void* mData;
+	};
+
+	class QueueCommandBucket : public UFG::qNode<QueueCommandBucket>
+	{
+	public:
+		void* mPlatData;
+		u32 mNumCommands;
+		QueueCommand mCommands[126];
+	};
+
+	class IRenderQueuePlat
+	{
+	public:
+	};
+
+	class RenderQueue : public UFG::qNode<RenderQueue>, public IRenderQueuePlat
+	{
+	public:
+		UFG::qList<QueueCommandBucket> mBuckets;
+		volatile u32 mState;
+		QueueCommandBucket* mFreeBucket;
+		void* mPlatData0;
+		void* mPlatData1;
+		void* mUserData;
+		u32 mCommandCount;
+		u32 mPrimitiveCount;
+		StateValues mStateValues;
+	};
+	SDK_ASSERT_SIZEOF(RenderQueue, 0x460);
+}

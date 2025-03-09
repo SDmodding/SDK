@@ -65,7 +65,6 @@ namespace UFG
 		virtual void _UnkVFunc12() = 0;
 		virtual void _UnkVFunc13() = 0;
 
-
 		/* Functions */
 
 		template <typename T = SimComponent>
