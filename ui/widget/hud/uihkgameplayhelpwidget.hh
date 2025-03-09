@@ -64,5 +64,6 @@ namespace UFG
 
 		void ShowOneFrame(const UIHKGameplayHelpData& data) { SDK_CALL_FUNC(void, 0x610CB0, void*, const UIHKGameplayHelpData&)(this, data); }
 		void StopButtonCharge(u32 id, int index) { SDK_CALL_FUNC(void, 0x612560, void*, u32, int)(this, id, index); }
+		void Update(UIScreen* screen) { SDK_CALL_FUNC(void, 0x613F20, void*, UIScreen*)(this, screen); }
 	};
 }
