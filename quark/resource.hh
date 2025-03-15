@@ -3,6 +3,7 @@
 namespace UFG
 {
 	class qResourceData;
+	class qResourceInventory;
 
 	class qChunk
 	{
@@ -29,6 +30,8 @@ namespace UFG
 
 		/* Functions */
 
+		void Close(qResourceInventory* inventory) { SDK_CALL_FUNC(void, 0x167F40, void*, qResourceInventory*)(this, inventory); }
+		void Close() { SDK_CALL_FUNC(void, 0x167FB0, void*)(this); }
 		void Init(u32 type_uid, u32 name_uid) { SDK_CALL_FUNC(void, 0x1734B0, void*, u32, u32)(this, type_uid, name_uid); }
 		bool IsDefault() { return SDK_CALL_FUNC(bool, 0x1754B0, void*)(this); }
 	};
@@ -66,6 +69,10 @@ namespace UFG
 		qList<qResourceHandle> mResourceHandles;
 		u32 mTypeUID;
 		char mDebugName[36];
+
+		/* Functions */
+
+		void SetDebugName(const char* name) { SDK_CALL_FUNC(void, 0x17CD40, void*, const char*)(this, name); }
 	};
 	SDK_ASSERT_SIZEOF(qResourceData, 0x58);
 

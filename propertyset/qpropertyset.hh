@@ -20,7 +20,7 @@ namespace UFG
 		qOffset64<qPropertyCollection*> mOwner;
 	};
 
-	class qPropertySetHandle : qTypedResourceHandle<0x54606C31, qPropertySetResource>
+	class qPropertySetHandle : public qTypedResourceHandle<0x54606C31, qPropertySetResource>
 	{
 	public:
 	};
@@ -61,6 +61,10 @@ namespace UFG
 		u32 mPropertyMask;
 		u16 mNumDataBytes;
 		u16 mNumProperties;
+
+		/* Static Functions */
+
+		SDK_SINLINE qPropertySet* CreateResourceSet(const qSymbol& name, const char* dbg_tag) { return SDK_CALL_FUNC(qPropertySet*, 0x1F46E0, const qSymbol&, const char*)(name, dbg_tag); }
 
 		/* Impl Functions */
 
@@ -120,7 +124,6 @@ namespace UFG
 
 		qPropertySet* Clone() { return SDK_CALL_FUNC(qPropertySet*, 0x1F2520, void*)(this); }
 		void CopyFrom(qPropertySet* source_set, bool copyParents) { SDK_CALL_FUNC(void, 0x1F29A0, void*, qPropertySet*, bool)(this, source_set, copyParents); }
-		qPropertySet* CreateResourceSet(const qSymbol& name, const char* dbg_tag) { return SDK_CALL_FUNC(qPropertySet*, 0x1F46E0, const qSymbol&, const char*)(name, dbg_tag); }
 		void Destroy() { SDK_CALL_FUNC(void, 0x1F50F0, void*)(this); }
 		void* GetMemImagePtr() { return SDK_CALL_FUNC(void*, 0x1F6F00, void*)(this); }
 
@@ -211,73 +214,27 @@ namespace UFG
 
 		/* Set Functions */
 
-		template <typename T>
-		void Set(const qSymbol& name, const T v);
-
-		template<>
 		void Set(const qSymbol& name, const qMatrix44& v) { SDK_CALL_FUNC(void, 0x1EAF90, void*, const qSymbol&, const qMatrix44&)(this, name, v); }
-
-		template<>
-		void Set(const qSymbol& name, const qPropertyList& v) { SDK_CALL_FUNC(void, 0x1EAFE0, void*, const qSymbol&, const qPropertyList&)(this, name, v); }
-
-		template<>
-		void Set(const qSymbol& name, const qPropertySet& v) { SDK_CALL_FUNC(void, 0x1EB030, void*, const qSymbol&, const qPropertySet&)(this, name, v); }
-
-		template<>
+		void Set(const qSymbol& name, const qPropertyList* v) { SDK_CALL_FUNC(void, 0x1EAFE0, void*, const qSymbol&, const qPropertyList*)(this, name, v); }
+		void Set(const qSymbol& name, const qPropertySet* v) { SDK_CALL_FUNC(void, 0x1EB030, void*, const qSymbol&, const qPropertySet*)(this, name, v); }
 		void Set(const qSymbol& name, const qRangedValue<i32>& v) { SDK_CALL_FUNC(void, 0x1EAF10, void*, const qSymbol&, const qRangedValue<i32>&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qSymbol& v) { SDK_CALL_FUNC(void, 0x1EB070, void*, const qSymbol&, const qSymbol&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qSymbolUC& v) { SDK_CALL_FUNC(void, 0x1EB0B0, void*, const qSymbol&, const qSymbolUC&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qTransQuat& v) { SDK_CALL_FUNC(void, 0x1EAF50, void*, const qSymbol&, const qTransQuat&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qVector2& v) { SDK_CALL_FUNC(void, 0x1EB0F0, void*, const qSymbol&, const qVector2&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qVector3& v) { SDK_CALL_FUNC(void, 0x1EB130, void*, const qSymbol&, const qVector3&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qVector4& v) { SDK_CALL_FUNC(void, 0x1EB170, void*, const qSymbol&, const qVector4&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const qWiseSymbol& v) { SDK_CALL_FUNC(void, 0x1EB1B0, void*, const qSymbol&, const qWiseSymbol&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const i64 v) { SDK_CALL_FUNC(void, 0x1EB1F0, void*, const qSymbol&, const i64)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const bool& v) { SDK_CALL_FUNC(void, 0x1EB270, void*, const qSymbol&, const bool&)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const char* v) { SDK_CALL_FUNC(void, 0x1EAE90, void*, const qSymbol&, const char*)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const float v) { SDK_CALL_FUNC(void, 0x1EAE50, void*, const qSymbol&, const float)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const i32 v) { SDK_CALL_FUNC(void, 0x1EADD0, void*, const qSymbol&, const i32)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const i16 v) { SDK_CALL_FUNC(void, 0x1EAD50, void*, const qSymbol&, const i16)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const i8 v) { SDK_CALL_FUNC(void, 0x11EACD0, void*, const qSymbol&, const i8)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const u8 v) { SDK_CALL_FUNC(void, 0x1EAD10, void*, const qSymbol&, const u8)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const u32 v) { SDK_CALL_FUNC(void, 0x1EAE10, void*, const qSymbol&, const u32)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const u64 v) { SDK_CALL_FUNC(void, 0x1EB230, void*, const qSymbol&, const u64)(this, name, v); }
-
-		template<>
 		void Set(const qSymbol& name, const u16 v) { SDK_CALL_FUNC(void, 0x1EAD90, void*, const qSymbol&, const u16)(this, name, v); }
 
 		bool SetVariant(const qSymbol& name, const qPropertySetVariant& value) { return SDK_CALL_FUNC(bool, 0x1FE910, void*, const qSymbol&, const qPropertySetVariant&)(this, name, value); }
