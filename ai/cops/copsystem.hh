@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	enum eHeatEventEnum : s32
+	enum eHeatEventEnum
 	{
 		eHEATEVENT_NONE,
 		eHEATEVENT_INTIMIDATION,
@@ -30,7 +30,7 @@ namespace UFG
 		eHEATEVENT_KIDNAP,
 		eHEATEVENT_EXPLOSION,
 		eHEATEVENT_RESIST_ARRES,
-		NUM_HEATEVENTS,
+		NUM_HEATEVENTS
 	};
 
 	class CopHeatEvent
@@ -44,7 +44,7 @@ namespace UFG
 	class CopSystem : public EncounterBase
 	{
 	public:
-		enum eFinishReason : s32
+		enum eFinishReason
 		{
 			eFinishReason_Unknown,
 			eFinishReason_Arrested,
@@ -60,7 +60,6 @@ namespace UFG
 			int mLastLevelSpawnCount;
 			int mLastLevelKillCount;
 		};
-
 
 		bool mReloadTuningFiles;
 		int mDebugDrawLevel;
@@ -93,51 +92,58 @@ namespace UFG
 		bool mIsSafehouseInstantCooldownActive;
 		u64 mHeatLevelTimestamp;
 
+		/* Static Functions */
+
 		SDK_SINLINE CopSystem* Instance() { return SDK_VAR(CopSystem*, 0x23D9AA0); }
+
+		/* Virtual Functions */
+
+		virtual void EnableAmbientUnits(bool enable) = 0;
+		virtual void OnRestore() = 0;
+		virtual f32 GetHeatThresholdByLevel(int heatLevel) = 0;
+		virtual void SetHeatLevel(HeatLevelEnum heatLevel, eHeatEventEnum heatEvent) = 0;
+		virtual HeatLevelEnum _GetHeatLevel() = 0;
+		virtual f32 GetHeatLevelPercentage() = 0;
+		virtual int _GetNumArrestAttempts() = 0;
+		virtual void HandleDestructionEvent(DestructionEvent* e) = 0;
+		virtual void HandleGameStatEvent(Event* e) = 0;
+		virtual void HandleArrest(SimObject* pSource, SimObject* pTarget) = 0;
+		virtual void HandleDamageEvent(SimObject* pSource, SimObject* pTarget, HitRecord* pHitRecord, HealthComponent* pTargetHealthComponent, bool appliedDamage) = 0;
+		virtual void HandleVehicleMeleeDamage(SimObject* pSource, SimObject* pTarget) = 0;
+		virtual void HandleDryWeaponFire(SimObject* pSource) = 0;
+		virtual void HandleFaceAction(SimObject* pSource, Stimulus* pStimulus) = 0;
+		virtual void CommitHeatEvent(eHeatEventEnum heatEvent) = 0;
+		virtual void SetMaxHeatLevel(int maxHeatLevel) = 0;
+		virtual void _ClearMaxHeatLevel() = 0;
+		virtual void ExcludePlayerForRestOfChase() = 0;
+		virtual void ReIncludePlayerForRestOfChase() = 0;
+		virtual bool AcquireArrestRight(SimObject* pCop) = 0;
+		virtual void ReleaseArrestRight(SimObject* pCop) = 0;
+		virtual eHeatEventEnum _GetLastHeatEventIndex() = 0;
+		virtual const char* GetHeatEventName(eHeatEventEnum heatEvent) = 0;
+		virtual eHeatEventEnum GetHeatEventEnum(const qString& heatEventName) = 0;
+		virtual void ReportInfractionTarget(SimObject* pWitness, SimObject* pSuspect) = 0;
+		virtual void GenerateHeatEvent(eHeatEventEnum heatEvent) = 0;
+		virtual void UpdateHeatLevel() = 0;
+		virtual bool IsAmbientUnitsAllowed() = 0;
+		virtual void UpdateRoadBlocks() = 0;
+		virtual void HandleHeatLevelChangeAudio(HeatLevelEnum oldHeatLevel, HeatLevelEnum newHeatLevel) = 0;
+		virtual void UpdateAudio(f32 deltaTime) = 0;
+		virtual void ShutdownAudio() = 0;
+		virtual bool IsStimulusUpdateRequired() = 0;
+		virtual f32 CalculateMultiplier(eHeatEventEnum heatEvent) = 0;
+		virtual void ResetChaseStats() = 0;
+
+		/* Impl Functions */
+
+		SDK_INLINE HeatLevelEnum GetHeatLevel() { return mHeatLevel; }
+		SDK_INLINE int GetNumArrestAttempts() { return mNumArrestAttempts; }
+		SDK_INLINE void ClearMaxHeatLevel() { mMaxHeatLevel = -1; }
+		SDK_INLINE eHeatEventEnum GetLastHeatEventIndex() { return mLastHeatEventIndex; }
 
 		/* Functions */
 
-		void ShutdownAudio() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x3F0720))(this); }
-
-		void SetMaxHeatLevel(int maxHeatLevel) { reinterpret_cast<void(SDK_CALL*)(void*, int)>(SDK_RVA(0x3F05E0))(this, maxHeatLevel); }
-
-		void SetHeatLevel(HeatLevelEnum heatLevel, eHeatEventEnum heatEvent) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, HeatLevelEnum, eHeatEventEnum)>(SDK_RVA(0x3F0550))(this, heatLevel, heatEvent); 
-		}
-
-		void ResetChaseStats() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x3F03C0))(this); }
-
-		void ReportInfractionTarget(SimObject* pWitness, SimObject* pSuspect) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*, SimObject*)>(SDK_RVA(0x3F02E0))(this, pWitness, pSuspect); }
-
-		void Replenish() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x3F02D0))(this); }
-
-		void RemoveAllUnitsOnScene(bool includeNonManaged) { reinterpret_cast<void(SDK_CALL*)(void*, bool)>(SDK_RVA(0x3F0170))(this, includeNonManaged); }
-
-		void ReleaseArrestRight(SimObject* pCop) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*)>(SDK_RVA(0x3F0120))(this, pCop); }
-
-		bool IsActive() { return mHeatLevel != HEATLEVEL_NONE; }
-
-		float GetHeatThresholdByLevel(int heatLevel) { return reinterpret_cast<float(SDK_CALL*)(void*, int)>(SDK_RVA(0x3EDA60))(this, heatLevel); }
-
-		float GetHeatRadius(bool isOnfoot, EncounterUnitComponent* pEncounterUnitComponent = 0) { 
-			return reinterpret_cast<float(SDK_CALL*)(void*, bool, EncounterUnitComponent*)>(SDK_RVA(0x3ED930))(this, isOnfoot, pEncounterUnitComponent); 
-		}
-
-		float GetHeatLevelPercentage() { return reinterpret_cast<float(SDK_CALL*)(void*)>(SDK_RVA(0x3ED860))(this); }
-
-		const char* GetHeatEventName(eHeatEventEnum heatEvent) { return reinterpret_cast<const char*(SDK_CALL*)(void*, eHeatEventEnum)>(SDK_RVA(0x3ED850))(this, heatEvent); }
-
-		float GetCurrentHeatLevelElapsedTime() { return reinterpret_cast<float(SDK_CALL*)(void*)>(SDK_RVA(0x3ED690))(this); }
-
-		void GenerateHeatEvent(eHeatEventEnum heatEvent) { reinterpret_cast<void(SDK_CALL*)(void*, eHeatEventEnum)>(SDK_RVA(0x3ED420))(this, heatEvent); }
-
-		void ReIncludePlayerForRestOfChase() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x3EF990))(this); }
-
-		void ExcludePlayerForRestOfChase() { reinterpret_cast<void(SDK_CALL*)(void*)>(SDK_RVA(0x3ED000))(this); }
-
-		void EnableAmbientUnits(bool enable) { reinterpret_cast<void(SDK_CALL*)(void*, bool)>(SDK_RVA(0x3ECF90))(this, enable); }
-
-		void Enable(bool enable) { reinterpret_cast<void(SDK_CALL*)(void*, bool)>(SDK_RVA(0x3ECEE0))(this, enable); }
+		f32 GetCurrentHeatLevelElapsedTime() { return SDK_CALL_FUNC(f32, 0x3ED690, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(CopSystem, 0xF88);
 }
