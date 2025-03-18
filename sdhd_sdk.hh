@@ -254,9 +254,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	SceneDB
 //--------------------------------------------------
 
+#include "scenedb/bsp.hh"
 #include "scenedb/streamingmemorymanager.hh"
 #include "scenedb/scenedb.hh"
 #include "scenedb/scenerygroup.hh"
+#include "scenedb/sectionlayout.hh"
+#include "scenedb/sectionchooser.hh"
 
 //--------------------------------------------------
 //	Audio

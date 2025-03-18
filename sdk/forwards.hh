@@ -14,7 +14,11 @@ class TrackGroup;
 
 namespace UFG
 {
+	class BSP;
+
 	class CameraSubject;
+
+	class CellTrigger;
 
 	class CollisionData;
 	class CoverData;
@@ -43,6 +47,8 @@ namespace UFG
 
 	class WayGraph;
 	class WayTraversalSearch;
+
+	class ZoneTrigger;
 
 	/* Sim */
 
