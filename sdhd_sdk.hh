@@ -107,6 +107,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/vramemorypool.hh"
 #include "quark/memorystream.hh"
 
+#include "quark/file.hh"
+
 #include "quark/averagewindow.hh"
 #include "quark/pidcontroller.hh"
 
@@ -242,13 +244,16 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "main/mainloop.hh"
+#include "main/bigfilelogic.hh"
 
 //--------------------------------------------------
 //	Streamer
 //--------------------------------------------------
 
-#include "streamer/datastreamer.hh"
 #include "streamer/streamingmemorymanager.hh"
+#include "streamer/datastreamer.hh"
+#include "streamer/streamermetrics.hh"
+#include "streamer/streamresourceloader.hh"
 
 //--------------------------------------------------
 //	SceneDB
