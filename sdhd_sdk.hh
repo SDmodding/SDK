@@ -370,6 +370,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "ai/aibasics.hh"
+
+#include "ai/factionenum.hh"
 #include "ai/faction.hh"
 
 #include "ai/nearbycharactermanager.hh"
