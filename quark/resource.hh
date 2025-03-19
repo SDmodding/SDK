@@ -2,6 +2,13 @@
 
 namespace UFG
 {
+	enum ResourceFileContentType
+	{
+		ResourceFileContentType_Standard,
+		ResourceFileContentType_Texture,
+		ResourceFileContentType_Count
+	};
+
 	class qResourceData;
 	class qResourceInventory;
 
@@ -159,4 +166,13 @@ namespace UFG
 		void Unload(void* buffer, u32 num_bytes) { SDK_CALL_FUNC(void, 0x17F180, void*, void*, u32)(this, buffer, num_bytes); }
 	};
 	SDK_ASSERT_SIZEOF(qResourceWarehouse, 0x80);
+
+	//------------------------
+	//	Static Functions
+	//------------------------
+
+	// file_path must contain 'data\' or 'data/' otherwise null pointer access will happen.
+	SDK_SINLINE u32 GenerateResourceFileUID(ResourceFileContentType content_type, const char* file_path) {
+		return SDK_CALL_FUNC(u32, 0x16EE60, ResourceFileContentType, const char*)(content_type, file_path);
+	}
 }

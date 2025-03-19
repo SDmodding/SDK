@@ -108,6 +108,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/memorystream.hh"
 
 #include "quark/file.hh"
+#include "quark/resourcefilesystem.hh"
 
 #include "quark/averagewindow.hh"
 #include "quark/pidcontroller.hh"
@@ -118,6 +119,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/reflection/reflectarray.hh"
 #include "quark/reflection/reflectstring.hh"
 #include "quark/reflection/reflecttype.hh"
+
+#include "quark/internal/resourceinternal.hh"
 
 //--------------------------------------------------
 //	Other Contrib
