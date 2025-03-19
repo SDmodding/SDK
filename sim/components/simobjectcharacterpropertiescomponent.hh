@@ -1,0 +1,116 @@
+#pragma once
+
+namespace UFG
+{
+	enum eCharacterTypeEnum
+	{
+		eCHARACTER_TYPE_INVALID,
+		eCHARACTER_TYPE_PLAYER,
+		eCHARACTER_TYPE_AMANDA,
+		eCHARACTER_TYPE_PEDESTRIAN,
+		eCHARACTER_TYPE_SHOPKEEPER,
+		eCHARACTER_TYPE_THUG,
+		eCHARACTER_TYPE_JACKIE,
+		eCHARACTER_TYPE_WAITRESS,
+		eCHARACTER_TYPE_BARTENDER,
+		eCHARACTER_TYPE_BOUNCER,
+		eCHARACTER_TYPE_POLICE_VARIANT1,
+		eCHARACTER_TYPE_POLICE_VARIANT2,
+		eCHARACTER_TYPE_POLICE_VARIANT3,
+		eCHARACTER_TYPE_POLICE_VARIANT4,
+		eCHARACTER_TYPE_POLICE_SWAT,
+		eCHARACTER_TYPE_NET_REMOTE_PLAYER,
+		eCHARACTER_TYPE_BENNY,
+		eCHARACTER_TYPE_DIRTY_MING,
+		eCHARACTER_TYPE_MRS_CHU,
+		eCHARACTER_TYPE_SS_WORKER,
+		eCHARACTER_TYPE_PED_DRUNK,
+		eCHARACTER_TYPE_PED_JUNKIE,
+		eCHARACTER_TYPE_PED_FAST,
+		eCHARACTER_TYPE_PED_SLOW,
+		eCHARACTER_TYPE_PED_SEXY,
+		eCHARACTER_TYPE_PED_ELDERLY,
+		eCHARACTER_TYPE_BEGGAR,
+		eCHARACTER_TYPE_METER_MAID,
+		eCHARACTER_TYPE_THIEF,
+		eCHARACTER_TYPE_TIFFANY,
+		eCHARACTER_TYPE_SIFU,
+		eCHARACTER_TYPE_MARTIAL_ARTS_STUDENT,
+		eCHARACTER_TYPE_ROOSTER,
+		eCHARACTER_TYPE_EMT,
+		eCHARACTER_TYPE_VALET,
+		eCHARACTER_TYPE_TONG,
+		eCHARACTER_TYPE_COOK,
+		eCHARACTER_TYPE_UNCLE_PO,
+		eCHARACTER_TYPE_DOGEYES,
+		eCHARACTER_TYPE_ZI_WAI,
+		eCHARACTER_TYPE_DLC_ELITE_GHOUL,
+		eCHARACTER_TYPE_DLC_JIANG_SHI,
+		eCHARACTER_TYPE_DLC_HAPPY_CAT,
+		NUM_CHARACTER_TYPES
+	};
+
+	enum eCharacterStatEnum
+	{
+		eCHARACTER_STAT_EVADE,
+		eCHARACTER_STAT_STAMINA,
+		eCHARACTER_STAT_POI_COOLDOWN,
+		eCHARACTER_STAT_LOCOMOTION_WALK_SCALE,
+		eCHARACTER_STAT_MELEE_ATTACKED,
+		eCHARACTER_STAT_ANNOYED,
+		eCHARACTER_STAT_SCARED,
+		NUM_CHARACTER_STATS
+	};
+
+	enum eFightingClassEnum
+	{
+		eFIGHTING_CLASS_INVALID,
+		eFIGHTING_CLASS_NONE,
+		eFIGHTING_CLASS_NON_COMBATANT,
+		eFIGHTING_CLASS_STRIKER,
+		eFIGHTING_CLASS_STRIKER_QUICK,
+		eFIGHTING_CLASS_STRIKER_BRAWLER,
+		eFIGHTING_CLASS_GRAPPLER,
+		eFIGHTING_CLASS_TUTORIAL,
+		eFIGHTING_CLASS_ENFORCER,
+		eFIGHTING_CLASS_ELITE,
+		NUM_FIGHTING_CLASSES
+	};
+
+	enum eGenderEnum
+	{
+		eGENDER_INVALID,
+		eGENDER_MALE,
+		eGENDER_FEMALE,
+		NUM_GENDERS
+	};
+
+	class SimObjectCharacterPropertiesComponent : public SimObjectPropertiesComponent, public UpdateInterface, public qNode<SimObjectCharacterPropertiesComponent>
+	{
+	public:
+		enum { _TypeUID = 0xB2000005 };
+
+		struct CharacterStat
+		{
+			f32 m_fStat;
+		};
+
+		bool mIsTired;
+		bool m_ActionTreeStateFlag[10];
+		eGenderEnum m_eGender;
+		eCharacterTypeEnum m_eCharacterType;
+		eFightingClassEnum m_eFightingClass;
+		eFactionClassEnum m_eFactionClass;
+		qSymbol m_symFactionClass;
+		CharacterStat m_CharacterStats[NUM_CHARACTER_STATS];
+		qStaticBitField<11> mBooleans;
+		bool mIsPossessed : 1;
+
+		/* Functions */
+
+		void Reset(bool soft_reset) { SDK_CALL_FUNC(void, 0x549C00, void*, bool)(this, soft_reset); }
+		void ResetFromProperties(const component_CharacterProperties* dataPtr) { SDK_CALL_FUNC(void, 0x54A020, void*, const component_CharacterProperties*)(this, dataPtr); }
+		void SetFactionClass(eFactionClassEnum faction) { SDK_CALL_FUNC(void, 0x54C960, void*, eFactionClassEnum)(this, faction); }
+	};
+	SDK_ASSERT_SIZEOF(SimObjectCharacterPropertiesComponent, 0x100);
+}

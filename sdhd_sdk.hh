@@ -447,6 +447,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "schema/schema_physicsmover.hh"
 #include "schema/schema_streamedresource.hh"
 
+#include "schema/schema_simobjectproperties.hh"
+#include "schema/schema_characterproperties.hh"
+
 //--------------------------------------------------
 //	Object Resource Management
 //--------------------------------------------------
@@ -762,6 +765,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/inventoryitemcomponent.hh"
 
 #include "sim/components/simobjectpropertiescomponent.hh"
+#include "sim/components/simobjectcharacterpropertiescomponent.hh"
 #include "sim/components/simobjectweaponpropertiescomponent.hh"
 
 #include "sim/components/missionfailconditioncomponent.hh"
