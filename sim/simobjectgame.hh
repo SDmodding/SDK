@@ -122,8 +122,10 @@ namespace UFG
 		/* Functions */
 
 		// Use this function if you're trying to get component that's outside of the type table ID (look enums above).
-		template <typename T = SimComponent>
-		T* GetComponentOfTypeHK(u32 type_uid) { return SDK_CALL_FUNC(T*, 0x52BBC0, void*, u32)(this, type_uid); }
+		SimComponent* GetComponentOfTypeHK(u32 type_uid) { return SDK_CALL_FUNC(SimComponent*, 0x52BBC0, void*, u32)(this, type_uid); }
+
+		template <typename T>
+		SDK_INLINE T* GetComponentOfTypeHK() { return reinterpret_cast<T*>(GetComponentOfTypeHK(T::_TypeUID)); }
 
 		SimComponent* GetComponent(u32 type_uid, u32 index)
 		{
@@ -361,6 +363,13 @@ namespace UFG
 
 		SDK_INLINE PedSpawningInfo* GetPedSpawningInfo() {
 			return GetComponent<PedSpawningInfo, Character_PedSpawningInfo>();
+		}
+
+		// Dynamic Slot
+
+
+		SDK_INLINE FaceMeterComponent* GetFaceMeter() {
+			return GetComponentOfTypeHK<FaceMeterComponent>();
 		}
 	};
 

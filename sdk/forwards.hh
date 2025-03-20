@@ -88,6 +88,7 @@ namespace UFG
 	class DynamicCoverComponent;
 	class EncounterUnitComponent;
 	class FaceActionComponent;
+	class FaceMeterComponent;
 	class FacialActionTreeComponent;
 	class FormationManagerComponent;
 	class GameCameraComponent;
