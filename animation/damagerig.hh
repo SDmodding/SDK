@@ -96,3 +96,59 @@ public:
 	}
 };
 SDK_ASSERT_SIZEOF(DamageRig, 0x530);
+
+class CharacterDamageRig
+{
+public:
+	struct CharacterMarker
+	{
+		u32 mBoneIndex;
+		i8 mValue[6];
+		UFG::qVector3 mPosition;
+		u32 mNameUID;
+	};
+
+	struct VisualDamageTarget
+	{
+		int boneID;
+		f32 elapsedTime;
+		f32 duration;
+		i8 initialDamage[6];
+		i8 targetDamage;
+	};
+
+	CharacterMarker mCharacterMarkers[26];
+	f32 mPaintEffectApplied;
+	UFG::qVector3 mPaintEffect;
+	f32 mCharredEffectAmount;
+	f32 mCharredEffectInitialAmount;
+	f32 mCharredEffectElapsedTime;
+	bool mDamaged;
+	f32 mDamageScale;
+	UFG::qArray<VisualDamageTarget> mVisualDamageTargets;
+
+	/* Functions */
+
+	void ApplyBluntForceDamageToBone(Creature* creature, const UFG::qVector4& hitPositionWS, const UFG::qVector4& invHitNormal, f32 damage, f32 health) {
+		SDK_CALL_FUNC(void, 0x3A1E40, void*, Creature*, const UFG::qVector4&, const UFG::qVector4&, f32, f32)(this, creature, hitPositionWS, invHitNormal, damage, health);
+	}
+
+	void ApplyCharredEffect(f32 amount) { SDK_CALL_FUNC(void, 0x3A1EA0, void*, f32)(this, amount); }
+
+	void ApplyDamageVector(Creature* creature, const UFG::qVector4& hitPositionWS, const UFG::qVector4& hitNormalWS, f32 damageAmount, f32 health) {
+		SDK_CALL_FUNC(void, 0x3A2070, void*, Creature*, const UFG::qVector4&, const UFG::qVector4&, f32, f32)(this, creature, hitPositionWS, hitNormalWS, damageAmount, health);
+	}
+
+	void ApplyPaintEffect(bool enable, f32 r, f32 g, f32 b) { SDK_CALL_FUNC(void, 0x3A2430, void*, bool, f32, f32, f32)(this, enable, r, g, b); }
+	void Clone(const CharacterDamageRig* source) { SDK_CALL_FUNC(void, 0x3A4F00, void*, const CharacterDamageRig*)(this, source); }
+
+	void GetCharacterWeightList(f32* remapped_array, u32 num_remapped_bones, const char* bone_remap_array) {
+		SDK_CALL_FUNC(void, 0x3A7C30, void*, f32*, u32, const char*)(this, remapped_array, num_remapped_bones, bone_remap_array);
+	}
+
+	void InitCharacterBoneNormals() { SDK_CALL_FUNC(void, 0x3AAE10, void*)(this); }
+	void ResetDamage() { SDK_CALL_FUNC(void, 0x3AE110, void*)(this); }
+	void SetVisualDamage(u32 bone_uid, f32 damage, f32 duration) { SDK_CALL_FUNC(void, 0x3AF920, void*, u32, f32, f32)(this, bone_uid, damage, duration); }
+	void Update(f32 delta_sec) { SDK_CALL_FUNC(void, 0x3B1160, void*, f32)(this, delta_sec); }
+};
+SDK_ASSERT_SIZEOF(CharacterDamageRig, 0x310);

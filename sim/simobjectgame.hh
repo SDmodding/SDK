@@ -299,6 +299,10 @@ namespace UFG
 			return GetComponent<SimObjectCharacterPropertiesComponent, CVBase_SimObjectPropertiesComponent>();
 		}
 
+		SDK_INLINE CharacterAnimationComponent* GetCharacterAnimation() {
+			return GetComponent<CharacterAnimationComponent, CVBase_BaseAnimationComponent>();
+		}
+
 		SDK_INLINE CharacterPhysicsComponent* GetCharacterPhysics() {
 			return GetComponent<CharacterPhysicsComponent, Character_CharacterPhysicsComponent>();
 		}

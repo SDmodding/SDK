@@ -18,6 +18,13 @@ namespace UFG
 		bool mTemporaryRig;
 		u32 mCurrentRigUID;
 
+		/* Virtual Functions */
+
+		virtual void UpdateTransforms() = 0;
+		virtual void Update(f32 delta_sec) = 0;
+		virtual void UpdateNIS(f32 delta_sec) = 0;
+		virtual void Reset() = 0;
+
 		/* Functions */
 
 		bool AreResourcesAvailable() { return SDK_CALL_FUNC(bool, 0x57F310, void*)(this); }
@@ -27,7 +34,6 @@ namespace UFG
 		AnimationNode* PlayAnimation(const qSymbolUC& animName, f32 startTime) { return SDK_CALL_FUNC(AnimationNode*, 0x588630, void*, const qSymbolUC&, f32)(this, animName, startTime); }
 		void RebindRequiredAnimationBanks() { SDK_CALL_FUNC(void, 0x58AF10, void*)(this); }
 		void RebindResources() { SDK_CALL_FUNC(void, 0x58AF60, void*)(this); }
-		void Reset() { SDK_CALL_FUNC(void, 0x58B220, void*)(this); }
 		void SetAnimationBankPriority(const qSymbolUC& theAnimationGroupSymbol, eAnimationPriorityEnum eAnimationPriority) {
 			SDK_CALL_FUNC(void, 0x58B790, void*, const qSymbolUC&, eAnimationPriorityEnum)(this, theAnimationGroupSymbol, eAnimationPriority);
 		}
