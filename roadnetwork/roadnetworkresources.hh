@@ -37,6 +37,10 @@ namespace UFG
 		qOffset64<RoadNetworkWayfindingList*> mTramWayfindingList;
 		qOffset64<RoadNetworkWayfindingList*> mFerryWayfindingList;
 
+		/* Static Functions */
+
+		SDK_SINLINE RoadNetworkResource* Instance() { return SDK_VAR_GET(RoadNetworkResource*, 0x2174A50); }
+
 		/* Functions */
 
 		void ClearDataGrids() { SDK_CALL_FUNC(void, 0xD3810, void*)(this); }
