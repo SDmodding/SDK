@@ -106,17 +106,40 @@ namespace UFG
 		void ApplyAllModifications() { SDK_CALL_FUNC(void, 0xD2370, void*)(this); }
 		RoadNetworkLane* GetCenterLane() { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD5EA0, void*)(this); }
 		RoadNetworkLane* GetClosestLane(const qVector3& pos) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD69B0, void*, const qVector3&)(this, pos); }
-		qVector3 GetClosestPosition(const qVector3& pos, f32* nearestT = 0) { return SDK_CALL_FUNC(qVector3, 0xD70B0, void*, const qVector3&, f32*)(this, pos, nearestT); }
+
+		qVector3 GetClosestPosition(const qVector3& pos, f32* nearestT = 0)
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xD70B0, void*, qVector3*, const qVector3&, f32*)(this, &res, pos, nearestT); 
+		}
+
 		f32 GetClosestT(u32 laneIndex, const qVector3& position) { return SDK_CALL_FUNC(f32, 0xD81D0, void*, u32, const qVector3&)(this, laneIndex, position); }
 		RoadNetworkLane* GetLane(const u32 index) { return SDK_CALL_FUNC(RoadNetworkLane*, 0xD94E0, void*, const u32)(this, index); }
-		qVector3 GetNearestPos(const qVector3& pos, RoadNetworkLane** nearestLane, f32& nearestT) { 
-			return SDK_CALL_FUNC(qVector3, 0xDAA30, void*, const qVector3&, RoadNetworkLane**, f32&)(this, pos, nearestLane, nearestT);
+
+		qVector3 GetNearestPos(const qVector3& pos, RoadNetworkLane** nearestLane, f32& nearestT)
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xDAA30, void*, qVector3*, const qVector3&, RoadNetworkLane**, f32&)(this, &res, pos, nearestLane, nearestT);
 		}
-		qVector3 GetNearestPos(const qVector3& pos, const qVector3& _heading, RoadNetworkLane** nearestLane, f32& nearestT) {
-			return SDK_CALL_FUNC(qVector3, 0xDA430, void*, const qVector3&, const qVector3&, RoadNetworkLane**, f32&)(this, pos, _heading, nearestLane, nearestT);
+
+		qVector3 GetNearestPos(const qVector3& pos, const qVector3& _heading, RoadNetworkLane** nearestLane, f32& nearestT)
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xDA430, void*, qVector3*, const qVector3&, const qVector3&, RoadNetworkLane**, f32&)(this, &res, pos, _heading, nearestLane, nearestT);
 		}
-		qVector3 GetPos(u32 laneIndex, f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDB470, void*, u32, f32)(this, laneIndex, laneT); }
-		qVector3 GetTangent(u32 laneIndex, f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDC020, void*, u32, f32)(this, laneIndex, laneT); }
+
+		qVector3 GetPos(u32 laneIndex, f32 laneT)
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xDB470, void*, qVector3*, u32, f32)(this, &res, laneIndex, laneT);
+		}
+
+		qVector3 GetTangent(u32 laneIndex, f32 laneT)
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xDC020, void*, qVector3*, u32, f32)(this, &res, laneIndex, laneT);
+		}
+
 		bool IsConnectedToNode(RoadNetworkNode* roadNode) { return SDK_CALL_FUNC(bool, 0xDE3D0, void*, RoadNetworkNode*)(this, roadNode); }
 		bool IsWater() { return SDK_CALL_FUNC(bool, 0xDEF20, void*)(this); }
 		void RemoveModification(RoadNetworkNodeModification* modification) { SDK_CALL_FUNC(void, 0xE0000, void*, RoadNetworkNodeModification*)(this, modification); }
@@ -345,7 +368,7 @@ namespace UFG
 		AllPhaseStatus mAllPhaseStatus;
 	};
 
-	class RoadNetworkIntersection : RoadNetworkNode
+	class RoadNetworkIntersection : public RoadNetworkNode
 	{
 	public:
 		qOffset64<qOffset64<RoadNetworkTrafficLightLocation*>*> mTrafficLightLocations;
