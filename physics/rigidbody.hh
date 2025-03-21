@@ -67,8 +67,19 @@ namespace UFG
 		bool EnableFracturePartByIndex(u32 index, FractureStrength strength) { return SDK_CALL_FUNC(bool, 0xA7AE0, void*, u32, FractureStrength)(this, index, strength); }
 		void EnableFractureParts(FractureStrength strength) { SDK_CALL_FUNC(void, 0xA7C50, void*, FractureStrength)(this, strength); }
 		bool GetAabb(qVector3& aabbMin, qVector3& aabbMax, AabbTypes aabbType) { return SDK_CALL_FUNC(bool, 0xA93B0, void*, qVector3&, qVector3&, AabbTypes)(this, aabbMin, aabbMax, aabbType); }
-		qVector3 GetAngularVelocity() { return SDK_CALL_FUNC(qVector3, 0xA9550, void*)(this); }
-		qVector3 GetCentreOfMass() { return SDK_CALL_FUNC(qVector3, 0xA9730, void*)(this); }
+		
+		qVector3 GetAngularVelocity()
+		{ 
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xA9550, void*, qVector3*)(this, &res);
+		}
+
+		qVector3 GetCentreOfMass()
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xA9730, void*, qVector3*)(this, &res);
+		}
+
 		u32 GetCollisionLayer() { return SDK_CALL_FUNC(u32, 0xA9810, void*)(this); }
 		Constraint* GetConstraintByIndex(u32 index) { return SDK_CALL_FUNC(Constraint*, 0xA9900, void*, u32)(this, index); }
 		Constraint* GetConstraintByName(const qSymbol& name) { return SDK_CALL_FUNC(Constraint*, 0xA9920, void*, const qSymbol&)(this, name); }
@@ -76,7 +87,13 @@ namespace UFG
 		u32 GetNumFracturableParts() { return SDK_CALL_FUNC(u32, 0xAAC10, void*)(this); }
 		f32 GetPercentFractured() { return SDK_CALL_FUNC(f32, 0xAB1C0, void*)(this); }
 		void GetTransform(qMatrix44& mat) { SDK_CALL_FUNC(void, 0xAB650, void*, qMatrix44&)(this, mat); }
-		qVector3 GetVelocity() { return SDK_CALL_FUNC(qVector3, 0xAB970, void*)(this); }
+
+		qVector3 GetVelocity()
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0xAB970, void*, qVector3*)(this, &res);
+		}
+
 		bool HasFracturedParts() { return SDK_CALL_FUNC(bool, 0xABA60, void*)(this); }
 		void Inflate(bool addToWorld) { SDK_CALL_FUNC(void, 0xABAC0, void*, bool)(this, addToWorld); }
 		bool IsPartFractured(u32 index) { return SDK_CALL_FUNC(bool, 0xACCD0, void*, u32)(this, index); }

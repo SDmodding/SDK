@@ -103,9 +103,21 @@ namespace UFG
 		void DoKeyframes(f32 deltaTime) { SDK_CALL_FUNC(void, 0x461FB0, void*, f32)(this, deltaTime); }
 		bool FixupTransformForGround(const qMatrix44& localWorld) { return SDK_CALL_FUNC(bool, 0x464F40, void*, const qMatrix44&)(this, localWorld); }
 		void FlipVehicle(f32 torqueFactor, const qVector3& collisionPoint) { SDK_CALL_FUNC(void, 0x4654C0, void*, f32, const qVector3&)(this, torqueFactor, collisionPoint); }
-		qVector3 GetAngularVelocity() { return SDK_CALL_FUNC(qVector3, 0x4660D0, void*)(this); }
+
+		qVector3 GetAngularVelocity() 
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0x4660D0, void*, qVector3*)(this, &res); 
+		}
+
 		void GetMass() { SDK_CALL_FUNC(void, 0x466B80, void*)(this); }
-		qVector3 GetVelocity() { return SDK_CALL_FUNC(qVector3, 0x4681D0, void*)(this); }
+
+		qVector3 GetVelocity()
+		{ 
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0x4681D0, void*, qVector3*)(this, &res); 
+		}
+
 		void LoadProperties() { SDK_CALL_FUNC(void, 0x46BAB0, void*)(this); }
 		void Reload(const qSymbol& physicsPropertiesName) { SDK_CALL_FUNC(void, 0x472BC0, void*, const qSymbol&)(this, physicsPropertiesName); }
 		void Reset(VehicleResetOptions options) { SDK_CALL_FUNC(void, 0x473510, void*, VehicleResetOptions)(this, options); }
