@@ -280,8 +280,8 @@ namespace UFG
 
 	SDK_SINLINE f32 qHeadingDifference2D(const qVector3& v1, const qVector3& v2) { return SDK_CALL_FUNC(f32, 0x184D60, const qVector3&, const qVector3&)(v1, v2); }
 
-	SDK_SINLINE bool qDecomposeAffineEuler(qVector3* sol_a, qVector3* sol_b, qMatrix44* m, bool pos_bias) { 
-		return SDK_CALL_FUNC(bool, 0x182C10, qVector3*, qVector3*, qMatrix44*, bool)(sol_a, sol_b, m, pos_bias);
+	SDK_SINLINE bool qDecomposeAffineEuler(qVector3& sol_a, qVector3& sol_b, const qMatrix44& m, bool pos_bias = 1) { 
+		return SDK_CALL_FUNC(bool, 0x182C10, qVector3&, qVector3&, const qMatrix44&, bool)(sol_a, sol_b, m, pos_bias);
 	}
 
 	SDK_SINLINE void qInverse(qMatrix44& d, const qMatrix44& m) { SDK_CALL_FUNC(void, 0x186740, qMatrix44&, const qMatrix44&)(d, m); }
