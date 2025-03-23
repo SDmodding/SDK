@@ -9,6 +9,7 @@
 #include "kernel/sf_list.hh"
 #include "kernel/sf_string.hh"
 #include "kernel/sf_stringhash.hh"
+#include "kernel/sf_wstring.hh"
 #include "kernel/sf_log.hh"
 #include "kernel/sf_memoryheap.hh"
 #include "kernel/sf_refcount.hh"

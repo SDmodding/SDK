@@ -50,10 +50,6 @@ namespace UFG
 
 		/* Virtual Functions */
 
-		virtual void _VFunc1() = 0;
-		virtual void _VFunc2() = 0;
-		virtual void _VFunc3() = 0;
-		virtual void _VFunc4() = 0;
 		virtual const char* Translate(u32 hash) = 0;
 
 		/* Functions */

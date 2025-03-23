@@ -117,7 +117,23 @@ namespace Scaleform::GFx
 	class Translator : public State
 	{
 	public:
+		class TranslateInfo
+		{
+		public:
+			const wchar_t* pKey;
+			Scaleform::WStringBuffer* pResult;
+			const char* pInstanceName;
+			char Flags;
+		};
+
 		u32 WWMode;
+
+		/* Virtual Functions */
+
+		virtual void _VFunc1() = 0;
+		virtual void Translate(TranslateInfo* ptranslateInfo) = 0;
+		virtual void _VFunc3() = 0;
+		virtual void _VFunc4() = 0;
 	};
 
 	class FileOpenerBase : public State
