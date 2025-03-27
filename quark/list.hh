@@ -42,7 +42,7 @@ namespace UFG
 
 			T* operator*() const { return mNode->type(); }
 
-			Iterator& operator++() { mNode = mNode.mNext; return *this; }
+			Iterator& operator++() { mNode = mNode->mNext; return *this; }
 
 		private:
 			qNode<T, U>* mNode;

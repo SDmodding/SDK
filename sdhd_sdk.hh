@@ -722,6 +722,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/components/vehiclemovercomponent.hh"
 #include "vehicles/components/roadspacecomponent.hh"
 
+#include "vehicles/vehicleutil.hh"
+
 //--------------------------------------------------
 //	Effects
 //--------------------------------------------------
