@@ -73,6 +73,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/array.hh"
 #include "quark/fixedarray.hh"
 #include "quark/safearray.hh"
+#include "quark/bitarray.hh"
 #include "quark/bitflags.hh"
 #include "quark/bitfield.hh"
 #include "quark/list.hh"
@@ -685,6 +686,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/dynamiccover.hh"
 #include "physics/coverdataresource.hh"
 #include "physics/covercornerhandle.hh"
+
+#include "physics/parkourcontainer.hh"
+#include "physics/components/parkourcomponent.hh"
 
 //--------------------------------------------------
 //	FX

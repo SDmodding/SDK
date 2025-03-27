@@ -104,6 +104,7 @@ namespace UFG
 	class HitReactionComponent;
 	class MissionFailConditionComponent;
 	class NavComponent;
+	class ParkourComponent;
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class RagdollComponent;

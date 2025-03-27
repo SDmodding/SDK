@@ -6,11 +6,28 @@ namespace UFG
 	class TrueCrowdModelPart;
 	class TrueCrowdTextureSet;
 
+	enum eTrueCrowdMorphType
+	{
+		eTCMT_None,
+		eTCMT_Base,
+		eTCMT_Target1,
+		eTCMT_Target2
+	};
+
 	struct ModelTextureCombination
 	{
 		u32 mModelIndex;
 		u32 mTextureSetIndex;
 		qColour* mColourTint;
+	};
+
+	class TrueCrowdModelPart
+	{
+	public:
+		qOffset64<char*> mModelName;
+		u32 mModelNameHash;
+		u16 mIsSkinned;
+		qEnum<eTrueCrowdMorphType, s16> mMorphType;
 	};
 
 	class TrueCrowdLOD
@@ -91,7 +108,7 @@ namespace UFG
 	};
 	SDK_ASSERT_SIZEOF(TrueCrowdSet, 0x1F0);
 
-	class TrueCrowdDataBase :public  qResourceData
+	class TrueCrowdDataBase : public qResourceData
 	{
 	public:
 		struct ResourceEntry

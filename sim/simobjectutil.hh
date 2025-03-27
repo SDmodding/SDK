@@ -86,6 +86,10 @@ namespace UFG::SimObjectUtility
 		return reinterpret_cast<bool(SDK_CALL*)(qVector3*, const qVector3&, f32, f32)>(SDK_RVA(0x542470))(out, position, heigh_above_ground, cast_distance);
 	}
 
+	SDK_SINLINE bool PlaceOnGround(qVector3* out, const qVector3& position, f32 height_above_ground, f32 cast_distance_down, f32 cast_distance_up) {
+		return SDK_CALL_FUNC(bool, 0x37C560, qVector3*, const qVector3&, f32, f32, f32)(out, position, height_above_ground, cast_distance_down, cast_distance_up);
+	}
+
 	SDK_SINLINE void PostRigChangeReset(SimObject* pObject) {
 		reinterpret_cast<void(SDK_CALL*)(SimObject*)>(SDK_RVA(0x542830))(pObject);
 	}
