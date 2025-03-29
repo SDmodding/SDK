@@ -187,10 +187,22 @@ namespace UFG
 		void DeactivateTargetSpheres() { SDK_CALL_FUNC(void, 0x6761E0, void*)(this); }
 		void EnableSuperStop() { SDK_CALL_FUNC(void, 0x677920, void*)(this); }
 		void FlipVehicle(f32 torqueFactor, const qVector3& collisionPoint) { SDK_CALL_FUNC(void, 0x6795A0, void*, f32, const qVector3&)(this, torqueFactor, collisionPoint); }
-		qVector3 GetAngularVelocity() { return SDK_CALL_FUNC(qVector3, 0x6795C0, void*)(this); }
+
+		qVector3 GetAngularVelocity()
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0x6795C0, void*, qVector3*)(this, &res);
+		}
+
 		void GetBoundingBoxLocalSpace(qVector3& min, qVector3& max) { SDK_CALL_FUNC(void, 0x6796B0, void*, qVector3&, qVector3&)(this, min, max); }
 		f32 GetCurvatureLimit(f32 speed) { return SDK_CALL_FUNC(f32, 0x67A250, void*, f32)(this, speed); }
-		qVector3 GetFacingDirection() { return SDK_CALL_FUNC(qVector3, 0x67A640, void*)(this); }
+
+		qVector3 GetFacingDirection()
+		{
+			qProxy<qVector3> res;
+			return SDK_CALL_FUNC(qVector3, 0x67A640, void*, qVector3*)(this, &res);
+		}
+
 		f32 GetHalfSteeringRange() { return SDK_CALL_FUNC(f32, 0x67A6C0, void*)(this); }
 		PhysicsVehicle::Lod GetLOD() { return SDK_CALL_FUNC(PhysicsVehicle::Lod, 0x67A700, void*)(this); }
 		f32 GetLinearVelocityMagnitude() { return SDK_CALL_FUNC(f32, 0x67A720, void*)(this); }
