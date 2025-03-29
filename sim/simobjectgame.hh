@@ -380,6 +380,10 @@ namespace UFG
 	class SimObjectVehicle : public SimObjectCVBase
 	{
 	public:
+		SDK_INLINE VehicleAudioComponent* GetVehicleAudio() {
+			return GetComponent<VehicleAudioComponent, Vehicle_HkAudioEntityComponent>();		
+		}
+
 		SDK_INLINE VehicleOccupantComponent* GetVehicleOccupant() { 
 			return GetComponent<VehicleOccupantComponent, Vehicle_VehicleOccupantComponent>();
 		}

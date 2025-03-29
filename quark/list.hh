@@ -22,6 +22,13 @@ namespace UFG
 		SDK_INLINE T* type() { return static_cast<T*>(this); }
 	};
 
+	template <typename T>
+	class qPointerNode : qNode<T>
+	{
+	public:
+		T* mNode;
+	};
+
 	template <typename T, typename U = T>
 	class qList
 	{

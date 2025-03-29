@@ -654,6 +654,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "tido/dialogueutils.hh"
 #include "tido/audioentitycomponent.hh"
 #include "tido/actoraudiocomponent.hh"
+#include "tido/enginecurveaudio.hh"
 
 //--------------------------------------------------
 //	Model Asset
@@ -721,6 +722,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/components/vehicleeffectscomponent.hh"
 #include "vehicles/components/vehiclemovercomponent.hh"
 #include "vehicles/components/roadspacecomponent.hh"
+
+#include "vehicles/components/vehicleaudiocomponent/parameters.hh"
+#include "vehicles/components/vehicleaudiocomponent/enginemodel2.hh"
+#include "vehicles/components/vehicleaudiocomponent/damagemodel.hh"
+#include "vehicles/components/vehicleaudiocomponent/environmentalmodel.hh"
+#include "vehicles/components/vehicleaudiocomponent/radio.hh"
+#include "vehicles/components/vehicleaudiocomponent/driverreactions.hh"
+#include "vehicles/components/vehicleaudiocomponent.hh"
 
 #include "vehicles/vehicleutil.hh"
 
