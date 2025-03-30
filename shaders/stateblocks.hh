@@ -6,21 +6,30 @@
 
 struct SB_DepthBiasSortLayer
 {
-	float Values[4];
+	f32 Values[4];
 };
 
 struct SB_SpecularLook
 {
-	float Values[4];
-	float Values2[4];
-	float DiffuseEmissionFilter[4];
-	float Values3[4];
+	f32 Values[4];
+	f32 Values2[4];
+	f32 DiffuseEmissionFilter[4];
+	f32 Values3[4];
 };
 
 struct SB_TextureAnim
 {
-	float UVSpeedAndUVNumPages[4];
-	float Flipbook[4];
+	f32 UVSpeedAndUVNumPages[4];
+	f32 Flipbook[4];
+};
+
+struct SB_VehicleLook
+{
+	f32 Colour[4];
+	f32 Colour2[4];
+	f32 Values[4];
+	f32 Colour3[4];
+	f32 Values2[2];
 };
 
 //------------------------------------------------------------
@@ -29,217 +38,217 @@ struct SB_TextureAnim
 
 struct CB_BeamSettings
 {
-	float Colour[4];
-	float AnimUVScaleOffset[4];
+	f32 Colour[4];
+	f32 AnimUVScaleOffset[4];
 };
 
 struct CB_ClipPlanes
 {
-	float ClipPlanes[1][4];
+	f32 ClipPlanes[1][4];
 };
 
 struct CB_FXOverrideSettings
 {
-	float ColorTint[4];
-	float Params1[4];
+	f32 ColorTint[4];
+	f32 Params1[4];
 };
 
 struct CB_DecalSettings
 {
-	float Info[4];
-	float Specular[4];
+	f32 Info[4];
+	f32 Specular[4];
 };
 
 struct CB_ParticleSettings
 {
-	float ColorAlphaKeys[4][4];
-	float ColorKeyPositions[4];
-	float AlphaKeyPositions[4];
-	float DepthControlAndPivot[4];
-	float LightInfo[4];
-	float AnimUVScaleOffset[4];
-	float AnimExtras[4];
-	float OpacityOverDistance[4];
-	float OpacityOverDistancePositions[4];
+	f32 ColorAlphaKeys[4][4];
+	f32 ColorKeyPositions[4];
+	f32 AlphaKeyPositions[4];
+	f32 DepthControlAndPivot[4];
+	f32 LightInfo[4];
+	f32 AnimUVScaleOffset[4];
+	f32 AnimExtras[4];
+	f32 OpacityOverDistance[4];
+	f32 OpacityOverDistancePositions[4];
 };
 
 struct CB_FXSizeModule
 {
-	float XSizeKeys[4];
-	float YSizeKeys[4];
-	float ZSizeKeys[4];
-	float SizeKeys[4];
+	f32 XSizeKeys[4];
+	f32 YSizeKeys[4];
+	f32 ZSizeKeys[4];
+	f32 SizeKeys[4];
 };
 
 struct CB_FXFlowmapSettings
 {
-	float FlowmapConstants[4];
-	float FlowmapDistortOverTimeKeys[4];
-	float FlowmapDistortOverTimeKeyPos[4];
+	f32 FlowmapConstants[4];
+	f32 FlowmapDistortOverTimeKeys[4];
+	f32 FlowmapDistortOverTimeKeyPos[4];
 };
 
 struct CB_SceneryInstance
 {
-	float ColourTint[4];
-	float SIColourTint[4];
-	float Mask[4];
-	float Value0[4];
+	f32 ColourTint[4];
+	f32 SIColourTint[4];
+	f32 Mask[4];
+	f32 Value0[4];
 };
 
 struct CB_ShaderParams
 {
-	float Value0[4];
-	float Value1[4];
-	float Value2[4];
-	float Value3[4];
-	float Value4[4];
-	float Value5[4];
-	float Value6[4];
-	float Value7[4];
+	f32 Value0[4];
+	f32 Value1[4];
+	f32 Value2[4];
+	f32 Value3[4];
+	f32 Value4[4];
+	f32 Value5[4];
+	f32 Value6[4];
+	f32 Value7[4];
 };
 
 struct CB_EnvironmentSettings
 {
-	float SunDir[4];
-	float SunDirWorld[4];
-	float SunColor[4];
-	float AmbientColorHorizon[4];
-	float ScaleAndHeight[4];
-	float ScatterZenithColor[4];
-	float ScatterHorizonColor[4];
-	float ScatterGroundColor[4];
-	float ScatterSunColor[4];
-	float CharacterParams[4];
-	float FogStartStopSky[4];
-	float WindDirAndMag[4];
-	float DisplayDebug[4];
-	float LitWindowTimeOn[4];
-	float Lighting[4];
-	float SunScatterParams[4];
+	f32 SunDir[4];
+	f32 SunDirWorld[4];
+	f32 SunColor[4];
+	f32 AmbientColorHorizon[4];
+	f32 ScaleAndHeight[4];
+	f32 ScatterZenithColor[4];
+	f32 ScatterHorizonColor[4];
+	f32 ScatterGroundColor[4];
+	f32 ScatterSunColor[4];
+	f32 CharacterParams[4];
+	f32 FogStartStopSky[4];
+	f32 WindDirAndMag[4];
+	f32 DisplayDebug[4];
+	f32 LitWindowTimeOn[4];
+	f32 Lighting[4];
+	f32 SunScatterParams[4];
 };
 
 struct CB_SkySettings
 {
-	float CloudColourTop[4];
-	float CloudColourMid[4];
-	float CloudColourBottom[4];
-	float CloudShadingComponents[4];
-	float CloudColourCeiling[4];
+	f32 CloudColourTop[4];
+	f32 CloudColourMid[4];
+	f32 CloudColourBottom[4];
+	f32 CloudShadingComponents[4];
+	f32 CloudColourCeiling[4];
 };
 
 struct CB_ExternalViewTransform
 {
-	float WorldView[16];
-	float ViewScaleAndNearFar[4];
-	float SkyFogDir[4];
-	float NorthFogDir[4];
-	float EastFogDir[4];
+	f32 WorldView[16];
+	f32 ViewScaleAndNearFar[4];
+	f32 SkyFogDir[4];
+	f32 NorthFogDir[4];
+	f32 EastFogDir[4];
 };
 
 struct CB_ViewTransform
 {
-	float WorldView[16];
-	float WorldProjection[16];
-	float WorldViewInv[16];
-	float CameraOffset[4];
-	float CameraPosition[4];
-	float Target[4];
+	f32 WorldView[16];
+	f32 WorldProjection[16];
+	f32 WorldViewInv[16];
+	f32 CameraOffset[4];
+	f32 CameraPosition[4];
+	f32 Target[4];
 };
 
 struct CB_Timebase
 {
-	float SimTime[4];
+	f32 SimTime[4];
 };
 
 struct CB_LocalTransform
 {
-	float LocalWorld[16];
-	float LocalView[16];
-	float LocalProjection[16];
+	f32 LocalWorld[16];
+	f32 LocalView[16];
+	f32 LocalProjection[16];
 };
 
 struct CB_LocalProjection
 {
-	float LocalProjection[16];
+	f32 LocalProjection[16];
 };
 
 struct CB_ShadowTransform
 {
-	float ViewShadow[4][16];
-	float CutDepths[4];
-	float Biases[4];
+	f32 ViewShadow[4][16];
+	f32 CutDepths[4];
+	f32 Biases[4];
 };
 
 struct CB_LocalTransformInverse
 {
-	float WorldLocal[16];
-	float ViewLocal[16];
+	f32 WorldLocal[16];
+	f32 ViewLocal[16];
 };
 
 struct CB_UIdata
 {
-	float texgenx0[4];
-	float texgeny0[4];
-	float texgenx1[4];
-	float texgeny1[4];
-	float cmul[4];
-	float cadd[4];
-	float data[4];
-	float colour[4];
+	f32 texgenx0[4];
+	f32 texgeny0[4];
+	f32 texgenx1[4];
+	f32 texgeny1[4];
+	f32 cmul[4];
+	f32 cadd[4];
+	f32 data[4];
+	f32 colour[4];
 };
 
 struct CB_ViewGenericInfo
 {
-	float Generic[4];
+	f32 Generic[4];
 };
 
 struct CB_RainSettings
 {
-	float WorldViewProj[16];
-	float PreviousWorldViewProj[16];
-	float WorldView[16];
-	float PositionOffset[4];
-	float Velocity[4];
-	float Alpha[4];
-	float ViewPosition[4];
-	float SizeScale[4];
-	float Lighting[4];
-	float Forward[4];
-	float ParticleBoxSize[4];
+	f32 WorldViewProj[16];
+	f32 PreviousWorldViewProj[16];
+	f32 WorldView[16];
+	f32 PositionOffset[4];
+	f32 Velocity[4];
+	f32 Alpha[4];
+	f32 ViewPosition[4];
+	f32 SizeScale[4];
+	f32 Lighting[4];
+	f32 Forward[4];
+	f32 ParticleBoxSize[4];
 };
 
 struct CB_UberParams
 {
-	float DepthBiasSortLayer[4];
-	float DiffuseTint[4];
-	float Glossiness;
-	float UseGlossinessTex;
-	float Metallic;
-	float NormalMapScale;
-	float ForceNormalsUp;
-	float BlendLayer_BlendFalloff;
-	float VertexInput_PositionScale;
-	float _Pad_v1;
-	float EmissiveAmount;
-	float EmissiveUseDiffuseAlpha;
-	float BlendLayer_UseVertexAlpha;
-	float BlendLayer_UseDiffuseAlpha;
-	float DiffuseTint_BaseAmount;
-	float DiffuseTint_BlendAmount;
-	float WindLayer_FlutterFrequency;
-	float WindLayer_FlutterSpatialFreq;
-	float WindLayer_SwayScale;
-	float WindLayer_SwayFrequency;
-	float WindLayer_SwayStiffness;
-	float WindLayer_FlutterScale;
-	float GrimLayer_BaseAmount;
-	float GrimLayer_BlendAmount;
-	float DetailLayer_BaseAmount;
-	float DetailLayer_BlendAmount;
-	float ReflectionLayer_Strength;
-	float ReflectionLayer_GlossScale;
-	float AlphaClip;
-	float SheenLayer_DiffuseScale;
+	f32 DepthBiasSortLayer[4];
+	f32 DiffuseTint[4];
+	f32 Glossiness;
+	f32 UseGlossinessTex;
+	f32 Metallic;
+	f32 NormalMapScale;
+	f32 ForceNormalsUp;
+	f32 BlendLayer_BlendFalloff;
+	f32 VertexInput_PositionScale;
+	f32 _Pad_v1;
+	f32 EmissiveAmount;
+	f32 EmissiveUseDiffuseAlpha;
+	f32 BlendLayer_UseVertexAlpha;
+	f32 BlendLayer_UseDiffuseAlpha;
+	f32 DiffuseTint_BaseAmount;
+	f32 DiffuseTint_BlendAmount;
+	f32 WindLayer_FlutterFrequency;
+	f32 WindLayer_FlutterSpatialFreq;
+	f32 WindLayer_SwayScale;
+	f32 WindLayer_SwayFrequency;
+	f32 WindLayer_SwayStiffness;
+	f32 WindLayer_FlutterScale;
+	f32 GrimLayer_BaseAmount;
+	f32 GrimLayer_BlendAmount;
+	f32 DetailLayer_BaseAmount;
+	f32 DetailLayer_BlendAmount;
+	f32 ReflectionLayer_Strength;
+	f32 ReflectionLayer_GlossScale;
+	f32 AlphaClip;
+	f32 SheenLayer_DiffuseScale;
 	int BaseLayer_UVChannel;
 	int BlendLayer_UVChannel;
 	int GrimeLayer_UVChannel;
@@ -250,105 +259,105 @@ struct CB_UberParams
 	int DiffuseTint_Enable;
 	int WindLayer_Enable;
 	int _padi3[3];
-	float SheenLayer_RimFalloff;
-	float SheenLayer_RimStrength;
-	float SheenLayer_InnerFalloff;
-	float SheenLayer_InnerStrength;
+	f32 SheenLayer_RimFalloff;
+	f32 SheenLayer_RimStrength;
+	f32 SheenLayer_InnerFalloff;
+	f32 SheenLayer_InnerStrength;
 	int UVChannelSets[4];
 	int UVChannelAnimType[4];
-	float UVChannelScaleOffset[16];
-	float UVChannelAnimSpeedNumPages[16];
-	float DiffuseTint_BlendMask[4];
-	float BlendLayer_BlendMask[4];
-	float GrimLayer_BlendMask[4];
-	float DetailLayer_BlendMask[4];
-	float SheenLayer_BlendMask[4];
-	float WindLayer_VertexColourMask[4];
+	f32 UVChannelScaleOffset[16];
+	f32 UVChannelAnimSpeedNumPages[16];
+	f32 DiffuseTint_BlendMask[4];
+	f32 BlendLayer_BlendMask[4];
+	f32 GrimLayer_BlendMask[4];
+	f32 DetailLayer_BlendMask[4];
+	f32 SheenLayer_BlendMask[4];
+	f32 WindLayer_VertexColourMask[4];
 };
 
 struct CB_WaterOffset
 {
-	float RippleOffset[4];
-	float FogFalloff[4];
+	f32 RippleOffset[4];
+	f32 FogFalloff[4];
 };
 
 struct CB_FlareSettings
 {
-	float ColorAlphaKeys[4][4];
-	float ColorKeyPositions[4];
-	float AlphaKeyPositions[4];
-	float Info[4];
+	f32 ColorAlphaKeys[4][4];
+	f32 ColorKeyPositions[4];
+	f32 AlphaKeyPositions[4];
+	f32 Info[4];
 };
 
 struct CB_LightningGlobalSettings
 {
-	float LightningConstants[4];
+	f32 LightningConstants[4];
 };
 
 struct CB_ParticleSoftSettings
 {
-	float SoftParticleConstants[4];
-	float ClipPlaneConstants[4];
+	f32 SoftParticleConstants[4];
+	f32 ClipPlaneConstants[4];
 };
 
 struct CB_DynamicFlareInfo
 {
-	float Info[4];
+	f32 Info[4];
 };
 
 struct CB_DeferredLight
 {
-	float PositionAndRadius[4];
-	float ColourAndInvRadiusSqr[4];
-	float Fov[4];
-	float WidthHeightNearFar[4];
+	f32 PositionAndRadius[4];
+	f32 ColourAndInvRadiusSqr[4];
+	f32 Fov[4];
+	f32 WidthHeightNearFar[4];
 };
 
 struct CB_CloudSettings
 {
-	float CloudCenter[4];
-	float OpacityAndVerticalParams[4];
+	f32 CloudCenter[4];
+	f32 OpacityAndVerticalParams[4];
 };
 
 struct CB_VisualTreatmentParams
 {
-	float Value0[4];
-	float Value1[4];
-	float Value2[4];
-	float Value3[4];
-	float FovOffset;
-	float TimeScale;
-	float Unused1;
-	float Unused2;
+	f32 Value0[4];
+	f32 Value1[4];
+	f32 Value2[4];
+	f32 Value3[4];
+	f32 FovOffset;
+	f32 TimeScale;
+	f32 Unused1;
+	f32 Unused2;
 };
 
 struct CB_Motionblur
 {
-	float ViewPrevProjection[16];
-	float ScaleAndLength[4];
+	f32 ViewPrevProjection[16];
+	f32 ScaleAndLength[4];
 };
 
 struct CB_SphericalHarmonic
 {
-	float IrradianceConst[4];
-	float RedIrradianceConst[3][4];
-	float GreenIrradianceConst[3][4];
-	float BlueIrradianceConst[3][4];
+	f32 IrradianceConst[4];
+	f32 RedIrradianceConst[3][4];
+	f32 GreenIrradianceConst[3][4];
+	f32 BlueIrradianceConst[3][4];
 };
 
 struct CB_GaussianBlur
 {
-	float Direction[4];
+	f32 Direction[4];
 };
 
 struct CB_ColourBiasScale
 {
-	float Bias[4];
-	float Scale[4];
+	f32 Bias[4];
+	f32 Scale[4];
 };
 
 struct CB_DepthOfField
 {
-	float NearBlurParams[4];
-	float FarBlurParams[4];
+	f32 NearBlurParams[4];
+	f32 FarBlurParams[4];
 };
