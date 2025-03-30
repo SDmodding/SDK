@@ -19,6 +19,11 @@ namespace UFG
 		u32 mChunkSize;
 		u32 mDataSize;
 		u32 mDataOffset;
+
+		/* Impl Functions */
+
+		SDK_INLINE qChunk* GetNext() { return reinterpret_cast<qChunk*>(reinterpret_cast<uptr>(&this[1]) + mChunkSize); }
+		SDK_INLINE qResourceData* GetData() { return reinterpret_cast<qResourceData*>(reinterpret_cast<uptr>(&this[1]) + mDataOffset); }
 	};
 
 	//------------------------

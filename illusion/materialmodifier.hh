@@ -19,6 +19,10 @@ namespace Illusion
 		UFG::qGenericResourceHandle mOriginalResourceHandle;
 		void* mConstantBlock;
 		u32 mConstantBlockSize;
+
+		/* Functions */
+
+		void SetOverride(u32 param_uid, u32 resource_type_name_uid, u32 override_name_uid, Condition condition, u32 original_name_uid) { SDK_CALL_FUNC(void, 0x957F0, void*, u32, u32, u32, Condition, u32)(this, param_uid, resource_type_name_uid, override_name_uid, condition, original_name_uid); }
 	};
 	SDK_ASSERT_SIZEOF(ParamOverride, 0x68);
 

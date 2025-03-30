@@ -43,15 +43,15 @@ namespace UFG
 
 		/* Functions */
 
-		void* Allocate(u64 size, const char* name, u64 allocation_params, bool check_null) { 
+		void* Allocate(u64 size, const char* name, u64 allocation_params = 0, bool check_null = 1) { 
 			return SDK_CALL_FUNC(void*, 0x166B60, void*, u64, const char*, u64, bool)(this, size, name, allocation_params, check_null);
 		}
 
-		void* Realloc(void* mem, u64 size, const char* name, u64 allocation_params) {
+		void* Realloc(void* mem, u64 size, const char* name, u64 allocation_params = 0) {
 			return SDK_CALL_FUNC(void*, 0x179A50, void*, void*, u64, const char*, u64)(this, mem, size, name, allocation_params);
 		}
 
-		void* Realloc(void* mem, u64 new_size, u64 old_size, const char* name, u64 allocation_params) {
+		void* Realloc(void* mem, u64 new_size, u64 old_size, const char* name, u64 allocation_params = 0) {
 			return SDK_CALL_FUNC(char*, 0x179900, void*, void*, u64, u64, const char*, u64)(this, mem, new_size, old_size, name, allocation_params);
 		}
 

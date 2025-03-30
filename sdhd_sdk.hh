@@ -55,6 +55,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sdk/bone_uid.hh"
 #include "sdk/resource_uid.hh"
+#include "sdk/stateparam_uid.hh"
 
 //--------------------------------------------------
 //	Contrib
