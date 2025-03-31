@@ -25,11 +25,11 @@ struct SB_TextureAnim
 
 struct SB_VehicleLook
 {
-	f32 Colour[4];
-	f32 Colour2[4];
-	f32 Values[4];
-	f32 Colour3[4];
-	f32 Values2[2];
+	f32 DiffuseTint1[4];
+	f32 DiffuseTint2[4];
+	f32 SpecularLook[4];
+	f32 DirtColour[4];
+	f32 ExtraInfo[2];
 };
 
 //------------------------------------------------------------
