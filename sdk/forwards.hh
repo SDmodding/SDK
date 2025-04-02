@@ -12,6 +12,11 @@ class LightingSubmitTaskParams;
 class PoseDriver;
 class TrackGroup;
 
+// Skookum Script
+
+class SSInvokedBase;
+class SSInvokedExpression;
+
 namespace UFG
 {
 	class BSP;

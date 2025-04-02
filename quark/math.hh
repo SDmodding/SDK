@@ -89,6 +89,8 @@ namespace UFG
 
 		/* Operators */
 
+		SDK_INLINE f32& operator[](int i) { return (&x)[i]; }
+
 		SDK_INLINE bool operator==(const qVector3& vec) const { return (x == vec.x && y == vec.y && z == vec.z); }
 		SDK_INLINE bool operator!=(const qVector3& vec) const { return (x != vec.x || y != vec.y || z != vec.z); }
 

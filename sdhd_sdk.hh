@@ -190,6 +190,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "agogcore/arefptr.hh"
 #include "agogcore/apsorted.hh"
 
+#include "agogcore/avcompactarraybase.hh"
+#include "agogcore/avcompactsorted.hh"
+
+#include "agogcore/amemory.hh"
+
 //--------------------------------------------------
 //	Input
 //--------------------------------------------------
@@ -433,6 +438,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookumscript/ssactorclass.hh"
 #include "skookumscript/ssinvokedbase.hh"
 #include "skookumscript/ssinvokedcoroutine.hh"
+#include "skookumscript/ssinvokedmethod.hh"
+#include "skookumscript/sscode.hh"
 
 //--------------------------------------------------
 //	Skookum
@@ -646,6 +653,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "skookum/tsactor.hh"
+#include "skookum/skookummgr.hh"
 
 //--------------------------------------------------
 //	TIDO
