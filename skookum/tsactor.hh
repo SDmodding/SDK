@@ -33,6 +33,16 @@ namespace UFG
 
 		AIdPtr<TSActor> mpActor;
 		SSActorClass* mpActorClass;
+
+		/* Static Functions */
+
+		SDK_SINLINE TSActorComponent* PropertiesOnActivateNew(SceneObjectProperties* pSceneObject, bool required) {
+			return SDK_CALL_FUNC(TSActorComponent*, 0x50F270, SceneObjectProperties*, bool)(pSceneObject, required);
+		}
+
+		/* Functions */
+
+		TSActor* GetActor() { return SDK_CALL_FUNC(TSActor*, 0x4E0C50, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(TSActorComponent, 0x58);
 }

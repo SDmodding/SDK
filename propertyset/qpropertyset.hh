@@ -75,6 +75,7 @@ namespace UFG
 		SDK_INLINE Type GetType() { return static_cast<Type>(mFlags >> 0x1C); }
 		SDK_INLINE u32 NumParents() { return mNumParents; }
 		SDK_INLINE u32 NumProperties() { return mNumProperties; }
+		SDK_INLINE void* GetMemImagePtr() { return mValues.Get(); }
 
 		SDK_INLINE qPropertySetResource* GetResource()
 		{
@@ -125,7 +126,6 @@ namespace UFG
 		qPropertySet* Clone() { return SDK_CALL_FUNC(qPropertySet*, 0x1F2520, void*)(this); }
 		void CopyFrom(qPropertySet* source_set, bool copyParents) { SDK_CALL_FUNC(void, 0x1F29A0, void*, qPropertySet*, bool)(this, source_set, copyParents); }
 		void Destroy() { SDK_CALL_FUNC(void, 0x1F50F0, void*)(this); }
-		void* GetMemImagePtr() { return SDK_CALL_FUNC(void*, 0x1F6F00, void*)(this); }
 
 		void* GetValuePtr(u32 type_uid, u32 name_uid, qPropertyDepth depth = DEPTH_RECURSE, qPropertySet** owningSet = 0) {
 			return SDK_CALL_FUNC(void*, 0x1F8990, void*, u32, u32, qPropertyDepth, qPropertySet**)(this, type_uid, name_uid, depth, owningSet);

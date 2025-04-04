@@ -46,7 +46,7 @@ namespace UFG
 		SDK_INLINE void Set(void* target)
 		{
 			if (target) {
-				mOffset = reinterpret_cast<i64>(reinterpret_cast<uptr>(target) - reinterpret_cast<uptr>(this));
+				mOffset = static_cast<i64>(reinterpret_cast<uptr>(target) - reinterpret_cast<uptr>(this));
 			}
 			else {
 				mOffset = 0;

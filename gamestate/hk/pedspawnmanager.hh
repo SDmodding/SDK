@@ -53,7 +53,7 @@ namespace UFG
 	public:
 		enum { _TypeUID = 0x6E000001 };
 
-		enum eActiveStatus : s32
+		enum eActiveStatus
 		{
 			Inactive,
 			Active,
@@ -64,11 +64,23 @@ namespace UFG
 			eActiveStatus_Count,
 		};
 
-		enum eDrawList : s32
+		enum eDrawList
 		{
 			DrawList_None,
 			DrawList_Draw,
 			DrawList_NoDraw,
+		};
+
+		enum eSuspendAction
+		{
+			SuspendAllowed = 0,
+			NoSuspend = (1 << 0),
+			LockActive = (1 << 1),
+			DeleteOnSuspend = (1 << 2),
+			DeleteNow = (1 << 3),
+			CleanUpWhenDead = (1 << 4),
+			LoanedToMission = (1 << 5),
+			NoSuspendOption = -1,
 		};
 
 		SimObject* mProxySimObjectPtr;
@@ -134,30 +146,6 @@ namespace UFG
 	class PedSpawnManager
 	{
 	public:
-		enum eActiveStatus
-		{
-			Inactive,
-			Active,
-			ExtraLowPower,
-			NormalSuspend,
-			NetFull,
-			NetProxy,
-			eActiveStatus_Count
-		};
-
-		enum eSuspendAction
-		{
-			SuspendAllowed = 0,
-			NoSuspend = (1 << 0),
-			LockActive = (1 << 1),
-			DeleteOnSuspend = (1 << 2),
-			DeleteNow = (1 << 3),
-			CleanUpWhenDead = (1 << 4),
-			LoanedToMission = (1 << 5),
-			NoSuspendOption = -1,
-		};
-
-
 		int mNumAmbientCurrentlyActive;
 		int mNumAmbientCurrentlySuspended;
 		int mTargetNumActive;
@@ -238,12 +226,12 @@ namespace UFG
 
 		void AddZoneToThugSpawningExceptionsArrary(SpawnZone* pZone) { SDK_CALL_FUNC(void, 0x4075A0, void*, SpawnZone*)(this, pZone); }
 
-		void ChangeActiveStatus(eActiveStatus targetPedStatus, PedSpawningInfo& pedInfo) {
-			SDK_CALL_FUNC(void, 0x408260, void*, eActiveStatus, PedSpawningInfo&)(this, targetPedStatus, pedInfo);
+		void ChangeActiveStatus(PedSpawningInfo::eActiveStatus targetPedStatus, PedSpawningInfo& pedInfo) {
+			SDK_CALL_FUNC(void, 0x408260, void*, PedSpawningInfo::eActiveStatus, PedSpawningInfo&)(this, targetPedStatus, pedInfo);
 		}
 
-		bool ChangeActiveStatusOfSimObj(eActiveStatus targetPedStatus, SimObject* simObj, const char* file, int line) {
-			return SDK_CALL_FUNC(bool, 0x408300, void*, eActiveStatus, SimObject*, const char*, int)(this, targetPedStatus, simObj, file, line);
+		bool ChangeActiveStatusOfSimObj(PedSpawningInfo::eActiveStatus targetPedStatus, SimObject* simObj, const char* file, int line) {
+			return SDK_CALL_FUNC(bool, 0x408300, void*, PedSpawningInfo::eActiveStatus, SimObject*, const char*, int)(this, targetPedStatus, simObj, file, line);
 		}
 
 		void ChangeStatusToActive(PedSpawningInfo& pedInfo) { SDK_CALL_FUNC(void, 0x408460, void*, PedSpawningInfo&)(this, pedInfo); }
@@ -251,8 +239,8 @@ namespace UFG
 		void ChangeStatusToInactive(PedSpawningInfo& pedInfo) { SDK_CALL_FUNC(void, 0x408850, void*, PedSpawningInfo&)(this, pedInfo); }
 		void CheckActiveStatusOfPeds() { SDK_CALL_FUNC(void, 0x408940, void*)(this); }
 
-		eActiveStatus CheckAmbientActiveStatus(PedSpawningInfo& pedInfo, f32 elapsedTime) {
-			return SDK_CALL_FUNC(eActiveStatus, 0x409340, void*, PedSpawningInfo&, f32)(this, pedInfo, elapsedTime);
+		PedSpawningInfo::eActiveStatus CheckAmbientActiveStatus(PedSpawningInfo& pedInfo, f32 elapsedTime) {
+			return SDK_CALL_FUNC(PedSpawningInfo::eActiveStatus, 0x409340, void*, PedSpawningInfo&, f32)(this, pedInfo, elapsedTime);
 		}
 
 		void CollectAllSpawnInfos(qPropertyList* list, qArray<qPropertySet*>& spawnInfoArray) {
@@ -285,8 +273,8 @@ namespace UFG
 
 		void FrameRateThrottle() { SDK_CALL_FUNC(void, 0x40B960, void*)(this); }
 
-		eActiveZoneClass GetActiveZoneFromPoint(const qVector3& raw_pos, eActiveStatus current_status) {
-			return SDK_CALL_FUNC(eActiveZoneClass, 0x40BAB0, void*, const qVector3&, eActiveStatus)(this, raw_pos, current_status);
+		eActiveZoneClass GetActiveZoneFromPoint(const qVector3& raw_pos, PedSpawningInfo::eActiveStatus current_status) {
+			return SDK_CALL_FUNC(eActiveZoneClass, 0x40BAB0, void*, const qVector3&, PedSpawningInfo::eActiveStatus)(this, raw_pos, current_status);
 		}
 
 		SimObjectCharacter* GetAmbientPedForVehicle(qPropertyList* classPriorities, qPropertyList* classExclusions, PedSpawningInfo** newPedInfo) {
@@ -297,7 +285,7 @@ namespace UFG
 			SDK_CALL_FUNC(void, 0x40C030, void*, PedSpawningInfo*, qFixedArray<PedSpawningInfo*, 10>&, const qVector3&, f32)(this, pPed, closePeds, pos, radius);
 		}
 
-		eActiveStatus GetIdealActiveStatus(PedSpawningInfo& info) { return SDK_CALL_FUNC(eActiveStatus, 0x40C1E0, void*, PedSpawningInfo&)(this, info); }
+		PedSpawningInfo::eActiveStatus GetIdealActiveStatus(PedSpawningInfo& info) { return SDK_CALL_FUNC(PedSpawningInfo::eActiveStatus, 0x40C1E0, void*, PedSpawningInfo&)(this, info); }
 
 		void GetNewNearestFromArray(PedSpawningInfo** arrayOfInfo, u32& index, f32& dist, int how_many_needed) {
 			SDK_CALL_FUNC(void, 0x40C5D0, void*, PedSpawningInfo**, u32&, f32&, int)(this, arrayOfInfo, index, dist, how_many_needed);
@@ -350,8 +338,8 @@ namespace UFG
 			SDK_CALL_FUNC(void, 0x416A80, void*, SimObject*, qPropertySet*, const qVector3&)(this, pObj, pPropSet, startPos);
 		}
 
-		bool SetSuspendOption(SimObjectGame* pedSimObj, eSuspendAction suspendAction) {
-			return SDK_CALL_FUNC(bool, 0x416AA0, void*, SimObjectGame*, eSuspendAction)(this, pedSimObj, suspendAction);
+		bool SetSuspendOption(SimObjectGame* pedSimObj, PedSpawningInfo::eSuspendAction suspendAction) {
+			return SDK_CALL_FUNC(bool, 0x416AA0, void*, SimObjectGame*, PedSpawningInfo::eSuspendAction)(this, pedSimObj, suspendAction);
 		}
 
 		void SetupSocialForNIS(bool bNISStarting) { SDK_CALL_FUNC(void, 0x416E60, void*, bool)(this, bNISStarting); }
