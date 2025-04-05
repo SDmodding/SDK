@@ -104,7 +104,7 @@ namespace UFG
 	{
 	public:
 		TargetingSystemBaseComponent* m_pTSBC;
-		qSafePointer<SimObject, SimObject> m_pTarget;
+		qSafePointer<SimObject> m_pTarget;
 		qEnum<eTargetTypeEnum, u8> m_eTargetType;
 		bool m_bLock;
 

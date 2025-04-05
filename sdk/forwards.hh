@@ -19,6 +19,9 @@ class SSInvokedExpression;
 
 namespace UFG
 {
+	class AudioEntity;
+	class AudioEvent;
+
 	class BSP;
 
 	class CameraSubject;

@@ -11,6 +11,17 @@ namespace UFG
 		TargetingMap* m_pTargetingMap;
 		qList<TargetingSimObject> m_TargetedBy;
 
+		/* Helper Functions */
+
+		SDK_INLINE SimObject* GetTarget(eTargetTypeEnum eTargetType)
+		{
+			if (auto i = m_pTargetingMap->m_Map[eTargetType]) {
+				return m_pTargets[i].m_pTarget.m_pPointer;
+			}
+
+			return 0;
+		};
+
 		/* Functions */
 
 		void AssignTarget(eTargetTypeEnum eAssignTargetTo, SimObject* pSimObject) { SDK_CALL_FUNC(void, 0x2E7E20, void*, eTargetTypeEnum, SimObject*)(this, eAssignTargetTo, pSimObject); }

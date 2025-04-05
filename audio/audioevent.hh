@@ -30,6 +30,14 @@ namespace UFG
 		virtual void Do(AudioEvent*, eAudioEventCallbackType) = 0;
 	};
 
+	class AudioEventInitParams
+	{
+	public:
+		void(__fastcall* m_EventPlayEndCallback)(AudioEntity*, eAudioEventCallbackType, AudioEvent*, void*);
+		u8 gap8[16];
+		void* m_EventCallbackUserData;
+	};
+
 	class ExternalSourceInfoNode
 	{
 	public:
@@ -46,5 +54,4 @@ namespace UFG
 
 		virtual ~AudioEventExternalSourceInfo() = 0;
 	};
-
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#define BONE_CAMERA_SYNC_01		0x31F17B03 // CameraSync01
+
 #define BONE_HEAD				0x22C14F2A // Bip01 Head
 #define BONE_L_CALF				0x8C4CF328 // Bip01 L Calf
 #define BONE_L_CLAVICLE			0x66DAA3C6 // Bip01 L Clavicle

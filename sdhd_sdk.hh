@@ -282,10 +282,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "audio/ratelimitedfloat.hh"
 #include "audio/regioncontainmentinfo.hh"
-#include "audio/audioentity.hh"
 #include "audio/audioevent.hh"
+#include "audio/audioentity.hh"
 #include "audio/oneshot.hh"
 #include "audio/oneshothandle.hh"
+
+#include "audio/globalaudio.hh"
 
 //--------------------------------------------------
 //	UEL
@@ -658,6 +660,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 //	TIDO
 //--------------------------------------------------
+
+#include "tido/policescanneraudio.hh"
+#include "tido/nisaudio.hh"
 
 #include "tido/basedialogueutils.hh"
 #include "tido/dialogueutils.hh"
