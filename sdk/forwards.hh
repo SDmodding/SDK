@@ -51,6 +51,8 @@ namespace UFG
 	class SpawnPoint;
 	class SpawnRegion;
 
+	class SupplementaryAttackTarget;
+
 	class TriggerRegion;
 
 	class WayGraph;
@@ -113,6 +115,7 @@ namespace UFG
 	class MissionFailConditionComponent;
 	class NavComponent;
 	class ParkourComponent;
+	class PedFormationManagerComponent;
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class RagdollComponent;

@@ -771,6 +771,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/encounters/encounterunitinfo.hh"
 #include "ai/encounters/encounterbase.hh"
 
+#include "ai/knowledge/pedknowledgebase.hh"
+
 //--------------------------------------------------
 //	Sim Components
 //--------------------------------------------------

@@ -30,6 +30,10 @@ namespace UFG
 		bool mScriptedLightsOn : 1;
 		bool mDummy : 4;
 
+		/* Static Functions */
+
+		SDK_SINLINE CopUnitComponent* PropertiesOnActivate(SceneObjectProperties* pSceneObj) { return SDK_CALL_FUNC(CopUnitComponent*, 0x544E60, SceneObjectProperties*)(pSceneObj); }
+
 		/* Functions */
 
 		void DisableHandler() { SDK_CALL_FUNC(void, 0x526190, void*)(this); }

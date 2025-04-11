@@ -305,6 +305,10 @@ namespace UFG
 			return GetComponent<CharacterAnimationComponent, CVBase_BaseAnimationComponent>();
 		}
 
+		SDK_INLINE ActiveAIEntityComponent* GetActiveAIEntity() {
+			return GetComponent<ActiveAIEntityComponent, CVBase_AIEntityComponent>();
+		}
+
 		SDK_INLINE CharacterPhysicsComponent* GetCharacterPhysics() {
 			return GetComponent<CharacterPhysicsComponent, Character_CharacterPhysicsComponent>();
 		}

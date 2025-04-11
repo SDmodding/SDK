@@ -2,7 +2,7 @@
 
 namespace UFG
 {
-	template <typename T>
+	template <typename T, u32 WHAT = 0>
 	class qArray
 	{
 	public:
