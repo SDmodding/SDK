@@ -165,7 +165,11 @@ namespace UFG
 		void ResetAndLoadProperties() { SDK_CALL_FUNC(void, 0x382F00, void*)(this); }
 		void RestartPoiCooldown() { SDK_CALL_FUNC(void, 0x383DB0, void*)(this); }
 		void SetBehaviourTree(const char* behaviour_tree_name) { SDK_CALL_FUNC(void, 0x385000, void*, const char*)(this, behaviour_tree_name); }
-		void SetCurrentObjective(eAIObjective objective, const char* caller_debug_name) { SDK_CALL_FUNC(void, 0x3852B0, void*, eAIObjective, const char*)(this, objective, caller_debug_name); }
+
+		void SetCurrentObjective(eAIObjective objective, const char* caller_debug_name = 0) {
+			SDK_CALL_FUNC(void, 0x3852B0, void*, eAIObjective, const char*)(this, objective, caller_debug_name);
+		}
+
 		void SetParkourSuccessRate(f32 val) { SDK_CALL_FUNC(void, 0x387A00, void*, f32)(this, val); }
 		void UpdateCurrentAttackTarget() { SDK_CALL_FUNC(void, 0x3948E0, void*)(this); }
 	};

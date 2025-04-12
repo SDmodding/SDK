@@ -75,6 +75,12 @@ namespace UFG
 		virtual void Update(f32 delta_sec) = 0;
 		virtual void DrawDebugInfo(Render::View* view) = 0;
 
+		/* Static Functions */
+
+		SDK_SINLINE AttackRightsComponent* PropertiesOnActivate(SceneObjectProperties* pSceneObj) {
+			return SDK_CALL_FUNC(AttackRightsComponent*, 0x37E560, SceneObjectProperties*)(pSceneObj);
+		}
+
 		/* Functions */
 
 		void AddToFollowerAttackSlotQueue(HasAttackRequestNode* attacker) { SDK_CALL_FUNC(void, 0x3414C0, void*, HasAttackRequestNode*)(this, attacker); }

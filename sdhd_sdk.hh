@@ -847,6 +847,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/stimulusreceivercomponent.hh"
 #include "ai/aientitycomponent.hh"
 #include "ai/attackrightscomponent.hh"
+#include "ai/pedformationmanagercomponent.hh"
+#include "ai/groupcomponent.hh"
 
 //--------------------------------------------------
 //	Online2
