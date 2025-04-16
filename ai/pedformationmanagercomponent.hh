@@ -24,7 +24,7 @@ namespace UFG
 		NUM_PED_FORMATION_FACING_TYPES
 	};
 
-	class PedFormationProfile : qNodeRB<PedFormationProfile>
+	class PedFormationProfile : public qNodeRB<PedFormationProfile>
 	{
 	public:
 		struct Slot : qSafePointerNode<Slot>
@@ -154,6 +154,11 @@ namespace UFG
 		bool m_IsDestinationValid;
 		bool m_IsApproachingTurn;
 		Ticket m_Ticket;
+
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qTreeRB<PedFormationProfile>*, 0x23BB6B0> s_Profiles;
+		SDK_VINLINE qGlobalVar<qFixedArray<PedFormationProfile, 16>*, 0x23BB950> s_ProfilePool;
 
 		/* Virtual Functions */
 

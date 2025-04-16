@@ -42,8 +42,26 @@ namespace UFG
 		SDK_INLINE void AppendParentLocal(qPropertySet* propertySet, const qSymbolUC& parentName) { SDK_CALL_FUNC(void, 0x1F1ED0, qPropertySet*, const qSymbolUC&)(propertySet, parentName); }
 		SDK_INLINE void AppendParentLocal(qPropertySet* propertySet, const char* parentNameString) { SDK_CALL_FUNC(void, 0x1F1F10, qPropertySet*, const char*)(propertySet, parentNameString); }
 		SDK_INLINE qPropertySet* CreateContainedPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F4110, const qSymbol&)(propSetName); }
+
+		// This will never correctly find propertyset as it uses debug string, use function with `2` at the end.
 		SDK_INLINE qPropertySet* CreateOrFindPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F4680, const qSymbol&)(propSetName); }
 		SDK_INLINE qPropertySet* CreateTopLevelPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F4760, const qSymbol&)(propSetName); }
+
+		// Does same thing as `CreateOrFindPropertySet`, but sets setName directly.
+		SDK_INLINE qPropertySet* CreateOrFindPropertySet2(const qSymbol& propSetName)
+		{
+			auto propSet = PropertySetCache::GetPropSet(propSetName);
+			if (!propSet)
+			{
+				propSet = CreateTopLevelPropertySet(propSetName);
+				auto setResource = propSet->GetResource();
+				setResource->mNode.mUID = propSet->mName.mUID = propSetName;
+				PropertySetCache::Add(setResource);
+			}
+
+			return propSet;
+		}
+
 		SDK_INLINE qString DeterminePathAndFilename(const char* propSetName, const char* alt_root_path) { return SDK_CALL_FUNC(qString, 0x1F51D0, const char*, const char*)(propSetName, alt_root_path); }
 		SDK_INLINE qPropertySet* FindPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F5560, const qSymbol&)(propSetName); }
 		SDK_INLINE qPropertySet* GetPropertySet(const qSymbol& propSetName) { return SDK_CALL_FUNC(qPropertySet*, 0x1F5560, const qSymbol&)(propSetName); }
