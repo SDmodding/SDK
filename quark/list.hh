@@ -29,7 +29,7 @@ namespace UFG
 		T* mNode;
 	};
 
-	template <typename T, typename U = T>
+	template <typename T, typename U = T, bool FREE = 1>
 	class qList
 	{
 	public:

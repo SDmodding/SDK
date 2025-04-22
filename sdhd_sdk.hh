@@ -483,12 +483,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "partdatabase/partloader.hh"
 
 //--------------------------------------------------
-//	Spawning
-//--------------------------------------------------
-
-#include "spawning/spawninterface.hh"
-
-//--------------------------------------------------
 //	Progression
 //--------------------------------------------------
 
@@ -498,8 +492,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/gamestat/gamestatdefinitions.hh"
 #include "progression/gamestat/gamestattracker.hh"
 #include "progression/gamestat/gamesaveload.hh"
-
-#include "progression/upgrades/storefronttracker.hh"
 
 #include "progression/pdatriggertracker.hh"
 #include "progression/objectivetracker.hh"
@@ -560,6 +552,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "roadnetwork/roadnetworkresources.hh"
 #include "roadnetwork/roadnetworkguide.hh"
 #include "roadnetwork/roadnetworkspawnpoint.hh"
+#include "roadnetwork/roadnetworkvisibilearea.hh"
 
 //--------------------------------------------------
 //	Daemon Manager
@@ -623,6 +616,30 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/transformnodecomponent.hh"
 
 #include "sim/components/charactersubjectcomponent.hh"
+
+//--------------------------------------------------
+//	Gamescene
+//--------------------------------------------------
+
+#include "gamescene/scenelayerresource.hh"
+#include "gamescene/sceneobjectproperties.hh"
+
+#include "gamescene/components/hintcomponentbase.hh"
+#include "gamescene/components/marker.hh"
+
+//--------------------------------------------------
+//	Spawning
+//--------------------------------------------------
+
+#include "spawning/spawninterface.hh"
+#include "spawning/trafficregion.hh"
+
+
+//--------------------------------------------------
+//	Progression 2
+//--------------------------------------------------
+
+#include "progression/upgrades/storefronttracker.hh"
 
 //--------------------------------------------------
 //	Camera (Components)
@@ -731,6 +748,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/ai/vehiclewayfinderclient.hh"
 #include "vehicles/ai/waytraversalfinder.hh"
 
+#include "vehicles/roadnetwork/truedirectionmanager.hh"
+
 #include "vehicles/components/vehicledrivercomponent.hh"
 #include "vehicles/components/aidrivercomponent.hh"
 #include "vehicles/components/vehicleeffectscomponent.hh"
@@ -746,6 +765,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/components/vehicleaudiocomponent.hh"
 
 #include "vehicles/vehicleutil.hh"
+
+#include "vehicles/wheeledvehiclenavigationdata.hh"
+#include "vehicles/wheeledvehiclemanager.hh"
 
 //--------------------------------------------------
 //	Effects
@@ -822,16 +844,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "render/renderstageplugin.hh"
 #include "render/posteffects.hh"
-
-//--------------------------------------------------
-//	Gamescene
-//--------------------------------------------------
-
-#include "gamescene/scenelayerresource.hh"
-#include "gamescene/sceneobjectproperties.hh"
-
-#include "gamescene/components/hintcomponentbase.hh"
-#include "gamescene/components/marker.hh"
 
 //--------------------------------------------------
 //	Spawning

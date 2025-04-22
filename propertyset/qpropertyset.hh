@@ -94,7 +94,7 @@ namespace UFG
 		u32 AddParent(const qSymbol& parent_name) { return SDK_CALL_FUNC(u32, 0x1F1A70, void*, const qSymbol&)(this, parent_name); }
 		qPropertySet* GetParentFromIdx(u32 parent_index) { return SDK_CALL_FUNC(qPropertySet*, 0x1F6FB0, void*, u32)(this, parent_index); }
 
-		qPropertySet* GetParentFromName(const qSymbol& propertySetName, qPropertyDepth depth) {
+		qPropertySet* GetParentFromName(const qSymbol& propertySetName, qPropertyDepth depth = DEPTH_RECURSE) {
 			return SDK_CALL_FUNC(qPropertySet*, 0x1F7030, void*, const qSymbol&, qPropertyDepth)(this, propertySetName, depth);
 		}
 
@@ -111,13 +111,13 @@ namespace UFG
 		const qSymbol& GetPropertyNameFromIndex(u32 index) { return SDK_CALL_FUNC(const qSymbol&, 0x1F7AC0, void*, u32)(this, index); }
 		ePropertyType GetPropertyTypeFromIndex(u32 index) { return SDK_CALL_FUNC(ePropertyType, 0x1F7BF0, void*, u32)(this, index); }
 
-		ePropertyType GetPropertyTypeFromName(const qSymbol& propName, qPropertyDepth depth) {
+		ePropertyType GetPropertyTypeFromName(const qSymbol& propName, qPropertyDepth depth = DEPTH_RECURSE) {
 			return SDK_CALL_FUNC(ePropertyType, 0x1F7C70, void*, const qSymbol&, qPropertyDepth)(this, propName, depth);
 		}
 
 		void RemovePropertyByName(const qSymbol& name) { SDK_CALL_FUNC(void, 0x1FC160, void*, const qSymbol&)(this, name); }
 		void RemovePropertyIdx(u32 property_index) { SDK_CALL_FUNC(void, 0x1FC220, void*, u32)(this, property_index); }
-		qPropertySet* PropertyExists(const qSymbol& name, qPropertyDepth depth) { return SDK_CALL_FUNC(qPropertySet*, 0x1FA740, void*, const qSymbol&, qPropertyDepth)(this, name, depth); }
+		qPropertySet* PropertyExists(const qSymbol& name, qPropertyDepth depth = DEPTH_RECURSE) { return SDK_CALL_FUNC(qPropertySet*, 0x1FA740, void*, const qSymbol&, qPropertyDepth)(this, name, depth); }
 		bool PropertyIsDefaultByName(const qSymbol& propertyName) { return SDK_CALL_FUNC(bool, 0x1FA880, void*, const qSymbol&)(this, propertyName); }
 		bool PropertyIsDefaultIdx(u32 property_index) { return SDK_CALL_FUNC(bool, 0x1FA8C0, void*, u32)(this, property_index); }
 

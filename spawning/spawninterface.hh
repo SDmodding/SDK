@@ -31,4 +31,9 @@ namespace UFG
 			return SDK_CALL_FUNC(SimObject*, 0x5B7410, const qSymbol&, qPropertySet*, SpawnPriority, SceneLayer*, SceneObjectProperties*, SimObject*)(objName, parentSet, priority, pOwnerLayer, pSpawnerSceneObj, pOwner);
 		}
 	};
+
+	class SpawnPointInterface : public MarkerBase, public SpawnInfoInterface
+	{
+	public:
+	};
 }

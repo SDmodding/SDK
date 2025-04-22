@@ -119,6 +119,7 @@ namespace UFG
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class RagdollComponent;
+	class RegionComponent;
 	class RigidBodyComponent;
 	class RoadSpaceComponent;
 	class SceneryGroupComponent;
