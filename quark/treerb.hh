@@ -75,7 +75,7 @@ namespace UFG
 		class Iterator
 		{
 		public:
-			Iterator(qBaseTreeRB* tree, qBaseNodeRB* node) : mTree(tree), mNode(node) {}
+			Iterator(qBaseTreeRB* tree = 0, qBaseNodeRB* node = 0) : mTree(tree), mNode(node) {}
 
 			bool operator!=(const Iterator& other) const { return mNode != other.mNode; }
 
@@ -89,7 +89,7 @@ namespace UFG
 		};
 
 		SDK_INLINE Iterator begin() { return { &mTree, mTree.GetHead() }; }
-		SDK_INLINE Iterator end() { return { nullptr, nullptr }; }
+		SDK_INLINE Iterator end() { return {}; }
 	};
 
 	template <typename T>

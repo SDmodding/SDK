@@ -35,7 +35,7 @@ namespace UFG
 	public:
 		i64 mOffset;
 
-		SDK_INLINE T Get(i64 offset = 0)
+		SDK_INLINE T Get(i64 offset = 0) const
 		{
 			if (mOffset) {
 				return reinterpret_cast<T>(reinterpret_cast<uptr>(this) + mOffset + offset);
@@ -43,7 +43,7 @@ namespace UFG
 			return 0;
 		}
 
-		SDK_INLINE void Set(void* target)
+		SDK_INLINE void Set(const void* target)
 		{
 			if (target) {
 				mOffset = static_cast<i64>(reinterpret_cast<uptr>(target) - reinterpret_cast<uptr>(this));
@@ -52,6 +52,8 @@ namespace UFG
 				mOffset = 0;
 			}
 		}
+
+		SDK_INLINE void operator=(const qOffset64<T>& other) { Set(other.Get()); }
 
 		SDK_INLINE void operator=(const T* target) { Set(target); }
 

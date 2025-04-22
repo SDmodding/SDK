@@ -19,9 +19,23 @@ namespace UFG
 	};
 	SDK_ASSERT_SIZEOF(VoiceProfile, 0x78);
 
+	class VoiceTag : public qNodeRB<VoiceTag>
+	{
+	public:
+		qSymbol m_tag;
+		u32 m_index;
+
+		virtual ~VoiceTag() = 0;
+	};
+
 	class VoiceProfileManager
 	{
 	public:
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qTreeRB<VoiceProfile>, 0x242EB20> sm_voiceProfiles;
+		SDK_VINLINE qGlobalVar<qTreeRB<VoiceTag>, 0x242EED0> sm_voiceTags;
+
 		/* Static Functions */
 
 		SDK_SINLINE VoiceProfile* AddOrGetVoiceProfile(const char* voiceStr, const qWiseSymbol* tag_voice) {
