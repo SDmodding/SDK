@@ -6,7 +6,6 @@ class ActionNode;
 class AnimationNode;
 class Attachment;
 class Creature;
-class ICompositeLook;
 class ITask;
 class LightingSubmitTaskParams;
 class PoseDriver;
@@ -35,6 +34,8 @@ namespace UFG
 	class GameSlice;
 	class GroundProperties;
 	class ModelAsset;
+
+	class ICompositeLook;
 
 	class ParkingSpot;
 	class ParkourHandle;
