@@ -32,4 +32,34 @@ namespace Render
 		bool mQueryInProcess;
 		u32 mMaxResults;
 	};
+
+	class SkinningParams
+	{
+	public:
+		View* view;
+		Illusion::ModelProxy* skin_model_proxy;
+		UFG::qMatrix44* local_transform;
+		u32 instance_uid;
+		UFG::qMatrix44* bone_inverse_array;
+		char* bone_remap_array;
+		void* transform_array;
+		u32 bone_matrix_count;
+		u32 transform_count;
+		Illusion::Model* simple_morph_target;
+		f32 simple_morph_weight;
+		f32* morph_weights_array;
+		u32 morph_weights_count;
+		void* user_data_0;
+		void* user_data_1;
+		bool no_override;
+		SkinClipInfo* clip_info;
+		Illusion::Material* mDecalMaterial;
+		SkinClipInfo::ClipOutputVertex* mDecalVerts;
+		u32 mDecalVertNum;
+		u32 mDecalTaskUID;
+		UFG::qMatrix44* mRigidTransform;
+		bool mHasSoftbody;
+		bool mUsePersistentCache;
+	};
+
 }

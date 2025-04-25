@@ -264,6 +264,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "streamer/datastreamer.hh"
 #include "streamer/streamermetrics.hh"
 #include "streamer/streamresourceloader.hh"
+#include "streamer/bigfile.hh"
 
 //--------------------------------------------------
 //	SceneDB
@@ -616,6 +617,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/transformnodecomponent.hh"
 
 #include "sim/components/charactersubjectcomponent.hh"
+
+#include "sim/components/compositelookcomponent.hh"
 
 //--------------------------------------------------
 //	Gamescene
