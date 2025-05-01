@@ -6,15 +6,6 @@ namespace UFG
 	class GetInPedFormationNode;
 	class HasAttackRequestNode;
 
-	enum eActionTreeType: int
-	{
-		eACTION_TREE_TYPE_NONE,
-		eACTION_TREE_TYPE_ACTION,
-		eACTION_TREE_TYPE_AI,
-		eACTION_TREE_TYPE_FACIAL,
-		NUM_ACTION_TREE_TYPES
-	};
-
 	class ActionTreeComponentBase
 	{
 	public:

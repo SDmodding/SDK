@@ -3,44 +3,6 @@
 class AnimationGroup;
 class SkeletalAnimation;
 
-namespace UFG
-{
-	enum eAnimationPriorityEnum
-	{
-		eANIM_PRIORITY_INACTIVE_NIS,
-		eANIM_PRIORITY_INACTIVE,
-		eANIM_PRIORITY_INACTIVE_POI,
-		eANIM_PRIORITY_INSTANCED_POI,
-		eANIM_PRIORITY_PREDICTIVE_POI,
-		eANIM_PRIORITY_ACTIVE_POI,
-		eANIM_PRIORITY_SOCIAL_FLAVOUR,
-		eANIM_PRIORITY_CHARACTER_FLAVOUR,
-		eANIM_PRIORITY_NIS_PRELOAD,
-		eANIM_PRIORITY_POI_CRITICAL,
-		eANIM_PRIORITY_CHARACTER,
-		eANIM_PRIORITY_ANIMATION_PLAYING,
-		eANIM_PRIORITY_REQUIRED,
-		eANIM_PRIORITY_SOCIAL,
-		eANIM_PRIORITY_CORE,
-		eANIM_PRIORITY_PLAYER,
-		eANIM_PRIORITY_ACTIVE_NIS,
-		NUM_ANIMATION_PRIORITIES
-	};
-}
-
-enum AnimationPlayMode
-{
-	APM_NORMAL,
-	APM_CYCLIC,
-	APM_HOLDLASTFRAME,
-	APM_PARAMETRIC,
-	APM_ABSOLUTE,
-	APM_PARAMETRIC_RATE,
-	APM_PARAMETRIC_RATE_CYCLIC,
-	APM_PARAMETRIC_RATE_ACTIVE,
-	APM_COUNT
-};
-
 class AnimationGroupHandle : public UFG::qNode<AnimationGroupHandle>, public UFG::qNode<AnimationGroupHandle, class AnimationGroupHandleContainer>
 {
 public:
@@ -54,7 +16,7 @@ public:
 	UFG::qSafePointer<AnimationGroup> m_AnimationGroup;
 	qEnum<UFG::eAnimationPriorityEnum, u16> m_eAnimationPriority;
 	u16 m_AnimationSubPriority;
-	i8 m_bHasBeenBound;
+	bool m_bHasBeenBound;
 	ReferenceInfo* m_pReferenceInfo;
 };
 

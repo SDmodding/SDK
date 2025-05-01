@@ -23,5 +23,9 @@ class TrackGroup : public Expression::IMemberMap
 {
 public:
 	BinPtrArray<ITrack> mTracks;
+
+	/* Static Functions */
+
+	SDK_SINLINE TrackGroup* Create() { return SDK_CALL_FUNC(TrackGroup*, 0x26C9B0)(); }
 };
 SDK_ASSERT_SIZEOF(TrackGroup, 0x20);

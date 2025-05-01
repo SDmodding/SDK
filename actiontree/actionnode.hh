@@ -30,5 +30,8 @@ SDK_ASSERT_SIZEOF(ActionNodeImplementation, 0x58);
 class ActionNodePlayable : public ActionNodeImplementation
 {
 public:
+	/* Static Functions */
+
+	SDK_SINLINE ActionNodePlayable* Create() { return SDK_CALL_FUNC(ActionNodePlayable*, 0x26C6C0)(); }
 };
 

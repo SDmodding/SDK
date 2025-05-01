@@ -157,6 +157,14 @@ class hkpWorld;
 #include "Physics2012/Collide/Filter/hkpCollisionFilter.hh"
 #include "Physics2012/Collide/Filter/hkpGroupFilter.hh"
 
+#include "Physics2012/Vehicle/hkpVehicleWheelCollide.hh"
+#include "Physics2012/Vehicle/hkpVehicleInstance.hh"
+#include "Physics2012/Vehicle/hkpVehicleEngine.hh"
+#include "Physics2012/Vehicle/hkpVehicleTransmission.hh"
+#include "Physics2012/Vehicle/hkpVehicleBrake.hh"
+#include "Physics2012/Vehicle/hkpVehicleSteering.hh"
+#include "Physics2012/Vehicle/hkpVehicleAerodynamics.hh"
+
 #include "Utilities/hkpCharacterControl.hh"
 
 //------------------------------------

@@ -304,6 +304,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/binarray.hh"
 #include "actiontree/binptrarray.hh"
 #include "actiontree/binstring.hh"
+#include "actiontree/enums.hh"
 #include "actiontree/tracksenum.hh"
 
 //--------------------------------------------------
@@ -714,6 +715,13 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/components/characterphysicscomponent.hh"
 #include "physics/components/ragdollcomponent.hh"
+
+#include "physics/engine.hh"
+#include "physics/transmission.hh"
+#include "physics/vehicleinstance.hh"
+#include "physics/brakes.hh"
+#include "physics/steering.hh"
+#include "physics/aerodynamics.hh"
 
 #include "physics/physicsvehicle.hh"
 

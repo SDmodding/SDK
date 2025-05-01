@@ -89,7 +89,7 @@ namespace UFG
 		{
 			TrueCrowdSet* mSet;
 			u32 mNumParts;
-			float mMorphWeights[2];
+			f32 mMorphWeights[2];
 			ModelTextureCombination mPart[16];
 
 			SDK_INLINE void AddProxyReference(PedSpawningInfo& proxy) { SDK_CALL_FUNC(void, 0x438600, void*, PedSpawningInfo&)(this, proxy); }
@@ -97,7 +97,6 @@ namespace UFG
 			SDK_INLINE bool IsEqual(const Instance& rhs) { return SDK_CALL_FUNC(bool, 0x43F0C0, void*, const Instance&)(this, rhs); }
 			SDK_INLINE bool IsLoaded() { return SDK_CALL_FUNC(char, 0x43F180, void*)(this); }
 		};
-
 
 		BitFlags128 mKey;
 		qSymbol mResourceFilename;

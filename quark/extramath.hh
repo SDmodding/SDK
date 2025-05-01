@@ -26,6 +26,7 @@ namespace UFG
 	{
 	public:
 		void MakeCoeffs() { SDK_CALL_FUNC(void, 0x3C6BB0, void*)(this); }
+		void Update(f32 f_elapsed_seconds) { SDK_CALL_FUNC(void, 0x3CF7F0, void*, f32)(this, f_elapsed_seconds); }
 	};
 
 	template <>

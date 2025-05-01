@@ -9,7 +9,9 @@ class Creature;
 class ITask;
 class LightingSubmitTaskParams;
 class PoseDriver;
+class PoseNode;
 class TrackGroup;
+class SkeletalAnimation;
 
 // Skookum Script
 
@@ -119,6 +121,7 @@ namespace UFG
 	class PedFormationManagerComponent;
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
+	class PhysicsWheeledVehicle;
 	class RagdollComponent;
 	class RegionComponent;
 	class RigidBodyComponent;
