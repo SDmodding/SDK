@@ -13,5 +13,5 @@ public:
 
 	/* Static Functions */
 
-	SDK_SINLINE CustomHavokMemoryAllocator* Instance() { SDK_VAR(CustomHavokMemoryAllocator*, 0x2173880); }
+	SDK_SINLINE CustomHavokMemoryAllocator* Instance() { return SDK_VAR(CustomHavokMemoryAllocator*, 0x2173880); }
 };
