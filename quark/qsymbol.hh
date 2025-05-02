@@ -13,7 +13,7 @@ namespace UFG
 
 		void set_from_cstr(const char* pszSymbolString) { SDK_CALL_FUNC(void, 0x18DC30, void*, const char*)(this, pszSymbolString); }
 
-		qSymbol create_from_string(const char* pszSymbolString)
+		SDK_SINLINE qSymbol create_from_string(const char* pszSymbolString)
 		{
 			qProxy<qSymbol> res;
 			return *SDK_CALL_FUNC(qSymbol*, 0x180880, qSymbol*, const char*)(&res, pszSymbolString);
@@ -34,7 +34,7 @@ namespace UFG
 
 		void set_from_cstr(const char* pszSymbolString) { SDK_CALL_FUNC(void, 0x18DC80, void*, const char*)(this, pszSymbolString); }
 
-		qSymbolUC create_from_string(const char* pszSymbolString)
+		SDK_SINLINE qSymbolUC create_from_string(const char* pszSymbolString)
 		{
 			qProxy<qSymbolUC> res;
 			return *SDK_CALL_FUNC(qSymbolUC*, 0x1808E0, qSymbolUC*, const char*)(&res, pszSymbolString);
