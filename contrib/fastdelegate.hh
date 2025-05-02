@@ -49,8 +49,8 @@ namespace fastdelegate
 		FastDelegate() { m_Closure.clear(); }
 		FastDelegate(void* pthis, void* function_to_bind)
 		{
-			m_Closure.m_pthis = pthis;
-			m_Closure.m_pFunction = function_to_bind;
+			m_Closure.m_pthis = reinterpret_cast<detail::GenericClass*>(pthis);
+			m_Closure.m_pFunction = reinterpret_cast<decltype(m_Closure.m_pFunction)>(function_to_bind);
 		}
 	};
 

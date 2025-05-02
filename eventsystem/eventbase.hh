@@ -21,7 +21,7 @@ namespace UFG
 	class HandlerNode : public qNode<HandlerNode>
 	{
 	public:
-		fastdelegate::FastDelegate1<Event*> HandlerFunction;
+		fastdelegate::FastDelegate1<Event*, void> HandlerFunction;
 		u32 mMyDependencyID;
 		u32 mListOfWhoIDependOn[2];
 	};
@@ -52,6 +52,18 @@ namespace UFG
 		ChannelObj* mChannelObj;
 		bool mIsDynamic;
 		qList<HandlerNode> m_HandlerList;
+
+		/* Functions */
+
+		EventHandlerCookieTag* AddHandler(const fastdelegate::FastDelegate1<Event*, void>& eh, u32 dependencyID = 0) {
+			return SDK_CALL_FUNC(EventHandlerCookieTag*, 0x1B5F90, void*, const fastdelegate::FastDelegate1<Event*, void>&, u32)(this, eh, dependencyID);
+		}
+
+		int RemoveHandler(EventHandlerCookieTag* cookie) { return SDK_CALL_FUNC(int, 0x1B6610, void*, HandlerNode*)(this, cookie); }
+
+		int RemoveHandler(const fastdelegate::FastDelegate1<Event*, void>& handler) {
+			return SDK_CALL_FUNC(int, 0x1B6690, void*, const fastdelegate::FastDelegate1<Event*, void>&)(this, handler);
+		}
 	};
 	SDK_ASSERT_SIZEOF(EventChannel, 0x48);
 

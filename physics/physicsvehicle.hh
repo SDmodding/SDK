@@ -148,7 +148,7 @@ namespace UFG
 			return *SDK_CALL_FUNC(qVector3*, 0x4660D0, void*, qVector3*)(this, &res); 
 		}
 
-		void GetMass() { SDK_CALL_FUNC(void, 0x466B80, void*)(this); }
+		f32 GetMass() { return SDK_CALL_FUNC(f32, 0x466B80, void*)(this); }
 
 		qVector3 GetVelocity()
 		{ 
