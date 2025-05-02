@@ -129,6 +129,10 @@ class hkpWorld;
 #include "Physics2012/Dynamics/hkpAction.hh"
 #include "Physics2012/Dynamics/hkpArrayAction.hh"
 #include "Physics2012/Dynamics/hkpUnaryAction.hh"
+#include "Physics2012/Dynamics/hkpMaterial.hh"
+
+#include "Physics2012/Dynamics/Motion/hkpMotion.hh"
+#include "Physics2012/Dynamics/Motion/hkpKeyframedRigidMotion.hh"
 
 #include "Physics2012/Dynamics/Entity/hkpEntity.hh"
 #include "Physics2012/Dynamics/Entity/hkpEntityListener.hh"

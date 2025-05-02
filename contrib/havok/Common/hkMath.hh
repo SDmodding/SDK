@@ -12,6 +12,27 @@ class hkHalf
 {
 public:
 	i16 m_value;
+
+	SDK_INLINE hkHalf() {}
+	SDK_INLINE hkHalf(const f32& f) { this->operator=(f); }
+
+	SDK_INLINE hkHalf& operator=(const f32& f)
+	{
+		int t = ((const int*)&f)[0];
+		m_value = i16(t >> 16);
+		return *this;
+	}
+
+	SDK_INLINE f32 getFloat32() const
+	{
+		union
+		{
+			int i;
+			float f;
+		} u;
+		u.i = (m_value << 16);
+		return u.f;
+	}
 };
 
 class hkVector4f
