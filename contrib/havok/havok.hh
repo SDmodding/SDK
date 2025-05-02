@@ -38,6 +38,7 @@ class hkpWorld;
 
 #include "Common/hkMultiThreadCheck.hh"
 #include "Common/hkStringPtr.hh"
+#include "Common/hkMemoryAllocator.hh"
 
 #include "Common/Thread/hkSemaphore.hh"
 #include "Common/Thread/hkCriticalSection.hh"
