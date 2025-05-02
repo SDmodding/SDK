@@ -41,11 +41,24 @@ public:
 	__m128 m_quad;
 
 	hkVector4f() {}
-	hkVector4f(f32 a, f32 b, f32 c, f32 d) { m_quad = _mm_setr_ps(a, b, c, d); }
+	hkVector4f(f32 a, f32 b, f32 c, f32 d = 0.f) { m_quad = _mm_setr_ps(a, b, c, d); }
 
-	void set(f32 a, f32 b, f32 c, f32 d) { m_quad = _mm_setr_ps(a, b, c, d); }
+	void set(f32 a, f32 b, f32 c, f32 d = 0.f) { m_quad = _mm_setr_ps(a, b, c, d); }
 
 	void setRotatedDir(const hkMatrix3f& a, const hkVector4f& b) { SDK_CALL_FUNC(void, 0xC56EB0, void*, const hkMatrix3f&, const hkVector4f&)(this, a, b); }
+
+	f32 operator[](int i) const { return m_quad.m128_f32[i]; }
+
+	hkVector4f& operator*(f32 f)
+	{
+		m_quad = _mm_mul_ps(m_quad, _mm_set_ps1(f));
+		return *this;
+	}
+
+	void operator*=(f32 f)
+	{
+		m_quad = _mm_mul_ps(m_quad, _mm_set_ps1(f));
+	}
 };
 typedef hkVector4f hkVector4;
 
