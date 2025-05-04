@@ -357,6 +357,10 @@ namespace UFG
 			return GetComponent<CharacterSubjectComponent, Character_CameraSubject>();
 		}
 
+		SDK_INLINE CharacterEffectsComponent* GetCharacterEffects() {
+			return GetComponent<CharacterEffectsComponent, Character_CharacterEffectsComponent>();
+		}
+
 		SDK_INLINE InventoryComponent* GetInventory() {
 			return GetComponent<InventoryComponent, Character_InventoryComponent>();
 		}

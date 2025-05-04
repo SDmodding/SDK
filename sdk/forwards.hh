@@ -110,6 +110,7 @@ namespace UFG
 	class CameraAnimationComponent;
 	class CharacterAnimationComponent;
 	class CharacterControllerInterface;
+	class CharacterEffectsComponent;
 	class CharacterOccupantComponent;
 	class CharacterPhysicsComponent;
 	class CharacterSubjectComponent;

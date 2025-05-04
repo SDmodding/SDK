@@ -833,6 +833,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/animationlodcomponent.hh"
 #include "sim/components/facialactiontreecomponent.hh"
 
+#include "sim/components/charactereffectscomponent.hh"
+
 #include "sim/components/interactioncomponent.hh"
 
 #include "sim/components/vehicleoccupantcomponent.hh"
