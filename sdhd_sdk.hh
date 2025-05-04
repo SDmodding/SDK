@@ -700,6 +700,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "tido/dialogueutils.hh"
 #include "tido/audioentitycomponent.hh"
 #include "tido/actoraudiocomponent.hh"
+#include "tido/dialogueanimationcomponent.hh"
 #include "tido/enginecurveaudio.hh"
 
 //--------------------------------------------------

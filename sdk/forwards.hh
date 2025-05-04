@@ -116,6 +116,7 @@ namespace UFG
 	class CharacterSubjectComponent;
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
+	class DialogueAnimationComponent;
 	class DynamicCoverComponent;
 	class EncounterUnitComponent;
 	class FaceActionComponent;

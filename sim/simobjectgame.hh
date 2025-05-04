@@ -373,6 +373,10 @@ namespace UFG
 			return GetComponent<ActorAudioComponent, Character_HkAudioEntityComponent>();
 		}
 
+		SDK_INLINE DialogueAnimationComponent* GetDialogueAnimation() {
+			return GetComponent<DialogueAnimationComponent, Character_DialogueAnimationComponent>();
+		}
+
 		SDK_INLINE RagdollComponent* GetRagdoll() {
 			return GetComponent<RagdollComponent, Character_RagdollComponent>();
 		}
