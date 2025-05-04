@@ -325,6 +325,10 @@ namespace UFG
 			return GetComponent<InteractorComponent, Character_InteractorComponent>();
 		}
 
+		SDK_INLINE ActionTreeResourcesComponent* GetActionTreeResources() {
+			return GetComponent<ActionTreeResourcesComponent, Character_ActionTreeResourcesComponent>();
+		}
+
 		SDK_INLINE FacialActionTreeComponent* GetFacialActionTree() {
 			return GetComponent<FacialActionTreeComponent, Character_FacialActionTreeComponent>();
 		}

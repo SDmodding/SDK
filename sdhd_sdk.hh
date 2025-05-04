@@ -402,6 +402,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "actiontree/actiontreecomponentbase.hh"
+
 #include "actiontree/actionnode.hh"
 #include "actiontree/actioncontext.hh"
 #include "actiontree/actioncontroller.hh"
@@ -849,7 +850,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/missionfailconditioncomponent.hh"
 #include "sim/components/copunitcomponent.hh"
 
+#include "sim/components/powermanagementcomponent.hh"
 #include "sim/components/worldcontextcomponent.hh"
+
+//--------------------------------------------------
+//	ActionTree
+//--------------------------------------------------
+
+#include "actiontree/actiontreeresourcescomponent.hh"
 
 //--------------------------------------------------
 //	Render

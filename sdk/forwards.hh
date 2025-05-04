@@ -77,6 +77,7 @@ namespace UFG
 	/* Sim (Components) */
 
 	class ActionTreeComponent;
+	class ActionTreeResourcesComponent;
 	class ActiveAIEntityComponent;
 	class ActorAudioComponent;
 	class AIActionTreeComponent;
@@ -123,6 +124,7 @@ namespace UFG
 	class PhantomVolumeComponent;
 	class PhysicsMoverInterface;
 	class PhysicsWheeledVehicle;
+	class PowerManagementComponent;
 	class RagdollComponent;
 	class RegionComponent;
 	class RigidBodyComponent;
