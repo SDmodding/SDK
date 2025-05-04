@@ -466,6 +466,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "schema/schema_simobjectproperties.hh"
 #include "schema/schema_characterproperties.hh"
 
+#include "schema/schema_sensor.hh"
+
 //--------------------------------------------------
 //	Object Resource Management
 //--------------------------------------------------
@@ -718,6 +720,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/components/characterphysicscomponent.hh"
 #include "physics/components/ragdollcomponent.hh"
+
+#include "physics/components/sensorcomponent.hh"
 
 #include "physics/engine.hh"
 #include "physics/transmission.hh"

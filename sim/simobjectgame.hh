@@ -288,6 +288,10 @@ namespace UFG
 		SDK_INLINE RoadSpaceComponent* GetRoadSpace() {
 			return GetComponent<RoadSpaceComponent, CVBase_RoadSpaceComponent>();
 		}
+
+		SDK_INLINE SensorComponent* GetSensor() {
+			return GetComponent<SensorComponent, CVBase_SensorComponent>();
+		}
 	};
 
 	//------------------------------------------------------------------------------

@@ -40,6 +40,7 @@ namespace UFG
 	class ICompositeLook;
 
 	class ParkingSpot;
+	class ParkourQuery;
 	class ParkourHandle;
 
 	class PhysicsObjectProperties;
@@ -127,6 +128,7 @@ namespace UFG
 	class RigidBodyComponent;
 	class RoadSpaceComponent;
 	class SceneryGroupComponent;
+	class SensorComponent;
 	class SimObjectCharacterPropertiesComponent;
 	class SimObjectPropertiesComponent;
 	class SimObjectWeaponPropertiesComponent;
