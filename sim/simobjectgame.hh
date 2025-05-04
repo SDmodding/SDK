@@ -349,6 +349,10 @@ namespace UFG
 			return GetComponent<HasAttackRequestComponent, Character_HasAttackRequestComponent>();
 		}
 
+		SDK_INLINE NavComponent* GetNav() {
+			return GetComponent<NavComponent, Character_NavComponent>();
+		}
+
 		SDK_INLINE CharacterSubjectComponent* GetCharacterSubject() {
 			return GetComponent<CharacterSubjectComponent, Character_CameraSubject>();
 		}

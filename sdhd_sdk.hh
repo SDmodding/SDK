@@ -584,6 +584,11 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "navigation/navpath.hh"
 #include "navigation/navdaemon.hh"
 
+#include "navigation/navtestdeferrer.hh"
+#include "navigation/navmodulepathing.hh"
+#include "navigation/navmodulelocal.hh"
+#include "navigation/navmodulecontroller.hh"
+
 //--------------------------------------------------
 //	Sim
 //--------------------------------------------------
@@ -892,6 +897,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/hasattackrequestcomponent.hh"
 #include "ai/pedformationmanagercomponent.hh"
 #include "ai/groupcomponent.hh"
+
+//--------------------------------------------------
+//	Navigation
+//--------------------------------------------------
+
+#include "navigation/navcomponent.hh"
 
 //--------------------------------------------------
 //	Online2

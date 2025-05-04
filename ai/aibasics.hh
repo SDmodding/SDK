@@ -3,6 +3,13 @@
 // Move this to appropriate file.
 namespace UFG
 {
+	enum AiPathGoalMode
+	{
+		AiGoal_Replace,
+		AiGoal_Replace_Direct,
+		AiGoal_Append
+	};
+
 	enum eAttackType
 	{
 		eATTACK_TYPE_MELEE,
@@ -11,7 +18,6 @@ namespace UFG
 		NUM_ATTACK_TYPES,
 		eATTACK_TYPE_NONE = -1
 	};
-
 
 	enum eAttackerType
 	{
