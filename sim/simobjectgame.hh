@@ -333,6 +333,10 @@ namespace UFG
 			return GetComponent<FacialActionTreeComponent, Character_FacialActionTreeComponent>();
 		}
 
+		SDK_INLINE GetInFormationComponent* GetGetInFormation() {
+			return GetComponent<GetInFormationComponent, Character_GetInFormationComponent>();
+		}
+
 		SDK_INLINE PedFormationManagerComponent* GetPedFormationManager() {
 			return GetComponent<PedFormationManagerComponent, Character_PedFormationManagerComponent>();
 		}

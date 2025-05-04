@@ -107,6 +107,7 @@ namespace UFG
 	class FacialActionTreeComponent;
 	class FormationManagerComponent;
 	class GameCameraComponent;
+	class GetInFormationComponent;
 	class GunComponent;
 	class HkAudioEntityComponent;
 	class HudComponent;
