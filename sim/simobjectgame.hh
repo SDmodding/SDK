@@ -341,6 +341,10 @@ namespace UFG
 			return GetComponent<PedFormationManagerComponent, Character_PedFormationManagerComponent>();
 		}
 
+		SDK_INLINE GetInPedFormationComponent* GetGetInPedFormation() {
+			return GetComponent<GetInPedFormationComponent, Character_GetInPedFormationComponent>();
+		}
+
 		SDK_INLINE HasAttackRequestComponent* GetHasAttackRequest() {
 			return GetComponent<HasAttackRequestComponent, Character_HasAttackRequestComponent>();
 		}

@@ -123,6 +123,7 @@ namespace UFG
 	class FormationManagerComponent;
 	class GameCameraComponent;
 	class GetInFormationComponent;
+	class GetInPedFormationComponent;
 	class GunComponent;
 	class HasAttackRequestComponent;
 	class HkAudioEntityComponent;
