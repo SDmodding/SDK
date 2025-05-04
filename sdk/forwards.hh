@@ -6,12 +6,27 @@ class ActionNode;
 class AnimationNode;
 class Attachment;
 class Creature;
-class ITask;
 class LightingSubmitTaskParams;
 class PoseDriver;
 class PoseNode;
-class TrackGroup;
 class SkeletalAnimation;
+
+// Conditions
+
+class HasAttackRequestCondition;
+
+// Groups
+
+class CanAttackConditionGroup;
+class TrackGroup;
+
+// Tasks
+
+class ITask;
+class AttackRightsScoreBonusTask;
+
+// Tracks
+
 
 // Skookum Script
 
@@ -109,6 +124,7 @@ namespace UFG
 	class GameCameraComponent;
 	class GetInFormationComponent;
 	class GunComponent;
+	class HasAttackRequestComponent;
 	class HkAudioEntityComponent;
 	class HudComponent;
 	class InteractableComponent;

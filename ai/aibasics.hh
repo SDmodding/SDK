@@ -12,6 +12,15 @@ namespace UFG
 		eATTACK_TYPE_NONE = -1
 	};
 
+
+	enum eAttackerType
+	{
+		eATTACKER_TYPE_PRIMARY,
+		eATTACKER_TYPE_FOLLOWER,
+		NUM_ATTACKER_TYPES,
+		eATTACKER_TYPE_NONE = -1
+	};
+
 	enum eInCoverType
 	{
 		eIN_COVER_NO,
