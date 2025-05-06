@@ -44,6 +44,18 @@ namespace UFG
 		SDK_INLINE void operator=(u32 uid) { mUID = uid; }
 	};
 
+	class qStaticSymbol : public qSymbol
+	{
+	public:
+		using qSymbol::qSymbol;
+	};
+
+	class qStaticSymbolUC : public qSymbolUC
+	{
+	public:
+		using qSymbolUC::qSymbolUC;
+	};
+
 	class qNamed
 	{
 	public:

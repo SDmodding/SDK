@@ -72,6 +72,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/types.hh"
 #include "quark/checksum.hh"
 #include "quark/array.hh"
+#include "quark/circulararray.hh"
 #include "quark/fixedarray.hh"
 #include "quark/safearray.hh"
 #include "quark/bitarray.hh"
@@ -502,15 +503,18 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "progression/pdatriggertracker.hh"
 #include "progression/objectivetracker.hh"
 #include "progression/secondaryobjectivetracker.hh"
+#include "progression/casetracker.hh"
 
 #include "progression/scenesettings.hh"
 #include "progression/ssgameslice.hh"
 #include "progression/gameslice.hh"
+#include "progression/gameslicestreamer.hh"
 
 //--------------------------------------------------
 //	Flow Control
 //--------------------------------------------------
 
+#include "flowcontrol/gamesetup.hh"
 #include "flowcontrol/gamestate.hh"
 #include "flowcontrol/gamestatecommon.hh"
 #include "flowcontrol/flowcontrol.hh"
@@ -632,6 +636,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "sim/components/compositelookcomponent.hh"
 
+#include "sim/components/progressiontriggercomponent.hh"
+
 //--------------------------------------------------
 //	Gamescene
 //--------------------------------------------------
@@ -649,12 +655,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "spawning/spawninterface.hh"
 #include "spawning/trafficregion.hh"
 
-
 //--------------------------------------------------
 //	Progression 2
 //--------------------------------------------------
 
 #include "progression/upgrades/storefronttracker.hh"
+#include "progression/progressiontracker.hh"
 
 //--------------------------------------------------
 //	Camera (Components)

@@ -79,6 +79,8 @@ namespace UFG
 
 	class ZoneTrigger;
 
+	class qMemoryPool;
+
 	/* Sim */
 
 	enum eSimObjectFlagEnum;
