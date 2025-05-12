@@ -157,6 +157,10 @@ namespace UFG
 			return GetComponent<SimObjectPropertiesComponent, Prop_SimObjectPropertiesComponent>();
 		}
 
+		SDK_INLINE SimObjectWeaponPropertiesComponent* GetSimObjectWeaponProperties() {
+			return GetComponent<SimObjectWeaponPropertiesComponent, Prop_SimObjectPropertiesComponent>();
+		}
+
 		SDK_INLINE TSActorComponent* GetTSActor() {
 			return GetComponent<TSActorComponent, Prop_TSActorComponent>();
 		}
