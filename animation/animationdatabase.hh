@@ -59,3 +59,28 @@ public:
 	void UnloadInternal() { SDK_CALL_FUNC(void, 0x3B04E0, void*)(this); }
 	void UpdatePriorityFromHandles() { SDK_CALL_FUNC(void, 0x3B49F0, void*)(this); }
 };
+
+class AnimationDataBase : public Expression::IMemberMap
+{
+public:
+	struct PriorityBudget
+	{
+		u32 mMaxSize;
+		u32 mUsedSize;
+		UFG::eAnimationPriorityEnum mOverFlowPriority;
+	};
+
+	UFG::qTreeRB<AnimationGroup> mAnimGroups;
+	UFG::qTreeRB<SkeletalAnimation> mAnimations;
+	AnimationGroupHandleContainer mDefaultReferenceContainers[17];
+	UFG::qList<AnimationGroup> mBudgetedAnimationGroups;
+	UFG::qList<AnimationGroup> mQueuedUpdateGroups;
+	UFG::qFixedArray<AnimationDataBase::PriorityBudget, 17> mPriorityBudgets;
+	UFG::qString mGlobalFallbackAnimation;
+	bool mUseFallbackAnimations;
+	UFG::StreamPrioritySystem* m_pStreamPrioritySystem;
+
+	/* Static Functions */
+
+	SDK_SINLINE AnimationDataBase* Instance() { return SDK_VAR_GET(AnimationDataBase*, 0x23CE050); }
+};

@@ -265,6 +265,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "streamer/datastreamer.hh"
 #include "streamer/streamermetrics.hh"
 #include "streamer/streamresourceloader.hh"
+#include "streamer/streamfilewrapper.hh"
 #include "streamer/bigfile.hh"
 
 //--------------------------------------------------

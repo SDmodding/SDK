@@ -6,5 +6,7 @@ namespace UFG
 	{
 	public:
 		char* mText;
+
+		SDK_INLINE operator const char*() const { return mText; }
 	};
 }
