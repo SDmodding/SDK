@@ -536,7 +536,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/sensorphantom.hh"
 #include "physics/statemachine.hh"
 #include "physics/sweptspherequery.hh"
-#include "physics/bulletmanager.hh"
 #include "physics/explosion.hh"
 #include "physics/volumeproperties.hh"
 #include "physics/phantomcallback.hh"
@@ -718,8 +717,21 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "modelasset/modelasset.hh"
 
 //--------------------------------------------------
+//	FX
+//--------------------------------------------------
+
+#include "fx/sharedpointer.hh"
+#include "fx/hardwareocclusionquery.hh"
+#include "fx/fxsimcomponent.hh"
+#include "fx/decal.hh"
+#include "fx/beam.hh"
+#include "fx/fxmanager.hh"
+
+//--------------------------------------------------
 //	Physics
 //--------------------------------------------------
+
+#include "physics/bulletmanager.hh"
 
 #include "physics/components/phantomvolumecomponent.hh"
 #include "physics/components/waterfloatingtrackerbasecomponent.hh"
@@ -753,17 +765,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/parkourcontainer.hh"
 #include "physics/components/parkourcomponent.hh"
-
-//--------------------------------------------------
-//	FX
-//--------------------------------------------------
-
-#include "fx/sharedpointer.hh"
-#include "fx/hardwareocclusionquery.hh"
-#include "fx/fxsimcomponent.hh"
-#include "fx/decal.hh"
-#include "fx/beam.hh"
-#include "fx/fxmanager.hh"
 
 //--------------------------------------------------
 //	Vehicles

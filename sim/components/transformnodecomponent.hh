@@ -22,6 +22,12 @@ namespace UFG
 		qVector3 mWorldVelocity;
 		eInheritXformType mInheritXformType;
 
+		/* Constructor */
+
+		void ctor(u32 name_uid, TransformNodeComponent* parent = 0, bool startSuspended = 0) {
+			SDK_CALL_FUNC(void, 0x18F1E0, void*, u32, TransformNodeComponent*, bool)(this, name_uid, parent, startSuspended);
+		}
+
 		/* Functions */
 
 		void SetLocalTransform(const qMatrix44& m) { reinterpret_cast<void(SDK_CALL*)(void*, const qMatrix44&)>(SDK_RVA(0x191250))(this, m); }

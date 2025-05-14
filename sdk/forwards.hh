@@ -70,6 +70,7 @@ namespace UFG
 	class SpawnPoint;
 	class SpawnRegion;
 
+	class SubTargetingLocation;
 	class SupplementaryAttackTarget;
 
 	class TriggerRegion;
