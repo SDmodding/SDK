@@ -20,6 +20,8 @@ namespace FX
 	public:
 		T* m_pPointer;
 
+		SDK_INLINE operator bool() { return m_pPointer; }
+
 		template <typename T>
 		void Set(T* pointer);
 

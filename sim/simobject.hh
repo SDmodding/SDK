@@ -23,6 +23,8 @@ namespace UFG
 		NUM_SIM_OBJECT_TYPES
 	};
 
+	SDK_SINLINE qMemoryPool* GetSimulationPool() { return SDK_VAR(qMemoryPool*, 0x23E5650); }
+
 	//-------------------------------------------------------------------
 	// Component
 	//-------------------------------------------------------------------

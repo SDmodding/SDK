@@ -254,7 +254,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Main
 //--------------------------------------------------
 
-#include "main/mainloop.hh"
 #include "main/bigfilelogic.hh"
 
 //--------------------------------------------------
@@ -728,6 +727,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "fx/fxmanager.hh"
 
 //--------------------------------------------------
+//	SceneDB
+//--------------------------------------------------
+
+#include "scenedb/dynamicscenerygroup.hh"
+
+//--------------------------------------------------
 //	Physics
 //--------------------------------------------------
 
@@ -992,3 +997,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "ui/screens/uihkscreenglobaloverlay.hh"
 #include "ui/screens/uihkscreenhud.hh"
+
+//--------------------------------------------------
+//	Main
+//--------------------------------------------------
+
+#include "main/mainloop.hh"

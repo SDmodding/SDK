@@ -36,7 +36,7 @@ namespace UFG
 
 		SDK_SINLINE bool LoadInternal(LoadedFile* loaded_file) { return SDK_CALL_FUNC(bool, 0x22ACF0, LoadedFile*)(loaded_file); }
 
-		SDK_SINLINE bool LoadResourceFile(const char* filename, qMemoryPool* pool, u32 alloc_flags, bool(__fastcall* filter)(qChunk*), void(__fastcall* callback)(const char*, bool, void*), void* callbackParam) {
+		SDK_SINLINE bool LoadResourceFile(const char* filename, qMemoryPool* pool = 0, u32 alloc_flags = 0, bool(__fastcall* filter)(qChunk*) = 0, void(__fastcall* callback)(const char*, bool, void*) = 0, void* callbackParam = 0) {
 			return SDK_CALL_FUNC(bool, 0x22ADA0, const char*, qMemoryPool*, u32, decltype(filter), decltype(callback), void*)(filename, pool, alloc_flags, filter, callback, callbackParam);
 		}
 
