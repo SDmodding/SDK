@@ -100,6 +100,7 @@ namespace UFG
 	class ActorAudioComponent;
 	class AIActionTreeComponent;
 	class AICharacterControllerBaseComponent;
+	class AICharacterControllerComponent;
 	class AiDriverComponent;
 	class AIEntityComponent;
 	class AIScriptInterfaceComponent;

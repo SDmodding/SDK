@@ -9,6 +9,10 @@ namespace UFG
 
 		RebindingComponentHandle<ActionTreeComponent> m_pActionTreeComponent;
 
+		/* Virtual Functions */
+
+		virtual void BeginFrame() = 0;
+
 		/* Functions */
 
 		bool PlayActionNode(const char* node_name) { return SDK_CALL_FUNC(bool, 0x5425C0, void*, const char*)(this, node_name); }

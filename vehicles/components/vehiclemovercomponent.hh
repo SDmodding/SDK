@@ -16,6 +16,23 @@ namespace UFG
 		NUM_VEHICLE_TRUNK_TYPES
 	};
 
+	class CruiseControl
+	{
+	public:
+		UFG::qPidController* mPidController;
+		f32 mSetSpeedMPS;
+		bool mIsActive;
+		bool mIsEnabled;
+
+		virtual ~CruiseControl() = 0;
+
+		/* Functions */
+
+		f32 Update(f32 deltaTime, f32 speedMPS, f32 gasBrakes, bool overrideSpeed) {
+			return SDK_CALL_FUNC(f32, 0x690610, void*, f32, f32, f32, bool)(this, deltaTime, speedMPS, gasBrakes, overrideSpeed);
+		}
+	};
+
 	class RammingState
 	{
 	public:

@@ -802,6 +802,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "vehicles/components/vehicleaudiocomponent/driverreactions.hh"
 #include "vehicles/components/vehicleaudiocomponent.hh"
 
+#include "vehicles/components/humandrivercomponent.hh"
+
 #include "vehicles/vehicleutil.hh"
 
 #include "vehicles/wheeledvehiclenavigationdata.hh"
@@ -906,6 +908,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ai/aiactiontreecomponent.hh"
 #include "ai/aiscriptinterfacecomponent.hh"
 #include "ai/stimulusreceivercomponent.hh"
+#include "ai/aicharactercontrollercomponent.hh"
 #include "ai/aientitycomponent.hh"
 #include "ai/attackrightscomponent.hh"
 #include "ai/getinformationcomponent.hh"
