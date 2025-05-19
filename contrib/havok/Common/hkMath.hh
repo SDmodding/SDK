@@ -6,6 +6,10 @@ class hkUFloat8
 {
 public:
 	i8 m_value;
+
+	SDK_SINLINE u16 getEncodedFloat(u8 index) { return SDK_CALL_FUNC(u16, 0xC56E80, u8)(index); }
+
+	hkUFloat8& operator=(f32 fv) { return SDK_CALL_FUNC(hkUFloat8&, 0x12FE590, void*, f32&)(this, fv); }
 };
 
 class hkHalf
@@ -48,6 +52,7 @@ public:
 	void setRotatedDir(const hkMatrix3f& a, const hkVector4f& b) { SDK_CALL_FUNC(void, 0xC56EB0, void*, const hkMatrix3f&, const hkVector4f&)(this, a, b); }
 
 	f32 operator[](int i) const { return m_quad.m128_f32[i]; }
+	f32& operator[](int i) { return m_quad.m128_f32[i]; }
 
 	hkVector4f& operator*(f32 f)
 	{
@@ -105,4 +110,12 @@ public:
 	hkQuaternionf m_rotation0;
 	hkQuaternionf m_rotation1;
 	hkVector4f m_centerOfMassLocal;
+};
+
+class hkSimdFloat32
+{
+public:
+	__m128 m_real;
+
+	hkSimdFloat32() {}
 };

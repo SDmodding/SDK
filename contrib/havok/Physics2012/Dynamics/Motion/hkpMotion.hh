@@ -28,4 +28,13 @@ public:
 	class hkpMaxSizeMotion* m_savedMotion;
 	u16 m_savedQualityTypeIndex;
 	hkHalf m_gravityFactor;
+
+	/* Virtual Functions */
+
+	virtual void setMass(const hkSimdFloat32& mass) = 0;
+	virtual void setMass(f32 mass) = 0; // -> Calls setMassInv(1.f / mass)
+	virtual void setMassInv(const hkSimdFloat32& massInv) = 0;
+	virtual void setMassInv(f32 massInv) = 0;
+
+	// TODO: Impl rest of the virtual functions if needed...
 };

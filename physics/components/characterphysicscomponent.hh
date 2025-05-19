@@ -96,6 +96,11 @@ namespace UFG
 		u32 mIsPlayer : 1;
 		u32 mBullShitCurbHack : 1;
 
+		/* Virtual Functions */
+
+		virtual void Update(f32 deltaT) = 0;
+		virtual void UpdateTransforms(f32 deltaT) = 0;
+
 		/* Impl Functions */
 
 		SDK_INLINE void ClearSuperMassive() { mHavokCharacter->m_superMassive = 0; }
@@ -111,7 +116,13 @@ namespace UFG
 		/* Functions */
 
 		void ClearPairedGrapple() { SDK_CALL_FUNC(void, 0x45A690, void*)(this); }
-		qVector3 GetVelocity() { return SDK_CALL_FUNC(qVector3, 0x468150, void*)(this); }
+
+		qVector3 GetVelocity()
+		{
+			qProxy<qVector3> res;
+			return *SDK_CALL_FUNC(qVector3*, 0x468150, void*, qVector3*)(this, &res);
+		}
+
 		f32 GetWaterElevation() { return SDK_CALL_FUNC(f32, 0x4683E0, void*)(this); }
 		void GrappleFixup(f32 deltaT) { SDK_CALL_FUNC(void, 0x468630, void*, f32)(this, deltaT); }
 		bool IsInWater() { return SDK_CALL_FUNC(bool, 0x46AF80, void*)(this); }

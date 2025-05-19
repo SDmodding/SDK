@@ -13,6 +13,8 @@ class hkEnum
 {
 public:
 	STORAGE m_storage;
+
+	void operator=(ENUM e) { m_storage = static_cast<STORAGE>(e); }
 };
 
 template <class TYPE>
