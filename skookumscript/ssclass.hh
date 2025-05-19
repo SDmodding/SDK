@@ -80,4 +80,8 @@ public:
 	APSortedLogical<SSTypedData, ASymbol> i_class_data_table;
 	APSortedLogical<SSMethodBase, ASymbol> i_class_methods;
 	qProxy<SSMetaClass> i_metaclass;
+
+    /* Functions */
+
+    SSMethodBase* get_method(const ASymbol& method_name) { return SDK_CALL_FUNC(SSMethodBase*, 0x117F70, void*, const ASymbol&)(this, method_name); }
 };

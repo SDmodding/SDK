@@ -332,9 +332,6 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "camera/actiontree/taskscamera.hh"
 
-#include "gameplay/actiontree/tasksgame.hh"
-#include "gameplay/actiontree/tracksgame.hh"
-
 //--------------------------------------------------
 //	Animation
 //--------------------------------------------------
@@ -447,12 +444,23 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookumscript/ssinvokedcoroutine.hh"
 #include "skookumscript/ssinvokedmethod.hh"
 #include "skookumscript/sscode.hh"
+#include "skookumscript/sssymbol.hh"
+#include "skookumscript/ssbrain.hh"
 
 //--------------------------------------------------
 //	Skookum
 //--------------------------------------------------
 
 #include "skookum/tstimer.hh"
+#include "skookum/scriptcache.hh"
+
+//--------------------------------------------------
+//	Gameplay (Action Tree)
+//--------------------------------------------------
+
+#include "gameplay/actiontree/conditionsgame.hh"
+#include "gameplay/actiontree/tasksgame.hh"
+#include "gameplay/actiontree/tracksgame.hh"
 
 //--------------------------------------------------
 //	Schema

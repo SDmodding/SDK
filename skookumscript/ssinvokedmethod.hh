@@ -6,7 +6,6 @@ public:
 	SSMethodBase* i_method_p;
 };
 
-
 class SSInvokedDeferrableMethod : public SSInvokedMethod
 {
 public:

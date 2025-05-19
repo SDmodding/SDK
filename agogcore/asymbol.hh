@@ -5,6 +5,9 @@ class ASymbol
 public:
 	u32 i_uid;
 
+	ASymbol() {}
+	ASymbol(u32 uid) : i_uid(uid) {}
+
 	/* Functions */
 
 	void create(const AString& str) { return SDK_CALL_FUNC(void, 0x224780, void*, const AString&, int)(this, str, 0); }
