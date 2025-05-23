@@ -187,6 +187,10 @@ namespace UFG
 		bool mCreatedWithTemporaryRig;
 		eVehicleTrunkTypeEnum mTrunkType;
 
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qList<PhysicsMoverInterface>*, 0x2091398> s_PhysicsMoverInterfaceList;
+
 		/* Impl Functions */
 
 		SDK_INLINE bool CanApplySpeedBoostRewardFromVehicleTakedown() { return mSecondsSinceAppliedSpeedBoostRewardFromVehicleTakedown > 5.f; }

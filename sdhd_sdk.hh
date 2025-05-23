@@ -732,6 +732,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "fx/fxsimcomponent.hh"
 #include "fx/decal.hh"
 #include "fx/beam.hh"
+#include "fx/particleemittersettings.hh"
+#include "fx/fxfactory.hh"
 #include "fx/fxmanager.hh"
 
 //--------------------------------------------------

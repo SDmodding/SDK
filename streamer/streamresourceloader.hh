@@ -30,7 +30,7 @@ namespace UFG
 
 		/* Static Functions */
 
-		SDK_SINLINE u32 Load(void* buffer, u32 num_bytes, const char* debug_identifier, StreamerMetrics::DATA_TYPE end_data_type, bool(__fastcall* fnFilter)(qChunk*)) {
+		SDK_SINLINE u32 Load(void* buffer, u32 num_bytes, const char* debug_identifier = 0, StreamerMetrics::DATA_TYPE end_data_type = StreamerMetrics::DATA_UNKNOWN, bool(__fastcall* fnFilter)(qChunk*) = 0) {
 			return SDK_CALL_FUNC(u32, 0x22A8C0, void*, u32, const char*, StreamerMetrics::DATA_TYPE, decltype(fnFilter))(buffer, num_bytes, debug_identifier, end_data_type, fnFilter);
 		}
 

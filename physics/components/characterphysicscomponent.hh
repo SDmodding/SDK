@@ -113,6 +113,14 @@ namespace UFG
 		SDK_INLINE void SetCollisionModel(CharacterCollisionMode type) { mDesiredCollisionModelType = type; }
 		SDK_INLINE void SetSuperMassive() { mHavokCharacter->m_superMassive = 1; }
 
+		SDK_INLINE bool IsInWater()
+		{
+			if (auto waterTracker = mWaterTracker.Get()) {
+				return waterTracker->mInWaterState > 0;
+			}
+			return 0;
+		}
+
 		/* Functions */
 
 		void ClearPairedGrapple() { SDK_CALL_FUNC(void, 0x45A690, void*)(this); }
@@ -125,7 +133,6 @@ namespace UFG
 
 		f32 GetWaterElevation() { return SDK_CALL_FUNC(f32, 0x4683E0, void*)(this); }
 		void GrappleFixup(f32 deltaT) { SDK_CALL_FUNC(void, 0x468630, void*, f32)(this, deltaT); }
-		bool IsInWater() { return SDK_CALL_FUNC(bool, 0x46AF80, void*)(this); }
 		void MagicCurbBullShitHack() { SDK_CALL_FUNC(void, 0x46BE00, void*)(this); }
 		void PlaceOnGroundAfterNIS() { SDK_CALL_FUNC(void, 0x46F8A0, void*)(this); }
 		void SetPairedGrappleMaster(CharacterPhysicsComponent* slave, GrappleMode mode) { SDK_CALL_FUNC(void, 0x475370, void*, CharacterPhysicsComponent*, GrappleMode)(this, slave, mode); }

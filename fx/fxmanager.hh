@@ -37,25 +37,6 @@ namespace Render
 	};
 	SDK_ASSERT_SIZEOF(FXOverride, 0x70);
 
-	class FXSettings : public UFG::qResourceData
-	{
-	public:
-		UFG::qVector3 mAABBMin;
-		UFG::qVector3 mAABBMax;
-		f32 mLength;
-		f32 mTransformNodeExtraTime;
-		u64 mAudioId;
-		u32 mSlowMoFxId;
-		f32 mAttachToCameraZDist;
-		i8 mLoop;
-		i8 mComponentCount;
-		i8 mAttachToCamera;
-		i8 mPad[13];
-	};
-	SDK_ASSERT_SIZEOF(FXSettings, 0x98);
-
-	class FXSettingsHandle : public UFG::qTypedResourceHandle<RTypeUID_FXSettings, FXSettings> {};
-
 	class __declspec(align(16)) FXInstance : public UFG::qNodeRB<FXInstance>, public UFG::qNode<FXInstance, class FXInstance_OcclusionList>, public UFG::qNode<FXInstance, class FXInstance_UpdateList>
 	{
 	public:

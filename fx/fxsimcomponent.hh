@@ -13,6 +13,8 @@ namespace Render
 	class FXSimComponent : public UFG::SimComponent, public UFG::qNode<FXSimComponent>
 	{
 	public:
+		enum { _TypeUID = 0x32000001 };
+
 		struct FxBinding : public UFG::qNode<FxBinding>
 		{
 		public:

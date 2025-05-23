@@ -119,6 +119,9 @@ namespace UFG
 		SDK_INLINE f32 Length2D() const { return sqrtf(x * x + y * y); }
 		SDK_INLINE void Normalize() { operator/=(Length()); }
 
+		SDK_INLINE bool IsZero() const { return x == 0.f && y == 0.f && z == 0.f; }
+		SDK_INLINE void SetZero() { x = y = z = 0.f; }
+
 		SDK_INLINE void NormalizeSafe() 
 		{
 			f32 length = Length();
