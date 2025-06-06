@@ -37,6 +37,8 @@ namespace UFG
 		u32 m_Changed;
 		fastdelegate::FastDelegate1<T*> m_BindCallback;
 		fastdelegate::FastDelegate1<T*> m_UnbindCallback;
+
+		SDK_INLINE T* Get() { return m_pPointer; }
 	};
 
 	template <typename T, typename U = T>

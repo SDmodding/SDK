@@ -162,6 +162,37 @@ namespace UFG
 		int mPedSpawnHistoryIndex;
 		u32 mNetRecycleCounter;
 
+		/* Custom Iterator */
+
+		class PedsIterator
+		{
+		public:
+			PedsIterator(PedSpawnManager* mgr) : mMgr(mgr) {}
+
+			class Iterator
+			{
+			public:
+				Iterator(PedSpawningInfo* info) : mInfo(info) {}
+
+				bool operator!=(const Iterator& other) const { return mInfo != other.mInfo; }
+
+				PedSpawningInfo* operator*() const { return mInfo; }
+
+				Iterator& operator++() { ++mInfo; return *this; }
+
+			private:
+				PedSpawningInfo* mInfo;
+			};
+
+			Iterator begin() { return Iterator(&mMgr->mAmbientPed[0]);}
+			Iterator end() { return Iterator(&mMgr->mScriptedPed[ARRAYSIZE(PedSpawnManager::mScriptedPed)]); }
+
+		private:
+			PedSpawnManager* mMgr;
+		};	
+
+		SDK_INLINE PedsIterator GetPeds() { return this; }
+
 		/* Static Members */
 
 		SDK_VINLINE qGlobalVar<bool, 0x207AE69> msAmbientSpawningEnable;
