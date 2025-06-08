@@ -159,11 +159,11 @@ namespace UFG
 	public:
 		qReflectArray<StateMachineNode> mStateNodes;
 		qSymbolUC name;
-		float mBulletDamageMultiplier;
-		float mExplosionDamageMultiplier;
-		float mImpactDamageMultiplier;
-		float mImpactDamageThreshold;
-		float mAttackDamageMultiplier;
+		f32 mBulletDamageMultiplier;
+		f32 mExplosionDamageMultiplier;
+		f32 mImpactDamageMultiplier;
+		f32 mImpactDamageThreshold;
+		f32 mAttackDamageMultiplier;
 		bool mHasCollisionEventHandler;
 		bool mHasNamedEventHandler;
 		bool mHasOnSpawnNode;

@@ -29,6 +29,8 @@ namespace UFG
 		virtual bool ModeIsSet(eGameStateMode mode) = 0;
 		virtual bool ModeSet(eGameStateMode mode, bool enable) = 0;
 		virtual void SetIsFading(bool) = 0; /* Unused */
+
+		SDK_INLINE bool IsPaused() { return (mMode & eGSM_PAUSED); }
 	};
 	SDK_ASSERT_SIZEOF(GameState, 0x68);
 }

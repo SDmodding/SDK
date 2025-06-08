@@ -763,6 +763,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/components/ragdollcomponent.hh"
 
 #include "physics/components/sensorcomponent.hh"
+#include "physics/components/statemachinecomponent.hh"
 
 #include "physics/engine.hh"
 #include "physics/transmission.hh"

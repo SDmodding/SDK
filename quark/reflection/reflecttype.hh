@@ -26,6 +26,10 @@ namespace UFG
 
 		virtual ~qReflectObject() = 0;
 		virtual const char* GetTypeName() = 0;
+
+		/* Functions */
+
+		const char* GetName() { return SDK_CALL_FUNC(const char*, 0x1713D0, void*)(this); }
 	};
 
 	template <typename T, class U = qReflectObject>

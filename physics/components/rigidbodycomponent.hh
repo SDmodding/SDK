@@ -18,6 +18,10 @@ namespace UFG
 		f32 mTimeSinceAddedToWorld;
 		u32 mStoredCollisionFilter;
 
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qList<RigidBodyComponent>*, 0x2081A08> s_RigidBodyComponentList;
+
 		/* Functions */
 
 		void CreateRuntimeStateMachineDefinition(StateMachineDefinition* definition) { SDK_CALL_FUNC(void, 0x45FE90, void*, StateMachineDefinition*)(this, definition); }

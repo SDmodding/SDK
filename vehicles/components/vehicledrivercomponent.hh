@@ -23,7 +23,7 @@ namespace UFG
 		qSafePointer<SimObject> mDriver;
 		VehicleState mState;
 		VehicleState mDesiredState;
-		float mReverseLockoutDelay;
+		f32 mReverseLockoutDelay;
 		qPropertySet* mPropertySet;
 		bool mForceDock;
 		TransformNodeComponent* m_ChaseSpawnTransform;

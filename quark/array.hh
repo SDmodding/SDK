@@ -14,6 +14,8 @@ namespace UFG
 
 		SDK_INLINE T* begin() { return p; }
 		SDK_INLINE T* end() { return &p[size]; }
+
+		SDK_INLINE bool IsEmpty() { return !p || !size; }
 	};
 
 }
