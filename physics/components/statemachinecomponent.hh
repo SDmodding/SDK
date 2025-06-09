@@ -53,6 +53,10 @@ namespace UFG
 		int mCurrentNodeIndex;
 		u32 mFlags;
 
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<qList<StateMachineComponent>*, 0x2081A48> s_StateMachineComponentList;
+
 		/* Impl Functions */
 
 		SDK_INLINE f32 GetDamage() { return 1.f - mHealth; }

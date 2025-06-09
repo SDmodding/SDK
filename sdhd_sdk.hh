@@ -141,6 +141,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "illusion/bonepalette.hh"
 #include "illusion/vertexdecl.hh"
+#include "illusion/vertexdescriptor.hh"
 #include "illusion/primitive.hh"
 #include "illusion/state.hh"
 
@@ -172,6 +173,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/stateargs.hh"
 #include "illusion/submitcontext.hh"
 #include "illusion/renderqueue.hh"
+
+#include "illusion/memimageschema.hh"
+
+#include "illusion/internal/factoryplat.hh"
 
 //--------------------------------------------------
 //	Agog Core
