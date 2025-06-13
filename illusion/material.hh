@@ -24,7 +24,7 @@ namespace Illusion
 		SDK_INLINE MaterialParam* GetParam(u32 index) { return &GetParams()[index]; }
 
 		// 0, "iTexture", "texDiffuse", "Illusion.Texture", "DEFAULT"
-		SDK_INLINE void SetParam(u32 index, u32 state_type, u32 state_name, u32 resource_type, u32 resource_name = -1)
+		SDK_INLINE void SetParam(u32 index, u32 state_type, u32 state_name, u32 resource_type, u32 resource_name)
 		{
 			auto param = GetParam(index);
 			param->mTypeUID = state_type;
@@ -33,7 +33,7 @@ namespace Illusion
 			param->mResourceHandle.mNameUID = resource_name;
 		}
 
-		SDK_INLINE void SetParam(u32 index, u32 state_name, u32 resource_type, u32 resource_name = -1)
+		SDK_INLINE void SetParam(u32 index, u32 state_name, u32 resource_type, u32 resource_name)
 		{
 			SetParam(index, state_name, state_name, resource_type, resource_name);
 		}

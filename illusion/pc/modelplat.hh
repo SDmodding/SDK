@@ -33,6 +33,9 @@ namespace Illusion
 			LOCK_OVERWRITE,
 			LOCK_MODIFY
 		};
+
+		void* Lock(LockType lockType) { return SDK_CALL_FUNC(void*, 0xA1C550, void*, LockType)(this, lockType); }
+		void Unlock() { SDK_CALL_FUNC(void, 0xA22A60, void*)(this); }
 	};
 
 	class BufferPlat

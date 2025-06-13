@@ -92,6 +92,9 @@ namespace UFG
 		return reinterpret_cast<T*>(mem);
 	}
 
+	template <typename T>
+	SDK_INLINE T* qNew2() { return reinterpret_cast<T*>(qMalloc(sizeof(T))); }
+
 	SDK_INLINE void qFree(void* ptr) { gMainMemoryPool->Free(ptr); }
 
 	template <typename T>
