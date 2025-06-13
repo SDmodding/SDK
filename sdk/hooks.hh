@@ -7,13 +7,25 @@ namespace SDK
 	private:
 		void* mOriginal = 0;
 	public:
+		enum ECallType
+		{
+			CT_Default,
+			CT_IgnoreCheck
+		};
+
 		/* Original Callers */
 
 		template <typename T = void, typename... Args>
-		SDK_INLINE T Original(Args... args) { return (mOriginal ? reinterpret_cast<T(SDK_CALL*)(Args...)>(mOriginal)(args...) : static_cast<T>(0)); }
+		SDK_INLINE T Original(ECallType call_type, Args... args)
+		{
+			return (call_type != CT_Default || mOriginal ? reinterpret_cast<T(SDK_CALL*)(Args...)>(mOriginal)(args...) : static_cast<T>(0));
+		}
 
 		template <typename T = void, typename... Args>
-		SDK_INLINE T operator()(Args... args) { return Original<T, Args...>(args...); }
+		SDK_INLINE T operator()(Args... args) { return Original<T, Args...>(CT_Default, args...); }
+
+		template <typename T = void, typename... Args>
+		SDK_INLINE T operator()(ECallType call_type, Args... args) { return Original<T, Args...>(call_type, args...); }
 
 		/* Initializers */
 
