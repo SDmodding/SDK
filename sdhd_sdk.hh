@@ -32,7 +32,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Windows Includes
 //--------------------------------------------------
 
-#define NOGDI
+#ifndef SDK_GDI
+	#define NOGDI
+	#define NOBITMAP
+#endif
 #define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
