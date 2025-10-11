@@ -33,7 +33,6 @@ namespace UFG
 		void Update(f32 delta_sec) { SDK_CALL_FUNC(void, 0x48A020, void*, f32)(this, delta_sec); }
 		void UpdateLockedState() { SDK_CALL_FUNC(void, 0x48A3E0, void*)(this); }
 		void UpdateOpenedState() { SDK_CALL_FUNC(void, 0x48A5C0, void*)(this); }
-
 	};
 	SDK_ASSERT_SIZEOF(DoorComponent, 0x90);
 }

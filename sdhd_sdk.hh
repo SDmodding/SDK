@@ -414,6 +414,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "actiontree/actioncontroller.hh"
 #include "actiontree/intention.hh"
 
+#include "actiontree/actionnodeplayabledatabase.hh"
+
 //--------------------------------------------------
 //	PropertySet
 //--------------------------------------------------

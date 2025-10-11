@@ -15,6 +15,11 @@ public:
 	char mPad0;
 	char mPad1;
 	char mPad2;
+
+	/* Static Functions */
+
+	SDK_SINLINE ActionNode* Find(ActionPath* absolutePath, ActionNode* absoluteRoot = 0) { return SDK_CALL_FUNC(ActionNode*, 0x26DBE0, ActionPath*, ActionNode*)(absolutePath, absoluteRoot); }
+	SDK_SINLINE ActionNode* FindWithOldPath(const char* resourcePath) { return SDK_CALL_FUNC(ActionNode*, 0x26DE60, void*, const char*)(0, resourcePath); }
 };
 SDK_ASSERT_SIZEOF(ActionNode, 0x38);
 
