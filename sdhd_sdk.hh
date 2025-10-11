@@ -654,6 +654,12 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "sim/components/progressiontriggercomponent.hh"
 
 //--------------------------------------------------
+//	Props
+//--------------------------------------------------
+
+#include "props/components/doorcomponent.hh"
+
+//--------------------------------------------------
 //	Gamescene
 //--------------------------------------------------
 
