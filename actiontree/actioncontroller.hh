@@ -28,7 +28,7 @@ public:
 	/* Functions */
 
 	Expression::IMemberMap* GetChild2(int priority) { return SDK_CALL_FUNC(Expression::IMemberMap*, 0x26E100, void*, int)(this, priority); }
-	bool IsPlaying(const ActionID& node_id, u32 mostUsedIndex, const bool recurseOnSpawns) { 
+	bool IsPlaying(const ActionID& node_id, u32 mostUsedIndex = -1, const bool recurseOnSpawns = false) { 
 		return SDK_CALL_FUNC(bool, 0x26F170, void*, const ActionID&, u32, const bool)(this, node_id, mostUsedIndex, recurseOnSpawns); 
 	}
 	bool IsPlaying(ActionNode* node) { return SDK_CALL_FUNC(bool, 0x26F310, void*, ActionNode*)(this, node); }

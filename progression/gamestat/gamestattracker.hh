@@ -114,7 +114,7 @@ namespace UFG
 
 		void SetStat(GameStat::BoolStat stat, bool status) { mpSnapshots[0]->mBools[stat].mValue = status; }
 		void SetStat(GameStat::FloatRangedStat stat, f32 number) { reinterpret_cast<void(SDK_CALL*)(void*, GameStat::FloatRangedStat, f32)>(SDK_RVA(0x4BD280))(this, stat, number); }
-		void SetStat(GameStat::FloatStat stat, f32 number) { mpSnapshots[0]->mFloats[stat].mValue; }
+		void SetStat(GameStat::FloatStat stat, f32 number) { mpSnapshots[0]->mFloats[stat].mValue = number; }
 		void SetStat(GameStat::IDStat stat, const qSymbol& id) { mpSnapshots[0]->mIDs[stat].mValue = id; }
 		void SetStat(GameStat::Int32RangedStat stat, int number) { reinterpret_cast<void(SDK_CALL*)(void*, GameStat::Int32RangedStat, int)>(SDK_RVA(0x4BD340))(this, stat, number); }
 		void SetStat(GameStat::Int32Stat stat, int number) { reinterpret_cast<void(SDK_CALL*)(void*, GameStat::Int32Stat, int)>(SDK_RVA(0x4BD390))(this, stat, number); }
