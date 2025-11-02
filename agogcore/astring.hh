@@ -6,6 +6,7 @@ public:
 	AStringRef* i_str_ref_p;
 
 	~AString() { SDK_CALL_FUNC(void, 0xBAC60, void*)(this); }
+	AString() { i_str_ref_p = SDK_VAR(AStringRef*, 0x236F948); }
 	AString(const char* cstr_p) { SDK_CALL_FUNC(void, 0xBAB00, void*, const char*)(this, cstr_p); }
 
 	/* Functions */

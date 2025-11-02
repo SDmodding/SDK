@@ -456,6 +456,10 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "skookumscript/sscode.hh"
 #include "skookumscript/sssymbol.hh"
 #include "skookumscript/ssbrain.hh"
+#include "skookumscript/sscontextclassbase.hh"
+#include "skookumscript/ssinvokableclass.hh"
+#include "skookumscript/sstypedcontext.hh"
+#include "skookumscript/ssparser.hh"
 
 //--------------------------------------------------
 //	Skookum
