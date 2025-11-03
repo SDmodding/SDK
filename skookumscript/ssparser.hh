@@ -203,4 +203,6 @@ public:
 	SSCode* parse_code_block(Args& args, eSSInvokeTime desired_exec_time, eResultDesired result) {
 		return SDK_CALL_FUNC(SSCode*, 0x128BF0, void*, Args&, eSSInvokeTime, eResultDesired)(this, args, desired_exec_time, result);
 	}
+
+	SSExpressionBase* parse_expression(Args& args, eSSInvokeTime desired_exec_time) { return SDK_CALL_FUNC(SSExpressionBase*, 0x129D10, void*, Args&, eSSInvokeTime)(this, args, desired_exec_time); }
 };
