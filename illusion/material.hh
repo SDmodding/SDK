@@ -20,6 +20,11 @@ namespace Illusion
 
 		/* Functions */
 
+		void OnLoad() { SDK_CALL_FUNC(void, 0x934A0, void*)(this); }
+		void OnUnload() { SDK_CALL_FUNC(void, 0x941D0, void*)(this); }
+
+		/* Helper Functions */
+
 		SDK_INLINE MaterialParam* GetParams() { return reinterpret_cast<MaterialParam*>(&this[1]); }
 		SDK_INLINE MaterialParam* GetParam(u32 index) { return &GetParams()[index]; }
 

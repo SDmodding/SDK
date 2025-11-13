@@ -46,6 +46,10 @@ namespace Illusion
 		UFG::qMemoryPool* mMemoryPool;
 		u32 pad1;
 		u32 pad2;
+
+		/* Functions */
+
+		void OnLoad() { SDK_CALL_FUNC(void, 0x93450, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(Buffer, 0x90);
 
