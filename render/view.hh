@@ -2,20 +2,6 @@
 
 namespace Render
 {
-	class vDynamic
-	{
-	public:
-		UFG::qVector3 mPosition;
-		u16 mTexCoord0[2];
-		u16 mTexCoord1[2];
-		UFG::qVector3 mNormal;
-		UFG::qVector3 mTangent;
-		u32 mColour;
-
-		void operator=(const vDynamic&  __that) { return SDK_CALL_FUNC(void, 0xA540, void*, const vDynamic&)(this, __that); }
-	};
-	SDK_ASSERT_SIZEOF(vDynamic, 0x30);
-
 	//----------------------------------------------------------------------------------
 	//	Poly
 	//----------------------------------------------------------------------------------

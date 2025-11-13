@@ -235,6 +235,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Render
 //--------------------------------------------------
 
+#include "render/dynamic.hh"
 #include "render/altcoloreffect.hh"
 #include "render/viewmetrics.hh"
 #include "render/view.hh"
