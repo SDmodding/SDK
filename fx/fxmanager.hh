@@ -31,7 +31,7 @@ namespace Render
 		/* Static Functions */
 
 		// NOTE: If `sNumInstancesInService` is equal or above 650 this will always return nullptr.
-		SDK_SINLINE FXOverride* CreateOverride(const char* allocationName, UFG::qMemoryPool* memoryPool) { 
+		SDK_SINLINE FXOverride* CreateOverride(const char* allocationName = 0, UFG::qMemoryPool* memoryPool = 0) { 
 			return SDK_CALL_FUNC(FXOverride*, 0x1CA5A0, const char*, UFG::qMemoryPool*)(allocationName, memoryPool);
 		}
 	};

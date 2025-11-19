@@ -108,8 +108,7 @@ namespace UFG
 		qReflectHandle<PhysicsObjectProperties> mObjectProperties;
 		u32 padding[2];
 
-		SDK_INLINE CollisionMeshData() { SDK_CALL_FUNC(void, 0x97AD0, void*)(this); }
-		SDK_INLINE CollisionMeshData(hkpShape* shape) { SDK_CALL_FUNC(void, 0x978C0, void*, void*, hkpShape*)(this, 0, shape); }
+		void ctor(const hkpShape* shape) { SDK_CALL_FUNC(void, 0x978C0, void*, void*, const hkpShape*)(this, 0, shape); }
 
 		/* Functions */
 

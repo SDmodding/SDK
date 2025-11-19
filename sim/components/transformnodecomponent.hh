@@ -24,7 +24,7 @@ namespace UFG
 
 		/* Constructor */
 
-		void ctor(u32 name_uid, TransformNodeComponent* parent = 0, bool startSuspended = 0) {
+		void ctor(u32 name_uid = 0, TransformNodeComponent* parent = 0, bool startSuspended = 0) {
 			SDK_CALL_FUNC(void, 0x18F1E0, void*, u32, TransformNodeComponent*, bool)(this, name_uid, parent, startSuspended);
 		}
 

@@ -37,6 +37,8 @@ namespace UFG
 
 		void Add(qBaseNodeRB* x) { SDK_CALL_FUNC(void, 0x1652A0, void*, qBaseNodeRB*)(this, x); }
 
+		void Remove(qBaseNodeRB* z) { SDK_CALL_FUNC(void, 0x17A0F0, void*, qBaseNodeRB*)(this, z); }
+
 		bool Contains(qBaseNodeRB* node) { return SDK_CALL_FUNC(bool, 0x16A9E0, void*, qBaseNodeRB*)(this, node); }
 
 		qBaseNodeRB* Get(u32 uid) { return SDK_CALL_FUNC(qBaseNodeRB*, 0x16EFB0, void*, u32)(this, uid); }
@@ -59,6 +61,8 @@ namespace UFG
 		SDK_INLINE bool IsEmpty() { return mTree.IsEmpty(); }
 
 		SDK_INLINE void Add(qNodeRB<T>* x) { mTree.Add(&x->mNode); }
+
+		SDK_INLINE void Remove(qNodeRB<T>* x) { mTree.Remove(&x->mNode); }
 
 		SDK_INLINE bool Contains(qNodeRB<T>* node) { return mTree.Contains(&node->mNode); }
 

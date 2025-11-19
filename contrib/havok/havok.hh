@@ -82,10 +82,11 @@ class hkpWorld;
 //	Physics2012
 //------------------------------------
 
+#include "Physics2012/Collide/Util/hkpWeldingUtility.hh"
+
 #include "Physics2012/Collide/hkpCollidableQualityType.hh"
 
 #include "Physics2012/Collide/Mopp/hkpMoppCode.hh"
-#include "Physics2012/Collide/Mopp/hkpMoppCompilerInput.hh"
 
 #include "Physics2012/Collide/Shape/hkpMeshMaterial.hh"
 #include "Physics2012/Collide/Shape/hkcdShape.hh"
@@ -98,6 +99,12 @@ class hkpWorld;
 #include "Physics2012/Collide/Shape/hkpSphereShape.hh"
 #include "Physics2012/Collide/Shape/hkpBvTreeShape.hh"
 #include "Physics2012/Collide/Shape/hkpMoppBvTreeShape.hh"
+
+#include "Physics2012/Collide/Shape/Compound/Collection/hkpShapeCollection.hh"
+#include "Physics2012/Collide/Shape/Compound/Collection/hkpExtendedMeshShape.hh"
+
+#include "Physics2012/Collide/Shape/Compound/Tree/hkpMoppCompilerInput.hh"
+#include "Physics2012/Collide/Shape/Compound/Tree/hkpMoppUtility.hh"
 
 #include "Physics2012/Collide/BroadPhase/hkpBroadPhaseHandle.hh"
 #include "Physics2012/Collide/BroadPhase/hkpTypedBroadPhaseHandle.hh"

@@ -1,5 +1,11 @@
 #pragma once
 
+struct hkpMoppCodeReindexedTerminal
+{
+	u32 m_origShapeKey;
+	u32 m_reindexedShapeKey;
+};
+
 class hkpMoppCode : public hkReferencedObject
 {
 public:

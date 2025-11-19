@@ -66,6 +66,48 @@ public:
 	}
 };
 typedef hkVector4f hkVector4;
+typedef hkVector4f* hkVector4Parameter;
+
+class hkVector4ComparisonMask
+{
+public:
+	enum Mask
+	{
+		INDEX_W = 3,	// Index of the w component
+		INDEX_Z = 2,
+		INDEX_Y = 1,
+		INDEX_X = 0,
+
+		MASK_NONE = 0x0,				// 0000
+		MASK_W = (1 << INDEX_W),		// 0001
+		MASK_Z = (1 << INDEX_Z),		// 0010
+		MASK_ZW = (MASK_Z | MASK_W),	// 0011
+
+		MASK_Y = (1 << INDEX_Y),		// 0100
+		MASK_YW = (MASK_Y | MASK_W),	// 0101
+		MASK_YZ = (MASK_Y | MASK_Z),	// 0110
+		MASK_YZW = (MASK_YZ | MASK_W),	// 0111
+
+		MASK_X = (1 << INDEX_X),		// 1000
+		MASK_XW = (MASK_X | MASK_W),	// 1001
+		MASK_XZ = (MASK_X | MASK_Z),	// 1010
+		MASK_XZW = (MASK_XZ | MASK_W),	// 1011
+
+		MASK_XY = (MASK_X | MASK_Y),	// 1100
+		MASK_XYW = (MASK_XY | MASK_W),	// 1101
+		MASK_XYZ = (MASK_XY | MASK_Z),	// 1110
+		MASK_XYZW = (MASK_XY | MASK_ZW)	// 1111
+	};
+};
+
+class hkVector4fComparison : public hkVector4ComparisonMask
+{
+public:
+	__m128 m_mask;
+};
+typedef hkVector4fComparison hkVector4Comparison;
+typedef hkVector4fComparison* hkVector4fComparisonParameter;
+typedef hkVector4fComparisonParameter hkVector4ComparisonParameter;
 
 class hkMatrix3f
 {

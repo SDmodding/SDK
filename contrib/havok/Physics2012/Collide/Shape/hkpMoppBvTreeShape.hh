@@ -15,4 +15,7 @@ class hkpMoppBvTreeShape : public hkMoppBvTreeShapeBase
 public:
 	qProxy<hkpSingleShapeContainer> m_child;
 	int m_childSize;
+
+	/// Constructs a new hkpMoppBvTreeShape.
+	void ctor(const class hkpShapeCollection* collection, const class hkpMoppCode* code) { SDK_CALL_FUNC(void, 0xD0CAB0, void*, const hkpShapeCollection*, const hkpMoppCode*)(this, collection, code); }
 };

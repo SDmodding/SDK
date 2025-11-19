@@ -19,6 +19,23 @@ namespace UFG
 			mNext = mPrev = this;
 		}
 
+		SDK_INLINE void LinkBeforeNode(qNode<T, U>* node)
+		{
+			node->mPrev = mPrev;
+			node->mNext = this;
+			mPrev->mNext = node;
+			mPrev = node;
+		}
+
+		SDK_INLINE void RemoveFromList()
+		{
+			auto prev = mPrev;
+			auto next = mNext;
+			prev->mNext = next;
+			next->mPrev = prev;
+			mNext = mPrev = this;
+		}
+
 		SDK_INLINE T* type() { return static_cast<T*>(this); }
 	};
 
@@ -34,6 +51,10 @@ namespace UFG
 	{
 	public:
 		qNode<T, U> mNode;
+
+		SDK_INLINE void Insert(qNode<T, U>* node) { mNode.LinkBeforeNode(node); }
+
+		SDK_INLINE void Remove(qNode<T, U>* node) { node->RemoveFromList(); }
 
 		SDK_INLINE bool IsEmpty() { return mNode.mNext == &mNode; }
 		SDK_INLINE qNode<T, U>* back() { return mNode.mPrev; }
