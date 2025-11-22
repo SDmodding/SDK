@@ -125,6 +125,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/reflection/reflectarray.hh"
 #include "quark/reflection/reflectstring.hh"
 #include "quark/reflection/reflecttype.hh"
+#include "quark/reflection/reflectinventory.hh"
 
 #include "quark/internal/resourceinternal.hh"
 
