@@ -42,6 +42,18 @@ namespace Illusion
 		{
 			SetParam(index, state_name, state_name, resource_type, resource_name);
 		}
+
+		// Use with caution: this will use and increase 'mNumParams'; ensure memory is preallocated.
+		SDK_INLINE void AddParam(u32 state_type, u32 state_name, u32 resource_type, u32 resource_name)
+		{
+			SetParam(mNumParams++, state_type, state_name, resource_type, resource_name);
+		}
+
+		// Use with caution: this will use and increase 'mNumParams'; ensure memory is preallocated.
+		SDK_INLINE void AddParam(u32 state_name, u32 resource_type, u32 resource_name)
+		{
+			SetParam(mNumParams++, state_name, state_name, resource_type, resource_name);
+		}
 	};
 	SDK_ASSERT_SIZEOF(Material, 0x80);
 

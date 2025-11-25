@@ -229,6 +229,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Render (Culling)
 //--------------------------------------------------
 
+#include "render/culling/rasterize.hh"
 #include "render/culling/culling.hh"
 #include "render/culling/cullinfo.hh"
 

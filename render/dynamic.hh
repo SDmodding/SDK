@@ -22,6 +22,12 @@ namespace Render
 			reinterpret_cast<UFG::qHalfFloat*>(&mTexCoord1[1])->Set(uv1.y);
 		}
 
+		void SetUV(f32 u, f32 v)
+		{
+			reinterpret_cast<UFG::qHalfFloat*>(&mTexCoord0[0])->Set(u);
+			reinterpret_cast<UFG::qHalfFloat*>(&mTexCoord0[1])->Set(v);
+		}
+
 		void SetColor(u32 r, u32 g, u32 b, u32 a = 255)
 		{
 			mColour = (r) | (g << 8) | (b << 16) | (a << 24);

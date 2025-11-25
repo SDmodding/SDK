@@ -127,7 +127,7 @@ namespace Illusion
 	{
 	public:
 		int mExampleOfModelUserPlatData1;
-		float mExampleOfModelUserPlatData2;
+		f32 mExampleOfModelUserPlatData2;
 	};
 
 	class ModelPlat
@@ -144,9 +144,9 @@ namespace Illusion
 	class Model : public IModelPlat, public UFG::qResourceData
 	{
 	public:
-		float mAABBMin[3];
+		f32 mAABBMin[3];
 		u32 mNumPrims;
-		float mAABBMax[3];
+		f32 mAABBMax[3];
 		u32 pad0;
 		MaterialTableHandle mMaterialTableHandle;
 		BonePaletteHandle mBonePaletteHandle;

@@ -44,7 +44,13 @@ namespace UFG
 
 		void Close(qResourceInventory* inventory) { SDK_CALL_FUNC(void, 0x167F40, void*, qResourceInventory*)(this, inventory); }
 		void Close() { SDK_CALL_FUNC(void, 0x167FB0, void*)(this); }
+
 		void Init(u32 type_uid, u32 name_uid) { SDK_CALL_FUNC(void, 0x1734B0, void*, u32, u32)(this, type_uid, name_uid); }
+
+		void Init(u32 type_uid, u32 name_uid, qResourceData* resource_data, qResourceInventory* inventory) {
+			SDK_CALL_FUNC(void, 0x173500, void*, u32, u32, qResourceData*, qResourceInventory*)(this, type_uid, name_uid, resource_data, inventory);
+		}
+
 		bool IsDefault() { return SDK_CALL_FUNC(bool, 0x1754B0, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(qResourceHandle, 0x20);

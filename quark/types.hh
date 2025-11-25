@@ -25,6 +25,17 @@ public:
 	SDK_INLINE operator T() { return *reinterpret_cast<T*>(this); }
 };
 
+// Same as qProxy, but has destructor call.
+template <typename T>
+class qProxyClass : public qProxy<T>
+{
+public:
+	~qProxyClass()
+	{
+		reinterpret_cast<T*>(this)->~T();
+	}
+};
+
 template <typename T, uptr RVA>
 class qGlobalVar
 {
