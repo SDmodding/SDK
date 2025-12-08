@@ -10,11 +10,11 @@ public:
 	u32 mMostUsedIndex;
 	u32 mUniqueID;
 	ActionID mID;
-	char mBreakPoint;
-	char mDisable;
-	char mPad0;
-	char mPad1;
-	char mPad2;
+	bool mBreakPoint;
+	bool mDisable;
+	u8 mPad0;
+	u8 mPad1;
+	u8 mPad2;
 
 	/* Static Functions */
 
@@ -22,6 +22,28 @@ public:
 	SDK_SINLINE ActionNode* FindWithOldPath(const char* resourcePath) { return SDK_CALL_FUNC(ActionNode*, 0x26DE60, void*, const char*)(0, resourcePath); }
 };
 SDK_ASSERT_SIZEOF(ActionNode, 0x38);
+
+class ActionNode_Iterator
+{
+public:
+	ActionNode* mSearchStack[32];
+	int mCurrentItem;
+
+	SDK_INLINE ActionNode_Iterator() : mCurrentItem(-1) {}
+	SDK_INLINE ActionNode_Iterator(ActionNode* startingRoot) { First(startingRoot); }
+
+	SDK_INLINE bool IsDone() { return (0 > mCurrentItem); }
+
+	SDK_INLINE void First(ActionNode* startingRoot) 
+	{
+		mCurrentItem = 0;
+		mSearchStack[0] = startingRoot;
+	}
+
+	SDK_INLINE ActionNode* CurrentItem() { return (mCurrentItem >= 0 ? mSearchStack[mCurrentItem] : 0); }
+
+	void Next() { SDK_CALL_FUNC(void, 0x26FE70, void*)(this); }
+};
 
 class ActionNodeImplementation : public ActionNode
 {

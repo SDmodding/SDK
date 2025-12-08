@@ -342,6 +342,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "animation/actiontree/tracksanimation.hh"
 
 #include "camera/actiontree/taskscamera.hh"
+#include "camera/actiontree/trackscamera.hh"
 
 //--------------------------------------------------
 //	Animation
@@ -604,6 +605,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "navigation/navparams.hh"
 #include "navigation/navposition.hh"
 #include "navigation/navresource.hh"
+#include "navigation/navdynamicoutline.hh"
 
 #include "navigation/havok/havoknavposition.hh"
 
@@ -678,6 +680,18 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "gamescene/components/hintcomponentbase.hh"
 #include "gamescene/components/marker.hh"
+
+//--------------------------------------------------
+//	NIS
+//--------------------------------------------------
+
+#include "nis/nistracks.hh"
+
+#include "nis/nislightgroup.hh"
+#include "nis/nisnodes.hh"
+#include "nis/nisinstance.hh"
+#include "nis/nisspatialdata.hh"
+#include "nis/nismanager.hh"
 
 //--------------------------------------------------
 //	Spawning

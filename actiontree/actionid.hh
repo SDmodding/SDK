@@ -17,4 +17,8 @@ public:
 		mPath.mData.Set(array);
 		mPath.mCount = count;
 	}
+
+	/* Functions */
+
+	void Append(const char* value) { SDK_CALL_FUNC(void, 0x15DE50, void*, const char*)(this, value); }
 };
