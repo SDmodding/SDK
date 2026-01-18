@@ -2,6 +2,7 @@
 
 namespace UFG
 {
+	class qPropertySet;
 	class qPropertyList;
 	class qPropertySetResource;
 
