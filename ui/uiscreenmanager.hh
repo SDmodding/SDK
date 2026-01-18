@@ -76,10 +76,10 @@ namespace UFG
 		UICommand* queuePopOverlay(const char* fileName) { return SDK_CALL_FUNC(UICommand*, 0xA31530, void*, const char*)(this, fileName); }
 		UICommand* queuePopOverlay(u32 screenUID) { return SDK_CALL_FUNC(UICommand*, 0xA31410, void*, u32)(this, screenUID); }
 		UICommand* queuePopScreen(u32 screenUID) { return SDK_CALL_FUNC(UICommand*, 0xA31600, void*, u32)(this, screenUID); }
-		UICommand* queuePushOverlay(const char* fileName, u32 priority, int controllerMask) { 
-			return SDK_CALL_FUNC(UICommand*, 0xA31720, void*, const char*, u32, int)(this, fileName, priority, controllerMask); 
+		UICommand* queuePushOverlay(const char* fileName, int priority = 0, int controllerMask = -1) { 
+			return SDK_CALL_FUNC(UICommand*, 0xA31720, void*, const char*, int, int)(this, fileName, priority, controllerMask);
 		}
-		UICommand* queuePushScreen(const char* fileName, int controllerMask) { return SDK_CALL_FUNC(UICommand*, 0xA31820, void*, const char*, int)(this, fileName, controllerMask); }
+		UICommand* queuePushScreen(const char* fileName, int controllerMask = -1) { return SDK_CALL_FUNC(UICommand*, 0xA31820, void*, const char*, int)(this, fileName, controllerMask); }
 		void setFontScale(f32 scale) { SDK_CALL_FUNC(void, 0xA31F20, void*, f32)(this, scale); }
 		void shutdownScreen(UIScreen* screen) { SDK_CALL_FUNC(void, 0xA32220, void*, UIScreen*)(this, screen); }
 	};

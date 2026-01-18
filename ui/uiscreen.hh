@@ -44,9 +44,16 @@ namespace UFG
 		virtual void intro(const char* fromScreen) = 0;
 		virtual void outro(const char* toScreen) = 0;
 
-		/* Functions */
+		/* Impl Functions */
 
-		Scaleform::GFx::Movie* getMovieSafe() { return SDK_CALL_FUNC(Scaleform::GFx::Movie*, 0xA2B980, void*)(this); }
+		SDK_INLINE Scaleform::GFx::Movie* getMovieSafe()
+		{
+			if (auto renderable = mRenderable) {
+				return renderable->m_movie.pObject;
+			}
+
+			return 0;
+		}
 	};
 	SDK_ASSERT_SIZEOF(UIScreen, 0x90);
 

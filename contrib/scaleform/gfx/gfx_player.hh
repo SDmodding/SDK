@@ -73,11 +73,61 @@ namespace Scaleform::GFx
 			virtual ~ObjectInterface() = 0;
 		};
 
-		ObjectInterface* pObjectInterface;
-		ValueType Type;
+		ObjectInterface* pObjectInterface = 0;
+		ValueType Type = VT_Undefined;
 		ValueUnion mValue;
 		u64 DataAux;
 
 		const Value& operator=(const Value& src) { return SDK_CALL_FUNC(const Value&, 0x5CEE00, void*, const Value&)(this, src); }
+
+		/* Impl Functions */
+
+		SDK_INLINE void SetString(const char* str) 
+		{ 
+			Type = VT_String;
+			mValue.pString = str;
+		}
+
+		SDK_INLINE void SetBool(bool v)
+		{
+			Type = VT_Boolean;
+			mValue.BValue = v;
+		}
+
+		SDK_INLINE void SetInt(int v)
+		{
+			Type = VT_Int;
+			mValue.IValue = v;
+		}
+
+		SDK_INLINE void SetNull()
+		{
+			Type = VT_Null;
+			mValue.pData = 0;
+		}
+
+		SDK_INLINE void SetNumber(double v)
+		{
+			Type = VT_Number;
+			mValue.NValue = v;
+		}
+
+		SDK_INLINE void SetNumber(long v)
+		{
+			Type = VT_Number;
+			mValue.NValue = v;
+		}
+
+		SDK_INLINE void SetUInt32(u32 v)
+		{
+			Type = VT_UInt;
+			mValue.UIValue = v;
+		}
+
+		SDK_INLINE void SetUndefined()
+		{
+			Type = VT_Undefined;
+			mValue.pData = 0;
+		}
 	};
 }

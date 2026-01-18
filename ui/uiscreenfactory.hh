@@ -25,6 +25,10 @@ namespace UFG
 
 		virtual ~UIScreenFactory() = 0;
 
+		/* Static Functions */
+
+		SDK_SINLINE UIScreenFactory* Instance() { return SDK_VAR_GET(UIScreenFactory*, 0x242FF98); }
+
 		/* Functions */
 
 		void addScreenMapping(const char* name, UIScreenFactoryBase* factory) { SDK_CALL_FUNC(void, 0xA292F0, void*, const char*, UIScreenFactoryBase*)(this, name, factory); }

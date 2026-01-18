@@ -104,20 +104,20 @@ namespace UFG
 		virtual bool AreAllWheelsOnGround() = 0;
 		virtual f32 GetHalfSteeringRange() = 0;
 		virtual void SetLevelOfDetailInternal(Lod lod) = 0;
-		virtual void applyForce(f32 deltaTime, const qVector3& force, const char* dbgName) = 0;
-		virtual void applyForce(f32 deltaTime, const hkVector4f& force, const char* dbgName) = 0;
-		virtual void applyTorque(f32 deltaTime, const qVector3& torque, const char* dbgName) = 0;
-		virtual void applyTorque(f32 deltaTime, const hkVector4f& torque, const char* dbgName) = 0;
-		virtual void applyAngularImpulse(const qVector3& imp, const char* dbgName) = 0;
-		virtual void applyAngularImpulse(const hkVector4f& imp, const char* dbgName) = 0;
-		virtual void applyLinearImpulse(const qVector3& imp, const char* dbgName) = 0;
-		virtual void applyLinearImpulse(const hkVector4f& imp, const char* dbgName) = 0;
-		virtual void applyPointImpulse(const qVector3& imp, const qVector3& p, const char* dbgName) = 0;
-		virtual void applyPointImpulse(const hkVector4f& imp, const hkVector4f& p, const char* dbgName) = 0;
-		virtual void setAngularVelocity(const qVector3& newVel, const char* dbgName) = 0;
-		virtual void setAngularVelocity(const hkVector4f& newVel, const char* dbgName) = 0;
-		virtual void setLinearVelocity(const qVector3& newVel, const char* dbgName) = 0;
-		virtual void setLinearVelocity(const hkVector4f& newVel, const char* dbgName) = 0;
+		virtual void applyForce(f32 deltaTime, const qVector3& force, const char* dbgName = 0) = 0;
+		virtual void applyForce(f32 deltaTime, const hkVector4f& force, const char* dbgName = 0) = 0;
+		virtual void applyTorque(f32 deltaTime, const qVector3& torque, const char* dbgName = 0) = 0;
+		virtual void applyTorque(f32 deltaTime, const hkVector4f& torque, const char* dbgName = 0) = 0;
+		virtual void applyAngularImpulse(const hkVector4f& imp, const char* dbgName = 0) = 0;
+		virtual void applyAngularImpulse(const qVector3& imp, const char* dbgName = 0) = 0;
+		virtual void applyLinearImpulse(const hkVector4f& imp, const char* dbgName = 0) = 0;
+		virtual void applyLinearImpulse(const qVector3& imp, const char* dbgName = 0) = 0;
+		virtual void applyPointImpulse(const qVector3& imp, const qVector3& p, const char* dbgName = 0) = 0;
+		virtual void applyPointImpulse(const hkVector4f& imp, const hkVector4f& p, const char* dbgName = 0) = 0;
+		virtual void setAngularVelocity(const qVector3& newVel, const char* dbgName = 0) = 0;
+		virtual void setAngularVelocity(const hkVector4f& newVel, const char* dbgName = 0) = 0;
+		virtual void setLinearVelocity(const qVector3& newVel, const char* dbgName = 0) = 0;
+		virtual void setLinearVelocity(const hkVector4f& newVel, const char* dbgName = 0) = 0;
 
 		/* Impl Functions */
 

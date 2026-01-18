@@ -197,6 +197,7 @@ namespace UFG
 		SDK_INLINE f32 GetEngineDamage() { return mDamageState.engineDamage; }
 		SDK_INLINE hkpRigidBody* GetRigidBody() { return (mPhysicsVehicle ? mPhysicsVehicle->mRigidBody->mBody : nullptr); }
 		SDK_INLINE bool IsTireBlown(int tireIndex) { return mDamageState.tireDamage[tireIndex] >= 1.f; }
+		SDK_INLINE void UnlockHighLod() { mLockAtHighLODMode = ELODLockMode_NOT_LOCKED; }
 
 		/* Functions */
 
@@ -250,7 +251,6 @@ namespace UFG
 		bool ShouldIgnoreBulletImpactDamageSphereEvent(SimObject* weaponOwnerSimObject) { return SDK_CALL_FUNC(bool, 0x68BCA0, void*, SimObject*)(this, weaponOwnerSimObject); }
 		void StartSlide() { SDK_CALL_FUNC(void, 0x68C4E0, void*)(this); }
 		void TriggerExplosion() { SDK_CALL_FUNC(void, 0x68D360, void*)(this); }
-		void UnlockHighLod() { SDK_CALL_FUNC(void, 0x68EE20, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(PhysicsMoverInterface, 0x398);
 }

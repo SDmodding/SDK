@@ -15,9 +15,45 @@ namespace UFG
 	class qPropertyCollection
 	{
 	public:
+		enum Flags
+		{
+			FLAG_MEMIMAGE = (1 << 0),
+			FLAG_IS_SET = (1 << 1),
+			FLAG_IS_LIST = (1 << 2),
+			FLAG_DELETED = (1 << 3),
+			FLAG_OWNER_IS_SET = (1 << 4),
+			FLAG_OWNER_IS_LIST = (1 << 5)
+		};
+
 		u32 mFlags;
 		u32 mPad0;
 		qOffset64<qPropertyCollection*> mOwner;
+
+		/* Impl Functions */
+
+		SDK_INLINE bool GetFlags(int flags) const { return mFlags & flags; }
+		SDK_INLINE void SetFlags(int flags) { mFlags |= flags; }
+
+		SDK_INLINE const qPropertySet* GetOwningSet() const { return GetFlags(FLAG_OWNER_IS_SET) ? reinterpret_cast<qPropertySet*>(mOwner.Get()) : 0; }
+		SDK_INLINE const qPropertyList* GetOwningList() const { return GetFlags(FLAG_OWNER_IS_LIST) ? reinterpret_cast<qPropertyList*>(mOwner.Get()) : 0; }
+
+		SDK_INLINE bool IsMemImaged() const { return mFlags & FLAG_MEMIMAGE; }
+		SDK_INLINE bool IsPropertySet() const { return (mFlags >> 1) & FLAG_IS_SET; }
+		SDK_INLINE bool IsPropertyList() const { return (mFlags >> 2) & FLAG_IS_LIST; }
+
+		SDK_INLINE void SetOwner(qPropertySet* owningSet)
+		{
+			mOwner.Set(owningSet);
+			mFlags &= ~FLAG_OWNER_IS_LIST;
+			mFlags |= FLAG_OWNER_IS_SET;
+		}
+
+		SDK_INLINE void SetOwner(qPropertyList* owningList)
+		{
+			mOwner.Set(owningList);
+			mFlags &= ~FLAG_OWNER_IS_SET;
+			mFlags |= FLAG_OWNER_IS_LIST;
+		}
 	};
 
 	class qPropertySetHandle : public qTypedResourceHandle<0x54606C31, qPropertySetResource>
@@ -39,14 +75,14 @@ namespace UFG
 
 		enum Flags
 		{
-			FLAG_RESOURCE_SET = 0x10000,
-			FLAG_HAS_SCHEMA = 0x20000,
-			FLAG_IS_SCHEMA = 0x40000,
-			FLAG_INHERIT_SCHEMA = 0x80000,
-			FLAG_COMPONENT_SCHEMA = 0x100000,
-			FLAG_CS_SKIP_PARENT_CHECK = 0x200000,
-			FLAG_REQUIRES_RECURSIVE_SETUP = 0x400000,
-			FLAG_TYPE_START = 0x10000000,
+			FLAG_RESOURCE_SET = (1 << 0) << 16,
+			FLAG_HAS_SCHEMA = (1 << 1) << 16,
+			FLAG_IS_SCHEMA = (1 << 2) << 16,
+			FLAG_INHERIT_SCHEMA = (1 << 3) << 16,
+			FLAG_COMPONENT_SCHEMA = (1 << 4) << 16,
+			FLAG_CS_SKIP_PARENT_CHECK = (1 << 5) << 16,
+			FLAG_REQUIRES_RECURSIVE_SETUP = (1 << 6) << 16,
+			FLAG_TYPE_START = (1 << 12) << 16,
 		};
 
 		qOffset64<qPropertySetHandle*> mParents;
