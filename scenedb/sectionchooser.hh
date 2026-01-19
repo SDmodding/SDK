@@ -26,7 +26,6 @@ namespace UFG
 			SUPRESS_ISLAND_AND_LOW
 		};
 
-
 		class Lookahead
 		{
 		public:
@@ -41,8 +40,13 @@ namespace UFG
 			virtual void DebugDraw(Render::View* view) = 0;
 		};
 
+		/* Static Members */
+
+		SDK_VINLINE qGlobalVar<bool, 0x20434E8> mStreamsUpdateEnabled;
+
 		/* Static Impl Functions */
 
+		SDK_SINLINE void EnableStreamsUpdate(bool enable) { mStreamsUpdateEnabled = enable; }
 		SDK_SINLINE BSP* GetBSP() { return SDK_VAR_GET(BSP*, 0x23A8D78); }
 		SDK_SINLINE u32 GetCurrentSectionIndex() { return SDK_VAR_GET(u32, 0x2043520); }
 		SDK_SINLINE void SetLookahead(Lookahead* look_ahead) { SDK_VAR_GET(Lookahead*, 0x23A8DA0) = look_ahead; }
@@ -65,8 +69,6 @@ namespace UFG
 		SDK_SINLINE void Destroy() { SDK_CALL_FUNC(void, 0x230ED0)(); }
 
 		SDK_SINLINE void EnableStreamingLookahead(bool enable) { SDK_CALL_FUNC(void, 0x2315A0, bool)(enable); }
-
-		SDK_SINLINE void EnableStreamsUpdate(bool enable) { SDK_CALL_FUNC(void, 0x2315B0, bool)(enable); }
 
 		SDK_SINLINE void FlushAltLayer(const char* layer_name, bool layer_enabled) { SDK_CALL_FUNC(void, 0x2316D0, const char*, bool)(layer_name, layer_enabled); }
 

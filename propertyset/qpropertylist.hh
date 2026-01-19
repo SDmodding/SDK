@@ -26,6 +26,10 @@ namespace UFG
 		u32 GetRandomIndex() { return SDK_CALL_FUNC(u32, 0x1F8010, void*)(this); }
 		void* GetValuePtr(u32 type_uid, u32 index) { return SDK_CALL_FUNC(void*, 0x1F8920, void*, u32, u32)(this, type_uid, index); }
 		bool GetVariant(u32 index, qPropertySetVariant& value) { return SDK_CALL_FUNC(bool, 0x1F8E90, void*, u32, qPropertySetVariant&)(this, index, value); }
+		qPropertyList* Clone() { return SDK_CALL_FUNC(qPropertyList*, 0x1F2460, void*)(this); }
+		void Remove(u32 index) { SDK_CALL_FUNC(void, 0x1FB5A0, void*, u32)(this, index); }
+		void RemoveAll() { SDK_CALL_FUNC(void, 0x1FB810, void*)(this); }
+		void* SetInternal(u32 type_uid, u32 index, const void* v = 0) { return SDK_CALL_FUNC(void*, 0x1FD420, void*, u32, u32, const void*)(this, type_uid, index, v); }
 
 		/* Add Functions */
 

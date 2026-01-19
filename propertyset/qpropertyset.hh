@@ -101,7 +101,8 @@ namespace UFG
 
 		/* Static Functions */
 
-		SDK_SINLINE qPropertySet* CreateResourceSet(const qSymbol& name, const char* dbg_tag) { return SDK_CALL_FUNC(qPropertySet*, 0x1F46E0, const qSymbol&, const char*)(name, dbg_tag); }
+		SDK_SINLINE qPropertySet* Create(const qSymbol& name, const char* dbg_tag = 0) { return SDK_CALL_FUNC(qPropertySet*, 0x1F4140, const qSymbol&, const char*)(name, dbg_tag); }
+		SDK_SINLINE qPropertySet* CreateResourceSet(const qSymbol& name, const char* dbg_tag = 0) { return SDK_CALL_FUNC(qPropertySet*, 0x1F46E0, const qSymbol&, const char*)(name, dbg_tag); }
 
 		/* Impl Functions */
 
@@ -125,6 +126,14 @@ namespace UFG
 
 		SDK_INLINE void SetName(const qSymbol& name) { mName = name; }
 
+		SDK_INLINE void AddPropertyString(const qSymbol& name, const char* str)
+		{
+			this->AddProperty(name, UID_string);
+			if (auto value = static_cast<qOffset64<void*>*>(this->GetValuePtr(UID_string, name))) {
+				value->Set(str);
+			}
+		}
+
 		/* Parent Functions */
 
 		u32 AddParent(qPropertySet* parent) { return SDK_CALL_FUNC(u32, 0x1F1B30, void*, qPropertySet*)(this, parent); }
@@ -143,6 +152,7 @@ namespace UFG
 
 		/* Property Functions */
 
+		void AddProperty(const qSymbol& name, ePropertyType type_uid) { SDK_CALL_FUNC(void, 0x1F1B60, void*, const qSymbol&, ePropertyType)(this, name, type_uid); }
 		s32 GetPropertyIdxLocal(u32 type_uid, u32 name_uid) { return SDK_CALL_FUNC(s32, 0x1F7630, void*, u32, u32)(this, type_uid, name_uid); }
 		s32 GetPropertyIndexFromName(const qSymbol& name) { return SDK_CALL_FUNC(s32, 0x1F7870, void*, const qSymbol&)(this, name); }
 		const qSymbol& GetPropertyNameFromIndex(u32 index) { return SDK_CALL_FUNC(const qSymbol&, 0x1F7AC0, void*, u32)(this, index); }

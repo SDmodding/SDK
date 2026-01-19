@@ -218,6 +218,9 @@
 #define RTypeUID_TextureD3DResource					0xEF77C5F7	// ?
 #define ChunkUID_TextureD3DResource					0x501B8E62	// ?
 
+#define RTypeUID_TrackStripSettings					0x69CE5438	// ?
+#define ChunkUID_TrackStripSettings					0x86DE69F6	// ?
+
 #define RTypeUID_TrueCrowdDataBase					0x4AEEEFDE	// ?
 #define ChunkUID_TrueCrowdDataBase					0x90EEF023	// ?
 

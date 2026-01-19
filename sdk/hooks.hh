@@ -4,9 +4,9 @@ namespace SDK
 {
 	class Hook
 	{
-	private:
-		void* mOriginal = 0;
 	public:
+		void* mOriginal = 0;
+
 		enum ECallType
 		{
 			CT_Default,

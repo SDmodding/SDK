@@ -96,6 +96,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "quark/process.hh"
 #include "quark/beziercurve.hh"
 #include "quark/spline.hh"
+#include "quark/qbytestream.hh"
 
 #include "quark/internal/allocator.hh"
 
@@ -769,7 +770,16 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "fx/hardwareocclusionquery.hh"
 #include "fx/fxsimcomponent.hh"
 #include "fx/decal.hh"
+#include "fx/audiofx.hh"
 #include "fx/beam.hh"
+#include "fx/coronaflare.hh"
+#include "fx/dynamiclight.hh"
+#include "fx/effectemitter.hh"
+#include "fx/flare.hh"
+#include "fx/fxforce.hh"
+#include "fx/lightning.hh"
+#include "fx/trackstrip.hh"
+#include "fx/volumetriceffect.hh"
 #include "fx/particleemittersettings.hh"
 #include "fx/fxfactory.hh"
 #include "fx/fxmanager.hh"
@@ -943,6 +953,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "render/renderstageplugin.hh"
 #include "render/posteffects.hh"
 
+#include "render/cloud.hh"
+#include "render/skymarshall.hh"
+
 //--------------------------------------------------
 //	Spawning
 //--------------------------------------------------
@@ -977,6 +990,14 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "online2/onlinemanager.hh"
+#include "online2/osuitemanager.hh"
+#include "online2/osuiteleaderboardmanager.hh"
+
+//--------------------------------------------------
+//	Movie Player
+//--------------------------------------------------
+
+#include "movieplayer/movieplayer.hh"
 
 //--------------------------------------------------
 //	UI
@@ -1021,6 +1042,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "ui/widget/uihksecondaryobjectiveswidget.hh"
 #include "ui/widget/uihksniperwidget.hh"
 #include "ui/widget/uihkplayerobjective.hh"
+#include "ui/widget/uipropertysetmenu.hh"
 
 #include "ui/widget/hud/uihkgameplayhelpwidget.hh"
 #include "ui/widget/hud/uihkobjectiveflasherwidget.hh"
@@ -1049,6 +1071,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "ui/screens/uihkscreenglobaloverlay.hh"
 #include "ui/screens/uihkscreenhud.hh"
+#include "ui/screens/uihkscreenmainmenu.hh"
 
 //--------------------------------------------------
 //	Main
