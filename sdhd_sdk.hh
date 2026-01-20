@@ -159,6 +159,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/illusionuser/textureuser.hh"
 #include "illusion/texture.hh"
 #include "illusion/rtexture.hh"
+#include "illusion/pc/textureplat.hh"
 
 #include "illusion/pc/targetplat.hh"
 #include "illusion/target.hh"

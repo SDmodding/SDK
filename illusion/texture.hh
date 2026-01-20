@@ -30,4 +30,12 @@ namespace Illusion
 	SDK_ASSERT_SIZEOF(Texture, 0xC8);
 
 	class TextureHandle : public UFG::qTypedResourceHandle<RTypeUID_Texture, Texture>{};
+
+	class TextureLockInfo
+	{
+	public:
+		char* mData;
+		int mLinePitch;
+		int mDepthPitch;
+	};
 }
