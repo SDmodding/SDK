@@ -2,6 +2,8 @@
 
 namespace UFG
 {
+	class StreamOrder;
+
 	class DataStreamer
 	{
 	public:
@@ -73,7 +75,7 @@ namespace UFG
 			~Handle() { SDK_CALL_FUNC(void, 0x2271F0, void*)(this); }
 		};
 
-		struct StreamInfo : public qNodeRB<StreamInfo>, public qNode<StreamInfo, class StreamOrder>, public qNode<StreamInfo, class Priority>
+		struct StreamInfo : public qNodeRB<StreamInfo>, public qNode<StreamInfo, StreamOrder>, public qNode<StreamInfo, class Priority>
 		{
 			STREAM_STATE mStateCurrent;
 			STREAM_STATE mStateTarget;

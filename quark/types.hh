@@ -52,6 +52,8 @@ class qGlobalArray
 {
 public:
 	SDK_INLINE T& operator[](int index) { return *(SDK_VAR(T*, RVA) + index); }
+	SDK_INLINE T* begin() { return &this->operator[](0); }
+	SDK_INLINE T* end() { return &this->operator[](SIZE); }
 };
 
 template <typename T, uptr RVA>

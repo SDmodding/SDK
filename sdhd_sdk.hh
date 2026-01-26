@@ -142,6 +142,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Illusion
 //--------------------------------------------------
 
+#include "illusion/pc/illusionplat.hh"
+#include "illusion/illusion.hh"
+
 #include "illusion/pc/modelplat.hh"
 
 #include "illusion/bonepalette.hh"
@@ -273,6 +276,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //	Streamer
 //--------------------------------------------------
 
+#include "streamer/streampool.hh"
 #include "streamer/streamingmemorymanager.hh"
 #include "streamer/datastreamer.hh"
 #include "streamer/streamermetrics.hh"
