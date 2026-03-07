@@ -15,7 +15,11 @@ namespace Render
 		u32 mNormalTextureID;
 		u32 mShaderID;
 		u32 mModelToEmitFromUID;
+
+		// >= 0.0 : time-based emission (particles per second)
+		// <  0.0 : distance-based emission (particles per unit distance)
 		f32 mEmissionRate;
+
 		u32 mEmissionInit;
 		f32 mLifeMin;
 		f32 mLifeMax;

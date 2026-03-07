@@ -82,7 +82,12 @@ struct CB_FXSizeModule
 
 struct CB_FXFlowmapSettings
 {
+	// 0: Speed
+	// 1: Distortion Strength
+	// 2: Offset?
+	// 3: Unknown / Possibly unused
 	f32 FlowmapConstants[4];
+
 	f32 FlowmapDistortOverTimeKeys[4];
 	f32 FlowmapDistortOverTimeKeyPos[4];
 };

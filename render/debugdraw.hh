@@ -246,7 +246,7 @@ namespace Render
 			SDK_CALL_FUNC(void, 0x181E0, void*, const UFG::qVector3&, const UFG::qVector3&, f32, const UFG::qColour&, const UFG::qMatrix44*, void*)(this, centre, normal, radius, colour, local_world, pre_draw_callback);
 		}
 
-		void DrawCoord(const UFG::qMatrix44& xform, f32 scale, const char* text) { SDK_CALL_FUNC(void, 0x18350, void*, const UFG::qMatrix44&, f32, const char*)(this, xform, scale, text); }
+		void DrawCoord(const UFG::qMatrix44& xform, f32 scale, const char* text = 0) { SDK_CALL_FUNC(void, 0x18350, void*, const UFG::qMatrix44&, f32, const char*)(this, xform, scale, text); }
 
 		void DrawCylinder(const UFG::qVector3& min, const UFG::qVector3& max, f32 radius, const UFG::qColour& colour, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity, void* pre_draw_callback = 0) {
 			SDK_CALL_FUNC(void, 0x18500, void*, const UFG::qVector3&, const UFG::qVector3&, f32, const UFG::qColour&, const UFG::qMatrix44*, void*)(this, min, max, radius, colour, local_world, pre_draw_callback);
