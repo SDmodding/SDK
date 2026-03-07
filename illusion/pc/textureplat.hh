@@ -2,6 +2,32 @@
 
 namespace Illusion
 {
+	class TextureLockInfo
+	{
+	public:
+		char* mData;
+		int mLinePitch;
+		int mDepthPitch;
+	};
+
+	class ITexturePlat
+	{
+	public:
+		enum LockType
+		{
+			LOCK_NONE = -1,
+			LOCK_READ = 0,
+			LOCK_OVERWRITE,
+			LOCK_MODIFY
+		};
+
+		bool Lock(LockType type, TextureLockInfo* info, int mipLevel = 0, int faceIndex = 0) {
+			return SDK_CALL_FUNC(bool, 0xA1C560, void*, LockType, TextureLockInfo*, int, int)(this, type, info, mipLevel, faceIndex);
+		}
+
+		void Unlock() { SDK_CALL_FUNC(void, 0xA22A70, void*)(this); }
+	};
+
 	class TextureD3DResource : public UFG::qResourceData
 	{
 	public:
