@@ -126,4 +126,6 @@ namespace Illusion
 	SDK_SINLINE Texture* CreateTexture3D(const char* name, int width, int height, int depth, Texture::Format format, u32 flags, int num_mips = 1, u32 esram_offset = 0, u32 esram_usage_bytes = 0) {
 		return SDK_CALL_FUNC(Texture*, 0x8EBD0, const char*, int, int, int, Texture::Format, u32, int, u32, u32)(name, width, height, depth, format, flags, num_mips, esram_offset, esram_usage_bytes);
 	}
+
+	SDK_SINLINE void DeleteTexture(Texture* texture, bool wait) { SDK_CALL_FUNC(void, 0x8F190, Texture*, bool)(texture, wait); }
 }
