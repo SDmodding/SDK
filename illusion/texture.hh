@@ -100,6 +100,12 @@ namespace Illusion
 		UFG::qVRAMemoryPool* mVRAMPool;
 		UFG::qMemoryPool* mMemoryPool;
 		UFG::qResourceFileHandle mTextureDataHandle;
+
+		/* Helpers */
+
+		SDK_INLINE TexturePlat* GetPlat() {
+			return reinterpret_cast<TexturePlat*>(reinterpret_cast<uptr>(this) + UFG::qAlignUp<uptr>(sizeof(Texture), 16));
+		}
 	};
 	SDK_ASSERT_SIZEOF(Texture, 0xC8);
 

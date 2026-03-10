@@ -73,6 +73,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 //--------------------------------------------------
 
 #include "quark/types.hh"
+#include "quark/memory.hh"
 #include "quark/checksum.hh"
 #include "quark/array.hh"
 #include "quark/circulararray.hh"
@@ -160,6 +161,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/renderstate.hh"
 
 #include "illusion/illusionuser/textureuser.hh"
+#include "illusion/illusionuser/textureuserplat.hh"
 #include "illusion/pc/textureplat.hh"
 #include "illusion/texture.hh"
 #include "illusion/rtexture.hh"

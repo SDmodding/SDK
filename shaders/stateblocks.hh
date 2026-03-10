@@ -66,8 +66,19 @@ struct CB_ParticleSettings
 	f32 AlphaKeyPositions[4];
 	f32 DepthControlAndPivot[4];
 	f32 LightInfo[4];
+
+	// 0: Count of sprites along X-axis (number of textures in a row)
+	// 1: Count of sprites along Y-axis (number of rows of textures)
+	// 2: Speed
+	// 3: Unknown / Possibly unused
 	f32 AnimUVScaleOffset[4];
+
+	// 0: Animation mode (<=0.5 = loop, >0.5 = clamp to last frame)
+	// 1: First frame index
+	// 2: Last frame index (inclusive)
+	// 3: Unknown / Possibly unused
 	f32 AnimExtras[4];
+
 	f32 OpacityOverDistance[4];
 	f32 OpacityOverDistancePositions[4];
 };
