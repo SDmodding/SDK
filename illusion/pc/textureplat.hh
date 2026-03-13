@@ -46,6 +46,8 @@ namespace Illusion
 		}
 
 		void Unlock() { SDK_CALL_FUNC(void, 0xA22A70, void*)(this); }
+
+		void CreateTextureData() { SDK_CALL_FUNC(void, 0xA19940, void*)(this); }
 	};
 
 	class TexturePlat

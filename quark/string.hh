@@ -22,6 +22,15 @@ namespace UFG
 
 		SDK_INLINE bool IsEmpty() const { return mLength == 0; }
 
+		/* Static Functions */
+
+		template <typename... Args>
+		SDK_SINLINE qString FormatEx(const char* format, Args... args) 
+		{ 
+			qProxy<qString> res;
+			return *SDK_CALL_FUNC(qString*, 0x16E480, qString*, const char*, Args...)(&res, format, args...);
+		}
+
 		/* Functions */
 
 		template <typename... Args>

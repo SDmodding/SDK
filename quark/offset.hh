@@ -27,6 +27,10 @@ namespace UFG
 		}
 
 		SDK_INLINE void operator=(const T* target) { Set(target); }
+
+		SDK_INLINE T operator[](u32 index) { return &Get()[index]; }
+
+		SDK_INLINE T operator->() { return Get(); }
 	};
 
 	template <typename T>

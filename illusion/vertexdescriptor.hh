@@ -73,5 +73,7 @@ namespace Illusion
 		int mTotalSize;
 
 		virtual void ApplyUserRemapping(UFG::qVector4*) = 0;
+
+		SDK_SINLINE UFG::qList<VertexStreamDescriptor>* GetStreamDescriptors() { return SDK_VAR(UFG::qList<VertexStreamDescriptor>*, 0x216B1F0); }
 	};
 }
