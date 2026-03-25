@@ -15,6 +15,8 @@
 
 /* Helpers */
 
+#define SDK_ARRAYSIZE(x)						(sizeof(x) / sizeof(x[0]))
+
 #define SDK_STRINGIFY(x)						#x
 #define SDK_TOSTRING(x)							SDK_STRINGIFY(x)
 

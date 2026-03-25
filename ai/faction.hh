@@ -9,11 +9,15 @@ namespace UFG
 
 		SDK_SINLINE FactionInterface* Instance() { return SDK_VAR(FactionInterface*, 0x24084D0); }
 
-		/* Functions */
+		/* Impl Functions */
 
-		void SetStanding(eFactionClassEnum source, eFactionClassEnum target, eFactionStandingEnum standing) { 
-			reinterpret_cast<void(SDK_CALL*)(void*, eFactionClassEnum, eFactionClassEnum, eFactionStandingEnum)>(SDK_RVA(0x387BE0))(this, source, target, standing); 
+		SDK_INLINE void SetStanding(eFactionClassEnum source, eFactionClassEnum target, eFactionStandingEnum standing)
+		{
+			mStandings[source][target] = standing;
+			mStandings[target][source] = standing;
 		}
+
+		/* Functions */
 
 		void SetFaction(SimObject* pObject, qSymbol* newFactionSymbol) { reinterpret_cast<void(SDK_CALL*)(void*, SimObject*, qSymbol*)>(SDK_RVA(0x3862D0))(this, pObject, newFactionSymbol); }
 

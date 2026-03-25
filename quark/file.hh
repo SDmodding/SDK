@@ -119,4 +119,30 @@ namespace UFG
 		virtual s64 FileRead(qFile* file, void* buffer, s64 num_bytes) = 0;
 		virtual s64 FileWrite(qFile* file, const void* buffer, s64 num_bytes, bool* not_enough_space) = 0;
 	};
+
+	//-------------------------------------------------------------------
+	// File Functions
+	//-------------------------------------------------------------------
+
+	SDK_SINLINE qFile* qOpen(const char* filename, qFileAccessType access_type, bool warn_if_fail = 0) {
+		return SDK_CALL_FUNC(qFile*, 0x188440, const char*, qFileAccessType, bool)(filename, access_type, warn_if_fail);
+	}
+
+	SDK_SINLINE void qClose(qFile* file) { SDK_CALL_FUNC(void, 0x182160, qFile*)(file); }
+
+	SDK_SINLINE s64 qGetFileSize(qFile* file) { return SDK_CALL_FUNC(s64, 0x184510, qFile*)(file); }
+
+	SDK_SINLINE s64 qRead(qFile* file, void* buffer, s64 num_bytes, s64 seek_offset = 0, qFileSeekType seek_type = QSEEK_CUR) {
+		return SDK_CALL_FUNC(s64, 0x1896B0, qFile*, void*, s64, s64, qFileSeekType)(file, buffer, num_bytes, seek_offset, seek_type);
+	}
+
+	SDK_SINLINE char* qReadEntireFile(const char* filename, s64* loaded_size = 0, qMemoryPool* memory_pool = 0, u64 allocation_params = 0, char* name = 0) {
+		return SDK_CALL_FUNC(char*, 0x189D50, const char*, s64*, qMemoryPool*, u64, char*)(filename, loaded_size, memory_pool, allocation_params, name);
+	}
+
+	SDK_SINLINE s64 qWrite(qFile* file, const void* buffer, s64 num_bytes, s64 seek_offset = 0, qFileSeekType seek_type = QSEEK_CUR, bool* not_enough_space = 0) {
+		return SDK_CALL_FUNC(s64, 0x18CE50, qFile*, const void*, s64, s64, qFileSeekType, bool*)(file, buffer, num_bytes, seek_offset, seek_type, not_enough_space);
+	}
+
+	SDK_SINLINE void qDeleteFile(const char* filename) { SDK_CALL_FUNC(void, 0x183250, const char*)(filename); }
 }

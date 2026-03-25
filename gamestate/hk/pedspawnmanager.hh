@@ -91,7 +91,7 @@ namespace UFG
 		f32 mPrevCulledTime;
 		qSafePointer<SpawnZone> mCreationSpawnZone;
 		eActiveStatus mActiveStatus;
-		PedSpawningInfo::eDrawList mDrawList;
+		eDrawList mDrawList;
 		qSafePointerWithCallbacks<SimObjectCharacter> mSimObjectPtr;
 		TransformNodeComponent* mTransformNodePtr;
 		AILightWeightComponent* mProxyAIComponent;
@@ -185,7 +185,7 @@ namespace UFG
 			};
 
 			Iterator begin() { return Iterator(&mMgr->mAmbientPed[0]);}
-			Iterator end() { return Iterator(&mMgr->mScriptedPed[ARRAYSIZE(PedSpawnManager::mScriptedPed)]); }
+			Iterator end() { return Iterator(&mMgr->mScriptedPed[SDK_ARRAYSIZE(PedSpawnManager::mScriptedPed)]); }
 
 		private:
 			PedSpawnManager* mMgr;
