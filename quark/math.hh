@@ -262,6 +262,7 @@ namespace UFG
 		SDK_INLINE qQuaternion(f32 f0, f32 f1, f32 f2, f32 f3) : x(f0), y(f1), z(f2), w(f3) {}
 		SDK_INLINE qQuaternion(const qVector4& v) : x(v.x), y(v.y), z(v.z), w(v.w) {}
 
+		void Set(const qMatrix44& mat) { SDK_CALL_FUNC(void, 0x17C460, void*, const qMatrix44&)(this, mat); }
 		void Rotate(qVector3& v) { SDK_CALL_FUNC(void, 0x17BD90, void*, qVector3&)(this, v); }
 
 		qMatrix44 GetMatrix(const qVector3& t)
