@@ -17,6 +17,13 @@ public:
 	void operator=(ENUM e) { m_storage = static_cast<STORAGE>(e); }
 };
 
+template<typename BITS, typename STORAGE>
+class hkFlags
+{
+public:
+	STORAGE m_storage;
+};
+
 template <class TYPE>
 class hkRefPtr
 {

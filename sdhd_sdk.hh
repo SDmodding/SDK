@@ -617,6 +617,9 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "navigation/havok/havoknavposition.hh"
 
+#include "navigation/navmanager.hh"
+#include "navigation/havok/havoknavmanager.hh"
+
 #include "navigation/navobject.hh"
 #include "navigation/navwaypoint.hh"
 #include "navigation/navobjectparkour.hh"

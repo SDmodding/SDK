@@ -42,3 +42,24 @@ public:
 	hkLocalFrameGroup* m_group;
 	hkStringPtr m_name;
 };
+
+class hkGeometry : public hkReferencedObject
+{
+public:
+	struct Triangle
+	{
+		int m_a;
+		int m_b;
+		int m_c;
+		int m_material = -1;
+	};
+
+	hkArray<hkVector4f> m_vertices;
+	hkArray<Triangle> m_triangles;
+
+	void ctor()
+	{
+		memset(this, 0, sizeof(*this));
+		*reinterpret_cast<void**>(this) = SDK_VAR(void*, 0x16883A8);
+	}
+};

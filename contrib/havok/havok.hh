@@ -59,6 +59,30 @@ class hkpWorld;
 #include "Common/serialize/hkPackfileData.hh"
 
 //------------------------------------
+//	Geometry
+//------------------------------------
+
+#include "Geometry/DataStructures/hkcdDynamicAabbTree.hh"
+#include "Geometry/DataStructures/hkcdStaticAabbTree.hh"
+
+//------------------------------------
+//	AI
+//------------------------------------
+
+#include "AI/Pathfinding/NavMesh/hkaiNavMesh.hh"
+
+#include "AI/Pathfinding/Collide/hkaiNavMeshQueryMediator.hh"
+#include "AI/Pathfinding/Collide/hkaiStaticTreeNavMeshQueryMediator.hh"
+
+#include "AI/Pathfinding/Streaming/hkaiStreamingManager.hh"
+
+#include "AI/NavMesh/hkaiNavMeshEdgeMatchingParams.hh"
+#include "AI/NavMesh/hkaiNavMeshSimplificationUtils.hh"
+#include "AI/NavMesh/hkaiNavMeshGenerationSettings.hh"
+#include "AI/NavMesh/hkaiNavMeshGenerationUtils.hh"
+
+
+//------------------------------------
 //	Animation
 //------------------------------------
 
