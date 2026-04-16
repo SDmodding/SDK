@@ -25,6 +25,7 @@ class hkpWorld;
 
 #include "Common/Reflection/hkTypeInfo.hh"
 #include "Common/Reflection/hkClassNameRegistry.hh"
+#include "Common/Reflection/hkClass.hh"
 
 #include "Common/hkMath.hh"
 #include "Common/Types/hkMotionState.hh"
@@ -51,12 +52,20 @@ class hkpWorld;
 
 #include "Common/GeometryUtilities/hkInertiaTensorComputer.hh"
 
+#include "Common/IO/hkStreamWriter.hh"
+#include "Common/IO/hkOstream.hh"
+
 //------------------------------------
 //	Serialize
 //------------------------------------
 
-#include "Common/serialize/hkResource.hh"
-#include "Common/serialize/hkPackfileData.hh"
+#include "Common/Serialize/hkResource.hh"
+#include "Common/Serialize/hkPackfileData.hh"
+
+#include "Common/Serialize/Util/hkStructureLayout.hh"
+#include "Common/Serialize/hkPackfileWriter.hh"
+
+#include "Common/Serialize/Util/hkSerializeUtil.hh"
 
 //------------------------------------
 //	Geometry
