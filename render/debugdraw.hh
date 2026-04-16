@@ -256,12 +256,12 @@ namespace Render
 			SDK_CALL_FUNC(void, 0x18640, void*, const UFG::qVector3&, const UFG::qVector3&, const UFG::qColour&, const UFG::qMatrix44*, void*, bool)(this, p0, p1, colour, local_world, pre_draw_callback, is_screen_coords);
 		}
 
-		void DrawLineStrip(const UFG::qVector3& line_points, int num_points, const UFG::DrawInfo& info, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity) {
-			SDK_CALL_FUNC(void, 0x18760, void*, const UFG::qVector3&, int, const UFG::DrawInfo&, const UFG::qMatrix44*)(this, line_points, num_points, info, local_world);
+		void DrawLineStrip(const UFG::qVector3* line_points, int num_points, const UFG::DrawInfo& info, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity) {
+			SDK_CALL_FUNC(void, 0x18760, void*, const UFG::qVector3*, int, const UFG::DrawInfo&, const UFG::qMatrix44*)(this, line_points, num_points, info, local_world);
 		}
 
-		void DrawLineStrip(const UFG::qVector3& line_points, int num_points, const UFG::qColour& colour, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity, void* pre_draw_callback = 0) {
-			SDK_CALL_FUNC(void, 0x188A0, void*, const UFG::qVector3&, int, const UFG::qColour&, const UFG::qMatrix44*, void*)(this, line_points, num_points, colour, local_world, pre_draw_callback);
+		void DrawLineStrip(const UFG::qVector3* line_points, int num_points, const UFG::qColour& colour, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity, void* pre_draw_callback = 0) {
+			SDK_CALL_FUNC(void, 0x188A0, void*, const UFG::qVector3*, int, const UFG::qColour&, const UFG::qMatrix44*, void*)(this, line_points, num_points, colour, local_world, pre_draw_callback);
 		}
 
 		void DrawPillar(const UFG::qVector3& position, f32 radius, f32 height, const UFG::qColour& colour, const UFG::qMatrix44* localWorld = &UFG::qMatrix44::msIdentity, void* preDrawCallback = 0) {

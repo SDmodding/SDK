@@ -17,7 +17,15 @@ namespace Render
 		u32 guid;
 		UFG::qVector3 offset;
 		bool offsetWorld;
+
+		// Bits:
+		//	1 = close (23 units)
+		//	2 = mid (39 units)
+		//	4 = far (500 units)
+		//	8 = force render
+		//
 		s8 lodMask;
+
 		s8 pad0;
 		s8 pad1;
 		f32 start;

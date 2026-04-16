@@ -2,6 +2,14 @@
 
 namespace Render
 {
+	enum eDynamicLightAnim
+	{
+		DYNAMICLIGHTANIM_ALWAYS_ON,
+		DYNAMICLIGHTANIM_ANIMATED,
+		DYNAMICLIGHTANIM_FLICKERING,
+		NUM_DYNAMICLIGHTANIMTYPES
+	};
+
 	class DynamicLightSettings : public UFG::qResourceData, public FXComponentSettings
 	{
 	public:

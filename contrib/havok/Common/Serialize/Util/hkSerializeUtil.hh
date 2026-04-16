@@ -73,6 +73,10 @@ namespace hkSerializeUtil
 		return SDK_CALL_FUNC(hkResource*, 0xE3A030, const char*, ErrorDetails*, LoadOptions*)(filename, detailsOut, &options);
 	}
 
+	SDK_SINLINE hkResource* load(void* buf, int buflen, ErrorDetails* resultOut = 0, LoadOptions options = LOAD_DEFAULT) {
+		return SDK_CALL_FUNC(hkResource*, 0xE3A090, void*, int, ErrorDetails*, LoadOptions*)(buf, buflen, resultOut, &options);
+	}
+
 	SDK_SINLINE hkResult save(const void* object, hkClass* klass, hkStreamWriter* writer, SaveOptions options = SAVE_DEFAULT)
 	{
 		hkResult res;

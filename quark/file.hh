@@ -124,6 +124,8 @@ namespace UFG
 	// File Functions
 	//-------------------------------------------------------------------
 
+	SDK_SINLINE bool qCreateDirectory(const char* dir) { return SDK_CALL_FUNC(bool, 0x1829E0, const char*)(dir); }
+
 	SDK_SINLINE qFile* qOpen(const char* filename, qFileAccessType access_type, bool warn_if_fail = 0) {
 		return SDK_CALL_FUNC(qFile*, 0x188440, const char*, qFileAccessType, bool)(filename, access_type, warn_if_fail);
 	}
