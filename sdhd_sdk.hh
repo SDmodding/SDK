@@ -149,8 +149,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/pc/modelplat.hh"
 
 #include "illusion/bonepalette.hh"
-#include "illusion/vertexdecl.hh"
 #include "illusion/vertexdescriptor.hh"
+#include "illusion/vertexdecl.hh"
 #include "illusion/primitive.hh"
 #include "illusion/state.hh"
 
