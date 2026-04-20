@@ -31,6 +31,13 @@ namespace UFG
 
 		virtual u32 GetClassSize() = 0;
 		virtual bool IsBaseClassOfThis(u64 type_uid) = 0;
+
+		/* Functions */
+
+		void Add(qReflectObject* data) { SDK_CALL_FUNC(void, 0x1654D0, void*, qReflectObject*)(this, data); }
+		qReflectObject* FindObject(u64 name_uid) { return SDK_CALL_FUNC(qReflectObject*, 0x16E060, void*, u64)(this, name_uid); }
+		qReflectObject* FindObjectByName(const char* name) { return SDK_CALL_FUNC(qReflectObject*, 0x16E110, void*, const char*)(this, name); }
+		void Remove(qReflectObject* data) { SDK_CALL_FUNC(void, 0x17A260, void*, qReflectObject*)(this, data); }
 	};
 	SDK_ASSERT_SIZEOF(qReflectInventoryBase, 0x190);
 

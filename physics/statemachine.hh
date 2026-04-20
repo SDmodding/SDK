@@ -17,10 +17,10 @@ namespace UFG
 	public:
 		enum MovementMode
 		{
-			MODE_FIXED = 0x4000,
-			MODE_SIMULATED = 0x8000,
-			MODE_ANIMATED_HARDKEYFRAME = 0x10000,
-			MODE_ANIMATED_SOFTKEYFRAME = 0x20000
+			MODE_FIXED = 0x40,
+			MODE_SIMULATED = 0x80,
+			MODE_ANIMATED_HARDKEYFRAME = 0x100,
+			MODE_ANIMATED_SOFTKEYFRAME = 0x200
 		};
 
 		typedef CollisionLayers SelectableLayers;
@@ -47,7 +47,17 @@ namespace UFG
 		{
 			enum Conditional
 			{
-				ON_NAMED_EVENT = 0x1,
+				HEALTH_LESSTHAN_OR_EQUAL,
+				ON_FRACTURE,
+				ON_COLLISION_ANY,
+				ON_COLLISION_WORLD,
+				ON_COLLISION_VEHICLE,
+				ON_COLLISION_CHARACTER,
+				ON_TIMER_EXPIRED,
+				ON_SPAWN,
+				ON_NAMED_EVENT,
+				RANDOM_BRANCH,
+				BRANCH_ALWAYS
 			};
 
 			Conditional mConditional;
@@ -157,6 +167,12 @@ namespace UFG
 	class StateMachineDefinition : public qReflectObjectType<StateMachineDefinition>
 	{
 	public:
+		class LookupNode : public qNodeRB<LookupNode>
+		{
+		public:
+			u64 dna_guid;
+		};
+
 		qReflectArray<StateMachineNode> mStateNodes;
 		qSymbolUC name;
 		f32 mBulletDamageMultiplier;

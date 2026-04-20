@@ -4,9 +4,9 @@ template <typename T>
 class hkArrayBase
 {
 public:
-	T* m_data;
-	int m_size;
-	int m_capacityAndFlags;
+	T* m_data = 0;
+	int m_size = 0;
+	int m_capacityAndFlags = 0;
 
 	/* Functions */
 
