@@ -47,7 +47,7 @@ namespace UFG
 
 		/* Impl Function */
 
-		SDK_INLINE u32 GetMotionType() { return mFlags & 0x3C0; }
+		SDK_INLINE u32 GetMotionType() { return mFlags & (MODE_FIXED | MODE_SIMULATED | MODE_ANIMATED_HARDKEYFRAME | MODE_ANIMATED_SOFTKEYFRAME); }
 		SDK_INLINE u32 GetCollisionLayerOverride() { return mCollisionLayerOverride != -1 ? mCollisionLayerOverride & (MAX_LAYERS - 1) : -1; }
 
 		/* Functions */
