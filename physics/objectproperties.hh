@@ -37,7 +37,7 @@ namespace UFG
 		CGT_CAPSULE
 	};
 
-	class PhysicsSurfaceProperties : qReflectObjectType<PhysicsSurfaceProperties>
+	class PhysicsSurfaceProperties : public qReflectObjectType<PhysicsSurfaceProperties>
 	{
 	public:
 		f32 mFriction;
