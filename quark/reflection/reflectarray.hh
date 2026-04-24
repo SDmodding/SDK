@@ -16,5 +16,14 @@ namespace UFG
 	{
 	public:
 		qReflectArrayData<T> mData;
+
+		void Set(T* items, u32 numItems)
+		{
+			mData.mItems = items;
+			mData.mNumItems = numItems;
+		}
+
+		bool IsEmpty() const { return mData.mNumItems == 0; }
+		bool IsDynamicallyAllocated() const { return mData.mFlags & 2; }
 	};
 }

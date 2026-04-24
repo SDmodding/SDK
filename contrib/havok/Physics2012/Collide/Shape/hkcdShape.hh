@@ -5,7 +5,7 @@ struct hkcdShapeType
 	enum ShapeTypeEnum : s32
 	{
 		SPHERE,
-		FIRST_SHAPE_TYPE,
+		FIRST_SHAPE_TYPE = 0,
 		CYLINDER,
 		TRIANGLE,
 		BOX,

@@ -134,6 +134,14 @@ class hkTransformf
 public:
 	hkRotationf m_rotation;
 	hkVector4f m_translation;
+
+	void setIdentity()
+	{
+		m_rotation.m_col0.set(1.f, 0.f, 0.f, 1.f);
+		m_rotation.m_col1.set(0.f, 1.f, 0.f, 1.f);
+		m_rotation.m_col2.set(0.f, 0.f, 1.f, 1.f);
+		m_translation.set(0.f, 0.f, 0.f);
+	}
 };
 
 class hkQsTransformf

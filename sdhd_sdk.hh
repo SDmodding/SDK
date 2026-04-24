@@ -808,6 +808,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "physics/bulletmanager.hh"
 
 #include "physics/components/phantomvolumecomponent.hh"
+#include "physics/components/physicsrenderhelper.hh"
 #include "physics/components/waterfloatingtrackerbasecomponent.hh"
 #include "physics/components/waterfloatingtrackercomponent.hh"
 

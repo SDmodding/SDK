@@ -5,6 +5,15 @@ namespace UFG
 	class BasePhysicsSystem
 	{
 	public:
+		// Doesn't exist in PDB
+		enum
+		{
+			ADD_FLAG_STREAMED_GEO = (1 << 0),
+			ADD_FLAG_FRACTURED = (1 << 1),
+			ADD_FLAG_INFLATE = (1 << 3),
+			ADD_FLAG_NO_RENDER = (1 << 4),
+		};
+
 		struct RaycastBatch
 		{
 			AsyncRayCastData mAsyncRayData[164];
@@ -62,8 +71,8 @@ namespace UFG
 		//virtual void PhysicsVolumeHandler(PhantomCallback* pcb, SimObject* simObject, PhantomCallbackData* data) = 0;
 
 		void AddCollisionInstanceToWorld(CollisionInstanceData* instance) { SDK_CALL_VFUNC(void, 1, this, void*, CollisionInstanceData*)(this, instance); }
-		RigidBody* OnCollisionInstanceAddedToWorld(CollisionInstanceData* instance, CollisionMeshData* mesh, char onAddedFlags, u32 rigidBodyFlags, SimObject* simObject) {
-			return SDK_CALL_VFUNC(RigidBody*, 2, this, void*, CollisionInstanceData*, CollisionMeshData*, char, u32, SimObject*)(this, instance, mesh, onAddedFlags, rigidBodyFlags, simObject);
+		RigidBodyComponent* OnCollisionInstanceAddedToWorld(CollisionInstanceData* instance, CollisionMeshData* mesh, u32 onAddedFlags, u32 rigidBodyFlags = 0, SimObject* simObject = 0) {
+			return SDK_CALL_VFUNC(RigidBodyComponent*, 2, this, void*, CollisionInstanceData*, CollisionMeshData*, u32, u32, SimObject*)(this, instance, mesh, onAddedFlags, rigidBodyFlags, simObject);
 		}
 		void OnCollisionInstanceRemovedFromWorld(CollisionInstanceData* instance) { SDK_CALL_VFUNC(void, 3, this, void*, CollisionInstanceData*)(this, instance); }
 		bool CastAsyncRay(const qVector3& rayStart, const qVector3& rayEnd, u32 collisionFilter, void(*callback)(RayCastData*, SimComponent*, void*), SimComponent* simComponent, void* userData) {
@@ -79,6 +88,7 @@ namespace UFG
 		/* Impl Functions */
 
 		SDK_INLINE void BeginRemoveEntityBatch() { mForceRemoveEntitiesToBeBatched = true; }
+		SDK_INLINE CollisionMeshData* GetCollisionModel(u32 guid) { return mCollisionModels.Get(guid); }
 
 		/* Functions */
 
@@ -98,7 +108,6 @@ namespace UFG
 		void DetermineRaycastSurfaceProperties(RayCastData& data) { SDK_CALL_FUNC(void, 0xA7050, void*, RayCastData&)(this, data); }
 		void DispatchAsyncRayCastResultCallbacks() { SDK_CALL_FUNC(void, 0xA7760, void*)(this); }
 		void EndRemoveEntityBatch() { SDK_CALL_FUNC(void, 0xA7E40, void*)(this); }
-		CollisionMeshData* GetCollisionModel(u32 guid) { return SDK_CALL_FUNC(CollisionMeshData*, 0xC0B60, void*, u32)(this, guid); }
 		void RemoveAction(hkpAction* action) { SDK_CALL_FUNC(void, 0xAF5B0, void*, hkpAction*)(this, action); }
 		void RemoveCollisionInstanceFromWorld(CollisionInstanceData* instance) { SDK_CALL_FUNC(void, 0xAF610, void*, CollisionInstanceData*)(this, instance); }
 		bool RemoveConstraint(hkpConstraintInstance* constraint) { return SDK_CALL_FUNC(bool, 0xAF620, void*, hkpConstraintInstance*)(this, constraint); }

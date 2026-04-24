@@ -10,6 +10,10 @@ namespace UFG
 		u64 mTypeUID;
 		u64 mNameUID;
 		qReflectObject* mData;
+
+		/* Functions */
+
+		void Init(u64 type_uid, u64 name_uid) { SDK_CALL_FUNC(void, 0x173420, void*, u64, u64)(this, type_uid, name_uid); }
 	};
 
 	template <typename T>
