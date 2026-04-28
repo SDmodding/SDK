@@ -9,6 +9,8 @@ public:
 	qEnum() {}
 	qEnum(E value) : mValue(static_cast<T>(value)) {}
 	qEnum(T value) : mValue(value) {}
+
+	bool operator==(E e) const { return mValue == e; }
 };
 
 /* Proxy class for handling abstract classes as members. */

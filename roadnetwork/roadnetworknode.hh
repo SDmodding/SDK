@@ -260,7 +260,7 @@ namespace UFG
 		qPropertySet* mpPropertySetCached;
 		u32 mParkingPropertyID2;
 		qList<RoadNetworkSubSegment> mSubSegmentCollection;
-		qEnum<RoadNetworkNode::RoadNetworkType, u32> mRoadNetworkType;
+		qEnum<RoadNetworkType, u32> mRoadNetworkType;
 		qVector3 mMin;
 		qVector3 mMax;
 		f32 mSpeedLimit;

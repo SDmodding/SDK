@@ -226,6 +226,38 @@ namespace Render
 		DebugData* mDebugData;
 		u32 mFrame;
 
+		/* Impl Functions */
+
+		void DrawAABB2(const UFG::qVector3& min, const UFG::qVector3& max, const UFG::qColour& colour, const UFG::qMatrix44* local_world = &UFG::qMatrix44::msIdentity, void* pre_draw_callback = 0) 
+		{
+			const UFG::qVector3 points[] = 
+			{
+				// Bottom face
+				{ min.x, min.y, min.z },
+				{ max.x, min.y, min.z },
+				{ max.x, max.y, min.z },
+				{ min.x, max.y, min.z },
+				{ min.x, min.y, min.z },
+
+				// Vertical edges
+				{ min.x, min.y, max.z },
+				{ max.x, min.y, max.z },
+				{ max.x, max.y, max.z },
+				{ min.x, max.y, max.z },
+				{ min.x, min.y, max.z },
+
+				// Connect bottom and top edges
+				{ max.x, min.y, max.z },
+				{ max.x, min.y, min.z },
+				{ max.x, max.y, min.z },
+				{ max.x, max.y, max.z },
+				{ min.x, max.y, max.z },
+				{ min.x, max.y, min.z }
+			};
+
+			DrawLineStrip(points, SDK_ARRAYSIZE(points), colour, local_world, pre_draw_callback);
+		}
+
 		/* Functions */
 
 		void Clear() { SDK_CALL_FUNC(void, 0x177F0, void*)(this); }
