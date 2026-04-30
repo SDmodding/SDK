@@ -255,7 +255,9 @@ namespace UFG
 			u32 nPadding : 25;
 		};
 
+		// RoadID (Lookup each listProperty in RoadSet and check if it matches RoadID property)
 		u32 mPropertyID1;
+
 		u32 mPropertyID2;
 		qPropertySet* mpPropertySetCached;
 		u32 mParkingPropertyID2;
