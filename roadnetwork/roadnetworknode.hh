@@ -279,8 +279,7 @@ namespace UFG
 		qEnum<RoadNetworkType, u32> mRoadNetworkType;
 
 		// World space AABB
-		qVector3 mMin;
-		qVector3 mMax;
+		qVector3 mMin, mMax;
 
 		// Defaults to 13.8 if its 0.0
 		f32 mSpeedLimit;
