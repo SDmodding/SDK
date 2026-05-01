@@ -189,7 +189,10 @@ namespace UFG
 		RoadNetworkSpawnPoint* mSpawnPoint;
 		f32 mSpawnT;
 		u16 mLaneIndex;
+
+		// Index to Bezier Path Collection of node.
 		u16 mPathIndex;
+
 		f32 mOffset;
 		i8 mLaneFlags;
 		i8 mDirection;
@@ -255,17 +258,35 @@ namespace UFG
 			u32 nPadding : 25;
 		};
 
-		// RoadID (Lookup each listProperty in RoadSet and check if it matches RoadID property)
+		// RoadID
+		// Lookup each listProperty in RoadSet and check if it matches RoadID property
 		u32 mPropertyID1;
 
+		// RoadIDAdditional
+		// Similar to 'mPropertyID1', but instead it searches listProperty called 'default-roadnetwork-additional-roadset'.
+		// Used only to set 'BuildVisibleRoadNetworkByGrid' in mBits.
 		u32 mPropertyID2;
+
+		// Cached propertySet of mPropertyID1.
 		qPropertySet* mpPropertySetCached;
+
 		u32 mParkingPropertyID2;
+
+		// Constructed while loaded as resource, based on center lane and bezier path length.
 		qList<RoadNetworkSubSegment> mSubSegmentCollection;
+
+		// Initialized from PropertySet if it has 'RoadNetworkType' property.
 		qEnum<RoadNetworkType, u32> mRoadNetworkType;
+
+		// World space AABB
 		qVector3 mMin;
 		qVector3 mMax;
+
+		// Defaults to 13.8 if its 0.0
 		f32 mSpeedLimit;
+
+		// All bits are reset when segment is loaded as resource.
+		// They're set from PropertySet later on by 'WheeledVehicleNavigationData::InitGlobalData'.
 		RoadSegmentBits mBits;
 
 		/* Functions */
@@ -278,7 +299,7 @@ namespace UFG
 		RoadNetworkSubSegment* GetClosestSubSegment(const qVector3& position) { return SDK_CALL_FUNC(RoadNetworkSubSegment*, 0xD7E20, void*, const qVector3&)(this, position); }
 		f32 GetMatchingT(const u32 laneIndex, double t, const u32 otherLaneIndex) { return SDK_CALL_FUNC(f32, 0xD9F20, void*, const u32, double, const u32)(this, laneIndex, t, otherLaneIndex); }
 		f32 GetRoadDensity() { return SDK_CALL_FUNC(f32, 0xDB6B0, void*)(this); }
-		RoadNetworkNode::RoadNetworkType GetRoadNetworkType() { return SDK_CALL_FUNC(RoadNetworkNode::RoadNetworkType, 0xDB850, void*)(this); }
+		RoadNetworkType GetRoadNetworkType() { return SDK_CALL_FUNC(RoadNetworkType, 0xDB850, void*)(this); }
 		qPropertySet* GetRoadPropertySet() { return SDK_CALL_FUNC(qPropertySet*, 0xDB8A0, void*)(this); }
 		f32 GetTFromDistance(RoadNetworkLane* lane, f32 distance, f32 beginT, bool forward) { return SDK_CALL_FUNC(f32, 0xDBF30, void*, RoadNetworkLane*, f32, f32, bool)(this, lane, distance, beginT, forward); }
 		bool IsWater() { return SDK_CALL_FUNC(bool, 0xDEFA0, void*)(this); }
@@ -376,7 +397,10 @@ namespace UFG
 		qOffset64<qOffset64<RoadNetworkTrafficLightLocation*>*> mTrafficLightLocations;
 		i8 mNumTrafficLightLocations;
 		i8 mIsMerged;
+
+		// Defaults to 1
 		i8 mEnableTimer;
+
 		i8 mNumLightPhases;
 		qOffset64<qOffset64<RoadNetworkTrafficLightPhase*>*> mLightPhases;
 		u32 mCurrentPhaseIndex;
