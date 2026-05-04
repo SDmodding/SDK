@@ -234,7 +234,13 @@ namespace UFG
 		qVector3 GetNearestPoint(const qVector3& pos, f32* laneT = 0) { return SDK_CALL_FUNC(qVector3, 0xDA3C0, void*, const qVector3&, f32*)(this, pos, laneT); }
 		u32 GetNumberOfCarsInLaneAheadOfDistance(f32 d) { return SDK_CALL_FUNC(u32, 0xDAF70, void*, f32)(this, d); }
 		qVector3 GetOffsetPos(f32 t, f32 offset) { return SDK_CALL_FUNC(qVector3, 0xDB0D0, void*, f32, f32)(this, t, offset); }
-		qVector3 GetPos(f32 t) { return SDK_CALL_FUNC(qVector3, 0xDB360, void*, f32)(this, t); }
+
+		qVector3 GetPos(f32 t) 
+		{
+			qVector3 res;
+			return *SDK_CALL_FUNC(qVector3*, 0xDB360, void*, qVector3&, f32)(this, res, t); 
+		}
+
 		bool GetPosAndTangent(f32 t, qVector3& pos, qVector3& tangent) { return SDK_CALL_FUNC(bool, 0xDB4C0, void*, f32, qVector3&, qVector3&)(this, t, pos, tangent); }
 		qVector3 GetPosNoOffset(f32 laneT) { return SDK_CALL_FUNC(qVector3, 0xDB570, void*, f32)(this, laneT); }
 		LaneTurnDirection GetTurnDirection() { return SDK_CALL_FUNC(LaneTurnDirection, 0xDC430, void*)(this); }
