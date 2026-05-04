@@ -33,6 +33,14 @@
 #define SDK_SINLINE								static SDK_INLINE
 #define SDK_VINLINE								static inline
 
+/* Constants */
+
+#ifdef SDK_CXX20
+	#define SDK_CONSTEVAL						consteval
+#else
+	#define SDK_CONSTEVAL						constexpr
+#endif
+
 /* Static Asserts */
 
 #define SDK_ASSERT_SIZEOF(name, size) \
