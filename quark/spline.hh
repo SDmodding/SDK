@@ -6,7 +6,10 @@ namespace UFG
 	{
 	public:
 		u32 mNumKnots;
+
+		// Is the total length of the spline, calculated as the sum of distances between consecutive knots.
 		f32 mLength;
+
 		qOffset64<qBezierKnot*> mKnotTable;
 		qOffset64<qBezierLookup*> mLookupTable;
 
@@ -26,7 +29,10 @@ namespace UFG
 	{
 	public:
 		u32 mNumSplines;
+
+		// Is the total length of the splines
 		f32 mLength;
+
 		qOffset64<qOffset64<qBezierSplineMemImaged*>*> mSplineOffsetTable;
 
 		qVector3 ClosestPoint3D(const qVector3& pos, f32* t = 0) { return SDK_CALL_FUNC(qVector3, 0x168450, void*, const qVector3&, f32*)(this, pos, t); }
