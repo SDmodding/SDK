@@ -24,6 +24,8 @@ namespace UFG
 		bool mFaceCull;
 		bool mDepthBias;
 		void(__fastcall* mPreDrawCallback)(Illusion::Material*, Render::View*, Illusion::StateValues*, Illusion::Primitive*, Illusion::StateArgs*);
+
+		SDK_VINLINE qGlobalVar<DrawInfo*, 0x2021C38> msDefault;
 	};
 
 	class XRayDrawInfo : public DrawInfo {};
