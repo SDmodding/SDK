@@ -5,6 +5,12 @@ namespace UFG
 	class SceneryGroup : public qResourceData
 	{
 	public:
+		enum FLAGS
+		{
+			REFLECTION_GROUP = 1,
+			LOADED_BEFORE = 2
+		};
+
 		u16 mNumObjects;
 		u16 mNumInstances;
 		u16 mNumOccluders;
