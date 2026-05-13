@@ -31,6 +31,25 @@ namespace UFG
 	class AISidewalkEdge_Game
 	{
 	public:
+		enum EdgeFlags
+		{
+			EdgeFlags_None = 0,
+			EdgeFlags_StartActive = (1 << 0),
+			EdgeFlags_Active = (1 << 1),
+			EdgeFlags_Crosswalk = (1 << 2),
+			EdgeFlags_AllowForwardTraversal = (1 << 3),
+			EdgeFlags_AllowBackwardTraversal = (1 << 4),
+			EdgeFlags_Degenerate = (1 << 5),
+			EdgeFlags_Interior = (1 << 6),
+			EdgeFlags_Error = (1 << 7),
+
+			NUM_EDGE_FLAGS = 8,
+
+			EdgeFlags_All = 0xFF,
+			EdgeFlags_SearchableMask = 0xFC,
+		};
+
+
 		qOffset64<SidewalkCommonHandle<AISidewalkNode_Game>*> mpStartNodeHandle;
 		qOffset64<SidewalkCommonHandle<AISidewalkNode_Game>*> mpEndNodeHandle;
 		u32 mObjId;
