@@ -134,6 +134,10 @@ namespace UFG
 
 		qStringBuilder() { SDK_CALL_FUNC(void, 0x1620F0, void*)(this); }
 		~qStringBuilder() { SDK_CALL_FUNC(void, 0x164430, void*)(this); }
+
+		void Add(const char* text, int length = -1) { SDK_CALL_FUNC(void, 0x165B90, void*, const char*, int)(this, text, length); }
+
+		SDK_INLINE operator const char* () const { return mBuffer; }
 	};
 
 	/* Functions */
