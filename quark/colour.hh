@@ -9,7 +9,7 @@ namespace UFG
 
 		SDK_INLINE qColour() : r(0.f), g(0.f), b(0.f), a(0.f) {}
 		SDK_INLINE qColour(f32 red, f32 green, f32 blue, f32 alpha = 1.f) : r(red), g(green), b(blue), a(alpha) {}
-		SDK_CONSTEVAL qColour(int red, int green, int blue, int alpha = 255) : 
+		constexpr qColour(int red, int green, int blue, int alpha = 255) : 
 			r(static_cast<f32>(red) / 255.f), 
 			g(static_cast<f32>(green) / 255.f), 
 			b(static_cast<f32>(blue) / 255.f), 

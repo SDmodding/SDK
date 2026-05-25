@@ -63,7 +63,7 @@ namespace UFG
 		/* Static Functions */
 
 		SDK_SINLINE BSP* Instance() { return SDK_VAR_GET(BSP*, 0x23A8D78); }
-		SDK_SINLINE BSPInventory* Inventory() { return SDK_VAR_GET(BSPInventory*, 0x23A9870); }
+		SDK_SINLINE BSPInventory* Inventory() { return SDK_VAR(BSPInventory*, 0x23A9870); }
 
 		/* Impl Functions */
 
