@@ -585,6 +585,8 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 
 #include "physics/worldcollisionevents.hh"
 
+#include "physics/havokfrictionmapvehicleraycastwheelcollide.hh"
+
 #include "physics/physicsmemory.hh"
 #include "physics/physicssystem.hh"
 #include "physics/physics.hh"

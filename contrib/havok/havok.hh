@@ -209,6 +209,9 @@ class hkpWorld;
 #include "Physics2012/Vehicle/hkpVehicleBrake.hh"
 #include "Physics2012/Vehicle/hkpVehicleSteering.hh"
 #include "Physics2012/Vehicle/hkpVehicleAerodynamics.hh"
+#include "Physics2012/Vehicle/hkpRejectChassisListener.hh"
+
+#include "Physics2012/Vehicle/WheelCollide/hkpVehicleRayCastWheelCollide.hh"
 
 #include "Utilities/hkpCharacterControl.hh"
 
