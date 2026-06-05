@@ -36,6 +36,14 @@ namespace UFG
 		u32 mPadding;
 	};
 
+	class CollisionInstanceResource : public qResourceData
+	{
+	public:
+		CollisionInstanceData** mData;
+		u32 mNumInstances;
+		u32 mPad[2];
+	};
+
 	class CollisionMeshData : public qNodeRB<CollisionMeshData>
 	{
 	public:

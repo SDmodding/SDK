@@ -120,6 +120,7 @@ class hkpWorld;
 #include "Physics2012/Collide/hkpCollidableQualityType.hh"
 
 #include "Physics2012/Collide/Mopp/hkpMoppCode.hh"
+#include "Physics2012/Collide/Mopp/hkpMoppModifier.hh"
 
 #include "Physics2012/Collide/Shape/hkpMeshMaterial.hh"
 #include "Physics2012/Collide/Shape/hkcdShape.hh"
@@ -134,6 +135,7 @@ class hkpWorld;
 #include "Physics2012/Collide/Shape/hkpMoppBvTreeShape.hh"
 
 #include "Physics2012/Collide/Shape/Compound/Collection/hkpShapeCollection.hh"
+#include "Physics2012/Collide/Shape/Compound/Collection/hkpListShape.hh"
 #include "Physics2012/Collide/Shape/Compound/Collection/hkpExtendedMeshShape.hh"
 
 #include "Physics2012/Collide/Shape/Compound/Tree/hkpMoppCompilerInput.hh"
@@ -161,6 +163,7 @@ class hkpWorld;
 #include "Physics2012/Dynamics/World/hkpWorldObject.hh"
 #include "Physics2012/Dynamics/World/hkpWorldCinfo.hh"
 #include "Physics2012/Dynamics/World/hkpBroadPhaseBorder.hh"
+#include "Physics2012/Dynamics/World/hkpPhysicsSystem.hh"
 
 #include "Physics2012/Dynamics/Phantom/hkpPhantom.hh"
 #include "Physics2012/Dynamics/Phantom/hkpShapePhantom.hh"
@@ -181,6 +184,8 @@ class hkpWorld;
 
 #include "Physics2012/Utilities/Actions/hkpReorientAction.hh"
 #include "Physics2012/Utilities/Actions/hkpEaseConstraintsAction.hh"
+
+#include "Physics2012/Utilities/Destruction/hkpBreakOffPartsUtil.hh"
 
 #include "Physics2012/Collide/Shape/Query/hkpShapeRayCastCollectorOutput.hh"
 #include "Physics2012/Collide/Shape/Query/hkpShapeRayCastInput.hh"

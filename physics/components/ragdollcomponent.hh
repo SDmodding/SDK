@@ -82,6 +82,7 @@ namespace UFG
 		void SetMotorMaxForce(f32 force) { SDK_CALL_FUNC(void, 0x475360, void*, f32)(this, force); }
 		void SetPositionTrackingStiffness(f32 p) { SDK_CALL_FUNC(void, 0x475540, void*, f32)(this, p); }
 		void SetPositionTrackingStiffnessAtJoint(f32 p, int skeletonBoneID) { SDK_CALL_FUNC(void, 0x475550, void*, f32, int)(this, p, skeletonBoneID); }
+		void Update(f32 deltaT = 0.f) { SDK_CALL_FUNC(void, 0x47BDC0, void*, f32)(this, deltaT); }
 	};
 	SDK_ASSERT_SIZEOF(RagdollComponent, 0x180);
 }
