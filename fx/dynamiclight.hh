@@ -15,9 +15,18 @@ namespace Render
 	public:
 		UFG::qVector4 mColorKeys[4];
 		f32 mColorKeyPositions[4];
+
+		// x: Radius
+		// y: FOV Half Inner (Type == 1 only)
+		// z: FOV Half Outer (Type == 1 only)
 		UFG::qVector3 mSizeKeys[4];
+
 		f32 mSizeKeyPositions[4];
+
+		// 0 - Omni light
+		// 1 - Spotlight
 		u32 mType;
+
 		u32 mAnimType;
 		f32 mDecayPower;
 		f32 mRadMin;
@@ -38,6 +47,8 @@ namespace Render
 		f32 mMaxFlickerOffTime;
 		s8 mClipPlanes[6];
 		s8 mClipPlaneCount;
+
+		// Type must be 1
 		s8 mLightshafts;
 	};
 
