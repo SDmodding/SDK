@@ -115,11 +115,13 @@ namespace UFG
 	class CharacterAnimationComponent;
 	class CharacterControllerInterface;
 	class CharacterEffectsComponent;
+	class CharacterLookComponent;
 	class CharacterOccupantComponent;
 	class CharacterPhysicsComponent;
 	class CharacterSubjectComponent;
 	class CopUnitComponent;
 	class CompositeDrawableComponent;
+	class CompositeLookComponent;
 	class DialogueAnimationComponent;
 	class DynamicCoverComponent;
 	class EncounterUnitComponent;
@@ -170,6 +172,7 @@ namespace UFG
 	class VehicleAudioComponent;
 	class VehicleDriverInterface;
 	class VehicleEffectsComponent;
+	class VehicleLookComponent;
 	class VehicleOccupantComponent;
 	class VehicleSubjectComponent;
 	class WaterFloatingTrackerBaseComponent;

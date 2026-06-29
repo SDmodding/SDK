@@ -125,7 +125,7 @@ namespace UFG
 		SimComponent* GetComponentOfTypeHK(u32 type_uid) { return SDK_CALL_FUNC(SimComponent*, 0x52BBC0, void*, u32)(this, type_uid); }
 
 		template <typename T>
-		SDK_INLINE T* GetComponentOfTypeHK() { return reinterpret_cast<T*>(GetComponentOfTypeHK(T::_TypeUID)); }
+		SDK_INLINE T* GetComponentOfTypeHK() { return static_cast<T*>(GetComponentOfTypeHK(T::_TypeUID)); }
 
 		SimComponent* GetComponent(u32 type_uid, u32 index)
 		{
@@ -138,7 +138,11 @@ namespace UFG
 		}
 
 		template <typename T, u32 index>
-		SDK_INLINE T* GetComponent() { return reinterpret_cast<T*>(GetComponent(T::_TypeUID, index)); }
+		SDK_INLINE T* GetComponent() { return static_cast<T*>(GetComponent(T::_TypeUID, index)); }
+
+		/* Components */
+
+		SDK_INLINE CompositeLookComponent* GetCompositeLook() { return GetComponentOfType<CompositeLookComponent>(); }
 	};
 	SDK_ASSERT_SIZEOF(SimObjectGame, 0x90);
 
@@ -415,6 +419,7 @@ namespace UFG
 
 		// Dynamic Slot
 
+		SDK_INLINE CharacterLookComponent* GetCharacterLook() { return reinterpret_cast<CharacterLookComponent*>(GetCompositeLook()); }
 
 		SDK_INLINE FaceMeterComponent* GetFaceMeter() {
 			return GetComponentOfTypeHK<FaceMeterComponent>();
@@ -443,5 +448,7 @@ namespace UFG
 		SDK_INLINE PhysicsMoverInterface* GetPhysicsMoverInterface() {
 			return GetComponent<PhysicsMoverInterface, Vehicle_PhysicsMoverInterface>();
 		}
+
+		SDK_INLINE VehicleLookComponent* GetVehicleLook() { return reinterpret_cast<VehicleLookComponent*>(GetCompositeLook()); }
 	};
 }

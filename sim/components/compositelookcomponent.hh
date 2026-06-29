@@ -49,4 +49,23 @@ namespace UFG
 		void StartFadeIn() { SDK_CALL_FUNC(void, 0x58C6B0, void*)(this); }
 	};
 	SDK_ASSERT_SIZEOF(CompositeLookComponent, 0xB0);
+
+	class CharacterLookComponent : public CompositeLookComponent
+	{
+	public:
+		u32 mOverlayTextureID;
+		bool mIsSkinSSEnabled;
+		f32 mSweatLevel;
+		f32 mWetnessLevel;
+		void* mPrevWetSphericalMap;
+	};
+
+	class VehicleLookComponent : public CompositeLookComponent
+	{
+	public:
+		VehicleEffectsComponent* mVehicleEffectsComponent;
+		__declspec(align(16)) qMatrix44 mVehicleInteriorMS;
+		s8 mVehiclePaintID;
+		s8 mVehicleGlassID;
+	};
 }
