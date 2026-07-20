@@ -183,5 +183,9 @@ namespace UFG
 		bool mHasCollisionEventHandler;
 		bool mHasNamedEventHandler;
 		bool mHasOnSpawnNode;
+
+		/* Static Functions */
+
+		SDK_SINLINE u64 GetDnaUid(u32 nameGuid) { return SDK_CALL_FUNC(u64, 0x4664A0, u32)(nameGuid); }
 	};
 }
