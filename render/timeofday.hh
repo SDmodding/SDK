@@ -2,6 +2,9 @@
 
 namespace UFG
 {
+	SDK_VINLINE qGlobalVar<f32, 0x2024158> gWindDirectionTweakerRadians;
+	SDK_VINLINE qGlobalVar<f32, 0x202415C> gWindSpeedTweaker;
+
 	class NightFogZone;
 
 	class TimeOfDayManager
