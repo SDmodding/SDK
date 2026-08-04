@@ -27,6 +27,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include <stdlib.h>
 #include <new>
 #include <xmmintrin.h>
+#include <d3d11shader.h>
 
 //--------------------------------------------------
 //	Windows Includes
@@ -157,6 +158,7 @@ static_assert(sizeof(void*) == 8, "ERROR: (void*) isn't 64-bit make sure you're 
 #include "illusion/shader.hh"
 #include "illusion/shadertemplate.hh"
 #include "illusion/illusionuser/shaderuser.hh"
+#include "illusion/pc/shaderplat.hh"
 
 #include "illusion/renderstate.hh"
 
