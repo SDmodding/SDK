@@ -51,4 +51,20 @@ namespace Illusion
 		UFG::qOffset64<ShaderUserPlat*> mShaderUserPlat;
 		UFG::qList<ShaderParam> mParams;
 	};
+
+	class ShaderSystemPlat
+	{
+	public:
+		//CombinedObjectCache<Shader, VertexDecl, ID3D11InputLayout> mInputLayoutCacheUnsafe;
+		//UFG::qThreadSafeHandle<CombinedObjectCache<Shader, VertexDecl, ID3D11InputLayout> > mInputLayoutCache;
+
+		/* Static Functions */
+
+		SDK_SINLINE ShaderSystemPlat* Instance() { return SDK_VAR(ShaderSystemPlat*, 0x249AF50); }
+
+		/* Functions */
+
+		void AddStageShaderResources(Shader* shader, StageShader* stageShader) { SDK_CALL_FUNC(void, 0xA17410, void*, Shader*, StageShader*)(this, shader, stageShader); }
+		void ValidShaderStageInputs(Shader* shader) { SDK_CALL_FUNC(void, 0xA22C80, void*, Shader*)(this, shader); }
+	};
 }
