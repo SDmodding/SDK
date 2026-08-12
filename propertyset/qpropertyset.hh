@@ -9,8 +9,24 @@ namespace UFG
 	class qProperty
 	{
 	public:
-		u32 mTypeUIDOffsetChanged;
+		union
+		{
+			u32 mTypeUIDOffsetChanged;
+
+			struct
+			{
+				u32 mOffset : 24;
+				u32 mTypeUID : 8;
+			};
+		};
+
 		u32 mNameUID;
+
+		u32 GetDataOffset() { return mOffset; }
+		void SetDataOffset(u32 dataOffset) { mOffset = dataOffset; }
+
+		u32 GetTypeUID() { return mTypeUID; }
+		void SetTypeUID(u32 typeUID) { mTypeUID = typeUID; }
 	};
 
 	class qPropertyCollection
