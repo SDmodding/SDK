@@ -133,6 +133,7 @@ namespace UFG
 	SDK_SINLINE void qClose(qFile* file) { SDK_CALL_FUNC(void, 0x182160, qFile*)(file); }
 
 	SDK_SINLINE s64 qGetFileSize(qFile* file) { return SDK_CALL_FUNC(s64, 0x184510, qFile*)(file); }
+	SDK_SINLINE s64 qGetFileSize(const char* filename) { return SDK_CALL_FUNC(s64, 0x184570, const char*)(filename); }
 
 	SDK_SINLINE s64 qRead(qFile* file, void* buffer, s64 num_bytes, s64 seek_offset = 0, qFileSeekType seek_type = QSEEK_CUR) {
 		return SDK_CALL_FUNC(s64, 0x1896B0, qFile*, void*, s64, s64, qFileSeekType)(file, buffer, num_bytes, seek_offset, seek_type);
