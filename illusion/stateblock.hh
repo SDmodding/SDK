@@ -5,6 +5,12 @@ namespace Illusion
 	class StateBlock : public UFG::qResourceData, public UFG::qNode<StateBlock>
 	{
 	public:
+		struct StateBlockHeader
+		{
+			u16 dataOffset;
+			u16 size;
+		};
+
 		u32 mParentUID;
 		u32 mDataByteSize;
 		u32 mNumValues;
@@ -12,11 +18,26 @@ namespace Illusion
 
 		/* Impl Functions */
 
-		// Use this with caution!
-		SDK_INLINE char* GetStateData() { return reinterpret_cast<char*>(reinterpret_cast<uptr>(this) + 0x80); } // sizeof(StateBlock) aligned at 0x10 bytes
+		SDK_INLINE char* GetBlockData() { return reinterpret_cast<char*>(this) + UFG::qAlignUp<uptr>(sizeof(*this), 16); }
+		SDK_INLINE StateBlockHeader* GetBlockHeader() { return reinterpret_cast<StateBlockHeader*>(GetBlockData() + UFG::qAlignUp<u32>(mDataByteSize, 16)); }
+
+		// Legacy alias, use GetBlockData() instead
+		SDK_INLINE char* GetStateData() { return GetBlockData(); }
 	};
 
 	class StateBlockHandle : public UFG::qTypedResourceHandle<RTypeUID_StateBlock, StateBlock> {};
+
+	class StateBlockCurve
+	{
+	public:
+		struct StateBlockKey
+		{
+			f32 fTime;
+			f32 fValue;
+		};
+
+		u32 numKeys;
+	};
 
 	class StateBlockInventory : public UFG::qResourceInventory
 	{
