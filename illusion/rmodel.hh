@@ -60,5 +60,13 @@ namespace Illusion
 	public:
 		ModelHandle mModelHandle;
 		rModel* mRModel;
+
+		ModelProxy() { SDK_CALL_FUNC(void, 0x1C19E0, void*)(this); }
+		~ModelProxy() { SDK_CALL_FUNC(void, 0x27F0, void*)(this); }
+
+		/* Functions */
+
+		u32 GetNumMeshes() { return SDK_CALL_FUNC(u32, 0x1DFD0, void*)(this); }
+		void Init(u32 model_uid) { SDK_CALL_FUNC(void, 0x3C70, void*, u32)(this, model_uid); }
 	};
 }
