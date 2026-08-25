@@ -37,6 +37,11 @@ namespace Illusion
 		};
 
 		u32 numKeys;
+
+		// Helpers
+
+		StateBlockKey* keys() { return reinterpret_cast<StateBlockKey*>(this + 1); }
+		const StateBlockKey* keys() const { return reinterpret_cast<const StateBlockKey*>(this + 1); }
 	};
 
 	class StateBlockInventory : public UFG::qResourceInventory
