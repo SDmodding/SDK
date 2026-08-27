@@ -157,6 +157,7 @@ namespace UFG
 		/* Static Members */
 
 		SDK_VINLINE qGlobalVar<u32, 0x240E3D8> sNumWeaponTypeInfos;
+		SDK_VINLINE qGlobalArray<WeaponTypeInfo, 120, 0x240EEC0> sWeaponTypeInfos;
 
 		/* Static Functions */
 
